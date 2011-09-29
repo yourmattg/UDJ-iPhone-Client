@@ -71,24 +71,24 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 338947739;
-			PBXWorkspaceStateSaveDate = 338947739;
+			PBXPerProjectTemplateStateSaveDate = 338949747;
+			PBXWorkspaceStateSaveDate = 338949747;
 		};
 		perUserProjectItems = {
-			A36B0B3E1433EE9D00A76652 /* PBXTextBookmark */ = A36B0B3E1433EE9D00A76652 /* PBXTextBookmark */;
-			A36B0B4F1433F01500A76652 /* XCBuildMessageTextBookmark */ = A36B0B4F1433F01500A76652 /* XCBuildMessageTextBookmark */;
-			A36B0B501433F01500A76652 /* PBXTextBookmark */ = A36B0B501433F01500A76652 /* PBXTextBookmark */;
-			A36B0B5A1433F02400A76652 /* XCBuildMessageTextBookmark */ = A36B0B5A1433F02400A76652 /* XCBuildMessageTextBookmark */;
-			A36B0B5B1433F02400A76652 /* PBXTextBookmark */ = A36B0B5B1433F02400A76652 /* PBXTextBookmark */;
-			A36B0B5E1433F03200A76652 /* PBXTextBookmark */ = A36B0B5E1433F03200A76652 /* PBXTextBookmark */;
-			A36B0B5F1433F03200A76652 /* PBXTextBookmark */ = A36B0B5F1433F03200A76652 /* PBXTextBookmark */;
-			A36B0B601433F03200A76652 /* PBXTextBookmark */ = A36B0B601433F03200A76652 /* PBXTextBookmark */;
-			A36B0B611433F03200A76652 /* PBXTextBookmark */ = A36B0B611433F03200A76652 /* PBXTextBookmark */;
-			A36B0B621433F03200A76652 /* XCBuildMessageTextBookmark */ = A36B0B621433F03200A76652 /* XCBuildMessageTextBookmark */;
-			A36B0B631433F03200A76652 /* PBXTextBookmark */ = A36B0B631433F03200A76652 /* PBXTextBookmark */;
-			A36B0B681433F34E00A76652 /* PBXTextBookmark */ = A36B0B681433F34E00A76652 /* PBXTextBookmark */;
-			A36B0B691433F34E00A76652 /* PBXTextBookmark */ = A36B0B691433F34E00A76652 /* PBXTextBookmark */;
-			A36B0B6A1433F34E00A76652 /* PBXTextBookmark */ = A36B0B6A1433F34E00A76652 /* PBXTextBookmark */;
+			A36B0B3E1433EE9D00A76652 = A36B0B3E1433EE9D00A76652 /* PBXTextBookmark */;
+			A36B0B4F1433F01500A76652 = A36B0B4F1433F01500A76652 /* PBXTextBookmark */;
+			A36B0B501433F01500A76652 = A36B0B501433F01500A76652 /* PBXTextBookmark */;
+			A36B0B5A1433F02400A76652 = A36B0B5A1433F02400A76652 /* PBXTextBookmark */;
+			A36B0B5B1433F02400A76652 = A36B0B5B1433F02400A76652 /* PBXTextBookmark */;
+			A36B0B5E1433F03200A76652 = A36B0B5E1433F03200A76652 /* PBXTextBookmark */;
+			A36B0B5F1433F03200A76652 = A36B0B5F1433F03200A76652 /* PBXTextBookmark */;
+			A36B0B601433F03200A76652 = A36B0B601433F03200A76652 /* PBXTextBookmark */;
+			A36B0B611433F03200A76652 = A36B0B611433F03200A76652 /* PBXTextBookmark */;
+			A36B0B621433F03200A76652 = A36B0B621433F03200A76652 /* PBXTextBookmark */;
+			A36B0B631433F03200A76652 = A36B0B631433F03200A76652 /* PBXTextBookmark */;
+			A36B0B681433F34E00A76652 = A36B0B681433F34E00A76652 /* PBXTextBookmark */;
+			A36B0B691433F34E00A76652 = A36B0B691433F34E00A76652 /* PBXTextBookmark */;
+			A36B0B6A1433F34E00A76652 = A36B0B6A1433F34E00A76652 /* PBXTextBookmark */;
 			A371C907142FBCB700BAA092 = A371C907142FBCB700BAA092 /* PBXTextBookmark */;
 			A371C908142FBCB700BAA092 = A371C908142FBCB700BAA092 /* PBXTextBookmark */;
 			A371C909142FBCB700BAA092 = A371C909142FBCB700BAA092 /* PBXTextBookmark */;
@@ -115,11 +115,10 @@
 		vrLen = 586;
 		vrLoc = 0;
 	};
-	A36B0B4F1433F01500A76652 /* XCBuildMessageTextBookmark */ = {
+	A36B0B4F1433F01500A76652 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		comments = "Property 'nearbyPartiesButton' requires method '-nearbyPartiesButton' to be defined - use @synthesize, @dynamic or provide a method implementation";
 		fRef = A3F9C1D6142EBB880016717B /* PartyLoginViewController.m */;
-		fallbackIsa = XCBuildMessageTextBookmark;
 		rLen = 1;
 		rLoc = 77;
 		rType = 1;
@@ -134,11 +133,10 @@
 		vrLen = 357;
 		vrLoc = 1681;
 	};
-	A36B0B5A1433F02400A76652 /* XCBuildMessageTextBookmark */ = {
+	A36B0B5A1433F02400A76652 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		comments = "Property 'nearbyPartiesButton' requires the method 'setNearbyPartiesButton:' to be defined - use @synthesize, @dynamic or provide a method implementation";
 		fRef = A3F9C1D6142EBB880016717B /* PartyLoginViewController.m */;
-		fallbackIsa = XCBuildMessageTextBookmark;
 		rLen = 1;
 		rLoc = 77;
 		rType = 1;
@@ -193,11 +191,10 @@
 		vrLen = 889;
 		vrLoc = 1258;
 	};
-	A36B0B621433F03200A76652 /* XCBuildMessageTextBookmark */ = {
+	A36B0B621433F03200A76652 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		comments = "Property 'nearbyPartiesButton' requires method '-nearbyPartiesButton' to be defined - use @synthesize, @dynamic or provide a method implementation";
 		fRef = A3F9C1D6142EBB880016717B /* PartyLoginViewController.m */;
-		fallbackIsa = XCBuildMessageTextBookmark;
 		rLen = 1;
 		rLoc = 77;
 		rType = 1;
@@ -355,11 +352,6 @@
 		name = list.cpp;
 		path = /Users/MattGraf/cs225/mp3/list.cpp;
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {924, 2535}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{169, 567}";
-		};
 	};
 	A3F9C035142EA9C30016717B /* UDJ */ = {
 		isa = PBXExecutable;
@@ -451,7 +443,7 @@
 	A3F9C1D6142EBB880016717B /* PartyLoginViewController.m */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1167, 1027}}";
-			sepNavSelRange = "{1828, 0}";
+			sepNavSelRange = "{1313, 5}";
 			sepNavVisRange = "{1219, 840}";
 		};
 	};

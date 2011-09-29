@@ -65,6 +65,7 @@
 	return NO;
 }
 
+//when a button is clicked
 - (IBAction) OnButtonClick:(id) sender {
 	// this view will set our model data
 	if(sender==nearbyPartiesButton)
