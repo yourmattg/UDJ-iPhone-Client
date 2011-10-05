@@ -68,10 +68,11 @@
 //when a button is clicked
 - (IBAction) OnButtonClick:(id) sender {
 	// this view will set our model data
-	if(sender==nearbyPartiesButton)
+	//if(sender==nearbyPartiesButton)
 	{
-		PartyListViewController* partyListViewController = [[PartyListViewController alloc] initWithNibName:@"PartyListViewController" bundle:[NSBundle mainBundle]];
-		[self.view addSubview:partyListViewController.view];
+		//PartyListViewController* partyListViewController = [[PartyListViewController alloc] initWithNibName:@"PartyListViewController" bundle:[NSBundle mainBundle]];
+		//[self.navigationController pushViewController:partyListViewController animated:YES];
+		//[partyListViewController release];
 	}
 }
 

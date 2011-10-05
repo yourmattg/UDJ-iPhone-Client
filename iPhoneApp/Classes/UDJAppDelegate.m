@@ -33,15 +33,18 @@
 #pragma mark -
 #pragma mark Application lifecycle
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
+- (void)applicationDidFinishLaunching:(UIApplication *)application {
     
     // Override point for customization after application launch.
 
 	// Set the view controller as the window's root view controller and display.
-    self.window.rootViewController = self.viewController;
+	viewController    = [[UDJViewController alloc] initWithNibName:@"UDJViewController" bundle:nil];
+	self.navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+	[self.navigationController setNavigationBarHidden:YES];
+	[self.navigationController setDelegate:self];
+    self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
 
-    return YES;
 }
 
 

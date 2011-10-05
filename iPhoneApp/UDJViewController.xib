@@ -85,7 +85,7 @@
 					<object class="IBUILabel" id="178257928">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{6, 94}, {108, 41}}</string>
+						<string key="NSFrame">{{36, 93}, {108, 41}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -107,7 +107,7 @@
 					<object class="IBUILabel" id="410997824">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{6, 159}, {91, 22}}</string>
+						<string key="NSFrame">{{36, 158}, {91, 22}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -125,7 +125,7 @@
 					<object class="IBUITextField" id="676070035">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{66, 99}, {187, 31}}</string>
+						<string key="NSFrame">{{96, 98}, {187, 31}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -149,7 +149,7 @@
 					<object class="IBUITextField" id="550940696">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{66, 155}, {187, 31}}</string>
+						<string key="NSFrame">{{96, 153}, {187, 31}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -172,7 +172,7 @@
 					<object class="IBUIButton" id="950877377">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{106, 309}, {108, 29}}</string>
+						<string key="NSFrame">{{96, 310}, {108, 39}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -304,12 +304,12 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="180412049"/>
-							<reference ref="676070035"/>
-							<reference ref="550940696"/>
-							<reference ref="410997824"/>
-							<reference ref="178257928"/>
-							<reference ref="950877377"/>
 							<reference ref="800756632"/>
+							<reference ref="178257928"/>
+							<reference ref="410997824"/>
+							<reference ref="676070035"/>
+							<reference ref="950877377"/>
+							<reference ref="550940696"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -383,25 +383,25 @@
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABAwAAAwwAAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABBoAAAwwQAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAwzIAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABBoAAAwzIAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABChAAAwxIAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABCoAAAwv4AAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABChAAAw08AAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABCwAAAwzcAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABC0gAAw2YAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABC1AAAw60AAA</bytes>
 					</object>
-					<string>{{305, 220}, {320, 480}}</string>
+					<string>{{388, 172}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
@@ -425,7 +425,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">27</int>
+			<int key="maxID">47</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

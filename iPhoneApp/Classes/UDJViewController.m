@@ -70,7 +70,8 @@
 	if(![usernameField.text isEqualToString: @""] && ![passwordField.text isEqualToString: @""])
 	{
 		PartyListViewController* partyListViewController = [[PartyListViewController alloc] initWithNibName:@"PartyListViewController" bundle:[NSBundle mainBundle]];
-		[self.view addSubview:partyListViewController.view];
+		[self.navigationController pushViewController:partyListViewController animated:YES];
+		[partyListViewController release];
 	}
 }
 

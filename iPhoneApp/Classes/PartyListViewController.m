@@ -140,8 +140,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
 	
-	PartyLoginViewController* partyLogin = [[PartyLoginViewController alloc] initWithNibName:@"PartyLoginViewController" bundle:[NSBundle mainBundle]];
-	[self.view addSubview:partyLogin.view];
+	PartyLoginViewController* partyLoginViewController = [[PartyLoginViewController alloc] initWithNibName:@"PartyLoginViewController" bundle:[NSBundle mainBundle]];
+	[self.navigationController pushViewController:partyLoginViewController animated:YES];
 	
     // ...
     // Pass the selected object to the new view controller.
