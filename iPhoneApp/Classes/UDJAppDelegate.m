@@ -29,7 +29,6 @@
 }
 
 
-
 #pragma mark -
 #pragma mark Application lifecycle
 
@@ -37,11 +36,11 @@
     
     // Override point for customization after application launch.
 
-	// Set the view controller as the window's root view controller and display.
+	//create a UDJViewController (the login screen), and make it the root view
 	viewController    = [[UDJViewController alloc] initWithNibName:@"UDJViewController" bundle:nil];
 	self.navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
 	[self.navigationController setNavigationBarHidden:YES];
-	[self.navigationController setDelegate:self];
+	//[self.navigationController setDelegate:self];
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
 

@@ -13,10 +13,12 @@
 
 	UITextField *passwordField;
 	UIButton *nearbyPartiesButton;
+	UIButton *enterPartyButton;
 }
 
 @property (retain,nonatomic) IBOutlet UITextField *passwordField;
 @property (retain,nonatomic) IBOutlet UIButton *nearbyPartiesButton;
+@property (retain,nonatomic) IBOutlet UIButton *enterPartyButton;
 
 - (IBAction) OnButtonClick:(id) sender;
 

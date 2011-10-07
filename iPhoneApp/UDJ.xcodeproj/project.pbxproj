@@ -39,10 +39,10 @@
 		A3F9C046142EAA5C0016717B /* default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpg; sourceTree = "<group>"; };
 		A3F9C04F142EAD610016717B /* PartyListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartyListViewController.h; sourceTree = "<group>"; };
 		A3F9C050142EAD610016717B /* PartyListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartyListViewController.m; sourceTree = "<group>"; };
-		A3F9C051142EAD610016717B /* PartyListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PartyListViewController.xib; sourceTree = "<group>"; };
+		A3F9C051142EAD610016717B /* PartyListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PartyListViewController.xib; path = Classes/PartyListViewController.xib; sourceTree = "<group>"; };
 		A3F9C1D5142EBB880016717B /* PartyLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartyLoginViewController.h; sourceTree = "<group>"; };
 		A3F9C1D6142EBB880016717B /* PartyLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartyLoginViewController.m; sourceTree = "<group>"; };
-		A3F9C1D7142EBB880016717B /* PartyLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PartyLoginViewController.xib; sourceTree = "<group>"; };
+		A3F9C1D7142EBB880016717B /* PartyLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PartyLoginViewController.xib; path = Classes/PartyLoginViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,12 +66,10 @@
 				1D3623250D0F684500981E51 /* UDJAppDelegate.m */,
 				A3F9C1D5142EBB880016717B /* PartyLoginViewController.h */,
 				A3F9C1D6142EBB880016717B /* PartyLoginViewController.m */,
-				A3F9C1D7142EBB880016717B /* PartyLoginViewController.xib */,
 				28D7ACF60DDB3853001CB0EB /* UDJViewController.h */,
 				28D7ACF70DDB3853001CB0EB /* UDJViewController.m */,
 				A3F9C04F142EAD610016717B /* PartyListViewController.h */,
 				A3F9C050142EAD610016717B /* PartyListViewController.m */,
-				A3F9C051142EAD610016717B /* PartyListViewController.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -109,6 +107,8 @@
 			isa = PBXGroup;
 			children = (
 				A3F9C046142EAA5C0016717B /* default.jpg */,
+				A3F9C1D7142EBB880016717B /* PartyLoginViewController.xib */,
+				A3F9C051142EAD610016717B /* PartyListViewController.xib */,
 				2899E5210DE3E06400AC0155 /* UDJViewController.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* UDJ-Info.plist */,

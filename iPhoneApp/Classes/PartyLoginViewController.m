@@ -12,7 +12,7 @@
 
 @implementation PartyLoginViewController
 
-@synthesize passwordField, nearbyPartiesButton;
+@synthesize passwordField, nearbyPartiesButton, enterPartyButton;
 
 /*
  // The designated initializer. Override to perform setup that is required before the view is loaded.
@@ -67,11 +67,18 @@
 
 
 - (IBAction) OnButtonClick:(id) sender {
-	// this view will set our model data
-		//PartyListViewController* partyListViewController = [[PartyListViewController alloc] initWithNibName:@"PartyListViewController" bundle:[NSBundle mainBundle]];
-		//[self.navigationController pushViewController:partyListViewController animated:YES];
-		//[partyListViewController release];
-	[self.navigationController popViewControllerAnimated:YES];
+	//pop this view to go back to nearby parties view
+	if(sender == nearbyPartiesButton) [self.navigationController popViewControllerAnimated:YES];
+	//do something when user attempts to enter party
+	else if(sender == enterPartyButton) { /*do something when user attempts to enter party */ }
+}
+
+//this hides the keyboard when the user is done with a textfield
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+	if (textField == passwordField) {
+		[textField resignFirstResponder];
+	}
+	return NO;
 }
 
 
