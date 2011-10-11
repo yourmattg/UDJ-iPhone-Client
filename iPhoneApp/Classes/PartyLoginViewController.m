@@ -8,6 +8,7 @@
 
 #import "PartyLoginViewController.h"
 #import	 "PartyListViewController.h"
+#import "PartyPlaylistViewController.h"
 
 
 @implementation PartyLoginViewController
@@ -70,7 +71,14 @@
 	//pop this view to go back to nearby parties view
 	if(sender == nearbyPartiesButton) [self.navigationController popViewControllerAnimated:YES];
 	//do something when user attempts to enter party
-	else if(sender == enterPartyButton) { /*do something when user attempts to enter party */ }
+	else if(sender == enterPartyButton) {
+		//authentication would go here
+		if(![passwordField.text isEqualToString: @""]){
+			PartyPlaylistViewController* partyPlaylistViewController = [[PartyPlaylistViewController alloc] initWithNibName:@"PartyPlaylistViewController" bundle:[NSBundle mainBundle]];
+			[self.navigationController pushViewController:partyPlaylistViewController animated:YES];
+			[partyPlaylistViewController release];	
+		}
+	}
 }
 
 //this hides the keyboard when the user is done with a textfield
