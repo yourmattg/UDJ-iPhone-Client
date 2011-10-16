@@ -25,6 +25,8 @@
 	[partyList addObject: @"Toga Party"];
 	[partyList addObject: @"Classy Party"];
 	[partyList addObject: @"21st Bday"];
+	self.navigationItem.title = @"Nearby Parties";
+	[self.navigationItem setLeftBarButtonItem:[[[UIBarButtonItem alloc] initWithCustomView:[[UIView new] autorelease]] autorelease]];
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
