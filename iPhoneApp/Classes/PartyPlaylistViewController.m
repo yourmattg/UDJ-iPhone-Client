@@ -40,6 +40,11 @@
     [playlist addObject: @"Smiling Swine - The Dear Hunter"];
 	self.navigationItem.title = @"Playlist";
 	[self.navigationItem setLeftBarButtonItem:[[[UIBarButtonItem alloc] initWithCustomView:[[UIView new] autorelease]] autorelease]];
+    UIButton* searchButton = [UIButton buttonWithType: UIButtonTypeRoundedRect];
+    searchButton.titleLabel.text = @"Library";
+   // [infoButton addTarget:self action:@selector(showInfoView:) forControlEvents:UIControlEventTouchUpInside];
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:searchButton]];
+    
 }
 
 
@@ -149,9 +154,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // get the song we selected
+    NSString *selectedSong = [playlist objectAtIndex: indexPath.row];
+        
     // Navigation logic may go here. Create and push another view controller.
     /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+     SongViewController *songViewController = [[SongViewController alloc] initWithNibName:@"SongViewController" bundle:nil];
      // ...
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
