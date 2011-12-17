@@ -8,11 +8,13 @@
 
 #import "UDJAppDelegate.h"
 #import "UDJViewController.h"
+#import "UDJConnection.h"
 
 @implementation UDJAppDelegate
 
 @synthesize window;
 @synthesize viewController, navigationController;
+@synthesize udjConnection;
 
 // accessor methods for "data" property
 
@@ -35,7 +37,11 @@
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
     
     // Override point for customization after application launch.
-
+    
+    // create udjConnection
+    udjConnection = [UDJConnection alloc];
+    [udjConnection initWithServerPrefix: @"https://www.bazaarsolutions.com:4897/udj"];
+    
 	//create a UDJViewController (the login screen), and make it the root view
 	viewController    = [[UDJViewController alloc] initWithNibName:@"UDJViewController" bundle:nil];
 	self.navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];

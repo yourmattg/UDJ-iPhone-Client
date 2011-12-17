@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UDJConnection.h"
 
 @class UDJViewController;
 
@@ -14,6 +15,7 @@
     UIWindow *window;
     UDJViewController *viewController;
 	UINavigationController *navigationController;
+    UDJConnection* udjConnection;
 	
 	//Application Model Data
 	NSString *modelData;
@@ -23,6 +25,7 @@
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UDJViewController *viewController;
 @property (nonatomic, retain) UINavigationController *navigationController;
+@property (nonatomic, retain) UDJConnection* udjConnection;
 
 - (void) setModelData:(NSString *)modelData;
 - (NSString *) getModelData;
