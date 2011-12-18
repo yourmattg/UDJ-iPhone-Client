@@ -8,10 +8,21 @@
 
 #import "UDJConnection.h"
 
+static UDJConnection* sharedUDJConnection = nil;
+
 @implementation UDJConnection
 
 @synthesize serverPrefix, ticket, client;
 
+#pragma mark Singleton Methods
+// allows UDJConnection to be used anywhere in the  application
++ (id)sharedConnection {
+    @synchronized(self) {
+        if (sharedUDJConnection == nil)
+            sharedUDJConnection = [[self alloc] init];
+    }
+    return sharedUDJConnection;
+}
 // this creates the RKClient and sets its base URL to 'prefix'
 - (void) initWithServerPrefix:(NSString *)prefix{
     client = [RKClient clientWithBaseURL:prefix];
@@ -47,6 +58,13 @@
             NSLog(@"The resource path '%@' was not found.", [request resourcePath]);
         }
     }
+}
+
+- (void)dealloc {
+    // Should never be called, but just here for clarity really.
+    [serverPrefix release];
+    [ticket release];
+    [client release];
 }
 
 @end

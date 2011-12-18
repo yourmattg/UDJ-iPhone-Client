@@ -38,9 +38,9 @@
     
     // Override point for customization after application launch.
     
-    // create udjConnection
-    udjConnection = [UDJConnection alloc];
-    [udjConnection initWithServerPrefix: @"https://www.bazaarsolutions.com:4897/udj"];
+    // initialize udjConnection
+    [[UDJConnection sharedConnection] initWithServerPrefix: @"https://www.bazaarsolutions.com:4897/udj"];
+    NSLog(@"Helloooooo there");
     
 	//create a UDJViewController (the login screen), and make it the root view
 	viewController    = [[UDJViewController alloc] initWithNibName:@"UDJViewController" bundle:nil];

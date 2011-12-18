@@ -8,6 +8,7 @@
 
 #import "UDJViewController.h"
 #import "PartyListViewController.h"
+#import "UDJConnection.h"
 
 @implementation UDJViewController
 
@@ -68,9 +69,14 @@
 
 
 - (IBAction) OnButtonClick:(id) sender {
-	// this view will set our model data
-	if(![usernameField.text isEqualToString: @""] && ![passwordField.text isEqualToString: @""])
+	// handle user's login attempt
+    NSString* username = usernameField.text;
+    NSString* password = passwordField.text;
+    
+	if(![username isEqualToString: @""] && ![password isEqualToString: @""])
 	{
+        // FIX THIS
+       [[UDJConnection sharedConnection] authenticate:username password: password];
 		PartyListViewController* partyListViewController = [[PartyListViewController alloc] initWithNibName:@"PartyListViewController" bundle:[NSBundle mainBundle]];
 		[self.navigationController pushViewController:partyListViewController animated:YES];
 		[partyListViewController release];

@@ -18,6 +18,7 @@
     RKClient* client; // configures, dispatches request
 }
 
++ (id) sharedConnection;
 - (void) initWithServerPrefix:(NSString*)prefix;
 - (void) authenticate:(NSString*)username password:(NSString*)pass;
 
