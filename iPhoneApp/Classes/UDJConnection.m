@@ -28,33 +28,39 @@ static UDJConnection* sharedUDJConnection = nil;
     client = [RKClient clientWithBaseURL:prefix];
 }
 
-// sends a POST request with the username and password
+// sends a POST with the username and password
 - (void) authenticate:(NSString*)username password:(NSString*)pass{
-    NSDictionary* nameAndPass = [NSDictionary dictionaryWithObjectsAndKeys:username, @"username", pass, @"password", nil]; 
+    // make sure the right api version is being passed in
+    NSDictionary* nameAndPass = [NSDictionary dictionaryWithObjectsAndKeys:username, @"username", pass, @"password", @"0.2", @"udj_api_version", nil]; 
     [client post:@"/auth" params:nameAndPass delegate:self];
+    NSLog(@"attemping to authenticate");
 }
 
 // handles responses from the server
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
+    NSLog(@"Got a response from the server");
     if ([request isGET]) {
         // Handling GET /foo.xml
         
-        if ([response isOK]) {
+        if([response isOK]) {
             // Success! Let's take a look at the data
             NSLog(@"Retrieved XML: %@", [response bodyAsString]);
         }
         
-    } else if ([request isPOST]) {
+    } else if([request isPOST]) {
         
         // Handling POST /other.json
-        if ([response isJSON]) {
+        if([response isJSON]) {
             NSLog(@"Got a JSON response back from our POST!");
         }
-        
-    } else if ([request isDELETE]) {
+        else if([response isOK]) {
+            NSLog(@"Retrieved XML from our POST: %@", [response bodyAsString]);
+        }
+        // Handle
+    } else if([request isDELETE]) {
         
         // Handling DELETE /missing_resource.txt
-        if ([response isNotFound]) {
+        if([response isNotFound]) {
             NSLog(@"The resource path '%@' was not found.", [request resourcePath]);
         }
     }

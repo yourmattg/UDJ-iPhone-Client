@@ -13,7 +13,7 @@
     @public
     
     @private
-    NSString* serverPrefix; // without spaces: https ://www.bazaarsolutions.com:4897/udj
+    NSString* serverPrefix; // without spaces: http://0.0.0.0:4897/udj
     NSString* ticket;
     RKClient* client; // configures, dispatches request
 }

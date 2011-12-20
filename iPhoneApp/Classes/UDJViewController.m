@@ -75,8 +75,7 @@
     
 	if(![username isEqualToString: @""] && ![password isEqualToString: @""])
 	{
-        // FIX THIS
-       [[UDJConnection sharedConnection] authenticate:username password: password];
+        [[UDJConnection sharedConnection] authenticate:username password: password];
 		PartyListViewController* partyListViewController = [[PartyListViewController alloc] initWithNibName:@"PartyListViewController" bundle:[NSBundle mainBundle]];
 		[self.navigationController pushViewController:partyListViewController animated:YES];
 		[partyListViewController release];
