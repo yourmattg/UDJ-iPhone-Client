@@ -9,6 +9,7 @@
 #import "UDJViewController.h"
 #import "PartyListViewController.h"
 #import "UDJConnection.h"
+#import "AuthenticateViewController.h"
 
 @implementation UDJViewController
 
@@ -75,10 +76,19 @@
     
 	if(![username isEqualToString: @""] && ![password isEqualToString: @""])
 	{
+        // load waiting screen
+        AuthenticateViewController* authenticateViewController = [[AuthenticateViewController alloc] initWithNibName:@"AuthenticateViewController" bundle:[NSBundle mainBundle]];
+        [self.navigationController pushViewController:authenticateViewController animated:NO];
+        [authenticateViewController release];
+        
+        // attempt authorization
+        [[UDJConnection sharedConnection] setCurrentController: self];
         [[UDJConnection sharedConnection] authenticate:username password: password];
-		PartyListViewController* partyListViewController = [[PartyListViewController alloc] initWithNibName:@"PartyListViewController" bundle:[NSBundle mainBundle]];
+        
+        // old code
+		/*PartyListViewController* partyListViewController = [[PartyListViewController alloc] initWithNibName:@"PartyListViewController" bundle:[NSBundle mainBundle]];
 		[self.navigationController pushViewController:partyListViewController animated:YES];
-		[partyListViewController release];
+		[partyListViewController release];*/
 	}
 }
 

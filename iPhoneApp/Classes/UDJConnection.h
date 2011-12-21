@@ -11,16 +11,22 @@
 
 @interface UDJConnection : NSObject<RKRequestDelegate>{
     @public
+    BOOL authCancelled; // true if the user cancelled logging in
     
     @private
     NSString* serverPrefix; // without spaces: http://0.0.0.0:4897/udj
     NSString* ticket;
     RKClient* client; // configures, dispatches request
+    UIViewController* currentController; // keeps track of the current view controller so we can pass info to it
 }
 
 + (id) sharedConnection;
+- (void) setCurrentController:(id) controller; // setting the current view controller
+
 - (void) initWithServerPrefix:(NSString*)prefix;
+
 - (void) authenticate:(NSString*)username password:(NSString*)pass;
+- (void) authCancel;
 
 @property(nonatomic,retain) NSString* serverPrefix;
 @property(nonatomic,retain) NSString* ticket;

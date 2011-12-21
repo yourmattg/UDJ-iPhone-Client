@@ -7,6 +7,8 @@
 //
 
 #import "UDJConnection.h"
+#import "AuthenticateViewController.h"
+#import "PartyListViewController.h"
 
 static UDJConnection* sharedUDJConnection = nil;
 
@@ -25,15 +27,47 @@ static UDJConnection* sharedUDJConnection = nil;
 }
 // this creates the RKClient and sets its base URL to 'prefix'
 - (void) initWithServerPrefix:(NSString *)prefix{
+    ticket=nil;
+    authCancelled=false;
     client = [RKClient clientWithBaseURL:prefix];
 }
 
+// **************************** CurrentController Methods ********************************
+
+- (void) setCurrentController:(id)controller{
+    currentController = controller;
+}
+
+
+
+// **************************** Authorization Methods ********************************
+
 // sends a POST with the username and password
 - (void) authenticate:(NSString*)username password:(NSString*)pass{
+    authCancelled=false;
     // make sure the right api version is being passed in
     NSDictionary* nameAndPass = [NSDictionary dictionaryWithObjectsAndKeys:username, @"username", pass, @"password", @"0.2", @"udj_api_version", nil]; 
     [client post:@"/auth" params:nameAndPass delegate:self];
     NSLog(@"attemping to authenticate");
+}
+
+// handle authorization response
+- (void)handleAuth:(RKResponse*)response{
+    NSLog(@"handling auth");
+    if(!authCancelled){
+        NSLog(@"auth");
+        ticket=@"ticket";
+        authCancelled=true; // this is so we don't get further responses
+        // load the party list view
+        PartyListViewController* partyListViewController = [[PartyListViewController alloc] initWithNibName:@"PartyListViewController" bundle:[NSBundle mainBundle]];
+         [currentController.navigationController pushViewController:partyListViewController animated:YES];
+        [partyListViewController release];
+    }
+}
+
+// called by outside classes to cancel authorization
+- (void)authCancel{
+    authCancelled=true;
 }
 
 // handles responses from the server
@@ -55,6 +89,7 @@ static UDJConnection* sharedUDJConnection = nil;
         }
         else if([response isOK]) {
             NSLog(@"Retrieved XML from our POST: %@", [response bodyAsString]);
+            [self handleAuth:response];
         }
         // Handle
     } else if([request isDELETE]) {
