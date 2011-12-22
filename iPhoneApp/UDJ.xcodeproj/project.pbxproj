@@ -139,6 +139,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A354F04014A2CA5A00F3AAEF /* Login */,
 				A3F58C5514A1519F00756F7D /* Other */,
 				A3F58C5414A1517900756F7D /* Main Views */,
 				1D3623240D0F684500981E51 /* UDJAppDelegate.h */,
@@ -209,6 +210,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A354F04014A2CA5A00F3AAEF /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				28D7ACF60DDB3853001CB0EB /* UDJViewController.h */,
+				28D7ACF70DDB3853001CB0EB /* UDJViewController.m */,
+				A3F58C5914A15F0B00756F7D /* AuthenticateViewController.h */,
+				A3F58C5A14A15F0B00756F7D /* AuthenticateViewController.m */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
 		A39AF6591497C803006ADF19 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -225,8 +237,6 @@
 			children = (
 				A3F9C1D5142EBB880016717B /* PartyLoginViewController.h */,
 				A3F9C1D6142EBB880016717B /* PartyLoginViewController.m */,
-				28D7ACF60DDB3853001CB0EB /* UDJViewController.h */,
-				28D7ACF70DDB3853001CB0EB /* UDJViewController.m */,
 				A3F9C04F142EAD610016717B /* PartyListViewController.h */,
 				A3F9C050142EAD610016717B /* PartyListViewController.m */,
 				A33C4611148F0707009C1BC6 /* PartyPlaylistViewController.h */,
@@ -242,8 +252,6 @@
 			children = (
 				A39AF66E1497CB74006ADF19 /* UDJConnection.h */,
 				A39AF66F1497CB74006ADF19 /* UDJConnection.m */,
-				A3F58C5914A15F0B00756F7D /* AuthenticateViewController.h */,
-				A3F58C5A14A15F0B00756F7D /* AuthenticateViewController.m */,
 			);
 			name = Other;
 			sourceTree = "<group>";

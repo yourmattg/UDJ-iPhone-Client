@@ -9,12 +9,13 @@
 #import "UDJConnection.h"
 #import "AuthenticateViewController.h"
 #import "PartyListViewController.h"
+#import "UDJAppDelegate.h"
 
 static UDJConnection* sharedUDJConnection = nil;
 
 @implementation UDJConnection
 
-@synthesize serverPrefix, ticket, client;
+@synthesize serverPrefix, ticket, client, userID;
 
 #pragma mark Singleton Methods
 // allows UDJConnection to be used anywhere in the  application
@@ -28,7 +29,7 @@ static UDJConnection* sharedUDJConnection = nil;
 // this creates the RKClient and sets its base URL to 'prefix'
 - (void) initWithServerPrefix:(NSString *)prefix{
     ticket=nil;
-    authCancelled=false;
+    acceptingAuth=false; // don't want to accept authorization response yet
     client = [RKClient clientWithBaseURL:prefix];
 }
 
@@ -44,20 +45,20 @@ static UDJConnection* sharedUDJConnection = nil;
 
 // sends a POST with the username and password
 - (void) authenticate:(NSString*)username password:(NSString*)pass{
-    authCancelled=false;
+    acceptingAuth=true;
     // make sure the right api version is being passed in
     NSDictionary* nameAndPass = [NSDictionary dictionaryWithObjectsAndKeys:username, @"username", pass, @"password", @"0.2", @"udj_api_version", nil]; 
     [client post:@"/auth" params:nameAndPass delegate:self];
-    NSLog(@"attemping to authenticate");
 }
 
 // handle authorization response
 - (void)handleAuth:(RKResponse*)response{
-    NSLog(@"handling auth");
-    if(!authCancelled){
-        NSLog(@"auth");
-        ticket=@"ticket";
-        authCancelled=true; // this is so we don't get further responses
+    if(acceptingAuth){
+        NSDictionary* headerDict = [response allHeaderFields];
+        ticket=[headerDict valueForKey:@"X-Udj-Ticket-Hash"];
+        userID=[headerDict valueForKey:@"X-Udj-User-Id"];
+        acceptingAuth=false; // this is so we don't get further responses
+        
         // load the party list view
         PartyListViewController* partyListViewController = [[PartyListViewController alloc] initWithNibName:@"PartyListViewController" bundle:[NSBundle mainBundle]];
          [currentController.navigationController pushViewController:partyListViewController animated:YES];
@@ -67,7 +68,15 @@ static UDJConnection* sharedUDJConnection = nil;
 
 // called by outside classes to cancel authorization
 - (void)authCancel{
-    authCancelled=true;
+    acceptingAuth=false;
+}
+
+// called when username/pass is incorrect
+- (void)denyAuth{
+    acceptingAuth = false;
+    [currentController.navigationController popViewControllerAnimated:YES];
+    UIAlertView* authNotification = [UIAlertView alloc];
+    [authNotification initWithTitle:@"Login Failed" message:@"The username or password you entered is invalid." delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 }
 
 // handles responses from the server
@@ -88,10 +97,15 @@ static UDJConnection* sharedUDJConnection = nil;
             NSLog(@"Got a JSON response back from our POST!");
         }
         else if([response isOK]) {
-            NSLog(@"Retrieved XML from our POST: %@", [response bodyAsString]);
+            // this automatically assumes its for authorization, should change
+           // NSLog(@"Retrieved XML from our POST: %@", [response bodyAsString]);
             [self handleAuth:response];
         }
-        // Handle
+        // we are waiting for an authorization, but credentials were invalid
+        else if(acceptingAuth){ // may have to add that it is a 403 status code
+            NSLog(@"denied");
+            [self denyAuth];
+        }
     } else if([request isDELETE]) {
         
         // Handling DELETE /missing_resource.txt
