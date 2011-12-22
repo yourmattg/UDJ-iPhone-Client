@@ -43,7 +43,7 @@ static UDJConnection* sharedUDJConnection = nil;
 
 // **************************** Authorization Methods ********************************
 
-// sends a POST with the username and password
+// authenticate: sends a POST with the username and password
 - (void) authenticate:(NSString*)username password:(NSString*)pass{
     acceptingAuth=true;
     // make sure the right api version is being passed in
@@ -51,8 +51,9 @@ static UDJConnection* sharedUDJConnection = nil;
     [client post:@"/auth" params:nameAndPass delegate:self];
 }
 
-// handle authorization response
+// handleAuth: handle authorization response if credentials are valid
 - (void)handleAuth:(RKResponse*)response{
+    // only handle if we are waiting for an auth response
     if(acceptingAuth){
         NSDictionary* headerDict = [response allHeaderFields];
         ticket=[headerDict valueForKey:@"X-Udj-Ticket-Hash"];
@@ -66,18 +67,22 @@ static UDJConnection* sharedUDJConnection = nil;
     }
 }
 
-// called by outside classes to cancel authorization
+// authCancel: called by outside classes to cancel authorization
 - (void)authCancel{
     acceptingAuth=false;
 }
 
-// called when username/pass is incorrect
+// denyAuth: called when username/pass is incorrect
 - (void)denyAuth{
     acceptingAuth = false;
     [currentController.navigationController popViewControllerAnimated:YES];
     UIAlertView* authNotification = [UIAlertView alloc];
     [authNotification initWithTitle:@"Login Failed" message:@"The username or password you entered is invalid." delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [authNotification show];
 }
+
+
+// **************************** General Response Handling ********************************
 
 // handles responses from the server
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
@@ -96,12 +101,12 @@ static UDJConnection* sharedUDJConnection = nil;
         if([response isJSON]) {
             NSLog(@"Got a JSON response back from our POST!");
         }
-        else if([response isOK]) {
-            // this automatically assumes its for authorization, should change
-           // NSLog(@"Retrieved XML from our POST: %@", [response bodyAsString]);
+        // proper authorization
+        else if(acceptingAuth && [response isOK]) {
+            // this assumes the response was for authorization, will probably be true but may need to change
             [self handleAuth:response];
         }
-        // we are waiting for an authorization, but credentials were invalid
+        // improper authorization i.e invalid credentials
         else if(acceptingAuth){ // may have to add that it is a 403 status code
             NSLog(@"denied");
             [self denyAuth];
