@@ -15,7 +15,9 @@ static UDJConnection* sharedUDJConnection = nil;
 
 @implementation UDJConnection
 
-@synthesize serverPrefix, ticket, client, userID;
+@synthesize serverPrefix, ticket, client, userID, headers;
+
+// **************************** General UDJConnection Methods ********************************
 
 #pragma mark Singleton Methods
 // allows UDJConnection to be used anywhere in the  application
@@ -26,26 +28,25 @@ static UDJConnection* sharedUDJConnection = nil;
     }
     return sharedUDJConnection;
 }
+
 // this creates the RKClient and sets its base URL to 'prefix'
 - (void) initWithServerPrefix:(NSString *)prefix{
     ticket=nil;
-    acceptingAuth=false; // don't want to accept authorization response yet
+    acceptAuth=false; // don't want to accept authorization response yet
+    acceptEvents=false;
     client = [RKClient clientWithBaseURL:prefix];
 }
-
-// **************************** CurrentController Methods ********************************
 
 - (void) setCurrentController:(id)controller{
     currentController = controller;
 }
 
 
-
 // **************************** Authorization Methods ********************************
 
 // authenticate: sends a POST with the username and password
 - (void) authenticate:(NSString*)username password:(NSString*)pass{
-    acceptingAuth=true;
+    acceptAuth=true;
     // make sure the right api version is being passed in
     NSDictionary* nameAndPass = [NSDictionary dictionaryWithObjectsAndKeys:username, @"username", pass, @"password", @"0.2", @"udj_api_version", nil]; 
     [client post:@"/auth" params:nameAndPass delegate:self];
@@ -54,11 +55,12 @@ static UDJConnection* sharedUDJConnection = nil;
 // handleAuth: handle authorization response if credentials are valid
 - (void)handleAuth:(RKResponse*)response{
     // only handle if we are waiting for an auth response
-    if(acceptingAuth){
+    if(acceptAuth){
         NSDictionary* headerDict = [response allHeaderFields];
         ticket=[headerDict valueForKey:@"X-Udj-Ticket-Hash"];
         userID=[headerDict valueForKey:@"X-Udj-User-Id"];
-        acceptingAuth=false; // this is so we don't get further responses
+        acceptAuth=false; // this is so we don't get further responses
+        headers = [NSDictionary dictionaryWithObjectsAndKeys:ticket, @"X-Udj-Ticket-Hash", userID, @"X-Udj-User-Id", nil];
         
         // load the party list view
         PartyListViewController* partyListViewController = [[PartyListViewController alloc] initWithNibName:@"PartyListViewController" bundle:[NSBundle mainBundle]];
@@ -69,16 +71,37 @@ static UDJConnection* sharedUDJConnection = nil;
 
 // authCancel: called by outside classes to cancel authorization
 - (void)authCancel{
-    acceptingAuth=false;
+    acceptAuth=false;
 }
 
 // denyAuth: called when username/pass is incorrect
 - (void)denyAuth{
-    acceptingAuth = false;
+    acceptAuth = false;
     [currentController.navigationController popViewControllerAnimated:YES];
     UIAlertView* authNotification = [UIAlertView alloc];
     [authNotification initWithTitle:@"Login Failed" message:@"The username or password you entered is invalid." delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [authNotification show];
+}
+
+
+// **************************** Event Loading and Searching ********************************
+
+// sendEventSearch: request all the events with a similiar name
+- (void) sendEventSearch:(NSString *)name{
+    RKRequest* request;
+    request.method = RKRequestMethodPOST;
+    request.URL = [NSURL URLWithString:@"/events"];
+   // request.additionalHTTPHeaders;
+    acceptEvents = true;
+    NSDictionary* searchParam = [NSDictionary dictionaryWithObject:name forKey:@"name_of_event"];
+    [client post:@"/events" params:searchParam delegate:self];
+}
+
+// handleEventResults: get the list of returned events from either the name or location search
+- (void) handleEventResults:(RKResponse*)response{
+    if(acceptEvents){
+        
+    }
 }
 
 
@@ -97,20 +120,18 @@ static UDJConnection* sharedUDJConnection = nil;
         
     } else if([request isPOST]) {
         
-        // Handling POST /other.json
-        if([response isJSON]) {
-            NSLog(@"Got a JSON response back from our POST!");
+        // authorization
+        if(acceptAuth) {
+            // valid credentials
+            if([response isOK]) [self handleAuth:response];
+            // invalid credentials
+            else [self denyAuth];
         }
-        // proper authorization
-        else if(acceptingAuth && [response isOK]) {
-            // this assumes the response was for authorization, will probably be true but may need to change
-            [self handleAuth:response];
+        // event lists
+        else if(acceptEvents){
+            
         }
-        // improper authorization i.e invalid credentials
-        else if(acceptingAuth){ // may have to add that it is a 403 status code
-            NSLog(@"denied");
-            [self denyAuth];
-        }
+
     } else if([request isDELETE]) {
         
         // Handling DELETE /missing_resource.txt

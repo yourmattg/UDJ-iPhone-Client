@@ -15,7 +15,8 @@
     NSArray* tempList; // list to use while we are loading events
 }
 
-- (void)loadNearbyEvents; // put the nearby events into templist, then set it to currentList
+- (void)getNearbyEvents; // put the nearby events into templist, then set it to currentList
+- (void)getEventsByName:(NSString*)name; // search for events by name and put them in table
 
 @property(nonatomic,retain) NSArray* currentList;
 @property(nonatomic,retain) NSArray* tempList;

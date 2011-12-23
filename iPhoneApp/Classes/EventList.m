@@ -7,13 +7,18 @@
 //
 
 #import "EventList.h"
+#import "UDJConnection.h"
 
 @implementation EventList
 
 @synthesize currentList, tempList;
 
-- (void) loadNearbyEvents{
+- (void) getNearbyEvents{
     // get coordinates
+}
+
+- (void)getEventsByName:(NSString *)name{
+    [[UDJConnection sharedConnection] sendEventSearch:name];
 }
 
 @end

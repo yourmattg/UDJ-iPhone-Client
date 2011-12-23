@@ -11,7 +11,8 @@
 
 @interface UDJConnection : NSObject<RKRequestDelegate>{
     @public
-    BOOL acceptingAuth; // true if connection is accepting authorization responses
+    BOOL acceptAuth; // true if connection is accepting authorization responses
+    BOOL acceptEvents; // awaiting an event list
     
     @private
     NSString* serverPrefix; // without spaces: http://0.0.0.0:4897/udj
@@ -19,6 +20,7 @@
     NSString* userID;
     RKClient* client; // configures, dispatches request
     UIViewController* currentController; // keeps track of the current view controller so we can pass info to it
+    NSDictionary* headers;
 }
 
 + (id) sharedConnection;
@@ -30,9 +32,13 @@
 - (void) authCancel;
 - (void) denyAuth;
 
+- (void) sendEventSearch:(NSString*)name; // request events by name
+- (void) handleEventResults:(RKResponse*)response;
+
 @property(nonatomic,retain) NSString* serverPrefix;
 @property(nonatomic,retain) NSString* ticket;
 @property(nonatomic,retain) RKClient* client;
 @property(nonatomic,retain) NSString* userID;
+@property(nonatomic,retain) NSDictionary* headers;
 
 @end
