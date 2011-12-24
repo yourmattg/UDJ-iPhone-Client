@@ -8,11 +8,13 @@
 
 #import "PartyListViewController.h"
 #import "PartyLoginViewController.h"
+#import "UDJConnection.h"
+#import "EventList.h"
 
 
 @implementation PartyListViewController
 
-@synthesize partyList;
+@synthesize partyList, eventList;
 
 
 #pragma mark -
@@ -21,6 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[UDJConnection sharedConnection] setCurrentController: self];
 	partyList = [[NSMutableArray alloc] init];
 	[partyList addObject: @"Toga Party"];
 	[partyList addObject: @"Classy Party"];
@@ -29,6 +32,8 @@
 	[self.navigationItem setLeftBarButtonItem:[[[UIBarButtonItem alloc] initWithCustomView:[[UIView new] autorelease]] autorelease]];
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    eventList = [EventList new];
+    [eventList getEventsByName:@"Party"];
 }
 
 

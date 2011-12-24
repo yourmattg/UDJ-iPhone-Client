@@ -88,20 +88,34 @@ static UDJConnection* sharedUDJConnection = nil;
 
 // sendEventSearch: request all the events with a similiar name
 - (void) sendEventSearch:(NSString *)name{
-    RKRequest* request;
-    request.method = RKRequestMethodPOST;
-    request.URL = [NSURL URLWithString:@"/events"];
-   // request.additionalHTTPHeaders;
-    acceptEvents = true;
-    NSDictionary* searchParam = [NSDictionary dictionaryWithObject:name forKey:@"name_of_event"];
-    [client post:@"/events" params:searchParam delegate:self];
+    NSLog(@"event search");
+    acceptEvents=true;
+    // create the URL
+    NSString* urlString = client.baseURL;
+    urlString = [urlString stringByAppendingString:@"/events?name="];
+    urlString = [urlString stringByAppendingString:name];
+    NSURL* url = [NSURL URLWithString:urlString];
+    //create GET request with correct parameters and headers
+    RKRequest* request = [RKRequest new];
+    [request initWithURL:url delegate:self];
+    request.method = RKRequestMethodGET;
+    request.additionalHTTPHeaders = headers;
+    [request sendAsynchronously];
 }
 
 // handleEventResults: get the list of returned events from either the name or location search
 - (void) handleEventResults:(RKResponse*)response{
-    if(acceptEvents){
-        
+    NSLog(@"Handling events...");/*
+    RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
+    NSArray* tempList = [parser objectFromString:[response bodyAsString] error:nil];
+    for(int i=0; i<[tempList count]; i++){
+        NSLog([tempList objectAtIndex:i]);
     }
+    acceptEvents=false;*/
+}
+
+- (void) acceptEvents:(BOOL)value{
+    acceptEvents = value;
 }
 
 
@@ -111,11 +125,12 @@ static UDJConnection* sharedUDJConnection = nil;
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
     NSLog(@"Got a response from the server");
     if ([request isGET]) {
-        // Handling GET /foo.xml
-        
-        if([response isOK]) {
-            // Success! Let's take a look at the data
-            NSLog(@"Retrieved XML: %@", [response bodyAsString]);
+        // event lists
+        if(acceptEvents){
+            // got a list of events back
+            if([response isOK]){
+                [self handleEventResults:response];
+            }
         }
         
     } else if([request isPOST]) {
@@ -126,10 +141,6 @@ static UDJConnection* sharedUDJConnection = nil;
             if([response isOK]) [self handleAuth:response];
             // invalid credentials
             else [self denyAuth];
-        }
-        // event lists
-        else if(acceptEvents){
-            
         }
 
     } else if([request isDELETE]) {

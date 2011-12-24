@@ -145,12 +145,10 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				A3F58C5514A1519F00756F7D /* Other */,
+				A3F58C5514A1519F00756F7D /* Main Items */,
 				A3536FB414A5219E00B5C95F /* Events */,
 				A354F04014A2CA5A00F3AAEF /* Login */,
 				A3F58C5414A1517900756F7D /* Main Views */,
-				1D3623240D0F684500981E51 /* UDJAppDelegate.h */,
-				1D3623250D0F684500981E51 /* UDJAppDelegate.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -265,13 +263,15 @@
 			name = "Main Views";
 			sourceTree = "<group>";
 		};
-		A3F58C5514A1519F00756F7D /* Other */ = {
+		A3F58C5514A1519F00756F7D /* Main Items */ = {
 			isa = PBXGroup;
 			children = (
+				1D3623240D0F684500981E51 /* UDJAppDelegate.h */,
+				1D3623250D0F684500981E51 /* UDJAppDelegate.m */,
 				A39AF66E1497CB74006ADF19 /* UDJConnection.h */,
 				A39AF66F1497CB74006ADF19 /* UDJConnection.m */,
 			);
-			name = Other;
+			name = "Main Items";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EventList.h"
 
 
 @interface PartyListViewController : UITableViewController {
 
-	NSMutableArray *partyList;
+    EventList* eventList; // the event list class to handle all the loading and stuff
+	NSMutableArray *partyList; // the current list actually being shown
 	
 }
 
+@property(nonatomic,retain) EventList* eventList;
 @property (nonatomic, retain) NSMutableArray *partyList;
 
 @end

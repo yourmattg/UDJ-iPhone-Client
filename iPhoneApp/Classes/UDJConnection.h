@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <RestKit/RestKit.h>
+#import <RestKit/RKJSONParserJSONKit.h>
 
 @interface UDJConnection : NSObject<RKRequestDelegate>{
     @public
@@ -34,6 +35,7 @@
 
 - (void) sendEventSearch:(NSString*)name; // request events by name
 - (void) handleEventResults:(RKResponse*)response;
+- (void) acceptEvents:(BOOL)value;
 
 @property(nonatomic,retain) NSString* serverPrefix;
 @property(nonatomic,retain) NSString* ticket;
