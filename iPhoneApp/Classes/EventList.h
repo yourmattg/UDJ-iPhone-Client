@@ -11,14 +11,15 @@
 
 @interface EventList : NSObject{
     
-    NSArray* currentList; // holds the last event list we loaded
-    NSArray* tempList; // list to use while we are loading events
+    NSMutableArray* currentList; // holds the last event list we loaded
+    NSMutableArray* tempList; // list to use while we are loading events
 }
 
++ (EventList*)sharedEventList;
 - (void)getNearbyEvents; // put the nearby events into templist, then set it to currentList
 - (void)getEventsByName:(NSString*)name; // search for events by name and put them in table
 
-@property(nonatomic,retain) NSArray* currentList;
-@property(nonatomic,retain) NSArray* tempList;
+@property(nonatomic,retain) NSMutableArray* currentList;
+@property(nonatomic,retain) NSMutableArray* tempList;
 
 @end

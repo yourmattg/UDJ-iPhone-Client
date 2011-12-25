@@ -36,7 +36,6 @@
     [eventList getEventsByName:@"Party"];
 }
 
-
 /*
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

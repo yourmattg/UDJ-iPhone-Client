@@ -113,6 +113,7 @@ static UDJConnection* sharedUDJConnection = nil;
 - (void) handleEventResults:(RKResponse*)response{
     NSLog(@"Handling events...");
     
+    NSMutableArray* currentList = [NSMutableArray new];
     RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
     NSArray* eventArray = [parser objectFromString:[response bodyAsString] error:nil];
     for(int i=0; i<[eventArray count]; i++){
@@ -123,7 +124,9 @@ static UDJConnection* sharedUDJConnection = nil;
         event.hostId = [[eventDict objectForKey:@"host_id"] integerValue];
         event.latitude = [[eventDict objectForKey:@"latitude"] doubleValue];
         event.longitude = [[eventDict objectForKey:@"longitude"] doubleValue];
+        [currentList addObject:event];
     }
+    [[EventList sharedEventList] setCurrentList:currentList];
     acceptEvents=false;
 }
 
