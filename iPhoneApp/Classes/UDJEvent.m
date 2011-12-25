@@ -12,7 +12,7 @@
 
 @synthesize eventId, name, hostId, latitude, longitude;
 
-- (UDJEvent*) eventWithId:(NSString *)eventid name:(NSString *)eventname hostId:(NSString *)hostid latitude:(NSString *)lat longitude:(NSString *)lon{
++ (UDJEvent*) eventWithId:(NSInteger)eventid name:(NSString *)eventname hostId:(NSInteger)hostid latitude:(double)lat longitude:(double)lon{
     UDJEvent* udjevent;
     udjevent.eventId = eventid;
     udjevent.name = eventname;

@@ -10,6 +10,7 @@
 #import "AuthenticateViewController.h"
 #import "PartyListViewController.h"
 #import "UDJAppDelegate.h"
+#import "UDJEvent.h"
 
 static UDJConnection* sharedUDJConnection = nil;
 
@@ -115,14 +116,14 @@ static UDJConnection* sharedUDJConnection = nil;
     RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
     NSArray* eventArray = [parser objectFromString:[response bodyAsString] error:nil];
     for(int i=0; i<[eventArray count]; i++){
+        UDJEvent* event = [UDJEvent new];
         NSDictionary* eventDict = [eventArray objectAtIndex:i];
-        NSArray* keys = [eventDict allKeys];
-        for(int j=0; j<[keys count]; j++){
-            // you now have an NSDictionary representing the event
-            // and an array of all the keys, use the keys to map this to a UDJEvent
-        }
+        event.name = [eventDict objectForKey:@"name"];
+        event.eventId = [[eventDict objectForKey:@"id"] integerValue];
+        event.hostId = [[eventDict objectForKey:@"host_id"] integerValue];
+        event.latitude = [[eventDict objectForKey:@"latitude"] doubleValue];
+        event.longitude = [[eventDict objectForKey:@"longitude"] doubleValue];
     }
-    
     acceptEvents=false;
 }
 

@@ -10,19 +10,19 @@
 
 @interface UDJEvent : NSObject{
     @private
-    NSString* eventId;
+    NSInteger eventId;
     NSString* name;
-    NSString* hostId;
-    NSString* latitude;
-    NSString* longitude;
+    NSInteger hostId;
+    double latitude;
+    double longitude;
     
 }
-- (UDJEvent*) eventWithId:(NSString*)eventId name:(NSString*)name hostId:(NSString*)hostId latitude:(NSString*)lat longitude:(NSString*)lon;
++ (UDJEvent*) eventWithId:(NSInteger)eventId name:(NSString*)name hostId:(NSInteger)hostId latitude:(double)lat longitude:(double)lon;
 
-@property(nonatomic,retain) NSString* eventId;
+@property(nonatomic) NSInteger eventId;
 @property(nonatomic,retain) NSString* name;
-@property(nonatomic,retain) NSString* hostId;
-@property(nonatomic,retain) NSString* latitude;
-@property(nonatomic,retain) NSString* longitude;
+@property(nonatomic) NSInteger hostId;
+@property(nonatomic) double latitude;
+@property(nonatomic) double longitude;
 
 @end
