@@ -16,6 +16,7 @@
     UDJViewController *viewController;
 	UINavigationController *navigationController;
     UDJConnection* udjConnection;
+    NSString* baseUrl;
 	
 	//Application Model Data
 	NSString *modelData;
@@ -26,7 +27,9 @@
 @property (nonatomic, retain) IBOutlet UDJViewController *viewController;
 @property (nonatomic, retain) UINavigationController *navigationController;
 @property (nonatomic, retain) UDJConnection* udjConnection;
+@property (nonatomic, retain) NSString* baseUrl;
 
+- (void) initObjectMappings;
 - (void) setModelData:(NSString *)modelData;
 - (NSString *) getModelData;
 

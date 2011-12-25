@@ -90,28 +90,40 @@ static UDJConnection* sharedUDJConnection = nil;
 - (void) sendEventSearch:(NSString *)name{
     NSLog(@"event search");
     acceptEvents=true;
+    
     // create the URL
     NSString* urlString = client.baseURL;
     urlString = [urlString stringByAppendingString:@"/events?name="];
     urlString = [urlString stringByAppendingString:name];
     NSURL* url = [NSURL URLWithString:urlString];
+    
     //create GET request with correct parameters and headers
     RKRequest* request = [RKRequest new];
     [request initWithURL:url delegate:self];
     request.method = RKRequestMethodGET;
     request.additionalHTTPHeaders = headers;
-    [request sendAsynchronously];
+    
+    // send request and handle response
+    RKResponse* response = [request sendSynchronously];
+    [self handleEventResults:response];
 }
 
 // handleEventResults: get the list of returned events from either the name or location search
 - (void) handleEventResults:(RKResponse*)response{
-    NSLog(@"Handling events...");/*
+    NSLog(@"Handling events...");
+    
     RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
-    NSArray* tempList = [parser objectFromString:[response bodyAsString] error:nil];
-    for(int i=0; i<[tempList count]; i++){
-        NSLog([tempList objectAtIndex:i]);
+    NSArray* eventArray = [parser objectFromString:[response bodyAsString] error:nil];
+    for(int i=0; i<[eventArray count]; i++){
+        NSDictionary* eventDict = [eventArray objectAtIndex:i];
+        NSArray* keys = [eventDict allKeys];
+        for(int j=0; j<[keys count]; j++){
+            // you now have an NSDictionary representing the event
+            // and an array of all the keys, use the keys to map this to a UDJEvent
+        }
     }
-    acceptEvents=false;*/
+    
+    acceptEvents=false;
 }
 
 - (void) acceptEvents:(BOOL)value{
@@ -126,12 +138,12 @@ static UDJConnection* sharedUDJConnection = nil;
     NSLog(@"Got a response from the server");
     if ([request isGET]) {
         // event lists
-        if(acceptEvents){
+        /*if(acceptEvents){
             // got a list of events back
             if([response isOK]){
                 [self handleEventResults:response];
             }
-        }
+        }*/
         
     } else if([request isPOST]) {
         

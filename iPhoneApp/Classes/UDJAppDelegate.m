@@ -9,12 +9,14 @@
 #import "UDJAppDelegate.h"
 #import "UDJViewController.h"
 #import "UDJConnection.h"
+#import "UDJEvent.h"
 
 @implementation UDJAppDelegate
 
 @synthesize window;
 @synthesize viewController, navigationController;
 @synthesize udjConnection;
+@synthesize baseUrl;
 
 // accessor methods for "data" property
 
@@ -34,12 +36,32 @@
 #pragma mark -
 #pragma mark Application lifecycle
 
+// initObjectMappings: set up our RKObjectMappings for events, songs, etc.
+- (void)initObjectMappings{
+    // create our RKObjectManager: this is a singleton
+    RKObjectManager *manager = [RKObjectManager objectManagerWithBaseURL:baseUrl];
+    [manager setSerializationMIMEType:RKMIMETypeJSON]; // we're using JSON
+    
+    // set up event mappings
+    // may only need this part for posting events
+    /*RKObjectMapping *eventRequestMapping = [RKObjectMapping mappingForClass:[UDJEvent class]];
+    [eventRequestMapping mapKeyPath:@"id" toAttribute:@"id"];
+     ...
+    [[manager mappingProvider] setSerializationMapping:[eventRequestMapping inverseMapping] forClass:[UDJEvent class]];*/
+    
+    RKObjectMapping *eventMapping = [RKObjectMapping mappingForClass:[UDJEvent class]];
+    [eventMapping mapKeyPathsToAttributes:@"id", @"eventId", @"name", @"name", @"host_id", @"hostId", @"latitude", @"latitude", @"longitude", @"longitude", nil];
+    [[manager mappingProvider] addObjectMapping:eventMapping];
+    
+}
+
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
     
     // Override point for customization after application launch.
     
     // initialize udjConnection
-    [[UDJConnection sharedConnection] initWithServerPrefix: @"http://0.0.0.0:4897/udj"];
+    baseUrl = @"http://0.0.0.0:4897/udj";
+    [[UDJConnection sharedConnection] initWithServerPrefix: baseUrl];
     
 	//create a UDJViewController (the login screen), and make it the root view
 	viewController    = [[UDJViewController alloc] initWithNibName:@"UDJViewController" bundle:nil];
