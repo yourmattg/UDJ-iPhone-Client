@@ -12,17 +12,21 @@
     @private
     NSInteger eventId;
     NSString* name;
+    NSString* hostUsername;
     NSInteger hostId;
+    BOOL hasPassword;
     double latitude;
     double longitude;
     
 }
-+ (UDJEvent*) eventWithId:(NSInteger)eventId name:(NSString*)name hostId:(NSInteger)hostId latitude:(double)lat longitude:(double)lon;
++ (UDJEvent*) eventFromDictionary:(NSDictionary*)eventDict;
 
 @property(nonatomic) NSInteger eventId;
 @property(nonatomic,retain) NSString* name;
 @property(nonatomic) NSInteger hostId;
 @property(nonatomic) double latitude;
 @property(nonatomic) double longitude;
+@property(nonatomic) BOOL hasPassword;
+@property(nonatomic,retain) NSString* hostUsername;
 
 @end

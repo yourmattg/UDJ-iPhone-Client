@@ -139,13 +139,8 @@ static UDJConnection* sharedUDJConnection = nil;
     RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
     NSArray* eventArray = [parser objectFromString:[response bodyAsString] error:nil];
     for(int i=0; i<[eventArray count]; i++){
-        UDJEvent* event = [UDJEvent new];
         NSDictionary* eventDict = [eventArray objectAtIndex:i];
-        event.name = [eventDict objectForKey:@"name"];
-        event.eventId = [[eventDict objectForKey:@"id"] integerValue];
-        event.hostId = [[eventDict objectForKey:@"host_id"] integerValue];
-        event.latitude = [[eventDict objectForKey:@"latitude"] doubleValue];
-        event.longitude = [[eventDict objectForKey:@"longitude"] doubleValue];
+        UDJEvent* event = [UDJEvent eventFromDictionary:eventDict];
         [currentList addObject:event];
     }
     [[EventList sharedEventList] setCurrentList:currentList];

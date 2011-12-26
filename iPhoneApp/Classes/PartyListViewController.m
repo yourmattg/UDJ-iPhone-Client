@@ -12,6 +12,7 @@
 #import "EventList.h"
 #import "UDJEvent.h"
 #import "PartySearchViewController.h"
+#import "PlaylistViewController.h"
 
 
 @implementation PartyListViewController
@@ -36,16 +37,12 @@
         [tableList addObject:partyName];
     }
     [self.tableView reloadData];
-    [[EventList sharedEventList] setRefresh:NO];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[UDJConnection sharedConnection] setCurrentController: self];
 	tableList = [[NSMutableArray alloc] init];
-	[tableList addObject: @"Toga Party"];
-	[tableList addObject: @"Classy Party"];
-	[tableList addObject: @"21st Bday"];
 	self.navigationItem.title = @"Events";
 	[self.navigationItem setLeftBarButtonItem:[[[UIBarButtonItem alloc] initWithCustomView:[[UIView new] autorelease]] autorelease]];
 
@@ -167,17 +164,23 @@
 #pragma mark -
 #pragma mark Table view delegate
 
+// this is called when the user selects a cell
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-	
-	PartyLoginViewController* partyLoginViewController = [[PartyLoginViewController alloc] initWithNibName:@"PartyLoginViewController" bundle:[NSBundle mainBundle]];
-	[self.navigationController pushViewController:partyLoginViewController animated:YES];
-	
-    // ...
-    // Pass the selected object to the new view controller.
-    //[self.navigationController pushViewController:partyLogin animated:YES];
-    //[partyLogin release];
     
+    NSInteger index = [indexPath indexAtPosition:1];
+    [EventList sharedEventList].currentEvent = [[EventList sharedEventList].currentList objectAtIndex:index];
+    // go to password screen if there is a password
+	if([EventList sharedEventList].currentEvent.hasPassword){
+        PartyLoginViewController* partyLoginViewController = [[PartyLoginViewController alloc] initWithNibName:@"PartyLoginViewController" bundle:[NSBundle mainBundle]];
+        [self.navigationController pushViewController:partyLoginViewController animated:YES];
+        [partyLoginViewController release];
+    }
+    // otherwise go straight to playlist
+    else{
+        PlaylistViewController* playlistViewController = [[PlaylistViewController alloc] initWithNibName:@"PlaylistViewController" bundle:[NSBundle mainBundle]];
+        [self.navigationController pushViewController:playlistViewController animated:YES];
+        [playlistViewController release];
+    }
 }
 
 
@@ -199,6 +202,7 @@
 
 - (void)dealloc {
     [super dealloc];
+    [tableList release];
 }
 
 

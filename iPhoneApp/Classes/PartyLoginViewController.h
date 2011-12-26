@@ -14,11 +14,13 @@
 	UITextField *passwordField;
 	UIButton *nearbyPartiesButton;
 	UIButton *enterPartyButton;
+    UILabel* eventNameLabel;
 }
 
 @property (retain,nonatomic) IBOutlet UITextField *passwordField;
 @property (retain,nonatomic) IBOutlet UIButton *nearbyPartiesButton;
 @property (retain,nonatomic) IBOutlet UIButton *enterPartyButton;
+@property(nonatomic,retain) IBOutlet UILabel* eventNameLabel;
 
 - (IBAction) OnButtonClick:(id) sender;
 

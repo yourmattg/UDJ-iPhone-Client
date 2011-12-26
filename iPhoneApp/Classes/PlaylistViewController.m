@@ -1,16 +1,18 @@
 //
-//  PartyPlaylistViewController.m
+//  PlaylistViewController.m
 //  UDJ
 //
 //  Created by Matthew Graf on 12/6/11.
 //  Copyright (c) 2011 University of Illinois at Urbana-Champaign. All rights reserved.
 //
 
-#import "PartyPlaylistViewController.h"
+#import "PlaylistViewController.h"
+#import "EventList.h"
+#import "UDJEvent.h"
 
-@implementation PartyPlaylistViewController
+@implementation PlaylistViewController
 
-@synthesize playlist;
+@synthesize playlist,theEvent;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -38,9 +40,14 @@
 	[playlist addObject: @"Escape Artist - Sage Francis"];
 	[playlist addObject: @"Finally Moving - Pretty Lights"];
     [playlist addObject: @"Smiling Swine - The Dear Hunter"];
-	self.navigationItem.title = @"Playlist";
+    
+    theEvent = [EventList sharedEventList].currentEvent;
+    NSString* navBarText = theEvent.name;
+    navBarText = [navBarText stringByAppendingString:@" Playlist"];
+	self.navigationItem.title = navBarText;
+    
 	[self.navigationItem setLeftBarButtonItem:[[[UIBarButtonItem alloc] initWithCustomView:[[UIView new] autorelease]] autorelease]];
-    UIButton* searchButton = [UIButton buttonWithType: UIButtonTypeRoundedRect];
+    UIButton* searchButton = [UIButton buttonWithType: UIButtonTypeRoundedRect];    
     searchButton.titleLabel.text = @"Library";
    // [infoButton addTarget:self action:@selector(showInfoView:) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:searchButton]];
@@ -102,7 +109,18 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
 	
-	NSString *cellValue = [playlist objectAtIndex:indexPath.row];
+    // combine song number and name into one string
+    NSInteger songNumber = indexPath.row;
+	NSString* songName = [playlist objectAtIndex:indexPath.row];
+    NSString* cellValue = [NSString new];
+    if(songNumber==0){
+        cellValue = @"Playing: ";
+    }
+    else{
+        cellValue = [NSString stringWithFormat:@"%d", songNumber];
+        cellValue = [cellValue stringByAppendingString:@". "];
+    }
+    cellValue = [cellValue stringByAppendingString:songName];
 	cell.textLabel.text = cellValue;
 	cell.textLabel.textColor=[UIColor whiteColor];
     

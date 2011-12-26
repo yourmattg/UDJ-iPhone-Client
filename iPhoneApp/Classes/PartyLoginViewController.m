@@ -7,13 +7,14 @@
 //
 
 #import "PartyLoginViewController.h"
-#import	 "PartyListViewController.h"
-#import "PartyPlaylistViewController.h"
+#import	"PartyListViewController.h"
+#import "PlaylistViewController.h"
+#import "EventList.h"
 
 
 @implementation PartyLoginViewController
 
-@synthesize passwordField, nearbyPartiesButton, enterPartyButton;
+@synthesize passwordField, nearbyPartiesButton, enterPartyButton, eventNameLabel;
 
 /*
  // The designated initializer. Override to perform setup that is required before the view is loaded.
@@ -33,12 +34,13 @@
  */
 
 
-/*
+
  // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
  - (void)viewDidLoad {
- [super viewDidLoad];
+     [super viewDidLoad];
+     eventNameLabel.text = [EventList sharedEventList].currentEvent.name;
  }
- */
+ 
 
 
 /*
@@ -66,6 +68,9 @@
     [super dealloc];
 }
 
+- (void) viewDidAppear:(BOOL)animated{
+    eventNameLabel.text = [EventList sharedEventList].currentEvent.name;
+}
 
 - (IBAction) OnButtonClick:(id) sender {
 	//pop this view to go back to nearby parties view
@@ -74,9 +79,9 @@
 	else if(sender == enterPartyButton) {
 		//authentication would go here
 		if(![passwordField.text isEqualToString: @""]){
-			PartyPlaylistViewController* partyPlaylistViewController = [[PartyPlaylistViewController alloc] initWithNibName:@"PartyPlaylistViewController" bundle:[NSBundle mainBundle]];
-			[self.navigationController pushViewController:partyPlaylistViewController animated:YES];
-			[partyPlaylistViewController release];	
+			PlaylistViewController* playlistViewController = [[PlaylistViewController alloc] initWithNibName:@"PlaylistViewController" bundle:[NSBundle mainBundle]];
+			[self.navigationController pushViewController:playlistViewController animated:YES];
+			[playlistViewController release];	
 		}
 	}
 }

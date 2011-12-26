@@ -15,8 +15,8 @@
 		2899E5220DE3E06400AC0155 /* UDJViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* UDJViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* UDJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* UDJViewController.m */; };
-		A33C4614148F0707009C1BC6 /* PartyPlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A33C4612148F0707009C1BC6 /* PartyPlaylistViewController.m */; };
-		A33C4615148F0707009C1BC6 /* PartyPlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A33C4613148F0707009C1BC6 /* PartyPlaylistViewController.xib */; };
+		A33C4614148F0707009C1BC6 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A33C4612148F0707009C1BC6 /* PlaylistViewController.m */; };
+		A33C4615148F0707009C1BC6 /* PlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A33C4613148F0707009C1BC6 /* PlaylistViewController.xib */; };
 		A33C461E148F11FC009C1BC6 /* LibrarySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A33C461C148F11FC009C1BC6 /* LibrarySearchViewController.m */; };
 		A33C461F148F11FC009C1BC6 /* LibrarySearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A33C461D148F11FC009C1BC6 /* LibrarySearchViewController.xib */; };
 		A3536FB314A5218F00B5C95F /* UDJEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A3536FB214A5218F00B5C95F /* UDJEvent.m */; };
@@ -94,9 +94,9 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* UDJ_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJ_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* UDJ-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "UDJ-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
-		A33C4611148F0707009C1BC6 /* PartyPlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartyPlaylistViewController.h; sourceTree = "<group>"; };
-		A33C4612148F0707009C1BC6 /* PartyPlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartyPlaylistViewController.m; sourceTree = "<group>"; };
-		A33C4613148F0707009C1BC6 /* PartyPlaylistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PartyPlaylistViewController.xib; path = Classes/PartyPlaylistViewController.xib; sourceTree = "<group>"; };
+		A33C4611148F0707009C1BC6 /* PlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistViewController.h; sourceTree = "<group>"; };
+		A33C4612148F0707009C1BC6 /* PlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistViewController.m; sourceTree = "<group>"; };
+		A33C4613148F0707009C1BC6 /* PlaylistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlaylistViewController.xib; path = Classes/PlaylistViewController.xib; sourceTree = "<group>"; };
 		A33C461B148F11FC009C1BC6 /* LibrarySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LibrarySearchViewController.h; path = ../LibrarySearchViewController.h; sourceTree = "<group>"; };
 		A33C461C148F11FC009C1BC6 /* LibrarySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LibrarySearchViewController.m; path = ../LibrarySearchViewController.m; sourceTree = "<group>"; };
 		A33C461D148F11FC009C1BC6 /* LibrarySearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LibrarySearchViewController.xib; sourceTree = "<group>"; };
@@ -207,7 +207,7 @@
 				A3F58C5B14A15F0B00756F7D /* AuthenticateViewController.xib */,
 				A3F9C046142EAA5C0016717B /* default.jpg */,
 				A33C461D148F11FC009C1BC6 /* LibrarySearchViewController.xib */,
-				A33C4613148F0707009C1BC6 /* PartyPlaylistViewController.xib */,
+				A33C4613148F0707009C1BC6 /* PlaylistViewController.xib */,
 				A3F9C1D7142EBB880016717B /* PartyLoginViewController.xib */,
 				A3F9C051142EAD610016717B /* PartyListViewController.xib */,
 				2899E5210DE3E06400AC0155 /* UDJViewController.xib */,
@@ -271,8 +271,8 @@
 			children = (
 				A36D2CC914A818130087E992 /* SearchingViewController.h */,
 				A36D2CCA14A818130087E992 /* SearchingViewController.m */,
-				A33C4611148F0707009C1BC6 /* PartyPlaylistViewController.h */,
-				A33C4612148F0707009C1BC6 /* PartyPlaylistViewController.m */,
+				A33C4611148F0707009C1BC6 /* PlaylistViewController.h */,
+				A33C4612148F0707009C1BC6 /* PlaylistViewController.m */,
 				A33C461B148F11FC009C1BC6 /* LibrarySearchViewController.h */,
 				A33C461C148F11FC009C1BC6 /* LibrarySearchViewController.m */,
 			);
@@ -385,7 +385,7 @@
 				A3F9C047142EAA5C0016717B /* default.jpg in Resources */,
 				A3F9C053142EAD610016717B /* PartyListViewController.xib in Resources */,
 				A3F9C1D9142EBB880016717B /* PartyLoginViewController.xib in Resources */,
-				A33C4615148F0707009C1BC6 /* PartyPlaylistViewController.xib in Resources */,
+				A33C4615148F0707009C1BC6 /* PlaylistViewController.xib in Resources */,
 				A33C461F148F11FC009C1BC6 /* LibrarySearchViewController.xib in Resources */,
 				A3F58C5D14A15F0B00756F7D /* AuthenticateViewController.xib in Resources */,
 				A36D2CC814A810230087E992 /* PartySearchViewController.xib in Resources */,
@@ -405,7 +405,7 @@
 				28D7ACF80DDB3853001CB0EB /* UDJViewController.m in Sources */,
 				A3F9C052142EAD610016717B /* PartyListViewController.m in Sources */,
 				A3F9C1D8142EBB880016717B /* PartyLoginViewController.m in Sources */,
-				A33C4614148F0707009C1BC6 /* PartyPlaylistViewController.m in Sources */,
+				A33C4614148F0707009C1BC6 /* PlaylistViewController.m in Sources */,
 				A33C461E148F11FC009C1BC6 /* LibrarySearchViewController.m in Sources */,
 				A39AF6701497CB74006ADF19 /* UDJConnection.m in Sources */,
 				A3F58C5C14A15F0B00756F7D /* AuthenticateViewController.m in Sources */,

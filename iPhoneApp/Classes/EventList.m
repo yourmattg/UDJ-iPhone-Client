@@ -11,7 +11,7 @@
 
 @implementation EventList
 
-@synthesize currentList, tempList, lastSearchParam, refresh;
+@synthesize currentList, tempList, lastSearchParam, currentEvent;
 
 - (void) getNearbyEvents{
     [[UDJConnection sharedConnection] sendNearbyEventSearch];
@@ -19,7 +19,6 @@
 
 - (void)getEventsByName:(NSString *)name{
     [[UDJConnection sharedConnection] sendEventSearch:name];
-    refresh=true;
 }
 
 #pragma mark Singleton methods

@@ -8,13 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "UDJConnection.h"
+#import "UDJEvent.h"
 
 @interface EventList : NSObject{
     
     NSMutableArray* currentList; // holds the last event list we loaded
     NSMutableArray* tempList; // list to use while we are loading events
     NSString* lastSearchParam; // the last string we tried searching
-    BOOL refresh; // whether or not to refresh the list
+    UDJEvent* currentEvent; // the event id the client is logged in/trying to connect to
 }
 
 + (EventList*)sharedEventList;
@@ -24,6 +25,6 @@
 @property(nonatomic,retain) NSMutableArray* currentList;
 @property(nonatomic,retain) NSMutableArray* tempList;
 @property(nonatomic,retain) NSString* lastSearchParam;
-@property(nonatomic) BOOL refresh;
+@property(nonatomic,retain) UDJEvent* currentEvent;
 
 @end

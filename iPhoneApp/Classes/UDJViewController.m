@@ -10,6 +10,7 @@
 #import "PartyListViewController.h"
 #import "UDJConnection.h"
 #import "AuthenticateViewController.h"
+#import "PlaylistViewController.h"
 
 @implementation UDJViewController
 
@@ -85,10 +86,6 @@
         [[UDJConnection sharedConnection] setCurrentController: self];
         [[UDJConnection sharedConnection] authenticate:username password: password];
         
-        // old code
-		/*PartyListViewController* partyListViewController = [[PartyListViewController alloc] initWithNibName:@"PartyListViewController" bundle:[NSBundle mainBundle]];
-		[self.navigationController pushViewController:partyListViewController animated:YES];
-		[partyListViewController release];*/
 	}
 }
 

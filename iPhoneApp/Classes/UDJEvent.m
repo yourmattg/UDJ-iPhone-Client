@@ -10,16 +10,18 @@
 
 @implementation UDJEvent
 
-@synthesize eventId, name, hostId, latitude, longitude;
+@synthesize eventId, name, hostId, latitude, longitude, hostUsername, hasPassword;
 
-+ (UDJEvent*) eventWithId:(NSInteger)eventid name:(NSString *)eventname hostId:(NSInteger)hostid latitude:(double)lat longitude:(double)lon{
-    UDJEvent* udjevent;
-    udjevent.eventId = eventid;
-    udjevent.name = eventname;
-    udjevent.hostId = hostid;
-    udjevent.latitude = lat;
-    udjevent.longitude = lon;
-    return udjevent;
++ (UDJEvent*) eventFromDictionary:(NSDictionary *)eventDict{
+    UDJEvent* event = [UDJEvent new];
+    event.name = [eventDict objectForKey:@"name"];
+    event.eventId = [[eventDict objectForKey:@"id"] integerValue];
+    event.hostId = [[eventDict objectForKey:@"host_id"] integerValue];
+    event.latitude = [[eventDict objectForKey:@"latitude"] doubleValue];
+    event.longitude = [[eventDict objectForKey:@"longitude"] doubleValue];
+    event.hostUsername = [eventDict objectForKey:@"host_username"];
+    event.hasPassword = [[eventDict objectForKey:@"has_password"] boolValue];
+    return event;
 }
 
 @end

@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UDJEvent.h"
 
-@interface PartyPlaylistViewController : UITableViewController{
+@interface PlaylistViewController : UITableViewController{
 
     NSMutableArray *playlist;
+    UDJEvent* theEvent;
 
 }
 
 @property (nonatomic, retain) NSMutableArray *playlist;
+@property (nonatomic, retain) UDJEvent* theEvent;
+
 @end
