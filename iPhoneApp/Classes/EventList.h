@@ -13,6 +13,8 @@
     
     NSMutableArray* currentList; // holds the last event list we loaded
     NSMutableArray* tempList; // list to use while we are loading events
+    NSString* lastSearchParam; // the last string we tried searching
+    BOOL refresh; // whether or not to refresh the list
 }
 
 + (EventList*)sharedEventList;
@@ -21,5 +23,7 @@
 
 @property(nonatomic,retain) NSMutableArray* currentList;
 @property(nonatomic,retain) NSMutableArray* tempList;
+@property(nonatomic,retain) NSString* lastSearchParam;
+@property(nonatomic) BOOL refresh;
 
 @end

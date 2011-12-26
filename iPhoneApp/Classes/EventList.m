@@ -11,7 +11,7 @@
 
 @implementation EventList
 
-@synthesize currentList, tempList;
+@synthesize currentList, tempList, lastSearchParam, refresh;
 
 - (void) getNearbyEvents{
     // get coordinates
@@ -19,6 +19,7 @@
 
 - (void)getEventsByName:(NSString *)name{
     [[UDJConnection sharedConnection] sendEventSearch:name];
+    refresh=true;
 }
 
 #pragma mark Singleton methods

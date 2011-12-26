@@ -13,11 +13,14 @@
 @interface PartyListViewController : UITableViewController {
 
     EventList* eventList; // the event list class to handle all the loading and stuff
-	NSMutableArray *partyList; // the current list actually being shown
+	NSMutableArray *tableList; // the current list actually being shown
 	
 }
 
+-(void)refreshTableList; // rebuild the tableList and show it
+-(IBAction)pushSearchScreen:(id)sender;
+
 @property(nonatomic,retain) EventList* eventList;
-@property (nonatomic, retain) NSMutableArray *partyList;
+@property (nonatomic, retain) NSMutableArray *tableList;
 
 @end

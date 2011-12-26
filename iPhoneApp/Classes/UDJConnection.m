@@ -89,7 +89,6 @@ static UDJConnection* sharedUDJConnection = nil;
 
 // sendEventSearch: request all the events with a similiar name
 - (void) sendEventSearch:(NSString *)name{
-    NSLog(@"event search");
     acceptEvents=true;
     
     // create the URL
@@ -111,8 +110,6 @@ static UDJConnection* sharedUDJConnection = nil;
 
 // handleEventResults: get the list of returned events from either the name or location search
 - (void) handleEventResults:(RKResponse*)response{
-    NSLog(@"Handling events...");
-    
     NSMutableArray* currentList = [NSMutableArray new];
     RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
     NSArray* eventArray = [parser objectFromString:[response bodyAsString] error:nil];

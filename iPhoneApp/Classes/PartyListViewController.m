@@ -10,30 +10,52 @@
 #import "PartyLoginViewController.h"
 #import "UDJConnection.h"
 #import "EventList.h"
+#import "UDJEvent.h"
+#import "PartySearchViewController.h"
 
 
 @implementation PartyListViewController
 
-@synthesize partyList, eventList;
+@synthesize tableList, eventList;
 
 
 #pragma mark -
 #pragma mark View lifecycle
 
+- (IBAction)pushSearchScreen:(id)sender{
+    PartySearchViewController* partySearchViewController = [[PartySearchViewController alloc] initWithNibName:@"PartySearchViewController" bundle:[NSBundle mainBundle]];
+    [self.navigationController pushViewController:partySearchViewController animated:YES];
+}
+
+- (void)refreshTableList{
+    [tableList removeAllObjects];
+    int size = [eventList.currentList count];
+    for(int i=0; i<size; i++){
+        UDJEvent* event = [eventList.currentList objectAtIndex:i];
+        NSString* partyName = event.name;
+        [tableList addObject:partyName];
+    }
+    [self.tableView reloadData];
+    [[EventList sharedEventList] setRefresh:NO];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[UDJConnection sharedConnection] setCurrentController: self];
-	partyList = [[NSMutableArray alloc] init];
-	[partyList addObject: @"Toga Party"];
-	[partyList addObject: @"Classy Party"];
-	[partyList addObject: @"21st Bday"];
+	tableList = [[NSMutableArray alloc] init];
+	[tableList addObject: @"Toga Party"];
+	[tableList addObject: @"Classy Party"];
+	[tableList addObject: @"21st Bday"];
 	self.navigationItem.title = @"Nearby Parties";
 	[self.navigationItem setLeftBarButtonItem:[[[UIBarButtonItem alloc] initWithCustomView:[[UIView new] autorelease]] autorelease]];
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
+    // set up search button
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIButtonTypeRoundedRect target:self action:NULL]];
+    
+    // make a new event list
     eventList = [EventList new];
     [eventList getEventsByName:@"Party"];
+    [self refreshTableList];
 }
 
 /*
@@ -41,11 +63,13 @@
     [super viewWillAppear:animated];
 }
 */
-/*
+
+// overridden so that party table refreshes
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [self refreshTableList];
 }
-*/
+
 /*
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -76,7 +100,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [partyList count];
+    return [tableList count];
 }
 
 
@@ -90,7 +114,7 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
 	
-	NSString *cellValue = [partyList objectAtIndex:indexPath.row];
+	NSString* cellValue = [tableList objectAtIndex:indexPath.row];
 	cell.textLabel.text = cellValue;
 	cell.textLabel.textColor=[UIColor whiteColor];
     
