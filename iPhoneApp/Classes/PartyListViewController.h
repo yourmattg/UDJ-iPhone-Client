@@ -18,7 +18,7 @@
 }
 
 -(void)refreshTableList; // rebuild the tableList and show it
--(IBAction)pushSearchScreen:(id)sender;
+-(void)pushSearchScreen;
 
 @property(nonatomic,retain) EventList* eventList;
 @property (nonatomic, retain) NSMutableArray *tableList;

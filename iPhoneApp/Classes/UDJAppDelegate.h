@@ -29,7 +29,6 @@
 @property (nonatomic, retain) UDJConnection* udjConnection;
 @property (nonatomic, retain) NSString* baseUrl;
 
-- (void) initObjectMappings;
 - (void) setModelData:(NSString *)modelData;
 - (NSString *) getModelData;
 

@@ -11,11 +11,13 @@
 @interface PartySearchViewController : UIViewController{
     UIButton* searchButton;
     UITextField* searchField;
+    UIButton* findNearbyButton;
 }
 
 - (IBAction) OnButtonClick:(id) sender;
 
 @property(nonatomic,retain) IBOutlet UIButton* searchButton;
 @property(nonatomic,retain) IBOutlet UITextField* searchField;
+@property(nonatomic,retain) IBOutlet UIButton* findNearbyButton;
 
 @end

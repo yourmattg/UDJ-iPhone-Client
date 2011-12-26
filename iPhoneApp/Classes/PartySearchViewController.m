@@ -11,16 +11,24 @@
 #import "EventList.h"
 
 @implementation PartySearchViewController
-@synthesize searchButton, searchField;
+@synthesize searchButton, searchField, findNearbyButton;
+
+// textFieldShouldReturn: hide keyboard when user is done with it
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+	return NO;
+}
 
 - (IBAction) OnButtonClick:(id) sender {
-	if(sender == searchButton){
+	if(sender == searchButton || sender == findNearbyButton){
         NSString* searchParam = searchField.text;
-        [self.navigationController popViewControllerAnimated:NO];
+        UINavigationController* navigationController = self.navigationController;
+        [navigationController popViewControllerAnimated:NO];
         SearchingViewController* searchingViewController = [[SearchingViewController alloc] initWithNibName:@"SearchingViewController" bundle:[NSBundle mainBundle]];
-        [self.navigationController pushViewController:searchingViewController animated:YES];
-        [[EventList sharedEventList] getEventsByName:searchParam];
-        [self.navigationController popViewControllerAnimated:YES];
+        [navigationController pushViewController:searchingViewController animated:NO];
+        if(sender==searchButton) [[EventList sharedEventList] getEventsByName:searchParam];
+        else [[EventList sharedEventList] getNearbyEvents];
+        [navigationController popViewControllerAnimated:YES];
     }
 }
 

@@ -7,8 +7,21 @@
 //
 
 #import "SearchingViewController.h"
+#import "UDJConnection.h"
 
 @implementation SearchingViewController
+
+@synthesize cancelButton;
+
+- (IBAction) OnButtonClick:(id) sender {
+	if(sender==cancelButton){
+        // don't accept incoming requests
+        [[UDJConnection sharedConnection] acceptEvents:NO];
+        
+        // go back to last screen
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,6 +45,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    // hide the back button
+    [self.navigationItem setLeftBarButtonItem:[[[UIBarButtonItem alloc] initWithCustomView:[[UIView new] autorelease]] autorelease]];
     // Do any additional setup after loading the view from its nib.
 }
 

@@ -108,6 +108,31 @@ static UDJConnection* sharedUDJConnection = nil;
     [self handleEventResults:response];
 }
 
+// sendNearbyEventSearch: requests all the events near the client's location
+- (void) sendNearbyEventSearch{
+    acceptEvents=true;
+    float latitude = [self getLatitude];
+    float longitude = [self getLongitude];
+    
+    // create URL
+    NSString* urlString = client.baseURL;
+    urlString = [urlString stringByAppendingString:@"/events/"];
+    urlString = [urlString stringByAppendingFormat:@"%f",latitude];
+    urlString = [urlString stringByAppendingString:@"/"];
+    urlString = [urlString stringByAppendingFormat:@"%f",longitude];
+    NSURL* url = [NSURL URLWithString:urlString];
+    
+    // create GET request
+    RKRequest* request = [RKRequest new];
+    [request initWithURL:url delegate:self];
+    request.method = RKRequestMethodGET;
+    request.additionalHTTPHeaders = headers;
+    
+    // send request and handle response
+    RKResponse* response = [request sendSynchronously];
+    [self handleEventResults:response];
+}
+
 // handleEventResults: get the list of returned events from either the name or location search
 - (void) handleEventResults:(RKResponse*)response{
     NSMutableArray* currentList = [NSMutableArray new];
@@ -131,6 +156,17 @@ static UDJConnection* sharedUDJConnection = nil;
     acceptEvents = value;
 }
 
+// **************************** Location Finding ********************************
+
+// getLongitude: INCOMPLETE
+- (float)getLongitude{
+    return 40;
+}
+
+// getLatitude: INCOMPLETE
+- (float)getLatitude{
+    return (float)80;
+}
 
 // **************************** General Response Handling ********************************
 

@@ -34,8 +34,12 @@
 - (void) denyAuth;
 
 - (void) sendEventSearch:(NSString*)name; // request events by name
+- (void) sendNearbyEventSearch;
 - (void) handleEventResults:(RKResponse*)response;
 - (void) acceptEvents:(BOOL)value;
+
+- (float)getLongitude;
+- (float)getLatitude;
 
 @property(nonatomic,retain) NSString* serverPrefix;
 @property(nonatomic,retain) NSString* ticket;

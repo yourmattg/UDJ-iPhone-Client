@@ -14,7 +14,7 @@
 @synthesize currentList, tempList, lastSearchParam, refresh;
 
 - (void) getNearbyEvents{
-    // get coordinates
+    [[UDJConnection sharedConnection] sendNearbyEventSearch];
 }
 
 - (void)getEventsByName:(NSString *)name{

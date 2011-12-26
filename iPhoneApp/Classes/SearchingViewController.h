@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SearchingViewController : UIViewController
+@interface SearchingViewController : UIViewController{
+    UIButton* cancelButton;
+}
+
+@property(nonatomic,retain) IBOutlet UIButton* cancelButton;
 
 @end

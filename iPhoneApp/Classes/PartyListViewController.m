@@ -22,7 +22,7 @@
 #pragma mark -
 #pragma mark View lifecycle
 
-- (IBAction)pushSearchScreen:(id)sender{
+- (void)pushSearchScreen{
     PartySearchViewController* partySearchViewController = [[PartySearchViewController alloc] initWithNibName:@"PartySearchViewController" bundle:[NSBundle mainBundle]];
     [self.navigationController pushViewController:partySearchViewController animated:YES];
 }
@@ -46,15 +46,15 @@
 	[tableList addObject: @"Toga Party"];
 	[tableList addObject: @"Classy Party"];
 	[tableList addObject: @"21st Bday"];
-	self.navigationItem.title = @"Nearby Parties";
+	self.navigationItem.title = @"Events";
 	[self.navigationItem setLeftBarButtonItem:[[[UIBarButtonItem alloc] initWithCustomView:[[UIView new] autorelease]] autorelease]];
 
     // set up search button
-    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIButtonTypeRoundedRect target:self action:NULL]];
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIBarButtonItemStylePlain target:self action:@selector(pushSearchScreen)]];
     
     // make a new event list
     eventList = [EventList new];
-    [eventList getEventsByName:@"Party"];
+    [eventList getNearbyEvents];
     [self refreshTableList];
 }
 
