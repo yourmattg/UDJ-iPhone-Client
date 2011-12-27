@@ -51,6 +51,7 @@ static UDJConnection* sharedUDJConnection = nil;
     // make sure the right api version is being passed in
     NSDictionary* nameAndPass = [NSDictionary dictionaryWithObjectsAndKeys:username, @"username", pass, @"password", @"0.2", @"udj_api_version", nil]; 
     [client post:@"/auth" params:nameAndPass delegate:self];
+    [nameAndPass release];
 }
 
 // handleAuth: handle authorization response if credentials are valid
@@ -149,6 +150,30 @@ static UDJConnection* sharedUDJConnection = nil;
 
 - (void) acceptEvents:(BOOL)value{
     acceptEvents = value;
+}
+
+// sendLoginRequest: attempts to log in user to party
+- (void) enterEventRequest{
+    //create url
+    NSMutableString* urlString = [NSMutableString stringWithString:serverPrefix];
+    [urlString appendString:@"/events/"];
+    [urlString appendFormat:@"%d",[EventList sharedEventList].currentEvent.eventId];
+    [urlString appendString:@"/"];
+    [urlString appendFormat:@"%d", userID];
+    //set up request
+    RKRequest* request = [RKRequest new];
+    request.method = RKRequestMethodGET;
+    request.URL = [NSURL URLWithString:urlString];
+    request.additionalHTTPHeaders = headers;
+    //send request, handle results
+    RKResponse* response = [request sendSynchronously];
+    [self handleEventResults:response];
+    
+}
+
+// handleEnterEventResponse: either deny or allow access to party
+- (void) handleEnterEventResponse:(RKResponse*)response{
+    
 }
 
 // **************************** Location Finding ********************************
