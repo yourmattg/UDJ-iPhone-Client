@@ -37,8 +37,7 @@
 - (void) sendNearbyEventSearch;
 - (void) handleEventResults:(RKResponse*)response;
 - (void) acceptEvents:(BOOL)value;
-- (void) enterEventRequest;
-- (void) handleEnterEventResponse:(RKResponse *)response;
+- (NSInteger) enterEventRequest;
 
 - (float)getLongitude;
 - (float)getLatitude;

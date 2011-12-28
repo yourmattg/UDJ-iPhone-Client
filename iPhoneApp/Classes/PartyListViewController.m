@@ -164,22 +164,38 @@
 #pragma mark -
 #pragma mark Table view delegate
 
-// this is called when the user selects a cell
+// user selects a cell: attempt to enter that party
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    // get the party and remember the event we are trying to join
     NSInteger index = [indexPath indexAtPosition:1];
     [EventList sharedEventList].currentEvent = [[EventList sharedEventList].currentList objectAtIndex:index];
-    // go to password screen if there is a password
+    // there's a password: go the password screen
 	if([EventList sharedEventList].currentEvent.hasPassword){
         PartyLoginViewController* partyLoginViewController = [[PartyLoginViewController alloc] initWithNibName:@"PartyLoginViewController" bundle:[NSBundle mainBundle]];
         [self.navigationController pushViewController:partyLoginViewController animated:YES];
         [partyLoginViewController release];
     }
-    // otherwise go straight to playlist
+    // no password: go straight to playlist
     else{
-        PlaylistViewController* playlistViewController = [[PlaylistViewController alloc] initWithNibName:@"PlaylistViewController" bundle:[NSBundle mainBundle]];
-        [self.navigationController pushViewController:playlistViewController animated:YES];
-        [playlistViewController release];
+        NSInteger statusCode = [[UDJConnection sharedConnection] enterEventRequest];
+        // 200: join success
+        if(statusCode==200){
+            PlaylistViewController* playlistViewController = [[PlaylistViewController alloc] initWithNibName:@"PlaylistViewController" bundle:[NSBundle mainBundle]];
+            [self.navigationController pushViewController:playlistViewController animated:YES];
+            [playlistViewController release];
+        }
+        // 410: event has ended
+        else if(statusCode==410){
+            UIAlertView* eventEndedNotification = [UIAlertView alloc];
+            [eventEndedNotification initWithTitle:@"Join Failed" message:@"This event has ended. Sorry!" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [eventEndedNotification show];
+        }
+        else if(statusCode==404){
+            UIAlertView* nonExistantEvent = [UIAlertView alloc];
+            [nonExistantEvent initWithTitle:@"Join Failed" message:@"The event you are trying to join does not exist. Sorry!" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [nonExistantEvent show];
+        }
+        // TODO: add other event possibilities (see API)
     }
 }
 

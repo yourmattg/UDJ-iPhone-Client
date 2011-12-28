@@ -52,6 +52,7 @@
 					<int key="IBUIBarStyle">1</int>
 				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<int key="IBUIIndicatorStyle">2</int>
 				<bool key="IBUIBouncesZoom">NO</bool>
 				<object class="NSColor" key="IBUISeparatorColor">
 					<int key="NSColorSpace">1</int>

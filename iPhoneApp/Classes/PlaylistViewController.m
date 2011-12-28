@@ -14,6 +14,16 @@
 
 @synthesize playlist,theEvent;
 
+// leaveEvent: log the client out of the event, return to event list
+- (void)leaveEvent{
+    
+}
+
+// loadLibrary: push the library search view
+- (void)loadLibrary{
+    
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -40,17 +50,15 @@
 	[playlist addObject: @"Escape Artist - Sage Francis"];
 	[playlist addObject: @"Finally Moving - Pretty Lights"];
     [playlist addObject: @"Smiling Swine - The Dear Hunter"];
+    [playlist addObject: @"Scary Monsters and Nice Sprites - Skrillex"];
     
+    // set event, navigation bar title
     theEvent = [EventList sharedEventList].currentEvent;
-    NSString* navBarText = theEvent.name;
-    navBarText = [navBarText stringByAppendingString:@" Playlist"];
-	self.navigationItem.title = navBarText;
+	self.navigationItem.title = theEvent.name;
     
-	[self.navigationItem setLeftBarButtonItem:[[[UIBarButtonItem alloc] initWithCustomView:[[UIView new] autorelease]] autorelease]];
-    UIButton* searchButton = [UIButton buttonWithType: UIButtonTypeRoundedRect];    
-    searchButton.titleLabel.text = @"Library";
-   // [infoButton addTarget:self action:@selector(showInfoView:) forControlEvents:UIControlEventTouchUpInside];
-    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:searchButton]];
+    // set up leave and library buttons
+    [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Leave" style:UIBarButtonItemStylePlain target:self action:@selector(leaveEvent)]];
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Library" style:UIBarButtonItemStylePlain target:self action:@selector(loadLibrary)]];
     
 }
 
@@ -122,6 +130,7 @@
     }
     cellValue = [cellValue stringByAppendingString:songName];
 	cell.textLabel.text = cellValue;
+    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
 	cell.textLabel.textColor=[UIColor whiteColor];
     
     // Configure the cell...
