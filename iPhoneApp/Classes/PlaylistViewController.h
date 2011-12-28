@@ -8,15 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "UDJEvent.h"
+#import "UDJPlaylist.h"
 
 @interface PlaylistViewController : UITableViewController{
 
-    NSMutableArray *playlist;
+    UDJPlaylist *playlist;
     UDJEvent* theEvent;
 
 }
 
-@property (nonatomic, retain) NSMutableArray *playlist;
+@property (nonatomic, retain) UDJPlaylist *playlist;
 @property (nonatomic, retain) UDJEvent* theEvent;
 
 @end

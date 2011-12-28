@@ -9,6 +9,8 @@
 #import "PlaylistViewController.h"
 #import "EventList.h"
 #import "UDJEvent.h"
+#import "UDJPlaylist.h"
+#import "UDJSong.h"
 
 @implementation PlaylistViewController
 
@@ -16,7 +18,8 @@
 
 // leaveEvent: log the client out of the event, return to event list
 - (void)leaveEvent{
-    
+    [[UDJConnection sharedConnection] leaveEventRequest];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 // loadLibrary: push the library search view
@@ -45,16 +48,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	playlist = [[NSMutableArray alloc] init];
-	[playlist addObject: @"Seventeen Years - Ratatat"];
-	[playlist addObject: @"Escape Artist - Sage Francis"];
-	[playlist addObject: @"Finally Moving - Pretty Lights"];
-    [playlist addObject: @"Smiling Swine - The Dear Hunter"];
-    [playlist addObject: @"Scary Monsters and Nice Sprites - Skrillex"];
     
     // set event, navigation bar title
     theEvent = [EventList sharedEventList].currentEvent;
 	self.navigationItem.title = theEvent.name;
+    
+    // init playlist
+    playlist = [UDJPlaylist new];
+    playlist.eventId = theEvent.eventId;
+    [playlist loadPlaylist];
     
     // set up leave and library buttons
     [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Leave" style:UIBarButtonItemStylePlain target:self action:@selector(leaveEvent)]];
@@ -119,7 +121,7 @@
 	
     // combine song number and name into one string
     NSInteger songNumber = indexPath.row;
-	NSString* songName = [playlist objectAtIndex:indexPath.row];
+	NSString* songName = [playlist songAtIndex:indexPath.row].title;
     NSString* cellValue = [NSString new];
     if(songNumber==0){
         cellValue = @"Playing: ";

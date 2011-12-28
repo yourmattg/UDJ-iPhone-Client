@@ -14,6 +14,7 @@
     @public
     BOOL acceptAuth; // true if connection is accepting authorization responses
     BOOL acceptEvents; // awaiting an event list
+    BOOL acceptPlaylist;
     
     @private
     NSString* serverPrefix; // without spaces: http://0.0.0.0:4897/udj
@@ -38,9 +39,12 @@
 - (void) handleEventResults:(RKResponse*)response;
 - (void) acceptEvents:(BOOL)value;
 - (NSInteger) enterEventRequest;
+- (NSInteger) leaveEventRequest;
 
 - (float)getLongitude;
 - (float)getLatitude;
+
+- (void) sendPlaylistRequest:(NSInteger)eventId;
 
 @property(nonatomic,retain) NSString* serverPrefix;
 @property(nonatomic,retain) NSString* ticket;

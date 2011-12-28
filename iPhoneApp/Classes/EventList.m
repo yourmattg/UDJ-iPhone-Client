@@ -11,7 +11,7 @@
 
 @implementation EventList
 
-@synthesize currentList, tempList, lastSearchParam, currentEvent;
+@synthesize currentList, lastSearchParam, currentEvent;
 
 - (void) getNearbyEvents{
     [[UDJConnection sharedConnection] sendNearbyEventSearch];

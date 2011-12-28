@@ -15,6 +15,8 @@
 		2899E5220DE3E06400AC0155 /* UDJViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* UDJViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* UDJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* UDJViewController.m */; };
+		A324ABF614AAB74700388514 /* UDJSong.m in Sources */ = {isa = PBXBuildFile; fileRef = A324ABF514AAB74700388514 /* UDJSong.m */; };
+		A324AC0514AABB8900388514 /* UDJPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = A324AC0414AABB8900388514 /* UDJPlaylist.m */; };
 		A33C4614148F0707009C1BC6 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A33C4612148F0707009C1BC6 /* PlaylistViewController.m */; };
 		A33C4615148F0707009C1BC6 /* PlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A33C4613148F0707009C1BC6 /* PlaylistViewController.xib */; };
 		A33C461E148F11FC009C1BC6 /* LibrarySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A33C461C148F11FC009C1BC6 /* LibrarySearchViewController.m */; };
@@ -94,6 +96,10 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* UDJ_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJ_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* UDJ-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "UDJ-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		A324ABF414AAB74700388514 /* UDJSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJSong.h; sourceTree = "<group>"; };
+		A324ABF514AAB74700388514 /* UDJSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJSong.m; sourceTree = "<group>"; };
+		A324AC0314AABB8900388514 /* UDJPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJPlaylist.h; sourceTree = "<group>"; };
+		A324AC0414AABB8900388514 /* UDJPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJPlaylist.m; sourceTree = "<group>"; };
 		A33C4611148F0707009C1BC6 /* PlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistViewController.h; sourceTree = "<group>"; };
 		A33C4612148F0707009C1BC6 /* PlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistViewController.m; sourceTree = "<group>"; };
 		A33C4613148F0707009C1BC6 /* PlaylistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlaylistViewController.xib; path = Classes/PlaylistViewController.xib; sourceTree = "<group>"; };
@@ -155,6 +161,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A324ABF714AAB74F00388514 /* Playlist */,
 				A3F58C5514A1519F00756F7D /* Main Items */,
 				A3536FB414A5219E00B5C95F /* Events */,
 				A354F04014A2CA5A00F3AAEF /* Login */,
@@ -227,6 +234,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A324ABF714AAB74F00388514 /* Playlist */ = {
+			isa = PBXGroup;
+			children = (
+				A324ABF414AAB74700388514 /* UDJSong.h */,
+				A324ABF514AAB74700388514 /* UDJSong.m */,
+				A324AC0314AABB8900388514 /* UDJPlaylist.h */,
+				A324AC0414AABB8900388514 /* UDJPlaylist.m */,
+				A33C4611148F0707009C1BC6 /* PlaylistViewController.h */,
+				A33C4612148F0707009C1BC6 /* PlaylistViewController.m */,
+			);
+			name = Playlist;
+			sourceTree = "<group>";
+		};
 		A3536FB414A5219E00B5C95F /* Events */ = {
 			isa = PBXGroup;
 			children = (
@@ -271,8 +291,6 @@
 			children = (
 				A36D2CC914A818130087E992 /* SearchingViewController.h */,
 				A36D2CCA14A818130087E992 /* SearchingViewController.m */,
-				A33C4611148F0707009C1BC6 /* PlaylistViewController.h */,
-				A33C4612148F0707009C1BC6 /* PlaylistViewController.m */,
 				A33C461B148F11FC009C1BC6 /* LibrarySearchViewController.h */,
 				A33C461C148F11FC009C1BC6 /* LibrarySearchViewController.m */,
 			);
@@ -413,6 +431,8 @@
 				A3536FB314A5218F00B5C95F /* UDJEvent.m in Sources */,
 				A36D2CC714A810230087E992 /* PartySearchViewController.m in Sources */,
 				A36D2CCC14A818130087E992 /* SearchingViewController.m in Sources */,
+				A324ABF614AAB74700388514 /* UDJSong.m in Sources */,
+				A324AC0514AABB8900388514 /* UDJPlaylist.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

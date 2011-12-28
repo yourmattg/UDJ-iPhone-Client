@@ -168,6 +168,22 @@ static UDJConnection* sharedUDJConnection = nil;
     return response.statusCode;
 }
 
+- (NSInteger) leaveEventRequest{
+    //create url
+    NSString* urlString = serverPrefix;
+    [urlString stringByAppendingString:@"/events/"];
+    [urlString stringByAppendingFormat:@"%d",[EventList sharedEventList].currentEvent.eventId];
+    [urlString stringByAppendingString:@"/users/"];
+    [urlString stringByAppendingFormat:@"%d", userID];
+    //set up request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
+    request.method = RKRequestMethodDELETE;
+    request.additionalHTTPHeaders = headers;
+    //send request, handle results
+    RKResponse* response = [request sendSynchronously];
+    return response.statusCode;
+}
+
 // **************************** Location Finding ********************************
 
 // getLongitude: INCOMPLETE
@@ -178,6 +194,24 @@ static UDJConnection* sharedUDJConnection = nil;
 // getLatitude: INCOMPLETE
 - (float)getLatitude{
     return (float)80;
+}
+
+// **************************** Playlist Methods ********************************
+
+// sendPlaylistRequest: requests playlist from server, seperate from handling because
+// we want client to be able to do other things while we wait for it to refresh
+- (void)sendPlaylistRequest:(NSInteger)eventId{
+    //create url [GET] {prefix}/events/event_id/active_playlist
+    NSString* urlString = serverPrefix;
+    [urlString stringByAppendingString:@"/events/"];
+    [urlString stringByAppendingFormat:@"%d",eventId];
+    [urlString stringByAppendingString:@"/active_playlist"];
+    // create request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
+    request.method = RKRequestMethodGET;
+    request.additionalHTTPHeaders = headers;
+    //send request
+    [request sendAsynchronously];
 }
 
 // **************************** General Response Handling ********************************
