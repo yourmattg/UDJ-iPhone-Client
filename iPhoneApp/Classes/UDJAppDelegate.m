@@ -10,6 +10,8 @@
 #import "UDJViewController.h"
 #import "UDJConnection.h"
 #import "UDJEvent.h"
+#import "EventList.h"
+#import "UDJPlaylist.h"
 
 @implementation UDJAppDelegate
 
@@ -43,6 +45,8 @@
     // initialize udjConnection
     baseUrl = @"http://0.0.0.0:4897/udj";
     [[UDJConnection sharedConnection] initWithServerPrefix: baseUrl];
+    [EventList alloc]; // make our eventlist singleton
+    [UDJPlaylist alloc]; // make UDJPlaylist singleton
     
 	//create a UDJViewController (the login screen), and make it the root view
 	viewController    = [[UDJViewController alloc] initWithNibName:@"UDJViewController" bundle:nil];

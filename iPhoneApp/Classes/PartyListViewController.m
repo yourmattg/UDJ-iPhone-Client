@@ -50,7 +50,7 @@
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIBarButtonItemStylePlain target:self action:@selector(pushSearchScreen)]];
     
     // make a new event list
-    eventList = [EventList new];
+    eventList = [EventList sharedEventList];
     [eventList getNearbyEvents];
     [self refreshTableList];
 }

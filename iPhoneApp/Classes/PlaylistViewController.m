@@ -54,7 +54,7 @@
 	self.navigationItem.title = theEvent.name;
     
     // init playlist
-    playlist = [UDJPlaylist new];
+    playlist = [UDJPlaylist sharedUDJPlaylist];
     playlist.eventId = theEvent.eventId;
     [playlist loadPlaylist];
     
