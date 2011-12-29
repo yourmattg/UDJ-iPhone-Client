@@ -215,7 +215,6 @@ static UDJConnection* sharedUDJConnection = nil;
     request.method = RKRequestMethodGET;
     request.additionalHTTPHeaders = headers;
     //send request
-    NSLog(urlString);
     acceptPlaylist=YES;
     [request send];
 }

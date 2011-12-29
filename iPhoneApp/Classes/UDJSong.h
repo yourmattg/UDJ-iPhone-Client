@@ -13,10 +13,11 @@
     NSInteger librarySongId;
     NSString* title;
     NSString* artist;
+    NSString* album;
     NSInteger duration;
     NSInteger downVotes;
     NSInteger upVotes;
-    NSInteger timeAdded;
+    NSString* timeAdded;
     NSInteger adderId;
     NSString* adderName;
 }
@@ -27,10 +28,11 @@
 @property(nonatomic) NSInteger librarySongId;
 @property(nonatomic,retain) NSString* title;
 @property(nonatomic,retain) NSString* artist;
+@property(nonatomic,retain) NSString* album;
 @property(nonatomic) NSInteger duration;
 @property(nonatomic) NSInteger downVotes;
 @property(nonatomic) NSInteger upVotes;
-@property(nonatomic) NSInteger timeAdded;
+@property(nonatomic,retain) NSString* timeAdded;
 @property(nonatomic) NSInteger adderId;
 @property(nonatomic,retain) NSString* adderName;
 

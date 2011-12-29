@@ -24,7 +24,7 @@
 
 // loadLibrary: push the library search view
 - (void)showLibrary{
-    
+    [self.tableView reloadData];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -121,7 +121,7 @@
 	
     // combine song number and name into one string
     NSInteger songNumber = indexPath.row;
-	NSString* songName = [playlist songAtIndex:indexPath.row].title;
+	NSString* songName = [[NSString alloc] initWithString:[playlist songAtIndex:songNumber].title];
     NSString* cellValue = [NSString new];
     if(songNumber==0){
         cellValue = @"Playing: ";
