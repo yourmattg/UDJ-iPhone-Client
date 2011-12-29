@@ -11,6 +11,8 @@
 #import "PartyListViewController.h"
 #import "UDJAppDelegate.h"
 #import "UDJEvent.h"
+#import "UDJSong.h"
+#import "UDJPlaylist.h"
 
 static UDJConnection* sharedUDJConnection = nil;
 
@@ -60,6 +62,7 @@ static UDJConnection* sharedUDJConnection = nil;
         NSDictionary* headerDict = [response allHeaderFields];
         ticket=[headerDict valueForKey:@"X-Udj-Ticket-Hash"];
         userID=[headerDict valueForKey:@"X-Udj-User-Id"];
+
         acceptAuth=false; // this is so we don't get further responses
         headers = [NSDictionary dictionaryWithObjectsAndKeys:ticket, @"X-Udj-Ticket-Hash", userID, @"X-Udj-User-Id", nil];
         
@@ -144,7 +147,7 @@ static UDJConnection* sharedUDJConnection = nil;
         [currentList addObject:event];
     }
     [[EventList sharedEventList] setCurrentList:currentList];
-    acceptEvents=false;
+    acceptEvents=NO;
 }
 
 - (void) acceptEvents:(BOOL)value{
@@ -154,11 +157,11 @@ static UDJConnection* sharedUDJConnection = nil;
 // sendLoginRequest: attempts to log in user to party, returns status code of response
 - (NSInteger) enterEventRequest{
     //create url
-    NSString* urlString = serverPrefix;
-    [urlString stringByAppendingString:@"/events/"];
-    [urlString stringByAppendingFormat:@"%d",[EventList sharedEventList].currentEvent.eventId];
-    [urlString stringByAppendingString:@"/"];
-    [urlString stringByAppendingFormat:@"%d", userID];
+    NSString* urlString = client.baseURL;
+    urlString = [urlString stringByAppendingString:@"/events/"];
+    urlString = [urlString stringByAppendingFormat:@"%d",[EventList sharedEventList].currentEvent.eventId];
+    urlString = [urlString stringByAppendingString:@"/users/"];
+    urlString = [urlString stringByAppendingFormat:@"%i", [userID intValue]];
     //set up request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
     request.method = RKRequestMethodPUT;
@@ -170,11 +173,11 @@ static UDJConnection* sharedUDJConnection = nil;
 
 - (NSInteger) leaveEventRequest{
     //create url
-    NSString* urlString = serverPrefix;
-    [urlString stringByAppendingString:@"/events/"];
-    [urlString stringByAppendingFormat:@"%d",[EventList sharedEventList].currentEvent.eventId];
-    [urlString stringByAppendingString:@"/users/"];
-    [urlString stringByAppendingFormat:@"%d", userID];
+    NSString* urlString = client.baseURL;
+    urlString = [urlString stringByAppendingString:@"/events/"];
+    urlString = [urlString stringByAppendingFormat:@"%d",[EventList sharedEventList].currentEvent.eventId];
+    urlString = [urlString stringByAppendingString:@"/users/"];
+    urlString = [urlString stringByAppendingFormat:@"%d", [userID intValue]];
     //set up request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
     request.method = RKRequestMethodDELETE;
@@ -202,16 +205,33 @@ static UDJConnection* sharedUDJConnection = nil;
 // we want client to be able to do other things while we wait for it to refresh
 - (void)sendPlaylistRequest:(NSInteger)eventId{
     //create url [GET] {prefix}/events/event_id/active_playlist
-    NSString* urlString = serverPrefix;
-    [urlString stringByAppendingString:@"/events/"];
-    [urlString stringByAppendingFormat:@"%d",eventId];
-    [urlString stringByAppendingString:@"/active_playlist"];
+    NSString* urlString = client.baseURL;
+    urlString = [urlString stringByAppendingString:@"/events/"];
+    urlString = [urlString stringByAppendingFormat:@"%d",eventId];
+    urlString = [urlString stringByAppendingString:@"/active_playlist"];
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
+    request.queue = client.requestQueue;
     request.method = RKRequestMethodGET;
     request.additionalHTTPHeaders = headers;
     //send request
-    [request sendAsynchronously];
+    NSLog(urlString);
+    acceptPlaylist=YES;
+    [request send];
+}
+
+- (void)handlePlaylistResponse:(RKResponse*)response{
+    acceptPlaylist=NO;
+    NSMutableArray* playlist = [NSMutableArray new];
+    RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
+    NSArray* songArray = [parser objectFromString:[response bodyAsString] error:nil];
+    for(int i=0; i<[songArray count]; i++){
+        NSDictionary* songDict = [songArray objectAtIndex:i];
+        UDJSong* song = [UDJSong songFromDictionary:songDict];
+        [playlist addObject:song];
+        [song release];
+    }
+    [[UDJPlaylist sharedUDJPlaylist] setPlaylist:playlist];
 }
 
 // **************************** General Response Handling ********************************
@@ -220,13 +240,10 @@ static UDJConnection* sharedUDJConnection = nil;
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
     NSLog(@"Got a response from the server");
     if ([request isGET]) {
-        // event lists
-        /*if(acceptEvents){
-            // got a list of events back
-            if([response isOK]){
-                [self handleEventResults:response];
-            }
-        }*/
+        // playlist
+        if(acceptPlaylist){
+            [self handlePlaylistResponse:response];
+        }
         
     } else if([request isPOST]) {
         

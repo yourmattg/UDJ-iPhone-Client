@@ -23,7 +23,7 @@
 }
 
 // loadLibrary: push the library search view
-- (void)loadLibrary{
+- (void)showLibrary{
     
 }
 
@@ -60,7 +60,7 @@
     
     // set up leave and library buttons
     [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Leave" style:UIBarButtonItemStylePlain target:self action:@selector(leaveEvent)]];
-    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Library" style:UIBarButtonItemStylePlain target:self action:@selector(loadLibrary)]];
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Library" style:UIBarButtonItemStylePlain target:self action:@selector(showLibrary)]];
     
 }
 

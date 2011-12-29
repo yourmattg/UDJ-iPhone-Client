@@ -19,7 +19,7 @@
     @private
     NSString* serverPrefix; // without spaces: http://0.0.0.0:4897/udj
     NSString* ticket;
-    NSString* userID;
+    NSNumber* userID;
     RKClient* client; // configures, dispatches request
     UIViewController* currentController; // keeps track of the current view controller so we can pass info to it
     NSDictionary* headers;
@@ -45,11 +45,12 @@
 - (float)getLatitude;
 
 - (void) sendPlaylistRequest:(NSInteger)eventId;
+- (void)handlePlaylistResponse:(RKResponse*)response;
 
 @property(nonatomic,retain) NSString* serverPrefix;
 @property(nonatomic,retain) NSString* ticket;
 @property(nonatomic,retain) RKClient* client;
-@property(nonatomic,retain) NSString* userID;
+@property(nonatomic,retain) NSNumber* userID;
 @property(nonatomic,retain) NSDictionary* headers;
 
 @end
