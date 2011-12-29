@@ -47,4 +47,11 @@ static EventList* _sharedEventList = nil;
 	return self;
 }
 
+// memory managed
+-(void)dealloc{
+    [currentList release];
+    [currentEvent release];
+    [lastSearchParam release];
+}
+
 @end

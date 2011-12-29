@@ -8,6 +8,7 @@
 
 #import "UDJPlaylist.h"
 #import "UDJSong.h"
+#import "UDJConnection.h"
 
 @implementation UDJPlaylist
 
@@ -18,7 +19,7 @@
 }
 
 - (void)loadPlaylist{
-    
+    [[UDJConnection sharedConnection] sendPlaylistRequest:eventId];
 }
 
 - (NSInteger)count{
@@ -44,6 +45,11 @@ static UDJPlaylist* _sharedUDJPlaylist = nil;
 		return _sharedUDJPlaylist;
 	}
 	return nil;
+}
+
+// memory managed
+-(void)dealloc{
+    [playlist release]; 
 }
 
 @end

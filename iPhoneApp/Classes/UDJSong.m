@@ -12,4 +12,17 @@
 
 @synthesize songId, librarySongId, title, artist, duration, downVotes, upVotes, timeAdded, adderId, adderName;
 
++ (id) songFromDictionary:(NSDictionary *)songDict{
+    UDJSong* song = [UDJSong new];
+    return song;
+}
+
+// memory managed
+-(void)dealloc{
+    [title release];
+    [artist release];
+    [adderName release];
+    [super dealloc];
+}
+
 @end

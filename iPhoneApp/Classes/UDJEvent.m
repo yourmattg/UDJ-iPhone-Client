@@ -24,4 +24,10 @@
     return event;
 }
 
+// memory managed
+- (void) dealloc{
+    [name release];
+    [hostUsername release];
+    [super dealloc];
+}
 @end

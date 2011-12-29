@@ -21,6 +21,8 @@
     NSString* adderName;
 }
 
++ (id)songFromDictionary:(NSDictionary*)songDict;
+
 @property(nonatomic) NSInteger songId;
 @property(nonatomic) NSInteger librarySongId;
 @property(nonatomic,retain) NSString* title;
