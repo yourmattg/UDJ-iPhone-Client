@@ -33,6 +33,16 @@
     [self.tableView reloadData];
 }
 
+// upvote
+- (void)upVote{
+    
+}
+
+// downvote
+- (void)downVote{
+    
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -70,6 +80,19 @@
     [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Leave" style:UIBarButtonItemStylePlain target:self action:@selector(leaveEvent)]];
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Library" style:UIBarButtonItemStylePlain target:self action:@selector(showLibrary)]];
     
+    // set up toolbar
+    self.navigationController.toolbar.tintColor = [UIColor blackColor];
+    UIBarButtonItem* downVoteButton = [[UIBarButtonItem alloc] initWithTitle:@"Up" style:UIBarButtonItemStylePlain 
+                                                                                    target:self action:@selector(downVote)];
+    UIBarButtonItem* upVoteButton = [[UIBarButtonItem alloc] initWithTitle:@"Down" style:UIBarButtonItemStylePlain 
+                                                                                  target:self action:@selector(upVote)];
+    UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc] initWithTitle:@"Refresh" style:UIBarButtonItemStylePlain 
+                                                                    target:self action:@selector(upVote)];
+    UIBarButtonItem* space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    NSArray* toolbarItems = [NSArray arrayWithObjects: downVoteButton, space, refreshButton, space, upVoteButton, nil];
+    [toolbarItems makeObjectsPerformSelector:@selector(release)];
+    self.toolbarItems = toolbarItems;
+    self.navigationController.toolbarHidden=NO;
 }
 
 
@@ -128,14 +151,16 @@
     }
 	
     // combine song number and name into one string
-    NSInteger songNumber = indexPath.row;
-	NSString* songName = [[NSString alloc] initWithString:[playlist songAtIndex:songNumber].title];
+    NSInteger rowNumber = indexPath.row;
+    NSString* songName;
+	if(rowNumber==0) songName = @"Derpity Herp";
+    else songName = [[NSString alloc] initWithString:[playlist songAtIndex:rowNumber-1].title];
     NSString* cellValue = [NSString new];
-    if(songNumber==0){
+    if(rowNumber==0){
         cellValue = @"Playing: ";
     }
     else{
-        cellValue = [NSString stringWithFormat:@"%d", songNumber];
+        cellValue = [NSString stringWithFormat:@"%d", rowNumber];
         cellValue = [cellValue stringByAppendingString:@". "];
     }
     cellValue = [cellValue stringByAppendingString:songName];

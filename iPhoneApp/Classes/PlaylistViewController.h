@@ -20,6 +20,8 @@
 -(void)showLibrary;
 -(void)leaveEvent;
 - (void)refreshTableList;
+- (void)downVote;
+- (void)upVote;
 
 @property (nonatomic, retain) UDJPlaylist *playlist;
 @property (nonatomic, retain) UDJEvent* theEvent;

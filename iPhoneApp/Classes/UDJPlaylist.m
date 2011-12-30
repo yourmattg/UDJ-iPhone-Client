@@ -12,9 +12,10 @@
 
 @implementation UDJPlaylist
 
-@synthesize playlist, eventId;
+@synthesize playlist, eventId, currentSong;
 
 - (UDJSong*)songAtIndex:(NSInteger)i{
+    if(i<0) return nil;
     return [playlist objectAtIndex:i];
 }
 
@@ -22,8 +23,13 @@
     [[UDJConnection sharedConnection] sendPlaylistRequest:eventId];
 }
 
+- (UDJSong*)songPlaying{
+    return currentSong;
+}
+
 - (NSInteger)count{
-    return [playlist count];
+    // +1 because we include current song
+    return [playlist count]+1;
 }
 
 #pragma mark Singleton methods
@@ -50,6 +56,8 @@ static UDJPlaylist* _sharedUDJPlaylist = nil;
 // memory managed
 -(void)dealloc{
     [playlist release]; 
+    [currentSong release];
+    [super dealloc];
 }
 
 @end

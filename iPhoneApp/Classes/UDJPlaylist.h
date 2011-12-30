@@ -13,14 +13,17 @@
     
     NSMutableArray* playlist;
     NSInteger eventId;
+    UDJSong* currentSong;
 }
 
 + (UDJPlaylist*)sharedUDJPlaylist;
+- (UDJSong*)songPlaying;
 - (UDJSong*)songAtIndex:(NSInteger)i;
 - (void)loadPlaylist;
 - (NSInteger)count;
 
 @property(nonatomic,retain) NSMutableArray* playlist;
 @property(nonatomic) NSInteger eventId;
+@property(nonatomic,retain) UDJSong* currentSong;
 
 @end
