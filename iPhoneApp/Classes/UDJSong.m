@@ -28,22 +28,6 @@
     return song;
 }
 
-/*
- {
- "lib_song_id" : id of the library entry on the server this playlist entry represents
- "song" : title of the song
- "artist" : song's artist
- "album" : song's album
- "duration" : duration of song in seconds
- "up_votes" : number of up-votes this entry has
- "down_votes" : number of down-votes this entry has
- "time_added" : Time the entry was added
- "time_played" : Time the entry started playing
- "adder_id" : user id of user who added the song to the playlist
- "adder_username" : username of the user who added the song to the playlist
- }
- */
-
 // memory managed
 -(void)dealloc{
     [title release];

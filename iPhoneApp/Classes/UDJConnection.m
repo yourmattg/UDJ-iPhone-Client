@@ -18,7 +18,7 @@ static UDJConnection* sharedUDJConnection = nil;
 
 @implementation UDJConnection
 
-@synthesize serverPrefix, ticket, client, userID, headers;
+@synthesize serverPrefix, ticket, client, userID, headers, playlistView;
 
 // **************************** General UDJConnection Methods ********************************
 
@@ -231,6 +231,7 @@ static UDJConnection* sharedUDJConnection = nil;
         [song release];
     }
     [[UDJPlaylist sharedUDJPlaylist] setPlaylist:playlist];
+    if(playlistView!=nil) [playlistView refreshTableList];
 }
 
 // **************************** General Response Handling ********************************

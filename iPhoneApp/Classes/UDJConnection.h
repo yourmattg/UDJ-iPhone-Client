@@ -9,12 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <RestKit/RestKit.h>
 #import <RestKit/RKJSONParserJSONKit.h>
+#import "PlaylistViewController.h"
 
 @interface UDJConnection : NSObject<RKRequestDelegate>{
     @public
     BOOL acceptAuth; // true if connection is accepting authorization responses
     BOOL acceptEvents; // awaiting an event list
     BOOL acceptPlaylist;
+    PlaylistViewController* playlistView;
     
     @private
     NSString* serverPrefix; // without spaces: http://0.0.0.0:4897/udj
@@ -52,5 +54,7 @@
 @property(nonatomic,retain) RKClient* client;
 @property(nonatomic,retain) NSNumber* userID;
 @property(nonatomic,retain) NSDictionary* headers;
+// using assign here because we only need a weak reference
+@property(nonatomic, assign) PlaylistViewController* playlistView; 
 
 @end

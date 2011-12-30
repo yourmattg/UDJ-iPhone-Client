@@ -19,11 +19,17 @@
 // leaveEvent: log the client out of the event, return to event list
 - (void)leaveEvent{
     [[UDJConnection sharedConnection] leaveEventRequest];
+    [EventList sharedEventList].currentEvent=nil;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 // loadLibrary: push the library search view
 - (void)showLibrary{
+    [playlist loadPlaylist];
+}
+
+// refreshes our list
+- (void)refreshTableList{
     [self.tableView reloadData];
 }
 
@@ -54,9 +60,11 @@
 	self.navigationItem.title = theEvent.name;
     
     // init playlist
+    [[UDJConnection sharedConnection] setPlaylistView:self];
     playlist = [UDJPlaylist sharedUDJPlaylist];
     playlist.eventId = theEvent.eventId;
     [playlist loadPlaylist];
+    [self refreshTableList];
     
     // set up leave and library buttons
     [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Leave" style:UIBarButtonItemStylePlain target:self action:@selector(leaveEvent)]];

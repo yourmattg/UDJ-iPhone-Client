@@ -90,10 +90,8 @@
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    /*
-     Called when the application is about to terminate.
-     See also applicationDidEnterBackground:.
-     */
+    // leave any event we may be in
+    [[UDJConnection sharedConnection] leaveEventRequest];
 }
 
 
