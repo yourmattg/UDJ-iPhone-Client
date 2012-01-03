@@ -26,6 +26,7 @@
 - (void)pushSearchScreen{
     PartySearchViewController* partySearchViewController = [[PartySearchViewController alloc] initWithNibName:@"PartySearchViewController" bundle:[NSBundle mainBundle]];
     [self.navigationController pushViewController:partySearchViewController animated:YES];
+    [partySearchViewController release];
 }
 
 - (void)refreshTableList{
@@ -37,22 +38,23 @@
         [tableList addObject:partyName];
     }
     [self.tableView reloadData];
+    NSLog(@"refresh done");
 }
 
 - (void)viewDidLoad {
+    NSLog(@"viewDidLoad start");
     [super viewDidLoad];
-    [[UDJConnection sharedConnection] setCurrentController: self];
+    //[[UDJConnection sharedConnection] setCurrentController: self];
 	tableList = [[NSMutableArray alloc] init];
 	self.navigationItem.title = @"Events";
 	[self.navigationItem setLeftBarButtonItem:[[[UIBarButtonItem alloc] initWithCustomView:[[UIView new] autorelease]] autorelease]];
-
     // set up search button
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIBarButtonItemStylePlain target:self action:@selector(pushSearchScreen)]];
-    
     // make a new event list
     eventList = [EventList sharedEventList];
     [eventList getNearbyEvents];
     [self refreshTableList];
+    NSLog(@"viewDidLoad end");
 }
 
 /*
@@ -63,6 +65,7 @@
 
 // overridden so that party table refreshes
 - (void)viewDidAppear:(BOOL)animated {
+    NSLog(@"viewDidAppear end");
     [super viewDidAppear:animated];
     [self refreshTableList];
 }
@@ -97,6 +100,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
+    NSLog(@"count");
     return [tableList count];
 }
 
@@ -116,7 +120,7 @@
 	cell.textLabel.textColor=[UIColor whiteColor];
     
     // Configure the cell...
-    
+    NSLog(@"cellforrowatindexpath done");
     return cell;
 }
 

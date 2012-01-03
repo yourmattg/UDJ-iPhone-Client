@@ -61,4 +61,9 @@
     }
 }
 
+-(void)dealloc{
+    [cancelButton release];
+    [super dealloc];
+}
+
 @end

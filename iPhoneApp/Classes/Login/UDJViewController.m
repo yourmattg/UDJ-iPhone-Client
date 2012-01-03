@@ -66,6 +66,9 @@
 
 
 - (void)dealloc {
+    [loginButton release];
+    [usernameField release];
+    [passwordField release];
     [super dealloc];
 }
 

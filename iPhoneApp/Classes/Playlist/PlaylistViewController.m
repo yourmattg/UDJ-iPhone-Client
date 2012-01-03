@@ -18,9 +18,13 @@
 
 // leaveEvent: log the client out of the event, return to event list
 - (void)leaveEvent{
-    [[UDJConnection sharedConnection] leaveEventRequest];
-    [EventList sharedEventList].currentEvent=nil;
-    [self.navigationController popViewControllerAnimated:YES];
+    NSInteger statusCode = [[UDJConnection sharedConnection] leaveEventRequest];
+    if(statusCode==200){
+        //[self.toolbarItems release];
+        self.navigationController.toolbarHidden=YES;
+        [EventList sharedEventList].currentEvent=nil;
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 // loadLibrary: push the library search view
@@ -75,11 +79,11 @@
     playlist.eventId = theEvent.eventId;
     [playlist loadPlaylist];
     [self refreshTableList];
-    
+    /*
     // set up leave and library buttons
     [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Leave" style:UIBarButtonItemStylePlain target:self action:@selector(leaveEvent)]];
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Library" style:UIBarButtonItemStylePlain target:self action:@selector(showLibrary)]];
-    
+
     // set up toolbar
     self.navigationController.toolbar.tintColor = [UIColor blackColor];
     UIBarButtonItem* downVoteButton = [[UIBarButtonItem alloc] initWithTitle:@"Up" style:UIBarButtonItemStylePlain 
@@ -89,10 +93,10 @@
     UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc] initWithTitle:@"Refresh" style:UIBarButtonItemStylePlain 
                                                                     target:self action:@selector(upVote)];
     UIBarButtonItem* space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    NSArray* toolbarItems = [NSArray arrayWithObjects: downVoteButton, space, refreshButton, space, upVoteButton, nil];
+    NSArray* toolbarItems = [NSArray arrayWithObjects: upVoteButton, space, refreshButton, space, downVoteButton, nil];
     [toolbarItems makeObjectsPerformSelector:@selector(release)];
     self.toolbarItems = toolbarItems;
-    self.navigationController.toolbarHidden=NO;
+    self.navigationController.toolbarHidden=NO;*/
 }
 
 
@@ -111,6 +115,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    NSLog(@"view appeared");
 }
 
 - (void)viewWillDisappear:(BOOL)animated

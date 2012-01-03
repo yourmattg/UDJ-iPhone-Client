@@ -68,7 +68,7 @@ static UDJConnection* sharedUDJConnection = nil;
         
         // load the party list view
         PartyListViewController* partyListViewController = [[PartyListViewController alloc] initWithNibName:@"PartyListViewController" bundle:[NSBundle mainBundle]];
-         [currentController.navigationController pushViewController:partyListViewController animated:YES];
+        [currentController.navigationController pushViewController:partyListViewController animated:YES];
         [partyListViewController release];
     }
 }
@@ -191,7 +191,7 @@ static UDJConnection* sharedUDJConnection = nil;
 
 // getLongitude: INCOMPLETE
 - (float)getLongitude{
-    return 40;
+    return (float)40;
 }
 
 // getLatitude: INCOMPLETE
@@ -223,15 +223,21 @@ static UDJConnection* sharedUDJConnection = nil;
     acceptPlaylist=NO;
     NSMutableArray* playlist = [NSMutableArray new];
     RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
-    NSArray* songArray = [parser objectFromString:[response bodyAsString] error:nil];
+    // response dict: holds current song and array of songs
+    NSDictionary* responseDict = [parser objectFromString:[response bodyAsString] error:nil];
+    UDJSong* currentSong = [UDJSong songFromDictionary:[responseDict objectForKey:@"current_song"]];
+    
+    // the array holding the songs on the playlist
+    NSArray* songArray = [responseDict objectForKey:@"active_playlist"];
     for(int i=0; i<[songArray count]; i++){
         NSDictionary* songDict = [songArray objectAtIndex:i];
         UDJSong* song = [UDJSong songFromDictionary:songDict];
         [playlist addObject:song];
-        [song release];
     }
     [[UDJPlaylist sharedUDJPlaylist] setPlaylist:playlist];
+    [[UDJPlaylist sharedUDJPlaylist] setCurrentSong:currentSong];
     if(playlistView!=nil) [playlistView refreshTableList];
+    [playlist release];
 }
 
 // **************************** General Response Handling ********************************

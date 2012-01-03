@@ -52,6 +52,7 @@ static EventList* _sharedEventList = nil;
     [currentList release];
     [currentEvent release];
     [lastSearchParam release];
+    [super release];
 }
 
 @end
