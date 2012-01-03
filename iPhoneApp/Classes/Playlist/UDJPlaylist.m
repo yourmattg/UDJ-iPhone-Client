@@ -29,7 +29,13 @@
 
 - (NSInteger)count{
     // +1 because we include current song
+    if(currentSong==nil) return 0;
     return [playlist count]+1;
+}
+
+-(void)clearPlaylist{
+    currentSong=nil;
+    [playlist removeAllObjects];
 }
 
 #pragma mark Singleton methods

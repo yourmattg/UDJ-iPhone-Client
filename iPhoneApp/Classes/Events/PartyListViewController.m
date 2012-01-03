@@ -38,11 +38,9 @@
         [tableList addObject:partyName];
     }
     [self.tableView reloadData];
-    NSLog(@"refresh done");
 }
 
 - (void)viewDidLoad {
-    NSLog(@"viewDidLoad start");
     [super viewDidLoad];
     //[[UDJConnection sharedConnection] setCurrentController: self];
 	tableList = [[NSMutableArray alloc] init];
@@ -54,7 +52,6 @@
     eventList = [EventList sharedEventList];
     [eventList getNearbyEvents];
     [self refreshTableList];
-    NSLog(@"viewDidLoad end");
 }
 
 /*
@@ -65,7 +62,6 @@
 
 // overridden so that party table refreshes
 - (void)viewDidAppear:(BOOL)animated {
-    NSLog(@"viewDidAppear end");
     [super viewDidAppear:animated];
     [self refreshTableList];
 }
@@ -100,7 +96,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    NSLog(@"count");
     return [tableList count];
 }
 
@@ -120,7 +115,6 @@
 	cell.textLabel.textColor=[UIColor whiteColor];
     
     // Configure the cell...
-    NSLog(@"cellforrowatindexpath done");
     return cell;
 }
 

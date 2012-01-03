@@ -226,6 +226,7 @@ static UDJConnection* sharedUDJConnection = nil;
     // response dict: holds current song and array of songs
     NSDictionary* responseDict = [parser objectFromString:[response bodyAsString] error:nil];
     UDJSong* currentSong = [UDJSong songFromDictionary:[responseDict objectForKey:@"current_song"]];
+    NSLog(currentSong.title);
     
     // the array holding the songs on the playlist
     NSArray* songArray = [responseDict objectForKey:@"active_playlist"];

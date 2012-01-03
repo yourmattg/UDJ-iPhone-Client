@@ -21,6 +21,7 @@
 - (UDJSong*)songAtIndex:(NSInteger)i;
 - (void)loadPlaylist;
 - (NSInteger)count;
+- (void)clearPlaylist;
 
 @property(nonatomic,retain) NSMutableArray* playlist;
 @property(nonatomic) NSInteger eventId;

@@ -13,6 +13,7 @@
 @synthesize songId, librarySongId, title, artist, album, duration, downVotes, upVotes, timeAdded, adderId, adderName;
 
 + (id) songFromDictionary:(NSDictionary *)songDict{
+    if([songDict count]==0) return nil;
     UDJSong* song = [UDJSong new];
     song.title = [songDict objectForKey:@"title"];
     song.songId = [[songDict objectForKey:@"id"] intValue];

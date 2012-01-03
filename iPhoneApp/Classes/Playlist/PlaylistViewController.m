@@ -23,6 +23,7 @@
         //[self.toolbarItems release];
         self.navigationController.toolbarHidden=YES;
         [EventList sharedEventList].currentEvent=nil;
+        [[UDJPlaylist sharedUDJPlaylist] clearPlaylist];
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
@@ -79,11 +80,11 @@
     playlist.eventId = theEvent.eventId;
     [playlist loadPlaylist];
     [self refreshTableList];
-    /*
+    
     // set up leave and library buttons
     [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Leave" style:UIBarButtonItemStylePlain target:self action:@selector(leaveEvent)]];
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Library" style:UIBarButtonItemStylePlain target:self action:@selector(showLibrary)]];
-
+    /*
     // set up toolbar
     self.navigationController.toolbar.tintColor = [UIColor blackColor];
     UIBarButtonItem* downVoteButton = [[UIBarButtonItem alloc] initWithTitle:@"Up" style:UIBarButtonItemStylePlain 
@@ -115,7 +116,6 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    NSLog(@"view appeared");
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -158,7 +158,12 @@
     // combine song number and name into one string
     NSInteger rowNumber = indexPath.row;
     NSString* songName;
-	if(rowNumber==0) songName = @"Derpity Herp";
+	if(rowNumber==0) {
+        if([UDJPlaylist sharedUDJPlaylist].currentSong==nil) {
+            songName=@"";
+        }
+        else songName = [UDJPlaylist sharedUDJPlaylist].currentSong.title;
+    }
     else songName = [[NSString alloc] initWithString:[playlist songAtIndex:rowNumber-1].title];
     NSString* cellValue = [NSString new];
     if(rowNumber==0){
