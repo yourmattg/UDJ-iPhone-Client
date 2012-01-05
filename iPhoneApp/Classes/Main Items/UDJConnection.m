@@ -64,6 +64,7 @@ static UDJConnection* sharedUDJConnection = nil;
         userID=[headerDict valueForKey:@"X-Udj-User-Id"];
 
         acceptAuth=false; // this is so we don't get further responses
+        //TODO: may need to change userID to [userID intValue]
         headers = [NSDictionary dictionaryWithObjectsAndKeys:ticket, @"X-Udj-Ticket-Hash", userID, @"X-Udj-User-Id", nil];
         
         // load the party list view
@@ -249,7 +250,7 @@ static UDJConnection* sharedUDJConnection = nil;
 -(void)sendVoteRequest:(BOOL)up songId:(NSInteger)songId eventId:(NSInteger)eventId{
     //create url [POST] {prefix}/udj/events/event_id/active_playlist/playlist_id/users/user_id/upvote
     NSString* urlString = client.baseURL;
-    urlString = [urlString stringByAppendingFormat:@"%@%d%@%d%@%d%@", @"/events/", eventId, @"/active_playlist/",songId,@"/users/",userID,@"/"];
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@%d%@%d%@", @"/events/", eventId, @"/active_playlist/",songId,@"/users/",[userID intValue],@"/"];
     if(up) urlString = [urlString stringByAppendingString:@"upvote"];
     else urlString = [urlString stringByAppendingString:@"downvote"];
     // create request

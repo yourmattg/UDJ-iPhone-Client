@@ -11,6 +11,7 @@
 #import "UDJEvent.h"
 #import "UDJPlaylist.h"
 #import "UDJSong.h"
+#import "LibrarySearchViewController.h"
 
 @implementation PlaylistViewController
 
@@ -30,7 +31,9 @@
 
 // loadLibrary: push the library search view
 - (void)showLibrary{
-    [playlist loadPlaylist];
+    LibrarySearchViewController* librarySearchViewController = [[LibrarySearchViewController alloc] initWithNibName:@"LibrarySearchViewController" bundle:[NSBundle mainBundle]];
+    [self.navigationController pushViewController:librarySearchViewController animated:YES];
+    [librarySearchViewController release];
 }
 
 // sendRefreshRequest: ask the playlist for a refresh

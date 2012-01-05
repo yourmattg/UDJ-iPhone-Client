@@ -162,6 +162,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A396EF1E14B558B300BCEF8F /* Library */,
 				A324ABF714AAB74F00388514 /* Playlist */,
 				A3F58C5514A1519F00756F7D /* Main Items */,
 				A3536FB414A5219E00B5C95F /* Events */,
@@ -276,6 +277,15 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		A396EF1E14B558B300BCEF8F /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				A33C461B148F11FC009C1BC6 /* LibrarySearchViewController.h */,
+				A33C461C148F11FC009C1BC6 /* LibrarySearchViewController.m */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
 		A39AF6591497C803006ADF19 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -292,8 +302,6 @@
 			children = (
 				A36D2CC914A818130087E992 /* SearchingViewController.h */,
 				A36D2CCA14A818130087E992 /* SearchingViewController.m */,
-				A33C461B148F11FC009C1BC6 /* LibrarySearchViewController.h */,
-				A33C461C148F11FC009C1BC6 /* LibrarySearchViewController.m */,
 			);
 			path = "Main Views";
 			sourceTree = "<group>";
