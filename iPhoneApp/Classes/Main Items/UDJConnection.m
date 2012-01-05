@@ -249,13 +249,13 @@ static UDJConnection* sharedUDJConnection = nil;
 -(void)sendVoteRequest:(BOOL)up songId:(NSInteger)songId eventId:(NSInteger)eventId{
     //create url [POST] {prefix}/udj/events/event_id/active_playlist/playlist_id/users/user_id/upvote
     NSString* urlString = client.baseURL;
-    urlString = [urlString stringByAppendingString:@"/events/"];
-    urlString = [urlString stringByAppendingFormat:@"%d",eventId];
-    urlString = [urlString stringByAppendingString:@"/active_playlist"];
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@%d%@%d%@", @"/events/", eventId, @"/active_playlist/",songId,@"/users/",userID,@"/"];
+    if(up) urlString = [urlString stringByAppendingString:@"upvote"];
+    else urlString = [urlString stringByAppendingString:@"downvote"];
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
     request.queue = client.requestQueue;
-    request.method = RKRequestMethodGET;
+    request.method = RKRequestMethodPOST;
     request.additionalHTTPHeaders = headers;
     //send request
     acceptPlaylist=YES;

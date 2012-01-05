@@ -43,26 +43,39 @@
     [self.tableView reloadData];
 }
 
-// upVote: have UDJConnection send an upvote request
-- (void)upVote{
+// vote: voting helper function
+-(void)vote:(BOOL)up{
+    UIAlertView* notification = [UIAlertView alloc];
     if(selectedSong==nil){
-        // you didn't select a song
+        [notification initWithTitle:@"Vote Error" message:@"You haven't selected a song to vote for!" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         return;
     }
-    [[UDJConnection sharedConnection] sendVoteRequest:YES songId:selectedSong.songId eventId:theEvent.eventId];
-    // let the client know it sent a vote
-    UIAlertView* authNotification = [UIAlertView alloc];
-    NSString* msg = @"Your vote for ";
-    msg = [msg stringByAppendingString:selectedSong.title];
-    msg = [msg stringByAppendingString:@" has been sent!"];
-    [authNotification initWithTitle:@"Vote Sent" message:msg delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [authNotification show];
-    [authNotification release];
+    else if(!selectedSong.hasVotedFor){
+        selectedSong.hasVotedFor=YES;
+        [[UDJConnection sharedConnection] sendVoteRequest:up songId:selectedSong.songId eventId:theEvent.eventId];
+        // let the client know it sent a vote
+        NSString* msg = @"Your vote for ";
+        msg = [msg stringByAppendingString:selectedSong.title];
+        msg = [msg stringByAppendingString:@" has been sent!"];
+        [notification initWithTitle:@"Vote Sent" message:msg delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    }
+    else{
+        NSString* msg = @"You have already voted for ";
+        msg = [msg stringByAppendingString:selectedSong.title];
+        msg = [msg stringByAppendingString:@"!"];
+        [notification initWithTitle:@"Vote Denied" message:msg delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    }
+    [notification show];
+    [notification release];
+}
+// upVote: have UDJConnection send an upvote request
+- (void)upVote{
+    [self vote:YES];
 }
 
 // downVote: have UDJConnection send a downvote request
 - (void)downVote{
-    
+    [self vote:NO];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
