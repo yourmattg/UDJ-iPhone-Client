@@ -19,6 +19,7 @@
     return [playlist objectAtIndex:i];
 }
 
+// loadPlaylist: has UDJConnection send a playlist request
 - (void)loadPlaylist{
     [[UDJConnection sharedConnection] sendPlaylistRequest:eventId];
 }
@@ -27,17 +28,20 @@
     return currentSong;
 }
 
+// count: returns the number of songs in the playlist (including the current song playing)
 - (NSInteger)count{
     // +1 because we include current song
     if(currentSong==nil) return 0;
     return [playlist count]+1;
 }
 
+// clearPlaylist: makes the playlist empty
 -(void)clearPlaylist{
     currentSong=nil;
     [playlist removeAllObjects];
 }
 
+// access the playlist anywhere in the app using [UDJPlaylist sharedPlaylist]
 #pragma mark Singleton methods
 static UDJPlaylist* _sharedUDJPlaylist = nil;
 

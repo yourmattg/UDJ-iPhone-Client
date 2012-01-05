@@ -14,7 +14,7 @@
 
 @implementation PlaylistViewController
 
-@synthesize playlist,theEvent;
+@synthesize theEvent;
 
 // leaveEvent: log the client out of the event, return to event list
 - (void)leaveEvent{
@@ -33,17 +33,34 @@
     [playlist loadPlaylist];
 }
 
+// sendRefreshRequest: ask the playlist for a refresh
+-(void)sendRefreshRequest{
+    [playlist loadPlaylist];
+}
 // refreshes our list
+// NOTE: this is automatically called by UDJConnection when it gets a response
 - (void)refreshTableList{
     [self.tableView reloadData];
 }
 
-// upvote
+// upVote: have UDJConnection send an upvote request
 - (void)upVote{
-    
+    if(selectedSong==nil){
+        // you didn't select a song
+        return;
+    }
+    [[UDJConnection sharedConnection] sendVoteRequest:YES songId:selectedSong.songId eventId:theEvent.eventId];
+    // let the client know it sent a vote
+    UIAlertView* authNotification = [UIAlertView alloc];
+    NSString* msg = @"Your vote for ";
+    msg = [msg stringByAppendingString:selectedSong.title];
+    msg = [msg stringByAppendingString:@" has been sent!"];
+    [authNotification initWithTitle:@"Vote Sent" message:msg delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [authNotification show];
+    [authNotification release];
 }
 
-// downvote
+// downVote: have UDJConnection send a downvote request
 - (void)downVote{
     
 }
@@ -88,14 +105,13 @@
     // set up toolbar
     self.navigationController.toolbar.tintColor = [UIColor blackColor];
     UIBarButtonItem* downVoteButton = [[UIBarButtonItem alloc] initWithTitle:@"Up" style:UIBarButtonItemStylePlain 
-                                                                                    target:self action:@selector(downVote)];
+                                                                                    target:self action:@selector(upVote)];
     UIBarButtonItem* upVoteButton = [[UIBarButtonItem alloc] initWithTitle:@"Down" style:UIBarButtonItemStylePlain 
-                                                                                  target:self action:@selector(upVote)];
+                                                                                  target:self action:@selector(downVote)];
     UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc] initWithTitle:@"Refresh" style:UIBarButtonItemStylePlain 
-                                                                    target:self action:@selector(upVote)];
+                                                                    target:self action:@selector(sendRefreshRequest)];
     UIBarButtonItem* space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     NSArray* toolbarItems = [NSArray arrayWithObjects: upVoteButton, space, refreshButton, space, downVoteButton, nil];
-    //[toolbarItems makeObjectsPerformSelector:@selector(release)];
     self.toolbarItems = toolbarItems;
     self.navigationController.toolbarHidden=NO;
     
@@ -151,6 +167,7 @@
     return [playlist count];
 }
 
+// this is used for setting up each cell in the table
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
@@ -231,17 +248,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // get the song we selected
-  //  NSString *selectedSong = [playlist objectAtIndex: indexPath.row];
-        
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     SongViewController *songViewController = [[SongViewController alloc] initWithNibName:@"SongViewController" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    NSInteger rowNumber = indexPath.row;
+    if(rowNumber==0) selectedSong = [playlist currentSong];
+    else selectedSong = [playlist songAtIndex:rowNumber-1];
+}
+
+- (void)dealloc{
+    [theEvent release];
+    [super dealloc];
 }
 
 @end

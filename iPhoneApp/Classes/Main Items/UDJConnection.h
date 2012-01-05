@@ -49,6 +49,8 @@
 - (void) sendPlaylistRequest:(NSInteger)eventId;
 - (void)handlePlaylistResponse:(RKResponse*)response;
 
+- (void)sendVoteRequest:(BOOL)up songId:(NSInteger)songId eventId:(NSInteger)eventId;
+
 @property(nonatomic,retain) NSString* serverPrefix;
 @property(nonatomic,retain) NSString* ticket;
 @property(nonatomic,retain) RKClient* client;

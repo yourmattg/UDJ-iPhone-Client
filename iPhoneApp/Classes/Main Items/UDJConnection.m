@@ -85,6 +85,7 @@ static UDJConnection* sharedUDJConnection = nil;
     UIAlertView* authNotification = [UIAlertView alloc];
     [authNotification initWithTitle:@"Login Failed" message:@"The username or password you entered is invalid." delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [authNotification show];
+    [authNotification release];
 }
 
 
@@ -219,6 +220,8 @@ static UDJConnection* sharedUDJConnection = nil;
     [request send];
 }
 
+// handlePlaylistResponse: this is done asynchronously from the send method so the client can do other things meanwhile
+// NOTE: this calls [playlistView refreshTableList] for you!
 - (void)handlePlaylistResponse:(RKResponse*)response{
     acceptPlaylist=NO;
     NSMutableArray* playlist = [NSMutableArray new];
@@ -239,6 +242,26 @@ static UDJConnection* sharedUDJConnection = nil;
     if(playlistView!=nil) [playlistView refreshTableList];
     [playlist release];
 }
+
+// **************************** Voting Methods ********************************
+
+// sendVoteRequest: first parameter specifies an up (YES) or down (NO) vote, second specifies song id
+-(void)sendVoteRequest:(BOOL)up songId:(NSInteger)songId eventId:(NSInteger)eventId{
+    //create url [POST] {prefix}/udj/events/event_id/active_playlist/playlist_id/users/user_id/upvote
+    NSString* urlString = client.baseURL;
+    urlString = [urlString stringByAppendingString:@"/events/"];
+    urlString = [urlString stringByAppendingFormat:@"%d",eventId];
+    urlString = [urlString stringByAppendingString:@"/active_playlist"];
+    // create request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
+    request.queue = client.requestQueue;
+    request.method = RKRequestMethodGET;
+    request.additionalHTTPHeaders = headers;
+    //send request
+    acceptPlaylist=YES;
+    [request send];    
+}
+
 
 // **************************** General Response Handling ********************************
 

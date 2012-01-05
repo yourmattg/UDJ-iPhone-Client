@@ -13,14 +13,17 @@
 
 @synthesize currentList, lastSearchParam, currentEvent;
 
+// getNearbyEvents: has the UDJConnection send a event search request
 - (void) getNearbyEvents{
     [[UDJConnection sharedConnection] sendNearbyEventSearch];
 }
 
+// getEventsByName: has the UDJConnection send a event search request
 - (void)getEventsByName:(NSString *)name{
     [[UDJConnection sharedConnection] sendEventSearch:name];
 }
 
+// access the EventList anywhere using [EventList sharedEventList]
 #pragma mark Singleton methods
 static EventList* _sharedEventList = nil;
 

@@ -14,16 +14,17 @@
 
     UDJPlaylist *playlist;
     UDJEvent* theEvent;
+    UDJSong* selectedSong;
 
 }
 
 -(void)showLibrary;
 -(void)leaveEvent;
+-(void)sendRefreshRequest;
 - (void)refreshTableList;
 - (void)downVote;
 - (void)upVote;
 
-@property (nonatomic, retain) UDJPlaylist *playlist;
 @property (nonatomic, retain) UDJEvent* theEvent;
 
 @end
