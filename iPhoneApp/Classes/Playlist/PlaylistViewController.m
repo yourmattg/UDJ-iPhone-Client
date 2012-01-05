@@ -84,7 +84,7 @@
     // set up leave and library buttons
     [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Leave" style:UIBarButtonItemStylePlain target:self action:@selector(leaveEvent)]];
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Library" style:UIBarButtonItemStylePlain target:self action:@selector(showLibrary)]];
-    /*
+    
     // set up toolbar
     self.navigationController.toolbar.tintColor = [UIColor blackColor];
     UIBarButtonItem* downVoteButton = [[UIBarButtonItem alloc] initWithTitle:@"Up" style:UIBarButtonItemStylePlain 
@@ -95,9 +95,14 @@
                                                                     target:self action:@selector(upVote)];
     UIBarButtonItem* space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     NSArray* toolbarItems = [NSArray arrayWithObjects: upVoteButton, space, refreshButton, space, downVoteButton, nil];
-    [toolbarItems makeObjectsPerformSelector:@selector(release)];
+    //[toolbarItems makeObjectsPerformSelector:@selector(release)];
     self.toolbarItems = toolbarItems;
-    self.navigationController.toolbarHidden=NO;*/
+    self.navigationController.toolbarHidden=NO;
+    
+    [downVoteButton release];
+    [upVoteButton release];
+    [refreshButton release];
+    [space release];
 }
 
 
