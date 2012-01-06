@@ -26,5 +26,6 @@
 - (void)upVote;
 
 @property (nonatomic, retain) UDJEvent* theEvent;
+@property (nonatomic, retain) UDJPlaylist* playlist;
 
 @end

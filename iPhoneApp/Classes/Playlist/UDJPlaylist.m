@@ -12,8 +12,11 @@
 
 @implementation UDJPlaylist
 
-@synthesize playlist, eventId, currentSong;
+@synthesize playlist, eventId, currentSong, voteRecordKeeper;
 
+-(void)initVoteRecordKeeper{
+    voteRecordKeeper = [[NSMutableDictionary alloc] init];
+}
 - (UDJSong*)songAtIndex:(NSInteger)i{
     if(i<0) return nil;
     return [playlist objectAtIndex:i];
@@ -67,6 +70,7 @@ static UDJPlaylist* _sharedUDJPlaylist = nil;
 -(void)dealloc{
     [playlist release]; 
     [currentSong release];
+    [voteRecordKeeper release];
     [super dealloc];
 }
 

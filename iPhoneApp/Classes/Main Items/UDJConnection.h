@@ -25,6 +25,7 @@
     RKClient* client; // configures, dispatches request
     UIViewController* currentController; // keeps track of the current view controller so we can pass info to it
     NSDictionary* headers;
+    NSMutableDictionary* currentRequests;
 }
 
 + (id) sharedConnection;
@@ -50,12 +51,14 @@
 - (void)handlePlaylistResponse:(RKResponse*)response;
 
 - (void)sendVoteRequest:(BOOL)up songId:(NSInteger)songId eventId:(NSInteger)eventId;
+-(void)handleVoteResponse:(RKResponse*)response;
 
 @property(nonatomic,retain) NSString* serverPrefix;
 @property(nonatomic,retain) NSString* ticket;
 @property(nonatomic,retain) RKClient* client;
 @property(nonatomic,retain) NSNumber* userID;
 @property(nonatomic,retain) NSDictionary* headers;
+@property(nonatomic,retain) NSMutableDictionary* currentRequests;
 // using assign here because we only need a weak reference
 @property(nonatomic, assign) PlaylistViewController* playlistView; 
 

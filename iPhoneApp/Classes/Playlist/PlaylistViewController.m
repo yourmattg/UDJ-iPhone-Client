@@ -15,7 +15,7 @@
 
 @implementation PlaylistViewController
 
-@synthesize theEvent;
+@synthesize theEvent, playlist;
 
 // leaveEvent: log the client out of the event, return to event list
 - (void)leaveEvent{
@@ -48,28 +48,36 @@
 
 // vote: voting helper function
 -(void)vote:(BOOL)up{
+    
     UIAlertView* notification = [UIAlertView alloc];
     if(selectedSong==nil){
         [notification initWithTitle:@"Vote Error" message:@"You haven't selected a song to vote for!" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        return;
-    }
-    else if(!selectedSong.hasVotedFor){
-        selectedSong.hasVotedFor=YES;
-        [[UDJConnection sharedConnection] sendVoteRequest:up songId:selectedSong.songId eventId:theEvent.eventId];
-        // let the client know it sent a vote
-        NSString* msg = @"Your vote for ";
-        msg = [msg stringByAppendingString:selectedSong.title];
-        msg = [msg stringByAppendingString:@" has been sent!"];
-        [notification initWithTitle:@"Vote Sent" message:msg delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [notification show];
+        [notification release];
     }
     else{
-        NSString* msg = @"You have already voted for ";
-        msg = [msg stringByAppendingString:selectedSong.title];
-        msg = [msg stringByAppendingString:@"!"];
-        [notification initWithTitle:@"Vote Denied" message:msg delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        NSNumber* songIdAsNumber = [NSNumber numberWithInteger:selectedSong.songId];
+        // haven't voted for this song yet
+        if(![[playlist.voteRecordKeeper objectForKey:songIdAsNumber] boolValue]){
+            [playlist.voteRecordKeeper setObject:[NSNumber numberWithBool:YES] forKey:songIdAsNumber];
+            
+            [[UDJConnection sharedConnection] sendVoteRequest:up songId:selectedSong.songId eventId:theEvent.eventId];
+            // let the client know it sent a vote
+            NSString* msg = @"Your vote for ";
+            msg = [msg stringByAppendingString:selectedSong.title];
+            msg = [msg stringByAppendingString:@" has been sent!"];
+            [notification initWithTitle:@"Vote Sent" message:msg delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        }
+        // have already voted for the song
+        else{
+            NSString* msg = @"You have already voted for ";
+            msg = [msg stringByAppendingString:selectedSong.title];
+            msg = [msg stringByAppendingString:@"!"];
+            [notification initWithTitle:@"Vote Denied" message:msg delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        }
+        [notification show];
+        [notification release];
     }
-    [notification show];
-    [notification release];
 }
 // upVote: have UDJConnection send an upvote request
 - (void)upVote{

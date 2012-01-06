@@ -14,9 +14,11 @@
     NSMutableArray* playlist;
     NSInteger eventId;
     UDJSong* currentSong;
+    NSMutableDictionary* voteRecordKeeper;
 }
 
 + (UDJPlaylist*)sharedUDJPlaylist;
+- (void)initVoteRecordKeeper;
 - (UDJSong*)songPlaying;
 - (UDJSong*)songAtIndex:(NSInteger)i;
 - (void)loadPlaylist;
@@ -26,5 +28,6 @@
 @property(nonatomic,retain) NSMutableArray* playlist;
 @property(nonatomic) NSInteger eventId;
 @property(nonatomic,retain) UDJSong* currentSong;
+@property(nonatomic,retain) NSMutableDictionary* voteRecordKeeper;
 
 @end

@@ -20,7 +20,6 @@
     NSString* timeAdded;
     NSInteger adderId;
     NSString* adderName;
-    BOOL hasVotedFor;
 }
 
 + (id)songFromDictionary:(NSDictionary*)songDict;
@@ -36,6 +35,5 @@
 @property(nonatomic,retain) NSString* timeAdded;
 @property(nonatomic) NSInteger adderId;
 @property(nonatomic,retain) NSString* adderName;
-@property(nonatomic) BOOL hasVotedFor;
 
 @end

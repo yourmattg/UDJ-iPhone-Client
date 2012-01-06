@@ -47,6 +47,7 @@
     [[UDJConnection sharedConnection] initWithServerPrefix: baseUrl];
     [EventList new]; // make our eventlist singleton
     [UDJPlaylist new]; // make UDJPlaylist singleton
+    [[UDJPlaylist sharedUDJPlaylist] initVoteRecordKeeper];
     
 	//create a UDJViewController (the login screen), and make it the root view
 	viewController    = [[UDJViewController alloc] initWithNibName:@"UDJViewController" bundle:nil];

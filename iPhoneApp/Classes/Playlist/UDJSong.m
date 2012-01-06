@@ -10,7 +10,7 @@
 
 @implementation UDJSong
 
-@synthesize songId, librarySongId, title, artist, album, duration, downVotes, upVotes, timeAdded, adderId, adderName, hasVotedFor;
+@synthesize songId, librarySongId, title, artist, album, duration, downVotes, upVotes, timeAdded, adderId, adderName;
 
 + (id) songFromDictionary:(NSDictionary *)songDict{
     if([songDict count]==0) return nil;
@@ -26,7 +26,6 @@
     song.timeAdded = [songDict objectForKey:@"time_added"];
     song.adderId = [[songDict objectForKey:@"adder_id"] intValue];
     song.adderName = [songDict objectForKey:@"adder_username"];
-    song.hasVotedFor = NO;
     return song;
 }
 

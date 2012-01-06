@@ -18,7 +18,7 @@ static UDJConnection* sharedUDJConnection = nil;
 
 @implementation UDJConnection
 
-@synthesize serverPrefix, ticket, client, userID, headers, playlistView;
+@synthesize serverPrefix, ticket, client, userID, headers, playlistView, currentRequests;
 
 // **************************** General UDJConnection Methods ********************************
 
@@ -38,6 +38,7 @@ static UDJConnection* sharedUDJConnection = nil;
     acceptAuth=false; // don't want to accept authorization response yet
     acceptEvents=false;
     client = [RKClient clientWithBaseURL:prefix];
+    currentRequests = [NSMutableDictionary new];
 }
 
 - (void) setCurrentController:(id)controller{
@@ -237,6 +238,14 @@ static UDJConnection* sharedUDJConnection = nil;
         NSDictionary* songDict = [songArray objectAtIndex:i];
         UDJSong* song = [UDJSong songFromDictionary:songDict];
         [playlist addObject:song];
+        
+        NSNumber* songIdAsNumber = [NSNumber numberWithInteger:song.songId];
+        // if this song hasnt been added to the playlist before i.e. isnt in the voteRecordKeeper
+        if([[UDJPlaylist sharedUDJPlaylist].voteRecordKeeper objectForKey:songIdAsNumber]==nil){
+            // set its songId to NO, meaning the user hasn't voted for it yet
+            NSNumber* no =[NSNumber numberWithBool:NO];
+            [[UDJPlaylist sharedUDJPlaylist].voteRecordKeeper setObject:no forKey:songIdAsNumber];
+        }
     }
     [[UDJPlaylist sharedUDJPlaylist] setPlaylist:playlist];
     [[UDJPlaylist sharedUDJPlaylist] setCurrentSong:currentSong];
@@ -260,7 +269,12 @@ static UDJConnection* sharedUDJConnection = nil;
     request.additionalHTTPHeaders = headers;
     //send request
     acceptPlaylist=YES;
+    //[currentRequests setObject:@"voteRequest" forKey:request]; was causing error
     [request send];    
+}
+
+-(void)handleVoteResponse:(RKResponse*)response{
+    
 }
 
 
@@ -283,7 +297,14 @@ static UDJConnection* sharedUDJConnection = nil;
             if([response isOK]) [self handleAuth:response];
             // invalid credentials
             else [self denyAuth];
-        }
+        }/* was causing error
+        if([currentRequests objectForKey:request]==@"voteRequest"){
+            if(response.statusCode==408){
+                NSLog(@"vote request timed out");
+                [request send];
+            }
+            else if([response isOK]) [self handleVoteResponse:response];
+        }*/
 
     } else if([request isDELETE]) {
         
@@ -299,6 +320,8 @@ static UDJConnection* sharedUDJConnection = nil;
     [serverPrefix release];
     [ticket release];
     [client release];
+    [currentRequests release];
+    [super dealloc];
 }
 
 @end
