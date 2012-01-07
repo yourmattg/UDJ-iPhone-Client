@@ -112,13 +112,13 @@
     [super viewDidLoad];
     
     // set event, navigation bar title
-    theEvent = [EventList sharedEventList].currentEvent;
+    self.theEvent = [EventList sharedEventList].currentEvent;
 	self.navigationItem.title = theEvent.name;
     
     // init playlist
     [[UDJConnection sharedConnection] setPlaylistView:self];
-    playlist = [UDJPlaylist sharedUDJPlaylist];
-    playlist.eventId = theEvent.eventId;
+    self.playlist = [UDJPlaylist sharedUDJPlaylist];
+    self.playlist.eventId = theEvent.eventId;
     [playlist loadPlaylist];
     [self refreshTableList];
     
@@ -279,6 +279,7 @@
 
 - (void)dealloc{
     [theEvent release];
+    [playlist release];
     [super dealloc];
 }
 

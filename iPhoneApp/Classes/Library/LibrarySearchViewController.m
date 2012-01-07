@@ -27,12 +27,19 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+-(void)backToPlaylist{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    // set up back to playlist button
+    UIBarButtonItem *playlistButton = [[UIBarButtonItem alloc] initWithTitle:@"Playlist" style:UIBarButtonItemStylePlain target:nil action:@selector(backToPlaylist)];
+    self.navigationItem.leftBarButtonItem = playlistButton;
+    [playlistButton release];
 }
 
 - (void)viewDidUnload

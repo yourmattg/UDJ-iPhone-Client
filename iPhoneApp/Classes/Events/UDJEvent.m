@@ -21,7 +21,7 @@
     event.longitude = [[eventDict objectForKey:@"longitude"] doubleValue];
     event.hostUsername = [eventDict objectForKey:@"host_username"];
     event.hasPassword = [[eventDict objectForKey:@"has_password"] boolValue];
-    return event;
+    return [event autorelease];
 }
 
 // memory managed

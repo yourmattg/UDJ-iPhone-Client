@@ -141,23 +141,25 @@ static UDJConnection* sharedUDJConnection = nil;
 
 // handleEventResults: get the list of returned events from either the name or location search
 - (void) handleEventResults:(RKResponse*)response{
-    NSMutableArray* currentList = [NSMutableArray new];
+    NSMutableArray* cList = [NSMutableArray new];
     RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
     NSArray* eventArray = [parser objectFromString:[response bodyAsString] error:nil];
     for(int i=0; i<[eventArray count]; i++){
         NSDictionary* eventDict = [eventArray objectAtIndex:i];
         UDJEvent* event = [UDJEvent eventFromDictionary:eventDict];
-        [currentList addObject:event];
+        [cList addObject:event];
     }
-    [[EventList sharedEventList] setCurrentList:currentList];
+    [EventList sharedEventList].currentList = cList;
     acceptEvents=NO;
+    [cList release];
+    [parser release];
 }
 
 - (void) acceptEvents:(BOOL)value{
     acceptEvents = value;
 }
 
-// sendLoginRequest: attempts to log in user to party, returns status code of response
+// enterEventRequest: attempts to log in user to party, returns status code of response
 - (NSInteger) enterEventRequest{
     //create url
     NSString* urlString = client.baseURL;

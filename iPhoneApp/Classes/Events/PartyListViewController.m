@@ -43,7 +43,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //[[UDJConnection sharedConnection] setCurrentController: self];
-	tableList = [[NSMutableArray alloc] init];
+    
+	self.tableList = [[[NSMutableArray alloc] init] autorelease];
 	self.navigationItem.title = @"Events";
 	[self.navigationItem setLeftBarButtonItem:[[[UIBarButtonItem alloc] initWithCustomView:[[UIView new] autorelease]] autorelease]];
     // set up search button
@@ -63,7 +64,7 @@
 // overridden so that party table refreshes
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self refreshTableList];
+    
 }
 
 /*
@@ -166,7 +167,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // get the party and remember the event we are trying to join
     NSInteger index = [indexPath indexAtPosition:1];
+    NSLog(@"attempting to get currentevent");
+    UDJEvent* thevent =  [[EventList sharedEventList].currentList objectAtIndex:index];
+    NSLog([NSString stringWithFormat:@"%d",[thevent retainCount]]);
+    // something wrong with the currentlist object at index
+    NSLog(@"not problem");
     [EventList sharedEventList].currentEvent = [[EventList sharedEventList].currentList objectAtIndex:index];
+    NSLog(@"got current event");
     // there's a password: go the password screen
 	if([EventList sharedEventList].currentEvent.hasPassword){
         PartyLoginViewController* partyLoginViewController = [[PartyLoginViewController alloc] initWithNibName:@"PartyLoginViewController" bundle:[NSBundle mainBundle]];
@@ -187,11 +194,13 @@
             UIAlertView* eventEndedNotification = [UIAlertView alloc];
             [eventEndedNotification initWithTitle:@"Join Failed" message:@"This event has ended. Sorry!" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [eventEndedNotification show];
+            [eventEndedNotification release];
         }
         else if(statusCode==404){
             UIAlertView* nonExistantEvent = [UIAlertView alloc];
             [nonExistantEvent initWithTitle:@"Join Failed" message:@"The event you are trying to join does not exist. Sorry!" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [nonExistantEvent show];
+            [nonExistantEvent release];
         }
         // TODO: add other event possibilities (see API)
     }
@@ -215,8 +224,9 @@
 
 
 - (void)dealloc {
-    [super dealloc];
     [tableList release];
+    [eventList release];
+    [super dealloc];
 }
 
 
