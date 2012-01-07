@@ -13,6 +13,8 @@
 #import "UDJEvent.h"
 #import "UDJSong.h"
 #import "UDJPlaylist.h"
+#import "LibraryResultsController.h"
+#import "UDJResultList.h"
 
 static UDJConnection* sharedUDJConnection = nil;
 
@@ -296,16 +298,21 @@ static UDJConnection* sharedUDJConnection = nil;
 }
 
 -(void)handleLibSearchResults:(RKResponse *)response{
-    NSMutableArray* tempList = [NSMutableArray new];
+    acceptLibSearch=NO;
+    UDJResultList* tempList = [UDJResultList new];
     RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
     NSArray* songArray = [parser objectFromString:[response bodyAsString] error:nil];
     for(int i=0; i<[songArray count]; i++){
         NSDictionary* songDict = [songArray objectAtIndex:i];
         UDJSong* song = [UDJSong songFromDictionary:songDict];
-        [tempList addObject:song];
+        [tempList addSong:song];
+       // NSLog([NSString stringWithFormat:@"%d",[tempList count]]);
     }
+    LibraryResultsController* libraryResultsController = [[LibraryResultsController alloc] initWithNibName:@"LibraryResultsController" bundle:[NSBundle mainBundle]];
+    [currentController.navigationController pushViewController:libraryResultsController animated:YES];
     // set tempList to be the tableList of the libsearch results screen
-    acceptLibSearch=NO;
+    libraryResultsController.resultList = tempList;
+    [libraryResultsController release];
     [tempList release];
     [parser release];
 }

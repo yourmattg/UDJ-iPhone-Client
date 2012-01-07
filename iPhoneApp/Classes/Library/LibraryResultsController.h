@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UDJResultList.h"
 
 @interface LibraryResultsController : UITableViewController{
-    NSMutableArray* tableList;
+    UDJResultList* resultList;
 }
 
-@property(nonatomic,retain) NSMutableArray* tableList;
+@property(nonatomic,retain) UDJResultList* resultList;
 
 @end

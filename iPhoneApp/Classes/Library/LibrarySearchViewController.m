@@ -20,6 +20,12 @@
         NSString* searchParam = searchField.text;
         NSInteger eventIdParam = [EventList sharedEventList].currentEvent.eventId;
         NSInteger maxResultsParam = 25;
+        // show the searching screen
+        SearchingViewController* searchingViewController = [[SearchingViewController alloc] initWithNibName:@"SearchingViewController" bundle:[NSBundle mainBundle]];
+        [self.navigationController pushViewController:searchingViewController animated:NO];
+        [[UDJConnection sharedConnection] setCurrentController:searchingViewController];
+        [searchingViewController release];
+        // have UDJConnection send a request
         [[UDJConnection sharedConnection] sendLibSearchRequest:searchParam eventId:eventIdParam maxResults:maxResultsParam];
     }
 }
