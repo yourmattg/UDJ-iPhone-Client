@@ -167,13 +167,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // get the party and remember the event we are trying to join
     NSInteger index = [indexPath indexAtPosition:1];
-    NSLog(@"attempting to get currentevent");
-    UDJEvent* thevent =  [[EventList sharedEventList].currentList objectAtIndex:index];
-    NSLog([NSString stringWithFormat:@"%d",[thevent retainCount]]);
-    // something wrong with the currentlist object at index
-    NSLog(@"not problem");
     [EventList sharedEventList].currentEvent = [[EventList sharedEventList].currentList objectAtIndex:index];
-    NSLog(@"got current event");
     // there's a password: go the password screen
 	if([EventList sharedEventList].currentEvent.hasPassword){
         PartyLoginViewController* partyLoginViewController = [[PartyLoginViewController alloc] initWithNibName:@"PartyLoginViewController" bundle:[NSBundle mainBundle]];

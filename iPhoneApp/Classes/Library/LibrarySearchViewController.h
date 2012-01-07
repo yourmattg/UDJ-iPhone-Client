@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LibrarySearchViewController : UIViewController
+@interface LibrarySearchViewController : UIViewController{
+    UITextField* searchField;
+    UIButton* searchButton;
+    NSMutableArray *tableList;
+}
+
+@property(nonatomic,retain) IBOutlet UITextField* searchField;
+@property(nonatomic,retain) IBOutlet UIButton* searchButton;
 
 @end

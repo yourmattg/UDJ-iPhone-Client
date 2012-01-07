@@ -26,7 +26,7 @@
     song.timeAdded = [songDict objectForKey:@"time_added"];
     song.adderId = [[songDict objectForKey:@"adder_id"] intValue];
     song.adderName = [songDict objectForKey:@"adder_username"];
-    return song;
+    return [song autorelease];
 }
 
 // memory managed

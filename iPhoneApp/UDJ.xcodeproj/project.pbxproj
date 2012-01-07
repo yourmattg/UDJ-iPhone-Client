@@ -22,6 +22,8 @@
 		A33C4615148F0707009C1BC6 /* PlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A33C4613148F0707009C1BC6 /* PlaylistViewController.xib */; };
 		A33C461E148F11FC009C1BC6 /* LibrarySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A33C461C148F11FC009C1BC6 /* LibrarySearchViewController.m */; };
 		A33C461F148F11FC009C1BC6 /* LibrarySearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A33C461D148F11FC009C1BC6 /* LibrarySearchViewController.xib */; };
+		A34FB30314B8EB5F00BE5CE2 /* LibraryResultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = A34FB30114B8EB5F00BE5CE2 /* LibraryResultsController.m */; };
+		A34FB30414B8EB5F00BE5CE2 /* LibraryResultsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A34FB30214B8EB5F00BE5CE2 /* LibraryResultsController.xib */; };
 		A3536FB314A5218F00B5C95F /* UDJEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A3536FB214A5218F00B5C95F /* UDJEvent.m */; };
 		A36D2CC714A810230087E992 /* PartySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A36D2CC514A810230087E992 /* PartySearchViewController.m */; };
 		A36D2CC814A810230087E992 /* PartySearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A36D2CC614A810230087E992 /* PartySearchViewController.xib */; };
@@ -107,6 +109,9 @@
 		A33C461B148F11FC009C1BC6 /* LibrarySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibrarySearchViewController.h; sourceTree = "<group>"; };
 		A33C461C148F11FC009C1BC6 /* LibrarySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibrarySearchViewController.m; sourceTree = "<group>"; };
 		A33C461D148F11FC009C1BC6 /* LibrarySearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LibrarySearchViewController.xib; sourceTree = "<group>"; };
+		A34FB30014B8EB5F00BE5CE2 /* LibraryResultsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryResultsController.h; sourceTree = "<group>"; };
+		A34FB30114B8EB5F00BE5CE2 /* LibraryResultsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryResultsController.m; sourceTree = "<group>"; };
+		A34FB30214B8EB5F00BE5CE2 /* LibraryResultsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LibraryResultsController.xib; path = ../Classes/Library/LibraryResultsController.xib; sourceTree = "<group>"; };
 		A3536FB114A5218F00B5C95F /* UDJEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJEvent.h; sourceTree = "<group>"; };
 		A3536FB214A5218F00B5C95F /* UDJEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJEvent.m; sourceTree = "<group>"; };
 		A36D2CC414A810230087E992 /* PartySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartySearchViewController.h; sourceTree = "<group>"; };
@@ -212,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				A32A384614AE917600D166CF /* UDJ-Info.plist */,
+				A34FB30214B8EB5F00BE5CE2 /* LibraryResultsController.xib */,
 				A36D2CCB14A818130087E992 /* SearchingViewController.xib */,
 				A36D2CC614A810230087E992 /* PartySearchViewController.xib */,
 				A3F58C5B14A15F0B00756F7D /* AuthenticateViewController.xib */,
@@ -282,6 +288,8 @@
 			children = (
 				A33C461B148F11FC009C1BC6 /* LibrarySearchViewController.h */,
 				A33C461C148F11FC009C1BC6 /* LibrarySearchViewController.m */,
+				A34FB30014B8EB5F00BE5CE2 /* LibraryResultsController.h */,
+				A34FB30114B8EB5F00BE5CE2 /* LibraryResultsController.m */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -418,6 +426,7 @@
 				A36D2CC814A810230087E992 /* PartySearchViewController.xib in Resources */,
 				A36D2CCD14A818130087E992 /* SearchingViewController.xib in Resources */,
 				A32A384714AE917600D166CF /* UDJ-Info.plist in Resources */,
+				A34FB30414B8EB5F00BE5CE2 /* LibraryResultsController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,6 +452,7 @@
 				A36D2CCC14A818130087E992 /* SearchingViewController.m in Sources */,
 				A324ABF614AAB74700388514 /* UDJSong.m in Sources */,
 				A324AC0514AABB8900388514 /* UDJPlaylist.m in Sources */,
+				A34FB30314B8EB5F00BE5CE2 /* LibraryResultsController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

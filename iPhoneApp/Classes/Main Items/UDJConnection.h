@@ -16,6 +16,7 @@
     BOOL acceptAuth; // true if connection is accepting authorization responses
     BOOL acceptEvents; // awaiting an event list
     BOOL acceptPlaylist;
+    BOOL acceptLibSearch;
     PlaylistViewController* playlistView;
     
     @private
@@ -52,6 +53,9 @@
 
 - (void)sendVoteRequest:(BOOL)up songId:(NSInteger)songId eventId:(NSInteger)eventId;
 -(void)handleVoteResponse:(RKResponse*)response;
+
+-(void)sendLibSearchRequest:(NSString*)param eventId:(NSInteger)eventId maxResults:(NSInteger)maxResults;
+-(void)handleLibSearchResults:(RKResponse*)response;
 
 @property(nonatomic,retain) NSString* serverPrefix;
 @property(nonatomic,retain) NSString* ticket;

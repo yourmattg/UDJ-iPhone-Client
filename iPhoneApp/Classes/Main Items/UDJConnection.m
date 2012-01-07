@@ -279,6 +279,37 @@ static UDJConnection* sharedUDJConnection = nil;
     
 }
 
+// **************************** Library Search Methods ********************************
+
+-(void)sendLibSearchRequest:(NSString *)param eventId:(NSInteger)eventId maxResults:(NSInteger)maxResults{
+    //create url [GET] /udj/events/event_id/available_music?query=query{&max_results=maximum_number_of_results}
+    NSString* urlString = client.baseURL;
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@%@%@%d",@"/events/",eventId,@"/available_music?query=",param,@"&max_results=",maxResults];
+    // create request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
+    request.queue = client.requestQueue;
+    request.method = RKRequestMethodGET;
+    request.additionalHTTPHeaders = headers;
+    //send request
+    acceptLibSearch=YES;
+    [request send]; 
+}
+
+-(void)handleLibSearchResults:(RKResponse *)response{
+    NSMutableArray* tempList = [NSMutableArray new];
+    RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
+    NSArray* songArray = [parser objectFromString:[response bodyAsString] error:nil];
+    for(int i=0; i<[songArray count]; i++){
+        NSDictionary* songDict = [songArray objectAtIndex:i];
+        UDJSong* song = [UDJSong songFromDictionary:songDict];
+        [tempList addObject:song];
+    }
+    // set tempList to be the tableList of the libsearch results screen
+    acceptLibSearch=NO;
+    [tempList release];
+    [parser release];
+}
+
 
 // **************************** General Response Handling ********************************
 
@@ -289,6 +320,9 @@ static UDJConnection* sharedUDJConnection = nil;
         // playlist
         if(acceptPlaylist){
             [self handlePlaylistResponse:response];
+        }
+        else if(acceptLibSearch){
+            [self handleLibSearchResults:response];
         }
         
     } else if([request isPOST]) {

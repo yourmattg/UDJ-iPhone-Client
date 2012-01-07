@@ -38,7 +38,7 @@
 
 // sendRefreshRequest: ask the playlist for a refresh
 -(void)sendRefreshRequest{
-    [playlist loadPlaylist];
+    [self.playlist loadPlaylist];
 }
 // refreshes our list
 // NOTE: this is automatically called by UDJConnection when it gets a response
@@ -210,7 +210,7 @@
         }
         else songName = [UDJPlaylist sharedUDJPlaylist].currentSong.title;
     }
-    else songName = [[NSString alloc] initWithString:[playlist songAtIndex:rowNumber-1].title];
+    else songName = [[[NSString alloc] initWithString:[playlist songAtIndex:rowNumber-1].title] autorelease];
     NSString* cellValue = [NSString new];
     if(rowNumber==0){
         cellValue = @"Playing: ";
