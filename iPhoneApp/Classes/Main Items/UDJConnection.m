@@ -306,7 +306,6 @@ static UDJConnection* sharedUDJConnection = nil;
         NSDictionary* songDict = [songArray objectAtIndex:i];
         UDJSong* song = [UDJSong songFromDictionary:songDict];
         [tempList addSong:song];
-       // NSLog([NSString stringWithFormat:@"%d",[tempList count]]);
     }
     LibraryResultsController* libraryResultsController = [[LibraryResultsController alloc] initWithNibName:@"LibraryResultsController" bundle:[NSBundle mainBundle]];
     [currentController.navigationController pushViewController:libraryResultsController animated:YES];

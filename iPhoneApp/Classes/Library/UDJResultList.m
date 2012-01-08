@@ -15,6 +15,7 @@
 -(id)init
 {
     self = [super init];
+    self.currentList = [[NSMutableArray new] autorelease];
     return self;
 }
 
