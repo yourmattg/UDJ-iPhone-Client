@@ -12,6 +12,10 @@
 
 @synthesize resultList;
 
+- (void)backToLibSearch{
+    
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -29,12 +33,23 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+// addSong: add the selected song to the event playlist
+-(void)addSong{
+    
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.navigationItem.title = @"Search Results";
+    // toolbar
+    UIBarButtonItem* addSongButton = [[UIBarButtonItem alloc] initWithTitle:@"Add" style:UIBarButtonItemStylePlain 
+                                                                     target:self action:@selector(addSong)];
+    UIBarButtonItem* space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    NSArray* toolbarItems = [NSArray arrayWithObjects: space, addSongButton, space, nil];
+    self.toolbarItems = toolbarItems;
 }
 
 - (void)viewDidUnload

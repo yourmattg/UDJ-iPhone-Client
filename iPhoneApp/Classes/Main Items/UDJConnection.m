@@ -308,7 +308,9 @@ static UDJConnection* sharedUDJConnection = nil;
         [tempList addSong:song];
     }
     LibraryResultsController* libraryResultsController = [[LibraryResultsController alloc] initWithNibName:@"LibraryResultsController" bundle:[NSBundle mainBundle]];
-    [currentController.navigationController pushViewController:libraryResultsController animated:YES];
+    UINavigationController* navigationController = currentController.navigationController;
+    [navigationController popViewControllerAnimated:NO];
+    [navigationController pushViewController:libraryResultsController animated:YES];
     // set tempList to be the tableList of the libsearch results screen
     libraryResultsController.resultList = tempList;
     [libraryResultsController release];

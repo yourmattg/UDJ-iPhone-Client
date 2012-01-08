@@ -53,7 +53,7 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     // set up back to playlist button
-    UIBarButtonItem *playlistButton = [[UIBarButtonItem alloc] initWithTitle:@"Playlist" style:UIBarButtonItemStylePlain target:nil action:@selector(backToPlaylist)];
+    UIBarButtonItem *playlistButton = [[UIBarButtonItem alloc] initWithTitle:@"Playlist" style:UIBarButtonItemStylePlain target:self action:@selector(backToPlaylist)];
     self.navigationItem.leftBarButtonItem = playlistButton;
     [playlistButton release];
 }
