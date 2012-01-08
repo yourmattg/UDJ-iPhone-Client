@@ -18,6 +18,7 @@
     BOOL acceptPlaylist;
     BOOL acceptLibSearch;
     PlaylistViewController* playlistView;
+    NSInteger clientRequestcount; // used to keep a unique client request id
     
     @private
     NSString* serverPrefix; // without spaces: http://0.0.0.0:4897/udj
@@ -56,6 +57,7 @@
 
 -(void)sendLibSearchRequest:(NSString*)param eventId:(NSInteger)eventId maxResults:(NSInteger)maxResults;
 -(void)handleLibSearchResults:(RKResponse*)response;
+-(void)sendAddSongRequest:(UDJSong*)song eventId:(NSInteger)eventId;
 
 @property(nonatomic,retain) NSString* serverPrefix;
 @property(nonatomic,retain) NSString* ticket;

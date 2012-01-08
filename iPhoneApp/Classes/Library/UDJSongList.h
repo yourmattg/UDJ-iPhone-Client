@@ -12,7 +12,7 @@
 // UDJResultList is used to store the results of a library search
 // it is basically a wrapper class to ensure LibraryResultsController is using
 // an array that only has UDJSongs in it
-@interface UDJResultList : NSObject{
+@interface UDJSongList : NSObject{
     NSMutableArray* currentList;
 }
 

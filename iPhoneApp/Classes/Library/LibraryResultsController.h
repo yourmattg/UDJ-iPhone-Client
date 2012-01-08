@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UDJResultList.h"
+#import "UDJSongList.h"
 
 @interface LibraryResultsController : UITableViewController{
-    UDJResultList* resultList;
+    UDJSongList* resultList;
+    UDJSong* selectedSong;
 }
 
-@property(nonatomic,retain) UDJResultList* resultList;
+@property(nonatomic,retain) UDJSongList* resultList;
+@property(nonatomic,retain) UDJSong* selectedSong;
 
 @end

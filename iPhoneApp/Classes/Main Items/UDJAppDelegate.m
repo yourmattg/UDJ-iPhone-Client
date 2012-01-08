@@ -12,6 +12,7 @@
 #import "UDJEvent.h"
 #import "EventList.h"
 #import "UDJPlaylist.h"
+#import "UDJSongAdd.h"
 
 @implementation UDJAppDelegate
 
@@ -34,6 +35,13 @@
 	return modelData;
 }
 
+// initObjectMappings: used for UDJSong
+-(void)initObjectMappings{
+    // mapping for UDJSongAdd class to a NSMutableDictionary
+    RKObjectMapping* udjSongAddMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
+    [udjSongAddMapping mapKeyPathsToAttributes:@"lib_song",@"librarySongId",@"client_request_id",@"clientRequestId", nil];
+    [[RKObjectManager sharedManager].mappingProvider setSerializationMapping:udjSongAddMapping forClass:[UDJSongAdd class]];
+}
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -48,6 +56,9 @@
     [EventList new]; // make our eventlist singleton
     [UDJPlaylist new]; // make UDJPlaylist singleton
     [[UDJPlaylist sharedUDJPlaylist] initVoteRecordKeeper];
+    
+    //set up object mappings
+    [self initObjectMappings];
     
 	//create a UDJViewController (the login screen), and make it the root view
 	viewController    = [[UDJViewController alloc] initWithNibName:@"UDJViewController" bundle:nil];

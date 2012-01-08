@@ -10,10 +10,11 @@
 
 @implementation LibraryResultsController
 
-@synthesize resultList;
+@synthesize resultList, selectedSong;
 
+// backToLibSearch: go back to the library search screen
 - (void)backToLibSearch{
-    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -44,7 +45,10 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = @"Search Results";
-    // toolbar
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIBarButtonItemStylePlain target:self action:@selector(backToLibSearch)];
+    self.navigationItem.leftBarButtonItem = backButton;
+    [backButton release];
+    // toolbar    
     UIBarButtonItem* addSongButton = [[UIBarButtonItem alloc] initWithTitle:@"Add" style:UIBarButtonItemStylePlain 
                                                                      target:self action:@selector(addSong)];
     UIBarButtonItem* space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
@@ -109,7 +113,9 @@
     }
     
     UDJSong* song = [resultList songAtIndex:indexPath.row];
-	cell.textLabel.text = song.title;
+    NSString* cellLabel = [NSString stringWithFormat:@"%@%@%@", song.title, @" - ", song.artist,nil];
+	cell.textLabel.text = cellLabel;
+    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
 	cell.textLabel.textColor=[UIColor whiteColor];
     
     return cell;
@@ -158,18 +164,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    NSInteger rowNumber = indexPath.row;
+    self.selectedSong = [resultList songAtIndex:rowNumber];
 }
 
 -(void) dealloc{
     [resultList release];
+    [selectedSong release];
     [super dealloc];
 }
 

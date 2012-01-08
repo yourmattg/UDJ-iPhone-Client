@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 University of Illinois at Urbana-Champaign. All rights reserved.
 //
 
-#import "UDJResultList.h"
+#import "UDJSongList.h"
 
-@implementation UDJResultList
+@implementation UDJSongList
 
 @synthesize currentList;
 

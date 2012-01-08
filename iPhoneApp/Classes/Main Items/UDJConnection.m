@@ -14,7 +14,7 @@
 #import "UDJSong.h"
 #import "UDJPlaylist.h"
 #import "LibraryResultsController.h"
-#import "UDJResultList.h"
+#import "UDJSongList.h"
 
 static UDJConnection* sharedUDJConnection = nil;
 
@@ -299,7 +299,7 @@ static UDJConnection* sharedUDJConnection = nil;
 
 -(void)handleLibSearchResults:(RKResponse *)response{
     acceptLibSearch=NO;
-    UDJResultList* tempList = [UDJResultList new];
+    UDJSongList* tempList = [UDJSongList new];
     RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
     NSArray* songArray = [parser objectFromString:[response bodyAsString] error:nil];
     for(int i=0; i<[songArray count]; i++){
@@ -316,6 +316,20 @@ static UDJConnection* sharedUDJConnection = nil;
     [libraryResultsController release];
     [tempList release];
     [parser release];
+}
+
+-(void)sendAddSongRequest:(UDJSong *)song eventId:(NSInteger)eventId{
+    //create url [PUT] /udj/events/event_id/active_playlist/songs
+    /*NSString* urlString = client.baseURL;
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@%@%@%d",@"/events/",eventId,@"/available_music?query=",param,@"&max_results=",maxResults];
+    // create request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
+    request.queue = client.requestQueue;
+    request.method = RKRequestMethodGET;
+    request.additionalHTTPHeaders = headers;
+    //send request
+    acceptLibSearch=YES;
+    [request send]; */   
 }
 
 
