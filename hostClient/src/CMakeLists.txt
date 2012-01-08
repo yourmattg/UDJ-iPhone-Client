@@ -17,35 +17,59 @@
 
 SET(UDJ_SRCS 
   main.cpp 
+  PlaybackWidget.cpp
   MetaWindow.cpp 
   MusicFinder.cpp 
   SettingsWidget.cpp 
-  MusicLibrary.cpp
-  PlaylistView.cpp
+  DataStore.cpp
+  ActivePlaylistView.cpp
   LibraryView.cpp
-  PlaylistDelegate.cpp
-	PlaylistModel.cpp
 	UDJServerConnection.cpp
-	PartiersView.cpp
+  JSONHelper.cpp
+  qt-json/json.cpp
+  LoginWidget.cpp
+  ActivityList.cpp
+  EventWidget.cpp
+  CreateEventWidget.cpp
+  EventDashboard.cpp
+  WidgetWithLoader.cpp
+  EventMusicDisplay.cpp
+  EventUsersDisplay.cpp
+  AvailableMusicView.cpp
+  EventGoersView.cpp
+  SongListView.cpp
 )
 
 SET(UDJ_HDRS 
   MusicFinder.hpp
 	ConfigDefs.hpp
+  JSONHelper.hpp
+  Utils.hpp
+  qt-json/json.h
 )
 
 SET(UDJ_MOC_HDRS 
   MetaWindow.hpp 
   SettingsWidget.hpp
-  MusicLibrary.hpp
-  PlaylistView.hpp
+  DataStore.hpp
+  ActivePlaylistView.hpp
   LibraryView.hpp
-  PlaylistDelegate.hpp
-	PlaylistModel.hpp
 	DifferenceSpinner.hpp
 	UDJServerConnection.hpp
-	PartiersView.hpp
+  LoginWidget.hpp
+  ActivityList.hpp
+  PlaybackWidget.hpp
+  EventWidget.hpp
+  CreateEventWidget.hpp
+  EventDashboard.hpp
+  WidgetWithLoader.hpp
+  EventMusicDisplay.hpp
+  EventUsersDisplay.hpp
+  AvailableMusicView.hpp
+  EventGoersView.hpp
+  SongListView.hpp
 )
+
 
 QT4_WRAP_CPP(MOC_SRCS ${UDJ_MOC_HDRS})
 
@@ -53,4 +77,5 @@ INCLUDE(${QT_USE_FILE})
 ADD_DEFINITIONS(${QT_DEFINITIONS})
 
 ADD_EXECUTABLE(UDJ ${UDJ_SRCS} ${MOC_SRCS} ${UDJ_MOD_HDRS} ${UDJ_HDRS})
-TARGET_LINK_LIBRARIES(UDJ ${QT_LIBRARIES} ${QT_PHONON_LIBRARY})
+TARGET_LINK_LIBRARIES(UDJ ${QT_LIBRARIES} ${QT_PHONON_LIBRARY} ${TAGLIB})
+

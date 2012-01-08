@@ -18,67 +18,115 @@
  */
 #ifndef LIBRARY_VIEW_HPP
 #define LIBRARY_VIEW_HPP
+#include "ConfigDefs.hpp"
 #include <QTableView>
 
 class QContextMenuEvent;
+class QSqlQueryModel;
 
 namespace UDJ{
 
+class DataStore;
 
-class MusicLibrary;
-
-/** \brief A class for viewing the current contents of the users music library.
-*/
+/** 
+ *\brief A class for viewing the current contents of the users music library.
+ */
 class LibraryView : public QTableView{
 Q_OBJECT
 public:
 	/** @name Constructors */
   //@{
 
-  /** \brief Constructs a MusicLibrary
+  /** \brief Constructs a LibraryView
    *
-   * @param musicLibrary The music library whose data this LibraryView should
-   * present
+   * @param dataStore The data store being used by the applicaiton.
    * @param parent The parent widget
    */
-  LibraryView(MusicLibrary* musicLibrary, QWidget* parent=0);
+  LibraryView(DataStore *dataStore, QWidget* parent=0);
 
   //@}
-signals:
-  
-  /** @name Signals */
+private slots:
+  /** @name Private Slots */
   //@{
 
-  /** \brief Emitted when a song is requested to be added to the curren
-   * playlist.
+  /**
+   * \brief Displays a context menu at the given position.
    *
-   * @param songToAdd The model index in the music library of the song
-   * that is being requested to be added to the playlist.
+   * @param pos The position where the context menu should be displayed.
    */
-  void songAddRequest(const QModelIndex& songToAdd); 
-
-  //@}
-protected:
-
-  /** @name Overriden from QWidget */
-  //@{
-
-  /** \brief . */
-  void contextMenuEvent(QContextMenuEvent* e);
-
-  //@}
+  void handleContextMenuRequest(const QPoint &pos);
 
 private:
+
+  /** @name Private Memeber */
+  //@{
+
+  /**
+   * \brief The data store backing this instance of UDJ.
+   */
+  DataStore *dataStore;
+
+  /** \brief The model backing LibraryView.  */
+  QSqlQueryModel *libraryModel;
+
+  /** \brief Action used for deleting songs from the library. */
+  QAction *deleteSongAction;
+ 
+  /** \brief Actions used for adding songs to the list of available songs. */
+  QAction *addToAvailableMusicAction;
+
+  //@}
+
   /** @name Private Functions */
   //@{
-  
-  /** \brief Get a list of actions to be displayed in the LibraryView's
-   * context menu.
+
+  /** \brief Initilaizes actions.  */
+  void createActions();
+
+  /**
+   * \brief Gets the name used for the delete context menu item.
    *
-   * @return A list of action to be displayed in the LibraryView's context
-   * menu.
+   * @return The name for the deleted context menu item.
    */
-  QList<QAction*> getContextMenuActions();
+  static const QString& getDeleteContextMenuItemName(){
+    static const QString deleteContextMenuItemName = tr("Delete");
+    return deleteContextMenuItemName;
+  }
+
+  /**
+   * \brief Gets the name used for the add to available music
+   *  context menu item.
+   *
+   * @return The name for the add to available music  context menu item.
+   */
+  static const QString& getAddToAvailableContextMenuItemName(){
+    static const QString addToAvailableContextMenuItemName = 
+      tr("Add to Available Music");
+    return addToAvailableContextMenuItemName;
+  }
+
+  //@}
+
+private slots:
+  /** @name Private Slots */
+  //@{
+
+  /** 
+   * \brief Adds the currently selected songs to the list of available music.
+   */
+  void addSongToAvailableMusic();
+
+  /** 
+   * \brief Deletes the currently selected songs from the library.
+   */
+  void deleteSongs();
+
+  /**
+   * \brief Refreshes the display of the library.
+   */
+  void refresh();
+
+  void addSongsToSongList(song_list_id_t songListId);
 
   //@}
 };

@@ -19,6 +19,8 @@
 package org.klnusbaum.udj.containers;
 
 import android.database.Cursor;
+import android.os.Bundle;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -27,36 +29,40 @@ import org.json.JSONException;
 import java.util.List;
 import java.util.ArrayList;
 
-import org.klnusbaum.udj.UDJPartyProvider;
 
 public class LibraryEntry{
-  private int libId; 
-  private String song;
+  public static final String ID_PARAM = "id";
+  public static final String TITLE_PARAM = "title";
+  public static final String ARTIST_PARAM = "artist";
+  public static final String ALBUM_PARAM = "album";
+  public static final String DURATION_PARAM = "duration";
+
+  private long libId; 
+  private String title;
   private String artist;
   private String album;
-  private boolean isDeleted;
-  private static final String IS_DELETED_FLAG = "is_deleted";
+  private int duration;
 
   public LibraryEntry(
-    int libId, 
-    String song, 
+    long libId, 
+    String title, 
     String artist,
     String album,
-    boolean isDeleted)
+    int duration)
   {
     this.libId = libId;
-    this.song = song;
+    this.title = title;
     this.artist = artist;
     this.album = album;
-    this.isDeleted = isDeleted;
+    this.duration = duration;
   }
 
-  public int getLibId(){
+  public long getLibId(){
     return libId;
   }
   
-  public String getSong(){
-    return song;
+  public String getTitle(){
+    return title;
   }
   
   public String getArtist(){
@@ -67,59 +73,33 @@ public class LibraryEntry{
     return album;
   }
   
-  public boolean getIsDeleted(){
-    return isDeleted;
+  public int getDuration(){
+    return duration;
   }
 
   public static LibraryEntry valueOf(JSONObject jObj)
     throws JSONException 
   {
     return new LibraryEntry(
-      jObj.getInt(UDJPartyProvider.LIBRARY_ID_COLUMN), 
-      jObj.getString(UDJPartyProvider.SONG_COLUMN),
-      jObj.getString(UDJPartyProvider.ARTIST_COLUMN),
-      jObj.getString(UDJPartyProvider.ALBUM_COLUMN),
-      jObj.getBoolean(IS_DELETED_FLAG));
+      jObj.getLong(ID_PARAM), 
+      jObj.getString(TITLE_PARAM),
+      jObj.getString(ARTIST_PARAM),
+      jObj.getString(ALBUM_PARAM),
+      jObj.getInt(DURATION_PARAM));
   }
-
-  public static LibraryEntry valueOf(Cursor cur){
-    return new LibraryEntry(
-      cur.getInt(cur.getColumnIndex(UDJPartyProvider.LIBRARY_ID_COLUMN)),
-      cur.getString(cur.getColumnIndex(UDJPartyProvider.SONG_COLUMN)),
-      cur.getString(cur.getColumnIndex(UDJPartyProvider.ARTIST_COLUMN)),
-      cur.getString(cur.getColumnIndex(UDJPartyProvider.ALBUM_COLUMN)),
-      false);
-  }
-
-  public static JSONObject getJSONObject(LibraryEntry pe)
-    throws JSONException
-  {
-    JSONObject toReturn = new JSONObject();
-    toReturn.put(UDJPartyProvider.LIBRARY_ID_COLUMN, pe.getLibId());
-    toReturn.put(UDJPartyProvider.SONG_COLUMN, pe.getSong());
-    toReturn.put(UDJPartyProvider.ARTIST_COLUMN, pe.getArtist());
-    toReturn.put(UDJPartyProvider.ALBUM_COLUMN, pe.getAlbum());
-    return toReturn;
-  }
-
-  public static JSONArray getJSONArray(List<LibraryEntry> entries)
-    throws JSONException
-  {
-    JSONArray toReturn = new JSONArray();
-    for(LibraryEntry le: entries){
-      toReturn.put(getJSONObject(le));
-    }
-    return toReturn;
-  } 
 
   public static ArrayList<LibraryEntry> fromJSONArray(JSONArray array)
     throws JSONException
   {
     ArrayList<LibraryEntry> toReturn = new ArrayList<LibraryEntry>();
-    for(int i=0; i < array.length(); ++i){
-      toReturn.add(LibraryEntry.valueOf(array.getJSONObject(i)));
+    for(int i=0; i<array.length(); i++){
+      toReturn.add(valueOf(array.getJSONObject(i)));
     }
     return toReturn;
+  }
+
+  public String toString(){
+    return "Song name: " + getTitle();
   }
   
 }

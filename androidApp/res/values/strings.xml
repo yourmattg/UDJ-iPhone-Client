@@ -18,26 +18,51 @@
   along with UDJ.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources>
-    <string name="app_name">UDJ</string>
-    <string name="udj_name">UDJ</string>
-    <string name="username_text">Username:</string>
-    <string name="username_hint">Username</string>
-    <string name="password_text">Password:</string>
-    <string name="password_hint">Password</string>
-    <string name="login_text">Login</string>
-    <string name="authenticating">Logging In...</string>
-    <string name="account_type">org.klnusbaum.udj</string>
-    <string name="authtoken_type">org.klnusbaum.udj</string>
-    <string name="authority">org.klnusbaum.udj</string>
-    <string name="auth_token_label">password</string>
-    <string name="no_playlist_items">There are currently no items in the playlist</string>
-    <string name="no_library_songs">Hit refresh to see if the host has added any new songs to the library</string>
-    <string name="party_name_label">Name of party:</string>
-    <string name="party_name_hint">Party Name</string>
-    <string name="quit_title">Quit?</string>
-    <string name="quit_message">Are you sure you want to leave the party?</string>
-    <string name="no_party_items">No parties nearby.</string>
-    <string name="party_load_error">Error loading parties. Please try again.</string>
-    <string name="login_error">Login Error</string>
-    <string name="login_error_message">Looks like there was a problem logging in. Can you try retyping your name and password please?</string>
+  <string name="app_name">UDJ</string>
+  <string name="udj_name">UDJ</string>
+  <string name="username_text">Username:</string>
+  <string name="username_hint">Username</string>
+  <string name="password_text">Password:</string>
+  <string name="password_hint">Password</string>
+  <string name="login_text">Login</string>
+  <string name="authenticating">Logging In...</string>
+  <string name="joining_event">Joining Event...</string>
+  <string name="no_playlist_items">There are currently no items in the playlist</string>
+  <string name="no_library_songs">No Results To Display</string>
+  <string name="party_name_label">Name of party:</string>
+  <string name="party_name_hint">Party Name</string>
+  <string name="quit_title">Quit?</string>
+  <string name="quit_message">Are you sure you want to leave the party?</string>
+  <string name="no_party_items">No parties nearby.</string>
+  <string name="party_load_error">Error loading parties. Please try again.</string>
+  <string name="login_error">Login Error</string>
+  <string name="login_error_message">Looks like there was a problem logging in. Can you try retyping your name and password please?</string>
+  <string name="song_search_hint">Search for songs...</string>
+  <string name="event_search_hint">Search for events...</string>
+  <string name="searching_lib">Searching library...</string>
+  <string name="bad_password">Password incorrect</string>
+  <string name="bad_username_and_password">Couldn\'t find account matching the given username and password</string>
+  <string name="new_account_text">Sign in to UDJ</string>
+  <string name="need_password">Password is needed</string>
+  <string name="no_location_error">Could not retrieve location</string>
+  <string name="no_current_song">No Current Song</string>
+  <string name="no_account_error">No Account Selected</string>
+  <string name="added_by">Added By: </string>
+  <string name="you">You</string>
+  <string name="add_song_notification_title">Adding Song(s)</string>
+  <string name="add_song_notification_content">Adding Songs(s) to playlist</string>
+  <string name="song_added_notification_title">Song(s) Added</string>
+  <string name="song_added_notification_content">Songs(s) added to playlist</string>
+  <string name="song_add_failed_title">Adding Song(s) Failed</string>
+  <string name="song_add_failed_content">Adding song(s) failed. Tap here to retry.</string>
+
+
+
+
+<!-- Stuff for action bar compatibility -->
+  <string name="alternate_title">An alternate title that is long</string>
+  <string name="toggle_title">Toggle title</string>
+  <string name="menu_refresh">Refresh</string>
+  <string name="menu_search">Search</string>
+  <string name="menu_share">Share</string>
 </resources>

@@ -18,21 +18,26 @@
 
 cmake_minimum_required(VERSION 2.6)
 PROJECT(UDJ)
-FIND_PACKAGE(Qt4 4.4.3 COMPONENTS QtCore QtGui QtPhonon QtSql REQUIRED)
+FIND_PACKAGE(Qt4 4.4.3 
+  COMPONENTS QtCore QtGui Phonon QtSql QtNetwork REQUIRED)
 
-IF(NOT QT_PHONON_FOUND)
-message(FATAL_ERROR "Couldn't find Phonon module!")
-ENDIF(NOT QT_PHONON_FOUND)
+FIND_LIBRARY(TAGLIB "tag")
+IF(NOT TAGLIB)
+  MESSAGE(fatal_error "Could not find taglib")
+ENDIF(NOT TAGLIB)
 
-IF(NOT QT_QTSQL_FOUND)
-message(FATAL_ERROR "Couldn't find QtSql module!")
-ENDIF(NOT QT_QTSQL_FOUND)
+FIND_PATH(TAGLIB_HEADER_PATH "taglib/taglib.h")
+IF(NOT TAGLIB_HEADER_PATH)
+  message(FATAL_ERROR "Couldn't find path to taglib header")
+ENDIF(NOT TAGLIB_HEADER_PATH)
+include_directories("${TAGLIB_HEADER_PATH}/taglib")
 
 set(UDJ_DEBUG_BUILD FALSE CACHE BOOL "Enables/Disables a debug build of UDJ")
 
 IF(UDJ_DEBUG_BUILD)
   ADD_DEFINITIONS(-DUDJ_DEBUG_BUILD)
 ENDIF(UDJ_DEBUG_BUILD)
+
   
 
 ADD_SUBDIRECTORY(src)

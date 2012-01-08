@@ -17,43 +17,66 @@
   You should have received a copy of the GNU General Public License
   along with UDJ.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest 
+      xmlns:android="http://schemas.android.com/apk/res/android"
       package="org.klnusbaum.udj"
       android:versionCode="1"
       android:versionName="1.0">
 
-		<uses-sdk android:minSdkVersion="7"/>
+		<uses-sdk android:minSdkVersion="7" android:targetSdkVersion="14"/>
 
-    <uses-permission android:name="android.permission.READ_SYNC_STATS" />
-    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
-    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission
+        android:name="android.permission.READ_SYNC_STATS" />
+    <uses-permission
+        android:name="android.permission.READ_SYNC_SETTINGS" />
+    <uses-permission
+        android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission
+        android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission
+        android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application android:label="@string/app_name" android:icon="@drawable/icon">
-        <activity android:name="PartySelectorActivity"
-          android:theme="@android:style/Theme.NoTitleBar"
+        <activity android:name="EventSelectorActivity"
           android:label="@string/app_name"
+          android:launchMode="singleTop"
         >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
+          <intent-filter>
+            <action android:name="android.intent.action.SEARCH"/> 
+          </intent-filter>
+          <meta-data 
+            android:name="android.app.searchable"
+            android:resource="@xml/event_searchable"
+          />
+        </activity>
+        <activity android:name="EventActivity"
+          android:launchMode="singleTop"
+        >
+          <intent-filter>
+            <action android:name="android.intent.action.SEARCH"/> 
+          </intent-filter>
+          <meta-data 
+            android:name="android.app.searchable"
+            android:resource="@xml/song_searchable"
+          />
         </activity>
 
-        <activity android:name="PartyActivity"
-          android:theme="@android:style/Theme.NoTitleBar"
+        <activity android:name="AvailableMusicSearchActivity"/>
+
+        <activity 
+            android:name=".auth.AuthActivity"
+            android:excludeFromRecents="true"
         />
-
-        <activity android:name="PlaylistActivity"/>
-        <activity android:name="LibraryActivity"/>
-
-        <activity android:name=".auth.AuthActivity"/>
       
         <service
             android:name=".auth.AuthService"
@@ -66,20 +89,31 @@
                 android:name="android.accounts.AccountAuthenticator"
                 android:resource="@xml/authenticator" />
         </service>
+
         <service
-          android:name=".sync.SyncService"
-          android:exported="true"
-        >
-          <intent-filter>
-            <action android:name="android.content.SyncAdapter" />
-          </intent-filter>
-          <meta-data
-            android:name="android.content.SyncAdapter"
-            android:resource="@xml/syncadapter" />
+            android:name=".network.SyncService"
+            android:exported="true">
+            <intent-filter>
+                <action
+                    android:name="android.content.SyncAdapter" />
+            </intent-filter>
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/syncadapter" />
         </service>
-        <provider android:name="org.klnusbaum.udj.UDJPartyProvider"
+
+        <service
+            android:name=".network.PlaylistSyncService"
+            android:exported="true">
+        </service>
+
+        <service
+            android:name=".network.EventCommService"
+            android:exported="true">
+        </service>
+
+        <provider android:name="org.klnusbaum.udj.UDJEventProvider"
           android:authorities="org.klnusbaum.udj"
         />
-
     </application>
 </manifest> 

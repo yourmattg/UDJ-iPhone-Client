@@ -17,8 +17,8 @@
   You should have received a copy of the GNU General Public License
   along with UDJ.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<sync-adapter 
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:contentAuthority="org.klnusbaum.udj"
-  android:accountType="org.klnusbaum.udj"
+<sync-adapter xmlns:android="http://schemas.android.com/apk/res/android"
+    android:contentAuthority="org.klnusbaum.udj"
+    android:accountType="org.klnusbaum.udj"
+    android:supportsUploading="false"
 />

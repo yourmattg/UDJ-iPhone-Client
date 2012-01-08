@@ -1,0 +1,1079 @@
+[
+  {
+    "pk": 1, 
+    "model": "udj.event", 
+    "fields": {
+      "time_started": "2011-12-28 01:03:43", 
+      "state": "FN", 
+      "host": 3, 
+      "name": "Finished Event"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "udj.event", 
+    "fields": {
+      "time_started": "2011-12-28 01:22:04", 
+      "state": "AC", 
+      "host": 2, 
+      "name": "Ongoing event"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "udj.event", 
+    "fields": {
+      "time_started": "2011-12-28 01:56:17", 
+      "state": "AC", 
+      "host": 4, 
+      "name": "Empty Event"
+    }
+  }, 
+  {
+    "pk" : 1,
+    "model" : "udj.eventlocation",
+    "fields":{
+      "event" : 1,
+      "longitude": "-88.224006", 
+      "latitude": "40.113523"
+    }
+  },
+  {
+    "pk" : 2,
+    "model" : "udj.eventlocation",
+    "fields":{
+      "event" : 2,
+      "longitude": "-88.224006", 
+      "latitude": "40.113523"
+    }
+  },
+  {
+    "pk" : 3,
+    "model" : "udj.eventlocation",
+    "fields":{
+      "event" : 3,
+      "longitude": "-88.224006", 
+      "latitude": "40.113523"
+    }
+  },
+  {
+    "pk" : 1,
+    "model" : "udj.eventendtime",
+    "fields":{
+      "event": 1,
+      "time_ended": "2011-12-28 01:20:55"
+    }
+  },
+  {
+    "pk": 1, 
+    "model": "udj.libraryentry", 
+    "fields": {
+      "album": "Blue", 
+      "is_deleted": false, 
+      "host_lib_song_id": 1, 
+      "artist": "Third Eye Blind", 
+      "title": "Never Let You Go", 
+      "duration": 237, 
+      "owning_user": 2
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "udj.libraryentry", 
+    "fields": {
+      "album": "Blue", 
+      "is_deleted": false, 
+      "host_lib_song_id": 2, 
+      "artist": "Third Eye Blind", 
+      "title": "10 Days Late", 
+      "duration": 185, 
+      "owning_user": 2
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "udj.libraryentry", 
+    "fields": {
+      "album": "Third Eye Blind", 
+      "is_deleted": false, 
+      "host_lib_song_id": 3, 
+      "artist": "Third Eye Blind", 
+      "title": "Semi-Charmed Life", 
+      "duration": 268, 
+      "owning_user": 2
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "udj.libraryentry", 
+    "fields": {
+      "album": "My Name Is Skrillex", 
+      "is_deleted": false, 
+      "host_lib_song_id": 4, 
+      "artist": "Skrillex", 
+      "title": "My Name Is Skrillex", 
+      "duration": 271, 
+      "owning_user": 2
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "udj.libraryentry", 
+    "fields": {
+      "album": "My Name Is Skrillex", 
+      "is_deleted": false, 
+      "host_lib_song_id": 5, 
+      "artist": "Skirllex", 
+      "title": "With You Friends", 
+      "duration": 382, 
+      "owning_user": 2
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "udj.libraryentry", 
+    "fields": {
+      "album": "Deloused in the Comatorium", 
+      "is_deleted": false, 
+      "host_lib_song_id": 6, 
+      "artist": "The Mars Volta", 
+      "title": "Inertiatic Esp", 
+      "duration": 264, 
+      "owning_user": 2
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "udj.libraryentry", 
+    "fields": {
+      "album": "The Bedlam In Goliath", 
+      "is_deleted": false, 
+      "host_lib_song_id": 7, 
+      "artist": "The Mars Volta", 
+      "title": "Ilyena", 
+      "duration": 335, 
+      "owning_user": 2
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "udj.libraryentry", 
+    "fields": {
+      "album": "Octahedron", 
+      "is_deleted": false, 
+      "host_lib_song_id": 8, 
+      "artist": "The Mars Volta", 
+      "title": "Teflon", 
+      "duration": 304, 
+      "owning_user": 2
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "udj.libraryentry", 
+    "fields": {
+      "album": "Homework", 
+      "is_deleted": false, 
+      "host_lib_song_id": 9, 
+      "artist": "Daft Punk", 
+      "title": "Around The World", 
+      "duration": 428, 
+      "owning_user": 2
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "udj.libraryentry", 
+    "fields": {
+      "album": "For Lack Of A Better Name", 
+      "is_deleted": false, 
+      "host_lib_song_id": 10, 
+      "artist": "Deadmau5", 
+      "title": "Moar Ghosts 'n' Stuff", 
+      "duration": 297, 
+      "owning_user": 2
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "udj.libraryentry", 
+    "fields": {
+      "album": "Mellon Collie And The Infinite Sadness", 
+      "is_deleted": false, 
+      "host_lib_song_id": 1, 
+      "artist": "The Smashing Pumpkins", 
+      "title": "Tonight, Tonight", 
+      "duration": 255, 
+      "owning_user": 3
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "udj.libraryentry", 
+    "fields": {
+      "album": "Mellon Collie And The Infinite Sadness", 
+      "is_deleted": false, 
+      "host_lib_song_id": 2, 
+      "artist": "The Smashing Pumpkins", 
+      "title": "Zero", 
+      "duration": 160, 
+      "owning_user": 3
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "udj.libraryentry", 
+    "fields": {
+      "album": "Mellon Collie And The Infinite Sadness", 
+      "is_deleted": false, 
+      "host_lib_song_id": 3, 
+      "artist": "The Smashing Pumpkins", 
+      "title": "1979", 
+      "duration": 266, 
+      "owning_user": 3
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "udj.libraryentry", 
+    "fields": {
+      "album": "Third Eye Blind", 
+      "is_deleted": false, 
+      "host_lib_song_id": 11, 
+      "artist": "Third Eye Blind", 
+      "title": "Graduate", 
+      "duration": 189, 
+      "owning_user": 2
+    }
+  }, 
+  {
+    "pk": 15, 
+    "model": "udj.libraryentry", 
+    "fields": {
+      "album": "Ursa Major", 
+      "is_deleted": false, 
+      "host_lib_song_id": 12, 
+      "artist": "Third Eye Blind", 
+      "title": "Water Landing", 
+      "duration": 269, 
+      "owning_user": 2
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "udj.availablesong", 
+    "fields": {
+      "event": 2, 
+      "song": 1
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "udj.availablesong", 
+    "fields": {
+      "event": 2, 
+      "song": 2
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "udj.availablesong", 
+    "fields": {
+      "event": 2, 
+      "song": 3
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "udj.availablesong", 
+    "fields": {
+      "event": 2, 
+      "song": 4
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "udj.availablesong", 
+    "fields": {
+      "event": 2, 
+      "song": 5
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "udj.availablesong", 
+    "fields": {
+      "event": 2, 
+      "song": 9
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "udj.availablesong", 
+    "fields": {
+      "event": 2, 
+      "song": 10
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "udj.activeplaylistentry", 
+    "fields": {
+      "song": 1, 
+      "client_request_id": 2, 
+      "state": "QE", 
+      "adder": 2, 
+      "time_added": "2011-12-28 01:36:51", 
+      "event": 2
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "udj.activeplaylistentry", 
+    "fields": {
+      "song": 5, 
+      "client_request_id": 2, 
+      "state": "QE", 
+      "adder": 3, 
+      "time_added": "2011-12-28 01:37:26", 
+      "event": 2
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "udj.activeplaylistentry", 
+    "fields": {
+      "song": 10, 
+      "client_request_id": 3, 
+      "state": "QE", 
+      "adder": 2, 
+      "time_added": "2011-12-28 01:40:46", 
+      "event": 2
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "udj.activeplaylistentry", 
+    "fields": {
+      "song": 3, 
+      "client_request_id": 4, 
+      "state": "QE", 
+      "adder": 2, 
+      "time_added": "2011-12-28 01:43:39", 
+      "event": 2
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "udj.activeplaylistentry", 
+    "fields": {
+      "song": 4, 
+      "client_request_id": 1, 
+      "state": "PL", 
+      "adder": 2, 
+      "time_added": "2011-12-28 01:46:07", 
+      "event": 2
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "udj.activeplaylistentry", 
+    "fields": {
+      "song": 14, 
+      "client_request_id": 1, 
+      "state": "FN", 
+      "adder": 3, 
+      "time_added": "2011-12-28 01:48:17", 
+      "event": 2
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "udj.activeplaylistentry", 
+    "fields": {
+      "song": 15, 
+      "client_request_id": 5, 
+      "state": "RM", 
+      "adder": 2, 
+      "time_added": "2011-12-28 01:51:05", 
+      "event": 2
+    }
+  }, 
+  {
+    "pk" : 1,
+    "model": "udj.playlistentrytimeplayed",
+    "fields" :{
+      "playlist_entry" : 5,
+      "time_played": "2011-12-28 01:46:25"
+    }
+  },
+  {
+    "pk" : 2,
+    "model": "udj.playlistentrytimeplayed",
+    "fields" :{
+      "playlist_entry" : 6,
+      "time_played": "2011-12-28 01:40:50"
+    }
+  },
+  {
+    "pk": 1, 
+    "model": "udj.eventgoer", 
+    "fields": {
+      "user": 3, 
+      "time_joined": "2011-12-28 01:34:25", 
+      "event": 1,
+      "state" : "LE"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "udj.eventgoer", 
+    "fields": {
+      "user": 2, 
+      "time_joined": "2011-12-28 01:34:25", 
+      "event": 2,
+      "state" : "IE"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "udj.eventgoer", 
+    "fields": {
+      "user": 3, 
+      "time_joined": "2011-12-28 01:35:40", 
+      "event": 2,
+      "state" : "IE"
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "udj.eventgoer", 
+    "fields": {
+      "user": 4, 
+      "time_joined": "2011-12-28 01:35:40", 
+      "event": 3,
+      "state" : "IE"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "udj.vote", 
+    "fields": {
+      "playlist_entry": 1, 
+      "user": 2,
+      "weight" : 1
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "udj.vote", 
+    "fields": {
+      "playlist_entry": 2, 
+      "user": 3,
+      "weight" : 1
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "udj.vote", 
+    "fields": {
+      "playlist_entry": 3, 
+      "user": 2,
+      "weight" : 1
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "udj.vote", 
+    "fields": {
+      "playlist_entry": 4, 
+      "user": 3,
+      "weight" : 1
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "udj.vote", 
+    "fields": {
+      "playlist_entry": 5, 
+      "user": 2,
+      "weight" : 1
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "udj.vote", 
+    "fields": {
+      "playlist_entry": 7, 
+      "user": 2,
+      "weight" : 1
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "udj.vote", 
+    "fields": {
+      "playlist_entry": 6, 
+      "user": 3,
+      "weight" : 1
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "udj.vote", 
+    "fields": {
+      "playlist_entry": 1, 
+      "user": 3,
+      "weight" : 1
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "udj.vote", 
+    "fields": {
+      "playlist_entry": 3, 
+      "user": 3,
+      "weight" : -1
+    }
+  }, 
+  {
+    "pk": 22, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_logentry", 
+      "name": "Can add log entry", 
+      "content_type": 8
+    }
+  }, 
+  {
+    "pk": 23, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_logentry", 
+      "name": "Can change log entry", 
+      "content_type": 8
+    }
+  }, 
+  {
+    "pk": 24, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_logentry", 
+      "name": "Can delete log entry", 
+      "content_type": 8
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_group", 
+      "name": "Can add group", 
+      "content_type": 2
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_group", 
+      "name": "Can change group", 
+      "content_type": 2
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_group", 
+      "name": "Can delete group", 
+      "content_type": 2
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_message", 
+      "name": "Can add message", 
+      "content_type": 4
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_message", 
+      "name": "Can change message", 
+      "content_type": 4
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_message", 
+      "name": "Can delete message", 
+      "content_type": 4
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_permission", 
+      "name": "Can add permission", 
+      "content_type": 1
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_permission", 
+      "name": "Can change permission", 
+      "content_type": 1
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_permission", 
+      "name": "Can delete permission", 
+      "content_type": 1
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_user", 
+      "name": "Can add user", 
+      "content_type": 3
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_user", 
+      "name": "Can change user", 
+      "content_type": 3
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_user", 
+      "name": "Can delete user", 
+      "content_type": 3
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_contenttype", 
+      "name": "Can add content type", 
+      "content_type": 5
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_contenttype", 
+      "name": "Can change content type", 
+      "content_type": 5
+    }
+  }, 
+  {
+    "pk": 15, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_contenttype", 
+      "name": "Can delete content type", 
+      "content_type": 5
+    }
+  }, 
+  {
+    "pk": 16, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_session", 
+      "name": "Can add session", 
+      "content_type": 6
+    }
+  }, 
+  {
+    "pk": 17, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_session", 
+      "name": "Can change session", 
+      "content_type": 6
+    }
+  }, 
+  {
+    "pk": 18, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_session", 
+      "name": "Can delete session", 
+      "content_type": 6
+    }
+  }, 
+  {
+    "pk": 19, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_site", 
+      "name": "Can add site", 
+      "content_type": 7
+    }
+  }, 
+  {
+    "pk": 20, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_site", 
+      "name": "Can change site", 
+      "content_type": 7
+    }
+  }, 
+  {
+    "pk": 21, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_site", 
+      "name": "Can delete site", 
+      "content_type": 7
+    }
+  }, 
+  {
+    "pk": 34, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_activeplaylistentry", 
+      "name": "Can add active playlist entry", 
+      "content_type": 12
+    }
+  }, 
+  {
+    "pk": 35, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_activeplaylistentry", 
+      "name": "Can change active playlist entry", 
+      "content_type": 12
+    }
+  }, 
+  {
+    "pk": 36, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_activeplaylistentry", 
+      "name": "Can delete active playlist entry", 
+      "content_type": 12
+    }
+  }, 
+  {
+    "pk": 31, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_availablesong", 
+      "name": "Can add available song", 
+      "content_type": 11
+    }
+  }, 
+  {
+    "pk": 32, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_availablesong", 
+      "name": "Can change available song", 
+      "content_type": 11
+    }
+  }, 
+  {
+    "pk": 33, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_availablesong", 
+      "name": "Can delete available song", 
+      "content_type": 11
+    }
+  }, 
+  {
+    "pk": 46, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_downvote", 
+      "name": "Can add down vote", 
+      "content_type": 16
+    }
+  }, 
+  {
+    "pk": 47, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_downvote", 
+      "name": "Can change down vote", 
+      "content_type": 16
+    }
+  }, 
+  {
+    "pk": 48, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_downvote", 
+      "name": "Can delete down vote", 
+      "content_type": 16
+    }
+  }, 
+  {
+    "pk": 25, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_event", 
+      "name": "Can add event", 
+      "content_type": 9
+    }
+  }, 
+  {
+    "pk": 26, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_event", 
+      "name": "Can change event", 
+      "content_type": 9
+    }
+  }, 
+  {
+    "pk": 27, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_event", 
+      "name": "Can delete event", 
+      "content_type": 9
+    }
+  }, 
+  {
+    "pk": 40, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_eventgoer", 
+      "name": "Can add event goer", 
+      "content_type": 14
+    }
+  }, 
+  {
+    "pk": 41, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_eventgoer", 
+      "name": "Can change event goer", 
+      "content_type": 14
+    }
+  }, 
+  {
+    "pk": 42, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_eventgoer", 
+      "name": "Can delete event goer", 
+      "content_type": 14
+    }
+  }, 
+  {
+    "pk": 28, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_libraryentry", 
+      "name": "Can add library entry", 
+      "content_type": 10
+    }
+  }, 
+  {
+    "pk": 29, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_libraryentry", 
+      "name": "Can change library entry", 
+      "content_type": 10
+    }
+  }, 
+  {
+    "pk": 30, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_libraryentry", 
+      "name": "Can delete library entry", 
+      "content_type": 10
+    }
+  }, 
+  {
+    "pk": 37, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_ticket", 
+      "name": "Can add ticket", 
+      "content_type": 13
+    }
+  }, 
+  {
+    "pk": 38, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_ticket", 
+      "name": "Can change ticket", 
+      "content_type": 13
+    }
+  }, 
+  {
+    "pk": 39, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_ticket", 
+      "name": "Can delete ticket", 
+      "content_type": 13
+    }
+  }, 
+  {
+    "pk": 43, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_upvote", 
+      "name": "Can add up vote", 
+      "content_type": 15
+    }
+  }, 
+  {
+    "pk": 44, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_upvote", 
+      "name": "Can change up vote", 
+      "content_type": 15
+    }
+  }, 
+  {
+    "pk": 45, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_upvote", 
+      "name": "Can delete up vote", 
+      "content_type": 15
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "admin", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "is_superuser": true, 
+      "is_staff": true, 
+      "last_login": "2011-12-28 01:25:41", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$e8825$8cb243d4cce92deb46626021aebb9ceee2d1b5c6", 
+      "email": "admin@udj.com", 
+      "date_joined": "2011-12-27 23:06:55"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "test2", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "is_superuser": false, 
+      "is_staff": false, 
+      "last_login": "2011-12-28 00:36:15", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$d175e$3340747e48f85a38ef8ef68274db2d650a814858", 
+      "email": "", 
+      "date_joined": "2011-12-28 00:36:15"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "test3", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "is_superuser": false, 
+      "is_staff": false, 
+      "last_login": "2011-12-28 00:36:26", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$88165$bacd00560a0993962779b9695c3072b6bd86947d", 
+      "email": "", 
+      "date_joined": "2011-12-28 00:36:26"
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "test4", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "is_superuser": false, 
+      "is_staff": false, 
+      "last_login": "2011-12-28 00:36:45", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$965d4$f2eb32e5ac174d0a1c4e8d648cc2f41f52746f7c", 
+      "email": "", 
+      "date_joined": "2011-12-28 00:36:45"
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "test5", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "is_superuser": false, 
+      "is_staff": false, 
+      "last_login": "2011-12-28 01:55:38", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$57395$0f02e645996f7d80b24ff13f78db53346672621a", 
+      "email": "", 
+      "date_joined": "2011-12-28 01:55:38"
+    }
+  },
+  {
+    "pk": 6, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "kurtis", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "is_superuser": false, 
+      "is_staff": false, 
+      "last_login": "2011-12-28 00:36:55", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$3e8fb$867e713230d15a88f3f217db569e2409b688109b", 
+      "email": "", 
+      "date_joined": "2011-12-28 00:36:55"
+    }
+  }
+]

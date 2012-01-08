@@ -18,6 +18,12 @@
  */
 package org.klnusbaum.udj.auth;
 
+import java.util.Calendar;
+import java.io.IOException;
+
+import org.apache.http.auth.AuthenticationException;
+
+import android.content.SharedPreferences;
 import android.accounts.AbstractAccountAuthenticator;
 import android.accounts.Account;
 import android.accounts.AccountAuthenticatorResponse;
@@ -25,8 +31,10 @@ import android.accounts.AccountManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import org.klnusbaum.udj.R;
+import org.klnusbaum.udj.Constants;
 import org.klnusbaum.udj.network.ServerConnection;
 
 /**
@@ -35,6 +43,10 @@ import org.klnusbaum.udj.network.ServerConnection;
 public class Authenticator extends AbstractAccountAuthenticator{
 
   private Context context;
+ 
+  private static final String tokenPrefsName = "tokenPrefs";
+  private static final String tokenPrefKey = "token";
+  private static final String lastModifiedPrefKey = "lastModified";
   
   /**
    * Constructs an Authenticator
@@ -53,7 +65,6 @@ public class Authenticator extends AbstractAccountAuthenticator{
     Bundle options)
   {
     final Intent addIntent = new Intent(context, AuthActivity.class);
-    addIntent.putExtra(AuthActivity.AUTHTOKEN_TYPE_EXTRA, authTokenType);
     addIntent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE,
       response);
     final Bundle addBundle = new Bundle();
@@ -66,9 +77,7 @@ public class Authenticator extends AbstractAccountAuthenticator{
     Account account, Bundle options)
   {
     //TODO actually implement this method
-    final Bundle result = new Bundle();
-    result.putBoolean(AccountManager.KEY_BOOLEAN_RESULT, true);
-    return result;
+    return null;
   }
 
   @Override
@@ -79,38 +88,80 @@ public class Authenticator extends AbstractAccountAuthenticator{
   }
 
   @Override
-  public Bundle getAuthToken(AccountAuthenticatorResponse respones,
+  public Bundle getAuthToken(AccountAuthenticatorResponse response,
     Account account, String authTokenType, Bundle loginOptions)
   {
-    if(!authTokenType.equals(context.getString(R.string.authtoken_type))){
-      final Bundle result = new Bundle();
-      result.putString(AccountManager.KEY_ERROR_MESSAGE,
-        "Authtoken type not appropriate for this Authenticator!");
-      return result;
+    //First, check if we've already got the shiznit in our persistent storage
+    SharedPreferences prefs = context.getSharedPreferences(
+      tokenPrefsName, Context.MODE_PRIVATE);
+    if(prefs.contains(tokenPrefKey) && prefs.contains(lastModifiedPrefKey)){
+      long lastModified = prefs.getLong(lastModifiedPrefKey, 0);
+      if(lessThan12HoursAgo(lastModified)){
+        return bundleUpAuthToken(account, prefs.getString(tokenPrefKey, ""));
+      }
     }
+
+    //Ok, fine! Not in persistent storage, well we'll just get it from the 
+    // server then.
     final AccountManager am = AccountManager.get(context);
     final String password = am.getPassword(account);
     if(password != null){
-      if(isValidUserNameAndPassword(account.name, password)){
-        final Bundle result = new Bundle();
-        result.putString(AccountManager.KEY_ACCOUNT_NAME, account.name);
-        result.putString(AccountManager.KEY_ACCOUNT_TYPE, 
-          context.getString(R.string.account_type));
-        result.putString(AccountManager.KEY_AUTHTOKEN, password);
-        return result;
+      try{
+        final ServerConnection.AuthResult authResult= 
+          ServerConnection.authenticate(account.name, password);
+        if(!TextUtils.isEmpty(authResult.ticketHash)) {
+          writeTokenToPersistentStorage(authResult.ticketHash);
+          am.setUserData(
+            account, Constants.USER_ID_DATA, Long.toString(authResult.userId));
+          return bundleUpAuthToken(account, authResult.ticketHash);
+        }
+      }
+      catch(AuthenticationException e){
+        //TODO actually do something with this exception 
+      }
+      catch(IOException e){
+        //TODO actually do something with this exception 
       }
     }
     
-    //TODO we need to actually return an bundle containing
-    //an intent to relaunch the auth activitiy if necessary.
-    return null;
+    //Oh snap, they're username and password didn't work. O well, better have
+    // them sort it out.
+    final Intent intent = new Intent(context, AuthActivity.class);
+    intent.putExtra(AuthActivity.PARAM_USERNAME, account.name);
+    intent.putExtra(AuthActivity.PARAM_AUTHTOKEN_TYPE, authTokenType);
+    intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, 
+      response);
+    final Bundle bundle = new Bundle();
+    bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+    return bundle;
   }
+
+  private Bundle bundleUpAuthToken(Account account, String authToken){
+    final Bundle result = new Bundle();
+    result.putString(AccountManager.KEY_ACCOUNT_NAME, account.name);
+    result.putString(AccountManager.KEY_ACCOUNT_TYPE, Constants.ACCOUNT_TYPE);
+    result.putString(AccountManager.KEY_AUTHTOKEN, authToken);
+    return result;
+  }
+
+  private void writeTokenToPersistentStorage(String token){
+    SharedPreferences.Editor prefs = context.getSharedPreferences(
+      tokenPrefsName, Context.MODE_PRIVATE).edit();
+    long now = Calendar.getInstance().getTimeInMillis();
+    prefs.putLong(lastModifiedPrefKey, now);
+    prefs.putString(tokenPrefKey, token);
+    prefs.commit();
+  }
+
+  private boolean lessThan12HoursAgo(long time){
+    long now = Calendar.getInstance().getTimeInMillis();
+    return  now-time < 43200;
+  }
+
 
   @Override
   public String getAuthTokenLabel(String authTokenType){
-    if(authTokenType.equals(context.getString(R.string.authtoken_type))){
-      return context.getString(R.string.auth_token_label);
-    }
+    // null means we don't support multiple authToken types
     return null;
   }
 
@@ -127,26 +178,13 @@ public class Authenticator extends AbstractAccountAuthenticator{
   public Bundle updateCredentials(AccountAuthenticatorResponse response,
     Account account, String authTokenType, Bundle loginOptions)
   {
-    final Intent updateIntent = new Intent(context, AuthActivity.class);
+    /*final Intent updateIntent = new Intent(context, AuthActivity.class);
     updateIntent.putExtra(AccountManager.KEY_ACCOUNT_NAME, account.name);
     updateIntent.putExtra(AuthActivity.AUTHTOKEN_TYPE_EXTRA, authTokenType);
     updateIntent.putExtra(AuthActivity.UPDATE_CREDS_EXTRA, true);
     final Bundle updateBundle = new Bundle();
     updateBundle.putParcelable(AccountManager.KEY_INTENT, updateIntent);
-    return updateBundle;
-  }
-    
-  /**
-   * Determines whether or not the given username and password
-   * combination are valid.
-   *
-   * @param username The username in question.
-   * @param password The password assocaited with the username
-   * in question.
-   */ 
-  private boolean isValidUserNameAndPassword(
-    String username, String password)
-  {
-    return ServerConnection.authenticate(username, password, null, null);
+    return updateBundle;*/
+    return null;
   }
 }
