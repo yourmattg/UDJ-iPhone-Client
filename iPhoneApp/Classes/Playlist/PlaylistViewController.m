@@ -202,25 +202,16 @@
     }
 	
     // combine song number and name into one string
+    UDJSong* song;
     NSInteger rowNumber = indexPath.row;
-    NSString* songName;
-	if(rowNumber==0) {
-        if([UDJPlaylist sharedUDJPlaylist].currentSong==nil) {
-            songName=@"";
-        }
-        else songName = [UDJPlaylist sharedUDJPlaylist].currentSong.title;
-    }
-    else songName = [[[NSString alloc] initWithString:[playlist songAtIndex:rowNumber-1].title] autorelease];
-    NSString* cellValue = [NSString new];
-    if(rowNumber==0){
-        cellValue = @"Playing: ";
-    }
-    else{
-        cellValue = [NSString stringWithFormat:@"%d", rowNumber];
-        cellValue = [cellValue stringByAppendingString:@". "];
-    }
-    cellValue = [cellValue stringByAppendingString:songName];
-	cell.textLabel.text = cellValue;
+	if(rowNumber==0) song = [UDJPlaylist sharedUDJPlaylist].currentSong;
+    else song = [playlist songAtIndex:rowNumber-1];
+    
+    NSString* cellLabel = [NSString new];
+    if(rowNumber==0) cellLabel = @"Playing: ";
+    else cellLabel = [NSString stringWithFormat:@"%d%@", rowNumber,@". ",nil];
+    if(song!=nil) cellLabel = [cellLabel stringByAppendingFormat:@"%@%@%@", song.title, @" - ", song.artist,nil];
+	cell.textLabel.text = cellLabel;
     cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
 	cell.textLabel.textColor=[UIColor whiteColor];
     

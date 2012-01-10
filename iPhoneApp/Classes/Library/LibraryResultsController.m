@@ -7,6 +7,8 @@
 //
 
 #import "LibraryResultsController.h"
+#import "UDJConnection.h"
+#import "EventList.h"
 
 @implementation LibraryResultsController
 
@@ -36,7 +38,7 @@
 
 // addSong: add the selected song to the event playlist
 -(void)addSong{
-    
+    [[UDJConnection sharedConnection] sendAddSongRequest:selectedSong eventId:[EventList sharedEventList].currentEvent.eventId];
 }
 
 #pragma mark - View lifecycle

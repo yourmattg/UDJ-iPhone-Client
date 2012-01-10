@@ -15,6 +15,7 @@
 #import "UDJPlaylist.h"
 #import "LibraryResultsController.h"
 #import "UDJSongList.h"
+#import "UDJSongAdd.h"
 
 static UDJConnection* sharedUDJConnection = nil;
 
@@ -41,6 +42,7 @@ static UDJConnection* sharedUDJConnection = nil;
     acceptEvents=false;
     client = [RKClient clientWithBaseURL:prefix];
     currentRequests = [NSMutableDictionary new];
+    clientRequestcount = 1;
 }
 
 - (void) setCurrentController:(id)controller{
@@ -320,16 +322,16 @@ static UDJConnection* sharedUDJConnection = nil;
 
 -(void)sendAddSongRequest:(UDJSong *)song eventId:(NSInteger)eventId{
     //create url [PUT] /udj/events/event_id/active_playlist/songs
-    /*NSString* urlString = client.baseURL;
-    urlString = [urlString stringByAppendingFormat:@"%@%d%@%@%@%d",@"/events/",eventId,@"/available_music?query=",param,@"&max_results=",maxResults];
-    // create request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
-    request.queue = client.requestQueue;
-    request.method = RKRequestMethodGET;
-    request.additionalHTTPHeaders = headers;
-    //send request
-    acceptLibSearch=YES;
-    [request send]; */   
+    NSString* urlString = [NSString stringWithFormat:@"%@%d%@",@"/events/",eventId,@"/active_playlist/songs"];
+    // set up an object manager and UDJSongAdd object
+    UDJSongAdd* songAdd = [UDJSongAdd new];
+    songAdd.librarySongId = song.librarySongId;
+    songAdd.clientRequestId = clientRequestcount++; // increment request count
+    RKObjectManager* manager = [RKObjectManager sharedManager];
+    [[manager router] routeClass:[UDJSongAdd class] toResourcePath:urlString];
+    
+    NSLog(urlString);
+   [manager putObject:songAdd delegate:nil]; // warning: may need to change delegate
 }
 
 

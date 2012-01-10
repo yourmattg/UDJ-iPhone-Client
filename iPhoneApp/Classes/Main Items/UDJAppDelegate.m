@@ -13,6 +13,7 @@
 #import "EventList.h"
 #import "UDJPlaylist.h"
 #import "UDJSongAdd.h"
+#import "UDJSongList.h"
 
 @implementation UDJAppDelegate
 
@@ -37,10 +38,17 @@
 
 // initObjectMappings: used for UDJSong
 -(void)initObjectMappings{
+    RKObjectManager* manager = [RKObjectManager objectManagerWithBaseURL:self.baseUrl];
+    manager.serializationMIMEType = RKMIMETypeJSON;
     // mapping for UDJSongAdd class to a NSMutableDictionary
-    RKObjectMapping* udjSongAddMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
-    [udjSongAddMapping mapKeyPathsToAttributes:@"lib_song",@"librarySongId",@"client_request_id",@"clientRequestId", nil];
-    [[RKObjectManager sharedManager].mappingProvider setSerializationMapping:udjSongAddMapping forClass:[UDJSongAdd class]];
+    RKObjectMapping* udjSongAddSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
+    [udjSongAddSerializationMapping mapKeyPathsToAttributes:@"librarySongId",@"lib_id",@"clientRequestId",@"client_request_id", nil];
+    [manager.mappingProvider setSerializationMapping:udjSongAddSerializationMapping forClass:[UDJSongAdd class]];
+    
+    // mapping for UDJSongList
+    RKObjectMapping* udjSongListMapping = [RKObjectMapping mappingForClass:[UDJSongList class]];
+    [udjSongListMapping mapKeyPath:@"array" toAttribute:@"currentList"];
+    [manager.mappingProvider setSerializationMapping:[udjSongListMapping inverseMapping] forClass:[NSManagedObject class]];
 }
 
 #pragma mark -
