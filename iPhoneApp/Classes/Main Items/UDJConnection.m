@@ -337,10 +337,11 @@ static UDJConnection* sharedUDJConnection = nil;
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
     request.queue = client.requestQueue;
     request.method = RKRequestMethodPUT;
-    request.additionalHTTPHeaders = headers;
+    NSMutableDictionary* headersWithContentType = [NSMutableDictionary dictionaryWithDictionary:self.headers];
+    [headersWithContentType setObject:@"text/json" forKey:@"Content-Type"];
+    request.additionalHTTPHeaders = headersWithContentType;
     request.HTTPBodyString = songAsJSONArray;
-    NSLog(songAsJSONArray);
-    [request send];
+    [request send]; 
     
     [songAddDictionary release];
 }
@@ -376,7 +377,11 @@ static UDJConnection* sharedUDJConnection = nil;
             }
             else if([response isOK]) [self handleVoteResponse:response];
         }*/
+        
 
+    } else if([request isPUT]){
+       // do something (probably with a newly added song)
+        
     } else if([request isDELETE]) {
         
         // Handling DELETE /missing_resource.txt
