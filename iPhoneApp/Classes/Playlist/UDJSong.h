@@ -22,7 +22,7 @@
     NSString* adderName;
 }
 
-+ (id)songFromDictionary:(NSDictionary*)songDict;
++ (id)songFromDictionary:(NSDictionary*)songDict isLibraryEntry:(BOOL)isLibEntry;
 
 @property(nonatomic) NSInteger songId;
 @property(nonatomic) NSInteger librarySongId;

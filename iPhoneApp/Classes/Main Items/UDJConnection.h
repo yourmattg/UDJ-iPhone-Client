@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <RestKit/RestKit.h>
 #import <RestKit/RKJSONParserJSONKit.h>
+#import <RestKit/JSONKit.h>
 #import "PlaylistViewController.h"
 
 @interface UDJConnection : NSObject<RKRequestDelegate>{
@@ -18,7 +19,7 @@
     BOOL acceptPlaylist;
     BOOL acceptLibSearch;
     PlaylistViewController* playlistView;
-    NSInteger clientRequestcount; // used to keep a unique client request id
+    NSInteger clientRequestCount; // used to keep a unique client request id
     
     @private
     NSString* serverPrefix; // without spaces: http://0.0.0.0:4897/udj

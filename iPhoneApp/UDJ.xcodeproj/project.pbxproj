@@ -40,6 +40,7 @@
 		A39AF6941497D09A006ADF19 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF6931497D09A006ADF19 /* SystemConfiguration.framework */; };
 		A39AF6961497D0A4006ADF19 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF6951497D0A4006ADF19 /* libxml2.dylib */; };
 		A3CF872F14B8F8F000A9F829 /* UDJSongList.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CF872E14B8F8F000A9F829 /* UDJSongList.m */; };
+		A3DAD57D14BD253600688CE0 /* UDJMappableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DAD57C14BD253600688CE0 /* UDJMappableArray.m */; };
 		A3F58C5C14A15F0B00756F7D /* AuthenticateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58C5A14A15F0B00756F7D /* AuthenticateViewController.m */; };
 		A3F58C5D14A15F0B00756F7D /* AuthenticateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F58C5B14A15F0B00756F7D /* AuthenticateViewController.xib */; };
 		A3F9C047142EAA5C0016717B /* default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3F9C046142EAA5C0016717B /* default.jpg */; };
@@ -137,6 +138,8 @@
 		A39AF6951497D0A4006ADF19 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		A3CF872D14B8F8F000A9F829 /* UDJSongList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJSongList.h; sourceTree = "<group>"; };
 		A3CF872E14B8F8F000A9F829 /* UDJSongList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJSongList.m; sourceTree = "<group>"; };
+		A3DAD57B14BD253600688CE0 /* UDJMappableArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJMappableArray.h; sourceTree = "<group>"; };
+		A3DAD57C14BD253600688CE0 /* UDJMappableArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJMappableArray.m; sourceTree = "<group>"; };
 		A3F58C5914A15F0B00756F7D /* AuthenticateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticateViewController.h; sourceTree = "<group>"; };
 		A3F58C5A14A15F0B00756F7D /* AuthenticateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticateViewController.m; sourceTree = "<group>"; };
 		A3F58C5B14A15F0B00756F7D /* AuthenticateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuthenticateViewController.xib; sourceTree = "<group>"; };
@@ -331,6 +334,8 @@
 				1D3623250D0F684500981E51 /* UDJAppDelegate.m */,
 				A39AF66E1497CB74006ADF19 /* UDJConnection.h */,
 				A39AF66F1497CB74006ADF19 /* UDJConnection.m */,
+				A3DAD57B14BD253600688CE0 /* UDJMappableArray.h */,
+				A3DAD57C14BD253600688CE0 /* UDJMappableArray.m */,
 			);
 			path = "Main Items";
 			sourceTree = "<group>";
@@ -465,6 +470,7 @@
 				A34FB30314B8EB5F00BE5CE2 /* LibraryResultsController.m in Sources */,
 				A3CF872F14B8F8F000A9F829 /* UDJSongList.m in Sources */,
 				A36674C314BA38720038CB4F /* UDJSongAdd.m in Sources */,
+				A3DAD57D14BD253600688CE0 /* UDJMappableArray.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

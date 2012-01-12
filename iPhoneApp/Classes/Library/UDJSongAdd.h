@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 // UDJSongAdd is used when adding songs to the playlist, it is intended only to be serialized and sent in a request
+// warning: this class might be obsolete
 @interface UDJSongAdd : NSObject{
     NSInteger librarySongId;
     NSInteger clientRequestId;

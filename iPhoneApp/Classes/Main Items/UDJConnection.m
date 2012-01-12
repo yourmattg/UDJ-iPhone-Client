@@ -16,6 +16,7 @@
 #import "LibraryResultsController.h"
 #import "UDJSongList.h"
 #import "UDJSongAdd.h"
+#import "UDJMappableArray.h"
 
 static UDJConnection* sharedUDJConnection = nil;
 
@@ -42,7 +43,7 @@ static UDJConnection* sharedUDJConnection = nil;
     acceptEvents=false;
     client = [RKClient clientWithBaseURL:prefix];
     currentRequests = [NSMutableDictionary new];
-    clientRequestcount = 1;
+    clientRequestCount = 1;
 }
 
 - (void) setCurrentController:(id)controller{
@@ -236,13 +237,13 @@ static UDJConnection* sharedUDJConnection = nil;
     RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
     // response dict: holds current song and array of songs
     NSDictionary* responseDict = [parser objectFromString:[response bodyAsString] error:nil];
-    UDJSong* currentSong = [UDJSong songFromDictionary:[responseDict objectForKey:@"current_song"]];
+    UDJSong* currentSong = [UDJSong songFromDictionary:[responseDict objectForKey:@"current_song"] isLibraryEntry:NO];
     
     // the array holding the songs on the playlist
     NSArray* songArray = [responseDict objectForKey:@"active_playlist"];
     for(int i=0; i<[songArray count]; i++){
         NSDictionary* songDict = [songArray objectAtIndex:i];
-        UDJSong* song = [UDJSong songFromDictionary:songDict];
+        UDJSong* song = [UDJSong songFromDictionary:songDict isLibraryEntry:NO];
         [playlist addObject:song];
         
         NSNumber* songIdAsNumber = [NSNumber numberWithInteger:song.songId];
@@ -306,7 +307,7 @@ static UDJConnection* sharedUDJConnection = nil;
     NSArray* songArray = [parser objectFromString:[response bodyAsString] error:nil];
     for(int i=0; i<[songArray count]; i++){
         NSDictionary* songDict = [songArray objectAtIndex:i];
-        UDJSong* song = [UDJSong songFromDictionary:songDict];
+        UDJSong* song = [UDJSong songFromDictionary:songDict isLibraryEntry:YES];
         [tempList addSong:song];
     }
     LibraryResultsController* libraryResultsController = [[LibraryResultsController alloc] initWithNibName:@"LibraryResultsController" bundle:[NSBundle mainBundle]];
@@ -322,16 +323,26 @@ static UDJConnection* sharedUDJConnection = nil;
 
 -(void)sendAddSongRequest:(UDJSong *)song eventId:(NSInteger)eventId{
     //create url [PUT] /udj/events/event_id/active_playlist/songs
-    NSString* urlString = [NSString stringWithFormat:@"%@%d%@",@"/events/",eventId,@"/active_playlist/songs"];
-    // set up an object manager and UDJSongAdd object
-    UDJSongAdd* songAdd = [UDJSongAdd new];
-    songAdd.librarySongId = song.librarySongId;
-    songAdd.clientRequestId = clientRequestcount++; // increment request count
-    RKObjectManager* manager = [RKObjectManager sharedManager];
-    [[manager router] routeClass:[UDJSongAdd class] toResourcePath:urlString];
+    NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@",client.baseURL,@"/events/",eventId,@"/active_playlist/songs"];
+    // make a dictionary for the song request, with a "lib_id" and "client_request_id"
+    NSMutableDictionary* songAddDictionary = [NSMutableDictionary new];
+    NSNumber* clientRequestIdAsNumber = [NSNumber numberWithInt:clientRequestCount++]; //increment request count
+    NSNumber* libraryIdAsNumber = [NSNumber numberWithInt:song.librarySongId];
+    [songAddDictionary setObject:clientRequestIdAsNumber forKey:@"client_request_id"];
+    [songAddDictionary setObject:libraryIdAsNumber forKey:@"lib_id"];
+    // then make an array to hold this song dictionary, convert it to JSON string
+    NSMutableArray* arrayToSend = [NSMutableArray arrayWithObject:songAddDictionary];;
+    NSString* songAsJSONArray = [arrayToSend JSONString];
+    // set up, send request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
+    request.queue = client.requestQueue;
+    request.method = RKRequestMethodPUT;
+    request.additionalHTTPHeaders = headers;
+    request.HTTPBodyString = songAsJSONArray;
+    NSLog(songAsJSONArray);
+    [request send];
     
-    NSLog(urlString);
-   [manager putObject:songAdd delegate:nil]; // warning: may need to change delegate
+    [songAddDictionary release];
 }
 
 

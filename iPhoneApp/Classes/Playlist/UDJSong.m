@@ -12,12 +12,13 @@
 
 @synthesize songId, librarySongId, title, artist, album, duration, downVotes, upVotes, timeAdded, adderId, adderName;
 
-+ (id) songFromDictionary:(NSDictionary *)songDict{
++ (id) songFromDictionary:(NSDictionary *)songDict isLibraryEntry:(BOOL)isLibEntry{
     if([songDict count]==0) return nil;
     UDJSong* song = [UDJSong new];
     song.title = [songDict objectForKey:@"title"];
     song.songId = [[songDict objectForKey:@"id"] intValue];
-    song.librarySongId = [[songDict objectForKey:@"lib_song_id"] intValue];
+    if(isLibEntry) song.librarySongId = [[songDict objectForKey:@"id"] intValue];
+    else song.librarySongId = [[songDict objectForKey:@"lib_song_id"] intValue];
     song.artist = [songDict objectForKey:@"artist"];
     song.album = [songDict objectForKey:@"album"];
     song.duration = [[songDict objectForKey:@"duration"] intValue];
