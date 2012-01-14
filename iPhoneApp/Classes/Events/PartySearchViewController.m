@@ -8,7 +8,7 @@
 
 #import "PartySearchViewController.h"
 #import "SearchingViewController.h"
-#import "EventList.h"
+#import "UDJEventList.h"
 
 @implementation PartySearchViewController
 @synthesize searchButton, searchField, findNearbyButton;
@@ -26,8 +26,8 @@
         [navigationController popViewControllerAnimated:NO];
         SearchingViewController* searchingViewController = [[SearchingViewController alloc] initWithNibName:@"SearchingViewController" bundle:[NSBundle mainBundle]];
         [navigationController pushViewController:searchingViewController animated:NO];
-        if(sender==searchButton) [[EventList sharedEventList] getEventsByName:searchParam];
-        else [[EventList sharedEventList] getNearbyEvents];
+        if(sender==searchButton) [[UDJEventList sharedEventList] getEventsByName:searchParam];
+        else [[UDJEventList sharedEventList] getNearbyEvents];
         [navigationController popViewControllerAnimated:YES];
     }
 }

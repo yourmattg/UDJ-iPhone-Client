@@ -6,10 +6,10 @@
 //  Copyright (c) 2011 University of Illinois at Urbana-Champaign. All rights reserved.
 //
 
-#import "EventList.h"
+#import "UDJEventList.h"
 #import "UDJConnection.h"
 
-@implementation EventList
+@implementation UDJEventList
 
 @synthesize currentList, lastSearchParam, currentEvent;
 
@@ -25,10 +25,10 @@
 
 // access the EventList anywhere using [EventList sharedEventList]
 #pragma mark Singleton methods
-static EventList* _sharedEventList = nil;
+static UDJEventList* _sharedEventList = nil;
 
-+(EventList*)sharedEventList{
-	@synchronized([EventList class]){
++(UDJEventList*)sharedEventList{
+	@synchronized([UDJEventList class]){
 		if (!_sharedEventList)
 			[[self alloc] init];        
 		return _sharedEventList;
@@ -37,7 +37,7 @@ static EventList* _sharedEventList = nil;
 }
 
 +(id)alloc{
-	@synchronized([EventList class]){
+	@synchronized([UDJEventList class]){
 		NSAssert(_sharedEventList == nil, @"Attempted to allocate a second instance of a singleton.");
 		_sharedEventList = [super alloc];
 		return _sharedEventList;

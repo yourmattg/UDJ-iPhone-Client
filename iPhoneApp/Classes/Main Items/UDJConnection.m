@@ -22,7 +22,7 @@ static UDJConnection* sharedUDJConnection = nil;
 
 @implementation UDJConnection
 
-@synthesize serverPrefix, ticket, client, userID, headers, playlistView, currentRequests;
+@synthesize serverPrefix, ticket, client, userID, headers, playlistView, currentRequests, acceptLibSearch, navigationController;
 
 // **************************** General UDJConnection Methods ********************************
 
@@ -86,7 +86,7 @@ static UDJConnection* sharedUDJConnection = nil;
 }
 
 // denyAuth: called when username/pass is incorrect
-- (void)denyAuth{
+- (void)denyAuth:(RKResponse*)response{
     acceptAuth = false;
     [currentController.navigationController popViewControllerAnimated:YES];
     UIAlertView* authNotification = [UIAlertView alloc];
@@ -154,7 +154,7 @@ static UDJConnection* sharedUDJConnection = nil;
         UDJEvent* event = [UDJEvent eventFromDictionary:eventDict];
         [cList addObject:event];
     }
-    [EventList sharedEventList].currentList = cList;
+    [UDJEventList sharedEventList].currentList = cList;
     acceptEvents=NO;
     [cList release];
     [parser release];
@@ -169,7 +169,7 @@ static UDJConnection* sharedUDJConnection = nil;
     //create url
     NSString* urlString = client.baseURL;
     urlString = [urlString stringByAppendingString:@"/events/"];
-    urlString = [urlString stringByAppendingFormat:@"%d",[EventList sharedEventList].currentEvent.eventId];
+    urlString = [urlString stringByAppendingFormat:@"%d",[UDJEventList sharedEventList].currentEvent.eventId];
     urlString = [urlString stringByAppendingString:@"/users/"];
     urlString = [urlString stringByAppendingFormat:@"%i", [userID intValue]];
     //set up request
@@ -178,6 +178,12 @@ static UDJConnection* sharedUDJConnection = nil;
     request.additionalHTTPHeaders = headers;
     //send request, handle results
     RKResponse* response = [request sendSynchronously];
+    // if user is already in another event, set currentEvent to that event
+    if(response.statusCode==409){
+        RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
+        NSDictionary* eventDict = [parser objectFromString:[response bodyAsString] error:nil];
+        [UDJEventList sharedEventList].currentEvent = [UDJEvent eventFromDictionary:eventDict];
+    }
     return response.statusCode;
 }
 
@@ -185,7 +191,7 @@ static UDJConnection* sharedUDJConnection = nil;
     //create url
     NSString* urlString = client.baseURL;
     urlString = [urlString stringByAppendingString:@"/events/"];
-    urlString = [urlString stringByAppendingFormat:@"%d",[EventList sharedEventList].currentEvent.eventId];
+    urlString = [urlString stringByAppendingFormat:@"%d",[UDJEventList sharedEventList].currentEvent.eventId];
     urlString = [urlString stringByAppendingString:@"/users/"];
     urlString = [urlString stringByAppendingFormat:@"%d", [userID intValue]];
     //set up request
@@ -311,9 +317,8 @@ static UDJConnection* sharedUDJConnection = nil;
         [tempList addSong:song];
     }
     LibraryResultsController* libraryResultsController = [[LibraryResultsController alloc] initWithNibName:@"LibraryResultsController" bundle:[NSBundle mainBundle]];
-    UINavigationController* navigationController = currentController.navigationController;
-    [navigationController popViewControllerAnimated:NO];
-    [navigationController pushViewController:libraryResultsController animated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
+    [self.navigationController pushViewController:libraryResultsController animated:YES];
     // set tempList to be the tableList of the libsearch results screen
     libraryResultsController.resultList = tempList;
     [libraryResultsController release];
@@ -346,13 +351,41 @@ static UDJConnection* sharedUDJConnection = nil;
     [songAddDictionary release];
 }
 
+// **************************** Errors ********************************
+
+// resetAcceptResponses: set acceptAuth, acceptEvents, etc. to NO
+-(void)resetAcceptResponses{
+    acceptAuth=NO;
+    acceptEvents=NO;
+    acceptPlaylist=NO;
+    acceptLibSearch=NO;
+}
+
+// resetToEventView: return user to the event screen and reset all variables associated with the event
+-(void)resetToEventView{
+    UIAlertView* notification = [UIAlertView alloc];
+    NSString* msg = [NSString stringWithFormat:@"%@%@", [UDJEventList sharedEventList].currentEvent.name, @"has ended. You will be returned to the event search screen.", nil];
+    [notification initWithTitle:@"Event Ended" message: msg delegate: nil cancelButtonTitle:@"Back" otherButtonTitles:nil];
+    [notification show];
+    [notification release];
+    while(![self.navigationController.topViewController isMemberOfClass:[PartyListViewController class]]){
+        [self.navigationController popViewControllerAnimated:NO];
+    }
+    [self resetAcceptResponses];
+    // dont need to reset UDJEventList, UDJPlaylist
+}
+
 
 // **************************** General Response Handling ********************************
 
 // handles responses from the server
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
     NSLog(@"Got a response from the server");
-    if ([request isGET]) {
+    // check if the event has ended
+    if(response.statusCode == 410){
+        [self resetToEventView];
+    }
+    else if ([request isGET]) {
         // playlist
         if(acceptPlaylist){
             [self handlePlaylistResponse:response];
@@ -368,7 +401,7 @@ static UDJConnection* sharedUDJConnection = nil;
             // valid credentials
             if([response isOK]) [self handleAuth:response];
             // invalid credentials
-            else [self denyAuth];
+            else [self denyAuth:response];
         }/* was causing error
         if([currentRequests objectForKey:request]==@"voteRequest"){
             if(response.statusCode==408){

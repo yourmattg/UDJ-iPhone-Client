@@ -10,14 +10,14 @@
 #import "UDJConnection.h"
 #import "UDJEvent.h"
 
-@interface EventList : NSObject{
+@interface UDJEventList : NSObject{
     
     NSMutableArray* currentList; // holds the last event list we loaded
     NSString* lastSearchParam; // the last string we tried searching
     UDJEvent* currentEvent; // the event id the client is logged in/trying to connect to
 }
 
-+ (EventList*)sharedEventList;
++ (UDJEventList*)sharedEventList;
 - (void)getNearbyEvents; // put the nearby events into templist, then set it to currentList
 - (void)getEventsByName:(NSString*)name; // search for events by name and put them in table
 

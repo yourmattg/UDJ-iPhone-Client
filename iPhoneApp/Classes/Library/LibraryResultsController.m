@@ -8,7 +8,7 @@
 
 #import "LibraryResultsController.h"
 #import "UDJConnection.h"
-#import "EventList.h"
+#import "UDJEventList.h"
 
 @implementation LibraryResultsController
 
@@ -39,7 +39,7 @@
 // addSong: add the selected song to the event playlist
 -(void)addSong{
     UIAlertView* notification = [[UIAlertView alloc] initWithTitle:@"Song Add" message:@"Thanks! Your song will be added to the playlist shortly!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [[UDJConnection sharedConnection] sendAddSongRequest:selectedSong eventId:[EventList sharedEventList].currentEvent.eventId];
+    [[UDJConnection sharedConnection] sendAddSongRequest:selectedSong eventId:[UDJEventList sharedEventList].currentEvent.eventId];
     [notification show];
     [notification release];
 }

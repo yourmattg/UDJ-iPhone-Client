@@ -9,7 +9,7 @@
 #import "PartyLoginViewController.h"
 #import	"PartyListViewController.h"
 #import "PlaylistViewController.h"
-#import "EventList.h"
+#import "UDJEventList.h"
 
 
 @implementation PartyLoginViewController
@@ -38,7 +38,7 @@
  // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
  - (void)viewDidLoad {
      [super viewDidLoad];
-     eventNameLabel.text = [EventList sharedEventList].currentEvent.name;
+     eventNameLabel.text = [UDJEventList sharedEventList].currentEvent.name;
  }
  
 
@@ -69,7 +69,7 @@
 }
 
 - (void) viewDidAppear:(BOOL)animated{
-    eventNameLabel.text = [EventList sharedEventList].currentEvent.name;
+    eventNameLabel.text = [UDJEventList sharedEventList].currentEvent.name;
 }
 
 - (IBAction) OnButtonClick:(id) sender {
