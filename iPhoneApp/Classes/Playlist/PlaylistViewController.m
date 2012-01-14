@@ -55,6 +55,11 @@
         [notification show];
         [notification release];
     }
+    else if(selectedSong == playlist.currentSong){
+        [notification initWithTitle:@"Vote Error" message:@"You can't vote for a song that's already playing!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [notification show];
+        [notification release];
+    }
     else{
         NSNumber* songIdAsNumber = [NSNumber numberWithInteger:selectedSong.songId];
         // haven't voted for this song yet
@@ -206,6 +211,8 @@
     NSInteger rowNumber = indexPath.row;
 	if(rowNumber==0) song = [UDJPlaylist sharedUDJPlaylist].currentSong;
     else song = [playlist songAtIndex:rowNumber-1];
+    
+    NSLog([NSString stringWithFormat:@"%d",song.songId]);
     
     NSString* cellLabel = [NSString new];
     if(rowNumber==0) cellLabel = @"Playing: ";
