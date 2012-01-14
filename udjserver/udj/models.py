@@ -33,7 +33,7 @@ class EventEndTime(models.Model):
         'End time was inserted for an event that is not yet over')
 
   def __unicode__(self):
-    return self.event.name + " ended at " + time_ended
+    return self.event.name + " ended at " + str(self.time_ended)
 
 class EventPassword(models.Model):
   event = models.ForeignKey(Event, unique=True)
@@ -44,8 +44,8 @@ class EventPassword(models.Model):
 
 class EventLocation(models.Model):
   event = models.ForeignKey(Event, unique=True)
-  longitude = models.FloatField()
   latitude = models.FloatField()
+  longitude = models.FloatField()
 
   #TODO put some sort of validation to make sure that long and lat are valid
 

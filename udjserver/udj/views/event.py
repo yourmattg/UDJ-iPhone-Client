@@ -37,7 +37,9 @@ from udj.JSONCodecs import getEventDictionary
 from udj.JSONCodecs import getJSONForEvents
 from udj.JSONCodecs import getJSONForAvailableSongs
 from udj.JSONCodecs import getJSONForEventGoers
+from udj.JSONCodecs import getJSONForEventsByLocation
 from udj.JSONCodecs import getActivePlaylistEntryDictionary
+from udj.utils import getJSONResponse
 
 
 def getEventHost(event_id):
@@ -52,16 +54,18 @@ def getEvents(request):
     name__icontains=request.GET['name'],
     state=u'AC')
   events_json = getJSONForEvents(events)
-  return HttpResponse(events_json)
+  return getJSONResponse(events_json)
   
 
 @NeedsAuth
 @AcceptsMethods('GET')
 def getNearbyEvents(request, latitude, longitude):
-  #TODO actually have this only return nearby events
-  events = Event.objects.filter(state=u'AC')
-  events_json = getJSONForEvents(events)
-  return HttpResponse(events_json)  
+  #TODO This is super ineeficient. We need to switch over to a geo database
+  locations = EventLocation.objects.filter(event__state=u'AC')
+  events_json = getJSONForEventsByLocation(
+    latitude, longitude, locations)
+  return getJSONResponse(events_json)  
+  
 
 @NeedsAuth
 @AcceptsMethods('PUT')
@@ -91,7 +95,7 @@ def createEvent(request):
   
   hostInsert = EventGoer(user=user, event=newEvent)
   hostInsert.save()
-  return HttpResponse('{"event_id" : ' + str(newEvent.id) + '}', status=201)
+  return getJSONResponse('{"event_id" : ' + str(newEvent.id) + '}', status=201)
 
 #Should be able to make only one call to the events table to ensure it:
 # 1. Exsits
@@ -127,8 +131,12 @@ def joinOrLeaveEvent(request, event_id, user_id):
 
 @IsntInOtherEvent
 def joinEvent(request, event_id, user_id):
-  joining_user = User.objects.get(pk=user_id)
+
   event_to_join = Event.objects.get(pk=event_id)
+  if event_to_join.state == u'FN':
+    return HttpResponse(status=410)
+
+  joining_user = User.objects.get(pk=user_id)
   event_goer , created = EventGoer.objects.get_or_create(
     user=joining_user, event=event_to_join)
   
@@ -139,12 +147,17 @@ def joinEvent(request, event_id, user_id):
 
   return HttpResponse("joined event", status=201)
 
-@InParty
 def leaveEvent(request, event_id, user_id):
-  event_goer = EventGoer.objects.get(event__id=event_id, user__id=user_id)
-  event_goer.state=u'LE';
-  event_goer.save()
-  return HttpResponse("left event")
+  requestingUser = getUserForTicket(request)
+  try:
+    event_goer = EventGoer.objects.get(
+      user=requestingUser, event__id=event_id)
+    event_goer.state=u'LE';
+    event_goer.save()
+    return HttpResponse("left event")
+  except ObjectDoesNotExist:
+    return HttpResponseForbidden(
+      "You must be logged into the party to do that")
 
 @NeedsAuth
 @AcceptsMethods(['GET', 'PUT'])
@@ -169,7 +182,7 @@ def getAvailableMusic(request, event_id):
   if(request.GET.__contains__('max_results')):
     available_songs = available_songs[:request.GET['max_results']]
     
-  return HttpResponse(getJSONForAvailableSongs(available_songs))
+  return getJSONResponse(getJSONForAvailableSongs(available_songs))
 
 @NeedsAuth
 @InParty
@@ -178,7 +191,7 @@ def getRandomMusic(request, event_id):
   rand_limit = request.GET.get('max_randoms',20)
   randomSongs = AvailableSong.objects.filter(event__id=event_id)
   randomSongs = randomSongs.order_by('?')[:rand_limit]
-  return HttpResponse(getJSONForAvailableSongs(randomSongs))
+  return getJSONResponse(getJSONForAvailableSongs(randomSongs))
 
 @IsEventHost
 @NeedsJSON
@@ -193,7 +206,7 @@ def addToAvailableMusic(request, event_id):
       event=event, song=songToAdd)
     added.append(song_id)
 
-  return HttpResponse(json.dumps(added), status=201)
+  return getJSONResponse(json.dumps(added), status=201)
 
 @NeedsAuth
 @AcceptsMethods('DELETE')
@@ -245,5 +258,5 @@ def setCurrentSong(request, event_id):
 @InParty
 def getEventGoers(request, event_id):
   eventGoers = EventGoer.objects.filter(event__id=event_id)
-  return HttpResponse(getJSONForEventGoers(eventGoers))
+  return getJSONResponse(getJSONForEventGoers(eventGoers))
 

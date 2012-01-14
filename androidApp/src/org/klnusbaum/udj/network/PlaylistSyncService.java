@@ -57,6 +57,7 @@ import org.klnusbaum.udj.UDJEventProvider;
 import org.klnusbaum.udj.EventActivity;
 import org.klnusbaum.udj.EventSelectorActivity;
 import org.klnusbaum.udj.R;
+import org.klnusbaum.udj.exceptions.EventOverException;
 
 
 /**
@@ -86,7 +87,7 @@ public class PlaylistSyncService extends IntentService{
       (Account)intent.getParcelableExtra(Constants.ACCOUNT_EXTRA);
     //TODO handle error if no account provider
     long eventId = Long.valueOf(AccountManager.get(this).getUserData(
-      account, Constants.EVENT_ID_DATA));
+      account, Constants.LAST_EVENT_ID_DATA));
     //TODO hanle error if eventId is bad
     if(intent.getAction().equals(Intent.ACTION_INSERT)){
       if(intent.getData().equals(UDJEventProvider.PLAYLIST_ADD_REQUEST_URI)){
@@ -135,6 +136,10 @@ public class PlaylistSyncService extends IntentService{
     }
     catch(OperationApplicationException e){
       Log.e(TAG, "Operation Application exception when retreiving playist");
+    }
+    catch(EventOverException e){
+      Log.e(TAG, "Event over exceptoin when retreiving playlist");
+      handleEventOver(account);
     }
     //TODO This point of the app seems very dangerous as there are so many
     // exceptions that could occuer. Need to pay special attention to this.
@@ -205,6 +210,10 @@ public class PlaylistSyncService extends IntentService{
       alertAddSongException(account);
       Log.e(TAG, "Operation Application exception when adding to playist");
     }
+    catch(EventOverException e){
+      Log.e(TAG, "Event over exceptoin when retreiving playlist");
+      handleEventOver(account);
+    }
     finally{
       clearAddNotification();
     }
@@ -247,6 +256,10 @@ public class PlaylistSyncService extends IntentService{
     }
     catch(OperationCanceledException e){
       Log.e(TAG, "Op Canceled exception when retreiving playist");
+    }
+    catch(EventOverException e){
+      Log.e(TAG, "Event over exceptoin when retreiving playlist");
+      handleEventOver(account);
     }
     finally{
       requestsCursor.close();
@@ -322,5 +335,15 @@ public class PlaylistSyncService extends IntentService{
     nm.notify(SONG_ADDED_ID, addNotification);
 
   }
+
+  private void handleEventOver(Account account){
+    Log.d(TAG, "Handling event over exception");
+    AccountManager am = AccountManager.get(this);
+    am.setUserData(account, Constants.IN_EVENT_DATA, 
+      String.valueOf(Constants.NOT_IN_EVENT_FLAG));
+    Intent eventEndedBroadcast = new Intent(Constants.EVENT_ENDED_ACTION);
+    sendBroadcast(eventEndedBroadcast);
+  }
+
 
 }

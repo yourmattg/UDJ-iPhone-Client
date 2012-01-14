@@ -21,6 +21,7 @@ package org.klnusbaum.udj;
 import android.app.Activity;
 import android.os.Bundle;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.widget.TabHost;
 import android.widget.Toast;
 import android.view.Menu;
@@ -36,12 +37,12 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentResolver;
 import android.util.Log;
-import android.app.Dialog;
 import android.app.SearchManager;
 import android.net.Uri;
 import android.database.Cursor;
 import android.view.Window;
 import android.os.Build;
+import android.content.BroadcastReceiver;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -63,28 +64,32 @@ import org.klnusbaum.udj.network.EventCommService;
 /**
  * The main activity display class.
  */
-public class EventActivity extends FragmentActivity
+public class EventActivity extends EventEndedListenerActivity
   implements LoaderManager.LoaderCallbacks<Cursor>
 {
-
   private static final String QUIT_DIALOG_TAG = "quit_dialog";
   private static final int CURRENT_SONG_LOADER_ID = 1;
   private static final String TAG = "EventActivity";
 
-
-  private Account account;
   private TextView currentSong;
 
   @Override
   protected void onCreate(Bundle savedInstanceState){
     super.onCreate(savedInstanceState);
+    account = (Account)getIntent().getParcelableExtra(Constants.ACCOUNT_EXTRA);
+    if(account == null){
+      //TODO we should never get here
+      Log.e(TAG, "Had a null account in the EventActivity");
+      setResult(Activity.RESULT_CANCELED);
+      finish();
+      return;
+    }
     if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){ 
       requestWindowFeature(Window.FEATURE_NO_TITLE);
     }
     setContentView(R.layout.event);
     currentSong = (TextView)findViewById(R.id.current_song_title);
     setCurrentSongDisplay(null);
-    account = (Account)getIntent().getParcelableExtra(Constants.ACCOUNT_EXTRA);
     //TODO hanle if no event
     getPlaylistFromServer();    
     getSupportLoaderManager().initLoader(CURRENT_SONG_LOADER_ID, null, this);
@@ -166,7 +171,7 @@ public class EventActivity extends FragmentActivity
     if(Intent.ACTION_SEARCH.equals(intent.getAction())){
       intent.setClass(this, AvailableMusicSearchActivity.class);
       intent.putExtra(Constants.ACCOUNT_EXTRA, account);
-      startActivity(intent);
+      startActivityForResult(intent, 0);
     }
   }
 
@@ -218,4 +223,3 @@ public class EventActivity extends FragmentActivity
     }
   }
 }
-
