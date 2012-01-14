@@ -35,6 +35,13 @@
     }
 }
 
+// rejoinEvent: rejoin the event the user was in
+- (void)rejoinEvent{
+    PlaylistViewController* playlistViewController = [[PlaylistViewController alloc] initWithNibName:@"PlaylistViewController" bundle:[NSBundle mainBundle]];
+    [self.navigationController pushViewController:playlistViewController animated:YES];
+    [playlistViewController release];
+}
+
 // handle button clicks from alertview (pop up message boxes)
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -45,7 +52,7 @@
         }
         // go back to the current event
         if(buttonIndex==1){
-            NSLog(@"Rejoin");
+            [self rejoinEvent];
         }
     }
 }
