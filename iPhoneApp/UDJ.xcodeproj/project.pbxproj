@@ -125,7 +125,7 @@
 		A36D2CC914A818130087E992 /* SearchingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchingViewController.h; sourceTree = "<group>"; };
 		A36D2CCA14A818130087E992 /* SearchingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchingViewController.m; sourceTree = "<group>"; };
 		A36D2CCB14A818130087E992 /* SearchingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchingViewController.xib; sourceTree = "<group>"; };
-		A374BDFF14A2EF36001A0DE0 /* UDJEventList.h */ = {isa = PBXFileReference; fileEncoding = 4; path = UDJEventList.h; sourceTree = "<group>"; };
+		A374BDFF14A2EF36001A0DE0 /* UDJEventList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJEventList.h; sourceTree = "<group>"; };
 		A374BE0014A2EF36001A0DE0 /* UDJEventList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJEventList.m; sourceTree = "<group>"; };
 		A39AF6581497C803006ADF19 /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = ../RestKit/RestKit.xcodeproj; sourceTree = "<group>"; };
 		A39AF66E1497CB74006ADF19 /* UDJConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJConnection.h; sourceTree = "<group>"; };
