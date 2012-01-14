@@ -23,6 +23,33 @@
 #pragma mark -
 #pragma mark View lifecycle
 
+// logOutOfEvent: log the client out of the current event
+- (void)logOutOfEvent{
+    NSInteger statusCode = [[UDJConnection sharedConnection] leaveEventRequest];
+    if(statusCode==200){
+        [UDJEventList sharedEventList].currentEvent=nil;
+        [[UDJPlaylist sharedUDJPlaylist] clearPlaylist];
+        UIAlertView* loggedOut = [[UIAlertView alloc] initWithTitle:@"Logout Success" message:@"You are no longer logged into any events." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [loggedOut show];
+        [loggedOut release];
+    }
+}
+
+// handle button clicks from alertview (pop up message boxes)
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(alertView.title == @"Event Conflict"){
+        // log out of the current event
+        if(buttonIndex==0){
+            [self logOutOfEvent];
+        }
+        // go back to the current event
+        if(buttonIndex==1){
+            NSLog(@"Rejoin");
+        }
+    }
+}
+
 - (void)pushSearchScreen{
     PartySearchViewController* partySearchViewController = [[PartySearchViewController alloc] initWithNibName:@"PartySearchViewController" bundle:[NSBundle mainBundle]];
     [self.navigationController pushViewController:partySearchViewController animated:YES];
@@ -195,6 +222,13 @@
             [nonExistantEvent initWithTitle:@"Join Failed" message:@"The event you are trying to join does not exist. Sorry!" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [nonExistantEvent show];
             [nonExistantEvent release];
+        }
+        else if(statusCode==409){
+            UIAlertView* alreadyInEvent = [UIAlertView alloc];
+            NSString* msg = [NSString stringWithFormat:@"%@%@%@", @"You are already logged into another event, \"", [UDJEventList sharedEventList].currentEvent.name, @"\". Would you like to log out of that event or rejoin it?", nil];
+            [alreadyInEvent initWithTitle:@"Event Conflict" message: msg delegate: self cancelButtonTitle:@"Log Out" otherButtonTitles:@"Rejoin",nil];
+            [alreadyInEvent show];
+            [alreadyInEvent release];
         }
         // TODO: add other event possibilities (see API)
     }

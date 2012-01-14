@@ -86,7 +86,7 @@ static UDJConnection* sharedUDJConnection = nil;
 }
 
 // denyAuth: called when username/pass is incorrect
-- (void)denyAuth{
+- (void)denyAuth:(RKResponse*)response{
     acceptAuth = false;
     [currentController.navigationController popViewControllerAnimated:YES];
     UIAlertView* authNotification = [UIAlertView alloc];
@@ -178,6 +178,12 @@ static UDJConnection* sharedUDJConnection = nil;
     request.additionalHTTPHeaders = headers;
     //send request, handle results
     RKResponse* response = [request sendSynchronously];
+    // if user is already in another event, set currentEvent to that event
+    if(response.statusCode==409){
+        RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
+        NSDictionary* eventDict = [parser objectFromString:[response bodyAsString] error:nil];
+        [UDJEventList sharedEventList].currentEvent = [UDJEvent eventFromDictionary:eventDict];
+    }
     return response.statusCode;
 }
 
@@ -376,7 +382,7 @@ static UDJConnection* sharedUDJConnection = nil;
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
     NSLog(@"Got a response from the server");
     // check if the event has ended
-    if(response.statusCode == 409){
+    if(response.statusCode == 410){
         [self resetToEventView];
     }
     else if ([request isGET]) {
@@ -395,7 +401,7 @@ static UDJConnection* sharedUDJConnection = nil;
             // valid credentials
             if([response isOK]) [self handleAuth:response];
             // invalid credentials
-            else [self denyAuth];
+            else [self denyAuth:response];
         }/* was causing error
         if([currentRequests objectForKey:request]==@"voteRequest"){
             if(response.statusCode==408){

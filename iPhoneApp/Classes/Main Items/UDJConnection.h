@@ -39,7 +39,7 @@
 
 - (void) authenticate:(NSString*)username password:(NSString*)pass;
 - (void) authCancel;
-- (void) denyAuth;
+- (void) denyAuth:(RKResponse*)response;
 
 - (void) sendEventSearch:(NSString*)name; // request events by name
 - (void) sendNearbyEventSearch;
