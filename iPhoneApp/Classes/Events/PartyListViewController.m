@@ -91,6 +91,7 @@
 // overridden so that party table refreshes
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [self refreshTableList];
     
 }
 
