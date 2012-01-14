@@ -17,6 +17,8 @@
 	if(sender==cancelButton){
         // don't accept incoming requests
         [[UDJConnection sharedConnection] acceptEvents:NO];
+        [[UDJConnection sharedConnection] setAcceptLibSearch:NO];
+        //[[UDJConnection sharedConnection] accep
         
         // go back to last screen
         [self.navigationController popViewControllerAnimated:YES];

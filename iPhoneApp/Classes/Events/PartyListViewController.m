@@ -9,7 +9,7 @@
 #import "PartyListViewController.h"
 #import "PartyLoginViewController.h"
 #import "UDJConnection.h"
-#import "EventList.h"
+#import "UDJEventList.h"
 #import "UDJEvent.h"
 #import "PartySearchViewController.h"
 #import "PlaylistViewController.h"
@@ -50,7 +50,7 @@
     // set up search button
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIBarButtonItemStylePlain target:self action:@selector(pushSearchScreen)]];
     // make a new event list
-    eventList = [EventList sharedEventList];
+    eventList = [UDJEventList sharedEventList];
     [eventList getNearbyEvents];
     [self refreshTableList];
 }
@@ -167,9 +167,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // get the party and remember the event we are trying to join
     NSInteger index = [indexPath indexAtPosition:1];
-    [EventList sharedEventList].currentEvent = [[EventList sharedEventList].currentList objectAtIndex:index];
+    [UDJEventList sharedEventList].currentEvent = [[UDJEventList sharedEventList].currentList objectAtIndex:index];
     // there's a password: go the password screen
-	if([EventList sharedEventList].currentEvent.hasPassword){
+	if([UDJEventList sharedEventList].currentEvent.hasPassword){
         PartyLoginViewController* partyLoginViewController = [[PartyLoginViewController alloc] initWithNibName:@"PartyLoginViewController" bundle:[NSBundle mainBundle]];
         [self.navigationController pushViewController:partyLoginViewController animated:YES];
         [partyLoginViewController release];

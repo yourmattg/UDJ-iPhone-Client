@@ -30,7 +30,7 @@
 		A36D2CC814A810230087E992 /* PartySearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A36D2CC614A810230087E992 /* PartySearchViewController.xib */; };
 		A36D2CCC14A818130087E992 /* SearchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A36D2CCA14A818130087E992 /* SearchingViewController.m */; };
 		A36D2CCD14A818130087E992 /* SearchingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A36D2CCB14A818130087E992 /* SearchingViewController.xib */; };
-		A374BE0114A2EF36001A0DE0 /* EventList.m in Sources */ = {isa = PBXBuildFile; fileRef = A374BE0014A2EF36001A0DE0 /* EventList.m */; };
+		A374BE0114A2EF36001A0DE0 /* UDJEventList.m in Sources */ = {isa = PBXBuildFile; fileRef = A374BE0014A2EF36001A0DE0 /* UDJEventList.m */; };
 		A39AF6701497CB74006ADF19 /* UDJConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A39AF66F1497CB74006ADF19 /* UDJConnection.m */; };
 		A39AF68B1497CFBC006ADF19 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF68A1497CFBC006ADF19 /* Security.framework */; };
 		A39AF68C1497D028006ADF19 /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF6631497C803006ADF19 /* libRestKit.a */; };
@@ -125,8 +125,8 @@
 		A36D2CC914A818130087E992 /* SearchingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchingViewController.h; sourceTree = "<group>"; };
 		A36D2CCA14A818130087E992 /* SearchingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchingViewController.m; sourceTree = "<group>"; };
 		A36D2CCB14A818130087E992 /* SearchingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchingViewController.xib; sourceTree = "<group>"; };
-		A374BDFF14A2EF36001A0DE0 /* EventList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventList.h; sourceTree = "<group>"; };
-		A374BE0014A2EF36001A0DE0 /* EventList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventList.m; sourceTree = "<group>"; };
+		A374BDFF14A2EF36001A0DE0 /* UDJEventList.h */ = {isa = PBXFileReference; fileEncoding = 4; path = UDJEventList.h; sourceTree = "<group>"; };
+		A374BE0014A2EF36001A0DE0 /* UDJEventList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJEventList.m; sourceTree = "<group>"; };
 		A39AF6581497C803006ADF19 /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = ../RestKit/RestKit.xcodeproj; sourceTree = "<group>"; };
 		A39AF66E1497CB74006ADF19 /* UDJConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJConnection.h; sourceTree = "<group>"; };
 		A39AF66F1497CB74006ADF19 /* UDJConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJConnection.m; sourceTree = "<group>"; };
@@ -269,8 +269,8 @@
 			children = (
 				A3536FB114A5218F00B5C95F /* UDJEvent.h */,
 				A3536FB214A5218F00B5C95F /* UDJEvent.m */,
-				A374BDFF14A2EF36001A0DE0 /* EventList.h */,
-				A374BE0014A2EF36001A0DE0 /* EventList.m */,
+				A374BDFF14A2EF36001A0DE0 /* UDJEventList.h */,
+				A374BE0014A2EF36001A0DE0 /* UDJEventList.m */,
 				A3F9C04F142EAD610016717B /* PartyListViewController.h */,
 				A3F9C050142EAD610016717B /* PartyListViewController.m */,
 				A3F9C1D5142EBB880016717B /* PartyLoginViewController.h */,
@@ -461,7 +461,7 @@
 				A33C461E148F11FC009C1BC6 /* LibrarySearchViewController.m in Sources */,
 				A39AF6701497CB74006ADF19 /* UDJConnection.m in Sources */,
 				A3F58C5C14A15F0B00756F7D /* AuthenticateViewController.m in Sources */,
-				A374BE0114A2EF36001A0DE0 /* EventList.m in Sources */,
+				A374BE0114A2EF36001A0DE0 /* UDJEventList.m in Sources */,
 				A3536FB314A5218F00B5C95F /* UDJEvent.m in Sources */,
 				A36D2CC714A810230087E992 /* PartySearchViewController.m in Sources */,
 				A36D2CCC14A818130087E992 /* SearchingViewController.m in Sources */,

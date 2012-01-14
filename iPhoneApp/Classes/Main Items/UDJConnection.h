@@ -29,6 +29,7 @@
     UIViewController* currentController; // keeps track of the current view controller so we can pass info to it
     NSDictionary* headers;
     NSMutableDictionary* currentRequests;
+    UINavigationController* navigationController;
 }
 
 + (id) sharedConnection;
@@ -60,6 +61,9 @@
 -(void)handleLibSearchResults:(RKResponse*)response;
 -(void)sendAddSongRequest:(UDJSong*)song eventId:(NSInteger)eventId;
 
+-(void)resetAcceptResponses;
+-(void)resetToEventView;
+
 @property(nonatomic,retain) NSString* serverPrefix;
 @property(nonatomic,retain) NSString* ticket;
 @property(nonatomic,retain) RKClient* client;
@@ -67,6 +71,8 @@
 @property(nonatomic,retain) NSDictionary* headers;
 @property(nonatomic,retain) NSMutableDictionary* currentRequests;
 // using assign here because we only need a weak reference
-@property(nonatomic, assign) PlaylistViewController* playlistView; 
+@property(nonatomic, assign) PlaylistViewController* playlistView;
+@property(nonatomic) BOOL acceptLibSearch;
+@property(nonatomic,assign) UINavigationController* navigationController;
 
 @end

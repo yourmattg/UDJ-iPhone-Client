@@ -7,7 +7,7 @@
 //
 
 #import "PlaylistViewController.h"
-#import "EventList.h"
+#import "UDJEventList.h"
 #import "UDJEvent.h"
 #import "UDJPlaylist.h"
 #import "UDJSong.h"
@@ -23,7 +23,7 @@
     if(statusCode==200){
         //[self.toolbarItems release];
         self.navigationController.toolbarHidden=YES;
-        [EventList sharedEventList].currentEvent=nil;
+        [UDJEventList sharedEventList].currentEvent=nil;
         [[UDJPlaylist sharedUDJPlaylist] clearPlaylist];
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -117,7 +117,7 @@
     [super viewDidLoad];
     
     // set event, navigation bar title
-    self.theEvent = [EventList sharedEventList].currentEvent;
+    self.theEvent = [UDJEventList sharedEventList].currentEvent;
 	self.navigationItem.title = theEvent.name;
     
     // init playlist
@@ -212,12 +212,10 @@
 	if(rowNumber==0) song = [UDJPlaylist sharedUDJPlaylist].currentSong;
     else song = [playlist songAtIndex:rowNumber-1];
     
-    NSLog([NSString stringWithFormat:@"%d",song.songId]);
-    
     NSString* cellLabel = [NSString new];
     if(rowNumber==0) cellLabel = @"Playing: ";
     else cellLabel = [NSString stringWithFormat:@"%d%@", rowNumber,@". ",nil];
-    if(song!=nil) cellLabel = [cellLabel stringByAppendingFormat:@"%@%@%@", song.title, @" - ", song.artist,nil];
+    if(song!=nil) cellLabel = [cellLabel stringByAppendingFormat:@"%@%@%@%@%d%@", song.title, @" - ", song.artist, @" [", (song.upVotes-song.downVotes), @"]", nil];
 	cell.textLabel.text = cellLabel;
     cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
 	cell.textLabel.textColor=[UIColor whiteColor];

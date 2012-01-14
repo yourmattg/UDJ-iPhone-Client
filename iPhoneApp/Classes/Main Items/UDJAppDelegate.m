@@ -10,7 +10,7 @@
 #import "UDJViewController.h"
 #import "UDJConnection.h"
 #import "UDJEvent.h"
-#import "EventList.h"
+#import "UDJEventList.h"
 #import "UDJPlaylist.h"
 #import "UDJSongAdd.h"
 #import "UDJSongList.h"
@@ -68,7 +68,7 @@
     // initialize udjConnection
     baseUrl = @"http://0.0.0.0:4897/udj";
     [[UDJConnection sharedConnection] initWithServerPrefix: baseUrl];
-    [EventList new]; // make our eventlist singleton
+    [UDJEventList new]; // make our eventlist singleton
     [UDJPlaylist new]; // make UDJPlaylist singleton
     [[UDJPlaylist sharedUDJPlaylist] initVoteRecordKeeper];
     
@@ -78,6 +78,7 @@
 	//create a UDJViewController (the login screen), and make it the root view
 	viewController    = [[UDJViewController alloc] initWithNibName:@"UDJViewController" bundle:nil];
 	self.navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [[UDJConnection sharedConnection] setNavigationController: self.navigationController];
 	[self.navigationController setNavigationBarHidden:YES];
 	//[self.navigationController setDelegate:self];
     self.window.rootViewController = self.navigationController;
