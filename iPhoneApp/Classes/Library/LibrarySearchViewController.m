@@ -19,7 +19,7 @@
 	if(sender==searchButton){
         NSString* searchParam = searchField.text;
         NSInteger eventIdParam = [UDJEventList sharedEventList].currentEvent.eventId;
-        NSInteger maxResultsParam = 25;
+        NSInteger maxResultsParam = 100;
         // show the searching screen
         SearchingViewController* searchingViewController = [[SearchingViewController alloc] initWithNibName:@"SearchingViewController" bundle:[NSBundle mainBundle]];
         [self.navigationController pushViewController:searchingViewController animated:NO];

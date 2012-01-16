@@ -148,10 +148,10 @@
     
     // set up toolbar
     self.navigationController.toolbar.tintColor = [UIColor blackColor];
-    UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc] initWithTitle:@"Refresh" style:UIBarButtonItemStylePlain 
-                                                                    target:self action:@selector(sendRefreshRequest)];
+    UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(sendRefreshRequest)];
+    //refreshButton.style=UIBarButtonSystemItemRefresh;
     UIBarButtonItem* space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    NSArray* toolbarItems = [NSArray arrayWithObjects: space, refreshButton, space, nil];
+    NSArray* toolbarItems = [NSArray arrayWithObjects: refreshButton, space, nil];
     self.toolbarItems = toolbarItems;
     self.navigationController.toolbarHidden=NO;
     
