@@ -60,6 +60,7 @@
 -(void)sendLibSearchRequest:(NSString*)param eventId:(NSInteger)eventId maxResults:(NSInteger)maxResults;
 -(void)handleLibSearchResults:(RKResponse*)response;
 -(void)sendAddSongRequest:(UDJSong*)song eventId:(NSInteger)eventId;
+-(void)handleFailedSongAdd:(RKRequest*)request;
 
 -(void)resetAcceptResponses;
 -(void)resetToEventView;

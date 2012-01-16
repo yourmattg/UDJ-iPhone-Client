@@ -10,7 +10,7 @@
 #import "UDJEvent.h"
 #import "UDJPlaylist.h"
 
-@interface PlaylistViewController : UITableViewController{
+@interface PlaylistViewController : UITableViewController <UIAlertViewDelegate>{
 
     UDJPlaylist *playlist;
     UDJEvent* theEvent;

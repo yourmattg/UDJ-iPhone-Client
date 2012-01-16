@@ -17,6 +17,21 @@
 
 @synthesize theEvent, playlist;
 
+// handle button clicks from alertview (pop up message boxes)
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(alertView.title == selectedSong.title){
+        // log out of the current event
+        if(buttonIndex==1){
+            [self upVote];
+        }
+        // go back to the current event
+        if(buttonIndex==2){
+            [self downVote];
+        }
+    }
+}
+
 // leaveEvent: log the client out of the event, return to event list
 - (void)leaveEvent{
     NSInteger statusCode = [[UDJConnection sharedConnection] leaveEventRequest];
@@ -98,7 +113,7 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
+        //custom initialization
     }
     return self;
 }
@@ -133,19 +148,13 @@
     
     // set up toolbar
     self.navigationController.toolbar.tintColor = [UIColor blackColor];
-    UIBarButtonItem* downVoteButton = [[UIBarButtonItem alloc] initWithTitle:@"Up" style:UIBarButtonItemStylePlain 
-                                                                                    target:self action:@selector(upVote)];
-    UIBarButtonItem* upVoteButton = [[UIBarButtonItem alloc] initWithTitle:@"Down" style:UIBarButtonItemStylePlain 
-                                                                                  target:self action:@selector(downVote)];
     UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc] initWithTitle:@"Refresh" style:UIBarButtonItemStylePlain 
                                                                     target:self action:@selector(sendRefreshRequest)];
     UIBarButtonItem* space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    NSArray* toolbarItems = [NSArray arrayWithObjects: upVoteButton, space, refreshButton, space, downVoteButton, nil];
+    NSArray* toolbarItems = [NSArray arrayWithObjects: space, refreshButton, space, nil];
     self.toolbarItems = toolbarItems;
     self.navigationController.toolbarHidden=NO;
     
-    [downVoteButton release];
-    [upVoteButton release];
     [refreshButton release];
     [space release];
 }
@@ -214,15 +223,23 @@
     
     NSString* cellLabel = [NSString new];
     if(rowNumber==0) cellLabel = @"Playing: ";
-    else cellLabel = [NSString stringWithFormat:@"%d%@", rowNumber,@". ",nil];
-    if(song!=nil) cellLabel = [cellLabel stringByAppendingFormat:@"%@%@%@%@%d%@", song.title, @" - ", song.artist, @" [", (song.upVotes-song.downVotes), @"]", nil];
+    else cellLabel = @"";
+    if(song!=nil) cellLabel = [cellLabel stringByAppendingFormat:@"%@%@%@%@%@", song.title, @"\n   By ", song.artist, @"\n   Added by ", song.adderName, nil];
 	cell.textLabel.text = cellLabel;
     cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
 	cell.textLabel.textColor=[UIColor whiteColor];
     
+    
+    cell.textLabel.numberOfLines=3;
+    cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
+    
     // Configure the cell...
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 71.0;
 }
 
 /*
@@ -271,6 +288,13 @@
     NSInteger rowNumber = indexPath.row;
     if(rowNumber==0) selectedSong = [playlist currentSong];
     else selectedSong = [playlist songAtIndex:rowNumber-1];
+    
+    UIAlertView* songOptionBox = [[UIAlertView alloc] initWithTitle: selectedSong.title message: selectedSong.artist delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: nil];
+    [songOptionBox addButtonWithTitle:@"Vote Up"];
+    [songOptionBox addButtonWithTitle:@"Vote Down"];
+    [songOptionBox show];
+    [songOptionBox release];
+    
 }
 
 - (void)dealloc{
