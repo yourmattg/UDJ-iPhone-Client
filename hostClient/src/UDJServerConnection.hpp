@@ -155,6 +155,20 @@ public slots:
     const QString& eventName,
     const QString& password);
 
+  void createEvent(
+    const QString& eventName,
+    const QString& password,
+    const QString& streetAddress,
+    const QString& city,
+    const QString& state,
+    const QString& zipcode);
+
+  void createEvent(
+    const QString& eventName,
+    const QString& password,
+    const double &latitude,
+    const double &longitude);
+
   /**
    * \brief Ends the current event.
    */
@@ -469,6 +483,12 @@ private:
 
   QUrl getUsersUrl() const;
 
+  QUrl getLocationUrl(
+    const QString& streetAddress,
+    const QString& city,
+    const QString& state,
+    const QString& zipcode) const;
+
   /**
    * \brief Determines whether or not a url path is a path which can be used 
    * for deleting a song from the library on the server.
@@ -499,6 +519,10 @@ private:
    */
   bool isActivePlaylistRemoveUrl(const QString& path) const;
 
+  inline bool isLocationUrl(const QUrl& url) const{
+    return url.authority() == "webgis.usc.edu";
+  }
+
   /** 
    * \brief Get the port number to be used when communicating with the server.
    *
@@ -528,7 +552,7 @@ private:
    */
   static const QString& getServerUrlPath(){
     static const QString SERVER_URL_PATH= 
-      "http://localhost:" + getServerPortNumber() + "/udj/";
+      "http://udjevents.com:" + getServerPortNumber() + "/udj/";
     return SERVER_URL_PATH;
   }
 
@@ -613,6 +637,17 @@ private:
     static const char* activePlaylistRequestIdsPropertyName = "request_ids";
     return activePlaylistRequestIdsPropertyName;
   }
+
+  static const char* getEventNameProperty(){
+    static const char* eventNameProperty = "event_name";
+    return eventNameProperty;
+  }
+
+  static const char* getEventPasswordProperty(){
+    static const char* eventPasswordProperty = "event_password";
+    return eventPasswordProperty;
+  }
+
 
   /**
    * \brief Perform authentication with the server.
@@ -707,6 +742,10 @@ private:
   void handleRecievedCurrentSongSet(QNetworkReply *reply);
 
   void handleRecievedNewEventGoers(QNetworkReply *reply);
+
+  void handleLocaitonResponse(QNetworkReply *reply);
+
+  void parseLocationResponse(QNetworkReply *reply);
 
   //@}
 

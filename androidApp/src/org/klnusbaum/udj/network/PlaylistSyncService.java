@@ -42,6 +42,7 @@ import android.app.NotificationManager;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.io.IOException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -57,6 +58,7 @@ import org.klnusbaum.udj.UDJEventProvider;
 import org.klnusbaum.udj.EventActivity;
 import org.klnusbaum.udj.EventSelectorActivity;
 import org.klnusbaum.udj.R;
+import org.klnusbaum.udj.exceptions.EventOverException;
 
 
 /**
@@ -66,7 +68,7 @@ public class PlaylistSyncService extends IntentService{
   private static final int ADD_SONG_ID = 0;
   private static final int SONG_ADDED_ID = 1;
 
-  private static final String TAG = "PlyalistSyncService";
+  private static final String TAG = "PlaylistSyncService";
   private static final String[] addRequestsProjection = new String[] {
     UDJEventProvider.ADD_REQUEST_ID_COLUMN,
     UDJEventProvider.ADD_REQUEST_LIB_ID_COLUMN};
@@ -84,15 +86,29 @@ public class PlaylistSyncService extends IntentService{
     Log.i(TAG, "In playlist sync service");
     final Account account = 
       (Account)intent.getParcelableExtra(Constants.ACCOUNT_EXTRA);
-    //TODO handle error if no account provider
     long eventId = Long.valueOf(AccountManager.get(this).getUserData(
-      account, Constants.EVENT_ID_DATA));
+      account, Constants.LAST_EVENT_ID_DATA));
+    //TODO this is hack. We should never get here but event activity sometimes
+    // calls sync playlist after a party is over. need to fix that.
+    if(eventId == Constants.NO_EVENT_ID){
+      return;
+    }
     //TODO hanle error if eventId is bad
     if(intent.getAction().equals(Intent.ACTION_INSERT)){
       if(intent.getData().equals(UDJEventProvider.PLAYLIST_ADD_REQUEST_URI)){
+        long libId = intent.getLongExtra(
+          Constants.LIB_ID_EXTRA, 
+          UDJEventProvider.INVALID_LIB_ID);
+        insertAddSongRequest(libId);
         syncAddRequests(account, eventId);
       }
       else if(intent.getData().equals(UDJEventProvider.VOTES_URI)){
+        long playlistId = 
+          intent.getLongExtra(Constants.PLAYLIST_ID_EXTRA, -1);
+        int voteType = intent.getIntExtra(
+          Constants.VOTE_TYPE_EXTRA, 
+          UDJEventProvider.INVALID_VOTE_TYPE);
+        addVoteRequest(playlistId, voteType);
         syncVoteRequests(account, eventId); 
       }
       updateActivePlaylist(account, eventId); 
@@ -120,6 +136,14 @@ public class PlaylistSyncService extends IntentService{
     }
     catch(IOException e){
       Log.e(TAG, "IO exception when retreiving playist");
+      try{
+        FileOutputStream fos = openFileOutput("error.html", Context.MODE_PRIVATE);
+        fos.write(e.getMessage().getBytes());
+        fos.close();
+      }
+      catch(Exception f){
+    
+      }
     }
     catch(AuthenticationException e){
       Log.e(TAG, "Authentication exception when retreiving playist");
@@ -135,6 +159,10 @@ public class PlaylistSyncService extends IntentService{
     }
     catch(OperationApplicationException e){
       Log.e(TAG, "Operation Application exception when retreiving playist");
+    }
+    catch(EventOverException e){
+      Log.e(TAG, "Event over exceptoin when retreiving playlist");
+      handleEventOver(account);
     }
     //TODO This point of the app seems very dangerous as there are so many
     // exceptions that could occuer. Need to pay special attention to this.
@@ -205,6 +233,10 @@ public class PlaylistSyncService extends IntentService{
       alertAddSongException(account);
       Log.e(TAG, "Operation Application exception when adding to playist");
     }
+    catch(EventOverException e){
+      Log.e(TAG, "Event over exceptoin when retreiving playlist");
+      handleEventOver(account);
+    }
     finally{
       clearAddNotification();
     }
@@ -238,6 +270,12 @@ public class PlaylistSyncService extends IntentService{
     }
     catch(IOException e){
       Log.e(TAG, "IO exception when retreiving playist");
+      try{
+      FileOutputStream fos = openFileOutput("error.html", Context.MODE_PRIVATE);
+      fos.write(e.getMessage().getBytes());
+      fos.close();
+      }
+      catch(Exception f){}
     }
     catch(AuthenticationException e){
       Log.e(TAG, "Authentication exception when retreiving playist");
@@ -247,6 +285,10 @@ public class PlaylistSyncService extends IntentService{
     }
     catch(OperationCanceledException e){
       Log.e(TAG, "Op Canceled exception when retreiving playist");
+    }
+    catch(EventOverException e){
+      Log.e(TAG, "Event over exceptoin when retreiving playlist");
+      handleEventOver(account);
     }
     finally{
       requestsCursor.close();
@@ -261,7 +303,10 @@ public class PlaylistSyncService extends IntentService{
       getString(R.string.add_song_notification_title), 
       System.currentTimeMillis());
     PendingIntent pe = PendingIntent.getActivity(
-      this, 0, null, 0);
+      getApplicationContext(), 
+      0, 
+      new Intent(), 
+      PendingIntent.FLAG_UPDATE_CURRENT);
     addNotification.setLatestEventInfo(
       this, 
       getString(R.string.add_song_notification_title),
@@ -310,7 +355,10 @@ public class PlaylistSyncService extends IntentService{
       getString(R.string.song_added_notification_title), 
       System.currentTimeMillis());
     PendingIntent pe = PendingIntent.getActivity(
-      this, 0, null, 0);
+      getApplicationContext(), 
+      0, 
+      new Intent(), 
+      PendingIntent.FLAG_UPDATE_CURRENT);
     addNotification.setLatestEventInfo(
       this, 
       getString(R.string.song_added_notification_title),
@@ -323,4 +371,81 @@ public class PlaylistSyncService extends IntentService{
 
   }
 
+  private void handleEventOver(Account account){
+    Log.d(TAG, "Handling event over exception");
+    AccountManager am = AccountManager.get(this);
+    am.setUserData(account, Constants.IN_EVENT_DATA, 
+      String.valueOf(Constants.NOT_IN_EVENT_FLAG));
+    Intent eventEndedBroadcast = new Intent(Constants.EVENT_ENDED_ACTION);
+    sendBroadcast(eventEndedBroadcast);
+  }
+
+
+  private void addVoteRequest(long playlistId, int voteType){
+    ContentResolver cr = getContentResolver();
+    Cursor alreadyThere = cr.query(
+      UDJEventProvider.VOTES_URI, 
+      null,
+      UDJEventProvider.VOTE_PLAYLIST_ENTRY_ID_COLUMN+"="+playlistId, 
+      null, 
+      null);
+    if(alreadyThere.moveToFirst()){
+      ContentValues toUpdate = new ContentValues();
+      toUpdate.put(UDJEventProvider.VOTE_TYPE_COLUMN, voteType);
+      toUpdate.put(UDJEventProvider.VOTE_SYNC_STATUS_COLUMN, 
+        UDJEventProvider.VOTE_NEEDS_SYNC);
+      cr.update(
+        UDJEventProvider.VOTES_URI, 
+        toUpdate, 
+        UDJEventProvider.VOTE_PLAYLIST_ENTRY_ID_COLUMN+"="+playlistId, 
+        null);
+    }
+    else{
+      ContentValues toInsert = new ContentValues();
+      toInsert.put(UDJEventProvider.VOTE_TYPE_COLUMN, voteType);
+      toInsert.put(
+        UDJEventProvider.VOTE_PLAYLIST_ENTRY_ID_COLUMN, 
+        Long.valueOf(playlistId));
+      cr.insert(UDJEventProvider.VOTES_URI, toInsert);
+    }
+    alreadyThere.close();
+    showVoteToast(playlistId, voteType, cr);
+  }
+
+  private void showVoteToast(
+    long playlistId, int voteType, ContentResolver cr)
+  {
+    Log.d(TAG, "Showing toast for id: " + String.valueOf(playlistId));
+    String voteMessage = "";
+    if(voteType == UDJEventProvider.UP_VOTE_TYPE){
+      voteMessage += getString(R.string.voting_up_message);
+    }
+    else if(voteType == UDJEventProvider.DOWN_VOTE_TYPE){
+      voteMessage += getString(R.string.voting_down_message);
+    }
+    Cursor song = cr.query(
+      UDJEventProvider.PLAYLIST_URI, 
+      new String[] {UDJEventProvider.TITLE_COLUMN},
+      UDJEventProvider.PLAYLIST_ID_COLUMN + "=" + String.valueOf(playlistId),
+      null,
+      null);
+    song.moveToFirst();
+    Log.d(TAG, "number of values returned " + String.valueOf(song.getCount()));
+    voteMessage += " " + song.getString(0);
+    song.close();
+
+    Intent showToast = new Intent(Constants.SHOW_TOAST_ACTION);
+    showToast.putExtra(Intent.EXTRA_TEXT, voteMessage);
+    sendBroadcast(showToast);
+  }
+
+  private void insertAddSongRequest(long libId){
+    ContentValues toInsert = new ContentValues();
+    toInsert.put(
+      UDJEventProvider.ADD_REQUEST_LIB_ID_COLUMN, libId);
+    ContentResolver cr = getContentResolver();
+    cr.insert(
+      UDJEventProvider.PLAYLIST_ADD_REQUEST_URI, 
+      toInsert);
+  }
 }

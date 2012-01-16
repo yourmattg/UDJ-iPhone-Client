@@ -33,7 +33,7 @@ class EventEndTime(models.Model):
         'End time was inserted for an event that is not yet over')
 
   def __unicode__(self):
-    return self.event.name + " ended at " + time_ended
+    return self.event.name + " ended at " + str(self.time_ended)
 
 class EventPassword(models.Model):
   event = models.ForeignKey(Event, unique=True)
@@ -44,8 +44,8 @@ class EventPassword(models.Model):
 
 class EventLocation(models.Model):
   event = models.ForeignKey(Event, unique=True)
-  longitude = models.FloatField()
   latitude = models.FloatField()
+  longitude = models.FloatField()
 
   #TODO put some sort of validation to make sure that long and lat are valid
 
@@ -83,7 +83,7 @@ class AvailableSong(models.Model):
     unique_together = ("song", "event")
 
   def __unicode__(self):
-    return str(self.song.title) + " for " + self.event.name
+    return self.song.title + " for " + self.event.name
 
 class ActivePlaylistEntry(models.Model):
   STATE_CHOICES = (
@@ -122,7 +122,8 @@ class PlaylistEntryTimePlayed(models.Model):
       'or are currnetly playing')
 
   def __unicode__(self):
-    return self.playlist_entry.song.title +  " : played at " + self.time_played
+    return self.playlist_entry.song.title +  " : played at " \
+      + str(self.time_played)
 
   
 class Ticket(models.Model):

@@ -37,14 +37,15 @@ import org.apache.http.ParseException;
 
 import org.klnusbaum.udj.network.ServerConnection;
 import org.klnusbaum.udj.containers.LibraryEntry;
+import org.klnusbaum.udj.exceptions.EventOverException;
 
-public class AvailableMusicSearchLoader 
+public class MusicSearchLoader 
   extends AsyncTaskLoader<List<LibraryEntry>>
 {
   private String query;
   private Account account;
 
-  public AvailableMusicSearchLoader(
+  public MusicSearchLoader(
     Context context, String query, Account account)
   {
     super(context);
@@ -58,27 +59,30 @@ public class AvailableMusicSearchLoader
         AccountManager am = AccountManager.get(getContext());
         String authToken = am.blockingGetAuthToken(account, "", true);
         long eventId = 
-          Long.valueOf(am.getUserData(account, Constants.EVENT_ID_DATA));
+          Long.valueOf(am.getUserData(account, Constants.LAST_EVENT_ID_DATA));
         return ServerConnection.availableMusicQuery(query, eventId, authToken);
         //TODO do something to the potential errors
       }
       catch(JSONException e){
-
+        //TODO notify the user
       }
       catch(ParseException e){
-
+        //TODO notify the user
       }
       catch(IOException e){
-
+        //TODO notify the user
       }
       catch(AuthenticationException e){
-
+        //TODO notify the user
       }
       catch(AuthenticatorException e){
         //TODO notify the user
       }
       catch(OperationCanceledException e){
         //TODO notify user
+      }
+      catch(EventOverException e){
+        //Let acitivyt take care of things at this point
       }
       return null;
     }

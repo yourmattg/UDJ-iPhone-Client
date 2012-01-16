@@ -21,6 +21,7 @@ package org.klnusbaum.udj;
 import android.app.Activity;
 import android.os.Bundle;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.widget.TabHost;
 import android.widget.Toast;
 import android.view.Menu;
@@ -36,12 +37,12 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentResolver;
 import android.util.Log;
-import android.app.Dialog;
 import android.app.SearchManager;
 import android.net.Uri;
 import android.database.Cursor;
 import android.view.Window;
 import android.os.Build;
+import android.content.BroadcastReceiver;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -63,16 +64,13 @@ import org.klnusbaum.udj.network.EventCommService;
 /**
  * The main activity display class.
  */
-public class EventActivity extends FragmentActivity
+public class EventActivity extends EventEndedListenerActivity
   implements LoaderManager.LoaderCallbacks<Cursor>
 {
-
   private static final String QUIT_DIALOG_TAG = "quit_dialog";
   private static final int CURRENT_SONG_LOADER_ID = 1;
   private static final String TAG = "EventActivity";
 
-
-  private Account account;
   private TextView currentSong;
 
   @Override
@@ -84,11 +82,11 @@ public class EventActivity extends FragmentActivity
     setContentView(R.layout.event);
     currentSong = (TextView)findViewById(R.id.current_song_title);
     setCurrentSongDisplay(null);
-    account = (Account)getIntent().getParcelableExtra(Constants.ACCOUNT_EXTRA);
     //TODO hanle if no event
     getPlaylistFromServer();    
     getSupportLoaderManager().initLoader(CURRENT_SONG_LOADER_ID, null, this);
   }
+
 
   private void getPlaylistFromServer(){
     Intent getPlaylist = new Intent(
@@ -145,28 +143,20 @@ public class EventActivity extends FragmentActivity
     switch (item.getItemId()) {
     case R.id.menu_refresh:
       getPlaylistFromServer();
-      /*getActionBarHelper().setRefreshActionItemState(true);
-      getWindow().getDecorView().postDelayed(
-        new Runnable() {
-          @Override
-          public void run() {
-            getActionBarHelper().setRefreshActionItemState(false);
-          }
-       }, 1000);*/
-       break;
-     case R.id.menu_search:
-       startSearch(null, false, null, false);
-       break;
+      return true;
+    case R.id.menu_search:
+      startSearch(null, false, null, false);
+      return true;  
+    default:
+      return super.onOptionsItemSelected(item);
     }
-    return super.onOptionsItemSelected(item);
   }
 
-
   protected void onNewIntent(Intent intent){
+    Log.d(TAG, "In on new intent");
     if(Intent.ACTION_SEARCH.equals(intent.getAction())){
-      intent.setClass(this, AvailableMusicSearchActivity.class);
-      intent.putExtra(Constants.ACCOUNT_EXTRA, account);
-      startActivity(intent);
+      intent.setClass(this, MusicSearchActivity.class);
+      startActivityForResult(intent, 0);
     }
   }
 
@@ -218,4 +208,3 @@ public class EventActivity extends FragmentActivity
     }
   }
 }
-
