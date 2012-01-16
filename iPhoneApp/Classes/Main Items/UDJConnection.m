@@ -329,15 +329,19 @@ static UDJConnection* sharedUDJConnection = nil;
 -(void)sendAddSongRequest:(UDJSong *)song eventId:(NSInteger)eventId{
     //create url [PUT] /udj/events/event_id/active_playlist/songs
     NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@",client.baseURL,@"/events/",eventId,@"/active_playlist/songs"];
+    
     // make a dictionary for the song request, with a "lib_id" and "client_request_id"
     NSMutableDictionary* songAddDictionary = [NSMutableDictionary new];
-    NSNumber* clientRequestIdAsNumber = [NSNumber numberWithInt:clientRequestCount++]; //increment request count
+    NSDate *currentDate = [NSDate date];
+    NSNumber* clientRequestIdAsNumber = [NSNumber numberWithDouble:[currentDate timeIntervalSinceReferenceDate]];
     NSNumber* libraryIdAsNumber = [NSNumber numberWithInt:song.librarySongId];
     [songAddDictionary setObject:clientRequestIdAsNumber forKey:@"client_request_id"];
     [songAddDictionary setObject:libraryIdAsNumber forKey:@"lib_id"];
+    
     // then make an array to hold this song dictionary, convert it to JSON string
     NSMutableArray* arrayToSend = [NSMutableArray arrayWithObject:songAddDictionary];;
     NSString* songAsJSONArray = [arrayToSend JSONString];
+    
     // set up, send request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
     request.queue = client.requestQueue;
@@ -346,9 +350,19 @@ static UDJConnection* sharedUDJConnection = nil;
     [headersWithContentType setObject:@"text/json" forKey:@"Content-Type"];
     request.additionalHTTPHeaders = headersWithContentType;
     request.HTTPBodyString = songAsJSONArray;
+    
+    //TODO: find a way to keep track of the requests
+    //[currentRequests setObject:@"songAdd" forKey:request];
     [request send]; 
     
     [songAddDictionary release];
+}
+
+-(void)handleFailedSongAdd:(RKRequest *)request{
+    UIAlertView* notification = [[UIAlertView alloc] initWithTitle:@"Song Add Failed" message:@"Your song was not confirmed as having been added to the playlist, would you like to try adding it again?" delegate:nil cancelButtonTitle:@"Yes" otherButtonTitles: nil];
+    [notification show];
+    [notification release];
+    [request send];
 }
 
 // **************************** Errors ********************************
@@ -414,6 +428,9 @@ static UDJConnection* sharedUDJConnection = nil;
 
     } else if([request isPUT]){
        // do something (probably with a newly added song)
+        /*if([currentRequests objectForKey:request]==@"songAdd" && response.statusCode==408){
+            [self handleFailedSongAdd:request];
+        }*/
         
     } else if([request isDELETE]) {
         
