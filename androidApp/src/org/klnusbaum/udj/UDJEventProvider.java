@@ -71,6 +71,9 @@ public class UDJEventProvider extends ContentProvider{
 	/** Name of the playlist table. */
   private static final String PLAYLIST_TABLE_NAME = "playlist";
 
+  /** Used to identify bad library ids */
+  public static final long INVALID_LIB_ID = -1;
+
 	/** Constants used for various Playlist column names */
   public static final String PLAYLIST_ID_COLUMN = "_id";
   public static final String UP_VOTES_COLUMN = "up_votes";
@@ -141,6 +144,7 @@ public class UDJEventProvider extends ContentProvider{
    public static final int VOTE_SYNCED = 0;
 
    /** Constants use for vote types */
+   public static final int INVALID_VOTE_TYPE = -1;
    public static final int UP_VOTE_TYPE = 1;
    public static final int DOWN_VOTE_TYPE = 2;
 

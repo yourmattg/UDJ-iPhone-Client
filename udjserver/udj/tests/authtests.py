@@ -19,4 +19,22 @@ class AuthTest(TestCase):
     ticket = Ticket.objects.filter(user=testUser)
     self.assertEqual(response.__getitem__(getTicketHeader()), ticket[0].ticket_hash)
 
-
+  def testDoubleTicket(self):
+    client = Client()
+    response = client.post(
+      '/udj/auth', {'username': 'test2', 'password' : 'twotest'})
+    self.assertEqual(response.status_code, 200)
+    self.assertTrue(response.has_header(getTicketHeader()))
+    self.assertTrue(response.has_header(getUserIdHeader()))
+    testUser = User.objects.filter(username='test2')
+    self.assertEqual(
+      int(response.__getitem__(getUserIdHeader())), testUser[0].id)
+    ticket = Ticket.objects.get(user=testUser)
+    firstTicket = response[getTicketHeader()]
+    self.assertEqual(firstTicket, ticket.ticket_hash)
+    response = client.post(
+      '/udj/auth', {'username': 'test2', 'password' : 'twotest'})
+    secondTicket = response[getTicketHeader()]
+    ticket = Ticket.objects.get(user=testUser)
+    self.assertNotEqual(firstTicket, secondTicket)
+    self.assertEqual(secondTicket, ticket.ticket_hash)

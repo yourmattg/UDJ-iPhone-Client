@@ -76,14 +76,6 @@ public class EventActivity extends EventEndedListenerActivity
   @Override
   protected void onCreate(Bundle savedInstanceState){
     super.onCreate(savedInstanceState);
-    account = (Account)getIntent().getParcelableExtra(Constants.ACCOUNT_EXTRA);
-    if(account == null){
-      //TODO we should never get here
-      Log.e(TAG, "Had a null account in the EventActivity");
-      setResult(Activity.RESULT_CANCELED);
-      finish();
-      return;
-    }
     if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){ 
       requestWindowFeature(Window.FEATURE_NO_TITLE);
     }
@@ -94,6 +86,7 @@ public class EventActivity extends EventEndedListenerActivity
     getPlaylistFromServer();    
     getSupportLoaderManager().initLoader(CURRENT_SONG_LOADER_ID, null, this);
   }
+
 
   private void getPlaylistFromServer(){
     Intent getPlaylist = new Intent(
@@ -150,27 +143,19 @@ public class EventActivity extends EventEndedListenerActivity
     switch (item.getItemId()) {
     case R.id.menu_refresh:
       getPlaylistFromServer();
-      /*getActionBarHelper().setRefreshActionItemState(true);
-      getWindow().getDecorView().postDelayed(
-        new Runnable() {
-          @Override
-          public void run() {
-            getActionBarHelper().setRefreshActionItemState(false);
-          }
-       }, 1000);*/
-       break;
-     case R.id.menu_search:
-       startSearch(null, false, null, false);
-       break;
+      return true;
+    case R.id.menu_search:
+      startSearch(null, false, null, false);
+      return true;  
+    default:
+      return super.onOptionsItemSelected(item);
     }
-    return super.onOptionsItemSelected(item);
   }
 
-
   protected void onNewIntent(Intent intent){
+    Log.d(TAG, "In on new intent");
     if(Intent.ACTION_SEARCH.equals(intent.getAction())){
-      intent.setClass(this, AvailableMusicSearchActivity.class);
-      intent.putExtra(Constants.ACCOUNT_EXTRA, account);
+      intent.setClass(this, MusicSearchActivity.class);
       startActivityForResult(intent, 0);
     }
   }

@@ -96,7 +96,7 @@ public class ServerConnection{
 
   private static final String NETWORK_PROTOCOL = "http";
  
-  private static final String SERVER_HOST = "10.0.2.2";
+  private static final String SERVER_HOST = "udjevents.com";
 
  
   private static final String TICKET_HASH_HEADER = "X-Udj-Ticket-Hash";
@@ -303,7 +303,7 @@ public class ServerConnection{
     URI uri, String authToken, String payload)
     throws AuthenticationException, IOException, EventOverException
   {
-    final HttpResponse resp = doPut(uri, authToken, payload);
+    final HttpResponse resp = doPost(uri, authToken, payload);
     final String response = EntityUtils.toString(resp.getEntity());
     Log.d(TAG, "Event related Post response: \"" + response +"\"");
     if(resp.getStatusLine().getStatusCode() == HttpStatus.SC_GONE){

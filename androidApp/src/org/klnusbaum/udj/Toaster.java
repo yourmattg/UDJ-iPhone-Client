@@ -18,28 +18,17 @@
  */
 package org.klnusbaum.udj;
 
+import android.content.BroadcastReceiver;
+import android.widget.Toast;
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.accounts.AccountManager;
-import android.accounts.Account;
+import android.content.Intent;
 
-public class Utils{
-
-  public static boolean isNetworkAvailable(Context context){
-    ConnectivityManager cm = ((ConnectivityManager)context.getSystemService(
-      Context.CONNECTIVITY_SERVICE));
-    NetworkInfo info = cm.getActiveNetworkInfo();
-    if(info != null && info.isConnected()){
-      return true;
-    }
-    return false;
+public class Toaster extends BroadcastReceiver{
+  public void onReceive(Context context, Intent intent){
+    Toast toShow = Toast.makeText(
+      context,
+      intent.getStringExtra(Intent.EXTRA_TEXT),
+      Toast.LENGTH_SHORT);
+    toShow.show();
   }
-
-  public static Account basicGetUdjAccount(Context context){
-    AccountManager am = AccountManager.get(context);
-    Account[] udjAccounts = am.getAccountsByType(Constants.ACCOUNT_TYPE);
-    return udjAccounts[0];
-  }
-
 }

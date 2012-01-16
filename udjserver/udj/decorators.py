@@ -94,7 +94,8 @@ def NeedsAuth(function):
       responseString = "Must provide the " + getTicketHeader() + " header. "
       return HttpResponseBadRequest(responseString)
     elif not isValidTicket(request.META[getDjangoTicketHeader()]):
-      return HttpResponseForbidden("Invalid ticket")
+      return HttpResponseForbidden("Invalid ticket. " + 
+        request.META[getDjangoTicketHeader()])
     else:
       return function(*args, **kwargs)
   return wrapper
@@ -109,7 +110,9 @@ def IsntInOtherEvent(function):
       user__id=user_id, state=u'IE')
     if eventLogins.exists():
       return HttpResponse(
-        json.dumps(getEventDictionary(eventLogins[0].event)), status=409)
+        json.dumps(getEventDictionary(eventLogins[0].event)), 
+        status=409,
+        content_type="text/json")
     else:
       return function(*args, **kwargs)
   return wrapper
