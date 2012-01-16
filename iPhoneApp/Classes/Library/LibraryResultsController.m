@@ -9,6 +9,7 @@
 #import "LibraryResultsController.h"
 #import "UDJConnection.h"
 #import "UDJEventList.h"
+#import "LibraryEntryCell.h"
 
 @implementation LibraryResultsController
 
@@ -50,12 +51,11 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = @"Search Results";
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIBarButtonItemStylePlain target:self action:@selector(backToLibSearch)];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backToLibSearch)];
     self.navigationItem.leftBarButtonItem = backButton;
     [backButton release];
     // toolbar    
-    UIBarButtonItem* addSongButton = [[UIBarButtonItem alloc] initWithTitle:@"Add" style:UIBarButtonItemStylePlain 
-                                                                     target:self action:@selector(addSong)];
+    UIBarButtonItem* addSongButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addSong)];
     UIBarButtonItem* space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     NSArray* toolbarItems = [NSArray arrayWithObjects: space, addSongButton, space, nil];
     self.toolbarItems = toolbarItems;
@@ -112,18 +112,20 @@
 {
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    LibraryEntryCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[LibraryEntryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
     UDJSong* song = [resultList songAtIndex:indexPath.row];
-    NSString* cellLabel = [NSString stringWithFormat:@"%@%@%@", song.title, @" - ", song.artist,nil];
-	cell.textLabel.text = cellLabel;
-    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
-	cell.textLabel.textColor=[UIColor whiteColor];
+    cell.songLabel.text = song.title;
+    cell.artistLabel.text = song.artist;
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 55.0;
 }
 
 /*
