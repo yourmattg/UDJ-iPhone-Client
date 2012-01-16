@@ -148,10 +148,10 @@
     
     // set up toolbar
     self.navigationController.toolbar.tintColor = [UIColor blackColor];
-    UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc] initWithTitle:@"Refresh" style:UIBarButtonItemStylePlain 
-                                                                    target:self action:@selector(sendRefreshRequest)];
+    UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(sendRefreshRequest)];
+    //refreshButton.style=UIBarButtonSystemItemRefresh;
     UIBarButtonItem* space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    NSArray* toolbarItems = [NSArray arrayWithObjects: space, refreshButton, space, nil];
+    NSArray* toolbarItems = [NSArray arrayWithObjects: refreshButton, space, nil];
     self.toolbarItems = toolbarItems;
     self.navigationController.toolbarHidden=NO;
     
@@ -290,8 +290,10 @@
     else selectedSong = [playlist songAtIndex:rowNumber-1];
     
     UIAlertView* songOptionBox = [[UIAlertView alloc] initWithTitle: selectedSong.title message: selectedSong.artist delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: nil];
-    [songOptionBox addButtonWithTitle:@"Vote Up"];
-    [songOptionBox addButtonWithTitle:@"Vote Down"];
+    if(rowNumber!=0){
+        [songOptionBox addButtonWithTitle:@"Vote Up"];
+        [songOptionBox addButtonWithTitle:@"Vote Down"];
+    }
     [songOptionBox show];
     [songOptionBox release];
     

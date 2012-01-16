@@ -281,7 +281,6 @@ static UDJConnection* sharedUDJConnection = nil;
     request.method = RKRequestMethodPOST;
     request.additionalHTTPHeaders = headers;
     //send request
-    acceptPlaylist=YES;
     //[currentRequests setObject:@"voteRequest" forKey:request]; was causing error
     [request send];    
 }
@@ -378,7 +377,7 @@ static UDJConnection* sharedUDJConnection = nil;
 // resetToEventView: return user to the event screen and reset all variables associated with the event
 -(void)resetToEventView{
     UIAlertView* notification = [UIAlertView alloc];
-    NSString* msg = [NSString stringWithFormat:@"%@%@", [UDJEventList sharedEventList].currentEvent.name, @"has ended. You will be returned to the event search screen.", nil];
+    NSString* msg = [NSString stringWithFormat:@"%@%@", [UDJEventList sharedEventList].currentEvent.name, @" has ended. You will be returned to the event search screen.", nil];
     [notification initWithTitle:@"Event Ended" message: msg delegate: nil cancelButtonTitle:@"Back" otherButtonTitles:nil];
     [notification show];
     [notification release];
