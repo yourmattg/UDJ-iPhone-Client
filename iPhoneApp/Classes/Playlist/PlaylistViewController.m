@@ -290,8 +290,10 @@
     else selectedSong = [playlist songAtIndex:rowNumber-1];
     
     UIAlertView* songOptionBox = [[UIAlertView alloc] initWithTitle: selectedSong.title message: selectedSong.artist delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: nil];
-    [songOptionBox addButtonWithTitle:@"Vote Up"];
-    [songOptionBox addButtonWithTitle:@"Vote Down"];
+    if(rowNumber!=0){
+        [songOptionBox addButtonWithTitle:@"Vote Up"];
+        [songOptionBox addButtonWithTitle:@"Vote Down"];
+    }
     [songOptionBox show];
     [songOptionBox release];
     
