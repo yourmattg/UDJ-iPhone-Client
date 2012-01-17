@@ -18,7 +18,7 @@
     voteRecordKeeper = [[NSMutableDictionary alloc] init];
 }
 - (UDJSong*)songAtIndex:(NSInteger)i{
-    if(i<0) return nil;
+    if(i<0 || i >= [playlist count]) return nil;
     return [playlist objectAtIndex:i];
 }
 

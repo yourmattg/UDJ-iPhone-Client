@@ -12,6 +12,8 @@
 #import "UDJPlaylist.h"
 #import "UDJSong.h"
 #import "LibrarySearchViewController.h"
+#import "PlaylistEntryCell.h"
+#import "LibraryEntryCell.h"
 
 @implementation PlaylistViewController
 
@@ -209,9 +211,9 @@
 {
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    PlaylistEntryCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[PlaylistEntryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
 	
     // combine song number and name into one string
@@ -220,25 +222,19 @@
 	if(rowNumber==0) song = [UDJPlaylist sharedUDJPlaylist].currentSong;
     else song = [playlist songAtIndex:rowNumber-1];
     
-    NSString* cellLabel = [NSString new];
-    if(rowNumber==0) cellLabel = @"Playing: ";
-    else cellLabel = @"";
-    if(song!=nil) cellLabel = [cellLabel stringByAppendingFormat:@"%@%@%@%@%@", song.title, @"\n   By ", song.artist, @"\n   Added by ", song.adderName, nil];
-	cell.textLabel.text = cellLabel;
-    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
-	cell.textLabel.textColor=[UIColor whiteColor];
-    
-    
-    cell.textLabel.numberOfLines=3;
-    cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
-    
-    // Configure the cell...
+    NSString* songText;
+    if(rowNumber==0) songText = [NSString stringWithString:@"Playing: "];
+    else songText =[NSString stringWithString:@""];
+    if(song!=nil) songText = [songText stringByAppendingString: song.title];
+	cell.songLabel.text = songText;
+    cell.artistLabel.text = [NSString stringWithFormat: @"%@%@", @"By ", song.artist, nil];
+    cell.addedByLabel.text = [NSString stringWithFormat:@"%@%@", @"Added by ", song.adderName];
     
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 71.0;
+    return 78.0;
 }
 
 /*
