@@ -90,6 +90,7 @@
             [playlist.voteRecordKeeper setObject:[NSNumber numberWithBool:YES] forKey:songIdAsNumber];
             
             [[UDJConnection sharedConnection] sendVoteRequest:up songId:selectedSong.songId eventId:theEvent.eventId];
+            [self sendRefreshRequest];
             // let the client know it sent a vote
             NSString* msg = @"Your vote for ";
             msg = [msg stringByAppendingString:selectedSong.title];
@@ -148,7 +149,7 @@
     self.playlist = [UDJPlaylist sharedUDJPlaylist];
     self.playlist.eventId = theEvent.eventId;
     [playlist loadPlaylist];
-    [self refreshTableList];
+    //[self refreshTableList]; moved to viewDidAppear
     
     // set up leave and library buttons
     [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Leave" style:UIBarButtonItemStylePlain target:self action:@selector(leaveEvent)]];
@@ -182,6 +183,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [self sendRefreshRequest];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
