@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EventGoerViewController : UITableViewController
+@interface EventGoerViewController : UITableViewController{
+    
+}
 
 @end

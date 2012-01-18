@@ -24,10 +24,7 @@
     return self;
 }
 
-- (void)locationManager:(CLLocationManager *)manager
-    didUpdateToLocation:(CLLocation *)newLocation
-           fromLocation:(CLLocation *)oldLocation
-{
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
     latitude = newLocation.coordinate.latitude;
     longitude = newLocation.coordinate.longitude;
 }

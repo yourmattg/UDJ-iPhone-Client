@@ -53,6 +53,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [[UDJConnection sharedConnection] sendEventGoerRequest:[UDJEventList sharedEventList].currentEvent.eventId];
 }
 
 - (void)viewDidAppear:(BOOL)animated

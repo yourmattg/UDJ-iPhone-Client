@@ -19,6 +19,7 @@
     BOOL acceptEvents; // awaiting an event list
     BOOL acceptPlaylist;
     BOOL acceptLibSearch;
+    BOOL acceptEventGoers;
     PlaylistViewController* playlistView;
     NSInteger clientRequestCount; // used to keep a unique client request id
     NSNumber* userID;
@@ -51,6 +52,7 @@
 - (NSInteger) enterEventRequest;
 - (NSInteger) leaveEventRequest;
 - (void) sendEventGoerRequest:(NSInteger)eventId;
+- (void) handleEventGoerResults:(RKResponse*)response;
 
 - (void) sendPlaylistRequest:(NSInteger)eventId;
 - (void)handlePlaylistResponse:(RKResponse*)response;

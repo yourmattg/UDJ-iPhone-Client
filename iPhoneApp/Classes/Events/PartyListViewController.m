@@ -218,13 +218,6 @@
             [self.navigationController pushViewController:playlistViewController animated:YES];
             [playlistViewController release];
         }
-        // 410: event has ended
-        else if(statusCode==410){
-            UIAlertView* eventEndedNotification = [UIAlertView alloc];
-            [eventEndedNotification initWithTitle:@"Join Failed" message:@"This event has ended. Sorry!" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [eventEndedNotification show];
-            [eventEndedNotification release];
-        }
         else if(statusCode==404){
             UIAlertView* nonExistantEvent = [UIAlertView alloc];
             [nonExistantEvent initWithTitle:@"Join Failed" message:@"The event you are trying to join does not exist. Sorry!" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];

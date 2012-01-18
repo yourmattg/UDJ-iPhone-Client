@@ -16,6 +16,7 @@
 #import "LibraryResultsController.h"
 #import "UDJSongList.h"
 #import "UDJMappableArray.h"
+#import "UDJEventGoer.h"
 
 static UDJConnection* sharedUDJConnection = nil;
 
@@ -213,7 +214,21 @@ static UDJConnection* sharedUDJConnection = nil;
     request.additionalHTTPHeaders = headers;
     request.queue = client.requestQueue;
     
+    acceptEventGoers=YES;
     [request send];
+}
+
+- (void) handleEventGoerResults:(RKResponse*)response{
+    NSMutableArray* cList = [NSMutableArray new];
+    RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
+    NSArray* eventGoerArray = [parser objectFromString:[response bodyAsString] error:nil];
+    for(int i=0; i<[eventGoerArray count]; i++){
+        NSDictionary* eventGoerDict = [eventGoerArray objectAtIndex:i];
+        UDJEventGoer* eventGoer = [UDJEventGoer eventGoerFromDictionary:eventGoerDict];
+        [cList addObject:eventGoer];
+    } 
+    
+    [parser release];
 }
 
 // **************************** Playlist Methods ********************************
@@ -299,7 +314,7 @@ static UDJConnection* sharedUDJConnection = nil;
 }
 
 -(void)handleVoteResponse:(RKResponse*)response{
-    
+    acceptEventGoers=NO;
 }
 
 // **************************** Library Search Methods ********************************
@@ -418,6 +433,9 @@ static UDJConnection* sharedUDJConnection = nil;
         }
         else if(acceptLibSearch){
             [self handleLibSearchResults:response];
+        }
+        else if(acceptEventGoers){
+            [self handleEventGoerResults:response];
         }
         
     } else if([request isPOST]) {

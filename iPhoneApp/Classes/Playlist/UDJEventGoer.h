@@ -16,6 +16,8 @@
     BOOL loggedIn;
 }
 
++(id)eventGoerFromDictionary:(NSDictionary*)eventGoerDict;
+
 @property(nonatomic) NSInteger eventGoerId;
 @property(nonatomic,retain) NSString* userName;
 @property(nonatomic,retain) NSString* firstName;
