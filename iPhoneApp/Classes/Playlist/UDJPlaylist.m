@@ -34,7 +34,7 @@
 // count: returns the number of songs in the playlist (including the current song playing)
 - (NSInteger)count{
     // +1 because we include current song
-    if(currentSong==nil) return 0;
+    if(currentSong==nil && [playlist count]==0) return 0;
     return [playlist count]+1;
 }
 
