@@ -266,6 +266,18 @@ static UDJConnection* sharedUDJConnection = nil;
     [playlist release];
 }
 
+- (void)sendSongRemoveRequest:(NSInteger)songId eventId:(NSInteger)eventId{
+    //[DELETE] /events/event_id/active_playlist/playlist_id
+    NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@%d", client.baseURL, @"/events/", eventId, @"/active_playlist/songs/", songId];
+    // set up request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
+    request.queue = client.requestQueue;
+    request.method = RKRequestMethodDELETE;
+    request.additionalHTTPHeaders = headers;
+    
+    [request send];    
+}
+
 // **************************** Voting Methods ********************************
 
 // sendVoteRequest: first parameter specifies an up (YES) or down (NO) vote, second specifies song id

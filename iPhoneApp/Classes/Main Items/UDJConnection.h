@@ -56,6 +56,7 @@
 
 - (void)sendVoteRequest:(BOOL)up songId:(NSInteger)songId eventId:(NSInteger)eventId;
 -(void)handleVoteResponse:(RKResponse*)response;
+-(void)sendSongRemoveRequest:(NSInteger)songId eventId:(NSInteger)eventId;
 
 -(void)sendLibSearchRequest:(NSString*)param eventId:(NSInteger)eventId maxResults:(NSInteger)maxResults;
 -(void)handleLibSearchResults:(RKResponse*)response;

@@ -24,14 +24,20 @@
 {
     if(alertView.title == selectedSong.title){
         // log out of the current event
-        if(buttonIndex==1){
-            [self upVote];
-        }
+        if(buttonIndex==1) [self upVote];
         // go back to the current event
-        if(buttonIndex==2){
-            [self downVote];
-        }
+        if(buttonIndex==2) [self downVote];
+        // remove song
+        //if(buttonIndex==3) [self removeSong];
     }
+}
+
+-(void)removeSong{
+    NSInteger eventIdParam = [UDJEventList sharedEventList].currentEvent.eventId;
+    [[UDJConnection sharedConnection] sendSongRemoveRequest:selectedSong.songId eventId:eventIdParam];
+    UIAlertView* notification = [[UIAlertView alloc] initWithTitle:@"Song Removed" message:@"Your song will be removed from the playlist." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [notification show];
+    [notification release];
 }
 
 // leaveEvent: log the client out of the event, return to event list
@@ -289,15 +295,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     NSInteger rowNumber = indexPath.row;
     if(rowNumber==0) selectedSong = [playlist currentSong];
     else selectedSong = [playlist songAtIndex:rowNumber-1];
     
     UIAlertView* songOptionBox = [[UIAlertView alloc] initWithTitle: selectedSong.title message: selectedSong.artist delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: nil];
+    // include vote buttons if its not the song playing
     if(rowNumber!=0){
         [songOptionBox addButtonWithTitle:@"Vote Up"];
         [songOptionBox addButtonWithTitle:@"Vote Down"];
     }
+    // include remove button if this user added the song
+    UDJConnection* connection = [UDJConnection sharedConnection];
+    if([connection.userID intValue]== selectedSong.adderId) [songOptionBox addButtonWithTitle:@"Remove Song"];
     [songOptionBox show];
     [songOptionBox release];
     

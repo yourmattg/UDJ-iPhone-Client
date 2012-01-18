@@ -32,6 +32,7 @@
 		A36D2CCC14A818130087E992 /* SearchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A36D2CCA14A818130087E992 /* SearchingViewController.m */; };
 		A36D2CCD14A818130087E992 /* SearchingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A36D2CCB14A818130087E992 /* SearchingViewController.xib */; };
 		A374BE0114A2EF36001A0DE0 /* UDJEventList.m in Sources */ = {isa = PBXBuildFile; fileRef = A374BE0014A2EF36001A0DE0 /* UDJEventList.m */; };
+		A38B62A014C736C70088640D /* udjlauncher.png in Resources */ = {isa = PBXBuildFile; fileRef = A38B629F14C736C70088640D /* udjlauncher.png */; };
 		A39A0C8B14C4ADDF008A6D54 /* LibraryEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A39A0C8A14C4ADDF008A6D54 /* LibraryEntryCell.m */; };
 		A39AF6701497CB74006ADF19 /* UDJConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A39AF66F1497CB74006ADF19 /* UDJConnection.m */; };
 		A39AF68B1497CFBC006ADF19 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF68A1497CFBC006ADF19 /* Security.framework */; };
@@ -134,6 +135,7 @@
 		A36D2CCB14A818130087E992 /* SearchingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchingViewController.xib; sourceTree = "<group>"; };
 		A374BDFF14A2EF36001A0DE0 /* UDJEventList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJEventList.h; sourceTree = "<group>"; };
 		A374BE0014A2EF36001A0DE0 /* UDJEventList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJEventList.m; sourceTree = "<group>"; };
+		A38B629F14C736C70088640D /* udjlauncher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = udjlauncher.png; sourceTree = "<group>"; };
 		A39A0C8914C4ADDF008A6D54 /* LibraryEntryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryEntryCell.h; sourceTree = "<group>"; };
 		A39A0C8A14C4ADDF008A6D54 /* LibraryEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryEntryCell.m; sourceTree = "<group>"; };
 		A39AF6581497C803006ADF19 /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = ../RestKit/RestKit.xcodeproj; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A38B629F14C736C70088640D /* udjlauncher.png */,
 				A3D334D614C6A02A00A90D58 /* uparrow.jpg */,
 				A3D334D414C6A02300A90D58 /* downarrow.jpg */,
 				A3EF398014C64D33003889E0 /* addbutton.jpg */,
@@ -464,6 +467,7 @@
 				A3EF398114C64D33003889E0 /* addbutton.jpg in Resources */,
 				A3D334D514C6A02300A90D58 /* downarrow.jpg in Resources */,
 				A3D334D714C6A02A00A90D58 /* uparrow.jpg in Resources */,
+				A38B62A014C736C70088640D /* udjlauncher.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
