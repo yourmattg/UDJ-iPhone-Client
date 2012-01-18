@@ -37,14 +37,6 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-// addSong: add the selected song to the event playlist
--(void)addSong{
-    UIAlertView* notification = [[UIAlertView alloc] initWithTitle:@"Song Add" message:@"Thanks! Your song will be added to the playlist shortly!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [[UDJConnection sharedConnection] sendAddSongRequest:selectedSong eventId:[UDJEventList sharedEventList].currentEvent.eventId];
-    [notification show];
-    [notification release];
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -54,11 +46,6 @@
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backToLibSearch)];
     self.navigationItem.leftBarButtonItem = backButton;
     [backButton release];
-    // toolbar    
-    UIBarButtonItem* addSongButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addSong)];
-    UIBarButtonItem* space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    NSArray* toolbarItems = [NSArray arrayWithObjects: space, addSongButton, space, nil];
-    self.toolbarItems = toolbarItems;
 }
 
 - (void)viewDidUnload
@@ -120,6 +107,7 @@
     UDJSong* song = [resultList songAtIndex:indexPath.row];
     cell.songLabel.text = song.title;
     cell.artistLabel.text = song.artist;
+    cell.addButton.tag = song.librarySongId;
     
     return cell;
 }

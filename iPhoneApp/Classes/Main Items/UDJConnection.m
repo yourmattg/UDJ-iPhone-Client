@@ -325,7 +325,7 @@ static UDJConnection* sharedUDJConnection = nil;
     [parser release];
 }
 
--(void)sendAddSongRequest:(UDJSong *)song eventId:(NSInteger)eventId{
+-(void)sendAddSongRequest:(NSInteger)librarySongId eventId:(NSInteger)eventId{
     //create url [PUT] /udj/events/event_id/active_playlist/songs
     NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@",client.baseURL,@"/events/",eventId,@"/active_playlist/songs"];
     
@@ -333,7 +333,7 @@ static UDJConnection* sharedUDJConnection = nil;
     NSMutableDictionary* songAddDictionary = [NSMutableDictionary new];
     NSDate *currentDate = [NSDate date];
     NSNumber* clientRequestIdAsNumber = [NSNumber numberWithDouble:[currentDate timeIntervalSinceReferenceDate]];
-    NSNumber* libraryIdAsNumber = [NSNumber numberWithInt:song.librarySongId];
+    NSNumber* libraryIdAsNumber = [NSNumber numberWithInt:librarySongId];
     [songAddDictionary setObject:clientRequestIdAsNumber forKey:@"client_request_id"];
     [songAddDictionary setObject:libraryIdAsNumber forKey:@"lib_id"];
     

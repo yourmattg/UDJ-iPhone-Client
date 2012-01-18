@@ -152,7 +152,7 @@
     self.navigationController.toolbar.tintColor = [UIColor blackColor];
     UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(sendRefreshRequest)];
     UIBarButtonItem* space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    NSArray* toolbarItems = [NSArray arrayWithObjects: refreshButton, space, nil];
+    NSArray* toolbarItems = [NSArray arrayWithObjects: space, refreshButton, space, nil];
     self.toolbarItems = toolbarItems;
     self.navigationController.toolbarHidden=NO;
     
@@ -228,7 +228,13 @@
     if(song!=nil) songText = [songText stringByAppendingString: song.title];
 	cell.songLabel.text = songText;
     cell.artistLabel.text = [NSString stringWithFormat: @"%@%@", @"By ", song.artist, nil];
-    cell.addedByLabel.text = [NSString stringWithFormat:@"%@%@", @"Added by ", song.adderName];
+    
+    NSString* adderName;
+    UDJConnection* connection = [UDJConnection sharedConnection];
+    NSInteger userId = [connection.userID intValue];
+    if(song.adderId == userId) adderName = @"You";
+    else adderName = song.adderName;
+    cell.addedByLabel.text = [NSString stringWithFormat:@"%@%@", @"Added by ", adderName];
     
     return cell;
 }

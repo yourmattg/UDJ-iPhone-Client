@@ -20,11 +20,11 @@
     BOOL acceptLibSearch;
     PlaylistViewController* playlistView;
     NSInteger clientRequestCount; // used to keep a unique client request id
+    NSNumber* userID;
     
     @private
     NSString* serverPrefix; // without spaces: http://0.0.0.0:4897/udj
     NSString* ticket;
-    NSNumber* userID;
     RKClient* client; // configures, dispatches request
     UIViewController* currentController; // keeps track of the current view controller so we can pass info to it
     NSDictionary* headers;
@@ -59,7 +59,7 @@
 
 -(void)sendLibSearchRequest:(NSString*)param eventId:(NSInteger)eventId maxResults:(NSInteger)maxResults;
 -(void)handleLibSearchResults:(RKResponse*)response;
--(void)sendAddSongRequest:(UDJSong*)song eventId:(NSInteger)eventId;
+-(void)sendAddSongRequest:(NSInteger)librarySongId eventId:(NSInteger)eventId;
 -(void)handleFailedSongAdd:(RKRequest*)request;
 
 -(void)resetAcceptResponses;
