@@ -322,6 +322,7 @@ static UDJConnection* sharedUDJConnection = nil;
 -(void)sendLibSearchRequest:(NSString *)param eventId:(NSInteger)eventId maxResults:(NSInteger)maxResults{
     //create url [GET] /udj/events/event_id/available_music?query=query{&max_results=maximum_number_of_results}
     NSString* urlString = client.baseURL;
+    param = [param stringByReplacingOccurrencesOfString:@" " withString:@"+"];
     urlString = [urlString stringByAppendingFormat:@"%@%d%@%@%@%d",@"/events/",eventId,@"/available_music?query=",param,@"&max_results=",maxResults];
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
