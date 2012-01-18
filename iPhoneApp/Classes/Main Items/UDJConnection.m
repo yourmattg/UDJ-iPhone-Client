@@ -15,7 +15,6 @@
 #import "UDJPlaylist.h"
 #import "LibraryResultsController.h"
 #import "UDJSongList.h"
-#import "UDJSongAdd.h"
 #import "UDJMappableArray.h"
 
 static UDJConnection* sharedUDJConnection = nil;

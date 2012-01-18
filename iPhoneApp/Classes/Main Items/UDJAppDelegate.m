@@ -12,7 +12,6 @@
 #import "UDJEvent.h"
 #import "UDJEventList.h"
 #import "UDJPlaylist.h"
-#import "UDJSongAdd.h"
 #import "UDJSongList.h"
 #import "UDJMappableArray.h"
 
@@ -37,27 +36,6 @@
 	return modelData;
 }
 
-// initObjectMappings: used for UDJSong
-// warning: currently not being used right now, may remove later
--(void)initObjectMappings{
-    RKObjectManager* manager = [RKObjectManager objectManagerWithBaseURL:self.baseUrl];
-    manager.serializationMIMEType = RKMIMETypeJSON;
-    // mapping for UDJSongAdd class to a NSMutableDictionary
-    RKObjectMapping* udjSongAddSerializationMapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
-    [udjSongAddSerializationMapping mapKeyPathsToAttributes:@"lib_id",@"librarySongId",@"client_request_id",@"clientRequestId", nil];
-    [manager.mappingProvider setSerializationMapping:udjSongAddSerializationMapping forClass:[UDJSongAdd class]];
-    
-    // mapping for UDJMappableArray
-    RKObjectMapping* udjMappableArrayMapping = [RKObjectMapping mappingForClass:[UDJMappableArray class]];
-    [udjMappableArrayMapping mapKeyPath:@"array" toRelationship:@"array" withMapping:udjSongAddSerializationMapping serialize:YES];
-    [manager.mappingProvider setSerializationMapping:[udjMappableArrayMapping inverseMapping] forClass:[UDJMappableArray class]];
-    
-    // mapping for UDJSongList
-    RKObjectMapping* udjSongListMapping = [RKObjectMapping mappingForClass:[UDJSongList class]];
-    [udjSongListMapping mapKeyPath:@"array" toAttribute:@"currentList"];
-    [manager.mappingProvider setSerializationMapping:[udjSongListMapping inverseMapping] forClass:[NSManagedObject class]];
-}
-
 #pragma mark -
 #pragma mark Application lifecycle
 
@@ -72,9 +50,6 @@
     [UDJEventList new]; // make our eventlist singleton
     [UDJPlaylist new]; // make UDJPlaylist singleton
     [[UDJPlaylist sharedUDJPlaylist] initVoteRecordKeeper];
-    
-    //set up object mappings
-    [self initObjectMappings];
     
 	//create a UDJViewController (the login screen), and make it the root view
 	viewController    = [[UDJViewController alloc] initWithNibName:@"UDJViewController" bundle:nil];
