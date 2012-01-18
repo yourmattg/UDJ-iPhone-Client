@@ -11,6 +11,7 @@
 #import <RestKit/RKJSONParserJSONKit.h>
 #import <RestKit/JSONKit.h>
 #import "PlaylistViewController.h"
+#import "LocationManager.h"
 
 @interface UDJConnection : NSObject<RKRequestDelegate>{
     @public
@@ -30,6 +31,8 @@
     NSDictionary* headers;
     NSMutableDictionary* currentRequests;
     UINavigationController* navigationController;
+    LocationManager* locationManager;
+    
 }
 
 + (id) sharedConnection;
@@ -76,5 +79,6 @@
 @property(nonatomic, assign) PlaylistViewController* playlistView;
 @property(nonatomic) BOOL acceptLibSearch;
 @property(nonatomic,assign) UINavigationController* navigationController;
+@property(nonatomic,retain) LocationManager* locationManager;
 
 @end

@@ -21,7 +21,7 @@ static UDJConnection* sharedUDJConnection = nil;
 
 @implementation UDJConnection
 
-@synthesize serverPrefix, ticket, client, userID, headers, playlistView, currentRequests, acceptLibSearch, navigationController;
+@synthesize serverPrefix, ticket, client, userID, headers, playlistView, currentRequests, acceptLibSearch, navigationController, locationManager;
 
 // **************************** General UDJConnection Methods ********************************
 
@@ -43,6 +43,7 @@ static UDJConnection* sharedUDJConnection = nil;
     client = [RKClient clientWithBaseURL:prefix];
     currentRequests = [NSMutableDictionary new];
     clientRequestCount = 1;
+    locationManager = [[LocationManager alloc] init];
 }
 
 - (void) setCurrentController:(id)controller{
@@ -121,8 +122,10 @@ static UDJConnection* sharedUDJConnection = nil;
 // sendNearbyEventSearch: requests all the events near the client's location
 - (void) sendNearbyEventSearch{
     acceptEvents=true;
-    float latitude = [self getLatitude];
-    float longitude = [self getLongitude];
+    
+    // use location manager to get long/latitude
+    float latitude = [locationManager getLatitude];
+    float longitude = [locationManager getLongitude];
     
     // create URL
     NSString* urlString = client.baseURL;
@@ -457,6 +460,7 @@ static UDJConnection* sharedUDJConnection = nil;
     [ticket release];
     [client release];
     [currentRequests release];
+    [locationManager release];
     [super dealloc];
 }
 

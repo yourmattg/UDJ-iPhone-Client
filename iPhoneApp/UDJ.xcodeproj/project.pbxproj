@@ -30,6 +30,9 @@
 		A36D2CC814A810230087E992 /* PartySearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A36D2CC614A810230087E992 /* PartySearchViewController.xib */; };
 		A36D2CCC14A818130087E992 /* SearchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A36D2CCA14A818130087E992 /* SearchingViewController.m */; };
 		A36D2CCD14A818130087E992 /* SearchingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A36D2CCB14A818130087E992 /* SearchingViewController.xib */; };
+		A3720B3014C74FE800D1E30C /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A3720B2F14C74FE800D1E30C /* LocationManager.m */; };
+		A3720B3214C7513600D1E30C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3720B3114C7513600D1E30C /* CoreLocation.framework */; };
+		A3720B3414C7514400D1E30C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3720B3314C7514400D1E30C /* CoreFoundation.framework */; };
 		A374BE0114A2EF36001A0DE0 /* UDJEventList.m in Sources */ = {isa = PBXBuildFile; fileRef = A374BE0014A2EF36001A0DE0 /* UDJEventList.m */; };
 		A38B62A014C736C70088640D /* udjlauncher.png in Resources */ = {isa = PBXBuildFile; fileRef = A38B629F14C736C70088640D /* udjlauncher.png */; };
 		A39A0C8B14C4ADDF008A6D54 /* LibraryEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A39A0C8A14C4ADDF008A6D54 /* LibraryEntryCell.m */; };
@@ -130,6 +133,10 @@
 		A36D2CC914A818130087E992 /* SearchingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchingViewController.h; sourceTree = "<group>"; };
 		A36D2CCA14A818130087E992 /* SearchingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchingViewController.m; sourceTree = "<group>"; };
 		A36D2CCB14A818130087E992 /* SearchingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchingViewController.xib; sourceTree = "<group>"; };
+		A3720B2E14C74FE800D1E30C /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
+		A3720B2F14C74FE800D1E30C /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
+		A3720B3114C7513600D1E30C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		A3720B3314C7514400D1E30C /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		A374BDFF14A2EF36001A0DE0 /* UDJEventList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJEventList.h; sourceTree = "<group>"; };
 		A374BE0014A2EF36001A0DE0 /* UDJEventList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJEventList.m; sourceTree = "<group>"; };
 		A38B629F14C736C70088640D /* udjlauncher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = udjlauncher.png; sourceTree = "<group>"; };
@@ -168,6 +175,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3720B3414C7514400D1E30C /* CoreFoundation.framework in Frameworks */,
+				A3720B3214C7513600D1E30C /* CoreLocation.framework in Frameworks */,
 				A39AF6961497D0A4006ADF19 /* libxml2.dylib in Frameworks */,
 				A39AF6941497D09A006ADF19 /* SystemConfiguration.framework in Frameworks */,
 				A39AF68B1497CFBC006ADF19 /* Security.framework in Frameworks */,
@@ -208,6 +217,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				A3720B3314C7514400D1E30C /* CoreFoundation.framework */,
+				A3720B3114C7513600D1E30C /* CoreLocation.framework */,
 				A39AF6951497D0A4006ADF19 /* libxml2.dylib */,
 				A39AF6931497D09A006ADF19 /* SystemConfiguration.framework */,
 				A39AF6911497D081006ADF19 /* MobileCoreServices.framework */,
@@ -347,6 +358,8 @@
 		A3F58C5514A1519F00756F7D /* Main Items */ = {
 			isa = PBXGroup;
 			children = (
+				A3720B2E14C74FE800D1E30C /* LocationManager.h */,
+				A3720B2F14C74FE800D1E30C /* LocationManager.m */,
 				1D3623240D0F684500981E51 /* UDJAppDelegate.h */,
 				1D3623250D0F684500981E51 /* UDJAppDelegate.m */,
 				A39AF66E1497CB74006ADF19 /* UDJConnection.h */,
@@ -493,6 +506,7 @@
 				A3DAD57D14BD253600688CE0 /* UDJMappableArray.m in Sources */,
 				A39A0C8B14C4ADDF008A6D54 /* LibraryEntryCell.m in Sources */,
 				A3265DB314C6101400FC692B /* PlaylistEntryCell.m in Sources */,
+				A3720B3014C74FE800D1E30C /* LocationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
