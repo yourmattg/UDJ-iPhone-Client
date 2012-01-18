@@ -236,6 +236,9 @@
     else adderName = song.adderName;
     cell.addedByLabel.text = [NSString stringWithFormat:@"%@%@", @"Added by ", adderName];
     
+    cell.upVoteLabel.text = [NSString stringWithFormat:@"%d", song.upVotes];
+    cell.downVoteLabel.text = [NSString stringWithFormat:@"%d", song.downVotes];
+    
     return cell;
 }
 

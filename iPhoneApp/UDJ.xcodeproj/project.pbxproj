@@ -42,6 +42,8 @@
 		A39AF6941497D09A006ADF19 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF6931497D09A006ADF19 /* SystemConfiguration.framework */; };
 		A39AF6961497D0A4006ADF19 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF6951497D0A4006ADF19 /* libxml2.dylib */; };
 		A3CF872F14B8F8F000A9F829 /* UDJSongList.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CF872E14B8F8F000A9F829 /* UDJSongList.m */; };
+		A3D334D514C6A02300A90D58 /* downarrow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3D334D414C6A02300A90D58 /* downarrow.jpg */; };
+		A3D334D714C6A02A00A90D58 /* uparrow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3D334D614C6A02A00A90D58 /* uparrow.jpg */; };
 		A3DAD57D14BD253600688CE0 /* UDJMappableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DAD57C14BD253600688CE0 /* UDJMappableArray.m */; };
 		A3EF398114C64D33003889E0 /* addbutton.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3EF398014C64D33003889E0 /* addbutton.jpg */; };
 		A3F58C5C14A15F0B00756F7D /* AuthenticateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58C5A14A15F0B00756F7D /* AuthenticateViewController.m */; };
@@ -145,6 +147,8 @@
 		A39AF6951497D0A4006ADF19 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		A3CF872D14B8F8F000A9F829 /* UDJSongList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJSongList.h; sourceTree = "<group>"; };
 		A3CF872E14B8F8F000A9F829 /* UDJSongList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJSongList.m; sourceTree = "<group>"; };
+		A3D334D414C6A02300A90D58 /* downarrow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = downarrow.jpg; sourceTree = "<group>"; };
+		A3D334D614C6A02A00A90D58 /* uparrow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = uparrow.jpg; sourceTree = "<group>"; };
 		A3DAD57B14BD253600688CE0 /* UDJMappableArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJMappableArray.h; sourceTree = "<group>"; };
 		A3DAD57C14BD253600688CE0 /* UDJMappableArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJMappableArray.m; sourceTree = "<group>"; };
 		A3EF398014C64D33003889E0 /* addbutton.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addbutton.jpg; sourceTree = "<group>"; };
@@ -233,6 +237,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A3D334D614C6A02A00A90D58 /* uparrow.jpg */,
+				A3D334D414C6A02300A90D58 /* downarrow.jpg */,
 				A3EF398014C64D33003889E0 /* addbutton.jpg */,
 				A32A384614AE917600D166CF /* UDJ-Info.plist */,
 				A34FB30214B8EB5F00BE5CE2 /* LibraryResultsController.xib */,
@@ -456,6 +462,8 @@
 				A32A384714AE917600D166CF /* UDJ-Info.plist in Resources */,
 				A34FB30414B8EB5F00BE5CE2 /* LibraryResultsController.xib in Resources */,
 				A3EF398114C64D33003889E0 /* addbutton.jpg in Resources */,
+				A3D334D514C6A02300A90D58 /* downarrow.jpg in Resources */,
+				A3D334D714C6A02A00A90D58 /* uparrow.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
