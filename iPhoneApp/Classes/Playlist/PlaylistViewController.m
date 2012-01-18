@@ -14,10 +14,17 @@
 #import "LibrarySearchViewController.h"
 #import "PlaylistEntryCell.h"
 #import "LibraryEntryCell.h"
+#import "EventGoerViewController.h"
 
 @implementation PlaylistViewController
 
 @synthesize theEvent, playlist;
+
+-(void)showEventGoers{
+    EventGoerViewController* eventGoerViewController = [[EventGoerViewController alloc] initWithNibName:@"EventGoerViewController" bundle:[NSBundle mainBundle]];
+    [self.navigationController pushViewController:eventGoerViewController animated:YES];
+    [eventGoerViewController release];
+}
 
 // handle button clicks from alertview (pop up message boxes)
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -159,7 +166,8 @@
     self.navigationController.toolbar.tintColor = [UIColor blackColor];
     UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(sendRefreshRequest)];
     UIBarButtonItem* space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    NSArray* toolbarItems = [NSArray arrayWithObjects: space, refreshButton, space, nil];
+    UIBarButtonItem* eventGoerButton = [[UIBarButtonItem alloc] initWithTitle:@"People" style:UIBarButtonItemStylePlain target:self action:@selector(showEventGoers)];
+    NSArray* toolbarItems = [NSArray arrayWithObjects: space, refreshButton, space, eventGoerButton, space, nil];
     self.toolbarItems = toolbarItems;
     self.navigationController.toolbarHidden=NO;
     

@@ -205,16 +205,15 @@ static UDJConnection* sharedUDJConnection = nil;
     return response.statusCode;
 }
 
-// **************************** Location Finding ********************************
-
-// getLongitude: INCOMPLETE
-- (float)getLongitude{
-    return (float)40;
-}
-
-// getLatitude: INCOMPLETE
-- (float)getLatitude{
-    return (float)80;
+- (void) sendEventGoerRequest:(NSInteger)eventId{
+    // [GET] /udj/events/event_id/users
+    NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@", client.baseURL, @"/events/", eventId, @"/users"];
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
+    request.method = RKRequestMethodGET;
+    request.additionalHTTPHeaders = headers;
+    request.queue = client.requestQueue;
+    
+    [request send];
 }
 
 // **************************** Playlist Methods ********************************

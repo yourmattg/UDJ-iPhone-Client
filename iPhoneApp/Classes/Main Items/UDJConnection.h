@@ -50,9 +50,7 @@
 - (void) acceptEvents:(BOOL)value;
 - (NSInteger) enterEventRequest;
 - (NSInteger) leaveEventRequest;
-
-- (float)getLongitude;
-- (float)getLatitude;
+- (void) sendEventGoerRequest:(NSInteger)eventId;
 
 - (void) sendPlaylistRequest:(NSInteger)eventId;
 - (void)handlePlaylistResponse:(RKResponse*)response;

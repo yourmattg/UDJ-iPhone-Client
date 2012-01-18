@@ -25,6 +25,7 @@
 -(void)downVote;
 -(void)upVote;
 -(void)removeSong;
+-(void)showEventGoers;
 
 @property (nonatomic, retain) UDJEvent* theEvent;
 @property (nonatomic, retain) UDJPlaylist* playlist;
