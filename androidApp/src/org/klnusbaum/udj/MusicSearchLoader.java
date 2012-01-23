@@ -40,8 +40,41 @@ import org.klnusbaum.udj.containers.LibraryEntry;
 import org.klnusbaum.udj.exceptions.EventOverException;
 
 public class MusicSearchLoader 
-  extends AsyncTaskLoader<List<LibraryEntry>>
+  extends AsyncTaskLoader<MusicSearchLoader.MusicSearchResult>
 {
+ 
+  public enum MusicSearchError{
+    NO_ERROR, 
+    EVENT_ENDED_ERROR,
+    NO_SEARCH_ERROR,
+    SERVER_ERROR,
+    AUTHENTICATION_ERROR};
+  private static final String TAG = "MusicSearchLoader";
+
+  public static class MusicSearchResult{
+    private List<LibraryEntry> res;
+    private MusicSearchError error;
+  
+    public MusicSearchResult(List<LibraryEntry> res){
+      this.res = res;
+      this.error = MusicSearchError.NO_ERROR;
+    }
+
+    public MusicSearchResult(List<LibraryEntry> res, MusicSearchError error){
+      this.res = res;
+      this.error = error;
+    }
+
+    public List<LibraryEntry> getResults(){
+      return res;
+    }
+
+    public MusicSearchError getError(){
+      return error;
+    }
+  }
+
+
   private String query;
   private Account account;
 
@@ -53,40 +86,67 @@ public class MusicSearchLoader
     this.account = account;
   }
 
-  public List<LibraryEntry> loadInBackground(){
+  public MusicSearchResult loadInBackground(){
+    return doSearch(true);
+  }
+
+  private MusicSearchResult doSearch(boolean attemptReauth){
     if(query != null){
+      AccountManager am = AccountManager.get(getContext());
+      String authToken = "";
       try{
-        AccountManager am = AccountManager.get(getContext());
-        String authToken = am.blockingGetAuthToken(account, "", true);
-        long eventId = 
-          Long.valueOf(am.getUserData(account, Constants.LAST_EVENT_ID_DATA));
-        return ServerConnection.availableMusicQuery(query, eventId, authToken);
-        //TODO do something to the potential errors
-      }
-      catch(JSONException e){
-        //TODO notify the user
-      }
-      catch(ParseException e){
-        //TODO notify the user
+        authToken = am.blockingGetAuthToken(account, "", true);
       }
       catch(IOException e){
-        //TODO notify the user
-      }
-      catch(AuthenticationException e){
-        //TODO notify the user
+        //TODO this might actually be an auth error
+        return new MusicSearchResult(null, 
+          MusicSearchError.AUTHENTICATION_ERROR);
       }
       catch(AuthenticatorException e){
-        //TODO notify the user
+        return new MusicSearchResult(null, 
+          MusicSearchError.AUTHENTICATION_ERROR);
       }
       catch(OperationCanceledException e){
-        //TODO notify user
+        return new MusicSearchResult(null, 
+          MusicSearchError.AUTHENTICATION_ERROR);
+      }
+
+      try{
+        long eventId = 
+          Long.valueOf(am.getUserData(account, Constants.LAST_EVENT_ID_DATA));
+        List<LibraryEntry> list = 
+          ServerConnection.availableMusicQuery(query, eventId, authToken);
+        return new MusicSearchResult(list);
+      }
+      catch(JSONException e){
+        return new MusicSearchResult(null, 
+          MusicSearchError.SERVER_ERROR);
+      }
+      catch(ParseException e){
+        return new MusicSearchResult(null, 
+          MusicSearchError.SERVER_ERROR);
+      }
+      catch(IOException e){
+        return new MusicSearchResult(null, 
+          MusicSearchError.SERVER_ERROR);
+      }
+      catch(AuthenticationException e){
+        if(attemptReauth){
+          Log.d(TAG, "soft auth failure");
+          am.invalidateAuthToken(Constants.ACCOUNT_TYPE, authToken);
+          return doSearch(false);
+        }
+        else{
+          Log.d(TAG, "hard auth failure");
+          return new MusicSearchResult(null, 
+            MusicSearchError.AUTHENTICATION_ERROR);
+        }
       }
       catch(EventOverException e){
-        //Let acitivyt take care of things at this point
+        return new MusicSearchResult(null, MusicSearchError.EVENT_ENDED_ERROR);
       }
-      return null;
     }
-    return null;
+    return new MusicSearchResult(null, MusicSearchError.NO_SEARCH_ERROR);
   }
 
   @Override

@@ -296,7 +296,7 @@ public:
    * @return The name of the song column in the library table.
    */
   static const QString& getLibSongColName(){
-    static const QString libSongColName = "song";
+    static const QString libSongColName = "Song";
     return libSongColName;
   }
 
@@ -306,7 +306,7 @@ public:
    * @return The name of the artist column in the library table.
    */
   static const QString& getLibArtistColName(){
-    static const QString libArtistColName = "artist";
+    static const QString libArtistColName = "Artist";
     return libArtistColName;
   }
   
@@ -316,7 +316,7 @@ public:
    * @return The name of the album column in the library table.
    */
   static const QString& getLibAlbumColName(){
-    static const QString libAlbumColName = "album";
+    static const QString libAlbumColName = "Album";
     return libAlbumColName;
   }
 
@@ -326,7 +326,7 @@ public:
    * @return The name of the file column in the library table.
    */
   static const QString& getLibFileColName(){
-    static const QString libFileColName = "file_path";
+    static const QString libFileColName = "File";
     return libFileColName;
   }
 
@@ -336,7 +336,7 @@ public:
    * @return The name of the duration column in the library table.
    */
   static const QString& getLibDurationColName(){
-    static const QString libDurationColName = "duration";
+    static const QString libDurationColName = "Length";
     return libDurationColName;
   }
 
@@ -588,6 +588,80 @@ public:
   static const QString& getEventGoerLeftEventState(){
     static const QString leftEventState = "LE";
     return leftEventState;
+  }
+
+  static const QString& getLibIdAlias(){
+    static const QString libIdAlias = "libIdAlias";
+    return libIdAlias;
+  }
+
+  /**
+   * Gets the name of the active playlist remove request table.
+   *
+   * @return the name of the active playlist remove request table.
+   */
+  static const QString& getPlaylistRemoveRequestsTableName(){
+    static const QString playlistRemoveRequestsTableName = 
+      "playlist_remove_requests";
+    return playlistRemoveRequestsTableName;
+  }
+ 
+  /** 
+   * \brief Get the name for the lib id column in the playlist remove request 
+   * table.
+   *
+   * @return The name fo the lib id column in the playlist remove request table.
+   */
+  static const QString& getPlaylistRemoveIdColName(){
+    static const QString playlistRemoveRequestIdColName = "id";
+    return playlistRemoveRequestIdColName;
+  }
+  
+  /** 
+   * \brief Get the name for the lib id column in the playlist remove request 
+   * table.
+   *
+   * @return The name fo the lib id column in the playlist remove request table.
+   */
+  static const QString& getPlaylistRemoveEntryIdColName(){
+    static const QString playlistRemoveLibIdColName = "playlist_id";
+    return playlistRemoveLibIdColName;
+  }
+
+  /** 
+   * \brief Get the name fo the sync status column in the playlist remove 
+   * request table.
+   *
+   * @return The name fo the lib sync status column in the playlist remove 
+   * request table.
+   */
+  static const QString& getPlaylistRemoveSycnStatusColName(){
+    static const QString playlistRemoveSycnStatusColName = "sync_status";
+    return playlistRemoveSycnStatusColName;
+  }
+
+  /** 
+   * \brief Gets the sync status used in the playlist edd request table to 
+   * indicate that an remove is synced.
+   *
+   * @return The sync status used in the playlist remove request table to 
+   * indicate that an remove is synced.
+   */
+  static const playlist_remove_sync_status_t& getPlaylistRemoveNeedsSync(){
+    static const playlist_remove_sync_status_t needs_sync = 1;
+    return needs_sync;
+  }
+
+  /** 
+   * \brief Gets the sync status used in the playlist remove request table to 
+   * indicate that an remove is synced.
+   *
+   * @return The sync status used in the playlist remove request table to 
+   * indicate that an remove is synced.
+   */
+  static const playlist_remove_sync_status_t& getPlaylistRemoveIsSynced(){
+    static const playlist_remove_sync_status_t isSynced = 0;
+    return isSynced;
   }
 
 
@@ -965,30 +1039,29 @@ private:
   static const QString& getCreateActivePlaylistViewQuery(){
     static const QString createActivePlaylistViewQuery = 
       "CREATE VIEW IF NOT EXISTS "+getActivePlaylistViewName() + " " + 
-      "AS SELECT * , (" + getUpVoteColName() + " - " + getDownVoteColName() +
-      ") AS " + getVoteCountColName() + " FROM " + getActivePlaylistTableName()
+      "AS SELECT " +
+      getActivePlaylistTableName() + "." + getActivePlaylistIdColName() + "," +
+      getActivePlaylistTableName() + "." + 
+        getActivePlaylistLibIdColName() + "," +
+      getLibraryTableName() + "." + getLibSongColName() + "," +
+      getLibraryTableName() + "." + getLibFileColName() + "," +
+      getLibraryTableName() + "." + getLibArtistColName() + "," +
+      getLibraryTableName() + "." + getLibAlbumColName() + "," +
+      getActivePlaylistTableName() + "." + getUpVoteColName() + "," +
+      getActivePlaylistTableName() + "." + getDownVoteColName() + "," +
+      getLibraryTableName() + "." + getLibDurationColName() + "," +
+      getActivePlaylistTableName() + "." + getAdderIdColName() + "," +
+      getActivePlaylistTableName() + "." + getAdderUsernameColName() + "," +
+      getActivePlaylistTableName() + "." + getTimeAddedColName() + "," +
+      getLibraryTableName() + "." + getLibIdColName() + 
+        " AS " + getLibIdAlias() + " " +
+      "FROM " + getActivePlaylistTableName()
        + " INNER JOIN " +
       getLibraryTableName() + " ON " + getActivePlaylistTableName() + "." +
       getActivePlaylistLibIdColName() + "=" + getLibraryTableName() + "." +
       getLibIdColName() +" "
       "ORDER BY " +getPriorityColName() + " ASC;";
     return createActivePlaylistViewQuery;
-  }
-
-  /** 
-   * \brief Gets the query used to create the available music view (a join
-   * between the available music table and the library table).
-   *
-   * @return The query used to create the available music view.
-   */
-  static const QString& getCreateAvailableMusicViewQuery(){
-    static const QString createAvailableMusicViewQuery = 
-      "CREATE VIEW IF NOT EXISTS "+getAvailableMusicViewName() + " " + 
-      "AS SELECT * FROM " + getAvailableMusicTableName() + " INNER JOIN " +
-      getLibraryTableName() + " ON " + getAvailableMusicTableName() + "." +
-      getAvailableEntryLibIdColName() + "=" + getLibraryTableName() + "." +
-      getLibIdColName() +";";
-    return createAvailableMusicViewQuery;
   }
 
   /**
@@ -1134,75 +1207,6 @@ private:
         QString::number(getPlaylistAddNeedsSync()) + 
       ");";
     return createPlaylistAddRequestsTableQuery;
-  }
-
-  /**
-   * Gets the name of the active playlist remove request table.
-   *
-   * @return the name of the active playlist remove request table.
-   */
-  static const QString& getPlaylistRemoveRequestsTableName(){
-    static const QString playlistRemoveRequestsTableName = 
-      "playlist_remove_requests";
-    return playlistRemoveRequestsTableName;
-  }
- 
-  /** 
-   * \brief Get the name for the lib id column in the playlist remove request 
-   * table.
-   *
-   * @return The name fo the lib id column in the playlist remove request table.
-   */
-  static const QString& getPlaylistRemoveIdColName(){
-    static const QString playlistRemoveRequestIdColName = "id";
-    return playlistRemoveRequestIdColName;
-  }
-  
-  /** 
-   * \brief Get the name for the lib id column in the playlist remove request 
-   * table.
-   *
-   * @return The name fo the lib id column in the playlist remove request table.
-   */
-  static const QString& getPlaylistRemoveEntryIdColName(){
-    static const QString playlistRemoveLibIdColName = "playlist_id";
-    return playlistRemoveLibIdColName;
-  }
-
-  /** 
-   * \brief Get the name fo the sync status column in the playlist remove 
-   * request table.
-   *
-   * @return The name fo the lib sync status column in the playlist remove 
-   * request table.
-   */
-  static const QString& getPlaylistRemoveSycnStatusColName(){
-    static const QString playlistRemoveSycnStatusColName = "sync_status";
-    return playlistRemoveSycnStatusColName;
-  }
-
-  /** 
-   * \brief Gets the sync status used in the playlist edd request table to 
-   * indicate that an remove is synced.
-   *
-   * @return The sync status used in the playlist remove request table to 
-   * indicate that an remove is synced.
-   */
-  static const playlist_remove_sync_status_t& getPlaylistRemoveNeedsSync(){
-    static const playlist_remove_sync_status_t needs_sync = 1;
-    return needs_sync;
-  }
-
-  /** 
-   * \brief Gets the sync status used in the playlist remove request table to 
-   * indicate that an remove is synced.
-   *
-   * @return The sync status used in the playlist remove request table to 
-   * indicate that an remove is synced.
-   */
-  static const playlist_remove_sync_status_t& getPlaylistRemoveIsSynced(){
-    static const playlist_remove_sync_status_t isSynced = 0;
-    return isSynced;
   }
 
   /**

@@ -19,14 +19,14 @@
 #ifndef LIBRARY_VIEW_HPP
 #define LIBRARY_VIEW_HPP
 #include "ConfigDefs.hpp"
+#include "DataStore.hpp"
 #include <QTableView>
 
 class QContextMenuEvent;
-class QSqlQueryModel;
 
 namespace UDJ{
 
-class DataStore;
+class MusicModel;
 
 /** 
  *\brief A class for viewing the current contents of the users music library.
@@ -67,7 +67,7 @@ private:
   DataStore *dataStore;
 
   /** \brief The model backing LibraryView.  */
-  QSqlQueryModel *libraryModel;
+  MusicModel *libraryModel;
 
   /** \brief Action used for deleting songs from the library. */
   QAction *deleteSongAction;
@@ -82,6 +82,8 @@ private:
 
   /** \brief Initilaizes actions.  */
   void createActions();
+
+  void configureColumns();
 
   /**
    * \brief Gets the name used for the delete context menu item.
@@ -121,12 +123,23 @@ private slots:
    */
   void deleteSongs();
 
-  /**
-   * \brief Refreshes the display of the library.
-   */
-  void refresh();
-
   void addSongsToSongList(song_list_id_t songListId);
+
+  static const QString& getDataQuery(){
+    static const QString dataQuery = 
+      "SELECT " +
+      DataStore::getLibIdColName() + ", " +
+      DataStore::getLibSongColName() + ", " +
+      DataStore::getLibArtistColName() + ", " +
+      DataStore::getLibAlbumColName() + ", " +
+      DataStore::getLibDurationColName() + ", " +
+      DataStore::getLibFileColName() + " " +
+      "FROM " + DataStore::getLibraryTableName() + " WHERE " +
+      DataStore::getLibIsDeletedColName() + "=0 AND " +
+      DataStore::getLibSyncStatusColName() + " != " +
+      QString::number(DataStore::getLibNeedsAddSyncStatus()) + ";";
+    return dataQuery;
+  }
 
   //@}
 };

@@ -43,6 +43,7 @@ import org.klnusbaum.udj.Constants;
 import org.klnusbaum.udj.Utils;
 import org.klnusbaum.udj.UDJEventProvider;
 import org.klnusbaum.udj.exceptions.EventOverException;
+import org.klnusbaum.udj.exceptions.AlreadyInEventException;
 
 
 /**
@@ -55,7 +56,8 @@ public class EventCommService extends IntentService{
     AUTHENTICATION_ERROR,
     SERVER_ERROR,
     EVENT_OVER_ERROR,
-    NO_NETWORK_ERROR 
+    NO_NETWORK_ERROR,
+    ALREADY_IN_EVENT_ERROR
   }
 
   private static final String TAG = "EventCommService";
@@ -71,11 +73,11 @@ public class EventCommService extends IntentService{
     final Account account = 
       (Account)intent.getParcelableExtra(Constants.ACCOUNT_EXTRA);
     if(intent.getAction().equals(Intent.ACTION_INSERT)){
-      enterEvent(intent, am, account);
+      enterEvent(intent, am, account, true);
     }
     else if(intent.getAction().equals(Intent.ACTION_DELETE)){
       //TODO handle if userId is null shouldn't ever be, but hey...
-      leaveEvent(am, account);
+      leaveEvent(am, account, true);
     }
     else{
       Log.d(TAG, "ACTION wasn't delete or insert, it was " + 
@@ -83,12 +85,9 @@ public class EventCommService extends IntentService{
     } 
   }
 
-  private void enterEvent(Intent intent, AccountManager am, Account account){
-    am.setUserData(
-      account, 
-      Constants.EVENT_JOIN_ERROR, 
-      String.valueOf(EventJoinError.NO_ERROR));
-
+  private void enterEvent(
+    Intent intent, AccountManager am, Account account, boolean attemptReauth)
+  {
     if(!Utils.isNetworkAvailable(this)){
       doLoginFail(am, account, EventJoinError.NO_NETWORK_ERROR);
       return;
@@ -137,10 +136,10 @@ public class EventCommService extends IntentService{
       am.setUserData(
         account, Constants.LAST_EVENT_ID_DATA, String.valueOf(eventId));
       am.setUserData(
-        account, Constants.IN_EVENT_DATA, 
-        String.valueOf(Constants.IN_EVENT_FLAG));
+        account, 
+        Constants.EVENT_STATE_DATA, 
+        String.valueOf(Constants.IN_EVENT));
       sendBroadcast(joinedEventIntent);
-      return;
     }
     catch(IOException e){
       Log.e(TAG, "IO exception when joining event");
@@ -154,15 +153,45 @@ public class EventCommService extends IntentService{
       doLoginFail(am, account, EventJoinError.SERVER_ERROR);
     }
     catch(AuthenticationException e){
-      Log.e(TAG, 
-        "Authentication exception when joining event");
-      Log.e(TAG, e.getMessage());
-      doLoginFail(am, account, EventJoinError.AUTHENTICATION_ERROR);
+      handleLoginAuthException(intent, am, account, authToken, attemptReauth);
     }
     catch(EventOverException e){
       Log.e(TAG, "Event Over Exception when joining event");
-      Log.e(TAG, e.getMessage());
+      //Log.e(TAG, e.getMessage());
       doLoginFail(am, account, EventJoinError.EVENT_OVER_ERROR);
+    }
+    catch(AlreadyInEventException e){
+      Log.e(TAG, "Already In Event Exception when joining event");
+      try{
+        ServerConnection.leaveEvent(e.getEventId(), userId, authToken);
+        enterEvent(intent, am, account, true);
+      } 
+      catch(AuthenticationException f){
+        handleLoginAuthException(intent, am, account, authToken, attemptReauth);
+      }
+      catch(IOException f){
+        Log.e(TAG, "IO exception when attempting to leave one event before "+ 
+          "joining another");
+        Log.e(TAG, f.getMessage());
+        doLoginFail(am, account, EventJoinError.SERVER_ERROR);
+      }
+    }
+  }
+
+  private void handleLoginAuthException(
+    Intent intent, AccountManager am, Account account, 
+    String authToken, boolean attemptReauth)
+  {
+    if(attemptReauth){
+      Log.d(TAG, 
+        "Soft Authentication exception when joining event");
+      am.invalidateAuthToken(Constants.ACCOUNT_TYPE, authToken);
+      enterEvent(intent, am, account, false);
+    }
+    else{
+      Log.e(TAG, 
+        "Hard Authentication exception when joining event");
+      doLoginFail(am, account, EventJoinError.AUTHENTICATION_ERROR);
     }
   }
 
@@ -206,7 +235,9 @@ public class EventCommService extends IntentService{
     );
   }
 
-  private void leaveEvent(AccountManager am, Account account){
+  private void leaveEvent(
+    AccountManager am, Account account, boolean attemptReauth)
+  {
     Log.d(TAG, "In leave event"); 
     
     if(account == null){
@@ -249,7 +280,19 @@ public class EventCommService extends IntentService{
       Log.e(TAG, "IO exception in EventCommService: " + e.getMessage());
     }
     catch(AuthenticationException e){
-      Log.e(TAG, "Authentication exception in EventCommService" );
+      if(attemptReauth){
+        Log.e(TAG, "Soft Authentication exception in EventCommService" );
+        am.invalidateAuthToken(Constants.ACCOUNT_TYPE, authToken);
+        leaveEvent(am, account, false);
+      }
+      else{
+        Log.e(TAG, "HARD Authentication exception in EventCommService" );
+      }
+    }
+    finally{
+      //TODO potential this get's repeated because it's already called once
+      //above. I'll deal with that fact later.
+      setNotInEvent(account);
     }
     //TODO need to implement exponential back off when log out fails.
     // 1. This is just nice to the server
@@ -260,8 +303,8 @@ public class EventCommService extends IntentService{
     AccountManager am = AccountManager.get(this);
     am.setUserData(account, Constants.LAST_EVENT_ID_DATA, 
       String.valueOf(Constants.NO_EVENT_ID));
-    am.setUserData(account, Constants.IN_EVENT_DATA, 
-      String.valueOf(Constants.NOT_IN_EVENT_FLAG));
+    am.setUserData(account, Constants.EVENT_STATE_DATA, 
+      String.valueOf(Constants.NOT_IN_EVENT));
   }
 
 }

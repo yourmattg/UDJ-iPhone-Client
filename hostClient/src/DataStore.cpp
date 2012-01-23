@@ -204,10 +204,6 @@ void DataStore::setupDB(){
   	setupQuery.exec(getCreateAvailableMusicQuery()),
 		setupQuery)
 	EXEC_SQL(
-		"Error creating available music view",
-  	setupQuery.exec(getCreateAvailableMusicViewQuery()),
-		setupQuery)
-	EXEC_SQL(
 		"Error creating add reqeusts table",
   	setupQuery.exec(getCreatePlaylistAddRequestsTableQuery()),
 		setupQuery)
@@ -772,6 +768,7 @@ void DataStore::removeSongsFromActivePlaylist(
     "Error setting active playlist add requests as synced" << std::endl <<
     "vector size was: " << toRemove.size(),
     needsInsertQuery)
+  emit activePlaylistModified();
   syncPlaylistRemoveRequests();
 }
 

@@ -28,7 +28,7 @@ class EventEndTime(models.Model):
 
   def clean(self):
     from django.core.exceptions import ValidationError
-    if self.event.status != u'FN':
+    if self.event.state != u'FN':
       raise ValidationError(
         'End time was inserted for an event that is not yet over')
 
@@ -127,9 +127,13 @@ class PlaylistEntryTimePlayed(models.Model):
 
   
 class Ticket(models.Model):
-  user = models.ForeignKey(User, primary_key=True)
+  user = models.ForeignKey(User)
   ticket_hash = models.CharField(max_length=32, unique=True)
-  time_issued = models.DateTimeField(auto_now_add=True)
+  source_ip_addr = models.IPAddressField()
+  time_issued = models.DateTimeField(auto_now=True)
+
+  class Meta: 
+    unique_together = ("user", "ticket_hash", "source_ip_addr")
 
   def __unicode__(self):
     return "Ticket " + self.ticket_hash +  " : User id " + str(self.user.id)

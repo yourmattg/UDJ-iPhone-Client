@@ -17,15 +17,13 @@
  * along with UDJ.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "LibraryView.hpp"
-#include "DataStore.hpp"
 #include "Utils.hpp"
-#include <QSqlQueryModel>
+#include "MusicModel.hpp"
 #include <QHeaderView>
 #include <QContextMenuEvent>
 #include <QMenu>
-#include <QSqlRecord>
 #include <QSqlQuery>
-	
+#include <QSqlRecord>
 
 namespace UDJ{
 
@@ -34,27 +32,31 @@ LibraryView::LibraryView(DataStore *dataStore, QWidget* parent):
   QTableView(parent),
   dataStore(dataStore)
 {
-  libraryModel = new QSqlQueryModel(this);
+  libraryModel = new MusicModel(getDataQuery(), dataStore, this);
   verticalHeader()->hide();
   horizontalHeader()->setStretchLastSection(true);
   setModel(libraryModel);
   setSelectionBehavior(QAbstractItemView::SelectRows);
   setContextMenuPolicy(Qt::CustomContextMenu);
+  configureColumns();
   createActions();
+  connect(dataStore, SIGNAL(libSongsModified()), libraryModel, SLOT(refresh()));
   connect(this, SIGNAL(customContextMenuRequested(const QPoint&)),
     this, SLOT(handleContextMenuRequest(const QPoint&)));
-  connect(dataStore, SIGNAL(libSongsModified()), this, SLOT(refresh()));
-  refresh();
 }
 
-void LibraryView::refresh(){
-  libraryModel->setQuery(
-    "SELECT * FROM " + DataStore::getLibraryTableName() + " WHERE " +
-    DataStore::getLibIsDeletedColName() + "=0 AND " +
-    DataStore::getLibSyncStatusColName() + " != " +
-    QString::number(DataStore::getLibNeedsAddSyncStatus()) + ";", 
-    dataStore->getDatabaseConnection());
+void LibraryView::configureColumns(){
+  QSqlRecord record = libraryModel->record();
+  int idIndex = record.indexOf(DataStore::getLibIdColName());
+  int isDeletedIndex = record.indexOf(DataStore::getLibIsDeletedColName());
+  int syncStatusIndex = record.indexOf(DataStore::getLibSyncStatusColName());
+  int durationIndex = record.indexOf(DataStore::getLibDurationColName());
+  setColumnHidden(idIndex, true);
+  setColumnHidden(isDeletedIndex, true); 
+  setColumnHidden(syncStatusIndex, true); 
+  resizeColumnToContents(durationIndex);
 }
+
 
 void LibraryView::createActions(){
   deleteSongAction = new QAction(getDeleteContextMenuItemName(), this);
@@ -94,9 +96,11 @@ void LibraryView::handleContextMenuRequest(const QPoint &pos){
   }
   contextMenu.addAction(deleteSongAction);
   QAction *selected = contextMenu.exec(QCursor::pos());
-  QVariant data = selected->data();
-  if(data.isValid()){
-    addSongsToSongList(data.value<song_list_id_t>()); 
+  if(selected != NULL){
+    QVariant data = selected->data();
+    if(data.isValid()){
+      addSongsToSongList(data.value<song_list_id_t>()); 
+    }
   }
 }
 

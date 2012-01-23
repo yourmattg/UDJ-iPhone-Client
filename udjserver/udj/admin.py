@@ -1,9 +1,15 @@
 from udj.models import *
 from django.contrib import admin
 
+def removeSongFromActivePlaylist(modeladmin, request, queryset):
+  queryset.update(state='RM')
+
+removeSongFromActivePlaylist.short_description = "Remove songs from playlist"
+
 class ActivePlaylistEntryAdmin(admin.ModelAdmin):
   list_display = ('song', 'time_added', 'adder', 'event', 'state')
   list_filter = ('state','event',)
+  actions = [removeSongFromActivePlaylist]
 
 class EventGoerAdmin(admin.ModelAdmin):
   list_display = ('user', 'event', 'time_joined', 'state')
@@ -27,7 +33,12 @@ class VoteAdmin(admin.ModelAdmin):
   list_display = ('playlist_entry', 'user', 'weight')
   list_filter = ('playlist_entry', 'user', 'weight')
 
-admin.site.register(Ticket)
+class TicketAdmin(admin.ModelAdmin):
+  list_display = ('user', 'ticket_hash', 'time_issued', 'source_ip_addr')
+  list_filter = ('user',)
+  
+
+admin.site.register(Ticket, TicketAdmin)
 admin.site.register(Event, EventAdmin)
 admin.site.register(EventEndTime)
 admin.site.register(EventPassword)

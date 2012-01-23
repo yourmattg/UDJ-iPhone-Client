@@ -17,9 +17,8 @@
  * along with UDJ.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "AvailableMusicView.hpp"
-#include "DataStore.hpp"
+#include "MusicModel.hpp"
 #include "Utils.hpp"
-#include <QSqlRelationalTableModel>
 #include <QAction>
 #include <QMenu>
 #include <QModelIndex>
@@ -36,27 +35,37 @@ AvailableMusicView::AvailableMusicView(DataStore *dataStore, QWidget *parent):
   dataStore(dataStore)
 {
   setEditTriggers(QAbstractItemView::NoEditTriggers);
-  availableMusicModel = 
-    new QSqlRelationalTableModel(this, dataStore->getDatabaseConnection());
+  availableMusicModel = new MusicModel(getDataQuery(), dataStore, this);
   setModel(availableMusicModel);
-  availableMusicModel->setTable(DataStore::getAvailableMusicViewName());
-  availableMusicModel->select();
-  horizontalHeader()->setStretchLastSection(true);
+//  horizontalHeader()->setStretchLastSection(true);
+  configHeaders();
   setSelectionBehavior(QAbstractItemView::SelectRows);
   setContextMenuPolicy(Qt::CustomContextMenu);
   createActions();
   connect(this, SIGNAL(customContextMenuRequested(const QPoint&)),
     this, SLOT(handleContextMenuRequest(const QPoint&)));
   connect(
-    dataStore,
-    SIGNAL(availableSongsModified()),
-    this,
-    SLOT(updateView()));
-  connect(
     this,
     SIGNAL(activated(const QModelIndex&)),
     this,
     SLOT(addSongToActivePlaylist(const QModelIndex&)));
+  connect(
+    dataStore,
+    SIGNAL(availableSongsModified()),
+    availableMusicModel,
+    SLOT(refresh()));
+}
+
+void AvailableMusicView::configHeaders(){
+  QSqlRecord record = availableMusicModel->record();
+  int syncIndex =   
+    record.indexOf(DataStore::getAvailableEntrySyncStatusColName());
+  int libIdIndex =
+    record.indexOf(DataStore::getAvailableEntryLibIdColName());
+  int durationIndex = record.indexOf(DataStore::getLibDurationColName());
+  setColumnHidden(syncIndex, true);
+  setColumnHidden(libIdIndex, true);
+  resizeColumnToContents(durationIndex);
 }
 
 void AvailableMusicView::createActions(){
@@ -85,7 +94,7 @@ void AvailableMusicView::addSongsToActivePlaylist(){
   dataStore->addSongsToActivePlaylist(Utils::getSelectedIds<library_song_id_t>(
     this,
     availableMusicModel,
-    DataStore::getActivePlaylistLibIdColName()));
+    DataStore::getAvailableEntryLibIdColName()));
 }
 
 void AvailableMusicView::removeSongsFromAvailableMusic(){
@@ -93,11 +102,7 @@ void AvailableMusicView::removeSongsFromAvailableMusic(){
     Utils::getSelectedIds<library_song_id_t>(
       this,
       availableMusicModel,
-      DataStore::getActivePlaylistLibIdColName()));
-}
-
-void AvailableMusicView::updateView(){
-  availableMusicModel->select();
+      DataStore::getAvailableEntryLibIdColName()));
 }
 
 void AvailableMusicView::addSongToActivePlaylist(const QModelIndex& index){

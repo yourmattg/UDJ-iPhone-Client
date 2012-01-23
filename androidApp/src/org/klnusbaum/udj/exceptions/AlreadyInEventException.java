@@ -16,23 +16,25 @@
  * You should have received a copy of the GNU General Public License
  * along with UDJ.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "EventUsersDisplay.hpp"
-#include <QHBoxLayout>
-#include <QLabel>
-#include "EventGoersView.hpp"
 
+package org.klnusbaum.udj.exceptions;
 
-namespace UDJ{
+public class AlreadyInEventException extends Exception{
+  
+  private long eventId;
+  private String eventName;
 
+  public AlreadyInEventException(long eventId, String eventName){
+    super();
+    this.eventId = eventId;
+    this.eventName = eventName; 
+  }
 
-EventUsersDisplay::EventUsersDisplay(DataStore *dataStore, QWidget *parent):
-  QWidget(parent),
-  dataStore(dataStore)
-{
-  QHBoxLayout *layout = new QHBoxLayout;
-  layout->addWidget(new EventGoersView(dataStore, this));
-  setLayout(layout);
+  public long getEventId(){
+    return eventId;
+  }
+
+  public String getEventName(){
+    return eventName;
+  }
 }
-
-
-} //end namespace

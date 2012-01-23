@@ -16,24 +16,36 @@
  * You should have received a copy of the GNU General Public License
  * along with UDJ.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef EVENT_USERS_DISPLAY_HPP
-#define EVENT_USERS_DISPLAY_HPP
-#include <QWidget>
+#ifndef LIBRARY_MODEL_HPP
+#define LIBRARY_MODEL_HPP
+#include <QSqlQueryModel>
 
 namespace UDJ{
 
 class DataStore;
-class EventGoersView;
 
-
-class EventUsersDisplay : public QWidget{
+class MusicModel : public QSqlQueryModel{
 Q_OBJECT
 public:
-  EventUsersDisplay(DataStore *dataStore, QWidget *parent=0);
+
+  MusicModel(const QString& query, DataStore *dataStore, QObject *parent);
+
+  virtual QVariant data(const QModelIndex& item, int role) const;
+
+public slots:
+
+  void refresh();
+
+  void refresh(QString query);
+
 private:
+
   DataStore *dataStore;
+
+  QString query;
+
 };
 
 
-} //end namespace
-#endif //EVENT_USERS_DISPLAY_HPP
+}
+#endif //LIBRARY_MODEL_HPP

@@ -24,6 +24,7 @@
 class QLabel;
 class QLineEdit;
 class QPushButton;
+class QCheckBox;
 
 namespace UDJ{
 
@@ -65,6 +66,13 @@ private:
 
   /** \brief Connection to the server. */
   UDJServerConnection *serverConnection;
+
+  QLabel *usernameLabel;
+ 
+  QLabel *passwordLabel;
+
+  bool showingDialog;
+
 
   //@}
 

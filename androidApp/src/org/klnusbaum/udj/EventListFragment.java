@@ -151,10 +151,15 @@ public class EventListFragment extends ListFragment implements
         startActivity(eventActivityIntent); 
       }
       else if(intent.getAction().equals(Constants.EVENT_JOIN_FAILED_ACTION)){
-        displayEventJoinFail();
+        handleEventJoinFail();
       }
     }
   };
+
+  public void onCreate(Bundle icicle){
+    super.onCreate(icicle);
+    setHasOptionsMenu(true);
+  }
 
   public void onActivityCreated(Bundle icicle){
     super.onActivityCreated(icicle);
@@ -228,21 +233,18 @@ public class EventListFragment extends ListFragment implements
   public void onResume(){
     super.onResume();
     if(account != null){
+      int eventState = Utils.getEventState(getActivity(), account);
       if(isShowingProgress()){
-        EventJoinError joinError = EventJoinError.valueOf(
-          am.getUserData(account, Constants.EVENT_JOIN_ERROR));
-        if(joinError != EventJoinError.NO_ERROR && isShowingProgress()){
+        if(eventState == Constants.EVENT_JOIN_FAILED){
           dismissProgress();
-          displayEventJoinFail();
+          handleEventJoinFail();
           //TODO inform user joining failed.
         }
         else{
           registerEventListener();
         }
       }
-      int inEvent = Integer.valueOf(
-        am.getUserData(account, Constants.IN_EVENT_DATA));
-      if(inEvent == Constants.IN_EVENT_FLAG){
+      else if(eventState == Constants.IN_EVENT){
         long eventId = Long.valueOf(
           am.getUserData(account, Constants.LAST_EVENT_ID_DATA));
         Intent startEventActivity = 
@@ -250,11 +252,9 @@ public class EventListFragment extends ListFragment implements
         startActivity(startEventActivity);
         return;
       }
-
-      if(eventAdapter == null || eventAdapter.getCount() ==0){
-        refreshEventList();
+      else if(eventAdapter == null || eventAdapter.getCount() ==0){
+        refreshList();
       }
-      
     }
   }
 
@@ -268,11 +268,8 @@ public class EventListFragment extends ListFragment implements
 
   public void onPause(){
     super.onPause();
-    try{
+    if(isShowingProgress()){
       getActivity().unregisterReceiver(eventJoinedReceiver);
-    }
-    catch(IllegalArgumentException e){
-
     }
   }
 
@@ -306,7 +303,7 @@ public class EventListFragment extends ListFragment implements
 
   public void setEventSearch(EventSearch newSearch){
     lastSearch = newSearch;
-    refreshEventList();
+    refreshList();
   }
 
   public void onLocationChanged(Location location){
@@ -320,12 +317,12 @@ public class EventListFragment extends ListFragment implements
   public void onProviderEnabled(String provider){}
   public void onStatusChanged(String provider, int status, Bundle extras){}
 
-  public void refreshEventList(){
-    getLoaderManager().restartLoader(0, lastSearch.getLoaderArgs(), this);
-  }
-
   @Override
   public void onListItemClick(ListView l, View v, int position, long id){
+    am.setUserData(
+      account, 
+      Constants.EVENT_STATE_DATA, 
+      String.valueOf(Constants.JOINING_EVENT));
     showProgress();
     Intent joinEventIntent = new Intent(
       Intent.ACTION_INSERT, 
@@ -409,7 +406,11 @@ public class EventListFragment extends ListFragment implements
   }
 
   public void onLoaderReset(Loader<EventsLoader.EventsLoaderResult> loader){
-    eventAdapter = new EventListAdapter(getActivity());
+    setListAdapter(null);
+  }
+
+  public void refreshList(){
+    getLoaderManager().restartLoader(0, lastSearch.getLoaderArgs(), this);
   }
 
   private void showProgress(){
@@ -448,13 +449,13 @@ public class EventListFragment extends ListFragment implements
     }
   }
 
-  private void displayEventJoinFail(){
+  private void handleEventJoinFail(){
     DialogFragment newFrag = new EventJoinFailDialog(account);
     newFrag.show(
       getActivity().getSupportFragmentManager(), EVENT_JOIN_FAIL_TAG);
   }
 
-  public static class EventJoinFailDialog extends DialogFragment{
+  public class EventJoinFailDialog extends DialogFragment{
     private Account account;
 
     public EventJoinFailDialog(Account account){
@@ -467,6 +468,8 @@ public class EventListFragment extends ListFragment implements
       AccountManager am = AccountManager.get(getActivity());
       EventJoinError joinError = EventJoinError.valueOf(
         am.getUserData(account, Constants.EVENT_JOIN_ERROR));
+      AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+        .setTitle(R.string.event_join_fail_title);
       String message; 
       switch(joinError){
       case SERVER_ERROR:
@@ -476,6 +479,7 @@ public class EventListFragment extends ListFragment implements
         message = getString(R.string.auth_join_fail_message); 
         break;
       case EVENT_OVER_ERROR:
+        refreshList();
         message = getString(R.string.event_over_join_fail_message); 
         break;
       case NO_NETWORK_ERROR:
@@ -484,8 +488,7 @@ public class EventListFragment extends ListFragment implements
       default:
         message = getString(R.string.unknown_error_message);
       }
-      return new AlertDialog.Builder(getActivity())
-        .setTitle(R.string.event_join_fail_title)
+      return builder
         .setMessage(message)
         .setPositiveButton(
           android.R.string.ok,

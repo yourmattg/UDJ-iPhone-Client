@@ -306,6 +306,9 @@ void UDJServerConnection::handleAuthReply(QNetworkReply* reply){
     emit connectionEstablished();
   }
   else{
+    QByteArray responseData = reply->readAll();
+    QString responseString = QString::fromUtf8(responseData);
+    DEBUG_MESSAGE(responseString.toStdString())
     QString error = tr("Unable to connect to server: error ") + 
      QString::number(reply->error());
     emit unableToConnect(error);
@@ -520,7 +523,7 @@ QUrl UDJServerConnection::getActivePlaylistRemoveUrl(
   playlist_song_id_t toDelete) const
 {
   return QUrl(getServerUrlPath() + "events/" + QString::number(eventId) +
-    "/active_playlist/" + QString::number(toDelete));
+    "/active_playlist/songs/" + QString::number(toDelete));
 }
 
 
@@ -547,7 +550,7 @@ bool UDJServerConnection::isAvailableMusicDeleteUrl(const QString& path) const{
 
 bool UDJServerConnection::isActivePlaylistRemoveUrl(const QString& path) const{
   QRegExp rx("^/udj/events/" + QString::number(eventId) + 
-    "/active_playlist/\\d+$");
+    "/active_playlist/songs/\\d+$");
   return rx.exactMatch(path);
 }
 
