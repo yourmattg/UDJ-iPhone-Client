@@ -167,7 +167,7 @@
     UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(sendRefreshRequest)];
     UIBarButtonItem* space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     UIBarButtonItem* eventGoerButton = [[UIBarButtonItem alloc] initWithTitle:@"People" style:UIBarButtonItemStylePlain target:self action:@selector(showEventGoers)];
-    NSArray* toolbarItems = [NSArray arrayWithObjects: space, refreshButton, space, nil];
+    NSArray* toolbarItems = [NSArray arrayWithObjects: space, refreshButton, space, eventGoerButton, space, nil];
     self.toolbarItems = toolbarItems;
     self.navigationController.toolbarHidden=NO;
     

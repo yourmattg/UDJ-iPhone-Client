@@ -12,6 +12,8 @@
 
 @implementation EventGoerViewController
 
+@synthesize eventGoerList;
+
 -(void)backToPlaylist{
    [self.navigationController popViewControllerAnimated:YES]; 
 }
@@ -39,7 +41,7 @@
 {
     [super viewDidLoad];
 
-    self.navigationItem.title = [UDJEventList sharedEventList].currentEvent.name;
+    self.navigationItem.title = @"Who's Here";
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backToPlaylist)];
     self.navigationItem.leftBarButtonItem = backButton;
     [backButton release];
@@ -53,7 +55,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[UDJConnection sharedConnection] sendEventGoerRequest:[UDJEventList sharedEventList].currentEvent.eventId];
+    [[UDJConnection sharedConnection] sendEventGoerRequest:[UDJEventList sharedEventList].currentEvent.eventId delegate:self];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -103,6 +105,15 @@
     // Configure the cell...
     
     return cell;
+}
+
+// used for when we recieve a request with event goers
+- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
+    NSLog(@"Got a response in the EventGoerView");
+    // check if the event has ended
+    if([response isOK]){
+        if ([request isGET]) [[UDJConnection sharedConnection] handleEventGoerResults:response];
+    }
 }
 
 /*

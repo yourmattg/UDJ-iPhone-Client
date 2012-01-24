@@ -17,6 +17,8 @@
 #import "UDJSongList.h"
 #import "UDJMappableArray.h"
 #import "UDJEventGoer.h"
+#import "EventGoerViewController.h"
+#import "UDJEventGoerList.h"
 
 static UDJConnection* sharedUDJConnection = nil;
 
@@ -206,10 +208,10 @@ static UDJConnection* sharedUDJConnection = nil;
     return response.statusCode;
 }
 
-- (void) sendEventGoerRequest:(NSInteger)eventId{
+- (void) sendEventGoerRequest:(NSInteger)eventId delegate:(NSObject*)delegate{
     // [GET] /udj/events/event_id/users
     NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@", client.baseURL, @"/events/", eventId, @"/users"];
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:delegate];
     request.method = RKRequestMethodGET;
     request.additionalHTTPHeaders = headers;
     request.queue = client.requestQueue;
@@ -219,16 +221,23 @@ static UDJConnection* sharedUDJConnection = nil;
 }
 
 - (void) handleEventGoerResults:(RKResponse*)response{
-    NSMutableArray* cList = [NSMutableArray new];
+    UDJEventGoerList* cList = [UDJEventGoerList new];
     RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
     NSArray* eventGoerArray = [parser objectFromString:[response bodyAsString] error:nil];
     for(int i=0; i<[eventGoerArray count]; i++){
         NSDictionary* eventGoerDict = [eventGoerArray objectAtIndex:i];
         UDJEventGoer* eventGoer = [UDJEventGoer eventGoerFromDictionary:eventGoerDict];
-        [cList addObject:eventGoer];
-    } 
+        [cList addEventGoer:eventGoer];
+    }
+    
+    UIViewController* currentView = self.navigationController.topViewController;
+    if([currentView isMemberOfClass: [EventGoerViewController class]]){
+        //EventGoerViewController* viewController = self.navigationController.topViewController;
+        
+    }
     
     [parser release];
+    [cList release];
 }
 
 // **************************** Playlist Methods ********************************

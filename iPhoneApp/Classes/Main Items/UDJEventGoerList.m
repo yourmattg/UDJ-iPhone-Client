@@ -17,4 +17,8 @@
     return eventGoer;
 }
 
+-(void)addEventGoer:(UDJEventGoer*)eventGoer{
+    [eventGoerList addObject:eventGoer];
+}
+
 @end

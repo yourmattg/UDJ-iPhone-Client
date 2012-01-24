@@ -37,7 +37,7 @@
 }
 
 #pragma mark -
-#pragma mark Application lifecycle
+#pragma mark Appelication lifecycle
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
     

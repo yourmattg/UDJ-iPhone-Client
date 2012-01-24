@@ -46,6 +46,10 @@
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="928223378"/>
 						<string key="NSReuseIdentifierKey">_NS:567</string>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MCAwIDAAA</bytes>
+						</object>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
@@ -211,7 +215,6 @@
 						<string key="NSFrame">{{215, 323}, {85, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:225</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -333,13 +336,13 @@
 						<int key="objectID">1</int>
 						<reference key="object" ref="191373211"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="916345488"/>
 							<reference ref="928223378"/>
 							<reference ref="259349376"/>
 							<reference ref="1052531566"/>
 							<reference ref="276884073"/>
 							<reference ref="712342666"/>
 							<reference ref="1050808179"/>
+							<reference ref="916345488"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -459,7 +462,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="NS.key.0">default.jpg</string>
-			<string key="NS.object.0">{320, 480}</string>
+			<string key="NS.object.0">{320, 422}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>

@@ -148,7 +148,6 @@
 						<string key="NSFrame">{{123, 147}, {72, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -441,7 +440,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="NS.key.0">default.jpg</string>
-			<string key="NS.object.0">{320, 480}</string>
+			<string key="NS.object.0">{320, 422}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>

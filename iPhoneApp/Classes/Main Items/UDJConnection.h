@@ -51,7 +51,7 @@
 - (void) acceptEvents:(BOOL)value;
 - (NSInteger) enterEventRequest;
 - (NSInteger) leaveEventRequest;
-- (void) sendEventGoerRequest:(NSInteger)eventId;
+- (void) sendEventGoerRequest:(NSInteger)eventId delegate:(NSObject*)delegate;
 - (void) handleEventGoerResults:(RKResponse*)response;
 
 - (void) sendPlaylistRequest:(NSInteger)eventId;

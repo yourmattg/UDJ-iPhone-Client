@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <RestKit/RestKit.h>
+#import "UDJEventGoerList.h"
 
-@interface EventGoerViewController : UITableViewController{
+@interface EventGoerViewController : UITableViewController<RKRequestDelegate>{
+    
+    UDJEventGoerList* eventGoerList;
     
 }
+
+@property(nonatomic,retain) UDJEventGoerList* eventGoerList;
 
 @end
