@@ -21,4 +21,8 @@
     [eventGoerList addObject:eventGoer];
 }
 
+-(NSInteger)count{
+    return [eventGoerList count];
+}
+
 @end

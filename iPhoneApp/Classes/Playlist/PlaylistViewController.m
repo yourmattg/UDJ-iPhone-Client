@@ -30,10 +30,13 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(alertView.title == selectedSong.title){
+        if(buttonIndex==1) {
+            // share
+        }
         // log out of the current event
-        if(buttonIndex==1) [self upVote];
+        if(buttonIndex==2) [self upVote];
         // go back to the current event
-        if(buttonIndex==2) [self downVote];
+        if(buttonIndex==3) [self downVote];
         // remove song
         //if(buttonIndex==3) [self removeSong];
     }
@@ -322,6 +325,7 @@
     UIAlertView* songOptionBox = [[UIAlertView alloc] initWithTitle: selectedSong.title message: selectedSong.artist delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: nil];
     // include vote buttons if its not the song playing
     if(rowNumber!=0){
+        [songOptionBox addButtonWithTitle:@"Share"];
         [songOptionBox addButtonWithTitle:@"Vote Up"];
         [songOptionBox addButtonWithTitle:@"Vote Down"];
     }

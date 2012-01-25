@@ -15,6 +15,7 @@
 
 -(UDJEventGoer*)eventGoerAtIndex:(NSInteger)i;
 -(void)addEventGoer:(UDJEventGoer*)eventGoer;
+-(NSInteger)count;
 
 @property(nonatomic,retain) NSMutableArray* eventGoerList;
 
