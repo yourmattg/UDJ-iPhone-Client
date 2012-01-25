@@ -90,7 +90,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 0;
+    return [eventGoerList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -102,9 +102,33 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    // Configure the cell...
+    // make eventgoer name as cell text
+    NSInteger rowNumber = indexPath.row;
+    UDJEventGoer* eventGoer = [eventGoerList eventGoerAtIndex:rowNumber];
+    cell.textLabel.text = eventGoer.userName;
+    cell.textLabel.textColor = [UIColor whiteColor];
     
     return cell;
+}
+
+- (void) handleEventGoerResults:(RKResponse*)response{
+    UDJEventGoerList* cList = [UDJEventGoerList new];
+    RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
+    NSArray* eventGoerArray = [parser objectFromString:[response bodyAsString] error:nil];
+    for(int i=0; i<[eventGoerArray count]; i++){
+        NSDictionary* eventGoerDict = [eventGoerArray objectAtIndex:i];
+        UDJEventGoer* eventGoer = [UDJEventGoer eventGoerFromDictionary:eventGoerDict];
+        if(eventGoer==nil) NSLog(@"what te");
+        [cList.eventGoerList addObject:eventGoer];
+    }
+    
+    NSLog([NSString stringWithFormat:@"%d", [cList.eventGoerList count]]);
+    
+    self.eventGoerList = cList;
+    [self.tableView reloadData];
+    
+    [parser release];
+    [cList release];
 }
 
 // used for when we recieve a request with event goers
@@ -112,7 +136,7 @@
     NSLog(@"Got a response in the EventGoerView");
     // check if the event has ended
     if([response isOK]){
-        if ([request isGET]) [[UDJConnection sharedConnection] handleEventGoerResults:response];
+        if ([request isGET]) [self handleEventGoerResults:response];
     }
 }
 
@@ -167,6 +191,11 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      [detailViewController release];
      */
+}
+
+-(void)dealloc{
+    [eventGoerList release];
+    [super dealloc];
 }
 
 @end

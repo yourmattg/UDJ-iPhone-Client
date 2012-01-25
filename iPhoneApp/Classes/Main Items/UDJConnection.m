@@ -220,26 +220,6 @@ static UDJConnection* sharedUDJConnection = nil;
     [request send];
 }
 
-- (void) handleEventGoerResults:(RKResponse*)response{
-    UDJEventGoerList* cList = [UDJEventGoerList new];
-    RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
-    NSArray* eventGoerArray = [parser objectFromString:[response bodyAsString] error:nil];
-    for(int i=0; i<[eventGoerArray count]; i++){
-        NSDictionary* eventGoerDict = [eventGoerArray objectAtIndex:i];
-        UDJEventGoer* eventGoer = [UDJEventGoer eventGoerFromDictionary:eventGoerDict];
-        [cList addEventGoer:eventGoer];
-    }
-    
-    UIViewController* currentView = self.navigationController.topViewController;
-    if([currentView isMemberOfClass: [EventGoerViewController class]]){
-        //EventGoerViewController* viewController = self.navigationController.topViewController;
-        
-    }
-    
-    [parser release];
-    [cList release];
-}
-
 // **************************** Playlist Methods ********************************
 
 // sendPlaylistRequest: requests playlist from server, seperate from handling because
@@ -443,9 +423,6 @@ static UDJConnection* sharedUDJConnection = nil;
         }
         else if(acceptLibSearch){
             [self handleLibSearchResults:response];
-        }
-        else if(acceptEventGoers){
-            [self handleEventGoerResults:response];
         }
         
     } else if([request isPOST]) {
