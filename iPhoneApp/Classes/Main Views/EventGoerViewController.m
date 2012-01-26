@@ -118,11 +118,8 @@
     for(int i=0; i<[eventGoerArray count]; i++){
         NSDictionary* eventGoerDict = [eventGoerArray objectAtIndex:i];
         UDJEventGoer* eventGoer = [UDJEventGoer eventGoerFromDictionary:eventGoerDict];
-        if(eventGoer==nil) NSLog(@"what te");
-        [cList.eventGoerList addObject:eventGoer];
+        [cList addEventGoer:eventGoer];
     }
-    
-    NSLog([NSString stringWithFormat:@"%d", [cList.eventGoerList count]]);
     
     self.eventGoerList = cList;
     [self.tableView reloadData];

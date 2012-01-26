@@ -12,6 +12,14 @@
 
 @synthesize eventGoerList;
 
+- (id) init{
+    self = [super init];
+    if (self != nil){
+        eventGoerList = [NSMutableArray new];
+    }
+    return self;
+}
+
 -(UDJEventGoer*)eventGoerAtIndex:(NSInteger)i{
     UDJEventGoer* eventGoer = [eventGoerList objectAtIndex:i];
     return eventGoer;
