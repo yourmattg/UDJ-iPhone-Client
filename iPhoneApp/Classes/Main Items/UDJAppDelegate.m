@@ -44,8 +44,8 @@
     // Override point for customization after application launch.
     
     // initialize udjConnection
-    baseUrl = @"http://udjevents.com:4897/udj";
-    //baseUrl = @"http://0.0.0.0:4897/udj";
+    //baseUrl = @"https://udjevents.com:4897/udj";
+    baseUrl = @"http://0.0.0.0:4897/udj";
     [[UDJConnection sharedConnection] initWithServerPrefix: baseUrl];
     [UDJEventList new]; // make our eventlist singleton
     [UDJPlaylist new]; // make UDJPlaylist singleton

@@ -15,18 +15,31 @@
 
 @synthesize searchField, searchButton;
 
+-(BOOL) isValidSearchQuery:(NSString*)string{
+    NSCharacterSet *alphaSet = [NSCharacterSet alphanumericCharacterSet];
+    BOOL valid = [[string stringByTrimmingCharactersInSet:alphaSet] isEqualToString:@""];
+    return valid;
+}
+
 - (IBAction) OnButtonClick:(id) sender {
 	if(sender==searchButton){
         NSString* searchParam = searchField.text;
-        NSInteger eventIdParam = [UDJEventList sharedEventList].currentEvent.eventId;
-        NSInteger maxResultsParam = 100;
-        // show the searching screen
-        SearchingViewController* searchingViewController = [[SearchingViewController alloc] initWithNibName:@"SearchingViewController" bundle:[NSBundle mainBundle]];
-        [self.navigationController pushViewController:searchingViewController animated:NO];
-        [[UDJConnection sharedConnection] setCurrentController:searchingViewController];
-        [searchingViewController release];
-        // have UDJConnection send a request
-        [[UDJConnection sharedConnection] sendLibSearchRequest:searchParam eventId:eventIdParam maxResults:maxResultsParam];
+        if([self isValidSearchQuery:searchParam]){
+            NSInteger eventIdParam = [UDJEventList sharedEventList].currentEvent.eventId;
+            NSInteger maxResultsParam = 100;
+            // show the searching screen
+            SearchingViewController* searchingViewController = [[SearchingViewController alloc] initWithNibName:@"SearchingViewController" bundle:[NSBundle mainBundle]];
+            [self.navigationController pushViewController:searchingViewController animated:NO];
+            [[UDJConnection sharedConnection] setCurrentController:searchingViewController];
+            [searchingViewController release];
+            // have UDJConnection send a request
+            [[UDJConnection sharedConnection] sendLibSearchRequest:searchParam eventId:eventIdParam maxResults:maxResultsParam];
+        }
+        else{
+            UIAlertView* invalidSearchParam = [[UIAlertView alloc] initWithTitle:@"Invalid Query" message:@"Your search query can only contain alphanumeric characters. This includes A-Z, 0-9." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [invalidSearchParam show];
+            [invalidSearchParam release];
+        }
     }
 }
 
