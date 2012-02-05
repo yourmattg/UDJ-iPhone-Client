@@ -19,6 +19,13 @@
 	return NO;
 }
 
+// check if this is a valid query
+-(BOOL) isValidSearchQuery:(NSString*)string{
+    NSCharacterSet *alphaSet = [NSCharacterSet alphanumericCharacterSet];
+    BOOL valid = [[string stringByTrimmingCharactersInSet:alphaSet] isEqualToString:@""];
+    return valid;
+}
+
 - (IBAction) OnButtonClick:(id) sender {
 	if(sender == searchButton || sender == findNearbyButton){
         NSString* searchParam = searchField.text;
