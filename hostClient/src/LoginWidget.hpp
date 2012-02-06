@@ -24,7 +24,6 @@
 
 class QLabel;
 class QLineEdit;
-class QPushButton;
 class QCheckBox;
 
 namespace UDJ{
@@ -41,9 +40,27 @@ public:
   /**
    * \brief Constructs a Login Widget
    */
-  LoginWidget();
+  LoginWidget(QWidget *parent=0);
 
   //@}
+
+
+public slots:
+  
+  /** @name Public slots */
+  //@{
+
+  /** \brief Perform actions necessary for loggin in */
+  void doLogin();
+  
+  //@}
+
+
+signals:
+
+  void startedMainGUI();
+  void loginFailed();
+
 
 private:
   
@@ -59,8 +76,8 @@ private:
   /** \brief lineedit used for entering the password. */
   QLineEdit *passwordBox;
 
-  /** \brief button used for initiating the login procedure. */
-  QPushButton *loginButton;
+  QCheckBox *saveCreds;
+
 
   /** \brief Actual display for the login widget. */
   QWidget *loginDisplay;
@@ -72,44 +89,20 @@ private:
  
   QLabel *passwordLabel;
 
-  bool showingDialog;
-
 
   //@}
 
   /** @name Private Functions */
+  //@{
 
   /** \brief Initializes UI. */
   void setupUi();
-
-  /**
-   * \brief Gets the hint for the username box.
-   *
-   * @return The hint for the username box. 
-   */
-  static const QString& getUsernameHint(){
-    static const QString usernameHint(tr("Username"));
-    return usernameHint;
-  }
-
-  /**
-   * \brief Gets the hint for the password box.
-   *
-   * @return The hint for the password box. 
-   */
-  static const QString& getPasswordHint(){
-    static const QString passwordHint(tr("Password"));
-    return passwordHint;
-  }
 
   //@}
 
 private slots:
   /** @name Private Slots */
   //@{
-
-  /** \brief Perform actions necessary for loggin in */
-  void doLogin();
 
   /** 
    * \brief Once the user has succesfully authenitcated, this starts up the
@@ -124,6 +117,8 @@ private slots:
    * @param errorMessage The error message describing the failure.
    */
   void displayLoginFailedMessage(const QString errorMessage);
+
+  void saveCredsChanged(bool newSetting);
 
   //@}
 };

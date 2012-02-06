@@ -17,6 +17,9 @@
  * along with UDJ.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "DataStore.hpp"
+#include "UDJServerConnection.hpp"
+#include "CommErrorHandler.hpp"
+#include "simpleCrypt/simplecrypt.h"
 #include <QDir>
 #include <QDesktopServices>
 #include <QDir>
@@ -33,13 +36,19 @@ namespace UDJ{
 
 
 DataStore::DataStore(
-  const QByteArray& ticket, const user_id_t& userId, QObject *parent)
-  :QObject(parent)
+  const QString& username,
+  const QString& password,
+  const QByteArray& ticket, 
+  const user_id_t& userId, 
+  QObject *parent)
+  :QObject(parent),
+  username(username),
+  password(password)
 {
-   
   serverConnection = new UDJServerConnection(this);
   serverConnection->setTicket(ticket);
   serverConnection->setUserId(userId);
+  errorHandler = new CommErrorHandler(this, serverConnection);
   activePlaylistRefreshTimer = new QTimer(this);
   eventGoerRefreshTimer = new QTimer(this);
   activePlaylistRefreshTimer->setInterval(5000);
@@ -75,7 +84,7 @@ DataStore::DataStore(
     SLOT(onEventCreate(const event_id_t&)));
 
   connect(
-    serverConnection,
+    errorHandler,
     SIGNAL(eventCreationFailed(const QString)),
     this,
     SLOT(onEventCreateFail(const QString)));
@@ -87,7 +96,7 @@ DataStore::DataStore(
     SLOT(onEventEnd()));
 
   connect(
-    serverConnection, 
+    errorHandler, 
     SIGNAL(eventEndingFailed(const QString)), 
     this, 
     SLOT(onEventEndFail(const QString)));
@@ -1041,6 +1050,59 @@ void DataStore::onEventEndFail(const QString message){
   QSettings settings(QSettings::UserScope, getSettingsOrg(), getSettingsApp());
   settings.setValue(getEventStateSettingName(), getHostingEventState());
   emit eventEndingFailed(message);
+}
+
+
+void DataStore::saveCredentials(
+  const QString& username, const QString& password)
+{
+  QSettings settings(QSettings::UserScope, getSettingsOrg(), getSettingsApp());
+  SimpleCrypt crypt = UDJ_GET_CRYPTO_OBJECT;
+  QString cryptUsername = crypt.encryptToString(username);
+  QString cryptPassword = crypt.encryptToString(password);
+  settings.setValue(getHasValidCredsSettingName(), true);
+  settings.setValue(getUsernameSettingName(), cryptUsername);
+  settings.setValue(getPasswordSettingName(), cryptPassword);
+}
+
+void DataStore::setCredentialsDirty(){
+  QSettings settings(QSettings::UserScope, getSettingsOrg(), getSettingsApp());
+  settings.setValue(getHasValidCredsSettingName(), false);
+}
+
+bool DataStore::hasValidSavedCredentials(){
+  QSettings settings(QSettings::UserScope, getSettingsOrg(), getSettingsApp());
+  return settings.value(getHasValidCredsSettingName()).toBool();
+}
+
+void DataStore::getSavedCredentials(QString* username, QString* password){
+  QSettings settings(QSettings::UserScope, getSettingsOrg(), getSettingsApp());
+  SimpleCrypt crypt = UDJ_GET_CRYPTO_OBJECT;
+  QString encryptedUsername = 
+    settings.value(getUsernameSettingName()).toString();
+  QString encryptedPassword = 
+    settings.value(getPasswordSettingName()).toString();
+  *username = crypt.decryptToString(encryptedUsername);
+  *password = crypt.decryptToString(encryptedPassword);
+}
+
+void DataStore::clearSavedCredentials(){
+  QSettings settings(QSettings::UserScope, getSettingsOrg(), getSettingsApp());
+  settings.setValue(getHasValidCredsSettingName(), false);
+  settings.setValue(getUsernameSettingName(), "");
+  settings.setValue(getPasswordSettingName(), "");
+}
+
+void DataStore::pausePlaylistUpdates(){
+  if(activePlaylistRefreshTimer->isActive()){
+    activePlaylistRefreshTimer->stop();
+  }
+}
+
+void DataStore::resumePlaylistUpdates(){
+  if(!activePlaylistRefreshTimer->isActive()){
+    activePlaylistRefreshTimer->start();
+  }
 }
 
 

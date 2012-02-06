@@ -17,14 +17,18 @@
  * along with UDJ.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <QApplication>
-#include "LoginWidget.hpp"
+#include <QSslConfiguration>
+#include "LoginDialog.hpp"
 
 int main(int argc, char* argv[]){
+  QSslConfiguration defaultConfig = QSslConfiguration::defaultConfiguration(); 
+  defaultConfig.setPeerVerifyMode(QSslSocket::VerifyNone);
+  QSslConfiguration::setDefaultConfiguration(defaultConfig);
   QApplication app(argc, argv);
   app.setApplicationName("Udj");
   app.setQuitOnLastWindowClosed(true);
-  UDJ::LoginWidget loginWidget;
-  loginWidget.show();
+  UDJ::LoginDialog loginDialog;
+  loginDialog.show(); 
   int toReturn = app.exec();
 	return toReturn;
 }

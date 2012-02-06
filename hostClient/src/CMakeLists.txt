@@ -15,6 +15,12 @@
 # You should have received a copy of the GNU General Public License
 # along with UDJ.  If not, see <http://www.gnu.org/licenses/>.
 
+
+configure_file(
+  "${PROJECT_SOURCE_DIR}/src/ConfigDefs.hpp.in"
+  "${PROJECT_BINARY_DIR}/src/ConfigDefs.hpp"
+)
+
 SET(UDJ_SRCS 
   main.cpp 
   PlaybackWidget.cpp
@@ -37,6 +43,9 @@ SET(UDJ_SRCS
   EventGoersView.cpp
   SongListView.cpp
   MusicModel.cpp
+  LoginDialog.cpp
+  simpleCrypt/simplecrypt.cpp
+  CommErrorHandler.cpp
 )
 
 SET(UDJ_HDRS 
@@ -45,6 +54,7 @@ SET(UDJ_HDRS
   JSONHelper.hpp
   Utils.hpp
   qt-json/json.h
+  simpleCrypt/simplecrypt.h
 )
 
 SET(UDJ_MOC_HDRS 
@@ -66,8 +76,11 @@ SET(UDJ_MOC_HDRS
   EventGoersView.hpp
   SongListView.hpp
   MusicModel.hpp
+  LoginDialog.hpp
+  CommErrorHandler.hpp
 )
 
+include_directories("${PROJECT_BINARY_DIR}/src")
 
 QT4_WRAP_CPP(MOC_SRCS ${UDJ_MOC_HDRS})
 

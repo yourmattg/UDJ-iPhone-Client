@@ -20,6 +20,7 @@
 #define UDJ_SERVER_CONNECTION_HPP
 
 #include "ConfigDefs.hpp"
+#include "CommErrorHandler.hpp"
 #include <QSqlDatabase>
 #include <QDateTime>
 #include <QObject>
@@ -160,6 +161,8 @@ public slots:
     const double &latitude,
     const double &longitude);
 
+  void createEvent(const QByteArray& payload);
+
   /**
    * \brief Ends the current event.
    */
@@ -205,6 +208,8 @@ public slots:
    */
   void setCurrentSong(playlist_song_id_t currentSong);
 
+  void setCurrentSong(const QByteArray& payload);
+
   void getEventGoers();
 
   //@}
@@ -226,6 +231,11 @@ signals:
    * @param errMessage A message describing the error.
    */
   void authFailed(const QString errMessage);
+
+  void commError(
+    CommErrorHandler::OperationType opType, 
+    CommErrorHandler::CommErrorType error, 
+    const QByteArray &payload);
 
   /**
    * \brief Emitted when songs are added to the library on the server.
@@ -250,23 +260,9 @@ signals:
   void eventCreated(const event_id_t& issuedId);
 
   /**
-   * \brief Emitted when an event was failed to be created.
-   *
-   * @param errMessage A message describing the error.
-   */
-  void eventCreationFailed(const QString errMessage);
-
-  /**
    * \brief Emitted when an event is succesfully ended.
    */
   void eventEnded();
-
-  /**
-   * \brief Emitted when ending an event fails.
-   *
-   * @param errMessage A message describing the error.
-   */
-  void eventEndingFailed(const QString errMessage);
 
   /**
    * \brief Emitted when songs are succesfully added to the list of available
@@ -364,15 +360,6 @@ private:
    * server.
    */
   QDateTime timeTicketIssued;
-
-  /**
-   * \brief Sets the status of the server connection to "logged in".
-   *
-   * @param ticket The ticket hash that should be used for all request made to
-   * the server.
-   * @param userId The id of the user that just logged in.
-   */
-  void setLoggedIn(QByteArray ticket, QByteArray userId);
 
   /**
    * \brief Prepares a network request that is going to include JSON.
@@ -535,7 +522,7 @@ private:
    */
   static const QString& getServerUrlPath(){
     static const QString SERVER_URL_PATH= 
-      "http://udjevents.com:" + getServerPortNumber() + "/udj/";
+      "https://udjevents.com:" + getServerPortNumber() + "/udj/";
     return SERVER_URL_PATH;
   }
 
@@ -609,16 +596,9 @@ private:
     return userIdHeaderName;
   }
 
-  /**
-   * \brief Get the property name used for storing request ids when performing 
-   * in a reply when doing an addition to the active playlist.
-   *
-   * @return The property name used for storing request ids when performing 
-   * in a reply when doing an addition to the active playlist.
-   */
-  static const char* getActivePlaylistRequestIdsPropertyName(){
-    static const char* activePlaylistRequestIdsPropertyName = "request_ids";
-    return activePlaylistRequestIdsPropertyName;
+  static const QByteArray& getGoneResourceHeaderName(){
+    static const QByteArray goneResourceHeaderName = "X-Udj-Gone-Resource";
+    return goneResourceHeaderName;
   }
 
   static const char* getEventNameProperty(){
@@ -629,6 +609,11 @@ private:
   static const char* getEventPasswordProperty(){
     static const char* eventPasswordProperty = "event_password";
     return eventPasswordProperty;
+  }
+
+  static const char* getPayloadPropertyName(){
+    static const char* payloadPropertyName = "payload";
+    return payloadPropertyName;
   }
 
 
@@ -722,7 +707,9 @@ private:
 
   void parseLocationResponse(QNetworkReply *reply);
 
-  void handleEventCreationConflict(QNetworkReply *);
+  bool checkReplyAndFireErrors(
+    QNetworkReply *reply,
+    CommErrorHandler::OperationType opType);
 
   //@}
 

@@ -14,6 +14,7 @@ from udj.models import ActivePlaylistEntry
 from udj.models import AvailableSong
 from decimal import Decimal
 from datetime import datetime
+from udj.headers import getGoneResourceHeader
 
 class GetEventsTest(User5TestCase):
   def testGetNearbyEvents(self):
@@ -102,6 +103,7 @@ class JoinEventTest(User5TestCase):
   def testJoinEndedEvent(self):
     response = self.doPut('/udj/events/1/users/5')
     self.assertEqual(response.status_code, 410)
+    self.assertEqual(response[getGoneResourceHeader()], "event")
     shouldntBeThere = EventGoer.objects.filter(event__id=1, user__id=5)
     self.assertFalse(shouldntBeThere.exists())
     
@@ -266,6 +268,15 @@ class TestDeleteAvailableMusic(User2TestCase):
     foundSongs = AvailableSong.objects.filter(
       song__host_lib_song_id=3, song__owning_user__id=2)
     self.assertFalse(foundSongs.exists())
+
+  def testBadRemove(self):
+    response = self.doDelete('/udj/events/2/available_music/400')
+    self.assertEqual(response.status_code, 404, response.content)
+
+  def testRemoveSongAlsoUsedInPreviousEvent(self):
+    response = self.doDelete('/udj/events/2/available_music/1')
+    self.assertEqual(response.status_code, 200, response.content)
+
    
 
 class TestSetCurrentSong(User2TestCase):

@@ -1,18 +1,18 @@
 /**
  * Copyright 2011 Kurtis L. Nusbaum
- * 
+ *
  * This file is part of UDJ.
- * 
+ *
  * UDJ is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * UDJ is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with UDJ.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -23,13 +23,14 @@
 #include <phonon/mediasource.h>
 #include <QProgressDialog>
 #include <QSettings>
-#include "UDJServerConnection.hpp"
 #include "ConfigDefs.hpp"
 
 class QTimer;
 
 namespace UDJ{
 
+class UDJServerConnection;
+class CommErrorHandler;
 
 /** 
  * \brief A class that provides access to all persisten storage used by UDJ.
@@ -47,7 +48,11 @@ public:
    * @param parent The parent widget.
    */
   DataStore(
-    const QByteArray& ticketHash, const event_id_t& userId, QObject *parent=0);
+    const QString& username,
+    const QString& password,
+    const QByteArray& ticketHash, 
+    const event_id_t& userId, 
+    QObject *parent=0);
 
   //@}
 
@@ -97,7 +102,29 @@ public:
 
   song_list_id_t insertSongList(const QString& name);
 
-  /** 
+  /**
+   * \brief Adds any songs to the server for which the
+   * host client doesn't have valid server_lib_song_id.
+   */
+  void syncLibrary();
+
+  /**
+   * \brief Syncs the available music table with the server.
+   */
+  void syncAvailableMusic();
+
+  /**
+   * \brief Syncs all the requests for additions to the active playlst.
+   */
+  void syncPlaylistAddRequests();
+
+  /**
+   * \brief Syncs all the requests for removals from the active playlst.
+   */
+  void syncPlaylistRemoveRequests();
+
+
+  /**
    * \brief Gets the name of the current event.
    *
    * @return The name of the current event.
@@ -108,7 +135,7 @@ public:
     return settings.value(getEventNameSettingName()).toString();
   }
 
-  /** 
+  /**
    * \brief Gets the id of the current event.
    *
    * @return The id of the current event.
@@ -117,6 +144,14 @@ public:
     QSettings settings(
       QSettings::UserScope, getSettingsOrg(), getSettingsApp());
     return settings.value(getEventIdSettingName()).value<event_id_t>();
+  }
+
+  inline const QString& getUsername() const{
+    return username;
+  }
+
+  inline const QString& getPassword() const{
+    return password;
   }
 
   /** 
@@ -149,6 +184,16 @@ public:
       ==
       getHostingEventState();
   }
+
+  static void saveCredentials(const QString& username, const QString& password);
+
+  static void setCredentialsDirty();
+
+  static bool hasValidSavedCredentials();
+
+  static void getSavedCredentials(QString* username, QString* password);
+
+  static void clearSavedCredentials();
 
   //@}
 
@@ -830,6 +875,10 @@ public slots:
 
   void addSongListToAvailableMusic(song_list_id_t songListId);
 
+  void pausePlaylistUpdates();
+
+  void resumePlaylistUpdates();
+
   //@}
 
 signals:
@@ -868,7 +917,7 @@ signals:
    * \brief Emitted when ending an event fails.
    */
   void eventEndingFailed(const QString errMessage);
- 
+
   /**
    * \brief Emitted when the active playlist is modified.
    */
@@ -890,7 +939,7 @@ signals:
 //@}
 
 private:
-  
+
   /** @name Private Members */
   //@{
 
@@ -905,8 +954,14 @@ private:
 
   /** \brief Timer used to refresh the active playlist. */
   QTimer *activePlaylistRefreshTimer;
-  
+
   QTimer *eventGoerRefreshTimer;
+
+  QString username;
+
+  QString password;
+
+  CommErrorHandler *errorHandler;
   //@}
 
   /** @name Private Functions */
@@ -915,42 +970,21 @@ private:
   /** \brief Does initiail database setup */
   void setupDB();
 
-  /** 
-   * \brief Adds any songs to the server for which the
-   * host client doesn't have valid server_lib_song_id.
-   */
-  void syncLibrary();
-
   /**
-   * \brief Syncs the available music table with the server.
-   */
-  void syncAvailableMusic();
-
-  /** 
    * \brief Deletes all the entries in the active playlist table.
    */
   void clearActivePlaylist();
 
-  /** 
+  /**
    * \brief Adds a song to the active playlist table.
    *
    * @param songToAdd A QVariantMap which represents the song to be added to
    * the active playlsit table.
    * @param pritority The priority of the song to be added to the active 
-   * playlist. 
+   * playlist.
    */
   void addSong2ActivePlaylistFromQVariant(
     const QVariantMap &songToAdd, int priority);
-
-  /** 
-   * \brief Syncs all the requests for additions to the active playlst.
-   */
-  void syncPlaylistAddRequests();
-
-  /** 
-   * \brief Syncs all the requests for removals from the active playlst.
-   */
-  void syncPlaylistRemoveRequests();
 
   //@}
 
@@ -1300,6 +1334,23 @@ private:
     return createEventGoersTableQuery;
   }
 
+
+  static const QString& getUsernameSettingName(){
+    static const QString usernameSettingName = "username";
+    return usernameSettingName;
+  }
+
+  static const QString& getPasswordSettingName(){
+    static const QString passwordSettingName = "password";
+    return passwordSettingName;
+  }
+
+  static const QString& getHasValidCredsSettingName(){
+    static const QString hasValidSavedCredentialsSettingName = 
+      "has_valid_creds";
+    return hasValidSavedCredentialsSettingName;
+  }
+
  //@}
 
 /** @name Private Slots */
@@ -1404,6 +1455,7 @@ private slots:
   void onEventEnd();
 
   void onEventEndFail(const QString message);
+
 
 
 
