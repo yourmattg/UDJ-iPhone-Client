@@ -44,6 +44,10 @@ static UDJConnection* sharedUDJConnection = nil;
     acceptAuth=false; // don't want to accept authorization response yet
     acceptEvents=false;
     client = [RKClient clientWithBaseURL:prefix];
+    
+    // we don't care about valid certificates
+    self.client.disableCertificateValidation = YES;
+    
     currentRequests = [NSMutableDictionary new];
     clientRequestCount = 1;
     locationManager = [[LocationManager alloc] init];
