@@ -44,6 +44,7 @@
 		A39AF6921497D081006ADF19 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF6911497D081006ADF19 /* MobileCoreServices.framework */; };
 		A39AF6941497D09A006ADF19 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF6931497D09A006ADF19 /* SystemConfiguration.framework */; };
 		A39AF6961497D0A4006ADF19 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF6951497D0A4006ADF19 /* libxml2.dylib */; };
+		A3BB46E314E2086400554179 /* EventGoerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BB46E214E2086400554179 /* EventGoerCell.m */; };
 		A3CF872F14B8F8F000A9F829 /* UDJSongList.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CF872E14B8F8F000A9F829 /* UDJSongList.m */; };
 		A3D334D514C6A02300A90D58 /* downarrow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3D334D414C6A02300A90D58 /* downarrow.jpg */; };
 		A3D334D714C6A02A00A90D58 /* uparrow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3D334D614C6A02A00A90D58 /* uparrow.jpg */; };
@@ -155,6 +156,8 @@
 		A39AF6911497D081006ADF19 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		A39AF6931497D09A006ADF19 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A39AF6951497D0A4006ADF19 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		A3BB46E114E2086400554179 /* EventGoerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventGoerCell.h; sourceTree = "<group>"; };
+		A3BB46E214E2086400554179 /* EventGoerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventGoerCell.m; sourceTree = "<group>"; };
 		A3CF872D14B8F8F000A9F829 /* UDJSongList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJSongList.h; sourceTree = "<group>"; };
 		A3CF872E14B8F8F000A9F829 /* UDJSongList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJSongList.m; sourceTree = "<group>"; };
 		A3D334D414C6A02300A90D58 /* downarrow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = downarrow.jpg; sourceTree = "<group>"; };
@@ -384,6 +387,8 @@
 				A3DAD57C14BD253600688CE0 /* UDJMappableArray.m */,
 				A3F58D9D14C765C100E350F4 /* UDJEventGoerList.h */,
 				A3F58D9E14C765C100E350F4 /* UDJEventGoerList.m */,
+				A3BB46E114E2086400554179 /* EventGoerCell.h */,
+				A3BB46E214E2086400554179 /* EventGoerCell.m */,
 			);
 			path = "Main Items";
 			sourceTree = "<group>";
@@ -529,6 +534,7 @@
 				A3F58D9514C753D300E350F4 /* UDJEventGoer.m in Sources */,
 				A3F58D9914C75F0800E350F4 /* EventGoerViewController.m in Sources */,
 				A3F58D9F14C765C100E350F4 /* UDJEventGoerList.m in Sources */,
+				A3BB46E314E2086400554179 /* EventGoerCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
