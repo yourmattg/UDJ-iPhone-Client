@@ -19,6 +19,7 @@
 		A324AC0514AABB8900388514 /* UDJPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = A324AC0414AABB8900388514 /* UDJPlaylist.m */; };
 		A3265DB314C6101400FC692B /* PlaylistEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3265DB214C6101400FC692B /* PlaylistEntryCell.m */; };
 		A32A384714AE917600D166CF /* UDJ-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A32A384614AE917600D166CF /* UDJ-Info.plist */; };
+		A3360BCF14F5E14F00541726 /* NewPlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */; };
 		A33C4614148F0707009C1BC6 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A33C4612148F0707009C1BC6 /* PlaylistViewController.m */; };
 		A33C4615148F0707009C1BC6 /* PlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A33C4613148F0707009C1BC6 /* PlaylistViewController.xib */; };
 		A33C461E148F11FC009C1BC6 /* LibrarySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A33C461C148F11FC009C1BC6 /* LibrarySearchViewController.m */; };
@@ -121,6 +122,7 @@
 		A3265DB114C6101400FC692B /* PlaylistEntryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistEntryCell.h; sourceTree = "<group>"; };
 		A3265DB214C6101400FC692B /* PlaylistEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistEntryCell.m; sourceTree = "<group>"; };
 		A32A384614AE917600D166CF /* UDJ-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "UDJ-Info.plist"; path = "../UDJ-Info.plist"; sourceTree = "<group>"; };
+		A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewPlaylistViewController.xib; path = Resources/NewPlaylistViewController.xib; sourceTree = SOURCE_ROOT; };
 		A33C4611148F0707009C1BC6 /* PlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistViewController.h; sourceTree = "<group>"; };
 		A33C4612148F0707009C1BC6 /* PlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistViewController.m; sourceTree = "<group>"; };
 		A33C4613148F0707009C1BC6 /* PlaylistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaylistViewController.xib; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */,
 				A3F58D9B14C75FAF00E350F4 /* EventGoerViewController.xib */,
 				A38B629F14C736C70088640D /* udjlauncher.png */,
 				A3D334D614C6A02A00A90D58 /* uparrow.jpg */,
@@ -500,6 +503,7 @@
 				A3D334D714C6A02A00A90D58 /* uparrow.jpg in Resources */,
 				A38B62A014C736C70088640D /* udjlauncher.png in Resources */,
 				A3F58D9C14C75FAF00E350F4 /* EventGoerViewController.xib in Resources */,
+				A3360BCF14F5E14F00541726 /* NewPlaylistViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

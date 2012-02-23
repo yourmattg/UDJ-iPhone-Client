@@ -271,6 +271,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger row = indexPath.row;
+    if([playlist songAtIndex:row-1]==selectedSong) return 100;
     return 78.0;
 }
 
@@ -334,6 +336,9 @@
     if([connection.userID intValue]== selectedSong.adderId) [songOptionBox addButtonWithTitle:@"Remove Song"];
     [songOptionBox show];
     [songOptionBox release];
+    
+    [self.tableView reloadData];
+    [self.tableView cellForRowAtIndexPath:indexPath].selected=YES;
     
 }
 
