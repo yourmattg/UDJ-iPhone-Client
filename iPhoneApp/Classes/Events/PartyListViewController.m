@@ -149,7 +149,6 @@
 	NSString* cellValue = [tableList objectAtIndex:indexPath.row];
 	cell.textLabel.text = cellValue;
 	cell.textLabel.textColor=[UIColor whiteColor];
-    
     // Configure the cell...
     return cell;
 }
