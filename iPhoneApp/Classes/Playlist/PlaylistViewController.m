@@ -18,7 +18,7 @@
 
 @implementation PlaylistViewController
 
-@synthesize theEvent, playlist, tableView;
+@synthesize theEvent, playlist, tableView, currentSongTitleLabel, currentSongArtistLabel;
 
 -(void)showEventGoers{
     EventGoerViewController* eventGoerViewController = [[EventGoerViewController alloc] initWithNibName:@"EventGoerViewController" bundle:[NSBundle mainBundle]];

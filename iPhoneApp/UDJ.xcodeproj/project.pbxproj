@@ -50,6 +50,7 @@
 		A3D334D514C6A02300A90D58 /* downarrow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3D334D414C6A02300A90D58 /* downarrow.jpg */; };
 		A3D334D714C6A02A00A90D58 /* uparrow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3D334D614C6A02A00A90D58 /* uparrow.jpg */; };
 		A3DAD57D14BD253600688CE0 /* UDJMappableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DAD57C14BD253600688CE0 /* UDJMappableArray.m */; };
+		A3E4471514F81B3900659E40 /* separator.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3E4471414F81B3900659E40 /* separator.jpg */; };
 		A3EF398114C64D33003889E0 /* addbutton.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3EF398014C64D33003889E0 /* addbutton.jpg */; };
 		A3F58C5C14A15F0B00756F7D /* AuthenticateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58C5A14A15F0B00756F7D /* AuthenticateViewController.m */; };
 		A3F58C5D14A15F0B00756F7D /* AuthenticateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F58C5B14A15F0B00756F7D /* AuthenticateViewController.xib */; };
@@ -166,6 +167,7 @@
 		A3D334D614C6A02A00A90D58 /* uparrow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = uparrow.jpg; sourceTree = "<group>"; };
 		A3DAD57B14BD253600688CE0 /* UDJMappableArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJMappableArray.h; sourceTree = "<group>"; };
 		A3DAD57C14BD253600688CE0 /* UDJMappableArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJMappableArray.m; sourceTree = "<group>"; };
+		A3E4471414F81B3900659E40 /* separator.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = separator.jpg; sourceTree = "<group>"; };
 		A3EF398014C64D33003889E0 /* addbutton.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addbutton.jpg; sourceTree = "<group>"; };
 		A3F58C5914A15F0B00756F7D /* AuthenticateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticateViewController.h; sourceTree = "<group>"; };
 		A3F58C5A14A15F0B00756F7D /* AuthenticateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticateViewController.m; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A3E4471414F81B3900659E40 /* separator.jpg */,
 				A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */,
 				A3F58D9B14C75FAF00E350F4 /* EventGoerViewController.xib */,
 				A38B629F14C736C70088640D /* udjlauncher.png */,
@@ -504,6 +507,7 @@
 				A38B62A014C736C70088640D /* udjlauncher.png in Resources */,
 				A3F58D9C14C75FAF00E350F4 /* EventGoerViewController.xib in Resources */,
 				A3360BCF14F5E14F00541726 /* NewPlaylistViewController.xib in Resources */,
+				A3E4471514F81B3900659E40 /* separator.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

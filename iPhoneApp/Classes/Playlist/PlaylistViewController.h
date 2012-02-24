@@ -16,6 +16,8 @@
     UDJEvent* theEvent;
     UDJSong* selectedSong;
     UITableView* tableView;
+    UILabel* currentSongTitleLabel;
+    UILabel* currentSongArtistLabel;
 
 }
 
@@ -31,5 +33,7 @@
 @property (nonatomic, retain) UDJEvent* theEvent;
 @property (nonatomic, retain) UDJPlaylist* playlist;
 @property (nonatomic, retain) IBOutlet UITableView* tableView;
+@property (nonatomic, retain) IBOutlet UILabel* currentSongTitleLabel;
+@property (nonatomic, retain) IBOutlet UILabel* currentSongArtistLabel;
 
 @end
