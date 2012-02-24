@@ -213,7 +213,7 @@
         NSInteger statusCode = [[UDJConnection sharedConnection] enterEventRequest];
         // 200: join success
         if(statusCode==201){
-            PlaylistViewController* playlistViewController = [[PlaylistViewController alloc] initWithNibName:@"PlaylistViewController" bundle:[NSBundle mainBundle]];
+            PlaylistViewController* playlistViewController = [[PlaylistViewController alloc] initWithNibName:@"NewPlaylistViewController" bundle:[NSBundle mainBundle]];
             [self.navigationController pushViewController:playlistViewController animated:YES];
             [playlistViewController release];
         }

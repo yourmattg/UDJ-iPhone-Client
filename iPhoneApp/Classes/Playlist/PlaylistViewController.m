@@ -18,7 +18,7 @@
 
 @implementation PlaylistViewController
 
-@synthesize theEvent, playlist;
+@synthesize theEvent, playlist, tableView;
 
 -(void)showEventGoers{
     EventGoerViewController* eventGoerViewController = [[EventGoerViewController alloc] initWithNibName:@"EventGoerViewController" bundle:[NSBundle mainBundle]];
@@ -127,7 +127,7 @@
 - (void)downVote{
     [self vote:NO];
 }
-
+/*
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -135,7 +135,7 @@
         //custom initialization
     }
     return self;
-}
+}*/
 
 - (void)didReceiveMemoryWarning
 {
@@ -227,11 +227,11 @@
 }
 
 // this is used for setting up each cell in the table
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)TableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     
-    PlaylistEntryCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    PlaylistEntryCell* cell = [TableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[PlaylistEntryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
@@ -343,6 +343,7 @@
 }
 
 - (void)dealloc{
+    [tableView release];
     [theEvent release];
     [playlist release];
     [super dealloc];

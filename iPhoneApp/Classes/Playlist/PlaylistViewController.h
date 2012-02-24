@@ -10,11 +10,12 @@
 #import "UDJEvent.h"
 #import "UDJPlaylist.h"
 
-@interface PlaylistViewController : UITableViewController <UIAlertViewDelegate>{
+@interface PlaylistViewController : UIViewController <UIAlertViewDelegate>{
 
     UDJPlaylist *playlist;
     UDJEvent* theEvent;
     UDJSong* selectedSong;
+    UITableView* tableView;
 
 }
 
@@ -29,5 +30,6 @@
 
 @property (nonatomic, retain) UDJEvent* theEvent;
 @property (nonatomic, retain) UDJPlaylist* playlist;
+@property (nonatomic, retain) IBOutlet UITableView* tableView;
 
 @end
