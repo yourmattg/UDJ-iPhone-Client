@@ -59,7 +59,7 @@
         artistLabel.textColor = [UIColor whiteColor];
         artistLabel.backgroundColor = [UIColor clearColor];
         
-        UIImage* addButtonImg = [UIImage imageNamed:@"addbutton.jpg"];
+        UIImage* addButtonImg = [UIImage imageNamed:@"addbutton.png"];
         addButton = [UIButton buttonWithType:UIButtonTypeCustom];
         addButton.tintColor = [UIColor blackColor];
         [addButton setImage:addButtonImg forState:UIControlStateNormal];

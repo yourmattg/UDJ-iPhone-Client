@@ -30,13 +30,13 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(alertView.title == selectedSong.title){
-        if(buttonIndex==1) {
+        /*if(buttonIndex==1) {
             // share
-        }
+        }*/
         // log out of the current event
-        if(buttonIndex==2) [self upVote];
+        if(buttonIndex==1) [self upVote];
         // go back to the current event
-        if(buttonIndex==3) [self downVote];
+        if(buttonIndex==2) [self downVote];
         // remove song
         //if(buttonIndex==3) [self removeSong];
     }
@@ -78,6 +78,7 @@
 - (void)refreshTableList{
     self.currentSongTitleLabel.text = [UDJPlaylist sharedUDJPlaylist].currentSong.title;
     NSString* artistText = [NSString stringWithFormat:@"by %@",[UDJPlaylist sharedUDJPlaylist].currentSong.artist];
+    if([UDJPlaylist sharedUDJPlaylist].currentSong == nil) artistText = @"";
     self.currentSongArtistLabel.text = artistText;
     [self.tableView reloadData];
 }
@@ -169,16 +170,15 @@
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Library" style:UIBarButtonItemStylePlain target:self action:@selector(showLibrary)]];
     
     // set up toolbar
-    self.navigationController.toolbar.tintColor = [UIColor blackColor];
     UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(sendRefreshRequest)];
     UIBarButtonItem* space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    UIBarButtonItem* eventGoerButton = [[UIBarButtonItem alloc] initWithTitle:@"People" style:UIBarButtonItemStylePlain target:self action:@selector(showEventGoers)];
-    NSArray* toolbarItems = [NSArray arrayWithObjects: space, refreshButton, space, eventGoerButton, space, nil];
+    //UIBarButtonItem* eventGoerButton = [[UIBarButtonItem alloc] initWithTitle:@"People" style:UIBarButtonItemStylePlain target:self action:@selector(showEventGoers)];
+    NSArray* toolbarItems = [NSArray arrayWithObjects: space, refreshButton, space, nil];
     self.toolbarItems = toolbarItems;
     self.navigationController.toolbarHidden=NO;
     
     [refreshButton release];
-    [eventGoerButton release];
+    //[eventGoerButton release];
     [space release];
 }
 
@@ -325,12 +325,12 @@
     
     UIAlertView* songOptionBox = [[UIAlertView alloc] initWithTitle: selectedSong.title message: selectedSong.artist delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: nil];
     // include vote buttons if its not the song playing
-    [songOptionBox addButtonWithTitle:@"Share"];
+    //[songOptionBox addButtonWithTitle:@"Share"];
     [songOptionBox addButtonWithTitle:@"Vote Up"];
     [songOptionBox addButtonWithTitle:@"Vote Down"];
     // include remove button if this user added the song
-    UDJConnection* connection = [UDJConnection sharedConnection];
-    if([connection.userID intValue]== selectedSong.adderId) [songOptionBox addButtonWithTitle:@"Remove Song"];
+    //UDJConnection* connection = [UDJConnection sharedConnection];
+    //if([connection.userID intValue]== selectedSong.adderId) [songOptionBox addButtonWithTitle:@"Remove Song"];
     [songOptionBox show];
     [songOptionBox release];
     
