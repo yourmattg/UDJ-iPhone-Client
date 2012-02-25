@@ -17,7 +17,7 @@
 
 @implementation PartyListViewController
 
-@synthesize tableList, eventList;
+@synthesize tableList, eventList, tableView;
 
 
 #pragma mark -
@@ -137,11 +137,11 @@
 
 
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)TableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [TableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
@@ -149,6 +149,7 @@
 	NSString* cellValue = [tableList objectAtIndex:indexPath.row];
 	cell.textLabel.text = cellValue;
 	cell.textLabel.textColor=[UIColor whiteColor];
+    cell.backgroundColor = [UIColor clearColor];
     // Configure the cell...
     return cell;
 }

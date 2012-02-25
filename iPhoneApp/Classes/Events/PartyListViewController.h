@@ -10,10 +10,11 @@
 #import "UDJEventList.h"
 
 
-@interface PartyListViewController : UITableViewController <UIAlertViewDelegate> {
+@interface PartyListViewController : UIViewController <UIAlertViewDelegate> {
 
     UDJEventList* eventList; // the event list class to handle all the loading and stuff
 	NSMutableArray *tableList; // the current list actually being shown
+    UITableView* tableView;
 	
 }
 
@@ -22,5 +23,6 @@
 
 @property(nonatomic,retain) UDJEventList* eventList;
 @property (nonatomic, retain) NSMutableArray *tableList;
+@property(nonatomic,retain) IBOutlet UITableView* tableView;
 
 @end
