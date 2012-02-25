@@ -36,7 +36,7 @@
     frame= CGRectMake(boundsX+20 ,24, 250, 14);
     artistLabel.frame = frame;
     
-    frame= CGRectMake(boundsX+20 ,50, 250, 20);
+    frame= CGRectMake(boundsX+20 ,42, 250, 16);
     addedByLabel.frame = frame;
     
     frame = CGRectMake(boundsX+225, 4, 38, 38);
@@ -45,10 +45,10 @@
     frame = CGRectMake(boundsX+275, 4, 38, 38);
     downVoteButton.frame = frame;
     
-    frame = CGRectMake(boundsX+245, 13, 30, 20);
+    frame = CGRectMake(boundsX+239, 42, 30, 20);
     upVoteLabel.frame = frame;
     
-    frame = CGRectMake(boundsX+294, 13, 30, 20);
+    frame = CGRectMake(boundsX+289, 42, 30, 20);
     downVoteLabel.frame = frame;
 }
 
@@ -97,15 +97,19 @@
         downVoteLabel.font = [UIFont fontWithName:@"Helvetica" size:18];
         downVoteLabel.textAlignment = UITextAlignmentLeft;
         
+        upVoteLabel.hidden=YES;
+        downVoteLabel.hidden=YES;
+        addedByLabel.hidden=YES;
+        
         self.backgroundColor = [UIColor clearColor];
         
         [self.contentView addSubview:songLabel];
         [self.contentView addSubview:artistLabel];
-        //[self.contentView addSubview:addedByLabel];
+        [self.contentView addSubview:addedByLabel];
         [self.contentView addSubview:upVoteButton];
         [self.contentView addSubview:downVoteButton];
-        //[self.contentView addSubview:upVoteLabel];
-        //[self.contentView addSubview:downVoteLabel];
+        [self.contentView addSubview:upVoteLabel];
+        [self.contentView addSubview:downVoteLabel];
     }
     return self;
 }

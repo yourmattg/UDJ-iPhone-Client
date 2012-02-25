@@ -270,12 +270,17 @@ static PlaylistViewController* _sharedPlaylistViewController;
     cell.downVoteButton.tag = rowNumber;
     cell.upVoteButton.tag = rowNumber;
     
+    BOOL extrasHidden = (song != selectedSong);
+    cell.addedByLabel.hidden=extrasHidden;
+    cell.upVoteLabel.hidden=extrasHidden;
+    cell.downVoteLabel.hidden=extrasHidden;
+    
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-   // NSInteger row = indexPath.row;
-    //if([playlist songAtIndex:row]==selectedSong) return 100;
+    NSInteger row = indexPath.row;
+    if([playlist songAtIndex:row]==selectedSong) return 64;
     return 48.0;
 }
 
