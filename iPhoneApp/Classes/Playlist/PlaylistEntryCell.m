@@ -18,25 +18,25 @@
     CGFloat boundsX = contentRect.origin.x;
     CGRect frame;
 
-    frame= CGRectMake(boundsX+10 ,5, 300, 25);
+    frame= CGRectMake(boundsX+10 ,3, 300, 16);
     songLabel.frame = frame;
     
-    frame= CGRectMake(boundsX+20 ,30, 250, 20);
+    frame= CGRectMake(boundsX+20 ,24, 250, 14);
     artistLabel.frame = frame;
     
     frame= CGRectMake(boundsX+20 ,50, 250, 20);
     addedByLabel.frame = frame;
     
-    frame = CGRectMake(boundsX+225, 35, 16, 23);
+    frame = CGRectMake(boundsX+225, 13, 16, 23);
     upArrowImage.frame = frame;
     
-    frame = CGRectMake(boundsX+275, 35, 16, 23);
+    frame = CGRectMake(boundsX+275, 13, 16, 23);
     downArrowImage.frame = frame;
     
-    frame = CGRectMake(boundsX+245, 35, 30, 20);
+    frame = CGRectMake(boundsX+245, 13, 30, 20);
     upVoteLabel.frame = frame;
     
-    frame = CGRectMake(boundsX+294, 35, 30, 20);
+    frame = CGRectMake(boundsX+294, 13, 30, 20);
     downVoteLabel.frame = frame;
 }
 
@@ -47,19 +47,19 @@
         // Initialization code
         songLabel = [[UILabel alloc] init];
         songLabel.textAlignment = UITextAlignmentLeft;
-        songLabel.font = [UIFont fontWithName:@"Helvetica" size:20];
+        songLabel.font = [UIFont fontWithName:@"Helvetica" size:16];
         songLabel.textColor=[UIColor whiteColor];
         songLabel.backgroundColor = [UIColor colorWithRed:50 green:112 blue:176 alpha:0];
         
         artistLabel = [[UILabel alloc]init];
         artistLabel.textAlignment = UITextAlignmentLeft;
-        artistLabel.font = [UIFont fontWithName:@"Helvetica" size:16];
+        artistLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
         artistLabel.textColor = [UIColor whiteColor];
         artistLabel.backgroundColor = [UIColor clearColor];
         
         addedByLabel = [[UILabel alloc]init];
         addedByLabel.textAlignment = UITextAlignmentLeft;
-        addedByLabel.font = [UIFont fontWithName:@"Helvetica" size:16];
+        addedByLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
         addedByLabel.textColor = [UIColor whiteColor];
         addedByLabel.backgroundColor = [UIColor clearColor];
         
@@ -85,7 +85,7 @@
         
         [self.contentView addSubview:songLabel];
         [self.contentView addSubview:artistLabel];
-        [self.contentView addSubview:addedByLabel];
+        //[self.contentView addSubview:addedByLabel];
         [self.contentView addSubview:upArrowImage];
         [self.contentView addSubview:downArrowImage];
         [self.contentView addSubview:upVoteLabel];

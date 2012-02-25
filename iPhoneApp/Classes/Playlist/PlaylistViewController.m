@@ -273,7 +273,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
    // NSInteger row = indexPath.row;
     //if([playlist songAtIndex:row]==selectedSong) return 100;
-    return 78.0;
+    return 48.0;
 }
 
 /*
