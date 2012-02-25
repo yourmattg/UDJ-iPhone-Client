@@ -14,7 +14,7 @@ from udj.models import ActivePlaylistEntry
 from udj.models import AvailableSong
 from decimal import Decimal
 from datetime import datetime
-from udj.headers import getGoneResourceHeader
+from udj.headers import getGoneResourceHeader, getDjangoUUIDHeader
 
 class GetEventsTest(User5TestCase):
   def testGetNearbyEvents(self):
@@ -61,6 +61,10 @@ class EndEventTest(User2TestCase):
     self.assertEqual(Event.objects.get(pk=2).state,u'FN')
     EventEndTime.objects.get(event__id=2)
     EventGoer.objects.get(user__id=2, event__id=2, state=u'LE')
+
+  def testDoubleEnd(self):
+    response = self.doDelete('/udj/events/2')
+    response = self.doDelete('/udj/events/2')
 
 class EndEmptyEventTest(User4TestCase):
   def testEndEmptyEvent(self):
@@ -205,7 +209,8 @@ class TestPutAvailableMusic(User2TestCase):
   def testSimplePut(self): 
     toAdd=[6]
     response = self.doJSONPut(
-      '/udj/events/2/available_music', json.dumps(toAdd))
+      '/udj/events/2/available_music', json.dumps(toAdd),
+      headers={getDjangoUUIDHeader() : "20000000000000000000000000000000"})
     self.assertEqual(response.status_code, 201, response.content)
     self.verifyJSONResponse(response)
     results = json.loads(response.content)
@@ -217,7 +222,8 @@ class TestPutAvailableMusic(User2TestCase):
   def testMultiPut(self):
     toAdd = [6,7]
     response = self.doJSONPut(
-      '/udj/events/2/available_music', json.dumps(toAdd))
+      '/udj/events/2/available_music', json.dumps(toAdd),
+      headers={getDjangoUUIDHeader() : "20000000000000000000000000000000"})
     self.assertEqual(response.status_code, 201, response.content)
     self.verifyJSONResponse(response)
     results = json.loads(response.content)
@@ -232,7 +238,8 @@ class TestPutAvailableMusic(User2TestCase):
   def testDoublePut(self):
     toAdd = [8]
     response = self.doJSONPut(
-      '/udj/events/2/available_music', json.dumps(toAdd))
+      '/udj/events/2/available_music', json.dumps(toAdd),
+      headers={getDjangoUUIDHeader() : "20000000000000000000000000000000"})
     self.assertEqual(response.status_code, 201, response.content)
     self.verifyJSONResponse(response)
     results = json.loads(response.content)
@@ -243,7 +250,8 @@ class TestPutAvailableMusic(User2TestCase):
 
     toAdd = [7, 8]
     response = self.doJSONPut(
-      '/udj/events/2/available_music', json.dumps(toAdd))
+      '/udj/events/2/available_music', json.dumps(toAdd),
+      headers={getDjangoUUIDHeader() : "20000000000000000000000000000000"})
     self.assertEqual(response.status_code, 201, response.content)
     self.verifyJSONResponse(response)
     results = json.loads(response.content)
@@ -256,7 +264,7 @@ class TestPutAvailableMusic(User2TestCase):
       song__host_lib_song_id=8, song__owning_user__id=2)
 
 class TestCantPutAvailableMusic(User3TestCase):
-  def testPut(self): 
+  def testPut(self):
    toAdd=[7]
    response = self.doJSONPut('/udj/events/2/available_music', json.dumps(toAdd))
    self.assertEqual(response.status_code, 403, response.content)
@@ -277,7 +285,7 @@ class TestDeleteAvailableMusic(User2TestCase):
     response = self.doDelete('/udj/events/2/available_music/1')
     self.assertEqual(response.status_code, 200, response.content)
 
-   
+
 
 class TestSetCurrentSong(User2TestCase):
   def testSetCurrentSong(self):
@@ -293,7 +301,7 @@ class TestSetCurrentSong(User2TestCase):
     currentSong.state = u'FN'
     currentSong.save()
     response = self.doPost(
-      '/udj/events/2/current_song', 
+      '/udj/events/2/current_song',
       {'playlist_entry_id' : '4'})
     self.assertEqual(response.status_code, 200, response.content)
     self.assertEqual(ActivePlaylistEntry.objects.get(pk=4).state, u'PL')
@@ -301,7 +309,7 @@ class TestSetCurrentSong(User2TestCase):
 class TestDuplicateHostEventCreate(User2TestCase):
   def testDuplicatHostEventCreate(self):
     partyName = "A Bitchn' Party"
-    event = {'name' : partyName } 
+    event = {'name' : partyName }
     response = self.doJSONPut('/udj/events/event', json.dumps(event))
     self.assertEqual(response.status_code, 409)
 

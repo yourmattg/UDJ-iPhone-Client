@@ -1,18 +1,18 @@
 /**
  * Copyright 2011 Kurtis L. Nusbaum
- * 
+ *
  * This file is part of UDJ.
- * 
+ *
  * UDJ is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * UDJ is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with UDJ.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -82,14 +82,14 @@ import org.klnusbaum.udj.exceptions.AlreadyInEventException;
  * A connection to the UDJ server
  */
 public class ServerConnection{
-  
+
   private static final String TAG = "ServerConnection";
   private static final String PARAM_USERNAME = "username";
 
   private static final String PARAM_PASSWORD = "password";
 
   private static final String PARAME_EVENT_NAME = "name";
-  /** 
+  /**
    * This port number is a memorial to Keith Nusbaum, my father. I loved him
    * deeply and he was taken from this world far too soon. Never-the-less 
    * we all continue to benefit from his good deeds. Without him, I wouldn't 
@@ -105,37 +105,25 @@ public class ServerConnection{
   private static final int SERVER_PORT = 4897;
 
   private static final String NETWORK_PROTOCOL = "https";
- 
+
   private static final String SERVER_HOST = "udjevents.com";
 
- 
+
   private static final String TICKET_HASH_HEADER = "X-Udj-Ticket-Hash";
   private static final String USER_ID_HEADER = "X-Udj-User-Id";
   private static final String GONE_RESOURCE_HEADER = "X-Udj-Gone-Resource";
-  
- 
+
+
   private static final int REGISTRATION_TIMEOUT = 30 * 1000; // ms
-  
+
   private static final String AVAILABLE_QUERY_PARAM = "query";
 
   private static DefaultHttpClient httpClient;
 
   public static DefaultHttpClient getHttpClient() throws IOException{
     if(httpClient == null){
-      try{
-      KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
-      trustStore.load(null,null);
-
-      SSLSocketFactory sf = new CustomSSLSocketFactory(trustStore);
-      sf.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-      Log.e(TAG, 
-        "Need to change host verifier to only work with udjevents.com");
-
       SchemeRegistry schemeReg = new SchemeRegistry();
-      /*schemeReg.register(
-        new Scheme("http", PlainSocketFactory.getSocketFactory(), SERVER_PORT));*/
-      schemeReg.register(new Scheme(  
-        "https", sf, SERVER_PORT));
+      schemeReg.register(new Scheme("https", SSLSocketFactory.getSocketFactory(), SERVER_PORT));
       BasicHttpParams params = new BasicHttpParams();
       ConnManagerParams.setMaxTotalConnections(params, 100);
       HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
@@ -145,22 +133,6 @@ public class ServerConnection{
       ThreadSafeClientConnManager cm = new ThreadSafeClientConnManager(
         params, schemeReg);
       httpClient = new DefaultHttpClient(cm, params);
-      }
-      catch(NoSuchAlgorithmException e){
-        //SHould never get here 
-      }
-      catch(KeyManagementException e){
-        //SHould never get here 
-      }
-      catch(KeyStoreException e){
-        //SHould never get here 
-      }
-      catch(CertificateException e){
-        //SHould never get here 
-      }
-      catch(UnrecoverableKeyException e){
-        //SHould never get here 
-      }
     }
     return httpClient;
   }
@@ -168,7 +140,7 @@ public class ServerConnection{
   public static class AuthResult{
     public String ticketHash;
     public long userId;
-    
+
     public AuthResult(String ticketHash, long userId){
       this.ticketHash = ticketHash;
       this.userId = userId;
@@ -518,6 +490,25 @@ public class ServerConnection{
     }
     return null;
   }
+
+  public static List<LibraryEntry> getRandomMusic(int max, long eventId, String authToken)
+    throws JSONException, ParseException, IOException, AuthenticationException,
+    EventOverException
+  {
+    try{
+      URI uri = new URI(
+        NETWORK_PROTOCOL, null, SERVER_HOST, SERVER_PORT,
+        "/udj/events/"+eventId+"/available_music/random_songs",
+        "max_randoms="+String.valueOf(max), null);
+      JSONArray libEntries = new JSONArray(doEventRelatedGet(uri, authToken));
+      return LibraryEntry.fromJSONArray(libEntries);
+    }
+    catch(URISyntaxException e){
+      //TODO inform caller that their query is bad 
+    }
+    return null;
+  }
+
 
   public static void addSongsToActivePlaylist(
     HashMap<Long, Long> requests, long eventId, String authToken)

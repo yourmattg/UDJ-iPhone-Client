@@ -16,24 +16,15 @@
  * You should have received a copy of the GNU General Public License
  * along with UDJ.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.klnusbaum.udj.network;
+package org.klnusbaum.udj;
 
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
+import android.support.v4.content.Loader;
 
-import javax.net.ssl.X509TrustManager;
+import android.accounts.Account;
 
-public class FullX509TrustManager implements X509TrustManager{
+public class RandomSearchFragment extends SearchFragment{
 
-  public void checkClientTrusted(X509Certificate[] chain, String authType)
-    throws CertificateException
-  {}
-
-  public void checkServerTrusted(X509Certificate[] chain, String authType)
-    throws CertificateException
-  {}
-
-  public X509Certificate[] getAcceptedIssuers(){
-    return null;
+  public Loader<MusicSearchLoader.MusicSearchResult> getLoader(Account account){
+    return new RandomSearchLoader(getActivity(), account);
   }
 }

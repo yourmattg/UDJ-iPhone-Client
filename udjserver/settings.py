@@ -1,5 +1,7 @@
 import udjdb
+import os
 # Django settings for udjserver project.
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -74,6 +76,7 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
+
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '-fggs&v^=v!rqo_=41!6zk)zio*!bkc1$hy48@eh_9*lg-li+t'
 
@@ -98,6 +101,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(SITE_ROOT, 'frontend/tpls'),
 )
 
 INSTALLED_APPS = (
@@ -111,6 +115,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
 #    'django.contrib.gis',
     'udj',
+    'frontend',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -137,3 +142,8 @@ LOGGING = {
         },
     }
 }
+
+try:
+  from settings_local import *
+except ImportError:
+  pass
