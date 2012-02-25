@@ -274,6 +274,8 @@ static PlaylistViewController* _sharedPlaylistViewController;
     cell.addedByLabel.hidden=extrasHidden;
     cell.upVoteLabel.hidden=extrasHidden;
     cell.downVoteLabel.hidden=extrasHidden;
+    cell.upVoteButton.hidden = extrasHidden;
+    cell.downVoteButton.hidden = extrasHidden;
     
     return cell;
 }
