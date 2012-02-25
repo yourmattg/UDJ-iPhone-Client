@@ -37,7 +37,6 @@
     self.navigationItem.title = @"Search Results";
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backToLibSearch)];
     self.navigationItem.leftBarButtonItem = backButton;
-    [backButton release];
 }
 
 - (void)viewDidUnload
@@ -93,7 +92,7 @@
     
     LibraryEntryCell* cell = [TableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[LibraryEntryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[LibraryEntryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     UDJSong* song = [resultList songAtIndex:indexPath.row];
@@ -155,10 +154,5 @@
     self.selectedSong = [resultList songAtIndex:rowNumber];
 }
 
--(void) dealloc{
-    [resultList release];
-    [selectedSong release];
-    [super dealloc];
-}
 
 @end

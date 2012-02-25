@@ -14,7 +14,7 @@
     
 }
 
-@property (retain,nonatomic) IBOutlet UIButton* cancelButton;
+@property (strong,nonatomic) IBOutlet UIButton* cancelButton;
 
 - (IBAction) OnButtonClick:(id) sender;
 @end

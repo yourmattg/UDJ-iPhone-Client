@@ -15,7 +15,7 @@
 
     UDJPlaylist *playlist;
     UDJEvent* theEvent;
-    UDJSong* selectedSong;
+    UDJSong* __weak selectedSong;
     UITableView* tableView;
     UILabel* currentSongTitleLabel;
     UILabel* currentSongArtistLabel;
@@ -33,11 +33,11 @@
 -(void)showEventGoers;
 +(PlaylistViewController*) sharedPlaylistViewController;
 
-@property(nonatomic, assign) UDJSong* selectedSong;
-@property (nonatomic, retain) UDJEvent* theEvent;
-@property (nonatomic, retain) UDJPlaylist* playlist;
-@property (nonatomic, retain) IBOutlet UITableView* tableView;
-@property (nonatomic, retain) IBOutlet UILabel* currentSongTitleLabel;
-@property (nonatomic, retain) IBOutlet UILabel* currentSongArtistLabel;
+@property(nonatomic, weak) UDJSong* selectedSong;
+@property (nonatomic, strong) UDJEvent* theEvent;
+@property (nonatomic, strong) UDJPlaylist* playlist;
+@property (nonatomic, strong) IBOutlet UITableView* tableView;
+@property (nonatomic, strong) IBOutlet UILabel* currentSongTitleLabel;
+@property (nonatomic, strong) IBOutlet UILabel* currentSongArtistLabel;
 
 @end

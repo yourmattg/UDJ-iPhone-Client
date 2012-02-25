@@ -30,7 +30,7 @@ static UDJEventList* _sharedEventList = nil;
 +(UDJEventList*)sharedEventList{
 	@synchronized([UDJEventList class]){
 		if (!_sharedEventList)
-			[[self alloc] init];        
+			self = [[self alloc] init];        
 		return _sharedEventList;
 	}    
 	return nil;
@@ -51,11 +51,5 @@ static UDJEventList* _sharedEventList = nil;
 }
 
 // memory managed
--(void)dealloc{
-    [currentList release];
-    [currentEvent release];
-    [lastSearchParam release];
-    [super release];
-}
 
 @end

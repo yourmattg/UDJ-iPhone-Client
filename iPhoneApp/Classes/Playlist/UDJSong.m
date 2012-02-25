@@ -27,15 +27,9 @@
     song.timeAdded = [songDict objectForKey:@"time_added"];
     song.adderId = [[songDict objectForKey:@"adder_id"] intValue];
     song.adderName = [songDict objectForKey:@"adder_username"];
-    return [song autorelease];
+    return song;
 }
 
 // memory managed
--(void)dealloc{
-    [title release];
-    [artist release];
-    [adderName release];
-    [super dealloc];
-}
 
 @end

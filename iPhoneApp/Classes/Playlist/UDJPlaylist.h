@@ -25,9 +25,9 @@
 - (NSInteger)count;
 - (void)clearPlaylist;
 
-@property(nonatomic,retain) NSMutableArray* playlist;
+@property(nonatomic,strong) NSMutableArray* playlist;
 @property(nonatomic) NSInteger eventId;
-@property(nonatomic,retain) UDJSong* currentSong;
-@property(nonatomic,retain) NSMutableDictionary* voteRecordKeeper;
+@property(nonatomic,strong) UDJSong* currentSong;
+@property(nonatomic,strong) NSMutableDictionary* voteRecordKeeper;
 
 @end

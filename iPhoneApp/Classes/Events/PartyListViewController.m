@@ -31,7 +31,6 @@
         [[UDJPlaylist sharedUDJPlaylist] clearPlaylist];
         UIAlertView* loggedOut = [[UIAlertView alloc] initWithTitle:@"Logout Success" message:@"You are no longer logged into any events." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [loggedOut show];
-        [loggedOut release];
     }
 }
 
@@ -39,7 +38,6 @@
 - (void)rejoinEvent{
     PlaylistViewController* playlistViewController = [[PlaylistViewController alloc] initWithNibName:@"NewPlaylistViewController" bundle:[NSBundle mainBundle]];
     [self.navigationController pushViewController:playlistViewController animated:YES];
-    [playlistViewController release];
 }
 
 // handle button clicks from alertview (pop up message boxes)
@@ -60,7 +58,6 @@
 - (void)pushSearchScreen{
     PartySearchViewController* partySearchViewController = [[PartySearchViewController alloc] initWithNibName:@"PartySearchViewController" bundle:[NSBundle mainBundle]];
     [self.navigationController pushViewController:partySearchViewController animated:YES];
-    [partySearchViewController release];
 }
 
 - (void)refreshTableList{
@@ -78,9 +75,9 @@
     [super viewDidLoad];
     //[[UDJConnection sharedConnection] setCurrentController: self];
     
-	self.tableList = [[[NSMutableArray alloc] init] autorelease];
+	self.tableList = [[NSMutableArray alloc] init];
 	self.navigationItem.title = @"Events";
-	[self.navigationItem setLeftBarButtonItem:[[[UIBarButtonItem alloc] initWithCustomView:[[UIView new] autorelease]] autorelease]];
+	[self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:[UIView new]]];
     // set up search button
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIBarButtonItemStylePlain target:self action:@selector(pushSearchScreen)]];
     // make a new event list
@@ -143,7 +140,7 @@
     
     UITableViewCell *cell = [TableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
 	
 	NSString* cellValue = [tableList objectAtIndex:indexPath.row];
@@ -208,7 +205,6 @@
 	if([UDJEventList sharedEventList].currentEvent.hasPassword){
         PartyLoginViewController* partyLoginViewController = [[PartyLoginViewController alloc] initWithNibName:@"PartyLoginViewController" bundle:[NSBundle mainBundle]];
         [self.navigationController pushViewController:partyLoginViewController animated:YES];
-        [partyLoginViewController release];
     }
     // no password: go straight to playlist
     else{
@@ -217,20 +213,15 @@
         if(statusCode==201){
             PlaylistViewController* playlistViewController = [[PlaylistViewController alloc] initWithNibName:@"NewPlaylistViewController" bundle:[NSBundle mainBundle]];
             [self.navigationController pushViewController:playlistViewController animated:YES];
-            [playlistViewController release];
         }
         else if(statusCode==404){
-            UIAlertView* nonExistantEvent = [UIAlertView alloc];
-            [nonExistantEvent initWithTitle:@"Join Failed" message:@"The event you are trying to join does not exist. Sorry!" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            UIAlertView* nonExistantEvent = [[UIAlertView alloc] initWithTitle:@"Join Failed" message:@"The event you are trying to join does not exist. Sorry!" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [nonExistantEvent show];
-            [nonExistantEvent release];
         }
         else if(statusCode==409){
-            UIAlertView* alreadyInEvent = [UIAlertView alloc];
             NSString* msg = [NSString stringWithFormat:@"%@%@%@", @"You are already logged into another event, \"", [UDJEventList sharedEventList].currentEvent.name, @"\". Would you like to log out of that event or rejoin it?", nil];
-            [alreadyInEvent initWithTitle:@"Event Conflict" message: msg delegate: self cancelButtonTitle:@"Log Out" otherButtonTitles:@"Rejoin",nil];
+            UIAlertView* alreadyInEvent = [[UIAlertView alloc] initWithTitle:@"Event Conflict" message: msg delegate: self cancelButtonTitle:@"Log Out" otherButtonTitles:@"Rejoin",nil];
             [alreadyInEvent show];
-            [alreadyInEvent release];
         }
         // TODO: add other event possibilities (see API)
     }
@@ -253,11 +244,6 @@
 }
 
 
-- (void)dealloc {
-    [tableList release];
-    [eventList release];
-    [super dealloc];
-}
 
 
 @end

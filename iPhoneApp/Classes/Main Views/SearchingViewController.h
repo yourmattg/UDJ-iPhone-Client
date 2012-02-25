@@ -12,6 +12,6 @@
     UIButton* cancelButton;
 }
 
-@property(nonatomic,retain) IBOutlet UIButton* cancelButton;
+@property(nonatomic,strong) IBOutlet UIButton* cancelButton;
 
 @end

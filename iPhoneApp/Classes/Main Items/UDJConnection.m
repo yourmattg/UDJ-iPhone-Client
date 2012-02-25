@@ -83,7 +83,6 @@ static UDJConnection* sharedUDJConnection = nil;
         // load the party list view
         PartyListViewController* partyListViewController = [[PartyListViewController alloc] initWithNibName:@"PartyListViewController" bundle:[NSBundle mainBundle]];
         [currentController.navigationController pushViewController:partyListViewController animated:YES];
-        [partyListViewController release];
     }
 }
 
@@ -96,10 +95,8 @@ static UDJConnection* sharedUDJConnection = nil;
 - (void)denyAuth:(RKResponse*)response{
     acceptAuth = false;
     [currentController.navigationController popViewControllerAnimated:YES];
-    UIAlertView* authNotification = [UIAlertView alloc];
-    [authNotification initWithTitle:@"Login Failed" message:@"The username or password you entered is invalid." delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView* authNotification = [[UIAlertView alloc] initWithTitle:@"Login Failed" message:@"The username or password you entered is invalid." delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [authNotification show];
-    [authNotification release];
 }
 
 
@@ -116,8 +113,7 @@ static UDJConnection* sharedUDJConnection = nil;
     NSURL* url = [NSURL URLWithString:urlString];
     
     //create GET request with correct parameters and headers
-    RKRequest* request = [RKRequest new];
-    [request initWithURL:url delegate:self];
+    RKRequest* request = [[RKRequest alloc] initWithURL:url delegate:self];
     request.method = RKRequestMethodGET;
     request.additionalHTTPHeaders = headers;
     
@@ -143,8 +139,7 @@ static UDJConnection* sharedUDJConnection = nil;
     NSURL* url = [NSURL URLWithString:urlString];
     
     // create GET request
-    RKRequest* request = [RKRequest new];
-    [request initWithURL:url delegate:self];
+    RKRequest* request = [[RKRequest alloc] initWithURL:url delegate:self];
     request.method = RKRequestMethodGET;
     request.additionalHTTPHeaders = headers;
     
@@ -165,8 +160,6 @@ static UDJConnection* sharedUDJConnection = nil;
     }
     [UDJEventList sharedEventList].currentList = cList;
     acceptEvents=NO;
-    [cList release];
-    [parser release];
 }
 
 - (void) acceptEvents:(BOOL)value{
@@ -272,7 +265,6 @@ static UDJConnection* sharedUDJConnection = nil;
     [[UDJPlaylist sharedUDJPlaylist] setPlaylist:playlist];
     [[UDJPlaylist sharedUDJPlaylist] setCurrentSong:currentSong];
     if(playlistView!=nil) [playlistView refreshTableList];
-    [playlist release];
 }
 
 - (void)sendSongRemoveRequest:(NSInteger)songId eventId:(NSInteger)eventId{
@@ -342,9 +334,6 @@ static UDJConnection* sharedUDJConnection = nil;
     [self.navigationController pushViewController:libraryResultsController animated:YES];
     // set tempList to be the tableList of the libsearch results screen
     libraryResultsController.resultList = tempList;
-    [libraryResultsController release];
-    [tempList release];
-    [parser release];
 }
 
 -(void)sendAddSongRequest:(NSInteger)librarySongId eventId:(NSInteger)eventId{
@@ -376,13 +365,11 @@ static UDJConnection* sharedUDJConnection = nil;
     //[currentRequests setObject:@"songAdd" forKey:request];
     [request send]; 
     
-    [songAddDictionary release];
 }
 
 -(void)handleFailedSongAdd:(RKRequest *)request{
     UIAlertView* notification = [[UIAlertView alloc] initWithTitle:@"Song Add Failed" message:@"Your song was not confirmed as having been added to the playlist, would you like to try adding it again?" delegate:nil cancelButtonTitle:@"Yes" otherButtonTitles: nil];
     [notification show];
-    [notification release];
     [request send];
 }
 
@@ -398,11 +385,9 @@ static UDJConnection* sharedUDJConnection = nil;
 
 // resetToEventView: return user to the event screen and reset all variables associated with the event
 -(void)resetToEventView{
-    UIAlertView* notification = [UIAlertView alloc];
     NSString* msg = [NSString stringWithFormat:@"%@%@", [UDJEventList sharedEventList].currentEvent.name, @" has ended. You will be returned to the event search screen.", nil];
-    [notification initWithTitle:@"Event Ended" message: msg delegate: nil cancelButtonTitle:@"Back" otherButtonTitles:nil];
+    UIAlertView* notification = [[UIAlertView alloc] initWithTitle:@"Event Ended" message: msg delegate: nil cancelButtonTitle:@"Back" otherButtonTitles:nil];
     [notification show];
-    [notification release];
     while(![self.navigationController.topViewController isMemberOfClass:[PartyListViewController class]]){
         [self.navigationController popViewControllerAnimated:NO];
     }
@@ -462,14 +447,5 @@ static UDJConnection* sharedUDJConnection = nil;
     }
 }
 
-- (void)dealloc {
-    // Should never be called, but just here for clarity really.
-    [serverPrefix release];
-    [ticket release];
-    [client release];
-    [currentRequests release];
-    [locationManager release];
-    [super dealloc];
-}
 
 @end

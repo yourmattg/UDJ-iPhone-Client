@@ -16,6 +16,6 @@
     
 }
 
-@property(nonatomic,retain) UDJEventGoerList* eventGoerList;
+@property(nonatomic,strong) UDJEventGoerList* eventGoerList;
 
 @end

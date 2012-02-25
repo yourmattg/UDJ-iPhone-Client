@@ -31,14 +31,12 @@
             SearchingViewController* searchingViewController = [[SearchingViewController alloc] initWithNibName:@"SearchingViewController" bundle:[NSBundle mainBundle]];
             [self.navigationController pushViewController:searchingViewController animated:NO];
             [[UDJConnection sharedConnection] setCurrentController:searchingViewController];
-            [searchingViewController release];
             // have UDJConnection send a request
             [[UDJConnection sharedConnection] sendLibSearchRequest:searchParam eventId:eventIdParam maxResults:maxResultsParam];
         }
         else{
             UIAlertView* invalidSearchParam = [[UIAlertView alloc] initWithTitle:@"Invalid Query" message:@"Your search query can only contain alphanumeric characters. This includes A-Z, 0-9." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [invalidSearchParam show];
-            [invalidSearchParam release];
         }
     }
 }
@@ -68,7 +66,6 @@
     // set up back to playlist button
     UIBarButtonItem *playlistButton = [[UIBarButtonItem alloc] initWithTitle:@"Playlist" style:UIBarButtonItemStylePlain target:self action:@selector(backToPlaylist)];
     self.navigationItem.leftBarButtonItem = playlistButton;
-    [playlistButton release];
 }
 
 - (void)viewDidUnload{

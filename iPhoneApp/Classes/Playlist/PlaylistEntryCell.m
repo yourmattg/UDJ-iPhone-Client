@@ -117,15 +117,5 @@
     // Configure the view for the selected state
 }
 
--(void) dealloc{
-    [songLabel release];
-    [artistLabel release];
-    [addedByLabel release];
-    [upVoteButton release];
-    [downVoteButton release];
-    [upVoteLabel release];
-    [downVoteLabel release];
-    [super dealloc];
-}
 
 @end

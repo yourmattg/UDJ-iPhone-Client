@@ -20,7 +20,7 @@
     BOOL acceptPlaylist;
     BOOL acceptLibSearch;
     BOOL acceptEventGoers;
-    PlaylistViewController* playlistView;
+    PlaylistViewController* __weak playlistView;
     NSInteger clientRequestCount; // used to keep a unique client request id
     NSNumber* userID;
     
@@ -31,7 +31,7 @@
     UIViewController* currentController; // keeps track of the current view controller so we can pass info to it
     NSDictionary* headers;
     NSMutableDictionary* currentRequests;
-    UINavigationController* navigationController;
+    UINavigationController* __weak navigationController;
     LocationManager* locationManager;
     
 }
@@ -68,16 +68,16 @@
 -(void)resetAcceptResponses;
 -(void)resetToEventView;
 
-@property(nonatomic,retain) NSString* serverPrefix;
-@property(nonatomic,retain) NSString* ticket;
-@property(nonatomic,retain) RKClient* client;
-@property(nonatomic,retain) NSNumber* userID;
-@property(nonatomic,retain) NSDictionary* headers;
-@property(nonatomic,retain) NSMutableDictionary* currentRequests;
+@property(nonatomic,strong) NSString* serverPrefix;
+@property(nonatomic,strong) NSString* ticket;
+@property(nonatomic,strong) RKClient* client;
+@property(nonatomic,strong) NSNumber* userID;
+@property(nonatomic,strong) NSDictionary* headers;
+@property(nonatomic,strong) NSMutableDictionary* currentRequests;
 // using assign here because we only need a weak reference
-@property(nonatomic, assign) PlaylistViewController* playlistView;
+@property(nonatomic, weak) PlaylistViewController* playlistView;
 @property(nonatomic) BOOL acceptLibSearch;
-@property(nonatomic,assign) UINavigationController* navigationController;
-@property(nonatomic,retain) LocationManager* locationManager;
+@property(nonatomic,weak) UINavigationController* navigationController;
+@property(nonatomic,strong) LocationManager* locationManager;
 
 @end

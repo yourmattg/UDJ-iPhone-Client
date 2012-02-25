@@ -18,12 +18,12 @@
     UILabel* downVoteLabel;
 }
 
-@property(nonatomic,retain) UILabel* songLabel;
-@property(nonatomic,retain) UILabel* artistLabel;
-@property(nonatomic,retain) UILabel* addedByLabel;
-@property(nonatomic,retain) UIButton* upVoteButton;
-@property(nonatomic,retain) UIButton* downVoteButton;
-@property(nonatomic,retain) UILabel* upVoteLabel;
-@property(nonatomic,retain) UILabel* downVoteLabel;
+@property(nonatomic,strong) UILabel* songLabel;
+@property(nonatomic,strong) UILabel* artistLabel;
+@property(nonatomic,strong) UILabel* addedByLabel;
+@property(nonatomic,strong) UIButton* upVoteButton;
+@property(nonatomic,strong) UIButton* downVoteButton;
+@property(nonatomic,strong) UILabel* upVoteLabel;
+@property(nonatomic,strong) UILabel* downVoteLabel;
 
 @end

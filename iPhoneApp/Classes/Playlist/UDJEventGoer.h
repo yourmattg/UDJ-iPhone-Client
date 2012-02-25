@@ -19,9 +19,9 @@
 +(id)eventGoerFromDictionary:(NSDictionary*)eventGoerDict;
 
 @property(nonatomic) NSInteger eventGoerId;
-@property(nonatomic,retain) NSString* userName;
-@property(nonatomic,retain) NSString* firstName;
-@property(nonatomic,retain) NSString* lastName;
+@property(nonatomic,strong) NSString* userName;
+@property(nonatomic,strong) NSString* firstName;
+@property(nonatomic,strong) NSString* lastName;
 @property(nonatomic) BOOL loggedIn;
 
 @end

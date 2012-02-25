@@ -20,14 +20,8 @@
     eventGoer.firstName = [eventGoerDict objectForKey:@"first_name"];
     eventGoer.lastName = [eventGoerDict objectForKey:@"last_name"];
     eventGoer.loggedIn = [[eventGoerDict objectForKey:@"logged_in"] boolValue];
-    return [eventGoer autorelease];
+    return eventGoer;
 }
 
--(void)dealloc{
-    [userName release];
-    [firstName release];
-    [lastName release];
-    [super dealloc];
-}
 
 @end

@@ -36,7 +36,7 @@
 {
     [super viewDidLoad];
     // hide the back button
-    [self.navigationItem setLeftBarButtonItem:[[[UIBarButtonItem alloc] initWithCustomView:[[UIView new] autorelease]] autorelease]];
+    [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:[UIView new]]];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -61,9 +61,5 @@
     }
 }
 
--(void)dealloc{
-    [cancelButton release];
-    [super dealloc];
-}
 
 @end

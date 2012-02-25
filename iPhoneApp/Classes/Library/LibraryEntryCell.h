@@ -14,8 +14,8 @@
     UIButton* addButton;
 }
 
-@property(nonatomic,retain) UILabel* songLabel;
-@property(nonatomic,retain) UILabel* artistLabel;
-@property(nonatomic,retain) UIButton* addButton;
+@property(nonatomic,strong) UILabel* songLabel;
+@property(nonatomic,strong) UILabel* artistLabel;
+@property(nonatomic,strong) UIButton* addButton;
 
 @end

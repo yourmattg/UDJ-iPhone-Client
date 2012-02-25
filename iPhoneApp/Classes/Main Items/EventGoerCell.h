@@ -14,8 +14,8 @@
     UILabel* lastNameLabel;
 }
 
-@property(nonatomic,retain) UILabel* usernameLabel;
-@property(nonatomic,retain) UILabel* firstNameLabel;
-@property(nonatomic,retain) UILabel* lastNameLabel;
+@property(nonatomic,strong) UILabel* usernameLabel;
+@property(nonatomic,strong) UILabel* firstNameLabel;
+@property(nonatomic,strong) UILabel* lastNameLabel;
 
 @end

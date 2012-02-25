@@ -21,8 +21,8 @@
 -(void)refreshTableList; // rebuild the tableList and show it
 -(void)pushSearchScreen;
 
-@property(nonatomic,retain) UDJEventList* eventList;
-@property (nonatomic, retain) NSMutableArray *tableList;
-@property(nonatomic,retain) IBOutlet UITableView* tableView;
+@property(nonatomic,strong) UDJEventList* eventList;
+@property (nonatomic, strong) NSMutableArray *tableList;
+@property(nonatomic,strong) IBOutlet UITableView* tableView;
 
 @end

@@ -22,11 +22,11 @@
 + (UDJEvent*) eventFromDictionary:(NSDictionary*)eventDict;
 
 @property(nonatomic) NSInteger eventId;
-@property(nonatomic,retain) NSString* name;
+@property(nonatomic,strong) NSString* name;
 @property(nonatomic) NSInteger hostId;
 @property(nonatomic) double latitude;
 @property(nonatomic) double longitude;
 @property(nonatomic) BOOL hasPassword;
-@property(nonatomic,retain) NSString* hostUsername;
+@property(nonatomic,strong) NSString* hostUsername;
 
 @end

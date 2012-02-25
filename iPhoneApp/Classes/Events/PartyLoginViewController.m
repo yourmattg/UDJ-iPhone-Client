@@ -64,9 +64,6 @@
 }
 
 
-- (void)dealloc {
-    [super dealloc];
-}
 
 - (void) viewDidAppear:(BOOL)animated{
     eventNameLabel.text = [UDJEventList sharedEventList].currentEvent.name;
@@ -81,7 +78,6 @@
 		if(![passwordField.text isEqualToString: @""]){
 			PlaylistViewController* playlistViewController = [[PlaylistViewController alloc] initWithNibName:@"NewPlaylistViewController" bundle:[NSBundle mainBundle]];
 			[self.navigationController pushViewController:playlistViewController animated:YES];
-			[playlistViewController release];	
 		}
 	}
 }

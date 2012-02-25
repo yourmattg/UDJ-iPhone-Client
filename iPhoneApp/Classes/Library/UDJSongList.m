@@ -15,7 +15,7 @@
 -(id)init
 {
     self = [super init];
-    self.currentList = [[NSMutableArray new] autorelease];
+    self.currentList = [NSMutableArray new];
     return self;
 }
 
@@ -32,10 +32,6 @@
     return [currentList count];
 }
 
--(void) dealloc{
-    [currentList release];
-    [super dealloc];
-}
 
 
 @end

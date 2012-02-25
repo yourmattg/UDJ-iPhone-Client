@@ -21,8 +21,8 @@
 - (void)getNearbyEvents; // put the nearby events into templist, then set it to currentList
 - (void)getEventsByName:(NSString*)name; // search for events by name and put them in table
 
-@property(nonatomic,retain) NSMutableArray* currentList;
-@property(nonatomic,retain) NSString* lastSearchParam;
-@property(nonatomic,retain) UDJEvent* currentEvent;
+@property(nonatomic,strong) NSMutableArray* currentList;
+@property(nonatomic,strong) NSString* lastSearchParam;
+@property(nonatomic,strong) UDJEvent* currentEvent;
 
 @end

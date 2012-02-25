@@ -14,7 +14,7 @@
     NSMutableArray *tableList;
 }
 
-@property(nonatomic,retain) IBOutlet UITextField* searchField;
-@property(nonatomic,retain) IBOutlet UIButton* searchButton;
+@property(nonatomic,strong) IBOutlet UITextField* searchField;
+@property(nonatomic,strong) IBOutlet UIButton* searchButton;
 
 @end

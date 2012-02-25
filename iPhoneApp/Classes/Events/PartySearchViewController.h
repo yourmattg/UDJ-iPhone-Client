@@ -16,8 +16,8 @@
 
 - (IBAction) OnButtonClick:(id) sender;
 
-@property(nonatomic,retain) IBOutlet UIButton* searchButton;
-@property(nonatomic,retain) IBOutlet UITextField* searchField;
-@property(nonatomic,retain) IBOutlet UIButton* findNearbyButton;
+@property(nonatomic,strong) IBOutlet UIButton* searchButton;
+@property(nonatomic,strong) IBOutlet UITextField* searchField;
+@property(nonatomic,strong) IBOutlet UIButton* findNearbyButton;
 
 @end

@@ -15,8 +15,8 @@
     UITableView* tableView;
 }
 
-@property(nonatomic,retain) UDJSongList* resultList;
-@property(nonatomic,retain) UDJSong* selectedSong;
-@property(nonatomic,retain) IBOutlet UITableView* tableView;
+@property(nonatomic,strong) UDJSongList* resultList;
+@property(nonatomic,strong) UDJSong* selectedSong;
+@property(nonatomic,strong) IBOutlet UITableView* tableView;
 
 @end

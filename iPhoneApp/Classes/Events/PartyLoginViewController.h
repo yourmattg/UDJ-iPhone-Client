@@ -17,10 +17,10 @@
     UILabel* eventNameLabel;
 }
 
-@property (retain,nonatomic) IBOutlet UITextField *passwordField;
-@property (retain,nonatomic) IBOutlet UIButton *nearbyPartiesButton;
-@property (retain,nonatomic) IBOutlet UIButton *enterPartyButton;
-@property(nonatomic,retain) IBOutlet UILabel* eventNameLabel;
+@property (strong,nonatomic) IBOutlet UITextField *passwordField;
+@property (strong,nonatomic) IBOutlet UIButton *nearbyPartiesButton;
+@property (strong,nonatomic) IBOutlet UIButton *enterPartyButton;
+@property(nonatomic,strong) IBOutlet UILabel* eventNameLabel;
 
 - (IBAction) OnButtonClick:(id) sender;
 

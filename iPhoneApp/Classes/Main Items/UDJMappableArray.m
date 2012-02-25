@@ -16,9 +16,5 @@
     return [array objectAtIndex:index];
 }
 
--(void)dealloc{
-    [array release];
-    [super dealloc];
-}
 
 @end

@@ -17,9 +17,9 @@
 	
 }
 
-@property (retain,nonatomic) IBOutlet UIButton *loginButton;
-@property (retain,nonatomic) IBOutlet UITextField *usernameField;
-@property (retain,nonatomic) IBOutlet UITextField *passwordField;
+@property (strong,nonatomic) IBOutlet UIButton *loginButton;
+@property (strong,nonatomic) IBOutlet UITextField *usernameField;
+@property (strong,nonatomic) IBOutlet UITextField *passwordField;
 
 - (IBAction) OnButtonClick:(id) sender;
 

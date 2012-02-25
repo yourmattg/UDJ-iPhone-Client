@@ -23,11 +23,11 @@
 	
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet UDJViewController *viewController;
-@property (nonatomic, retain) UINavigationController *navigationController;
-@property (nonatomic, retain) UDJConnection* udjConnection;
-@property (nonatomic, retain) NSString* baseUrl;
+@property (nonatomic, strong) IBOutlet UIWindow *window;
+@property (nonatomic, strong) IBOutlet UDJViewController *viewController;
+@property (nonatomic, strong) UINavigationController *navigationController;
+@property (nonatomic, strong) UDJConnection* udjConnection;
+@property (nonatomic, strong) NSString* baseUrl;
 
 - (void) setModelData:(NSString *)modelData;
 - (NSString *) getModelData;

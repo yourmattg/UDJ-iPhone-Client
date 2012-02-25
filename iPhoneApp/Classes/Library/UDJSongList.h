@@ -16,7 +16,7 @@
     NSMutableArray* currentList;
 }
 
-@property(nonatomic,retain) NSMutableArray* currentList;
+@property(nonatomic,strong) NSMutableArray* currentList;
 
 -(void)addSong:(UDJSong*)song;
 -(UDJSong*)songAtIndex:(NSUInteger)index;

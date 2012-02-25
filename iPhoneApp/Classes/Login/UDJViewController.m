@@ -65,12 +65,6 @@
 }
 
 
-- (void)dealloc {
-    [loginButton release];
-    [usernameField release];
-    [passwordField release];
-    [super dealloc];
-}
 
 
 - (IBAction) OnButtonClick:(id) sender {
@@ -83,7 +77,6 @@
         // load waiting screen
         AuthenticateViewController* authenticateViewController = [[AuthenticateViewController alloc] initWithNibName:@"AuthenticateViewController" bundle:[NSBundle mainBundle]];
         [self.navigationController pushViewController:authenticateViewController animated:NO];
-        [authenticateViewController release];
         
         // attempt authorization
         [[UDJConnection sharedConnection] setCurrentController: self];

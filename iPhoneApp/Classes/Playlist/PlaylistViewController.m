@@ -29,7 +29,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
 -(void)showEventGoers{
     EventGoerViewController* eventGoerViewController = [[EventGoerViewController alloc] initWithNibName:@"EventGoerViewController" bundle:[NSBundle mainBundle]];
     [self.navigationController pushViewController:eventGoerViewController animated:YES];
-    [eventGoerViewController release];
 }
 
 // handle button clicks from alertview (pop up message boxes)
@@ -53,7 +52,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
     [[UDJConnection sharedConnection] sendSongRemoveRequest:selectedSong.songId eventId:eventIdParam];
     UIAlertView* notification = [[UIAlertView alloc] initWithTitle:@"Song Removed" message:@"Your song will be removed from the playlist." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [notification show];
-    [notification release];
 }
 
 // leaveEvent: log the client out of the event, return to event list
@@ -72,7 +70,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
 - (void)showLibrary{
     LibrarySearchViewController* librarySearchViewController = [[LibrarySearchViewController alloc] initWithNibName:@"LibrarySearchViewController" bundle:[NSBundle mainBundle]];
     [self.navigationController pushViewController:librarySearchViewController animated:YES];
-    [librarySearchViewController release];
 }
 
 // sendRefreshRequest: ask the playlist for a refresh
@@ -92,16 +89,14 @@ static PlaylistViewController* _sharedPlaylistViewController;
 // vote: voting helper function
 -(void)vote:(BOOL)up{
     
-    UIAlertView* notification = [UIAlertView alloc];
+    UIAlertView* notification;
     if(selectedSong==nil){
-        [notification initWithTitle:@"Vote Error" message:@"You haven't selected a song to vote for!" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        notification = [[UIAlertView alloc] initWithTitle: @"Vote Error" message:@"You haven't selected a song to vote for!" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [notification show];
-        [notification release];
     }
     else if(selectedSong == playlist.currentSong){
-        [notification initWithTitle:@"Vote Error" message:@"You can't vote for a song that's already playing!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        notification = [[UIAlertView alloc] initWithTitle:@"Vote Error" message:@"You can't vote for a song that's already playing!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [notification show];
-        [notification release];
     }
     else{
         NSNumber* songIdAsNumber = [NSNumber numberWithInteger:selectedSong.songId];
@@ -115,17 +110,16 @@ static PlaylistViewController* _sharedPlaylistViewController;
             NSString* msg = @"Your vote for ";
             msg = [msg stringByAppendingString:selectedSong.title];
             msg = [msg stringByAppendingString:@" has been sent!"];
-            [notification initWithTitle:@"Vote Sent" message:msg delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            notification = [[UIAlertView alloc] initWithTitle:@"Vote Sent" message:msg delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         }
         // have already voted for the song
         else{
             NSString* msg = @"You have already voted for ";
             msg = [msg stringByAppendingString:selectedSong.title];
             msg = [msg stringByAppendingString:@"!"];
-            [notification initWithTitle:@"Vote Denied" message:msg delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            notification = [[UIAlertView alloc] initWithTitle:@"Vote Denied" message:msg delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         }
         [notification show];
-        [notification release];
     }
 }
 // upVote: have UDJConnection send an upvote request
@@ -185,9 +179,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     self.toolbarItems = toolbarItems;
     self.navigationController.toolbarHidden=NO;
     
-    [refreshButton release];
     //[eventGoerButton release];
-    [space release];
 }
 
 
@@ -244,7 +236,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     PlaylistEntryCell* cell = [TableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[PlaylistEntryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[PlaylistEntryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
 	
     // combine song number and name into one string
@@ -254,7 +246,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     // if there's no current song, show "nothing" and "nobody" as title/artist
     if(song==nil){
-        song = [[[UDJSong alloc] init] autorelease];
+        song = [[UDJSong alloc] init];
         song.title = @"nothing";
         song.artist = @"nobody";
         song.adderName = @"nobody";
@@ -353,11 +345,5 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
 }
 
-- (void)dealloc{
-    [tableView release];
-    [theEvent release];
-    [playlist release];
-    [super dealloc];
-}
 
 @end

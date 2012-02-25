@@ -44,7 +44,6 @@
     self.navigationItem.title = @"Who's Here";
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backToPlaylist)];
     self.navigationItem.leftBarButtonItem = backButton;
-    [backButton release];
 }
 
 - (void)viewDidUnload
@@ -99,7 +98,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     // make eventgoer name as cell text
@@ -124,8 +123,6 @@
     self.eventGoerList = cList;
     [self.tableView reloadData];
     
-    [parser release];
-    [cList release];
 }
 
 // used for when we recieve a request with event goers
@@ -190,9 +187,5 @@
      */
 }
 
--(void)dealloc{
-    [eventGoerList release];
-    [super dealloc];
-}
 
 @end

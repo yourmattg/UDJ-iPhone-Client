@@ -51,7 +51,7 @@ static UDJPlaylist* _sharedUDJPlaylist = nil;
 +(UDJPlaylist*)sharedUDJPlaylist{
 	@synchronized([UDJPlaylist class]){
 		if (!_sharedUDJPlaylist)
-			[[self alloc] init];        
+			self = [[self alloc] init];        
 		return _sharedUDJPlaylist;
 	}    
 	return nil;
@@ -67,11 +67,5 @@ static UDJPlaylist* _sharedUDJPlaylist = nil;
 }
 
 // memory managed
--(void)dealloc{
-    [playlist release]; 
-    [currentSong release];
-    [voteRecordKeeper release];
-    [super dealloc];
-}
 
 @end
