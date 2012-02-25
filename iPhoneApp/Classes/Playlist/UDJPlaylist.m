@@ -35,7 +35,7 @@
 - (NSInteger)count{
     // +1 because we include current song
     if(currentSong==nil && [playlist count]==0) return 0;
-    return [playlist count]+1;
+    return [playlist count];
 }
 
 // clearPlaylist: makes the playlist empty

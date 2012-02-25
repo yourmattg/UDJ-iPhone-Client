@@ -24,6 +24,9 @@
 		A33C4615148F0707009C1BC6 /* PlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A33C4613148F0707009C1BC6 /* PlaylistViewController.xib */; };
 		A33C461E148F11FC009C1BC6 /* LibrarySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A33C461C148F11FC009C1BC6 /* LibrarySearchViewController.m */; };
 		A33C461F148F11FC009C1BC6 /* LibrarySearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A33C461D148F11FC009C1BC6 /* LibrarySearchViewController.xib */; };
+		A341B92514F8681C001892C5 /* downarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A341B92414F8681C001892C5 /* downarrow.png */; };
+		A341B92714F86824001892C5 /* uparrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A341B92614F86824001892C5 /* uparrow.png */; };
+		A34796A514F85AE0001DEE15 /* default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A34796A414F85AE0001DEE15 /* default.jpg */; };
 		A34FB30314B8EB5F00BE5CE2 /* LibraryResultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = A34FB30114B8EB5F00BE5CE2 /* LibraryResultsController.m */; };
 		A34FB30414B8EB5F00BE5CE2 /* LibraryResultsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A34FB30214B8EB5F00BE5CE2 /* LibraryResultsController.xib */; };
 		A3536FB314A5218F00B5C95F /* UDJEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A3536FB214A5218F00B5C95F /* UDJEvent.m */; };
@@ -58,7 +61,6 @@
 		A3F58D9914C75F0800E350F4 /* EventGoerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58D9714C75F0800E350F4 /* EventGoerViewController.m */; };
 		A3F58D9C14C75FAF00E350F4 /* EventGoerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F58D9B14C75FAF00E350F4 /* EventGoerViewController.xib */; };
 		A3F58D9F14C765C100E350F4 /* UDJEventGoerList.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58D9E14C765C100E350F4 /* UDJEventGoerList.m */; };
-		A3F9C047142EAA5C0016717B /* default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3F9C046142EAA5C0016717B /* default.jpg */; };
 		A3F9C052142EAD610016717B /* PartyListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F9C050142EAD610016717B /* PartyListViewController.m */; };
 		A3F9C053142EAD610016717B /* PartyListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F9C051142EAD610016717B /* PartyListViewController.xib */; };
 		A3F9C1D8142EBB880016717B /* PartyLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F9C1D6142EBB880016717B /* PartyLoginViewController.m */; };
@@ -130,6 +132,9 @@
 		A33C461B148F11FC009C1BC6 /* LibrarySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibrarySearchViewController.h; sourceTree = "<group>"; };
 		A33C461C148F11FC009C1BC6 /* LibrarySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibrarySearchViewController.m; sourceTree = "<group>"; };
 		A33C461D148F11FC009C1BC6 /* LibrarySearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LibrarySearchViewController.xib; sourceTree = "<group>"; };
+		A341B92414F8681C001892C5 /* downarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downarrow.png; sourceTree = "<group>"; };
+		A341B92614F86824001892C5 /* uparrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uparrow.png; sourceTree = "<group>"; };
+		A34796A414F85AE0001DEE15 /* default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpg; sourceTree = "<group>"; };
 		A34FB30014B8EB5F00BE5CE2 /* LibraryResultsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryResultsController.h; sourceTree = "<group>"; };
 		A34FB30114B8EB5F00BE5CE2 /* LibraryResultsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryResultsController.m; sourceTree = "<group>"; };
 		A34FB30214B8EB5F00BE5CE2 /* LibraryResultsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LibraryResultsController.xib; path = ../Classes/Library/LibraryResultsController.xib; sourceTree = "<group>"; };
@@ -179,7 +184,6 @@
 		A3F58D9B14C75FAF00E350F4 /* EventGoerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventGoerViewController.xib; sourceTree = "<group>"; };
 		A3F58D9D14C765C100E350F4 /* UDJEventGoerList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJEventGoerList.h; sourceTree = "<group>"; };
 		A3F58D9E14C765C100E350F4 /* UDJEventGoerList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJEventGoerList.m; sourceTree = "<group>"; };
-		A3F9C046142EAA5C0016717B /* default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpg; sourceTree = "<group>"; };
 		A3F9C04F142EAD610016717B /* PartyListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartyListViewController.h; sourceTree = "<group>"; };
 		A3F9C050142EAD610016717B /* PartyListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartyListViewController.m; sourceTree = "<group>"; };
 		A3F9C051142EAD610016717B /* PartyListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PartyListViewController.xib; sourceTree = "<group>"; };
@@ -265,6 +269,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A341B92614F86824001892C5 /* uparrow.png */,
+				A341B92414F8681C001892C5 /* downarrow.png */,
+				A34796A414F85AE0001DEE15 /* default.jpg */,
 				A3E4471414F81B3900659E40 /* separator.jpg */,
 				A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */,
 				A3F58D9B14C75FAF00E350F4 /* EventGoerViewController.xib */,
@@ -277,7 +284,6 @@
 				A36D2CCB14A818130087E992 /* SearchingViewController.xib */,
 				A36D2CC614A810230087E992 /* PartySearchViewController.xib */,
 				A3F58C5B14A15F0B00756F7D /* AuthenticateViewController.xib */,
-				A3F9C046142EAA5C0016717B /* default.jpg */,
 				A33C461D148F11FC009C1BC6 /* LibrarySearchViewController.xib */,
 				A33C4613148F0707009C1BC6 /* PlaylistViewController.xib */,
 				A3F9C1D7142EBB880016717B /* PartyLoginViewController.xib */,
@@ -491,7 +497,6 @@
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				2899E5220DE3E06400AC0155 /* UDJViewController.xib in Resources */,
-				A3F9C047142EAA5C0016717B /* default.jpg in Resources */,
 				A3F9C053142EAD610016717B /* PartyListViewController.xib in Resources */,
 				A3F9C1D9142EBB880016717B /* PartyLoginViewController.xib in Resources */,
 				A33C4615148F0707009C1BC6 /* PlaylistViewController.xib in Resources */,
@@ -508,6 +513,9 @@
 				A3F58D9C14C75FAF00E350F4 /* EventGoerViewController.xib in Resources */,
 				A3360BCF14F5E14F00541726 /* NewPlaylistViewController.xib in Resources */,
 				A3E4471514F81B3900659E40 /* separator.jpg in Resources */,
+				A34796A514F85AE0001DEE15 /* default.jpg in Resources */,
+				A341B92514F8681C001892C5 /* downarrow.png in Resources */,
+				A341B92714F86824001892C5 /* uparrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

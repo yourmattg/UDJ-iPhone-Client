@@ -51,13 +51,13 @@
         songLabel.textAlignment = UITextAlignmentLeft;
         songLabel.font = [UIFont fontWithName:@"Helvetica" size:20];
         songLabel.textColor=[UIColor whiteColor];
-        songLabel.backgroundColor = [UIColor blackColor];
+        songLabel.backgroundColor = [UIColor clearColor];
         
         artistLabel = [[UILabel alloc]init];
         artistLabel.textAlignment = UITextAlignmentLeft;
         artistLabel.font = [UIFont fontWithName:@"Helvetica" size:16];
         artistLabel.textColor = [UIColor whiteColor];
-        artistLabel.backgroundColor = [UIColor blackColor];
+        artistLabel.backgroundColor = [UIColor clearColor];
         
         UIImage* addButtonImg = [UIImage imageNamed:@"addbutton.jpg"];
         addButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -67,6 +67,8 @@
         addButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:24];
         [addButton addTarget:self action:@selector(onButtonClick:)   
            forControlEvents:UIControlEventTouchUpInside];
+        
+        self.backgroundColor = [UIColor clearColor];
         
         [self.contentView addSubview:songLabel];
         [self.contentView addSubview:artistLabel];

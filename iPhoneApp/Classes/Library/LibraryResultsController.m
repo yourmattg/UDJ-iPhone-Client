@@ -13,21 +13,13 @@
 
 @implementation LibraryResultsController
 
-@synthesize resultList, selectedSong;
+@synthesize resultList, selectedSong, tableView;
 
 // backToLibSearch: go back to the library search screen
 - (void)backToLibSearch{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -95,11 +87,11 @@
     return [resultList count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)TableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     
-    LibraryEntryCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    LibraryEntryCell* cell = [TableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[LibraryEntryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
