@@ -148,6 +148,7 @@
 	
 	NSString* cellValue = [tableList objectAtIndex:indexPath.row];
 	cell.textLabel.text = cellValue;
+    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:24];
 	cell.textLabel.textColor=[UIColor whiteColor];
     cell.backgroundColor = [UIColor clearColor];
     // Configure the cell...

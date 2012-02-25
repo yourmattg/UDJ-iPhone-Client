@@ -32,13 +32,13 @@
     CGRect contentRect = self.contentView.bounds;
     CGFloat boundsX = contentRect.origin.x;
     CGRect frame;
-    frame = CGRectMake(boundsX+275 ,12, 35, 35);
+    frame = CGRectMake(boundsX+275 ,3, 35, 35);
     addButton.frame = frame;
     
-    frame= CGRectMake(boundsX+10 ,5, 250, 25);
+    frame= CGRectMake(boundsX+10 ,3, 250, 16);
     songLabel.frame = frame;
     
-    frame= CGRectMake(boundsX+20 ,30, 250, 20);
+    frame= CGRectMake(boundsX+20 ,22, 250, 14);
     artistLabel.frame = frame;
 }
 
@@ -49,13 +49,13 @@
         // Initialization code
         songLabel = [[UILabel alloc] init];
         songLabel.textAlignment = UITextAlignmentLeft;
-        songLabel.font = [UIFont fontWithName:@"Helvetica" size:20];
+        songLabel.font = [UIFont fontWithName:@"Helvetica" size:16];
         songLabel.textColor=[UIColor whiteColor];
         songLabel.backgroundColor = [UIColor clearColor];
         
         artistLabel = [[UILabel alloc]init];
         artistLabel.textAlignment = UITextAlignmentLeft;
-        artistLabel.font = [UIFont fontWithName:@"Helvetica" size:16];
+        artistLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
         artistLabel.textColor = [UIColor whiteColor];
         artistLabel.backgroundColor = [UIColor clearColor];
         
