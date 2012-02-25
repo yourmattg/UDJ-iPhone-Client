@@ -7,13 +7,21 @@
 //
 
 #import "PlaylistEntryCell.h"
+#import "PlaylistViewController.h"
 
 @implementation PlaylistEntryCell
 
 @synthesize songLabel, addedByLabel, artistLabel, upVoteButton, downVoteButton, upVoteLabel, downVoteLabel;
 
 - (IBAction) onButtonClick: (id) sender {
-   // UIButton* button = sender;
+    UIButton* button = sender;
+    [PlaylistViewController sharedPlaylistViewController].selectedSong = [[UDJPlaylist sharedUDJPlaylist] songAtIndex: button.tag];
+    if(sender == upVoteButton) {
+        [[PlaylistViewController sharedPlaylistViewController] vote:YES];
+    }    
+    else if(sender == downVoteButton){
+        [[PlaylistViewController sharedPlaylistViewController] vote:NO];
+    }
 }
 
 - (void)layoutSubviews {
@@ -77,8 +85,6 @@
         [downVoteButton setImage:downVoteImage forState:UIControlStateNormal];
         [downVoteButton addTarget:self action:@selector(onButtonClick:)   
                forControlEvents:UIControlEventTouchUpInside];
-        upVoteButton.tag = 1;
-        downVoteButton.tag = 0;
      
         upVoteLabel = [[UILabel alloc] init];
         downVoteLabel = [[UILabel alloc] init];

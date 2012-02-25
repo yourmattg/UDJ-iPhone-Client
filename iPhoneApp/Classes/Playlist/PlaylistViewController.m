@@ -18,7 +18,13 @@
 
 @implementation PlaylistViewController
 
-@synthesize theEvent, playlist, tableView, currentSongTitleLabel, currentSongArtistLabel;
+@synthesize theEvent, playlist, tableView, currentSongTitleLabel, currentSongArtistLabel, selectedSong;
+
+static PlaylistViewController* _sharedPlaylistViewController;
+
++(PlaylistViewController*) sharedPlaylistViewController{
+    return _sharedPlaylistViewController;
+}
 
 -(void)showEventGoers{
     EventGoerViewController* eventGoerViewController = [[EventGoerViewController alloc] initWithNibName:@"EventGoerViewController" bundle:[NSBundle mainBundle]];
@@ -154,6 +160,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _sharedPlaylistViewController = self;
+    
     // set event, navigation bar title
     self.theEvent = [UDJEventList sharedEventList].currentEvent;
 	self.navigationItem.title = theEvent.name;
@@ -266,6 +274,9 @@
     
     cell.upVoteLabel.text = [NSString stringWithFormat:@"%d", song.upVotes];
     cell.downVoteLabel.text = [NSString stringWithFormat:@"%d", song.downVotes];
+    
+    cell.downVoteButton.tag = rowNumber;
+    cell.upVoteButton.tag = rowNumber;
     
     return cell;
 }

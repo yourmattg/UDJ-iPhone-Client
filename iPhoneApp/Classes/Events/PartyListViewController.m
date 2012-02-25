@@ -37,7 +37,7 @@
 
 // rejoinEvent: rejoin the event the user was in
 - (void)rejoinEvent{
-    PlaylistViewController* playlistViewController = [[PlaylistViewController alloc] initWithNibName:@"PlaylistViewController" bundle:[NSBundle mainBundle]];
+    PlaylistViewController* playlistViewController = [[PlaylistViewController alloc] initWithNibName:@"NewPlaylistViewController" bundle:[NSBundle mainBundle]];
     [self.navigationController pushViewController:playlistViewController animated:YES];
     [playlistViewController release];
 }
