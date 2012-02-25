@@ -10,7 +10,11 @@
 
 @implementation PlaylistEntryCell
 
-@synthesize songLabel, addedByLabel, artistLabel, upArrowImage, downArrowImage, upVoteLabel, downVoteLabel;
+@synthesize songLabel, addedByLabel, artistLabel, upVoteButton, downVoteButton, upVoteLabel, downVoteLabel;
+
+- (IBAction) onButtonClick: (id) sender {
+   // UIButton* button = sender;
+}
 
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -27,11 +31,11 @@
     frame= CGRectMake(boundsX+20 ,50, 250, 20);
     addedByLabel.frame = frame;
     
-    frame = CGRectMake(boundsX+225, 13, 16, 23);
-    upArrowImage.frame = frame;
+    frame = CGRectMake(boundsX+225, 4, 38, 38);
+    upVoteButton.frame = frame;
     
-    frame = CGRectMake(boundsX+275, 13, 16, 23);
-    downArrowImage.frame = frame;
+    frame = CGRectMake(boundsX+275, 4, 38, 38);
+    downVoteButton.frame = frame;
     
     frame = CGRectMake(boundsX+245, 13, 30, 20);
     upVoteLabel.frame = frame;
@@ -63,13 +67,19 @@
         addedByLabel.textColor = [UIColor whiteColor];
         addedByLabel.backgroundColor = [UIColor clearColor];
         
-        upArrowImage = [[UIImageView alloc] init];
-        downArrowImage = [[UIImageView alloc] init];
-        UIImage* upArrow = [UIImage imageNamed:@"uparrow.png"];
-        UIImage* downArrow = [UIImage imageNamed:@"downarrow.png"];
-        upArrowImage.image = upArrow;
-        downArrowImage.image = downArrow;
-        
+        UIImage* upVoteImage = [UIImage imageNamed:@"voteup.png"];
+        upVoteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [upVoteButton setImage:upVoteImage forState:UIControlStateNormal];
+        [upVoteButton addTarget:self action:@selector(onButtonClick:)   
+            forControlEvents:UIControlEventTouchUpInside];
+        UIImage* downVoteImage = [UIImage imageNamed:@"votedown.png"];
+        downVoteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [downVoteButton setImage:downVoteImage forState:UIControlStateNormal];
+        [downVoteButton addTarget:self action:@selector(onButtonClick:)   
+               forControlEvents:UIControlEventTouchUpInside];
+        upVoteButton.tag = 1;
+        downVoteButton.tag = 0;
+     
         upVoteLabel = [[UILabel alloc] init];
         downVoteLabel = [[UILabel alloc] init];
         upVoteLabel.textColor = [UIColor greenColor];
@@ -86,10 +96,10 @@
         [self.contentView addSubview:songLabel];
         [self.contentView addSubview:artistLabel];
         //[self.contentView addSubview:addedByLabel];
-        [self.contentView addSubview:upArrowImage];
-        [self.contentView addSubview:downArrowImage];
-        [self.contentView addSubview:upVoteLabel];
-        [self.contentView addSubview:downVoteLabel];
+        [self.contentView addSubview:upVoteButton];
+        [self.contentView addSubview:downVoteButton];
+        //[self.contentView addSubview:upVoteLabel];
+        //[self.contentView addSubview:downVoteLabel];
     }
     return self;
 }
@@ -105,8 +115,8 @@
     [songLabel release];
     [artistLabel release];
     [addedByLabel release];
-    [upArrowImage release];
-    [downArrowImage release];
+    [upVoteButton release];
+    [downVoteButton release];
     [upVoteLabel release];
     [downVoteLabel release];
     [super dealloc];

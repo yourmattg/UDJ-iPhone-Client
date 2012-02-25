@@ -12,8 +12,8 @@
     UILabel* songLabel;
     UILabel* artistLabel;
     UILabel* addedByLabel;
-    UIImageView* upArrowImage;
-    UIImageView* downArrowImage;
+    UIButton* upVoteButton;
+    UIButton* downVoteButton;
     UILabel* upVoteLabel;
     UILabel* downVoteLabel;
 }
@@ -21,8 +21,8 @@
 @property(nonatomic,retain) UILabel* songLabel;
 @property(nonatomic,retain) UILabel* artistLabel;
 @property(nonatomic,retain) UILabel* addedByLabel;
-@property(nonatomic,retain) UIImageView* upArrowImage;
-@property(nonatomic,retain) UIImageView* downArrowImage;
+@property(nonatomic,retain) UIButton* upVoteButton;
+@property(nonatomic,retain) UIButton* downVoteButton;
 @property(nonatomic,retain) UILabel* upVoteLabel;
 @property(nonatomic,retain) UILabel* downVoteLabel;
 

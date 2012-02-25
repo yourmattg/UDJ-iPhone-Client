@@ -31,6 +31,8 @@
 		A34FB30314B8EB5F00BE5CE2 /* LibraryResultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = A34FB30114B8EB5F00BE5CE2 /* LibraryResultsController.m */; };
 		A34FB30414B8EB5F00BE5CE2 /* LibraryResultsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A34FB30214B8EB5F00BE5CE2 /* LibraryResultsController.xib */; };
 		A3536FB314A5218F00B5C95F /* UDJEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A3536FB214A5218F00B5C95F /* UDJEvent.m */; };
+		A35D3DF114F985460007B374 /* votedown.png in Resources */ = {isa = PBXBuildFile; fileRef = A35D3DEF14F985460007B374 /* votedown.png */; };
+		A35D3DF214F985460007B374 /* voteup.png in Resources */ = {isa = PBXBuildFile; fileRef = A35D3DF014F985460007B374 /* voteup.png */; };
 		A36D2CC714A810230087E992 /* PartySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A36D2CC514A810230087E992 /* PartySearchViewController.m */; };
 		A36D2CC814A810230087E992 /* PartySearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A36D2CC614A810230087E992 /* PartySearchViewController.xib */; };
 		A36D2CCC14A818130087E992 /* SearchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A36D2CCA14A818130087E992 /* SearchingViewController.m */; };
@@ -142,6 +144,8 @@
 		A34FB30214B8EB5F00BE5CE2 /* LibraryResultsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LibraryResultsController.xib; path = ../Classes/Library/LibraryResultsController.xib; sourceTree = "<group>"; };
 		A3536FB114A5218F00B5C95F /* UDJEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJEvent.h; sourceTree = "<group>"; };
 		A3536FB214A5218F00B5C95F /* UDJEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJEvent.m; sourceTree = "<group>"; };
+		A35D3DEF14F985460007B374 /* votedown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = votedown.png; sourceTree = "<group>"; };
+		A35D3DF014F985460007B374 /* voteup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voteup.png; sourceTree = "<group>"; };
 		A36D2CC414A810230087E992 /* PartySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartySearchViewController.h; sourceTree = "<group>"; };
 		A36D2CC514A810230087E992 /* PartySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartySearchViewController.m; sourceTree = "<group>"; };
 		A36D2CC614A810230087E992 /* PartySearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PartySearchViewController.xib; sourceTree = "<group>"; };
@@ -271,6 +275,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A35D3DEF14F985460007B374 /* votedown.png */,
+				A35D3DF014F985460007B374 /* voteup.png */,
 				A341B92814F86C61001892C5 /* addbutton.png */,
 				A341B92614F86824001892C5 /* uparrow.png */,
 				A341B92414F8681C001892C5 /* downarrow.png */,
@@ -520,6 +526,8 @@
 				A341B92514F8681C001892C5 /* downarrow.png in Resources */,
 				A341B92714F86824001892C5 /* uparrow.png in Resources */,
 				A341B92914F86C61001892C5 /* addbutton.png in Resources */,
+				A35D3DF114F985460007B374 /* votedown.png in Resources */,
+				A35D3DF214F985460007B374 /* voteup.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

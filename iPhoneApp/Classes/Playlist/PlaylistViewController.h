@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UDJEvent.h"
 #import "UDJPlaylist.h"
+#import "PlaylistEntryCell.h"
 
 @interface PlaylistViewController : UIViewController <UIAlertViewDelegate>{
 

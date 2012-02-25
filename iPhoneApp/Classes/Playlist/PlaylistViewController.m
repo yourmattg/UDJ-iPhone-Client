@@ -322,7 +322,7 @@
     
     NSInteger rowNumber = indexPath.row;
     selectedSong = [playlist songAtIndex:rowNumber];
-    
+    /*
     UIAlertView* songOptionBox = [[UIAlertView alloc] initWithTitle: selectedSong.title message: selectedSong.artist delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: nil];
     // include vote buttons if its not the song playing
     //[songOptionBox addButtonWithTitle:@"Share"];
@@ -332,10 +332,13 @@
     //UDJConnection* connection = [UDJConnection sharedConnection];
     //if([connection.userID intValue]== selectedSong.adderId) [songOptionBox addButtonWithTitle:@"Remove Song"];
     [songOptionBox show];
-    [songOptionBox release];
+    [songOptionBox release];*/
     
     [self.tableView reloadData];
-    [self.tableView cellForRowAtIndexPath:indexPath].selected=YES;
+    [self.tableView cellForRowAtIndexPath:indexPath].selected = YES;
+    PlaylistEntryCell* cell = (PlaylistEntryCell*) [self.tableView cellForRowAtIndexPath:indexPath];
+    cell.downVoteButton.highlighted = NO;
+    cell.upVoteButton.highlighted = NO;
     
 }
 
