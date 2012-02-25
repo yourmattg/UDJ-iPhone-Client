@@ -61,6 +61,7 @@
 -(void)sendSongRemoveRequest:(NSInteger)songId eventId:(NSInteger)eventId;
 
 -(void)sendLibSearchRequest:(NSString*)param eventId:(NSInteger)eventId maxResults:(NSInteger)maxResults;
+-(void)sendRandomSongRequest:(NSInteger)eventId maxResults:(NSInteger)maxResults;
 -(void)handleLibSearchResults:(RKResponse*)response;
 -(void)sendAddSongRequest:(NSInteger)librarySongId eventId:(NSInteger)eventId;
 -(void)handleFailedSongAdd:(RKRequest*)request;

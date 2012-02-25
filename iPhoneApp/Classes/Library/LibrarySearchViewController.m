@@ -13,7 +13,7 @@
 
 @implementation LibrarySearchViewController
 
-@synthesize searchField, searchButton;
+@synthesize searchField, searchButton, randomButton;
 
 -(BOOL) isValidSearchQuery:(NSString*)string{
     NSCharacterSet *alphaSet = [NSCharacterSet alphanumericCharacterSet];
@@ -38,6 +38,16 @@
             UIAlertView* invalidSearchParam = [[UIAlertView alloc] initWithTitle:@"Invalid Query" message:@"Your search query can only contain alphanumeric characters. This includes A-Z, 0-9." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [invalidSearchParam show];
         }
+    }
+    if(sender==randomButton){
+        NSInteger eventIdParam = [UDJEventList sharedEventList].currentEvent.eventId;
+        NSInteger maxResultsParam = 50;
+        // show the searching screen
+        SearchingViewController* searchingViewController = [[SearchingViewController alloc] initWithNibName:@"SearchingViewController" bundle:[NSBundle mainBundle]];
+        [self.navigationController pushViewController:searchingViewController animated:NO];
+        [[UDJConnection sharedConnection] setCurrentController:searchingViewController];
+        // have UDJConnection send a request
+        [[UDJConnection sharedConnection] sendRandomSongRequest:eventIdParam maxResults:maxResultsParam];
     }
 }
 
