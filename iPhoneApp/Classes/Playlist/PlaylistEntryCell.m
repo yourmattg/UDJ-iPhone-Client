@@ -39,13 +39,13 @@
     frame= CGRectMake(boundsX+20 ,42, 250, 16);
     addedByLabel.frame = frame;
     
-    frame = CGRectMake(boundsX+225, 4, 38, 38);
+    frame = CGRectMake(boundsX+215, 4, 38, 38);
     upVoteButton.frame = frame;
     
     frame = CGRectMake(boundsX+275, 4, 38, 38);
     downVoteButton.frame = frame;
     
-    frame = CGRectMake(boundsX+239, 42, 30, 20);
+    frame = CGRectMake(boundsX+229, 42, 30, 20);
     upVoteLabel.frame = frame;
     
     frame = CGRectMake(boundsX+289, 42, 30, 20);
