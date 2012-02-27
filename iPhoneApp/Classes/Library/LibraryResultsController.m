@@ -10,6 +10,7 @@
 #import "UDJConnection.h"
 #import "UDJEventList.h"
 #import "LibraryEntryCell.h"
+#import "SearchingViewController.h"
 
 @implementation LibraryResultsController
 
@@ -21,7 +22,11 @@
 }
 
 -(void) sendRandomRequest{
-    
+    NSInteger eventIdParam = [UDJEventList sharedEventList].currentEvent.eventId;
+    NSInteger maxResultsParam = 50;
+    // have UDJConnection send a request
+    [[UDJConnection sharedConnection] sendRandomSongRequest:eventIdParam maxResults:maxResultsParam];
+ 
 }
 
 
@@ -41,14 +46,14 @@
     self.navigationItem.title = @"Search Results";
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backToLibSearch)];
     self.navigationItem.leftBarButtonItem = backButton;
-    /*
+    
     // set up toolbar
-    UIBarButtonItem* randomButton = [[UIBarButtonItem alloc] initWithTitle:@"Random" style:UIBarButtonItemStylePlain target:self action:@selector(sendRandomRequest)];
+    UIBarButtonItem* randomButton = [[UIBarButtonItem alloc] initWithTitle:@"Get Random" style:UIBarButtonItemStylePlain target:self action:@selector(sendRandomRequest)];
     UIBarButtonItem* space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     NSArray* toolbarItems = [NSArray arrayWithObjects: space, randomButton, space, nil];
     self.toolbarItems = toolbarItems;
     self.navigationController.toolbarHidden=NO;
-     */
+     
     
 }
 

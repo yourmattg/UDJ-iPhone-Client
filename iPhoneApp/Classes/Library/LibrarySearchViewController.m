@@ -17,7 +17,9 @@
 
 -(BOOL) isValidSearchQuery:(NSString*)string{
     NSCharacterSet *alphaSet = [NSCharacterSet alphanumericCharacterSet];
-    BOOL valid = [[string stringByTrimmingCharactersInSet:alphaSet] isEqualToString:@""];
+    string = [string stringByTrimmingCharactersInSet:alphaSet];
+    string = [string stringByReplacingOccurrencesOfString:@" " withString:@""];
+    BOOL valid = [string isEqualToString:@""];
     return valid;
 }
 
