@@ -60,7 +60,7 @@
 					<object class="IBUILabel" id="712342666">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{109, 285}, {191, 41}}</string>
+						<string key="NSFrame">{{109, 232}, {191, 41}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1050808179"/>
@@ -212,7 +212,7 @@
 					<object class="IBUIButton" id="1050808179">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{215, 323}, {85, 37}}</string>
+						<string key="NSFrame">{{215, 271}, {85, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:225</string>
@@ -340,9 +340,9 @@
 							<reference ref="259349376"/>
 							<reference ref="1052531566"/>
 							<reference ref="276884073"/>
-							<reference ref="712342666"/>
 							<reference ref="1050808179"/>
 							<reference ref="916345488"/>
+							<reference ref="712342666"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -462,7 +462,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="NS.key.0">default.jpg</string>
-			<string key="NS.object.0">{320, 422}</string>
+			<string key="NS.object.0">{320, 420}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>
