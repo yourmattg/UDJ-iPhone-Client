@@ -29,6 +29,8 @@
 -(void)vote:(BOOL)up;
 -(void)downVote;
 -(void)upVote;
+-(void)login;
+-(void)post;
 -(void)removeSong;
 -(void)showEventGoers;
 +(PlaylistViewController*) sharedPlaylistViewController;
