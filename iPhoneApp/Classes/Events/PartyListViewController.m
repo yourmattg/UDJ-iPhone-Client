@@ -17,7 +17,7 @@
 
 @implementation PartyListViewController
 
-@synthesize tableList, eventList, tableView;
+@synthesize tableList, eventList, tableView, searchResultLabel;
 
 
 #pragma mark -
@@ -96,6 +96,20 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self refreshTableList];
+    if([[UDJEventList sharedEventList].currentList count] == 0){
+        NSLog(@"empty");
+        if([UDJEventList sharedEventList].lastSearchType == @"Nearby"){
+            self.searchResultLabel.text = @"No nearby events were found.";
+        }
+        else if([UDJEventList sharedEventList].lastSearchType == @"Name"){
+            self.searchResultLabel.text = @"No events were found that matched your query";
+        }
+        else{
+            self.searchResultLabel.text = @"Press the search button to find events";
+        }
+        [UDJEventList sharedEventList].lastSearchType = nil;
+    }
+    else self.searchResultLabel.text = @"";
     
 }
 

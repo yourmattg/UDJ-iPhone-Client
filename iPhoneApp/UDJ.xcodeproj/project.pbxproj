@@ -33,6 +33,7 @@
 		A3536FB314A5218F00B5C95F /* UDJEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A3536FB214A5218F00B5C95F /* UDJEvent.m */; };
 		A35D3DF114F985460007B374 /* votedown.png in Resources */ = {isa = PBXBuildFile; fileRef = A35D3DEF14F985460007B374 /* votedown.png */; };
 		A35D3DF214F985460007B374 /* voteup.png in Resources */ = {isa = PBXBuildFile; fileRef = A35D3DF014F985460007B374 /* voteup.png */; };
+		A3632F6814FC8AE10073EDF4 /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3632F5F14FC8AC40073EDF4 /* libRestKit.a */; };
 		A36D2CC714A810230087E992 /* PartySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A36D2CC514A810230087E992 /* PartySearchViewController.m */; };
 		A36D2CC814A810230087E992 /* PartySearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A36D2CC614A810230087E992 /* PartySearchViewController.xib */; };
 		A36D2CCC14A818130087E992 /* SearchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A36D2CCA14A818130087E992 /* SearchingViewController.m */; };
@@ -45,7 +46,6 @@
 		A39A0C8B14C4ADDF008A6D54 /* LibraryEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A39A0C8A14C4ADDF008A6D54 /* LibraryEntryCell.m */; };
 		A39AF6701497CB74006ADF19 /* UDJConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A39AF66F1497CB74006ADF19 /* UDJConnection.m */; };
 		A39AF68B1497CFBC006ADF19 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF68A1497CFBC006ADF19 /* Security.framework */; };
-		A39AF68C1497D028006ADF19 /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF6631497C803006ADF19 /* libRestKit.a */; };
 		A39AF68E1497D072006ADF19 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF68D1497D072006ADF19 /* CFNetwork.framework */; };
 		A39AF6901497D079006ADF19 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF68F1497D079006ADF19 /* CoreData.framework */; };
 		A39AF6921497D081006ADF19 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF6911497D081006ADF19 /* MobileCoreServices.framework */; };
@@ -70,35 +70,35 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A39AF6621497C803006ADF19 /* PBXContainerItemProxy */ = {
+		A3632F5E14FC8AC40073EDF4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A39AF6581497C803006ADF19 /* RestKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 25160D1614564E810060A5C5;
 			remoteInfo = RestKit;
 		};
-		A39AF6641497C803006ADF19 /* PBXContainerItemProxy */ = {
+		A3632F6014FC8AC40073EDF4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A39AF6581497C803006ADF19 /* RestKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 25160D2614564E820060A5C5;
 			remoteInfo = RestKitTests;
 		};
-		A39AF6661497C803006ADF19 /* PBXContainerItemProxy */ = {
+		A3632F6214FC8AC40073EDF4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A39AF6581497C803006ADF19 /* RestKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 25160E62145651060060A5C5;
 			remoteInfo = RestKitFramework;
 		};
-		A39AF6681497C803006ADF19 /* PBXContainerItemProxy */ = {
+		A3632F6414FC8AC40073EDF4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A39AF6581497C803006ADF19 /* RestKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 25160E78145651060060A5C5;
 			remoteInfo = RestKitFrameworkTests;
 		};
-		A39AF66C1497CAB5006ADF19 /* PBXContainerItemProxy */ = {
+		A3632F6614FC8ADB0073EDF4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A39AF6581497C803006ADF19 /* RestKit.xcodeproj */;
 			proxyType = 1;
@@ -160,7 +160,7 @@
 		A38B629F14C736C70088640D /* udjlauncher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = udjlauncher.png; sourceTree = "<group>"; };
 		A39A0C8914C4ADDF008A6D54 /* LibraryEntryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryEntryCell.h; sourceTree = "<group>"; };
 		A39A0C8A14C4ADDF008A6D54 /* LibraryEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryEntryCell.m; sourceTree = "<group>"; };
-		A39AF6581497C803006ADF19 /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = ../RestKit/RestKit.xcodeproj; sourceTree = "<group>"; };
+		A39AF6581497C803006ADF19 /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = RestKit/RestKit.xcodeproj; sourceTree = "<group>"; };
 		A39AF66E1497CB74006ADF19 /* UDJConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJConnection.h; sourceTree = "<group>"; };
 		A39AF66F1497CB74006ADF19 /* UDJConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJConnection.m; sourceTree = "<group>"; };
 		A39AF68A1497CFBC006ADF19 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -201,6 +201,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3632F6814FC8AE10073EDF4 /* libRestKit.a in Frameworks */,
 				A3720B3414C7514400D1E30C /* CoreFoundation.framework in Frameworks */,
 				A3720B3214C7513600D1E30C /* CoreLocation.framework in Frameworks */,
 				A39AF6961497D0A4006ADF19 /* libxml2.dylib in Frameworks */,
@@ -209,7 +210,6 @@
 				A39AF6921497D081006ADF19 /* MobileCoreServices.framework in Frameworks */,
 				A39AF6901497D079006ADF19 /* CoreData.framework in Frameworks */,
 				A39AF68E1497D072006ADF19 /* CFNetwork.framework in Frameworks */,
-				A39AF68C1497D028006ADF19 /* libRestKit.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -355,6 +355,17 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		A3632F5814FC8AC40073EDF4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A3632F5F14FC8AC40073EDF4 /* libRestKit.a */,
+				A3632F6114FC8AC40073EDF4 /* RestKitTests.octest */,
+				A3632F6314FC8AC40073EDF4 /* RestKit.framework */,
+				A3632F6514FC8AC40073EDF4 /* RestKitFrameworkTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		A396EF1E14B558B300BCEF8F /* Library */ = {
 			isa = PBXGroup;
 			children = (
@@ -368,17 +379,6 @@
 				A39A0C8A14C4ADDF008A6D54 /* LibraryEntryCell.m */,
 			);
 			path = Library;
-			sourceTree = "<group>";
-		};
-		A39AF6591497C803006ADF19 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A39AF6631497C803006ADF19 /* libRestKit.a */,
-				A39AF6651497C803006ADF19 /* RestKitTests.octest */,
-				A39AF6671497C803006ADF19 /* RestKit.framework */,
-				A39AF6691497C803006ADF19 /* RestKitFrameworkTests.octest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		A3F58C5414A1517900756F7D /* Main Views */ = {
@@ -425,7 +425,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				A39AF66D1497CAB5006ADF19 /* PBXTargetDependency */,
+				A3632F6714FC8ADB0073EDF4 /* PBXTargetDependency */,
 			);
 			name = UDJ;
 			productName = UDJ;
@@ -454,7 +454,7 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = A39AF6591497C803006ADF19 /* Products */;
+					ProductGroup = A3632F5814FC8AC40073EDF4 /* Products */;
 					ProjectRef = A39AF6581497C803006ADF19 /* RestKit.xcodeproj */;
 				},
 			);
@@ -466,32 +466,32 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		A39AF6631497C803006ADF19 /* libRestKit.a */ = {
+		A3632F5F14FC8AC40073EDF4 /* libRestKit.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRestKit.a;
-			remoteRef = A39AF6621497C803006ADF19 /* PBXContainerItemProxy */;
+			remoteRef = A3632F5E14FC8AC40073EDF4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A39AF6651497C803006ADF19 /* RestKitTests.octest */ = {
+		A3632F6114FC8AC40073EDF4 /* RestKitTests.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = RestKitTests.octest;
-			remoteRef = A39AF6641497C803006ADF19 /* PBXContainerItemProxy */;
+			remoteRef = A3632F6014FC8AC40073EDF4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A39AF6671497C803006ADF19 /* RestKit.framework */ = {
+		A3632F6314FC8AC40073EDF4 /* RestKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = RestKit.framework;
-			remoteRef = A39AF6661497C803006ADF19 /* PBXContainerItemProxy */;
+			remoteRef = A3632F6214FC8AC40073EDF4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A39AF6691497C803006ADF19 /* RestKitFrameworkTests.octest */ = {
+		A3632F6514FC8AC40073EDF4 /* RestKitFrameworkTests.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = RestKitFrameworkTests.octest;
-			remoteRef = A39AF6681497C803006ADF19 /* PBXContainerItemProxy */;
+			remoteRef = A3632F6414FC8AC40073EDF4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -565,10 +565,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A39AF66D1497CAB5006ADF19 /* PBXTargetDependency */ = {
+		A3632F6714FC8ADB0073EDF4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = RestKit;
-			targetProxy = A39AF66C1497CAB5006ADF19 /* PBXContainerItemProxy */;
+			targetProxy = A3632F6614FC8ADB0073EDF4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -614,14 +614,53 @@
 			};
 			name = Release;
 		};
+		A3FA511514FF26EF004169C2 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Kurtis Nusbaum";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Kurtis Nusbaum";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "0D88DA8D-C513-43A2-A81C-D71FBF6AEB31";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0D88DA8D-C513-43A2-A81C-D71FBF6AEB31";
+				SDKROOT = iphoneos;
+			};
+			name = Distribution;
+		};
+		A3FA511614FF26EF004169C2 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = UDJ_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = "\"$(SOURCE_ROOT)/RestKit/Build\"";
+				INFOPLIST_FILE = "UDJ-Info.plist";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PRODUCT_NAME = UDJ;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Distribution;
+		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Kurtis Nusbaum (M4UE32J8NM)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				PROVISIONING_PROFILE = "8B6E135E-7E47-4E6D-B5F9-EA5F8758B2EC";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -630,11 +669,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Kurtis Nusbaum";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Kurtis Nusbaum";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "0D88DA8D-C513-43A2-A81C-D71FBF6AEB31";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0D88DA8D-C513-43A2-A81C-D71FBF6AEB31";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
@@ -647,6 +689,7 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+				A3FA511614FF26EF004169C2 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -656,6 +699,7 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
+				A3FA511514FF26EF004169C2 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

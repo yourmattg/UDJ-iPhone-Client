@@ -11,15 +11,17 @@
 
 @implementation UDJEventList
 
-@synthesize currentList, lastSearchParam, currentEvent;
+@synthesize currentList, lastSearchParam, currentEvent, lastSearchType;
 
 // getNearbyEvents: has the UDJConnection send a event search request
 - (void) getNearbyEvents{
+    [UDJEventList sharedEventList].lastSearchType = @"Nearby";
     [[UDJConnection sharedConnection] sendNearbyEventSearch];
 }
 
 // getEventsByName: has the UDJConnection send a event search request
 - (void)getEventsByName:(NSString *)name{
+    [UDJEventList sharedEventList].lastSearchType = @"Name";
     [[UDJConnection sharedConnection] sendEventSearch:name];
 }
 

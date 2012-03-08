@@ -47,7 +47,7 @@
 
 - (void) sendEventSearch:(NSString*)name; // request events by name
 - (void) sendNearbyEventSearch;
-- (void) handleEventResults:(RKResponse*)response;
+- (void) handleEventResults:(RKResponse*)response isNearbySearch:(BOOL)isNearbySearch;
 - (void) acceptEvents:(BOOL)value;
 - (NSInteger) enterEventRequest;
 - (NSInteger) leaveEventRequest;

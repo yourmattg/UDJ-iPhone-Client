@@ -15,6 +15,7 @@
     NSMutableArray* currentList; // holds the last event list we loaded
     NSString* lastSearchParam; // the last string we tried searching
     UDJEvent* currentEvent; // the event id the client is logged in/trying to connect to
+    NSString* lastSearchType;
 }
 
 + (UDJEventList*)sharedEventList;
@@ -24,5 +25,6 @@
 @property(nonatomic,strong) NSMutableArray* currentList;
 @property(nonatomic,strong) NSString* lastSearchParam;
 @property(nonatomic,strong) UDJEvent* currentEvent;
+@property(nonatomic,strong) NSString* lastSearchType;
 
 @end

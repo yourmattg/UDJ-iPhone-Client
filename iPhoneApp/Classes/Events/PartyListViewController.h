@@ -15,6 +15,7 @@
     UDJEventList* eventList; // the event list class to handle all the loading and stuff
 	NSMutableArray *tableList; // the current list actually being shown
     UITableView* tableView;
+    UILabel* searchResultLabel;
 	
 }
 
@@ -24,5 +25,6 @@
 @property(nonatomic,strong) UDJEventList* eventList;
 @property (nonatomic, strong) NSMutableArray *tableList;
 @property(nonatomic,strong) IBOutlet UITableView* tableView;
+@property(nonatomic,strong) IBOutlet UILabel* searchResultLabel;
 
 @end

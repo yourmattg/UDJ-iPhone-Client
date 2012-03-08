@@ -119,7 +119,7 @@ static UDJConnection* sharedUDJConnection = nil;
     
     // send request and handle response
     RKResponse* response = [request sendSynchronously];
-    [self handleEventResults:response];
+    [self handleEventResults:response isNearbySearch:NO];
 }
 
 // sendNearbyEventSearch: requests all the events near the client's location
@@ -145,11 +145,11 @@ static UDJConnection* sharedUDJConnection = nil;
     
     // send request and handle response
     RKResponse* response = [request sendSynchronously];
-    [self handleEventResults:response];
+    [self handleEventResults:response isNearbySearch:NO];
 }
 
 // handleEventResults: get the list of returned events from either the name or location search
-- (void) handleEventResults:(RKResponse*)response{
+- (void) handleEventResults:(RKResponse*)response isNearbySearch:(BOOL)isNearbySearch{
     NSMutableArray* cList = [NSMutableArray new];
     RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
     NSArray* eventArray = [parser objectFromString:[response bodyAsString] error:nil];
@@ -160,6 +160,9 @@ static UDJConnection* sharedUDJConnection = nil;
     }
     [UDJEventList sharedEventList].currentList = cList;
     acceptEvents=NO;
+    
+    // if no events found, alert the user
+
 }
 
 - (void) acceptEvents:(BOOL)value{
