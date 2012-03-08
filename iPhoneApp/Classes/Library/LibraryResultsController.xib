@@ -58,7 +58,7 @@
 						<string key="NSFrameSize">{320, 420}</string>
 						<reference key="NSSuperview" ref="592084157"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="813900501"/>
+						<reference key="NSNextKeyView" ref="730435430"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MCAwIDAgMAA</bytes>
@@ -77,7 +77,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<bool key="IBUIBouncesZoom">NO</bool>
 						<int key="IBUISeparatorStyle">1</int>
-						<object class="NSColor" key="IBUISeparatorColor" id="398807719">
+						<object class="NSColor" key="IBUISeparatorColor" id="929236262">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MSAxIDEAA</bytes>
 						</object>
@@ -87,7 +87,7 @@
 						<float key="IBUISectionHeaderHeight">22</float>
 						<float key="IBUISectionFooterHeight">22</float>
 					</object>
-					<object class="IBUILabel" id="813900501">
+					<object class="IBUILabel" id="730435430">
 						<reference key="NSNextResponder" ref="592084157"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 102}, {280, 143}}</string>
@@ -101,7 +101,7 @@
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText"/>
-						<reference key="IBUITextColor" ref="398807719"/>
+						<reference key="IBUITextColor" ref="929236262"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
@@ -154,7 +154,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">statusLabel</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="813900501"/>
+						<reference key="destination" ref="730435430"/>
 					</object>
 					<int key="connectionID">15</int>
 				</object>
@@ -200,7 +200,7 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="329457789"/>
 							<reference ref="873029372"/>
-							<reference ref="813900501"/>
+							<reference ref="730435430"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -216,7 +216,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">14</int>
-						<reference key="object" ref="813900501"/>
+						<reference key="object" ref="730435430"/>
 						<reference key="parent" ref="592084157"/>
 					</object>
 				</array>
