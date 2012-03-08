@@ -14,7 +14,7 @@
 
 @implementation LibraryResultsController
 
-@synthesize resultList, selectedSong, tableView;
+@synthesize resultList, selectedSong, tableView, statusLabel;
 
 // backToLibSearch: go back to the library search screen
 - (void)backToLibSearch{
@@ -43,6 +43,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.statusLabel.numberOfLines = 0;
+    
     self.navigationItem.title = @"Search Results";
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backToLibSearch)];
     self.navigationItem.leftBarButtonItem = backButton;
@@ -72,6 +75,14 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    if([resultList count] == 0){
+        self.statusLabel.text = @"There were no songs that matched your search query.\n\n If you're having trouble finding songs, try using Get Random to get a sample of the host's music library.";
+        self.tableView.hidden = YES;
+    }
+    else{
+        self.statusLabel.text = @"";
+        self.tableView.hidden = NO;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
