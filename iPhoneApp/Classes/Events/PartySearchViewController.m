@@ -22,17 +22,28 @@
 // check if this is a valid query
 -(BOOL) isValidSearchQuery:(NSString*)string{
     NSCharacterSet *alphaSet = [NSCharacterSet alphanumericCharacterSet];
-    BOOL valid = [[string stringByTrimmingCharactersInSet:alphaSet] isEqualToString:@""];
+    NSString* testString = [NSString stringWithString: string];
+    testString = [testString stringByReplacingOccurrencesOfString:@" " withString:@""];
+    BOOL valid = [[testString stringByTrimmingCharactersInSet:alphaSet] isEqualToString:@""];
     return valid;
 }
 
 - (IBAction) OnButtonClick:(id) sender {
 	if(sender == searchButton || sender == findNearbyButton){
         NSString* searchParam = searchField.text;
+        if(sender == searchButton && ![self isValidSearchQuery:searchParam]){
+            UIAlertView* invalidSearchParam = [[UIAlertView alloc] initWithTitle:@"Invalid Query" message:@"Your search query can only contain alphanumeric characters. This includes A-Z, 0-9." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [invalidSearchParam show];
+            return;
+        }
+        
+        // show the "searching..." view
         UINavigationController* navigationController = self.navigationController;
         [navigationController popViewControllerAnimated:NO];
         SearchingViewController* searchingViewController = [[SearchingViewController alloc] initWithNibName:@"SearchingViewController" bundle:[NSBundle mainBundle]];
         [navigationController pushViewController:searchingViewController animated:NO];
+        
+        // send the search request
         if(sender==searchButton) [[UDJEventList sharedEventList] getEventsByName:searchParam];
         else [[UDJEventList sharedEventList] getNearbyEvents];
         [navigationController popViewControllerAnimated:YES];

@@ -19,6 +19,7 @@
     UITableView* tableView;
     UILabel* currentSongTitleLabel;
     UILabel* currentSongArtistLabel;
+    UILabel* statusLabel;
 
 }
 
@@ -39,5 +40,6 @@
 @property (nonatomic, strong) IBOutlet UITableView* tableView;
 @property (nonatomic, strong) IBOutlet UILabel* currentSongTitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel* currentSongArtistLabel;
+@property(nonatomic,strong) IBOutlet UILabel* statusLabel;
 
 @end

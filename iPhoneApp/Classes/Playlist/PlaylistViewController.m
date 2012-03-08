@@ -18,7 +18,7 @@
 
 @implementation PlaylistViewController
 
-@synthesize theEvent, playlist, tableView, currentSongTitleLabel, currentSongArtistLabel, selectedSong;
+@synthesize theEvent, playlist, tableView, currentSongTitleLabel, currentSongArtistLabel, selectedSong, statusLabel;
 
 static PlaylistViewController* _sharedPlaylistViewController;
 
@@ -83,6 +83,17 @@ static PlaylistViewController* _sharedPlaylistViewController;
     NSString* artistText = [NSString stringWithFormat:@"by %@",[UDJPlaylist sharedUDJPlaylist].currentSong.artist];
     if([UDJPlaylist sharedUDJPlaylist].currentSong == nil) artistText = @"";
     self.currentSongArtistLabel.text = artistText;
+    
+    // if the playlist is empty, let them know, and hide the tableview
+    if([[UDJPlaylist sharedUDJPlaylist].playlist count] == 0){
+        self.tableView.hidden = YES;
+        self.statusLabel.text = @"There are no songs queued up to play next. Click the Search button to add some to the playlist!";
+    }
+    else{
+        self.tableView.hidden = NO;
+        self.statusLabel.text = @"";
+    }
+    
     [self.tableView reloadData];
 }
 
@@ -122,6 +133,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
         [notification show];
     }
 }
+
 // upVote: have UDJConnection send an upvote request
 - (void)upVote{
     [self vote:YES];
@@ -153,6 +165,8 @@ static PlaylistViewController* _sharedPlaylistViewController;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.statusLabel.numberOfLines = 0;
     
     _sharedPlaylistViewController = self;
     
