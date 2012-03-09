@@ -599,6 +599,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kurtis Nusbaum (M4UE32J8NM)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = UDJ_Prefix.pch;
@@ -610,6 +611,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = UDJ;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8B6E135E-7E47-4E6D-B5F9-EA5F8758B2EC";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -635,6 +637,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kurtis Nusbaum (M4UE32J8NM)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = UDJ_Prefix.pch;
@@ -646,6 +649,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = UDJ;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8B6E135E-7E47-4E6D-B5F9-EA5F8758B2EC";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Distribution;
