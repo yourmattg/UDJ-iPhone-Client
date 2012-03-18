@@ -14,12 +14,14 @@
 	UIButton *loginButton;
 	UITextField *usernameField;
 	UITextField *passwordField;
+    UIButton* registerButton;
 	
 }
 
 @property (strong,nonatomic) IBOutlet UIButton *loginButton;
 @property (strong,nonatomic) IBOutlet UITextField *usernameField;
 @property (strong,nonatomic) IBOutlet UITextField *passwordField;
+@property (strong,nonatomic) IBOutlet UIButton *registerButton;
 
 - (IBAction) OnButtonClick:(id) sender;
 

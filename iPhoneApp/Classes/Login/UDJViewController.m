@@ -14,7 +14,7 @@
 
 @implementation UDJViewController
 
-@synthesize loginButton, usernameField, passwordField;
+@synthesize loginButton, usernameField, passwordField, registerButton;
 
 /*
 // The designated initializer. Override to perform setup that is required before the view is loaded.
@@ -39,6 +39,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	[self.navigationController setNavigationBarHidden:NO];
+    self.loginButton.tintColor = [UIColor grayColor];
 	//self.navigationController.navigationBar.tintColor = [UIColor blackColor];
 }
 
@@ -83,6 +84,10 @@
         [[UDJConnection sharedConnection] authenticate:username password: password];
         
 	}
+}
+
+-(IBAction)registerButtonClick:(id)sender{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.udjevents.com/registration/register/"]];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
