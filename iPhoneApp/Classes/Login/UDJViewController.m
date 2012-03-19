@@ -11,47 +11,22 @@
 #import "UDJConnection.h"
 #import "AuthenticateViewController.h"
 #import "PlaylistViewController.h"
+#import "UDJData.h"
 
 @implementation UDJViewController
 
-@synthesize loginButton, usernameField, passwordField, registerButton;
+@synthesize loginButton, usernameField, passwordField, registerButton, currentRequestNumber, globalData, loggingInView;
 
-/*
-// The designated initializer. Override to perform setup that is required before the view is loaded.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
-
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-}
-*/
-
-
-
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
 	[self.navigationController setNavigationBarHidden:NO];
-    self.loginButton.tintColor = [UIColor grayColor];
-	//self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    globalData = [UDJData sharedUDJData];
+    
+    loggingInView.hidden = YES;
+    loggingInView.layer.cornerRadius = 8;
+    loggingInView.layer.borderColor = [[UIColor whiteColor] CGColor];
+    loggingInView.layer.borderWidth = 3;
 }
-
-
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
@@ -65,7 +40,60 @@
 	// e.g. self.myOutlet = nil;
 }
 
+// Show or hide the "logging in.." view; active = YES will show the view
+-(void) toggleLoginView:(BOOL) active{
+    loggingInView.hidden = !active;
+    loginButton.enabled = !active;
+    registerButton.enabled = !active;
+    usernameField.enabled = !active;
+}
 
+
+#pragma mark Authenticate methods
+
+// authenticate: sends a POST with the username and password
+- (void) sendAuthRequest:(NSString*)username password:(NSString*)pass{
+    RKClient* client = [RKClient sharedClient];
+    
+    // make sure the right api version is being passed in
+    NSDictionary* nameAndPass = [NSDictionary dictionaryWithObjectsAndKeys:username, @"username", pass, @"password", @"0.2", @"udj_api_version", nil]; 
+    
+    // create the URL
+    NSMutableString* urlString = [NSMutableString stringWithString: client.baseURL];
+    [urlString appendString: @"/auth"];
+    
+    // set up request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
+    request.queue = client.requestQueue;
+    request.params = nameAndPass;
+    request.method = RKRequestMethodPOST;
+    request.userData = [NSNumber numberWithInt: globalData.requestCount++]; 
+    
+    // remember the request we are waiting on
+    self.currentRequestNumber = request.userData;
+    
+    [self toggleLoginView:YES];
+    
+    [request send];
+    
+}
+
+// handleAuth: handle authorization response if credentials are valid
+- (void)handleAuth:(RKResponse*)response{
+    self.currentRequestNumber = nil;
+    
+    // only handle if we are waiting for an auth response
+    NSDictionary* headerDict = [response allHeaderFields];
+    globalData.ticket=[headerDict valueForKey:@"X-Udj-Ticket-Hash"];
+    globalData.userID=[headerDict valueForKey:@"X-Udj-User-Id"];
+        
+    //TODO: may need to change userID to [userID intValue]
+    globalData.headers = [NSDictionary dictionaryWithObjectsAndKeys:globalData.ticket, @"X-Udj-Ticket-Hash", globalData.userID, @"X-Udj-User-Id", nil];
+        
+    // load the party list view
+    PartyListViewController* partyListViewController = [[PartyListViewController alloc] initWithNibName:@"PartyListViewController" bundle:[NSBundle mainBundle]];
+    [self.navigationController pushViewController:partyListViewController animated:YES];
+}
 
 
 - (IBAction) OnButtonClick:(id) sender {
@@ -75,13 +103,7 @@
     
 	if(![username isEqualToString: @""] && ![password isEqualToString: @""])
 	{
-        // load waiting screen
-        AuthenticateViewController* authenticateViewController = [[AuthenticateViewController alloc] initWithNibName:@"AuthenticateViewController" bundle:[NSBundle mainBundle]];
-        [self.navigationController pushViewController:authenticateViewController animated:NO];
-        
-        // attempt authorization
-        [[UDJConnection sharedConnection] setCurrentController: self];
-        [[UDJConnection sharedConnection] authenticate:username password: password];
+        [self sendAuthRequest:username password:password];
         
 	}
 }
@@ -95,6 +117,30 @@
 		[textField resignFirstResponder];
 	}
 	return NO;
+}
+
+// handles responses from the server
+- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
+    NSLog(@"Got a response from the server");
+    
+    if(request.userData != self.currentRequestNumber) return;
+    
+    // check if the event has ended
+    if(response.statusCode == 410){
+        //[self resetToEventView];
+    }
+    else if ([request isGET]) {
+
+        
+    } else if([request isPOST]) {
+        //[self handleAuth:response];
+        
+    } else if([request isPUT]){
+
+        
+    } else if([request isDELETE]) {
+        
+    }
 }
 
 

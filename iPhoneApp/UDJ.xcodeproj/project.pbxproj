@@ -33,6 +33,7 @@
 		A3536FB314A5218F00B5C95F /* UDJEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A3536FB214A5218F00B5C95F /* UDJEvent.m */; };
 		A35D3DF114F985460007B374 /* votedown.png in Resources */ = {isa = PBXBuildFile; fileRef = A35D3DEF14F985460007B374 /* votedown.png */; };
 		A35D3DF214F985460007B374 /* voteup.png in Resources */ = {isa = PBXBuildFile; fileRef = A35D3DF014F985460007B374 /* voteup.png */; };
+		A35E3E9A1516680100A2882D /* UDJData.m in Sources */ = {isa = PBXBuildFile; fileRef = A35E3E991516680100A2882D /* UDJData.m */; };
 		A3632F6814FC8AE10073EDF4 /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3632F5F14FC8AC40073EDF4 /* libRestKit.a */; };
 		A36D2CC714A810230087E992 /* PartySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A36D2CC514A810230087E992 /* PartySearchViewController.m */; };
 		A36D2CC814A810230087E992 /* PartySearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A36D2CC614A810230087E992 /* PartySearchViewController.xib */; };
@@ -145,6 +146,8 @@
 		A3536FB214A5218F00B5C95F /* UDJEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJEvent.m; sourceTree = "<group>"; };
 		A35D3DEF14F985460007B374 /* votedown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = votedown.png; sourceTree = "<group>"; };
 		A35D3DF014F985460007B374 /* voteup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voteup.png; sourceTree = "<group>"; };
+		A35E3E981516680100A2882D /* UDJData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJData.h; sourceTree = "<group>"; };
+		A35E3E991516680100A2882D /* UDJData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJData.m; sourceTree = "<group>"; };
 		A36D2CC414A810230087E992 /* PartySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartySearchViewController.h; sourceTree = "<group>"; };
 		A36D2CC514A810230087E992 /* PartySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartySearchViewController.m; sourceTree = "<group>"; };
 		A36D2CC614A810230087E992 /* PartySearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PartySearchViewController.xib; sourceTree = "<group>"; };
@@ -407,6 +410,8 @@
 				A3F58D9E14C765C100E350F4 /* UDJEventGoerList.m */,
 				A3BB46E114E2086400554179 /* EventGoerCell.h */,
 				A3BB46E214E2086400554179 /* EventGoerCell.m */,
+				A35E3E981516680100A2882D /* UDJData.h */,
+				A35E3E991516680100A2882D /* UDJData.m */,
 			);
 			path = "Main Items";
 			sourceTree = "<group>";
@@ -559,6 +564,7 @@
 				A3F58D9914C75F0800E350F4 /* EventGoerViewController.m in Sources */,
 				A3F58D9F14C765C100E350F4 /* UDJEventGoerList.m in Sources */,
 				A3BB46E314E2086400554179 /* EventGoerCell.m in Sources */,
+				A35E3E9A1516680100A2882D /* UDJData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

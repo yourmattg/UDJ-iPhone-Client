@@ -14,6 +14,7 @@
 #import "UDJPlaylist.h"
 #import "UDJSongList.h"
 #import "UDJMappableArray.h"
+#import "UDJData.h"
 
 @implementation UDJAppDelegate
 
@@ -43,9 +44,14 @@
     
     // Override point for customization after application launch.
     
+    //init UDJData
+    UDJData* udjData = [[UDJData alloc] init];
+    udjData.requestCount = 0;
+    
     // initialize udjConnection
     baseUrl = @"https://udjevents.com:4897/udj";
     //baseUrl = @"https://0.0.0.0:4897/udj";
+    
     [[UDJConnection sharedConnection] initWithServerPrefix: baseUrl];
     [UDJEventList new]; // make our eventlist singleton
     [UDJPlaylist new]; // make UDJPlaylist singleton
