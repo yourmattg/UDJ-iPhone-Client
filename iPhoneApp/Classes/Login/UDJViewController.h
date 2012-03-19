@@ -23,7 +23,9 @@
     
     UDJData* globalData;
     
-    UIView* loggingInView;
+    UIView* loginBackgroundView;
+    UIView* loginView;
+    UIButton* cancelButton;
 }
 
 @property (strong,nonatomic) IBOutlet UIButton *loginButton;
@@ -32,8 +34,13 @@
 @property (strong,nonatomic) IBOutlet UIButton *registerButton;
 @property(nonatomic,strong) NSNumber* currentRequestNumber;
 @property(nonatomic,strong) UDJData* globalData;
-@property(nonatomic,strong) IBOutlet UIView* loggingInView;
+
+@property(nonatomic,strong) IBOutlet UIView* loginView;
+@property(nonatomic,strong) IBOutlet UIView* loginBackgroundView;
+@property(nonatomic,strong) IBOutlet UIButton* cancelButton;
+
 - (IBAction) OnButtonClick:(id) sender;
+- (IBAction) cancelButtonClick:(id)sender;
 
 @end
 

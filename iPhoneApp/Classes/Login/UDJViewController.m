@@ -15,17 +15,17 @@
 
 @implementation UDJViewController
 
-@synthesize loginButton, usernameField, passwordField, registerButton, currentRequestNumber, globalData, loggingInView;
+@synthesize loginButton, usernameField, passwordField, registerButton, currentRequestNumber, globalData, loginView, loginBackgroundView, cancelButton;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 	[self.navigationController setNavigationBarHidden:NO];
     globalData = [UDJData sharedUDJData];
     
-    loggingInView.hidden = YES;
-    loggingInView.layer.cornerRadius = 8;
-    loggingInView.layer.borderColor = [[UIColor whiteColor] CGColor];
-    loggingInView.layer.borderWidth = 3;
+    loginBackgroundView.hidden = YES;
+    loginView.layer.cornerRadius = 8;
+    loginView.layer.borderColor = [[UIColor whiteColor] CGColor];
+    loginView.layer.borderWidth = 3;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,10 +42,11 @@
 
 // Show or hide the "logging in.." view; active = YES will show the view
 -(void) toggleLoginView:(BOOL) active{
-    loggingInView.hidden = !active;
+    loginBackgroundView.hidden = !active;
     loginButton.enabled = !active;
     registerButton.enabled = !active;
     usernameField.enabled = !active;
+    passwordField.enabled = !active;
 }
 
 
@@ -95,6 +96,17 @@
     [self.navigationController pushViewController:partyListViewController animated:YES];
 }
 
+-(void)denyAuth:(RKResponse*)response{
+    [self toggleLoginView:NO];
+    
+    UIAlertView* authNotification = [[UIAlertView alloc] initWithTitle:@"Login Failed" message:@"The username or password you entered is invalid." delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [authNotification show];
+}
+
+-(IBAction)cancelButtonClick:(id)sender{
+    self.currentRequestNumber = nil;
+    [self toggleLoginView:NO];
+}
 
 - (IBAction) OnButtonClick:(id) sender {
 	// handle user's login attempt
@@ -133,7 +145,10 @@
 
         
     } else if([request isPOST]) {
-        //[self handleAuth:response];
+        if([response isOK])
+            [self handleAuth:response];
+        else
+            [self denyAuth:response];
         
     } else if([request isPUT]){
 
