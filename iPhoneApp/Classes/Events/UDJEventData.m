@@ -28,9 +28,11 @@
     NSURL* url = [NSURL URLWithString:urlString];
     
     // create GET request
-    RKRequest* request = [[RKRequest alloc] initWithURL:url delegate:delegate];
+    RKRequest* request = [[RKRequest alloc] initWithURL:url delegate: delegate];
     request.method = RKRequestMethodGET;
-    request.additionalHTTPHeaders = globalData.headers;
+    request.additionalHTTPHeaders = globalData.headers;    
+    request.userData = [NSNumber numberWithInt: globalData.requestCount++]; 
+    request.queue = client.requestQueue;
     
     // send request 
     [request send];
@@ -39,8 +41,24 @@
 
 // getEventsByName: has the UDJConnection send a event search request
 - (void)getEventsByName:(NSString *)name{
-    [UDJEventData sharedEventData].lastSearchType = @"Name";
-    [[UDJConnection sharedConnection] sendEventSearch:name];
+    NSLog(@"sending event request");
+    RKClient* client = [RKClient sharedClient];
+    
+    // create the URL
+    NSString* urlString = client.baseURL;
+    urlString = [urlString stringByAppendingString:@"/events?name="];
+    urlString = [urlString stringByAppendingString:name];
+    NSURL* url = [NSURL URLWithString:urlString];
+    
+    //create GET request with correct parameters and headers
+    RKRequest* request = [[RKRequest alloc] initWithURL:url delegate: delegate];
+    request.method = RKRequestMethodGET;
+    request.additionalHTTPHeaders = globalData.headers;
+    request.userData = [NSNumber numberWithInt: globalData.requestCount++]; 
+    request.queue = client.requestQueue;
+    
+    // send request and handle response
+    [request send];
 }
 
 // access the EventList anywhere using [EventList sharedEventList]

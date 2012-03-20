@@ -13,11 +13,12 @@
 #import "UDJEvent.h"
 #import "PartySearchViewController.h"
 #import "PlaylistViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 @implementation PartyListViewController
 
-@synthesize tableList, eventData, tableView, searchResultLabel, globalData, currentRequestNumber;
+@synthesize tableList, eventData, tableView, searchResultLabel, globalData, currentRequestNumber, eventNameField, findNearbyButton, eventSearchButton;
 
 
 #pragma mark -
@@ -31,15 +32,26 @@
 	[self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:[UIView new]]];
     
     // set up search button
-    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIBarButtonItemStylePlain target:self action:@selector(pushSearchScreen)]];
+    //[self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIBarButtonItemStylePlain target:self action:@selector(pushSearchScreen)]];
+    self.navigationController.navigationBarHidden = YES;
     
     self.globalData = [UDJData sharedUDJData];
 
+    // set up eventData and get nearby events
     self.eventData = [UDJEventData sharedEventData];
     self.eventData.delegate = self;
-    [eventData getNearbyEvents];
+    self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
     
-    [self refreshTableList];
+    tableView.layer.borderColor = [[UIColor whiteColor] CGColor];
+    tableView.layer.borderWidth = 3;
+    
+    [eventData getNearbyEvents];
+}
+
+// Hide the keyboard when user hits return
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+	return NO;
 }
 
 // logOutOfEvent: log the client out of the current event
@@ -248,7 +260,7 @@
 #pragma mark Event search methods
 
 // handleEventResults: get the list of returned events from either the name or location search
-- (void) handleEventResults:(RKResponse*)response isNearbySearch:(BOOL)isNearbySearch{
+- (void) handleEventResults:(RKResponse*)response{
     NSMutableArray* cList = [NSMutableArray new];
     RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
     NSArray* eventArray = [parser objectFromString:[response bodyAsString] error:nil];
@@ -258,6 +270,8 @@
         [cList addObject:event];
     }
     [UDJEventData sharedEventData].currentList = cList;
+
+    [self refreshTableList];
     
     // if no events found, alert the user
     
@@ -265,9 +279,8 @@
 
 // Handle responses from the server
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
-    NSLog(@"Got a response from the server");
     
-    //if(request.userData != self.currentRequestNumber) return;
+    if(request.userData != self.currentRequestNumber) return;
     
     // check if the event has ended
     if(response.statusCode == 410){
@@ -275,7 +288,7 @@
     }
     else if ([request isGET]) {
         // TODO: change isNearbySearch accordingly
-        [self handleEventResults:response isNearbySearch:YES];
+        [self handleEventResults:response];
         
     } else if([request isPOST]) {
         

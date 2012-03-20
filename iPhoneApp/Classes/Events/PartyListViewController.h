@@ -20,6 +20,12 @@
     UILabel* searchResultLabel;
     
     NSNumber* currentRequestNumber;
+    
+    UILabel* greetingLabel;
+    
+    UITextField* eventNameField;
+    UIButton* findNearbyButton;
+    UIButton* eventSearchButton;
 	
 }
 
@@ -32,5 +38,8 @@
 @property(nonatomic,strong) IBOutlet UILabel* searchResultLabel;
 @property(nonatomic,strong) UDJData* globalData;
 @property(nonatomic,strong) NSNumber* currentRequestNumber;
+@property(nonatomic,strong) IBOutlet UITextField* eventNameField;
+@property(nonatomic,strong) IBOutlet UIButton* findNearbyButton;
+@property(nonatomic,strong) IBOutlet UIButton* eventSearchButton;
 
 @end

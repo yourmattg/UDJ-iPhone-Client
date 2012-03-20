@@ -10,7 +10,7 @@
 
 @implementation UDJData
 
-@synthesize requestCount, ticket, headers, userID;
+@synthesize requestCount, ticket, headers, userID, username;
 
 #pragma mark Singleton methods
 static UDJData* _sharedUDJData = nil;

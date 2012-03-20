@@ -12,12 +12,14 @@
     NSString* ticket;
     NSDictionary* headers;
     NSNumber* userID;
+    NSString* username;
 }
 
 @property NSInteger requestCount;
 @property(nonatomic,strong) NSString* ticket;
 @property(nonatomic,strong) NSDictionary* headers;
 @property(nonatomic,strong) NSNumber* userID;
+@property(nonatomic,strong) NSString* username;
 
 +(UDJData*)sharedUDJData;
 

@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	[self.navigationController setNavigationBarHidden:NO];
+	[self.navigationController setNavigationBarHidden:YES];
     globalData = [UDJData sharedUDJData];
     
     // initialize login view
@@ -87,6 +87,8 @@
 // handleAuth: handle authorization response if credentials are valid
 - (void)handleAuth:(RKResponse*)response{
     self.currentRequestNumber = nil;
+    
+    globalData.username = usernameField.text;
     
     // only handle if we are waiting for an auth response
     NSDictionary* headerDict = [response allHeaderFields];
