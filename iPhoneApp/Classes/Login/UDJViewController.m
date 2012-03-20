@@ -22,10 +22,15 @@
 	[self.navigationController setNavigationBarHidden:NO];
     globalData = [UDJData sharedUDJData];
     
+    // initialize login view
     loginBackgroundView.hidden = YES;
     loginView.layer.cornerRadius = 8;
     loginView.layer.borderColor = [[UIColor whiteColor] CGColor];
     loginView.layer.borderWidth = 3;
+    
+    // initialize text fields
+    usernameField.placeholder = @"Username";
+    passwordField.placeholder = @"Password";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -97,17 +102,22 @@
 }
 
 -(void)denyAuth:(RKResponse*)response{
+    // hide the login view
     [self toggleLoginView:NO];
     
+    //let user know their credentials were invalid
     UIAlertView* authNotification = [[UIAlertView alloc] initWithTitle:@"Login Failed" message:@"The username or password you entered is invalid." delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [authNotification show];
 }
 
+// When user presses cancel, hide login view and let controller know
+// we aren't waiting on any requests
 -(IBAction)cancelButtonClick:(id)sender{
     self.currentRequestNumber = nil;
     [self toggleLoginView:NO];
 }
 
+// Send a login attempt if the user entered a name/pass
 - (IBAction) OnButtonClick:(id) sender {
 	// handle user's login attempt
     NSString* username = usernameField.text;
@@ -120,10 +130,12 @@
 	}
 }
 
+// Send user to the register page
 -(IBAction)registerButtonClick:(id)sender{
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.udjevents.com/registration/register/"]];
 }
 
+// Hide the keyboard when user hits return
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	if (textField == usernameField || textField == passwordField) {
 		[textField resignFirstResponder];
@@ -131,7 +143,7 @@
 	return NO;
 }
 
-// handles responses from the server
+// Handle responses from the server
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
     NSLog(@"Got a response from the server");
     
@@ -145,6 +157,7 @@
 
         
     } else if([request isPOST]) {
+        // If we got a response back from our authenticate request
         if([response isOK])
             [self handleAuth:response];
         else
