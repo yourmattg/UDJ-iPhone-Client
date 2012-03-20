@@ -17,7 +17,6 @@
     NSMutableArray* currentList; // holds the last event list we loaded
     NSString* lastSearchParam; // the last string we tried searching
     UDJEvent* currentEvent; // the event id the client is logged in/trying to connect to
-    NSString* lastSearchType;
     
     UDJData* globalData;
     
@@ -31,7 +30,6 @@
 @property(nonatomic,strong) NSMutableArray* currentList;
 @property(nonatomic,strong) NSString* lastSearchParam;
 @property(nonatomic,strong) UDJEvent* currentEvent;
-@property(nonatomic,strong) NSString* lastSearchType;
 @property(nonatomic,strong) LocationManager* locationManager;
 @property(nonatomic,strong) UDJData* globalData;
 @property(nonatomic,strong) UIViewController* delegate;

@@ -7,7 +7,7 @@
 //
 
 #import "PartyLoginViewController.h"
-#import	"PartyListViewController.h"
+#import	"EventSearchViewController.h"
 #import "PlaylistViewController.h"
 #import "UDJEventData.h"
 

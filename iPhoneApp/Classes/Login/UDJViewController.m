@@ -7,7 +7,7 @@
 //
 
 #import "UDJViewController.h"
-#import "PartyListViewController.h"
+#import "EventSearchViewController.h"
 #import "UDJConnection.h"
 #import "AuthenticateViewController.h"
 #import "PlaylistViewController.h"
@@ -31,6 +31,7 @@
     // initialize text fields
     usernameField.placeholder = @"Username";
     passwordField.placeholder = @"Password";
+    usernameField.autocorrectionType = UITextAutocorrectionTypeNo;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -99,8 +100,8 @@
     globalData.headers = [NSDictionary dictionaryWithObjectsAndKeys:globalData.ticket, @"X-Udj-Ticket-Hash", globalData.userID, @"X-Udj-User-Id", nil];
         
     // load the party list view
-    PartyListViewController* partyListViewController = [[PartyListViewController alloc] initWithNibName:@"PartyListViewController" bundle:[NSBundle mainBundle]];
-    [self.navigationController pushViewController:partyListViewController animated:YES];
+    EventSearchViewController* eventSearchViewController = [[EventSearchViewController alloc] initWithNibName:@"EventSearchViewController" bundle:[NSBundle mainBundle]];
+    [self.navigationController pushViewController:eventSearchViewController animated:YES];
 }
 
 -(void)denyAuth:(RKResponse*)response{

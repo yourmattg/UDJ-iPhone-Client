@@ -12,7 +12,7 @@
 
 @implementation UDJEventData
 
-@synthesize currentList, lastSearchParam, currentEvent, lastSearchType, locationManager, globalData, delegate;
+@synthesize currentList, lastSearchParam, currentEvent, locationManager, globalData, delegate;
 
 // getNearbyEvents: has the UDJConnection send a event search request
 - (void) getNearbyEvents{
@@ -41,7 +41,6 @@
 
 // getEventsByName: has the UDJConnection send a event search request
 - (void)getEventsByName:(NSString *)name{
-    NSLog(@"sending event request");
     RKClient* client = [RKClient sharedClient];
     
     // create the URL

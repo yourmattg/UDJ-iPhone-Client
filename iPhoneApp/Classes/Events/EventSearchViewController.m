@@ -1,12 +1,12 @@
 //
-//  PartyListViewController.m
+//  EventSearchViewController.m
 //  UDJ
 //
 //  Created by Matthew Graf on 9/24/11.
 //  Copyright 2011 University of Illinois at Urbana-Champaign. All rights reserved.
 //
 
-#import "PartyListViewController.h"
+#import "EventSearchViewController.h"
 #import "PartyLoginViewController.h"
 #import "UDJConnection.h"
 #import "UDJEventData.h"
@@ -16,9 +16,9 @@
 #import <QuartzCore/QuartzCore.h>
 
 
-@implementation PartyListViewController
+@implementation EventSearchViewController
 
-@synthesize tableList, eventData, tableView, searchResultLabel, globalData, currentRequestNumber, eventNameField, findNearbyButton, eventSearchButton;
+@synthesize tableList, eventData, tableView, searchResultLabel, globalData, currentRequestNumber, eventNameField, findNearbyButton, eventSearchButton, lastSearchType, searchingBackgroundView, searchingView;
 
 
 #pragma mark -
@@ -28,13 +28,7 @@
     [super viewDidLoad];
     
 	self.tableList = [[NSMutableArray alloc] init];
-	self.navigationItem.title = @"Events";
-	[self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:[UIView new]]];
-    
-    // set up search button
-    //[self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIBarButtonItemStylePlain target:self action:@selector(pushSearchScreen)]];
-    self.navigationController.navigationBarHidden = YES;
-    
+  
     self.globalData = [UDJData sharedUDJData];
 
     // set up eventData and get nearby events
@@ -42,10 +36,24 @@
     self.eventData.delegate = self;
     self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
     
-    tableView.layer.borderColor = [[UIColor whiteColor] CGColor];
-    tableView.layer.borderWidth = 3;
+    // initialize login view
+    searchingBackgroundView.hidden = YES;
+    searchingView.layer.cornerRadius = 8;
+    searchingView.layer.borderColor = [[UIColor whiteColor] CGColor];
+    searchingView.layer.borderWidth = 3;
     
-    [eventData getNearbyEvents];
+    // initialize eventNameField
+    eventNameField.autocorrectionType = UITextAutocorrectionTypeNo;
+    
+    [self toggleSearchingView: NO];
+}
+
+// Show or hide the "Searching events" view; active = YES will show the view
+-(void) toggleSearchingView:(BOOL) active{
+    searchingBackgroundView.hidden = !active;
+    eventSearchButton.enabled = !active;
+    findNearbyButton.enabled = !active;
+    eventNameField.enabled = !active;
 }
 
 // Hide the keyboard when user hits return
@@ -69,6 +77,42 @@
 - (void)rejoinEvent{
     PlaylistViewController* playlistViewController = [[PlaylistViewController alloc] initWithNibName:@"NewPlaylistViewController" bundle:[NSBundle mainBundle]];
     [self.navigationController pushViewController:playlistViewController animated:YES];
+}
+
+#pragma mark Button click methods
+
+// check if this is a valid query
+-(BOOL) isValidSearchQuery:(NSString*)string{
+    NSCharacterSet *alphaSet = [NSCharacterSet alphanumericCharacterSet];
+    NSString* testString = [NSString stringWithString: string];
+    testString = [testString stringByReplacingOccurrencesOfString:@" " withString:@""];
+    BOOL valid = [[testString stringByTrimmingCharactersInSet:alphaSet] isEqualToString:@""];
+    return valid;
+}
+
+-(IBAction)searchButtonClick:(id)sender{
+    
+    NSString* searchParam = eventNameField.text;
+    
+    // if the search query is invalid, alert the user
+    if(![self isValidSearchQuery:searchParam]){
+        UIAlertView* invalidSearchParam = [[UIAlertView alloc] initWithTitle:@"Invalid Query" message:@"Your search query can only contain alphanumeric characters. This includes A-Z, 0-9." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [invalidSearchParam show];
+        return;
+    }
+    
+    // otherwise, send a search request
+    else{
+        self.lastSearchType = @"Name";
+        self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
+        [eventData getEventsByName: searchParam];
+    }
+}
+
+-(IBAction)findNearbyButtonClick:(id)sender{
+    self.lastSearchType = @"Nearby";
+    self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
+    [eventData getNearbyEvents];
 }
 
 // handle button clicks from alertview (pop up message boxes)
@@ -112,20 +156,6 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self refreshTableList];
-    if([[UDJEventData sharedEventData].currentList count] == 0){
-        NSLog(@"empty");
-        if([UDJEventData sharedEventData].lastSearchType == @"Nearby"){
-            self.searchResultLabel.text = @"No nearby events were found.";
-        }
-        else if([UDJEventData sharedEventData].lastSearchType == @"Name"){
-            self.searchResultLabel.text = @"No events were found that matched your query";
-        }
-        else{
-            self.searchResultLabel.text = @"Press the search button to find events";
-        }
-        [UDJEventData sharedEventData].lastSearchType = nil;
-    }
-    else self.searchResultLabel.text = @"";
     
 }
 
@@ -183,44 +213,7 @@
 }
 
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source.
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }   
-}
-*/
-
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 
 #pragma mark -
@@ -259,6 +252,19 @@
 
 #pragma mark Event search methods
 
+-(void)showResultsMessage{
+    if(lastSearchType == @"Name"){
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No Events Found" message:@"Sorry, there were no events that matched the name you specified." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alert show];
+    }
+    else if(lastSearchType == @"Nearby"){
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No Events Found" message:@"Sorry, there are no public events near you." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alert show];        
+    }
+    
+    lastSearchType = nil;
+}
+
 // handleEventResults: get the list of returned events from either the name or location search
 - (void) handleEventResults:(RKResponse*)response{
     NSMutableArray* cList = [NSMutableArray new];
@@ -271,15 +277,19 @@
     }
     [UDJEventData sharedEventData].currentList = cList;
 
-    [self refreshTableList];
+    // show "No Events Found" message if there were no events,
+    // otherwise just reset our last search type
+    if([cList count] == 0) [self showResultsMessage];
+    else self.lastSearchType = nil;
     
-    // if no events found, alert the user
-    
+    // refresh the table view
+    [self refreshTableList];    
 }
 
 // Handle responses from the server
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
     
+    NSLog(@"Got a response");
     if(request.userData != self.currentRequestNumber) return;
     
     // check if the event has ended

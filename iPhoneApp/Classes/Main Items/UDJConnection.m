@@ -8,7 +8,7 @@
 
 #import "UDJConnection.h"
 #import "AuthenticateViewController.h"
-#import "PartyListViewController.h"
+#import "EventSearchViewController.h"
 #import "UDJAppDelegate.h"
 #import "UDJEvent.h"
 #import "UDJSong.h"
@@ -81,8 +81,8 @@ static UDJConnection* sharedUDJConnection = nil;
         headers = [NSDictionary dictionaryWithObjectsAndKeys:ticket, @"X-Udj-Ticket-Hash", userID, @"X-Udj-User-Id", nil];
         
         // load the party list view
-        PartyListViewController* partyListViewController = [[PartyListViewController alloc] initWithNibName:@"PartyListViewController" bundle:[NSBundle mainBundle]];
-        [currentController.navigationController pushViewController:partyListViewController animated:YES];
+        EventSearchViewController* eventSearchViewController = [[EventSearchViewController alloc] initWithNibName:@"EventSearchViewController" bundle:[NSBundle mainBundle]];
+        [currentController.navigationController pushViewController:eventSearchViewController animated:YES];
     }
 }
 
@@ -405,7 +405,7 @@ static UDJConnection* sharedUDJConnection = nil;
     NSString* msg = [NSString stringWithFormat:@"%@%@", [UDJEventData sharedEventData].currentEvent.name, @" has ended. You will be returned to the event search screen.", nil];
     UIAlertView* notification = [[UIAlertView alloc] initWithTitle:@"Event Ended" message: msg delegate: nil cancelButtonTitle:@"Back" otherButtonTitles:nil];
     [notification show];
-    while(![self.navigationController.topViewController isMemberOfClass:[PartyListViewController class]]){
+    while(![self.navigationController.topViewController isMemberOfClass:[EventSearchViewController class]]){
         [self.navigationController popViewControllerAnimated:NO];
     }
     [self resetAcceptResponses];
