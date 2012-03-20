@@ -35,7 +35,6 @@
 }
 
 -(void)refreshTableList; // rebuild the tableList and show it
--(void)pushSearchScreen;
 -(void) toggleSearchingView:(BOOL) active;
 
 @property(nonatomic,strong) UDJEventData* eventData;

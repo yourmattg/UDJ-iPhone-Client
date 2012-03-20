@@ -11,7 +11,6 @@
 #import "UDJConnection.h"
 #import "UDJEventData.h"
 #import "UDJEvent.h"
-#import "PartySearchViewController.h"
 #import "PlaylistViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -105,6 +104,7 @@
     else{
         self.lastSearchType = @"Name";
         self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
+        [self toggleSearchingView: YES];
         [eventData getEventsByName: searchParam];
     }
 }
@@ -112,6 +112,7 @@
 -(IBAction)findNearbyButtonClick:(id)sender{
     self.lastSearchType = @"Nearby";
     self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
+    [self toggleSearchingView: YES];
     [eventData getNearbyEvents];
 }
 
@@ -128,11 +129,9 @@
             [self rejoinEvent];
         }
     }
-}
-
-- (void)pushSearchScreen{
-    PartySearchViewController* partySearchViewController = [[PartySearchViewController alloc] initWithNibName:@"PartySearchViewController" bundle:[NSBundle mainBundle]];
-    [self.navigationController pushViewController:partySearchViewController animated:YES];
+    else if(alertView.title == @"No Events Found"){
+        [self toggleSearchingView: NO];
+    }
 }
 
 - (void)refreshTableList{
@@ -253,6 +252,9 @@
 #pragma mark Event search methods
 
 -(void)showResultsMessage{
+    
+    self.searchingView.hidden = YES;
+    
     if(lastSearchType == @"Name"){
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No Events Found" message:@"Sorry, there were no events that matched the name you specified." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alert show];

@@ -15,6 +15,8 @@
 		2899E5220DE3E06400AC0155 /* UDJViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* UDJViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* UDJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* UDJViewController.m */; };
+		A309CC6415194A8000912EA2 /* EventResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A309CC6215194A7F00912EA2 /* EventResultsViewController.m */; };
+		A309CC6515194A8000912EA2 /* EventResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A309CC6315194A8000912EA2 /* EventResultsViewController.xib */; };
 		A324ABF614AAB74700388514 /* UDJSong.m in Sources */ = {isa = PBXBuildFile; fileRef = A324ABF514AAB74700388514 /* UDJSong.m */; };
 		A324AC0514AABB8900388514 /* UDJPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = A324AC0414AABB8900388514 /* UDJPlaylist.m */; };
 		A3265DB314C6101400FC692B /* PlaylistEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3265DB214C6101400FC692B /* PlaylistEntryCell.m */; };
@@ -35,7 +37,6 @@
 		A35D3DF214F985460007B374 /* voteup.png in Resources */ = {isa = PBXBuildFile; fileRef = A35D3DF014F985460007B374 /* voteup.png */; };
 		A35E3E9A1516680100A2882D /* UDJData.m in Sources */ = {isa = PBXBuildFile; fileRef = A35E3E991516680100A2882D /* UDJData.m */; };
 		A3632F6814FC8AE10073EDF4 /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3632F5F14FC8AC40073EDF4 /* libRestKit.a */; };
-		A36D2CC714A810230087E992 /* PartySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A36D2CC514A810230087E992 /* PartySearchViewController.m */; };
 		A36D2CC814A810230087E992 /* PartySearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A36D2CC614A810230087E992 /* PartySearchViewController.xib */; };
 		A36D2CCC14A818130087E992 /* SearchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A36D2CCA14A818130087E992 /* SearchingViewController.m */; };
 		A36D2CCD14A818130087E992 /* SearchingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A36D2CCB14A818130087E992 /* SearchingViewController.xib */; };
@@ -121,6 +122,9 @@
 		28D7ACF70DDB3853001CB0EB /* UDJViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* UDJ_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJ_Prefix.pch; sourceTree = "<group>"; };
+		A309CC6115194A7F00912EA2 /* EventResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventResultsViewController.h; sourceTree = "<group>"; };
+		A309CC6215194A7F00912EA2 /* EventResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventResultsViewController.m; sourceTree = "<group>"; };
+		A309CC6315194A8000912EA2 /* EventResultsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventResultsViewController.xib; path = ../Classes/Events/EventResultsViewController.xib; sourceTree = "<group>"; };
 		A324ABF414AAB74700388514 /* UDJSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJSong.h; sourceTree = "<group>"; };
 		A324ABF514AAB74700388514 /* UDJSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJSong.m; sourceTree = "<group>"; };
 		A324AC0314AABB8900388514 /* UDJPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJPlaylist.h; sourceTree = "<group>"; };
@@ -148,8 +152,6 @@
 		A35D3DF014F985460007B374 /* voteup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voteup.png; sourceTree = "<group>"; };
 		A35E3E981516680100A2882D /* UDJData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJData.h; sourceTree = "<group>"; };
 		A35E3E991516680100A2882D /* UDJData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJData.m; sourceTree = "<group>"; };
-		A36D2CC414A810230087E992 /* PartySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartySearchViewController.h; sourceTree = "<group>"; };
-		A36D2CC514A810230087E992 /* PartySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartySearchViewController.m; sourceTree = "<group>"; };
 		A36D2CC614A810230087E992 /* PartySearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PartySearchViewController.xib; sourceTree = "<group>"; };
 		A36D2CC914A818130087E992 /* SearchingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchingViewController.h; sourceTree = "<group>"; };
 		A36D2CCA14A818130087E992 /* SearchingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchingViewController.m; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 				A33C4613148F0707009C1BC6 /* PlaylistViewController.xib */,
 				A3F9C1D7142EBB880016717B /* PartyLoginViewController.xib */,
 				A3F9C051142EAD610016717B /* EventSearchViewController.xib */,
+				A309CC6315194A8000912EA2 /* EventResultsViewController.xib */,
 				2899E5210DE3E06400AC0155 /* UDJViewController.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 			);
@@ -339,10 +342,10 @@
 				A374BE0014A2EF36001A0DE0 /* UDJEventData.m */,
 				A3F9C04F142EAD610016717B /* EventSearchViewController.h */,
 				A3F9C050142EAD610016717B /* EventSearchViewController.m */,
+				A309CC6115194A7F00912EA2 /* EventResultsViewController.h */,
+				A309CC6215194A7F00912EA2 /* EventResultsViewController.m */,
 				A3F9C1D5142EBB880016717B /* PartyLoginViewController.h */,
 				A3F9C1D6142EBB880016717B /* PartyLoginViewController.m */,
-				A36D2CC414A810230087E992 /* PartySearchViewController.h */,
-				A36D2CC514A810230087E992 /* PartySearchViewController.m */,
 			);
 			path = Events;
 			sourceTree = "<group>";
@@ -529,6 +532,7 @@
 				A341B92914F86C61001892C5 /* addbutton.png in Resources */,
 				A35D3DF114F985460007B374 /* votedown.png in Resources */,
 				A35D3DF214F985460007B374 /* voteup.png in Resources */,
+				A309CC6515194A8000912EA2 /* EventResultsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,7 +554,6 @@
 				A3F58C5C14A15F0B00756F7D /* AuthenticateViewController.m in Sources */,
 				A374BE0114A2EF36001A0DE0 /* UDJEventData.m in Sources */,
 				A3536FB314A5218F00B5C95F /* UDJEvent.m in Sources */,
-				A36D2CC714A810230087E992 /* PartySearchViewController.m in Sources */,
 				A36D2CCC14A818130087E992 /* SearchingViewController.m in Sources */,
 				A324ABF614AAB74700388514 /* UDJSong.m in Sources */,
 				A324AC0514AABB8900388514 /* UDJPlaylist.m in Sources */,
@@ -565,6 +568,7 @@
 				A3F58D9F14C765C100E350F4 /* UDJEventGoerList.m in Sources */,
 				A3BB46E314E2086400554179 /* EventGoerCell.m in Sources */,
 				A35E3E9A1516680100A2882D /* UDJData.m in Sources */,
+				A309CC6415194A8000912EA2 /* EventResultsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
