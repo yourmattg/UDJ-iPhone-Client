@@ -10,7 +10,7 @@
 #import "UDJViewController.h"
 #import "UDJConnection.h"
 #import "UDJEvent.h"
-#import "UDJEventList.h"
+#import "UDJEventData.h"
 #import "UDJPlaylist.h"
 #import "UDJSongList.h"
 #import "UDJMappableArray.h"
@@ -47,13 +47,13 @@
     //init UDJData
     UDJData* udjData = [[UDJData alloc] init];
     udjData.requestCount = 0;
+    [UDJEventData new]; // eventData singleton
     
     // initialize udjConnection
     baseUrl = @"https://udjevents.com:4897/udj";
     //baseUrl = @"https://0.0.0.0:4897/udj";
     
     [[UDJConnection sharedConnection] initWithServerPrefix: baseUrl];
-    [UDJEventList new]; // make our eventlist singleton
     [UDJPlaylist new]; // make UDJPlaylist singleton
     [[UDJPlaylist sharedUDJPlaylist] initVoteRecordKeeper];
     

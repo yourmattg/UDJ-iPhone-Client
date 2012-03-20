@@ -9,7 +9,7 @@
 #import "LibrarySearchViewController.h"
 #import "SearchingViewController.h"
 #import "UDJConnection.h"
-#import "UDJEventList.h"
+#import "UDJEventData.h"
 
 @implementation LibrarySearchViewController
 
@@ -27,7 +27,7 @@
 	if(sender==searchButton){
         NSString* searchParam = searchField.text;
         if([self isValidSearchQuery:searchParam]){
-            NSInteger eventIdParam = [UDJEventList sharedEventList].currentEvent.eventId;
+            NSInteger eventIdParam = [UDJEventData sharedEventData].currentEvent.eventId;
             NSInteger maxResultsParam = 100;
             // show the searching screen
             SearchingViewController* searchingViewController = [[SearchingViewController alloc] initWithNibName:@"SearchingViewController" bundle:[NSBundle mainBundle]];
@@ -42,7 +42,7 @@
         }
     }
     if(sender==randomButton){
-        NSInteger eventIdParam = [UDJEventList sharedEventList].currentEvent.eventId;
+        NSInteger eventIdParam = [UDJEventData sharedEventData].currentEvent.eventId;
         NSInteger maxResultsParam = 50;
         // show the searching screen
         SearchingViewController* searchingViewController = [[SearchingViewController alloc] initWithNibName:@"SearchingViewController" bundle:[NSBundle mainBundle]];

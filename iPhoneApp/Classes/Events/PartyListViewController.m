@@ -9,7 +9,7 @@
 #import "PartyListViewController.h"
 #import "PartyLoginViewController.h"
 #import "UDJConnection.h"
-#import "UDJEventList.h"
+#import "UDJEventData.h"
 #import "UDJEvent.h"
 #import "PartySearchViewController.h"
 #import "PlaylistViewController.h"
@@ -17,17 +17,36 @@
 
 @implementation PartyListViewController
 
-@synthesize tableList, eventList, tableView, searchResultLabel;
+@synthesize tableList, eventData, tableView, searchResultLabel, globalData, currentRequestNumber;
 
 
 #pragma mark -
 #pragma mark View lifecycle
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+	self.tableList = [[NSMutableArray alloc] init];
+	self.navigationItem.title = @"Events";
+	[self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:[UIView new]]];
+    
+    // set up search button
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIBarButtonItemStylePlain target:self action:@selector(pushSearchScreen)]];
+    
+    self.globalData = [UDJData sharedUDJData];
+
+    self.eventData = [UDJEventData sharedEventData];
+    self.eventData.delegate = self;
+    [eventData getNearbyEvents];
+    
+    [self refreshTableList];
+}
+
 // logOutOfEvent: log the client out of the current event
 - (void)logOutOfEvent{
     NSInteger statusCode = [[UDJConnection sharedConnection] leaveEventRequest];
     if(statusCode==200){
-        [UDJEventList sharedEventList].currentEvent=nil;
+        [UDJEventData sharedEventData].currentEvent=nil;
         [[UDJPlaylist sharedUDJPlaylist] clearPlaylist];
         UIAlertView* loggedOut = [[UIAlertView alloc] initWithTitle:@"Logout Success" message:@"You are no longer logged into any events." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [loggedOut show];
@@ -62,28 +81,13 @@
 
 - (void)refreshTableList{
     [tableList removeAllObjects];
-    int size = [eventList.currentList count];
+    int size = [eventData.currentList count];
     for(int i=0; i<size; i++){
-        UDJEvent* event = [eventList.currentList objectAtIndex:i];
+        UDJEvent* event = [eventData.currentList objectAtIndex:i];
         NSString* partyName = event.name;
         [tableList addObject:partyName];
     }
     [self.tableView reloadData];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    //[[UDJConnection sharedConnection] setCurrentController: self];
-    
-	self.tableList = [[NSMutableArray alloc] init];
-	self.navigationItem.title = @"Events";
-	[self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:[UIView new]]];
-    // set up search button
-    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIBarButtonItemStylePlain target:self action:@selector(pushSearchScreen)]];
-    // make a new event list
-    eventList = [UDJEventList sharedEventList];
-    [eventList getNearbyEvents];
-    [self refreshTableList];
 }
 
 /*
@@ -96,18 +100,18 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self refreshTableList];
-    if([[UDJEventList sharedEventList].currentList count] == 0){
+    if([[UDJEventData sharedEventData].currentList count] == 0){
         NSLog(@"empty");
-        if([UDJEventList sharedEventList].lastSearchType == @"Nearby"){
+        if([UDJEventData sharedEventData].lastSearchType == @"Nearby"){
             self.searchResultLabel.text = @"No nearby events were found.";
         }
-        else if([UDJEventList sharedEventList].lastSearchType == @"Name"){
+        else if([UDJEventData sharedEventData].lastSearchType == @"Name"){
             self.searchResultLabel.text = @"No events were found that matched your query";
         }
         else{
             self.searchResultLabel.text = @"Press the search button to find events";
         }
-        [UDJEventList sharedEventList].lastSearchType = nil;
+        [UDJEventData sharedEventData].lastSearchType = nil;
     }
     else self.searchResultLabel.text = @"";
     
@@ -214,9 +218,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // get the party and remember the event we are trying to join
     NSInteger index = [indexPath indexAtPosition:1];
-    [UDJEventList sharedEventList].currentEvent = [[UDJEventList sharedEventList].currentList objectAtIndex:index];
+    [UDJEventData sharedEventData].currentEvent = [[UDJEventData sharedEventData].currentList objectAtIndex:index];
     // there's a password: go the password screen
-	if([UDJEventList sharedEventList].currentEvent.hasPassword){
+	if([UDJEventData sharedEventData].currentEvent.hasPassword){
         PartyLoginViewController* partyLoginViewController = [[PartyLoginViewController alloc] initWithNibName:@"PartyLoginViewController" bundle:[NSBundle mainBundle]];
         [self.navigationController pushViewController:partyLoginViewController animated:YES];
     }
@@ -233,11 +237,53 @@
             [nonExistantEvent show];
         }
         else if(statusCode==409){
-            NSString* msg = [NSString stringWithFormat:@"%@%@%@", @"You are already logged into another event, \"", [UDJEventList sharedEventList].currentEvent.name, @"\". Would you like to log out of that event or rejoin it?", nil];
+            NSString* msg = [NSString stringWithFormat:@"%@%@%@", @"You are already logged into another event, \"", [UDJEventData sharedEventData].currentEvent.name, @"\". Would you like to log out of that event or rejoin it?", nil];
             UIAlertView* alreadyInEvent = [[UIAlertView alloc] initWithTitle:@"Event Conflict" message: msg delegate: self cancelButtonTitle:@"Log Out" otherButtonTitles:@"Rejoin",nil];
             [alreadyInEvent show];
         }
         // TODO: add other event possibilities (see API)
+    }
+}
+
+#pragma mark Event search methods
+
+// handleEventResults: get the list of returned events from either the name or location search
+- (void) handleEventResults:(RKResponse*)response isNearbySearch:(BOOL)isNearbySearch{
+    NSMutableArray* cList = [NSMutableArray new];
+    RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
+    NSArray* eventArray = [parser objectFromString:[response bodyAsString] error:nil];
+    for(int i=0; i<[eventArray count]; i++){
+        NSDictionary* eventDict = [eventArray objectAtIndex:i];
+        UDJEvent* event = [UDJEvent eventFromDictionary:eventDict];
+        [cList addObject:event];
+    }
+    [UDJEventData sharedEventData].currentList = cList;
+    
+    // if no events found, alert the user
+    
+}
+
+// Handle responses from the server
+- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
+    NSLog(@"Got a response from the server");
+    
+    //if(request.userData != self.currentRequestNumber) return;
+    
+    // check if the event has ended
+    if(response.statusCode == 410){
+        //[self resetToEventView];
+    }
+    else if ([request isGET]) {
+        // TODO: change isNearbySearch accordingly
+        [self handleEventResults:response isNearbySearch:YES];
+        
+    } else if([request isPOST]) {
+        
+    } else if([request isPUT]){
+        
+        
+    } else if([request isDELETE]) {
+        
     }
 }
 

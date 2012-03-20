@@ -158,7 +158,7 @@ static UDJConnection* sharedUDJConnection = nil;
         UDJEvent* event = [UDJEvent eventFromDictionary:eventDict];
         [cList addObject:event];
     }
-    [UDJEventList sharedEventList].currentList = cList;
+    [UDJEventData sharedEventData].currentList = cList;
     acceptEvents=NO;
     
     // if no events found, alert the user
@@ -174,7 +174,7 @@ static UDJConnection* sharedUDJConnection = nil;
     //create url
     NSString* urlString = client.baseURL;
     urlString = [urlString stringByAppendingString:@"/events/"];
-    urlString = [urlString stringByAppendingFormat:@"%d",[UDJEventList sharedEventList].currentEvent.eventId];
+    urlString = [urlString stringByAppendingFormat:@"%d",[UDJEventData sharedEventData].currentEvent.eventId];
     urlString = [urlString stringByAppendingString:@"/users/"];
     urlString = [urlString stringByAppendingFormat:@"%i", [userID intValue]];
     //set up request
@@ -187,7 +187,7 @@ static UDJConnection* sharedUDJConnection = nil;
     if(response.statusCode==409){
         RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
         NSDictionary* eventDict = [parser objectFromString:[response bodyAsString] error:nil];
-        [UDJEventList sharedEventList].currentEvent = [UDJEvent eventFromDictionary:eventDict];
+        [UDJEventData sharedEventData].currentEvent = [UDJEvent eventFromDictionary:eventDict];
     }
     return response.statusCode;
 }
@@ -196,7 +196,7 @@ static UDJConnection* sharedUDJConnection = nil;
     //create url
     NSString* urlString = client.baseURL;
     urlString = [urlString stringByAppendingString:@"/events/"];
-    urlString = [urlString stringByAppendingFormat:@"%d",[UDJEventList sharedEventList].currentEvent.eventId];
+    urlString = [urlString stringByAppendingFormat:@"%d",[UDJEventData sharedEventData].currentEvent.eventId];
     urlString = [urlString stringByAppendingString:@"/users/"];
     urlString = [urlString stringByAppendingFormat:@"%d", [userID intValue]];
     //set up request
@@ -402,14 +402,14 @@ static UDJConnection* sharedUDJConnection = nil;
 
 // resetToEventView: return user to the event screen and reset all variables associated with the event
 -(void)resetToEventView{
-    NSString* msg = [NSString stringWithFormat:@"%@%@", [UDJEventList sharedEventList].currentEvent.name, @" has ended. You will be returned to the event search screen.", nil];
+    NSString* msg = [NSString stringWithFormat:@"%@%@", [UDJEventData sharedEventData].currentEvent.name, @" has ended. You will be returned to the event search screen.", nil];
     UIAlertView* notification = [[UIAlertView alloc] initWithTitle:@"Event Ended" message: msg delegate: nil cancelButtonTitle:@"Back" otherButtonTitles:nil];
     [notification show];
     while(![self.navigationController.topViewController isMemberOfClass:[PartyListViewController class]]){
         [self.navigationController popViewControllerAnimated:NO];
     }
     [self resetAcceptResponses];
-    // dont need to reset UDJEventList, UDJPlaylist
+    // dont need to reset sharedEventData, UDJPlaylist
 }
 
 

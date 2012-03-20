@@ -8,7 +8,7 @@
 
 #import "LibraryResultsController.h"
 #import "UDJConnection.h"
-#import "UDJEventList.h"
+#import "UDJEventData.h"
 #import "LibraryEntryCell.h"
 #import "SearchingViewController.h"
 
@@ -22,7 +22,7 @@
 }
 
 -(void) sendRandomRequest{
-    NSInteger eventIdParam = [UDJEventList sharedEventList].currentEvent.eventId;
+    NSInteger eventIdParam = [UDJEventData sharedEventData].currentEvent.eventId;
     NSInteger maxResultsParam = 50;
     // have UDJConnection send a request
     [[UDJConnection sharedConnection] sendRandomSongRequest:eventIdParam maxResults:maxResultsParam];

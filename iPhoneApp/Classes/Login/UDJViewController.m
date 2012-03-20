@@ -147,27 +147,19 @@
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
     NSLog(@"Got a response from the server");
     
+    // disregard request if it wasn't the one we were waiting on
     if(request.userData != self.currentRequestNumber) return;
     
     // check if the event has ended
     if(response.statusCode == 410){
         //[self resetToEventView];
     }
-    else if ([request isGET]) {
-
-        
-    } else if([request isPOST]) {
+    else if([request isPOST]) {
         // If we got a response back from our authenticate request
         if([response isOK])
             [self handleAuth:response];
         else
             [self denyAuth:response];
-        
-    } else if([request isPUT]){
-
-        
-    } else if([request isDELETE]) {
-        
     }
 }
 

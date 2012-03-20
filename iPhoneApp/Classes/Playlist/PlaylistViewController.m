@@ -7,7 +7,7 @@
 //
 
 #import "PlaylistViewController.h"
-#import "UDJEventList.h"
+#import "UDJEventData.h"
 #import "UDJEvent.h"
 #import "UDJPlaylist.h"
 #import "UDJSong.h"
@@ -48,7 +48,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 }
 
 -(void)removeSong{
-    NSInteger eventIdParam = [UDJEventList sharedEventList].currentEvent.eventId;
+    NSInteger eventIdParam = [UDJEventData sharedEventData].currentEvent.eventId;
     [[UDJConnection sharedConnection] sendSongRemoveRequest:selectedSong.songId eventId:eventIdParam];
     UIAlertView* notification = [[UIAlertView alloc] initWithTitle:@"Song Removed" message:@"Your song will be removed from the playlist." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [notification show];
@@ -60,7 +60,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     if(statusCode==200){
         //[self.toolbarItems release];
         self.navigationController.toolbarHidden=YES;
-        [UDJEventList sharedEventList].currentEvent=nil;
+        [UDJEventData sharedEventData].currentEvent=nil;
         [[UDJPlaylist sharedUDJPlaylist] clearPlaylist];
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -171,7 +171,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     _sharedPlaylistViewController = self;
     
     // set event, navigation bar title
-    self.theEvent = [UDJEventList sharedEventList].currentEvent;
+    self.theEvent = [UDJEventData sharedEventData].currentEvent;
 	self.navigationItem.title = theEvent.name;
     
     // init playlist

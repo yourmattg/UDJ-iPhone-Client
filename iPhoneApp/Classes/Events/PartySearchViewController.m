@@ -8,7 +8,7 @@
 
 #import "PartySearchViewController.h"
 #import "SearchingViewController.h"
-#import "UDJEventList.h"
+#import "UDJEventData.h"
 
 @implementation PartySearchViewController
 @synthesize searchButton, searchField, findNearbyButton;
@@ -44,8 +44,8 @@
         [navigationController pushViewController:searchingViewController animated:NO];
         
         // send the search request
-        if(sender==searchButton) [[UDJEventList sharedEventList] getEventsByName:searchParam];
-        else [[UDJEventList sharedEventList] getNearbyEvents];
+        if(sender==searchButton) [[UDJEventData sharedEventData] getEventsByName:searchParam];
+        else [[UDJEventData sharedEventData] getNearbyEvents];
         [navigationController popViewControllerAnimated:YES];
     }
 }

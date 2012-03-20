@@ -8,7 +8,7 @@
 
 #import "LibraryEntryCell.h"
 #import "UDJConnection.h"
-#import "UDJEventList.h"
+#import "UDJEventData.h"
 
 @implementation LibraryEntryCell
 
@@ -17,7 +17,7 @@
 // addSong: add the selected song to the event playlist
 -(void)addSong:(NSInteger)librarySongId{
     UIAlertView* notification = [[UIAlertView alloc] initWithTitle:@"Song Add" message:@"Thanks! Your song will be added to the playlist shortly!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [[UDJConnection sharedConnection] sendAddSongRequest:librarySongId eventId:[UDJEventList sharedEventList].currentEvent.eventId];
+    [[UDJConnection sharedConnection] sendAddSongRequest:librarySongId eventId:[UDJEventData sharedEventData].currentEvent.eventId];
     [notification show];
 }
 

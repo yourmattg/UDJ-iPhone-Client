@@ -7,7 +7,7 @@
 //
 
 #import "EventGoerViewController.h"
-#import "UDJEventList.h"
+#import "UDJEventData.h"
 #import "UDJConnection.h"
 
 @implementation EventGoerViewController
@@ -54,7 +54,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[UDJConnection sharedConnection] sendEventGoerRequest:[UDJEventList sharedEventList].currentEvent.eventId delegate:self];
+    [[UDJConnection sharedConnection] sendEventGoerRequest:[UDJEventData sharedEventData].currentEvent.eventId delegate:self];
 }
 
 - (void)viewDidAppear:(BOOL)animated
