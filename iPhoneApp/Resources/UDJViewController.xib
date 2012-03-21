@@ -126,7 +126,7 @@
 							<int key="type">1</int>
 							<double key="pointSize">16</double>
 						</object>
-						<object class="NSFont" key="IBUIFont" id="425416195">
+						<object class="NSFont" key="IBUIFont" id="815908866">
 							<string key="NSName">Helvetica</string>
 							<double key="NSSize">16</double>
 							<int key="NSfFlags">16</int>
@@ -157,7 +157,7 @@
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
 						<reference key="IBUIFontDescription" ref="173988746"/>
-						<reference key="IBUIFont" ref="425416195"/>
+						<reference key="IBUIFont" ref="815908866"/>
 					</object>
 					<object class="IBUIButton" id="950877377">
 						<reference key="NSNextResponder" ref="774585933"/>
@@ -263,7 +263,7 @@
 									<object class="IBUIButton" id="681781626">
 										<reference key="NSNextResponder" ref="783987806"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{51, 163}, {72, 37}}</string>
+										<string key="NSFrame">{{43, 169}, {88, 37}}</string>
 										<reference key="NSSuperview" ref="783987806"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="800756632"/>
@@ -591,8 +591,8 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="17153539"/>
-							<reference ref="681781626"/>
 							<reference ref="909886394"/>
+							<reference ref="681781626"/>
 						</object>
 						<reference key="parent" ref="726255338"/>
 					</object>

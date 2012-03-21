@@ -12,6 +12,7 @@
 #import "UDJEventData.h"
 #import "UDJEvent.h"
 #import "PlaylistViewController.h"
+#import "EventResultsViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 
@@ -50,6 +51,7 @@
 // Show or hide the "Searching events" view; active = YES will show the view
 -(void) toggleSearchingView:(BOOL) active{
     searchingBackgroundView.hidden = !active;
+    searchingView.hidden = !active;
     eventSearchButton.enabled = !active;
     findNearbyButton.enabled = !active;
     eventNameField.enabled = !active;
@@ -114,6 +116,13 @@
     self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
     [self toggleSearchingView: YES];
     [eventData getNearbyEvents];
+}
+
+// When user presses cancel, hide login view and let controller know
+// we aren't waiting on any requests
+-(IBAction)cancelButtonClick:(id)sender{
+    self.currentRequestNumber = nil;
+    [self toggleSearchingView: NO];
 }
 
 // handle button clicks from alertview (pop up message boxes)
@@ -269,6 +278,8 @@
 
 // handleEventResults: get the list of returned events from either the name or location search
 - (void) handleEventResults:(RKResponse*)response{
+    
+    // Parse the response into an array of UDJEvents
     NSMutableArray* cList = [NSMutableArray new];
     RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
     NSArray* eventArray = [parser objectFromString:[response bodyAsString] error:nil];
@@ -277,15 +288,20 @@
         UDJEvent* event = [UDJEvent eventFromDictionary:eventDict];
         [cList addObject:event];
     }
+    
+    // Update the global event list
     [UDJEventData sharedEventData].currentList = cList;
 
     // show "No Events Found" message if there were no events,
-    // otherwise just reset our last search type
     if([cList count] == 0) [self showResultsMessage];
-    else self.lastSearchType = nil;
     
-    // refresh the table view
-    [self refreshTableList];    
+    // otherwise push the event results page
+    else {
+        self.lastSearchType = nil;
+        
+        EventResultsViewController* viewController = [[EventResultsViewController alloc] initWithNibName:@"EventResultsViewController" bundle:[NSBundle mainBundle]];
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
 }
 
 // Handle responses from the server
