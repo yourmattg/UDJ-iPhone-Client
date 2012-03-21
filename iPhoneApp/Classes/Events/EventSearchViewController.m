@@ -299,9 +299,9 @@
 
 // Handle responses from the server
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
+    NSNumber* requestNumber = request.userData;
     
-    NSLog(@"Got a response");
-    if(request.userData != self.currentRequestNumber) return;
+    if(![requestNumber isEqualToNumber: currentRequestNumber]) return;
     
     // check if the event has ended
     if(response.statusCode == 410){
