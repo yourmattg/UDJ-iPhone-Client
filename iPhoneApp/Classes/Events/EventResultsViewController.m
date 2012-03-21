@@ -79,7 +79,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 60.0;
+    return 50.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)TableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -95,7 +95,7 @@
     UDJEvent* event = [tableList objectAtIndex: row];
     
     cell.textLabel.text = event.name;
-    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:24];
+    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:22];
 	cell.textLabel.textColor=[UIColor whiteColor];
     cell.backgroundColor = [UIColor clearColor];
     return cell;
