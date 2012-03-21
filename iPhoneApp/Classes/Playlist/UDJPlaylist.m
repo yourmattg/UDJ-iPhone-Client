@@ -32,7 +32,7 @@
     urlString = [urlString stringByAppendingFormat:@"%@%d%@", @"/events/", eventId, @"/active_playlist"];
 
     // create request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: delegate];
     request.queue = client.requestQueue;
     request.method = RKRequestMethodGET;
     request.additionalHTTPHeaders = globalData.headers;

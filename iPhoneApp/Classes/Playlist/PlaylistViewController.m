@@ -166,6 +166,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     // init playlist
     self.playlist = [UDJPlaylist sharedUDJPlaylist];
     self.playlist.eventId = currentEvent.eventId;
+    self.playlist.delegate = self;
     [playlist sendPlaylistRequest];
     
     // set up leave and library buttons
@@ -349,12 +350,19 @@ static PlaylistViewController* _sharedPlaylistViewController;
     [[UDJPlaylist sharedUDJPlaylist] setCurrentSong: currentSong];
     
     [self refreshTableList];
+    
 }
 
 
 // Handle responses from the server
-- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
+- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response { 
+    
+    NSLog(@"Got response in playlist view");
+    
     NSNumber* requestNumber = request.userData;
+    
+    //if(requestNumber == nil) NSLog(@"Request is null");
+    //if(currentRequestNumber == nil) NSLog(@"currentrequestnumber is null");
     
     if(![requestNumber isEqualToNumber: currentRequestNumber]) return;
     
