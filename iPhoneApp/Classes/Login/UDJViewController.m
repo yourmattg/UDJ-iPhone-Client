@@ -150,8 +150,9 @@
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
     NSLog(@"Got a response from the server");
     
-    // disregard request if it wasn't the one we were waiting on
-    if(request.userData != self.currentRequestNumber) return;
+    NSNumber* requestNumber = request.userData;
+    
+    if(![requestNumber isEqualToNumber: currentRequestNumber]) return;
     
     // check if the event has ended
     if(response.statusCode == 410){
@@ -164,6 +165,8 @@
         else
             [self denyAuth:response];
     }
+    
+    self.currentRequestNumber = nil;
 }
 
 

@@ -8,11 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "UDJEventData.h"
+#import "UDJData.h"
 
-@interface EventResultsViewController : UIViewController
+@interface EventResultsViewController : UIViewController <RKRequestDelegate>
 
 @property(nonatomic,strong) UDJEventData* eventData;
 @property(nonatomic,strong) NSMutableArray* tableList;
 @property(nonatomic,strong) IBOutlet UITableView* tableView;
+@property(nonatomic,strong) NSNumber* currentRequestNumber;
+@property(nonatomic,strong) UDJData* globalData;
+
+-(void) showPasswordScreen;
 
 @end

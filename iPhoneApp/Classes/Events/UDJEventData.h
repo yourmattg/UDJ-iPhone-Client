@@ -20,18 +20,21 @@
     
     UDJData* globalData;
     
-    UIViewController* delegate;
+    UIViewController* getEventsDelegate; // this will be the EventSearchViewController
+    UIViewController* enterEventDelegate; // this will be the EventResultsViewController
 }
 
 + (UDJEventData*)sharedEventData;
 - (void)getNearbyEvents; // put the nearby events into templist, then set it to currentList
 - (void)getEventsByName:(NSString*)name; // search for events by name and put them in table
+- (void)enterEvent;
 
 @property(nonatomic,strong) NSMutableArray* currentList;
 @property(nonatomic,strong) NSString* lastSearchParam;
 @property(nonatomic,strong) UDJEvent* currentEvent;
 @property(nonatomic,strong) LocationManager* locationManager;
 @property(nonatomic,strong) UDJData* globalData;
-@property(nonatomic,strong) UIViewController* delegate;
+@property(nonatomic,strong) UIViewController* getEventsDelegate;
+@property(nonatomic,strong) UIViewController* enterEventDelegate;
 
 @end

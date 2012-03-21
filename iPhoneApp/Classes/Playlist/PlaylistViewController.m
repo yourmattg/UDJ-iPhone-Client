@@ -18,7 +18,7 @@
 
 @implementation PlaylistViewController
 
-@synthesize theEvent, playlist, tableView, currentSongTitleLabel, currentSongArtistLabel, selectedSong, statusLabel;
+@synthesize currentEvent, playlist, tableView, currentSongTitleLabel, currentSongArtistLabel, selectedSong, statusLabel;
 
 static PlaylistViewController* _sharedPlaylistViewController;
 
@@ -115,7 +115,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
         if(![[playlist.voteRecordKeeper objectForKey:songIdAsNumber] boolValue]){
             [playlist.voteRecordKeeper setObject:[NSNumber numberWithBool:YES] forKey:songIdAsNumber];
             
-            [[UDJConnection sharedConnection] sendVoteRequest:up songId:selectedSong.songId eventId:theEvent.eventId];
+            [[UDJConnection sharedConnection] sendVoteRequest:up songId:selectedSong.songId eventId:currentEvent.eventId];
             [self sendRefreshRequest];
             // let the client know it sent a vote
             NSString* msg = @"Your vote for ";
@@ -171,15 +171,14 @@ static PlaylistViewController* _sharedPlaylistViewController;
     _sharedPlaylistViewController = self;
     
     // set event, navigation bar title
-    self.theEvent = [UDJEventData sharedEventData].currentEvent;
-	self.navigationItem.title = theEvent.name;
+    self.currentEvent = [UDJEventData sharedEventData].currentEvent;
+	self.navigationItem.title = currentEvent.name;
     
     // init playlist
     [[UDJConnection sharedConnection] setPlaylistView:self];
     self.playlist = [UDJPlaylist sharedUDJPlaylist];
-    self.playlist.eventId = theEvent.eventId;
+    self.playlist.eventId = currentEvent.eventId;
     [playlist loadPlaylist];
-    //[self refreshTableList]; moved to viewDidAppear
     
     // set up leave and library buttons
     [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Leave" style:UIBarButtonItemStylePlain target:self action:@selector(leaveEvent)]];
@@ -206,6 +205,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    self.navigationController.navigationBarHidden = NO;
     [super viewWillAppear:animated];
 }
 

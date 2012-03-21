@@ -33,7 +33,7 @@
 
     // set up eventData and get nearby events
     self.eventData = [UDJEventData sharedEventData];
-    self.eventData.delegate = self;
+    self.eventData.getEventsDelegate = self;
     self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
     
     // initialize login view
@@ -309,16 +309,10 @@
     }
     else if ([request isGET]) {
         // TODO: change isNearbySearch accordingly
-        [self handleEventResults:response];
-        
-    } else if([request isPOST]) {
-        
-    } else if([request isPUT]){
-        
-        
-    } else if([request isDELETE]) {
-        
+        [self handleEventResults:response];        
     }
+    
+    self.currentRequestNumber = nil;
 }
 
 

@@ -8,10 +8,11 @@
 
 #import "EventResultsViewController.h"
 #import "UDJEvent.h"
+#import "PartyLoginViewController.h"
 
 @implementation EventResultsViewController
 
-@synthesize tableList, tableView, eventData;
+@synthesize tableList, tableView, eventData, currentRequestNumber, globalData;
 
 - (void)didReceiveMemoryWarning
 {
@@ -26,8 +27,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.globalData = [UDJData sharedUDJData];
 
+    // initialize eventData
     self.eventData = [UDJEventData sharedEventData];
+    self.eventData.enterEventDelegate = self;
     
     self.tableList = eventData.currentList;
     [self.tableView reloadData];
@@ -65,6 +70,8 @@
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+
+
 
 
 #pragma mark Button click methods
@@ -112,15 +119,85 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+// user selects a cell: attempt to enter that party
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // get the party and remember the event we are trying to join
+    NSInteger index = [indexPath indexAtPosition:1];
+
+    // get the event corresponding to that index
+    [UDJEventData sharedEventData].currentEvent = [[UDJEventData sharedEventData].currentList objectAtIndex:index];
+    
+    // there's a password: go the password screen
+	if([UDJEventData sharedEventData].currentEvent.hasPassword)
+        [self showPasswordScreen];
+    
+    // no password: attempt login
+    else{
+        // send event request
+        self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
+        [eventData enterEvent];
+    }
+}
+
+
+
+#pragma mark Navigation methods
+
+-(void) showPasswordScreen{
+    PartyLoginViewController* partyLoginViewController = [[PartyLoginViewController alloc] initWithNibName:@"PartyLoginViewController" bundle:[NSBundle mainBundle]];
+    [self.navigationController pushViewController:partyLoginViewController animated:YES];   
+}
+
+// joinEvent: login was successful, show playlist view
+-(void) joinEvent{
+    PlaylistViewController* playlistViewController = [[PlaylistViewController alloc] initWithNibName:@"NewPlaylistViewController" bundle:[NSBundle mainBundle]];
+    [self.navigationController pushViewController:playlistViewController animated:YES];    
+}
+
+
+
+
+#pragma mark Error methods
+-(void) showEventNotFoundError{
+    UIAlertView* nonExistantEvent = [[UIAlertView alloc] initWithTitle:@"Join Failed" message:@"The event you are trying to join does not exist. Sorry!" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [nonExistantEvent show];    
+}
+
+-(void) showAlreadyInEventError{
+    NSString* msg = [NSString stringWithFormat:@"%@%@%@", @"You are already logged into another event, \"", [UDJEventData sharedEventData].currentEvent.name, @"\". Would you like to log out of that event or rejoin it?", nil];
+    UIAlertView* alreadyInEvent = [[UIAlertView alloc] initWithTitle:@"Event Conflict" message: msg delegate: self cancelButtonTitle:@"Log Out" otherButtonTitles:@"Rejoin",nil];
+    [alreadyInEvent show];
+}
+
+
+
+
+#pragma mark Response handling
+
+// Handle responses from the server
+- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
+    NSNumber* requestNumber = request.userData;
+    
+    if(![requestNumber isEqualToNumber: currentRequestNumber]) return;
+    
+    // check if the event has ended
+    if(response.statusCode == 410){
+        //[self resetToEventView];
+    }
+    else if([request isPUT]){
+        
+        if(response.statusCode == 201)
+            [self joinEvent];
+        
+        else if(response.statusCode == 404)
+            [self showEventNotFoundError];
+        
+        else if(response.statusCode == 409)
+            [self showAlreadyInEventError];
+        
+    } 
+    
+    self.currentRequestNumber = nil;
 }
 
 @end

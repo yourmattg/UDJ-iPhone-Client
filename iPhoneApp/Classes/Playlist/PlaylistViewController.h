@@ -14,7 +14,7 @@
 @interface PlaylistViewController : UIViewController <UIAlertViewDelegate>{
 
     UDJPlaylist *playlist;
-    UDJEvent* theEvent;
+    UDJEvent* currentEvent;
     UDJSong* __weak selectedSong;
     UITableView* tableView;
     UILabel* currentSongTitleLabel;
@@ -35,7 +35,7 @@
 +(PlaylistViewController*) sharedPlaylistViewController;
 
 @property(nonatomic, weak) UDJSong* selectedSong;
-@property (nonatomic, strong) UDJEvent* theEvent;
+@property (nonatomic, strong) UDJEvent* currentEvent;
 @property (nonatomic, strong) UDJPlaylist* playlist;
 @property (nonatomic, strong) IBOutlet UITableView* tableView;
 @property (nonatomic, strong) IBOutlet UILabel* currentSongTitleLabel;

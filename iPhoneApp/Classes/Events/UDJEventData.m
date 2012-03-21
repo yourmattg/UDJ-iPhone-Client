@@ -12,7 +12,7 @@
 
 @implementation UDJEventData
 
-@synthesize currentList, lastSearchParam, currentEvent, locationManager, globalData, delegate;
+@synthesize currentList, lastSearchParam, currentEvent, locationManager, globalData, getEventsDelegate, enterEventDelegate;
 
 // getNearbyEvents: has the UDJConnection send a event search request
 - (void) getNearbyEvents{
@@ -28,7 +28,7 @@
     NSURL* url = [NSURL URLWithString:urlString];
     
     // create GET request
-    RKRequest* request = [[RKRequest alloc] initWithURL:url delegate: delegate];
+    RKRequest* request = [[RKRequest alloc] initWithURL:url delegate: getEventsDelegate];
     request.method = RKRequestMethodGET;
     request.additionalHTTPHeaders = globalData.headers;    
     request.userData = [NSNumber numberWithInt: globalData.requestCount++]; 
@@ -50,7 +50,7 @@
     NSURL* url = [NSURL URLWithString:urlString];
     
     //create GET request with correct parameters and headers
-    RKRequest* request = [[RKRequest alloc] initWithURL:url delegate: delegate];
+    RKRequest* request = [[RKRequest alloc] initWithURL:url delegate: getEventsDelegate];
     request.method = RKRequestMethodGET;
     request.additionalHTTPHeaders = globalData.headers;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++]; 
@@ -59,6 +59,39 @@
     // send request and handle response
     [request send];
 }
+
+// enterEventRequest: attempts to log in user to party, returns status code of response
+- (void) enterEvent{
+    RKClient* client = [RKClient sharedClient];
+    
+    //create url
+    NSString* urlString = client.baseURL;
+    urlString = [urlString stringByAppendingString:@"/events/"];
+    urlString = [urlString stringByAppendingFormat:@"%d",[UDJEventData sharedEventData].currentEvent.eventId];
+    urlString = [urlString stringByAppendingString:@"/users/"];
+    urlString = [urlString stringByAppendingFormat:@"%i", [globalData.userID intValue]];
+    
+    //set up request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: enterEventDelegate];
+    request.method = RKRequestMethodPUT;
+    request.additionalHTTPHeaders = globalData.headers;
+    request.userData = [NSNumber numberWithInt: globalData.requestCount++];
+    request.queue = client.requestQueue;
+    
+    //send request
+    [request send];
+    
+    /*
+    // if user is already in another event, set currentEvent to that event
+    if(response.statusCode==409){
+        RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
+        NSDictionary* eventDict = [parser objectFromString:[response bodyAsString] error:nil];
+        [UDJEventData sharedEventData].currentEvent = [UDJEvent eventFromDictionary:eventDict];
+    }*/
+}
+
+
+
 
 // access the EventList anywhere using [EventList sharedEventList]
 #pragma mark Singleton methods
