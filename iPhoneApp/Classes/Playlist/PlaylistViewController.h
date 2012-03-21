@@ -10,16 +10,18 @@
 #import "UDJEvent.h"
 #import "UDJPlaylist.h"
 #import "PlaylistEntryCell.h"
+#import "RestKit/RestKit.h"
 
-@interface PlaylistViewController : UIViewController <UIAlertViewDelegate>{
+@interface PlaylistViewController : UIViewController <UIAlertViewDelegate, RKRequestDelegate>{
 
     UDJPlaylist *playlist;
     UDJEvent* currentEvent;
-    UDJSong* __weak selectedSong;
     UITableView* tableView;
     UILabel* currentSongTitleLabel;
     UILabel* currentSongArtistLabel;
     UILabel* statusLabel;
+    UDJSong* selectedSong;
+    UDJData* globalData;
 
 }
 
@@ -34,12 +36,14 @@
 -(void)showEventGoers;
 +(PlaylistViewController*) sharedPlaylistViewController;
 
-@property(nonatomic, weak) UDJSong* selectedSong;
+@property(nonatomic, strong) UDJSong* selectedSong;
 @property (nonatomic, strong) UDJEvent* currentEvent;
 @property (nonatomic, strong) UDJPlaylist* playlist;
 @property (nonatomic, strong) IBOutlet UITableView* tableView;
 @property (nonatomic, strong) IBOutlet UILabel* currentSongTitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel* currentSongArtistLabel;
 @property(nonatomic,strong) IBOutlet UILabel* statusLabel;
+@property(nonatomic,strong) NSNumber* currentRequestNumber;
+@property(nonatomic,strong) UDJData* globalData;
 
 @end

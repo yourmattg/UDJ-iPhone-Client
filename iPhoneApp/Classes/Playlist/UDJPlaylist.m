@@ -12,7 +12,7 @@
 
 @implementation UDJPlaylist
 
-@synthesize playlist, eventId, currentSong, voteRecordKeeper;
+@synthesize playlist, eventId, currentSong, voteRecordKeeper, delegate, globalData;
 
 -(void)initVoteRecordKeeper{
     voteRecordKeeper = [[NSMutableDictionary alloc] init];
@@ -22,9 +22,24 @@
     return [playlist objectAtIndex:i];
 }
 
-// loadPlaylist: has UDJConnection send a playlist request
-- (void)loadPlaylist{
-    [[UDJConnection sharedConnection] sendPlaylistRequest:eventId];
+// sendPlaylistRequest: requests playlist from server, seperate from handling because
+// we want client to be able to do other things while we wait for it to refresh
+- (void)sendPlaylistRequest{
+    RKClient* client = [RKClient sharedClient];
+    
+    //create url [GET] {prefix}/events/event_id/active_playlist
+    NSString* urlString = client.baseURL;
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@", @"/events/", eventId, @"/active_playlist"];
+
+    // create request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
+    request.queue = client.requestQueue;
+    request.method = RKRequestMethodGET;
+    request.additionalHTTPHeaders = globalData.headers;
+    request.userData = [NSNumber numberWithInt: globalData.requestCount++];
+    
+    //send request
+    [request send];
 }
 
 - (UDJSong*)songPlaying{
@@ -43,6 +58,16 @@
     currentSong=nil;
     [playlist removeAllObjects];
 }
+
+
+
+
+
+
+
+
+
+
 
 // access the playlist anywhere in the app using [UDJPlaylist sharedPlaylist]
 #pragma mark Singleton methods

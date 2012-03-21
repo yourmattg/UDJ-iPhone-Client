@@ -18,7 +18,7 @@
 
 @implementation PlaylistViewController
 
-@synthesize currentEvent, playlist, tableView, currentSongTitleLabel, currentSongArtistLabel, selectedSong, statusLabel;
+@synthesize currentEvent, playlist, tableView, currentSongTitleLabel, currentSongArtistLabel, selectedSong, statusLabel, currentRequestNumber, globalData;
 
 static PlaylistViewController* _sharedPlaylistViewController;
 
@@ -31,21 +31,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
     [self.navigationController pushViewController:eventGoerViewController animated:YES];
 }
 
-// handle button clicks from alertview (pop up message boxes)
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(alertView.title == selectedSong.title){
-        /*if(buttonIndex==1) {
-            // share
-        }*/
-        // log out of the current event
-        if(buttonIndex==1) [self upVote];
-        // go back to the current event
-        if(buttonIndex==2) [self downVote];
-        // remove song
-        //if(buttonIndex==3) [self removeSong];
-    }
-}
 
 -(void)removeSong{
     NSInteger eventIdParam = [UDJEventData sharedEventData].currentEvent.eventId;
@@ -74,8 +59,11 @@ static PlaylistViewController* _sharedPlaylistViewController;
 
 // sendRefreshRequest: ask the playlist for a refresh
 -(void)sendRefreshRequest{
-    [self.playlist loadPlaylist];
+    self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
+    [self.playlist sendPlaylistRequest];
 }
+
+
 // refreshes our list
 // NOTE: this is automatically called by UDJConnection when it gets a response
 - (void)refreshTableList{
@@ -164,9 +152,10 @@ static PlaylistViewController* _sharedPlaylistViewController;
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
+
     [super viewDidLoad];
     
-    self.statusLabel.numberOfLines = 0;
+    self.globalData = [UDJData sharedUDJData];
     
     _sharedPlaylistViewController = self;
     
@@ -175,10 +164,9 @@ static PlaylistViewController* _sharedPlaylistViewController;
 	self.navigationItem.title = currentEvent.name;
     
     // init playlist
-    [[UDJConnection sharedConnection] setPlaylistView:self];
     self.playlist = [UDJPlaylist sharedUDJPlaylist];
     self.playlist.eventId = currentEvent.eventId;
-    [playlist loadPlaylist];
+    [playlist sendPlaylistRequest];
     
     // set up leave and library buttons
     [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Leave" style:UIBarButtonItemStylePlain target:self action:@selector(leaveEvent)]];
@@ -192,7 +180,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
     self.toolbarItems = toolbarItems;
     self.navigationController.toolbarHidden=NO;
     
-    //[eventGoerButton release];
 }
 
 
@@ -205,8 +192,8 @@ static PlaylistViewController* _sharedPlaylistViewController;
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.navigationController.navigationBarHidden = NO;
     [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -300,44 +287,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     return 48.0;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -364,6 +314,59 @@ static PlaylistViewController* _sharedPlaylistViewController;
     cell.downVoteButton.highlighted = NO;
     cell.upVoteButton.highlighted = NO;
     
+}
+
+
+#pragma mark Response handling
+
+// handlePlaylistResponse: this is done asynchronously from the send method so the client can do other things meanwhile
+// NOTE: this calls [playlistView refreshTableList] for you!
+- (void)handlePlaylistResponse:(RKResponse*)response{
+    
+    NSMutableArray* tempList = [NSMutableArray new];
+    
+    RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
+    // response dict: holds current song and array of songs
+    NSDictionary* responseDict = [parser objectFromString:[response bodyAsString] error:nil];
+    UDJSong* currentSong = [UDJSong songFromDictionary:[responseDict objectForKey:@"current_song"] isLibraryEntry:NO];
+    
+    // the array holding the songs on the playlist
+    NSArray* songArray = [responseDict objectForKey:@"active_playlist"];
+    for(int i=0; i<[songArray count]; i++){
+        NSDictionary* songDict = [songArray objectAtIndex:i];
+        UDJSong* song = [UDJSong songFromDictionary:songDict isLibraryEntry:NO];
+        [tempList addObject:song];
+        
+        NSNumber* songIdAsNumber = [NSNumber numberWithInteger:song.songId];
+        // if this song hasnt been added to the playlist before i.e. isnt in the voteRecordKeeper
+        if([[UDJPlaylist sharedUDJPlaylist].voteRecordKeeper objectForKey:songIdAsNumber]==nil){
+            // set its songId to NO, meaning the user hasn't voted for it yet
+            NSNumber* no =[NSNumber numberWithBool:NO];
+            [[UDJPlaylist sharedUDJPlaylist].voteRecordKeeper setObject:no forKey:songIdAsNumber];
+        }
+    }
+    [[UDJPlaylist sharedUDJPlaylist] setPlaylist: tempList];
+    [[UDJPlaylist sharedUDJPlaylist] setCurrentSong: currentSong];
+    
+    [self refreshTableList];
+}
+
+
+// Handle responses from the server
+- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
+    NSNumber* requestNumber = request.userData;
+    
+    if(![requestNumber isEqualToNumber: currentRequestNumber]) return;
+    
+    // check if the event has ended
+    if(response.statusCode == 410){
+        //[self resetToEventView];
+    }
+    else if ([request isGET]) {
+        [self handlePlaylistResponse:response];        
+    }
+    
+    self.currentRequestNumber = nil;
 }
 
 

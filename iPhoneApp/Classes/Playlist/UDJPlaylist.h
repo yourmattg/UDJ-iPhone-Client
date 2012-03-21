@@ -8,20 +8,26 @@
 
 #import <Foundation/Foundation.h>
 #import "UDJSong.h"
+#import "UDJData.h"
 
 @interface UDJPlaylist : NSObject{
     
     NSMutableArray* playlist;
     NSInteger eventId;
     UDJSong* currentSong;
+    
     NSMutableDictionary* voteRecordKeeper;
+    
+    UIViewController* delegate;
+    
+    UDJData* globalData;
 }
 
 + (UDJPlaylist*)sharedUDJPlaylist;
 - (void)initVoteRecordKeeper;
 - (UDJSong*)songPlaying;
 - (UDJSong*)songAtIndex:(NSInteger)i;
-- (void)loadPlaylist;
+- (void)sendPlaylistRequest;
 - (NSInteger)count;
 - (void)clearPlaylist;
 
@@ -29,5 +35,7 @@
 @property(nonatomic) NSInteger eventId;
 @property(nonatomic,strong) UDJSong* currentSong;
 @property(nonatomic,strong) NSMutableDictionary* voteRecordKeeper;
+@property(nonatomic,strong) UIViewController* delegate;
+@property(nonatomic,strong) UDJData* globalData;
 
 @end
