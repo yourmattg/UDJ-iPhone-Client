@@ -167,7 +167,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     self.playlist = [UDJPlaylist sharedUDJPlaylist];
     self.playlist.eventId = currentEvent.eventId;
     self.playlist.delegate = self;
-    [playlist sendPlaylistRequest];
+    [self sendRefreshRequest];
     
     // set up leave and library buttons
     [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Leave" style:UIBarButtonItemStylePlain target:self action:@selector(leaveEvent)]];
@@ -360,10 +360,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     NSLog(@"Got response in playlist view");
     
     NSNumber* requestNumber = request.userData;
-    
-    //if(requestNumber == nil) NSLog(@"Request is null");
-    //if(currentRequestNumber == nil) NSLog(@"currentrequestnumber is null");
-    
+
     if(![requestNumber isEqualToNumber: currentRequestNumber]) return;
     
     // check if the event has ended
