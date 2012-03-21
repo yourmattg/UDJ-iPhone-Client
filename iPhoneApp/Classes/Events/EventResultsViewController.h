@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UDJEventData.h"
 
 @interface EventResultsViewController : UIViewController
 
+@property(nonatomic,strong) UDJEventData* eventData;
 @property(nonatomic,strong) NSMutableArray* tableList;
 @property(nonatomic,strong) IBOutlet UITableView* tableView;
 

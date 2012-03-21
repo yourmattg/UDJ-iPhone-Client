@@ -122,7 +122,7 @@
 		28D7ACF70DDB3853001CB0EB /* UDJViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* UDJ_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJ_Prefix.pch; sourceTree = "<group>"; };
-		A309CC6115194A7F00912EA2 /* EventResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventResultsViewController.h; path = ../Events/EventResultsViewController.h; sourceTree = "<group>"; };
+		A309CC6115194A7F00912EA2 /* EventResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventResultsViewController.h; sourceTree = "<group>"; };
 		A309CC6215194A7F00912EA2 /* EventResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventResultsViewController.m; sourceTree = "<group>"; };
 		A309CC6315194A8000912EA2 /* EventResultsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventResultsViewController.xib; path = ../Classes/Events/EventResultsViewController.xib; sourceTree = "<group>"; };
 		A324ABF414AAB74700388514 /* UDJSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJSong.h; sourceTree = "<group>"; };
@@ -342,6 +342,7 @@
 				A374BE0014A2EF36001A0DE0 /* UDJEventData.m */,
 				A3F9C04F142EAD610016717B /* EventSearchViewController.h */,
 				A3F9C050142EAD610016717B /* EventSearchViewController.m */,
+				A309CC6115194A7F00912EA2 /* EventResultsViewController.h */,
 				A309CC6215194A7F00912EA2 /* EventResultsViewController.m */,
 				A3F9C1D5142EBB880016717B /* PartyLoginViewController.h */,
 				A3F9C1D6142EBB880016717B /* PartyLoginViewController.m */,
@@ -353,7 +354,6 @@
 			isa = PBXGroup;
 			children = (
 				28D7ACF60DDB3853001CB0EB /* UDJViewController.h */,
-				A309CC6115194A7F00912EA2 /* EventResultsViewController.h */,
 				28D7ACF70DDB3853001CB0EB /* UDJViewController.m */,
 				A3F58C5914A15F0B00756F7D /* AuthenticateViewController.h */,
 				A3F58C5A14A15F0B00756F7D /* AuthenticateViewController.m */,

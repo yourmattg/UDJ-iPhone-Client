@@ -7,10 +7,11 @@
 //
 
 #import "EventResultsViewController.h"
+#import "UDJEvent.h"
 
 @implementation EventResultsViewController
 
-@synthesize tableList, tableView;
+@synthesize tableList, tableView, eventData;
 
 - (void)didReceiveMemoryWarning
 {
@@ -26,11 +27,10 @@
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.eventData = [UDJEventData sharedEventData];
+    
+    self.tableList = eventData.currentList;
+    [self.tableView reloadData];
 }
 
 - (void)viewDidUnload
@@ -78,6 +78,10 @@
     return [tableList count];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 60.0;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)TableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
@@ -87,8 +91,13 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    // Configure the cell...
+    NSInteger row = indexPath.row;
+    UDJEvent* event = [tableList objectAtIndex: row];
     
+    cell.textLabel.text = event.name;
+    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:24];
+	cell.textLabel.textColor=[UIColor whiteColor];
+    cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
 
