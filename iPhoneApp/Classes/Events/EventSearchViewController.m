@@ -163,7 +163,6 @@
 // overridden so that party table refreshes
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self refreshTableList];
     
 }
 
@@ -172,11 +171,12 @@
     [super viewWillDisappear:animated];
 }
 */
-/*
+
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+    [self toggleSearchingView:NO];
 }
-*/
+
 
 
 #pragma mark -

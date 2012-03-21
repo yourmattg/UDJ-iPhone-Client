@@ -66,6 +66,14 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+
+#pragma mark Button click methods
+
+-(IBAction)newEventSearchButtonClick:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
