@@ -346,6 +346,9 @@ static PlaylistViewController* _sharedPlaylistViewController;
             [[UDJPlaylist sharedUDJPlaylist].voteRecordKeeper setObject:no forKey:songIdAsNumber];
         }
     }
+    
+    NSLog([NSString stringWithFormat: @"count %d", [tempList count]]);
+    
     [[UDJPlaylist sharedUDJPlaylist] setPlaylist: tempList];
     [[UDJPlaylist sharedUDJPlaylist] setCurrentSong: currentSong];
     
@@ -360,6 +363,8 @@ static PlaylistViewController* _sharedPlaylistViewController;
     NSLog(@"Got response in playlist view");
     
     NSNumber* requestNumber = request.userData;
+    
+    NSLog([NSString stringWithFormat: @"response number %d, waiting on %d", [requestNumber intValue], [currentRequestNumber intValue]]);
 
     if(![requestNumber isEqualToNumber: currentRequestNumber]) return;
     
