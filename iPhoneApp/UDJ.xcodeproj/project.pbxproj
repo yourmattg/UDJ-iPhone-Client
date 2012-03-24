@@ -54,6 +54,9 @@
 		A39AF6941497D09A006ADF19 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF6931497D09A006ADF19 /* SystemConfiguration.framework */; };
 		A39AF6961497D0A4006ADF19 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF6951497D0A4006ADF19 /* libxml2.dylib */; };
 		A3BB46E314E2086400554179 /* EventGoerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BB46E214E2086400554179 /* EventGoerCell.m */; };
+		A3C608FA151E3593004AB623 /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C608F9151E3593004AB623 /* EventCell.m */; };
+		A3C608FC151E52BB004AB623 /* eventcellselected.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C608FB151E52BB004AB623 /* eventcellselected.png */; };
+		A3CE2C06151D257400C13006 /* eventcell.png in Resources */ = {isa = PBXBuildFile; fileRef = A3CE2C05151D257400C13006 /* eventcell.png */; };
 		A3CF872F14B8F8F000A9F829 /* UDJSongList.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CF872E14B8F8F000A9F829 /* UDJSongList.m */; };
 		A3D334D514C6A02300A90D58 /* downarrow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3D334D414C6A02300A90D58 /* downarrow.jpg */; };
 		A3D334D714C6A02A00A90D58 /* uparrow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3D334D614C6A02A00A90D58 /* uparrow.jpg */; };
@@ -176,6 +179,10 @@
 		A39AF6951497D0A4006ADF19 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		A3BB46E114E2086400554179 /* EventGoerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventGoerCell.h; sourceTree = "<group>"; };
 		A3BB46E214E2086400554179 /* EventGoerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventGoerCell.m; sourceTree = "<group>"; };
+		A3C608F8151E3593004AB623 /* EventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventCell.h; sourceTree = "<group>"; };
+		A3C608F9151E3593004AB623 /* EventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventCell.m; sourceTree = "<group>"; };
+		A3C608FB151E52BB004AB623 /* eventcellselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eventcellselected.png; sourceTree = "<group>"; };
+		A3CE2C05151D257400C13006 /* eventcell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eventcell.png; sourceTree = "<group>"; };
 		A3CF872D14B8F8F000A9F829 /* UDJSongList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJSongList.h; sourceTree = "<group>"; };
 		A3CF872E14B8F8F000A9F829 /* UDJSongList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJSongList.m; sourceTree = "<group>"; };
 		A3D334D414C6A02300A90D58 /* downarrow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = downarrow.jpg; sourceTree = "<group>"; };
@@ -278,6 +285,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A3C608FB151E52BB004AB623 /* eventcellselected.png */,
+				A3CE2C05151D257400C13006 /* eventcell.png */,
 				A35D3DEF14F985460007B374 /* votedown.png */,
 				A35D3DF014F985460007B374 /* voteup.png */,
 				A341B92814F86C61001892C5 /* addbutton.png */,
@@ -336,6 +345,8 @@
 		A3536FB414A5219E00B5C95F /* Events */ = {
 			isa = PBXGroup;
 			children = (
+				A3C608F8151E3593004AB623 /* EventCell.h */,
+				A3C608F9151E3593004AB623 /* EventCell.m */,
 				A3536FB114A5218F00B5C95F /* UDJEvent.h */,
 				A3536FB214A5218F00B5C95F /* UDJEvent.m */,
 				A374BDFF14A2EF36001A0DE0 /* UDJEventData.h */,
@@ -533,6 +544,8 @@
 				A35D3DF114F985460007B374 /* votedown.png in Resources */,
 				A35D3DF214F985460007B374 /* voteup.png in Resources */,
 				A309CC6515194A8000912EA2 /* EventResultsViewController.xib in Resources */,
+				A3CE2C06151D257400C13006 /* eventcell.png in Resources */,
+				A3C608FC151E52BB004AB623 /* eventcellselected.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -569,6 +582,7 @@
 				A3BB46E314E2086400554179 /* EventGoerCell.m in Sources */,
 				A35E3E9A1516680100A2882D /* UDJData.m in Sources */,
 				A309CC6415194A8000912EA2 /* EventResultsViewController.m in Sources */,
+				A3C608FA151E3593004AB623 /* EventCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

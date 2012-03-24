@@ -78,12 +78,19 @@
     // set up back to playlist button
     UIBarButtonItem *playlistButton = [[UIBarButtonItem alloc] initWithTitle:@"Playlist" style:UIBarButtonItemStylePlain target:self action:@selector(backToPlaylist)];
     self.navigationItem.leftBarButtonItem = playlistButton;
+    
+    self.navigationItem.title = @"Library Search";
 }
 
 - (void)viewDidUnload{
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+-(void) viewWillAppear:(BOOL)animated{
+    self.navigationController.toolbarHidden = YES;
+    [super viewWillAppear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{

@@ -94,24 +94,22 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50.0;
+    return 60.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)TableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [TableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    EventCell *cell = [TableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[EventCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     NSInteger row = indexPath.row;
     UDJEvent* event = [tableList objectAtIndex: row];
     
-    cell.textLabel.text = event.name;
-    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:22];
-	cell.textLabel.textColor=[UIColor whiteColor];
+    cell.eventNameLabel.text = event.name;
     cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
@@ -121,6 +119,10 @@
 
 // user selects a cell: attempt to enter that party
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    EventCell* cell = (EventCell*) [self.tableView cellForRowAtIndexPath: indexPath];
+    cell.cellImageView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:255 alpha: 0.3];
+    
     // get the party and remember the event we are trying to join
     NSInteger index = [indexPath indexAtPosition:1];
 
@@ -137,6 +139,7 @@
         self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
         [eventData enterEvent];
     }
+    
 }
 
 

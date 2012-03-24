@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UDJEventData.h"
 #import "UDJData.h"
+#import "EventCell.h"
 
 @interface EventResultsViewController : UIViewController <RKRequestDelegate>
 

@@ -195,6 +195,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
+    self.navigationController.toolbarHidden = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated
