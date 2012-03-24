@@ -38,7 +38,7 @@
 -(void) toggleSearchingView:(BOOL) active;
 
 @property(nonatomic,strong) UDJEventData* eventData;
-@property (nonatomic, strong) NSMutableArray *tableList;
+@property(nonatomic,strong) NSMutableArray *tableList;
 @property(nonatomic,strong) IBOutlet UITableView* tableView;
 @property(nonatomic,strong) IBOutlet UILabel* searchResultLabel;
 @property(nonatomic,strong) UDJData* globalData;

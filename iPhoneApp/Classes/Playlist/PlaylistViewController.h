@@ -22,6 +22,9 @@
     UILabel* statusLabel;
     UDJSong* selectedSong;
     UDJData* globalData;
+    
+    UIView* leavingBackgroundView;
+    UIView* leavingView;
 
 }
 
@@ -35,6 +38,7 @@
 -(void)removeSong;
 -(void)showEventGoers;
 +(PlaylistViewController*) sharedPlaylistViewController;
+-(void) toggleLeavingView:(BOOL) active;
 
 @property(nonatomic, strong) UDJSong* selectedSong;
 @property (nonatomic, strong) UDJEvent* currentEvent;
@@ -45,5 +49,8 @@
 @property(nonatomic,strong) IBOutlet UILabel* statusLabel;
 @property(nonatomic,strong) NSNumber* currentRequestNumber;
 @property(nonatomic,strong) UDJData* globalData;
+
+@property(nonatomic,strong) IBOutlet UIView* leavingBackgroundView;
+@property(nonatomic,strong) IBOutlet UIView* leavingView;
 
 @end

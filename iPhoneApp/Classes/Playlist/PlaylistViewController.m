@@ -15,10 +15,11 @@
 #import "PlaylistEntryCell.h"
 #import "LibraryEntryCell.h"
 #import "EventGoerViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation PlaylistViewController
 
-@synthesize currentEvent, playlist, tableView, currentSongTitleLabel, currentSongArtistLabel, selectedSong, statusLabel, currentRequestNumber, globalData;
+@synthesize currentEvent, playlist, tableView, currentSongTitleLabel, currentSongArtistLabel, selectedSong, statusLabel, currentRequestNumber, globalData, leavingBackgroundView, leavingView;
 
 static PlaylistViewController* _sharedPlaylistViewController;
 
@@ -41,14 +42,18 @@ static PlaylistViewController* _sharedPlaylistViewController;
 
 // leaveEvent: log the client out of the event, return to event list
 - (void)leaveEvent{
-    NSInteger statusCode = [[UDJConnection sharedConnection] leaveEventRequest];
+    [self toggleLeavingView: YES];
+    
+    self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
+    [[UDJEventData sharedEventData] leaveEvent];
+    /*NSInteger statusCode = [[UDJConnection sharedConnection] leaveEventRequest];
     if(statusCode==200){
         //[self.toolbarItems release];
         self.navigationController.toolbarHidden=YES;
         [UDJEventData sharedEventData].currentEvent=nil;
         [[UDJPlaylist sharedUDJPlaylist] clearPlaylist];
         [self.navigationController popViewControllerAnimated:YES];
-    }
+    }*/
 }
 
 // loadLibrary: push the library search view
@@ -131,22 +136,23 @@ static PlaylistViewController* _sharedPlaylistViewController;
 - (void)downVote{
     [self vote:NO];
 }
-/*
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        //custom initialization
-    }
-    return self;
-}*/
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
+
+// Show or hide the "Leaving event" view; active = YES will show the view
+-(void) toggleLeavingView:(BOOL) active{
+    leavingBackgroundView.hidden = !active;
+    leavingView.hidden = !active;
+    self.navigationItem.rightBarButtonItem.enabled = !active;
+    self.navigationItem.leftBarButtonItem.enabled = !active;
     
-    // Release any cached data, images, etc that aren't in use.
+    // TODO: disable toolbar?
+}
+
+// When user presses cancel, hide leaving view and let controller know
+// we aren't waiting on any requests
+-(IBAction)cancelButtonClick:(id)sender{
+    self.currentRequestNumber = nil;
+    [self toggleLeavingView: NO];
 }
 
 #pragma mark - View lifecycle
@@ -162,6 +168,9 @@ static PlaylistViewController* _sharedPlaylistViewController;
     // set event, navigation bar title
     self.currentEvent = [UDJEventData sharedEventData].currentEvent;
 	self.navigationItem.title = currentEvent.name;
+    
+    // set delegate
+    [UDJEventData sharedEventData].leaveEventDelegate = self;
     
     // init playlist
     self.playlist = [UDJPlaylist sharedUDJPlaylist];
@@ -180,6 +189,15 @@ static PlaylistViewController* _sharedPlaylistViewController;
     NSArray* toolbarItems = [NSArray arrayWithObjects: space, refreshButton, space, nil];
     self.toolbarItems = toolbarItems;
     self.navigationController.toolbarHidden=NO;
+    
+    
+    // initialize leaving view
+    leavingView.layer.cornerRadius = 8;
+    leavingView.layer.borderColor = [[UIColor whiteColor] CGColor];
+    leavingView.layer.borderWidth = 3;
+    
+    [self toggleLeavingView: NO];
+    
     
 }
 
@@ -212,6 +230,14 @@ static PlaylistViewController* _sharedPlaylistViewController;
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Release any cached data, images, etc that aren't in use.
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -348,8 +374,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
         }
     }
     
-    NSLog([NSString stringWithFormat: @"count %d", [tempList count]]);
-    
     [[UDJPlaylist sharedUDJPlaylist] setPlaylist: tempList];
     [[UDJPlaylist sharedUDJPlaylist] setCurrentSong: currentSong];
     
@@ -365,7 +389,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     NSNumber* requestNumber = request.userData;
     
-    NSLog([NSString stringWithFormat: @"response number %d, waiting on %d", [requestNumber intValue], [currentRequestNumber intValue]]);
+    //NSLog([NSString stringWithFormat: @"response number %d, waiting on %d", [requestNumber intValue], [currentRequestNumber intValue]]);
 
     if(![requestNumber isEqualToNumber: currentRequestNumber]) return;
     

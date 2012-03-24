@@ -12,7 +12,7 @@
 
 @implementation UDJEventData
 
-@synthesize currentList, lastSearchParam, currentEvent, locationManager, globalData, getEventsDelegate, enterEventDelegate;
+@synthesize currentList, lastSearchParam, currentEvent, locationManager, globalData, getEventsDelegate, enterEventDelegate, leaveEventDelegate;
 
 // getNearbyEvents: has the UDJConnection send a event search request
 - (void) getNearbyEvents{
@@ -90,6 +90,26 @@
     }*/
 }
 
+
+- (void) leaveEvent{
+    RKClient* client = [RKClient sharedClient];
+    //create url
+    NSString* urlString = client.baseURL;
+    urlString = [urlString stringByAppendingString:@"/events/"];
+    urlString = [urlString stringByAppendingFormat:@"%d",[UDJEventData sharedEventData].currentEvent.eventId];
+    urlString = [urlString stringByAppendingString:@"/users/"];
+    urlString = [urlString stringByAppendingFormat:@"%d", [[UDJData sharedUDJData].userID intValue]];
+    
+    //set up request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: leaveEventDelegate];
+    request.method = RKRequestMethodDELETE;
+    request.additionalHTTPHeaders = globalData.headers;
+    request.userData = [NSNumber numberWithInt: globalData.requestCount++];
+    request.queue = client.requestQueue;
+    
+    //send request, handle results
+    [request send];
+}
 
 
 
