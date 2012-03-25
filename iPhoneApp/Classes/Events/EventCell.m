@@ -35,7 +35,7 @@
     if (self) {
         // Initialization code
         cellImageView = [[UIImageView alloc] init];
-        cellImageView.backgroundColor = [UIColor colorWithRed:149 green:207 blue:233 alpha: 0.1];
+        cellImageView.backgroundColor = [UIColor colorWithRed:149 green:207 blue:233 alpha: 0.3];
         cellImageView.layer.cornerRadius = 8;
         cellImageView.layer.borderColor = [[UIColor whiteColor] CGColor];
         cellImageView.layer.borderWidth = 3;

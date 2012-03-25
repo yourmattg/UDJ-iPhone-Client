@@ -53,6 +53,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [self.tableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -111,6 +112,7 @@
     
     cell.eventNameLabel.text = event.name;
     cell.backgroundColor = [UIColor clearColor];
+    cell.cellImageView.backgroundColor = [UIColor colorWithRed:149 green:207 blue:233 alpha: 0.3];
     return cell;
 }
 

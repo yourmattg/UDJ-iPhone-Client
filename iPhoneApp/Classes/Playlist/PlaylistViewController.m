@@ -42,18 +42,29 @@ static PlaylistViewController* _sharedPlaylistViewController;
 
 // leaveEvent: log the client out of the event, return to event list
 - (void)leaveEvent{
+    // show "Leaving" view
     [self toggleLeavingView: YES];
     
+    // increment requestCount and send leave event request
     self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
     [[UDJEventData sharedEventData] leaveEvent];
-    /*NSInteger statusCode = [[UDJConnection sharedConnection] leaveEventRequest];
-    if(statusCode==200){
-        //[self.toolbarItems release];
-        self.navigationController.toolbarHidden=YES;
-        [UDJEventData sharedEventData].currentEvent=nil;
-        [[UDJPlaylist sharedUDJPlaylist] clearPlaylist];
-        [self.navigationController popViewControllerAnimated:YES];
-    }*/
+}
+
+// handleLeaveEvent: go back to the event results page
+-(void)handleLeaveEvent{
+    // cosmetics
+    self.navigationController.navigationBarHidden = YES;
+    self.navigationController.toolbarHidden=YES;
+    
+    
+    // user is no longer in an event, reset currentEvent
+    [UDJEventData sharedEventData].currentEvent=nil;
+    
+    // we have no need for this party's playlist
+    [[UDJPlaylist sharedUDJPlaylist] clearPlaylist];
+    
+    // show the event results page
+    [self.navigationController popViewControllerAnimated:YES]; 
 }
 
 // loadLibrary: push the library search view
@@ -399,6 +410,9 @@ static PlaylistViewController* _sharedPlaylistViewController;
     }
     else if ([request isGET]) {
         [self handlePlaylistResponse:response];        
+    }
+    else if([request isDELETE]){
+        if([response isOK]) [self handleLeaveEvent];
     }
     
     self.currentRequestNumber = nil;
