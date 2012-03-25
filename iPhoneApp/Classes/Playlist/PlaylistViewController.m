@@ -19,7 +19,7 @@
 
 @implementation PlaylistViewController
 
-@synthesize currentEvent, playlist, tableView, currentSongTitleLabel, currentSongArtistLabel, selectedSong, statusLabel, currentRequestNumber, globalData, leavingBackgroundView, leavingView;
+@synthesize currentEvent, playlist, tableView, currentSongTitleLabel, currentSongArtistLabel, selectedSong, statusLabel, currentRequestNumber, globalData, leavingBackgroundView, leavingView, leaveButton, libraryButton, eventNameLabel;
 
 static PlaylistViewController* _sharedPlaylistViewController;
 
@@ -41,7 +41,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 }
 
 // leaveEvent: log the client out of the event, return to event list
-- (void)leaveEvent{
+- (IBAction)leaveButtonClick:(id)sender{
     // show "Leaving" view
     [self toggleLeavingView: YES];
     
@@ -52,11 +52,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
 
 // handleLeaveEvent: go back to the event results page
 -(void)handleLeaveEvent{
-    // cosmetics
-    self.navigationController.navigationBarHidden = YES;
-    self.navigationController.toolbarHidden=YES;
-    
-    
     // user is no longer in an event, reset currentEvent
     [UDJEventData sharedEventData].currentEvent=nil;
     
@@ -68,7 +63,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 }
 
 // loadLibrary: push the library search view
-- (void)showLibrary{
+- (IBAction)showLibrary:(id)sender{
     LibrarySearchViewController* librarySearchViewController = [[LibrarySearchViewController alloc] initWithNibName:@"LibrarySearchViewController" bundle:[NSBundle mainBundle]];
     [self.navigationController pushViewController:librarySearchViewController animated:YES];
 }
@@ -77,6 +72,10 @@ static PlaylistViewController* _sharedPlaylistViewController;
 -(void)sendRefreshRequest{
     self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
     [self.playlist sendPlaylistRequest];
+}
+
+-(IBAction)refreshButtonClick:(id)sender{
+    [self sendRefreshRequest];
 }
 
 
@@ -153,8 +152,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
 -(void) toggleLeavingView:(BOOL) active{
     leavingBackgroundView.hidden = !active;
     leavingView.hidden = !active;
-    self.navigationItem.rightBarButtonItem.enabled = !active;
-    self.navigationItem.leftBarButtonItem.enabled = !active;
     
     // TODO: disable toolbar?
 }
@@ -176,9 +173,9 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     _sharedPlaylistViewController = self;
     
-    // set event, navigation bar title
+    // set event, event label text
     self.currentEvent = [UDJEventData sharedEventData].currentEvent;
-	self.navigationItem.title = currentEvent.name;
+	self.eventNameLabel.text = currentEvent.name;
     
     // set delegate
     [UDJEventData sharedEventData].leaveEventDelegate = self;
@@ -188,19 +185,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
     self.playlist.eventId = currentEvent.eventId;
     self.playlist.delegate = self;
     [self sendRefreshRequest];
-    
-    // set up leave and library buttons
-    [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Leave" style:UIBarButtonItemStylePlain target:self action:@selector(leaveEvent)]];
-    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Library" style:UIBarButtonItemStylePlain target:self action:@selector(showLibrary)]];
-    
-    // set up toolbar
-    UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(sendRefreshRequest)];
-    UIBarButtonItem* space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    //UIBarButtonItem* eventGoerButton = [[UIBarButtonItem alloc] initWithTitle:@"People" style:UIBarButtonItemStylePlain target:self action:@selector(showEventGoers)];
-    NSArray* toolbarItems = [NSArray arrayWithObjects: space, refreshButton, space, nil];
-    self.toolbarItems = toolbarItems;
-    self.navigationController.toolbarHidden=NO;
-    
     
     // initialize leaving view
     leavingView.layer.cornerRadius = 8;
@@ -223,8 +207,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = NO;
-    self.navigationController.toolbarHidden = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated

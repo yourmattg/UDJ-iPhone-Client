@@ -28,8 +28,6 @@
 
 }
 
--(void)showLibrary;
--(void)leaveEvent;
 -(void)sendRefreshRequest;
 -(void)refreshTableList;
 -(void)vote:(BOOL)up;
@@ -52,5 +50,10 @@
 
 @property(nonatomic,strong) IBOutlet UIView* leavingBackgroundView;
 @property(nonatomic,strong) IBOutlet UIView* leavingView;
+
+@property(nonatomic,strong) IBOutlet UIButton* leaveButton;
+@property(nonatomic,strong) IBOutlet UIButton* libraryButton;
+
+@property(nonatomic,strong) IBOutlet UILabel* eventNameLabel;
 
 @end

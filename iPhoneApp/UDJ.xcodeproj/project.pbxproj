@@ -66,6 +66,9 @@
 		A3F58D9914C75F0800E350F4 /* EventGoerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58D9714C75F0800E350F4 /* EventGoerViewController.m */; };
 		A3F58D9C14C75FAF00E350F4 /* EventGoerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F58D9B14C75FAF00E350F4 /* EventGoerViewController.xib */; };
 		A3F58D9F14C765C100E350F4 /* UDJEventGoerList.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58D9E14C765C100E350F4 /* UDJEventGoerList.m */; };
+		A3F877E5151EE53C005EC5EE /* leavebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A3F877E3151EE53C005EC5EE /* leavebutton.png */; };
+		A3F877E6151EE53C005EC5EE /* librarybutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A3F877E4151EE53C005EC5EE /* librarybutton.png */; };
+		A3F877E8151EE545005EC5EE /* navbar.png in Resources */ = {isa = PBXBuildFile; fileRef = A3F877E7151EE545005EC5EE /* navbar.png */; };
 		A3F9C052142EAD610016717B /* EventSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F9C050142EAD610016717B /* EventSearchViewController.m */; };
 		A3F9C053142EAD610016717B /* EventSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F9C051142EAD610016717B /* EventSearchViewController.xib */; };
 		A3F9C1D8142EBB880016717B /* PartyLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F9C1D6142EBB880016717B /* PartyLoginViewController.m */; };
@@ -196,6 +199,9 @@
 		A3F58D9B14C75FAF00E350F4 /* EventGoerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventGoerViewController.xib; sourceTree = "<group>"; };
 		A3F58D9D14C765C100E350F4 /* UDJEventGoerList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJEventGoerList.h; sourceTree = "<group>"; };
 		A3F58D9E14C765C100E350F4 /* UDJEventGoerList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJEventGoerList.m; sourceTree = "<group>"; };
+		A3F877E3151EE53C005EC5EE /* leavebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leavebutton.png; sourceTree = "<group>"; };
+		A3F877E4151EE53C005EC5EE /* librarybutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = librarybutton.png; sourceTree = "<group>"; };
+		A3F877E7151EE545005EC5EE /* navbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navbar.png; sourceTree = "<group>"; };
 		A3F9C04F142EAD610016717B /* EventSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventSearchViewController.h; sourceTree = "<group>"; };
 		A3F9C050142EAD610016717B /* EventSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventSearchViewController.m; sourceTree = "<group>"; };
 		A3F9C051142EAD610016717B /* EventSearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventSearchViewController.xib; sourceTree = "<group>"; };
@@ -281,6 +287,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A3F877E7151EE545005EC5EE /* navbar.png */,
+				A3F877E3151EE53C005EC5EE /* leavebutton.png */,
+				A3F877E4151EE53C005EC5EE /* librarybutton.png */,
 				A3C608FB151E52BB004AB623 /* eventcellselected.png */,
 				A3CE2C05151D257400C13006 /* eventcell.png */,
 				A35D3DEF14F985460007B374 /* votedown.png */,
@@ -296,12 +305,12 @@
 				A3EF398014C64D33003889E0 /* addbutton.jpg */,
 				A32A384614AE917600D166CF /* UDJ-Info.plist */,
 				A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */,
+				A3F9C051142EAD610016717B /* EventSearchViewController.xib */,
 				A34FB30214B8EB5F00BE5CE2 /* LibraryResultsController.xib */,
 				A36D2CCB14A818130087E992 /* SearchingViewController.xib */,
 				A3F58C5B14A15F0B00756F7D /* AuthenticateViewController.xib */,
 				A33C461D148F11FC009C1BC6 /* LibrarySearchViewController.xib */,
 				A3F9C1D7142EBB880016717B /* PartyLoginViewController.xib */,
-				A3F9C051142EAD610016717B /* EventSearchViewController.xib */,
 				A309CC6315194A8000912EA2 /* EventResultsViewController.xib */,
 				2899E5210DE3E06400AC0155 /* UDJViewController.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
@@ -538,6 +547,9 @@
 				A309CC6515194A8000912EA2 /* EventResultsViewController.xib in Resources */,
 				A3CE2C06151D257400C13006 /* eventcell.png in Resources */,
 				A3C608FC151E52BB004AB623 /* eventcellselected.png in Resources */,
+				A3F877E5151EE53C005EC5EE /* leavebutton.png in Resources */,
+				A3F877E6151EE53C005EC5EE /* librarybutton.png in Resources */,
+				A3F877E8151EE545005EC5EE /* navbar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
