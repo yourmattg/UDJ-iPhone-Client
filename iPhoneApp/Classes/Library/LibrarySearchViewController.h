@@ -13,10 +13,12 @@
     UIButton* searchButton;
     NSMutableArray *tableList;
     UIButton* randomButton;
+    
 }
 
 @property(nonatomic,strong) IBOutlet UITextField* searchField;
 @property(nonatomic,strong) IBOutlet UIButton* searchButton;
 @property(nonatomic,strong) IBOutlet UIButton* randomButton;
+@property(nonatomic,strong) IBOutlet UIButton* playlistButton;
 
 @end

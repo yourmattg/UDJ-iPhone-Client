@@ -109,35 +109,47 @@ static PlaylistViewController* _sharedPlaylistViewController;
 -(void)vote:(BOOL)up{
     
     UIAlertView* notification;
+    
+    // If user hasn't selected a song, let them know
     if(selectedSong==nil){
         notification = [[UIAlertView alloc] initWithTitle: @"Vote Error" message:@"You haven't selected a song to vote for!" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [notification show];
     }
+    
+    // User can't vote for a song that's already playing
     else if(selectedSong == playlist.currentSong){
         notification = [[UIAlertView alloc] initWithTitle:@"Vote Error" message:@"You can't vote for a song that's already playing!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [notification show];
     }
+    
+    // If everything is OK, send the vote
     else{
         NSNumber* songIdAsNumber = [NSNumber numberWithInteger:selectedSong.songId];
+        
         // haven't voted for this song yet
         if(![[playlist.voteRecordKeeper objectForKey:songIdAsNumber] boolValue]){
             [playlist.voteRecordKeeper setObject:[NSNumber numberWithBool:YES] forKey:songIdAsNumber];
             
             [[UDJConnection sharedConnection] sendVoteRequest:up songId:selectedSong.songId eventId:currentEvent.eventId];
+            
             [self sendRefreshRequest];
+            
             // let the client know it sent a vote
             NSString* msg = @"Your vote for ";
             msg = [msg stringByAppendingString:selectedSong.title];
             msg = [msg stringByAppendingString:@" has been sent!"];
             notification = [[UIAlertView alloc] initWithTitle:@"Vote Sent" message:msg delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            
         }
-        // have already voted for the song
+        // Let user know they can't vote for a song twice
         else{
             NSString* msg = @"You have already voted for ";
             msg = [msg stringByAppendingString:selectedSong.title];
             msg = [msg stringByAppendingString:@"!"];
             notification = [[UIAlertView alloc] initWithTitle:@"Vote Denied" message:msg delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         }
+        
+        // show the appropriate notificaton
         [notification show];
     }
 }

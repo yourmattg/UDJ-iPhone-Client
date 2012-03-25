@@ -32,6 +32,7 @@
 		A3495614151EF3D800AAEF7E /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = A3495613151EF3D800AAEF7E /* refresh.png */; };
 		A34FB30314B8EB5F00BE5CE2 /* LibraryResultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = A34FB30114B8EB5F00BE5CE2 /* LibraryResultsController.m */; };
 		A34FB30414B8EB5F00BE5CE2 /* LibraryResultsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A34FB30214B8EB5F00BE5CE2 /* LibraryResultsController.xib */; };
+		A351B57D151F7AB200368F6F /* playlistbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A351B57C151F7AB200368F6F /* playlistbutton.png */; };
 		A3536FB314A5218F00B5C95F /* UDJEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A3536FB214A5218F00B5C95F /* UDJEvent.m */; };
 		A35D3DF114F985460007B374 /* votedown.png in Resources */ = {isa = PBXBuildFile; fileRef = A35D3DEF14F985460007B374 /* votedown.png */; };
 		A35D3DF214F985460007B374 /* voteup.png in Resources */ = {isa = PBXBuildFile; fileRef = A35D3DF014F985460007B374 /* voteup.png */; };
@@ -151,6 +152,7 @@
 		A34FB30014B8EB5F00BE5CE2 /* LibraryResultsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryResultsController.h; sourceTree = "<group>"; };
 		A34FB30114B8EB5F00BE5CE2 /* LibraryResultsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryResultsController.m; sourceTree = "<group>"; };
 		A34FB30214B8EB5F00BE5CE2 /* LibraryResultsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LibraryResultsController.xib; path = ../Classes/Library/LibraryResultsController.xib; sourceTree = "<group>"; };
+		A351B57C151F7AB200368F6F /* playlistbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playlistbutton.png; sourceTree = "<group>"; };
 		A3536FB114A5218F00B5C95F /* UDJEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJEvent.h; sourceTree = "<group>"; };
 		A3536FB214A5218F00B5C95F /* UDJEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJEvent.m; sourceTree = "<group>"; };
 		A35D3DEF14F985460007B374 /* votedown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = votedown.png; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A351B57C151F7AB200368F6F /* playlistbutton.png */,
 				A3495613151EF3D800AAEF7E /* refresh.png */,
 				A3F877E7151EE545005EC5EE /* navbar.png */,
 				A3F877E3151EE53C005EC5EE /* leavebutton.png */,
@@ -554,6 +557,7 @@
 				A3F877E6151EE53C005EC5EE /* librarybutton.png in Resources */,
 				A3F877E8151EE545005EC5EE /* navbar.png in Resources */,
 				A3495614151EF3D800AAEF7E /* refresh.png in Resources */,
+				A351B57D151F7AB200368F6F /* playlistbutton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

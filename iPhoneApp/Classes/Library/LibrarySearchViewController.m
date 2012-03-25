@@ -13,7 +13,7 @@
 
 @implementation LibrarySearchViewController
 
-@synthesize searchField, searchButton, randomButton;
+@synthesize searchField, searchButton, randomButton, playlistButton;
 
 -(BOOL) isValidSearchQuery:(NSString*)string{
     NSCharacterSet *alphaSet = [NSCharacterSet alphanumericCharacterSet];
@@ -67,7 +67,7 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
--(void)backToPlaylist{
+-(IBAction)playlistButtonClick:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -75,11 +75,8 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    // set up back to playlist button
-    UIBarButtonItem *playlistButton = [[UIBarButtonItem alloc] initWithTitle:@"Playlist" style:UIBarButtonItemStylePlain target:self action:@selector(backToPlaylist)];
-    self.navigationItem.leftBarButtonItem = playlistButton;
+
     
-    self.navigationItem.title = @"Library Search";
 }
 
 - (void)viewDidUnload{
