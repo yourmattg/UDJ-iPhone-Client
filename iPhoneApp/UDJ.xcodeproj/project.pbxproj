@@ -29,6 +29,7 @@
 		A341B92714F86824001892C5 /* uparrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A341B92614F86824001892C5 /* uparrow.png */; };
 		A341B92914F86C61001892C5 /* addbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A341B92814F86C61001892C5 /* addbutton.png */; };
 		A34796A514F85AE0001DEE15 /* default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A34796A414F85AE0001DEE15 /* default.jpg */; };
+		A3495614151EF3D800AAEF7E /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = A3495613151EF3D800AAEF7E /* refresh.png */; };
 		A34FB30314B8EB5F00BE5CE2 /* LibraryResultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = A34FB30114B8EB5F00BE5CE2 /* LibraryResultsController.m */; };
 		A34FB30414B8EB5F00BE5CE2 /* LibraryResultsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A34FB30214B8EB5F00BE5CE2 /* LibraryResultsController.xib */; };
 		A3536FB314A5218F00B5C95F /* UDJEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A3536FB214A5218F00B5C95F /* UDJEvent.m */; };
@@ -146,6 +147,7 @@
 		A341B92614F86824001892C5 /* uparrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uparrow.png; sourceTree = "<group>"; };
 		A341B92814F86C61001892C5 /* addbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addbutton.png; sourceTree = "<group>"; };
 		A34796A414F85AE0001DEE15 /* default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpg; sourceTree = "<group>"; };
+		A3495613151EF3D800AAEF7E /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		A34FB30014B8EB5F00BE5CE2 /* LibraryResultsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryResultsController.h; sourceTree = "<group>"; };
 		A34FB30114B8EB5F00BE5CE2 /* LibraryResultsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryResultsController.m; sourceTree = "<group>"; };
 		A34FB30214B8EB5F00BE5CE2 /* LibraryResultsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LibraryResultsController.xib; path = ../Classes/Library/LibraryResultsController.xib; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A3495613151EF3D800AAEF7E /* refresh.png */,
 				A3F877E7151EE545005EC5EE /* navbar.png */,
 				A3F877E3151EE53C005EC5EE /* leavebutton.png */,
 				A3F877E4151EE53C005EC5EE /* librarybutton.png */,
@@ -550,6 +553,7 @@
 				A3F877E5151EE53C005EC5EE /* leavebutton.png in Resources */,
 				A3F877E6151EE53C005EC5EE /* librarybutton.png in Resources */,
 				A3F877E8151EE545005EC5EE /* navbar.png in Resources */,
+				A3495614151EF3D800AAEF7E /* refresh.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

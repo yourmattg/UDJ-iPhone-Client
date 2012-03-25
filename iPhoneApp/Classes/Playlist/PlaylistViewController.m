@@ -19,7 +19,7 @@
 
 @implementation PlaylistViewController
 
-@synthesize currentEvent, playlist, tableView, currentSongTitleLabel, currentSongArtistLabel, selectedSong, statusLabel, currentRequestNumber, globalData, leavingBackgroundView, leavingView, leaveButton, libraryButton, eventNameLabel;
+@synthesize currentEvent, playlist, tableView, currentSongTitleLabel, currentSongArtistLabel, selectedSong, statusLabel, currentRequestNumber, globalData, leavingBackgroundView, leavingView, leaveButton, libraryButton, eventNameLabel, refreshButton, refreshIndicator, refreshLabel;
 
 static PlaylistViewController* _sharedPlaylistViewController;
 
@@ -75,6 +75,11 @@ static PlaylistViewController* _sharedPlaylistViewController;
 }
 
 -(IBAction)refreshButtonClick:(id)sender{
+    // hide refreshbutton, show waiting indicator
+    self.refreshButton.hidden = YES;
+    self.refreshIndicator.hidden = NO;
+    self.refreshLabel.hidden = NO;
+    
     [self sendRefreshRequest];
 }
 
@@ -180,16 +185,20 @@ static PlaylistViewController* _sharedPlaylistViewController;
     // set delegate
     [UDJEventData sharedEventData].leaveEventDelegate = self;
     
-    // init playlist
-    self.playlist = [UDJPlaylist sharedUDJPlaylist];
-    self.playlist.eventId = currentEvent.eventId;
-    self.playlist.delegate = self;
-    [self sendRefreshRequest];
     
     // initialize leaving view
     leavingView.layer.cornerRadius = 8;
     leavingView.layer.borderColor = [[UIColor whiteColor] CGColor];
     leavingView.layer.borderWidth = 3;
+    
+    self.refreshIndicator.hidden = YES;
+    self.refreshLabel.hidden = YES;
+    
+    // init playlist
+    self.playlist = [UDJPlaylist sharedUDJPlaylist];
+    self.playlist.eventId = currentEvent.eventId;
+    self.playlist.delegate = self;
+    [self sendRefreshRequest];
     
     [self toggleLeavingView: NO];
     
@@ -371,6 +380,11 @@ static PlaylistViewController* _sharedPlaylistViewController;
     [[UDJPlaylist sharedUDJPlaylist] setCurrentSong: currentSong];
     
     [self refreshTableList];
+    
+    // bring back the refresh button
+    self.refreshButton.hidden = NO;
+    self.refreshIndicator.hidden = YES;
+    self.refreshLabel.hidden = YES;
     
 }
 
