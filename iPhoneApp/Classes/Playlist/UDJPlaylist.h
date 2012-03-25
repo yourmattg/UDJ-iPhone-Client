@@ -30,6 +30,7 @@
 - (void)sendPlaylistRequest;
 - (NSInteger)count;
 - (void)clearPlaylist;
+- (void)sendVoteRequest:(BOOL)up songId:(NSInteger)songId;
 
 @property(nonatomic,strong) NSMutableArray* playlist;
 @property(nonatomic) NSInteger eventId;

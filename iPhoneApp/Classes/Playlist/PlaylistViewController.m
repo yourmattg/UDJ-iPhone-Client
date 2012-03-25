@@ -130,7 +130,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
         if(![[playlist.voteRecordKeeper objectForKey:songIdAsNumber] boolValue]){
             [playlist.voteRecordKeeper setObject:[NSNumber numberWithBool:YES] forKey:songIdAsNumber];
             
-            [[UDJConnection sharedConnection] sendVoteRequest:up songId:selectedSong.songId eventId:currentEvent.eventId];
+            [playlist sendVoteRequest:up songId:selectedSong.songId];
             
             [self sendRefreshRequest];
             

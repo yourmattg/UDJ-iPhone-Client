@@ -42,6 +42,28 @@
     [request send];
 }
 
+
+-(void)sendVoteRequest:(BOOL)up songId:(NSInteger)songId{
+    RKClient* client = [RKClient sharedClient];
+    
+    //create url [POST] {prefix}/udj/events/event_id/active_playlist/playlist_id/users/user_id/upvote
+    NSString* urlString = client.baseURL;
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@%d%@%d%@", @"/events/", eventId, @"/active_playlist/",songId,@"/users/",[globalData.userID intValue],@"/"];
+    if(up) urlString = [urlString stringByAppendingString:@"upvote"];
+    else urlString = [urlString stringByAppendingString:@"downvote"];
+    
+    // create request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: delegate];
+    request.queue = client.requestQueue;
+    request.method = RKRequestMethodGET;
+    request.additionalHTTPHeaders = globalData.headers;
+    request.userData = [NSNumber numberWithInt: globalData.requestCount++];
+    
+    //send request
+    //[currentRequests setObject:@"voteRequest" forKey:request]; was causing error
+    [request send];    
+}
+
 - (UDJSong*)songPlaying{
     return currentSong;
 }
