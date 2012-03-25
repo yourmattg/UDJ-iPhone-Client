@@ -14,14 +14,14 @@
 
 @implementation LibraryResultsController
 
-@synthesize resultList, selectedSong, tableView, statusLabel;
+@synthesize resultList, selectedSong, tableView, statusLabel, randomButton;
 
 // backToLibSearch: go back to the library search screen
 - (void)backToLibSearch{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void) sendRandomRequest{
+-(IBAction)randomButtonClick:(id)sender{
     NSInteger eventIdParam = [UDJEventData sharedEventData].currentEvent.eventId;
     NSInteger maxResultsParam = 50;
     // have UDJConnection send a request
@@ -46,17 +46,11 @@
     
     self.statusLabel.numberOfLines = 0;
     
+    /*
     self.navigationItem.title = @"Search Results";
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backToLibSearch)];
     self.navigationItem.leftBarButtonItem = backButton;
-    
-    // set up toolbar
-    UIBarButtonItem* randomButton = [[UIBarButtonItem alloc] initWithTitle:@"Get Random" style:UIBarButtonItemStylePlain target:self action:@selector(sendRandomRequest)];
-    UIBarButtonItem* space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    NSArray* toolbarItems = [NSArray arrayWithObjects: space, randomButton, space, nil];
-    self.toolbarItems = toolbarItems;
-    self.navigationController.toolbarHidden=NO;
-     
+    */
     
 }
 

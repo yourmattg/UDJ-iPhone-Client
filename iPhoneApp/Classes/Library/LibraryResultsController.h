@@ -20,5 +20,6 @@
 @property(nonatomic,strong) UDJSong* selectedSong;
 @property(nonatomic,strong) IBOutlet UITableView* tableView;
 @property(nonatomic,strong) IBOutlet UILabel* statusLabel;
+@property(nonatomic,strong) IBOutlet UIButton* randomButton;
 
 @end
