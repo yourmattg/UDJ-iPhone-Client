@@ -37,6 +37,23 @@
     [request send]; 
 }
 
+-(void)sendRandomSongRequest:(NSInteger)eventId maxResults:(NSInteger)maxResults{
+    RKClient* client = [RKClient sharedClient];
+    
+    //create url [GET] /udj/events/event_id/available_music/random_songs{?max_randoms=number_desired}
+    NSString* urlString = client.baseURL;
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@%d",@"/events/",eventId,@"/available_music/random_songs?max_randoms=",maxResults];
+    // create request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
+    request.queue = client.requestQueue;
+    request.method = RKRequestMethodGET;
+    request.additionalHTTPHeaders = globalData.headers;
+    request.userData = [NSNumber numberWithInt: globalData.requestCount++];
+    
+    //send request
+    [request send]; 
+}
+
 // Show or hide the "Leaving event" view; active = YES will show the view
 -(void) toggleSearchingView:(BOOL) active{
     searchingBackgroundView.hidden = !active;
@@ -80,7 +97,7 @@
         
         // have UDJConnection send a request
         self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
-        [[UDJConnection sharedConnection] sendRandomSongRequest:eventIdParam maxResults:maxResultsParam];
+        [self sendRandomSongRequest:eventIdParam maxResults:maxResultsParam];
     }
 }
 
@@ -115,7 +132,6 @@
     searchingView.layer.borderWidth = 3;
     
     [self toggleSearchingView: NO];
-
     
 }
 
@@ -152,6 +168,8 @@
         UDJSong* song = [UDJSong songFromDictionary:songDict isLibraryEntry:YES];
         [tempList addSong:song];
     }
+    
+    [self toggleSearchingView: NO];
     
     LibraryResultsController* libraryResultsController = [[LibraryResultsController alloc] initWithNibName:@"LibraryResultsController" bundle:[NSBundle mainBundle]];
     [self.navigationController pushViewController:libraryResultsController animated:YES];
