@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RestKit/RestKit.h"
+#import "UDJData.h"
 
-@interface LibrarySearchViewController : UIViewController{
+@interface LibrarySearchViewController : UIViewController <RKRequestDelegate>{
     UITextField* searchField;
     UIButton* searchButton;
     NSMutableArray *tableList;
@@ -20,5 +22,13 @@
 @property(nonatomic,strong) IBOutlet UIButton* searchButton;
 @property(nonatomic,strong) IBOutlet UIButton* randomButton;
 @property(nonatomic,strong) IBOutlet UIButton* playlistButton;
+
+@property(nonatomic,strong) IBOutlet UIView* searchingView;
+@property(nonatomic,strong) IBOutlet UIView* searchingBackgroundView;
+@property(nonatomic,strong) IBOutlet UIButton* cancelButton;
+
+@property(nonatomic,strong) NSNumber* currentRequestNumber;
+
+@property(nonatomic,strong) UDJData* globalData;
 
 @end

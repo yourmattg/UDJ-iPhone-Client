@@ -32,6 +32,7 @@
     usernameField.placeholder = @"Username";
     passwordField.placeholder = @"Password";
     usernameField.autocorrectionType = UITextAutocorrectionTypeNo;
+    
 }
 
 - (void)didReceiveMemoryWarning {

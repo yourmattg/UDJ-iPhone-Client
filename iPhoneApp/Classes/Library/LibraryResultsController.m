@@ -14,10 +14,10 @@
 
 @implementation LibraryResultsController
 
-@synthesize resultList, selectedSong, tableView, statusLabel, randomButton;
+@synthesize resultList, selectedSong, tableView, statusLabel, randomButton, backButton;
 
 // backToLibSearch: go back to the library search screen
-- (void)backToLibSearch{
+- (IBAction)backButtonClick:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
 

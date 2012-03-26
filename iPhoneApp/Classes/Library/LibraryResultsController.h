@@ -22,4 +22,6 @@
 @property(nonatomic,strong) IBOutlet UILabel* statusLabel;
 @property(nonatomic,strong) IBOutlet UIButton* randomButton;
 
+@property(nonatomic,strong) IBOutlet UIButton* backButton;
+
 @end

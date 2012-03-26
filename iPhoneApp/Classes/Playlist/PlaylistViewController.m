@@ -300,9 +300,10 @@ static PlaylistViewController* _sharedPlaylistViewController;
 	cell.songLabel.text = songText;
     cell.artistLabel.text = [NSString stringWithFormat: @"%@%@", @"By ", song.artist, nil];
     
+    // figure out who added the song: either "You" or another user
     NSString* adderName;
-    UDJConnection* connection = [UDJConnection sharedConnection];
-    NSInteger userId = [connection.userID intValue];
+    NSInteger userId = [globalData.userID intValue];
+    
     if(song.adderId == userId) adderName = @"You";
     else adderName = song.adderName;
     cell.addedByLabel.text = [NSString stringWithFormat:@"%@%@", @"Added by ", adderName];
