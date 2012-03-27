@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PlaylistViewController.h"
 
 @interface PlaylistEntryCell : UITableViewCell{
     UILabel* songLabel;
@@ -25,5 +26,7 @@
 @property(nonatomic,strong) UIButton* downVoteButton;
 @property(nonatomic,strong) UILabel* upVoteLabel;
 @property(nonatomic,strong) UILabel* downVoteLabel;
+
+@property(nonatomic,strong) PlaylistViewController* parentViewController;
 
 @end

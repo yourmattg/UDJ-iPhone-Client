@@ -55,7 +55,7 @@
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: delegate];
     request.queue = client.requestQueue;
-    request.method = RKRequestMethodGET;
+    request.method = RKRequestMethodPOST;
     request.additionalHTTPHeaders = globalData.headers;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++];
     

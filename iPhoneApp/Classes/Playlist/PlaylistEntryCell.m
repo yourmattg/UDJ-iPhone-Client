@@ -11,7 +11,7 @@
 
 @implementation PlaylistEntryCell
 
-@synthesize songLabel, addedByLabel, artistLabel, upVoteButton, downVoteButton, upVoteLabel, downVoteLabel;
+@synthesize songLabel, addedByLabel, artistLabel, upVoteButton, downVoteButton, upVoteLabel, downVoteLabel, parentViewController;
 
 - (IBAction) onButtonClick: (id) sender {
     UIButton* button = sender;

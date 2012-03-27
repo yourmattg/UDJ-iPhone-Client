@@ -14,7 +14,14 @@
 
 @implementation LibraryResultsController
 
-@synthesize resultList, selectedSong, tableView, statusLabel, randomButton, backButton, globalData, currentRequestNumber;
+@synthesize resultList, selectedSong, tableView, statusLabel, randomButton, backButton, globalData, currentRequestNumber, searchingLabel, searchingIndicator;
+
+-(void)toggleSearchingStatus:(BOOL)active{
+    self.randomButton.hidden = active;
+    self.searchingIndicator.hidden = !active;
+    self.searchingLabel.hidden = !active;
+}
+
 
 -(void)sendRandomSongRequest:(NSInteger)eventId maxResults:(NSInteger)maxResults{
     RKClient* client = [RKClient sharedClient];
@@ -34,6 +41,40 @@
     [request send]; 
 }
 
+-(void)sendAddSongRequest:(NSInteger)librarySongId eventId:(NSInteger)eventId{
+    RKClient* client = [RKClient sharedClient];
+    
+    //create url [PUT] /udj/events/event_id/active_playlist/songs
+    NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@",client.baseURL,@"/events/",eventId,@"/active_playlist/songs"];
+    
+    // make a dictionary for the song request, with a "lib_id" and "client_request_id"
+    NSMutableDictionary* songAddDictionary = [NSMutableDictionary new];
+    NSDate *currentDate = [NSDate date];
+    NSNumber* clientRequestIdAsNumber = [NSNumber numberWithDouble:[currentDate timeIntervalSinceReferenceDate]];
+    NSNumber* libraryIdAsNumber = [NSNumber numberWithInt:librarySongId];
+    [songAddDictionary setObject:clientRequestIdAsNumber forKey:@"client_request_id"];
+    [songAddDictionary setObject:libraryIdAsNumber forKey:@"lib_id"];
+    
+    // then make an array to hold this song dictionary, convert it to JSON string
+    NSMutableArray* arrayToSend = [NSMutableArray arrayWithObject:songAddDictionary];;
+    NSString* songAsJSONArray = [arrayToSend JSONString];
+    
+    // create request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
+    request.queue = client.requestQueue;
+    request.method = RKRequestMethodPUT;
+    request.userData = [NSNumber numberWithInt: globalData.requestCount++];
+    NSMutableDictionary* headersWithContentType = [NSMutableDictionary dictionaryWithDictionary: globalData.headers];
+    [headersWithContentType setObject:@"text/json" forKey:@"Content-Type"];
+    request.additionalHTTPHeaders = headersWithContentType;
+    request.HTTPBodyString = songAsJSONArray;
+    
+    //TODO: find a way to keep track of the requests
+    //[currentRequests setObject:@"songAdd" forKey:request];
+    [request send]; 
+    
+}
+
 // backToLibSearch: go back to the library search screen
 - (IBAction)backButtonClick:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
@@ -42,6 +83,9 @@
 -(IBAction)randomButtonClick:(id)sender{
     NSInteger eventIdParam = [UDJEventData sharedEventData].currentEvent.eventId;
     NSInteger maxResultsParam = 50;
+    
+    // show "searching" status
+    [self toggleSearchingStatus: YES];
     
     // have UDJConnection send a request
     self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
@@ -65,6 +109,8 @@
     [super viewDidLoad];
     
     self.statusLabel.numberOfLines = 0;
+    
+    [self toggleSearchingStatus: NO];
     
     self.globalData = [UDJData sharedUDJData];
     
@@ -145,6 +191,8 @@
     cell.artistLabel.text = song.artist;
     cell.addButton.tag = song.librarySongId;
     
+    cell.parentViewController = self;
+    
     return cell;
 }
 
@@ -172,9 +220,9 @@
         [tempList addSong:song];
     }
 
+    [self toggleSearchingStatus: NO];
     
     self.resultList = tempList;
-    
     [self.tableView reloadData];
 }
 

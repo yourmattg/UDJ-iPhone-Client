@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LibraryResultsController.h"
 
 @interface LibraryEntryCell : UITableViewCell{
     UILabel* songLabel;
@@ -17,5 +18,6 @@
 @property(nonatomic,strong) UILabel* songLabel;
 @property(nonatomic,strong) UILabel* artistLabel;
 @property(nonatomic,strong) UIButton* addButton;
+@property(nonatomic,strong) LibraryResultsController* parentViewController;
 
 @end

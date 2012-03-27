@@ -12,12 +12,15 @@
 
 @implementation LibraryEntryCell
 
-@synthesize songLabel, artistLabel, addButton;
+@synthesize songLabel, artistLabel, addButton, parentViewController;
 
 // addSong: add the selected song to the event playlist
 -(void)addSong:(NSInteger)librarySongId{
+    parentViewController.currentRequestNumber = [NSNumber numberWithInt: parentViewController.globalData.requestCount];
+    [parentViewController sendAddSongRequest:librarySongId eventId:[UDJEventData sharedEventData].currentEvent.eventId];
+    
+    // TODO: make this notification less invasive
     UIAlertView* notification = [[UIAlertView alloc] initWithTitle:@"Song Add" message:@"Thanks! Your song will be added to the playlist shortly!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [[UDJConnection sharedConnection] sendAddSongRequest:librarySongId eventId:[UDJEventData sharedEventData].currentEvent.eventId];
     [notification show];
 }
 

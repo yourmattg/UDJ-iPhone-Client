@@ -30,4 +30,9 @@
 
 @property(nonatomic,strong) NSNumber* currentRequestNumber;
 
+@property(nonatomic,strong) IBOutlet UIActivityIndicatorView* searchingIndicator;
+@property(nonatomic,strong) IBOutlet UILabel* searchingLabel;
+
+-(void)sendAddSongRequest:(NSInteger)librarySongId eventId:(NSInteger)eventId;
+
 @end

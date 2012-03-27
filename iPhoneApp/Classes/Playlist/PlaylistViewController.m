@@ -15,6 +15,7 @@
 #import "PlaylistEntryCell.h"
 #import "LibraryEntryCell.h"
 #import "EventGoerViewController.h"
+#import "PlaylistEntryCell.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation PlaylistViewController
@@ -68,18 +69,20 @@ static PlaylistViewController* _sharedPlaylistViewController;
     [self.navigationController pushViewController:librarySearchViewController animated:YES];
 }
 
+-(void)toggleRefreshingStatus:(BOOL)active{
+    self.refreshButton.hidden = active;
+    self.refreshIndicator.hidden = !active;
+    self.refreshLabel.hidden = !active;
+}
+
 // sendRefreshRequest: ask the playlist for a refresh
 -(void)sendRefreshRequest{
+    [self toggleRefreshingStatus: YES];
     self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
     [self.playlist sendPlaylistRequest];
 }
 
 -(IBAction)refreshButtonClick:(id)sender{
-    // hide refreshbutton, show waiting indicator
-    self.refreshButton.hidden = YES;
-    self.refreshIndicator.hidden = NO;
-    self.refreshLabel.hidden = NO;
-    
     [self sendRefreshRequest];
 }
 
@@ -130,9 +133,9 @@ static PlaylistViewController* _sharedPlaylistViewController;
         if(![[playlist.voteRecordKeeper objectForKey:songIdAsNumber] boolValue]){
             [playlist.voteRecordKeeper setObject:[NSNumber numberWithBool:YES] forKey:songIdAsNumber];
             
+            // send the vote request
+            self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
             [playlist sendVoteRequest:up songId:selectedSong.songId];
-            
-            [self sendRefreshRequest];
             
             // let the client know it sent a vote
             NSString* msg = @"Your vote for ";
@@ -203,8 +206,8 @@ static PlaylistViewController* _sharedPlaylistViewController;
     leavingView.layer.borderColor = [[UIColor whiteColor] CGColor];
     leavingView.layer.borderWidth = 3;
     
-    self.refreshIndicator.hidden = YES;
-    self.refreshLabel.hidden = YES;
+    [self toggleLeavingView: NO];
+    [self toggleRefreshingStatus: NO];
     
     // init playlist
     self.playlist = [UDJPlaylist sharedUDJPlaylist];
@@ -213,9 +216,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     self.refreshIndicator.hidden = NO;
     self.refreshButton.hidden = YES;
-    [self sendRefreshRequest];
-    
-    [self toggleLeavingView: NO];
     
     
 }
@@ -398,9 +398,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     [self refreshTableList];
     
     // bring back the refresh button
-    self.refreshButton.hidden = NO;
-    self.refreshIndicator.hidden = YES;
-    self.refreshLabel.hidden = YES;
+    [self toggleRefreshingStatus: NO];
     
 }
 
@@ -412,9 +410,11 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     NSNumber* requestNumber = request.userData;
     
-    //NSLog([NSString stringWithFormat: @"response number %d, waiting on %d", [requestNumber intValue], [currentRequestNumber intValue]]);
+    NSLog([NSString stringWithFormat: @"response number %d, waiting on %d", [requestNumber intValue], [currentRequestNumber intValue]]);
 
     if(![requestNumber isEqualToNumber: currentRequestNumber]) return;
+    
+    NSLog([NSString stringWithFormat:@"code %d", response.statusCode]);
     
     // check if the event has ended
     if(response.statusCode == 410){
@@ -425,6 +425,10 @@ static PlaylistViewController* _sharedPlaylistViewController;
     }
     else if([request isDELETE]){
         if([response isOK]) [self handleLeaveEvent];
+    }
+    else if([request isPUT]){
+        NSLog(@"put");
+        if([response isOK]) [self sendRefreshRequest];
     }
     
     self.currentRequestNumber = nil;
