@@ -15,6 +15,7 @@
 #import "UDJSongList.h"
 #import "UDJMappableArray.h"
 #import "UDJData.h"
+#import "FacebookHandler.h"
 
 @implementation UDJAppDelegate
 
@@ -107,6 +108,12 @@
     [[UDJConnection sharedConnection] leaveEventRequest];
 }
 
+//Facebook
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    
+    return [[[FacebookHandler sharedHandler] facebook] handleOpenURL:url]; 
+}
+
 
 #pragma mark -
 #pragma mark Memory management
@@ -116,6 +123,7 @@
      Free up as much memory as possible by purging cached data objects that can be recreated (or reloaded from disk) later.
      */
 }
+
 
 
 

@@ -17,6 +17,7 @@
 #import "EventGoerViewController.h"
 #import "PlaylistEntryCell.h"
 #import <QuartzCore/QuartzCore.h>
+#import "FacebookHandler.h"
 
 @implementation PlaylistViewController
 
@@ -166,6 +167,43 @@ static PlaylistViewController* _sharedPlaylistViewController;
 - (void)downVote{
     [self vote:NO];
 }
+
+// Login to Facebook
+- (void)login {
+    [[FacebookHandler sharedHandler] login];
+    NSLog(@"login called");
+}
+
+// Post to Facebook
+- (void)post {
+    SBJSON *jsonWriter = [SBJSON new];
+    
+    
+    // The action links to be shown with the post in the feed
+    NSArray* actionLinks = [NSArray arrayWithObjects:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                      @"Test...",@"name",@"http://github.com/simon911011/UDJ/",@"link", nil], nil];
+    NSString *actionLinksStr = [jsonWriter stringWithObject:actionLinks];
+    // Dialog parameters
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                   @"UDJ", @"name",
+                                   selectedSong.title, @"caption",
+                                   @"I'm playing this song on UDJ. Come join the party!", @"description",
+                                   @"http://github.com/simon911011/UDJ/", @"link",
+                                   @"http://1.bp.blogspot.com/-RRRpZE314eQ/TkycUFS24II/AAAAAAAAPrM/z1b0peDvG6Q/s320/troll+face.jpg", @"picture",
+                                   actionLinksStr, @"actions",
+                                   nil];
+    [[FacebookHandler sharedHandler] postWithParam:params];
+    NSLog(@"post called");
+}
+/*
+- (id)initWithStyle:(UITableViewStyle)style
+{
+    self = [super initWithStyle:style];
+    if (self) {
+        //custom initialization
+    }
+    return self;
+}*/
 
 
 // Show or hide the "Leaving event" view; active = YES will show the view
