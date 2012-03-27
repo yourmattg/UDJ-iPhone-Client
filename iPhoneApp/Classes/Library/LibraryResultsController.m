@@ -81,6 +81,10 @@
 }
 
 -(IBAction)randomButtonClick:(id)sender{
+    // make sure the table view is showing
+    self.statusLabel.text = @"";
+    self.tableView.hidden = NO;
+    
     NSInteger eventIdParam = [UDJEventData sharedEventData].currentEvent.eventId;
     NSInteger maxResultsParam = 50;
     
@@ -138,7 +142,7 @@
 {
     [super viewDidAppear:animated];
     if([resultList count] == 0){
-        self.statusLabel.text = @"There were no songs that matched your search query.\n\n If you're having trouble finding songs, try using Get Random to get a sample of the host's music library.";
+        self.statusLabel.text = @"There were no songs that matched your search query.\n\n If you're having trouble finding songs, try using the find random feature to get a sample of the host's music library.";
         self.tableView.hidden = YES;
     }
     else{
@@ -243,7 +247,7 @@
         [self handleLibSearchResults: response];        
     }
     
-    self.currentRequestNumber = nil;
+    self.currentRequestNumber = [NSNumber numberWithInt: -1];
 }
 
 

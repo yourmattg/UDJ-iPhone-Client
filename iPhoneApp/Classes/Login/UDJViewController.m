@@ -88,7 +88,7 @@
 
 // handleAuth: handle authorization response if credentials are valid
 - (void)handleAuth:(RKResponse*)response{
-    self.currentRequestNumber = nil;
+    self.currentRequestNumber = [NSNumber numberWithInt: -1];
     
     globalData.username = usernameField.text;
     
@@ -117,7 +117,7 @@
 // When user presses cancel, hide login view and let controller know
 // we aren't waiting on any requests
 -(IBAction)cancelButtonClick:(id)sender{
-    self.currentRequestNumber = nil;
+    self.currentRequestNumber = [NSNumber numberWithInt: -1];
     [self toggleLoginView:NO];
 }
 
@@ -167,7 +167,7 @@
             [self denyAuth:response];
     }
     
-    self.currentRequestNumber = nil;
+    self.currentRequestNumber = [NSNumber numberWithInt: -1];
 }
 
 

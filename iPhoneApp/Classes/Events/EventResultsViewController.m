@@ -202,7 +202,7 @@
         
     } 
     
-    self.currentRequestNumber = nil;
+    self.currentRequestNumber = [NSNumber numberWithInt: -1];
 }
 
 @end

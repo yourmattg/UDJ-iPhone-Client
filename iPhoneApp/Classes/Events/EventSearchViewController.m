@@ -121,7 +121,7 @@
 // When user presses cancel, hide login view and let controller know
 // we aren't waiting on any requests
 -(IBAction)cancelButtonClick:(id)sender{
-    self.currentRequestNumber = nil;
+    self.currentRequestNumber = [NSNumber numberWithInt: -1];
     [self toggleSearchingView: NO];
 }
 
@@ -312,7 +312,7 @@
         [self handleEventResults:response];        
     }
     
-    self.currentRequestNumber = nil;
+    self.currentRequestNumber = [NSNumber numberWithInt: -1];
 }
 
 

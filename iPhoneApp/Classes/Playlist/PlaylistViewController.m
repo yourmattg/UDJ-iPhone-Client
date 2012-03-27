@@ -179,7 +179,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 // When user presses cancel, hide leaving view and let controller know
 // we aren't waiting on any requests
 -(IBAction)cancelButtonClick:(id)sender{
-    self.currentRequestNumber = nil;
+    self.currentRequestNumber = [NSNumber numberWithInt: -1];
     [self toggleLeavingView: NO];
 }
 
@@ -431,7 +431,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
         if([response isOK]) [self sendRefreshRequest];
     }
     
-    self.currentRequestNumber = nil;
+    self.currentRequestNumber = [NSNumber numberWithInt: -1];
 }
 
 
