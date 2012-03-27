@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RestKit/RestKit.h"
 #import "UDJSongList.h"
+#import "UDJData.h"
 
-@interface LibraryResultsController : UIViewController{
+@interface LibraryResultsController : UIViewController<RKRequestDelegate>{
     UDJSongList* resultList;
     UDJSong* selectedSong;
     UITableView* tableView;
@@ -23,5 +25,9 @@
 @property(nonatomic,strong) IBOutlet UIButton* randomButton;
 
 @property(nonatomic,strong) IBOutlet UIButton* backButton;
+
+@property(nonatomic,strong) UDJData* globalData;
+
+@property(nonatomic,strong) NSNumber* currentRequestNumber;
 
 @end

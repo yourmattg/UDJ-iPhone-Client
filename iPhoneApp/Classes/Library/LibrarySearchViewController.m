@@ -43,6 +43,7 @@
     //create url [GET] /udj/events/event_id/available_music/random_songs{?max_randoms=number_desired}
     NSString* urlString = client.baseURL;
     urlString = [urlString stringByAppendingFormat:@"%@%d%@%d",@"/events/",eventId,@"/available_music/random_songs?max_randoms=",maxResults];
+    
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
     request.queue = client.requestQueue;
@@ -95,7 +96,7 @@
         
         [self toggleSearchingView: YES];
         
-        // have UDJConnection send a request
+        // send a random song request
         self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
         [self sendRandomSongRequest:eventIdParam maxResults:maxResultsParam];
     }

@@ -14,7 +14,25 @@
 
 @implementation LibraryResultsController
 
-@synthesize resultList, selectedSong, tableView, statusLabel, randomButton, backButton;
+@synthesize resultList, selectedSong, tableView, statusLabel, randomButton, backButton, globalData, currentRequestNumber;
+
+-(void)sendRandomSongRequest:(NSInteger)eventId maxResults:(NSInteger)maxResults{
+    RKClient* client = [RKClient sharedClient];
+    
+    //create url [GET] /udj/events/event_id/available_music/random_songs{?max_randoms=number_desired}
+    NSString* urlString = client.baseURL;
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@%d",@"/events/",eventId,@"/available_music/random_songs?max_randoms=",maxResults];
+    
+    // create request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
+    request.queue = client.requestQueue;
+    request.method = RKRequestMethodGET;
+    request.additionalHTTPHeaders = globalData.headers;
+    request.userData = [NSNumber numberWithInt: globalData.requestCount++];
+    
+    //send request
+    [request send]; 
+}
 
 // backToLibSearch: go back to the library search screen
 - (IBAction)backButtonClick:(id)sender{
@@ -24,8 +42,10 @@
 -(IBAction)randomButtonClick:(id)sender{
     NSInteger eventIdParam = [UDJEventData sharedEventData].currentEvent.eventId;
     NSInteger maxResultsParam = 50;
+    
     // have UDJConnection send a request
-    [[UDJConnection sharedConnection] sendRandomSongRequest:eventIdParam maxResults:maxResultsParam];
+    self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
+    [self sendRandomSongRequest:eventIdParam maxResults:maxResultsParam];
  
 }
 
@@ -45,6 +65,8 @@
     [super viewDidLoad];
     
     self.statusLabel.numberOfLines = 0;
+    
+    self.globalData = [UDJData sharedUDJData];
     
     /*
     self.navigationItem.title = @"Search Results";
@@ -130,44 +152,6 @@
     return 44.0;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -175,6 +159,43 @@
 {
     NSInteger rowNumber = indexPath.row;
     self.selectedSong = [resultList songAtIndex:rowNumber];
+}
+
+
+-(void)handleLibSearchResults:(RKResponse *)response{
+    UDJSongList* tempList = [UDJSongList new];
+    RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
+    NSArray* songArray = [parser objectFromString:[response bodyAsString] error:nil];
+    for(int i=0; i<[songArray count]; i++){
+        NSDictionary* songDict = [songArray objectAtIndex:i];
+        UDJSong* song = [UDJSong songFromDictionary:songDict isLibraryEntry:YES];
+        [tempList addSong:song];
+    }
+
+    
+    self.resultList = tempList;
+    
+    [self.tableView reloadData];
+}
+
+// Handle responses from the server
+- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response { 
+    
+    NSNumber* requestNumber = request.userData;
+    
+    //NSLog([NSString stringWithFormat: @"response number %d, waiting on %d", [requestNumber intValue], [currentRequestNumber intValue]]);
+    
+    if(![requestNumber isEqualToNumber: currentRequestNumber]) return;
+    
+    // check if the event has ended
+    if(response.statusCode == 410){
+        //[self resetToEventView];
+    }
+    else if ([request isGET]) {
+        [self handleLibSearchResults: response];        
+    }
+    
+    self.currentRequestNumber = nil;
 }
 
 

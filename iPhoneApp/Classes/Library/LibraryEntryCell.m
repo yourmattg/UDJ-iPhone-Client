@@ -31,7 +31,7 @@
     CGRect contentRect = self.contentView.bounds;
     CGFloat boundsX = contentRect.origin.x;
     CGRect frame;
-    frame = CGRectMake(boundsX+275 ,3, 35, 35);
+    frame = CGRectMake(boundsX+275 ,2, 40, 40);
     addButton.frame = frame;
     
     frame= CGRectMake(boundsX+10 ,3, 250, 16);
@@ -72,6 +72,8 @@
         [self.contentView addSubview:songLabel];
         [self.contentView addSubview:artistLabel];
         [self.contentView addSubview:addButton];
+        
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
 }

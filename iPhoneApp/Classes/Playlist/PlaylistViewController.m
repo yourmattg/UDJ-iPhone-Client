@@ -210,6 +210,9 @@ static PlaylistViewController* _sharedPlaylistViewController;
     self.playlist = [UDJPlaylist sharedUDJPlaylist];
     self.playlist.eventId = currentEvent.eventId;
     self.playlist.delegate = self;
+    
+    self.refreshIndicator.hidden = NO;
+    self.refreshButton.hidden = YES;
     [self sendRefreshRequest];
     
     [self toggleLeavingView: NO];
