@@ -182,7 +182,7 @@
 // Handle responses from the server
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response { 
     
-    NSLog(@"Got response in lib search view");
+    NSLog(@"status code %d", [response statusCode]);
     
     NSNumber* requestNumber = request.userData;
     

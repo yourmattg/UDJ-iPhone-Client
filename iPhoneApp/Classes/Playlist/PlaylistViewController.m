@@ -187,7 +187,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                    @"UDJ", @"name",
                                    selectedSong.title, @"caption",
-                                   @"I'm playing this song on UDJ. Come join the party!", @"description",
+                                   @"We're listening to this song with UDJ. Come join the party!", @"description",
                                    @"http://github.com/simon911011/UDJ/", @"link",
                                    @"http://1.bp.blogspot.com/-RRRpZE314eQ/TkycUFS24II/AAAAAAAAPrM/z1b0peDvG6Q/s320/troll+face.jpg", @"picture",
                                    actionLinksStr, @"actions",
@@ -444,15 +444,15 @@ static PlaylistViewController* _sharedPlaylistViewController;
 // Handle responses from the server
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response { 
     
-    NSLog(@"Got response in playlist view");
+    NSLog(@"status code %d", [response statusCode]);
     
     NSNumber* requestNumber = request.userData;
     
-    NSLog([NSString stringWithFormat: @"response number %d, waiting on %d", [requestNumber intValue], [currentRequestNumber intValue]]);
+    //NSLog([NSString stringWithFormat: @"response number %d, waiting on %d", [requestNumber intValue], [currentRequestNumber intValue]]);
 
     if(![requestNumber isEqualToNumber: currentRequestNumber]) return;
     
-    NSLog([NSString stringWithFormat:@"code %d", response.statusCode]);
+    //NSLog([NSString stringWithFormat:@"code %d", response.statusCode]);
     
     // check if the event has ended
     if(response.statusCode == 410){

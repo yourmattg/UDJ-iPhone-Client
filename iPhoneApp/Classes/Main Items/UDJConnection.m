@@ -7,7 +7,6 @@
 //
 
 #import "UDJConnection.h"
-#import "AuthenticateViewController.h"
 #import "EventSearchViewController.h"
 #import "UDJAppDelegate.h"
 #import "UDJEvent.h"

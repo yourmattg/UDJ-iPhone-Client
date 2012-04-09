@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RestKit/RestKit.h"
 
-@interface UDJData : NSObject{
+@interface UDJData : NSObject<RKRequestDelegate>{
     NSString* ticket;
     NSDictionary* headers;
     NSNumber* userID;
@@ -20,7 +21,10 @@
 @property(nonatomic,strong) NSDictionary* headers;
 @property(nonatomic,strong) NSNumber* userID;
 @property(nonatomic,strong) NSString* username;
+@property(nonatomic,strong) NSString* password;
 
 +(UDJData*)sharedUDJData;
+-(void)renewTicket;
+-(void)handleRenewTicket:(RKResponse*)response;
 
 @end

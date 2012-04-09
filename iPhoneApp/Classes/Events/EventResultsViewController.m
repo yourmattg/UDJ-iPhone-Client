@@ -9,10 +9,24 @@
 #import "EventResultsViewController.h"
 #import "UDJEvent.h"
 #import "PartyLoginViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation EventResultsViewController
 
-@synthesize tableList, tableView, eventData, currentRequestNumber, globalData;
+@synthesize tableList, tableView, eventData, currentRequestNumber, globalData, joiningView, joiningBackgroundView, cancelButton;
+
+// Show or hide the "joining event..." view; active = YES will show the view
+-(void) toggleJoiningView:(BOOL) active{
+    joiningBackgroundView.hidden = !active;
+}
+
+// When user presses cancel, hide login view and let controller know
+// we aren't waiting on any requests
+-(IBAction)cancelButtonClick:(id)sender{
+    self.currentRequestNumber = [NSNumber numberWithInt: -1];
+    [self.tableView reloadData];
+    [self toggleJoiningView:NO];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -27,6 +41,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self toggleJoiningView: NO];
+    
+    // initialize login view
+    joiningView.layer.cornerRadius = 8;
+    joiningView.layer.borderColor = [[UIColor whiteColor] CGColor];
+    joiningView.layer.borderWidth = 3;
     
     self.globalData = [UDJData sharedUDJData];
 
@@ -52,6 +73,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [self toggleJoiningView: NO];
     [self.tableView reloadData];
     [super viewDidAppear:animated];
 }
@@ -63,6 +85,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated
 {
+    [self toggleJoiningView: NO];
     [super viewDidDisappear:animated];
 }
 
@@ -138,6 +161,7 @@
     // no password: attempt login
     else{
         // send event request
+        [self toggleJoiningView: YES];
         self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
         [eventData enterEvent];
     }
@@ -182,6 +206,8 @@
 // Handle responses from the server
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
     NSNumber* requestNumber = request.userData;
+    
+    NSLog(@"status code %d", [response statusCode]);
     
     if(![requestNumber isEqualToNumber: currentRequestNumber]) return;
     

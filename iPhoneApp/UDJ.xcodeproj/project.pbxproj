@@ -64,8 +64,6 @@
 		A3D334D714C6A02A00A90D58 /* uparrow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3D334D614C6A02A00A90D58 /* uparrow.jpg */; };
 		A3DAD57D14BD253600688CE0 /* UDJMappableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DAD57C14BD253600688CE0 /* UDJMappableArray.m */; };
 		A3EF398114C64D33003889E0 /* addbutton.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3EF398014C64D33003889E0 /* addbutton.jpg */; };
-		A3F58C5C14A15F0B00756F7D /* AuthenticateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58C5A14A15F0B00756F7D /* AuthenticateViewController.m */; };
-		A3F58C5D14A15F0B00756F7D /* AuthenticateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F58C5B14A15F0B00756F7D /* AuthenticateViewController.xib */; };
 		A3F58D9514C753D300E350F4 /* UDJEventGoer.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58D9414C753D300E350F4 /* UDJEventGoer.m */; };
 		A3F58D9914C75F0800E350F4 /* EventGoerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58D9714C75F0800E350F4 /* EventGoerViewController.m */; };
 		A3F58D9C14C75FAF00E350F4 /* EventGoerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F58D9B14C75FAF00E350F4 /* EventGoerViewController.xib */; };
@@ -207,9 +205,6 @@
 		A3DAD57B14BD253600688CE0 /* UDJMappableArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJMappableArray.h; sourceTree = "<group>"; };
 		A3DAD57C14BD253600688CE0 /* UDJMappableArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJMappableArray.m; sourceTree = "<group>"; };
 		A3EF398014C64D33003889E0 /* addbutton.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addbutton.jpg; sourceTree = "<group>"; };
-		A3F58C5914A15F0B00756F7D /* AuthenticateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticateViewController.h; sourceTree = "<group>"; };
-		A3F58C5A14A15F0B00756F7D /* AuthenticateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticateViewController.m; sourceTree = "<group>"; };
-		A3F58C5B14A15F0B00756F7D /* AuthenticateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuthenticateViewController.xib; sourceTree = "<group>"; };
 		A3F58D9314C753D300E350F4 /* UDJEventGoer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJEventGoer.h; sourceTree = "<group>"; };
 		A3F58D9414C753D300E350F4 /* UDJEventGoer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJEventGoer.m; sourceTree = "<group>"; };
 		A3F58D9614C75F0800E350F4 /* EventGoerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventGoerViewController.h; path = "Classes/Main Views/EventGoerViewController.h"; sourceTree = SOURCE_ROOT; };
@@ -354,7 +349,6 @@
 				A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */,
 				A3F9C051142EAD610016717B /* EventSearchViewController.xib */,
 				A36D2CCB14A818130087E992 /* SearchingViewController.xib */,
-				A3F58C5B14A15F0B00756F7D /* AuthenticateViewController.xib */,
 				A33C461D148F11FC009C1BC6 /* LibrarySearchViewController.xib */,
 				A34FB30214B8EB5F00BE5CE2 /* LibraryResultsController.xib */,
 				A3F9C1D7142EBB880016717B /* PartyLoginViewController.xib */,
@@ -395,16 +389,16 @@
 		A3536FB414A5219E00B5C95F /* Events */ = {
 			isa = PBXGroup;
 			children = (
+				A3F9C04F142EAD610016717B /* EventSearchViewController.h */,
+				A3F9C050142EAD610016717B /* EventSearchViewController.m */,
+				A309CC6115194A7F00912EA2 /* EventResultsViewController.h */,
+				A309CC6215194A7F00912EA2 /* EventResultsViewController.m */,
 				A3C608F8151E3593004AB623 /* EventCell.h */,
 				A3C608F9151E3593004AB623 /* EventCell.m */,
 				A3536FB114A5218F00B5C95F /* UDJEvent.h */,
 				A3536FB214A5218F00B5C95F /* UDJEvent.m */,
 				A374BDFF14A2EF36001A0DE0 /* UDJEventData.h */,
 				A374BE0014A2EF36001A0DE0 /* UDJEventData.m */,
-				A3F9C04F142EAD610016717B /* EventSearchViewController.h */,
-				A3F9C050142EAD610016717B /* EventSearchViewController.m */,
-				A309CC6115194A7F00912EA2 /* EventResultsViewController.h */,
-				A309CC6215194A7F00912EA2 /* EventResultsViewController.m */,
 				A3F9C1D5142EBB880016717B /* PartyLoginViewController.h */,
 				A3F9C1D6142EBB880016717B /* PartyLoginViewController.m */,
 			);
@@ -416,8 +410,6 @@
 			children = (
 				28D7ACF60DDB3853001CB0EB /* UDJViewController.h */,
 				28D7ACF70DDB3853001CB0EB /* UDJViewController.m */,
-				A3F58C5914A15F0B00756F7D /* AuthenticateViewController.h */,
-				A3F58C5A14A15F0B00756F7D /* AuthenticateViewController.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -615,7 +607,6 @@
 				A3F9C053142EAD610016717B /* EventSearchViewController.xib in Resources */,
 				A3F9C1D9142EBB880016717B /* PartyLoginViewController.xib in Resources */,
 				A33C461F148F11FC009C1BC6 /* LibrarySearchViewController.xib in Resources */,
-				A3F58C5D14A15F0B00756F7D /* AuthenticateViewController.xib in Resources */,
 				A36D2CCD14A818130087E992 /* SearchingViewController.xib in Resources */,
 				A32A384714AE917600D166CF /* UDJ-Info.plist in Resources */,
 				A34FB30414B8EB5F00BE5CE2 /* LibraryResultsController.xib in Resources */,
@@ -660,7 +651,6 @@
 				A33C4614148F0707009C1BC6 /* PlaylistViewController.m in Sources */,
 				A33C461E148F11FC009C1BC6 /* LibrarySearchViewController.m in Sources */,
 				A39AF6701497CB74006ADF19 /* UDJConnection.m in Sources */,
-				A3F58C5C14A15F0B00756F7D /* AuthenticateViewController.m in Sources */,
 				A374BE0114A2EF36001A0DE0 /* UDJEventData.m in Sources */,
 				A3536FB314A5218F00B5C95F /* UDJEvent.m in Sources */,
 				A36D2CCC14A818130087E992 /* SearchingViewController.m in Sources */,

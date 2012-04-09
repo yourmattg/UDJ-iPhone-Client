@@ -9,7 +9,6 @@
 #import "UDJViewController.h"
 #import "EventSearchViewController.h"
 #import "UDJConnection.h"
-#import "AuthenticateViewController.h"
 #import "PlaylistViewController.h"
 #import "UDJData.h"
 
@@ -64,7 +63,10 @@
     RKClient* client = [RKClient sharedClient];
     
     // make sure the right api version is being passed in
-    NSDictionary* nameAndPass = [NSDictionary dictionaryWithObjectsAndKeys:username, @"username", pass, @"password", @"0.2", @"udj_api_version", nil]; 
+    NSDictionary* nameAndPass = [NSDictionary dictionaryWithObjectsAndKeys:username, @"username", pass, @"password", nil]; 
+    
+    // put the API version in the header
+    NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"0.2", @"X-Udj-Api-Version", nil];
     
     // create the URL
     NSMutableString* urlString = [NSMutableString stringWithString: client.baseURL];
@@ -76,6 +78,7 @@
     request.params = nameAndPass;
     request.method = RKRequestMethodPOST;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++]; 
+    request.additionalHTTPHeaders = headers;
     
     // remember the request we are waiting on
     self.currentRequestNumber = request.userData;
@@ -90,7 +93,9 @@
 - (void)handleAuth:(RKResponse*)response{
     self.currentRequestNumber = [NSNumber numberWithInt: -1];
     
+    // save our username and password
     globalData.username = usernameField.text;
+    globalData.password = passwordField.text;
     
     // only handle if we are waiting for an auth response
     NSDictionary* headerDict = [response allHeaderFields];
@@ -109,9 +114,17 @@
     // hide the login view
     [self toggleLoginView:NO];
     
-    //let user know their credentials were invalid
-    UIAlertView* authNotification = [[UIAlertView alloc] initWithTitle:@"Login Failed" message:@"The username or password you entered is invalid." delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [authNotification show];
+    if([response statusCode] == 503){
+        //let user know their credentials were invalid
+        UIAlertView* authNotification = [[UIAlertView alloc] initWithTitle:@"Login Failed" message:@"The username or password you entered is invalid." delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [authNotification show];        
+    }
+    
+    if([response statusCode] == 401){
+        //let user know their credentials were invalid
+        UIAlertView* authNotification = [[UIAlertView alloc] initWithTitle:@"Login Failed" message:@"The username or password you entered is invalid." delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [authNotification show];        
+    }
 }
 
 // When user presses cancel, hide login view and let controller know
@@ -149,7 +162,7 @@
 
 // Handle responses from the server
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
-    NSLog(@"Got a response from the server");
+    NSLog(@"status code %d", [response statusCode]);
     
     NSNumber* requestNumber = request.userData;
     

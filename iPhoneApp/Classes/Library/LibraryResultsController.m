@@ -233,6 +233,8 @@
 // Handle responses from the server
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response { 
     
+    NSLog(@"status code %d", [response statusCode]);
+    
     NSNumber* requestNumber = request.userData;
     
     //NSLog([NSString stringWithFormat: @"response number %d, waiting on %d", [requestNumber intValue], [currentRequestNumber intValue]]);

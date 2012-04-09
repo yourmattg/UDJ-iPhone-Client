@@ -19,6 +19,10 @@
 @property(nonatomic,strong) NSNumber* currentRequestNumber;
 @property(nonatomic,strong) UDJData* globalData;
 
+@property(nonatomic,strong) IBOutlet UIView* joiningView;
+@property(nonatomic,strong) IBOutlet UIView* joiningBackgroundView;
+@property(nonatomic,strong) IBOutlet UIButton* cancelButton;
+
 -(void) showPasswordScreen;
 
 @end
