@@ -10,7 +10,7 @@
 
 @implementation UDJData
 
-@synthesize requestCount, ticket, headers, userID, username, password;
+@synthesize requestCount, ticket, headers, userID, username, password, loggedIn;
 
 -(void)renewTicket{
     

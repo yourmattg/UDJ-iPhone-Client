@@ -16,6 +16,14 @@
 
 @synthesize loginButton, usernameField, passwordField, registerButton, currentRequestNumber, globalData, loginView, loginBackgroundView, cancelButton;
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // bring the user to the UDJ app store page to update
+    if([alertView.title isEqualToString:@"Needs Update"] && buttonIndex == 1){
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms://itunes.com/apps/udj"]];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 	[self.navigationController setNavigationBarHidden:YES];
@@ -114,15 +122,15 @@
     // hide the login view
     [self toggleLoginView:NO];
     
-    if([response statusCode] == 503){
+    if([response statusCode] == 403){
         //let user know their credentials were invalid
         UIAlertView* authNotification = [[UIAlertView alloc] initWithTitle:@"Login Failed" message:@"The username or password you entered is invalid." delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [authNotification show];        
     }
     
-    if([response statusCode] == 401){
+    if([response statusCode] == 501){
         //let user know their credentials were invalid
-        UIAlertView* authNotification = [[UIAlertView alloc] initWithTitle:@"Login Failed" message:@"The username or password you entered is invalid." delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView* authNotification = [[UIAlertView alloc] initWithTitle:@"Needs Update" message:@"It looks like your UDJ client is outdated. Please take a moment to download the latest version from the App Store." delegate: self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Update", nil];
         [authNotification show];        
     }
 }
