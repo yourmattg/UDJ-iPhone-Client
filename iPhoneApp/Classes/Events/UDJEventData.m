@@ -81,8 +81,10 @@
     request.queue = client.requestQueue;
     
     // add the password to the header if neccessary
-    if(password != nil){
-        [request.additionalHTTPHeaders setValue:password forKey:@"X-Udj-Event-Password"];
+    if(password != nil){ 
+        NSMutableDictionary* dictionaryWithPass = [NSMutableDictionary dictionaryWithDictionary: globalData.headers];
+        [dictionaryWithPass setValue:password forKey:@"X-Udj-Event-Password"];
+        request.additionalHTTPHeaders = dictionaryWithPass;
     }
     
     //send request

@@ -740,6 +740,7 @@
 				);
 				PRODUCT_NAME = UDJ;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8B6E135E-7E47-4E6D-B5F9-EA5F8758B2EC";
+				SKIP_INSTALL = NO;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

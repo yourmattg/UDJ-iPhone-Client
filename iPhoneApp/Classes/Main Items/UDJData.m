@@ -47,7 +47,7 @@
         self.userID=[headerDict valueForKey:@"X-Udj-User-Id"];
         
         //TODO: may need to change userID to [userID intValue]
-        self.headers = [NSDictionary dictionaryWithObjectsAndKeys:self.ticket, @"X-Udj-Ticket-Hash", self.userID, @"X-Udj-User-Id", nil];
+        self.headers = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.ticket, @"X-Udj-Ticket-Hash", self.userID, @"X-Udj-User-Id", nil];
     }
     else{
         NSLog(@"couldnt renew ticket, trying again");

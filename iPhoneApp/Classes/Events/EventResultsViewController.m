@@ -40,6 +40,9 @@
             self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
             [[UDJEventData sharedEventData] enterEvent: [alertView textFieldAtIndex:0].text];
         }
+        else{
+            [self.tableView reloadData];
+        }
     }
 }
 
@@ -186,8 +189,9 @@
     
     // there's a password: go the password screen
 	if([UDJEventData sharedEventData].currentEvent.hasPassword){
-        UIAlertView* passwordAlertView = [[UIAlertView alloc] initWithTitle:@"Password Required" message:@"This party requires a password to join." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Enter", nil];
+        UIAlertView* passwordAlertView = [[UIAlertView alloc] initWithTitle:@"Password Required" message:@"This party requires a password." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Enter", nil];
         passwordAlertView.alertViewStyle = UIAlertViewStyleSecureTextInput;
+        [passwordAlertView textFieldAtIndex:0].placeholder = @"Password";
         [passwordAlertView show];
     }
     
@@ -221,8 +225,10 @@
 
 #pragma mark Error methods
 -(void) showEventNotFoundError{
-    UIAlertView* nonExistantEvent = [[UIAlertView alloc] initWithTitle:@"Join Failed" message:@"The event you are trying to join does not exist. Sorry!" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [nonExistantEvent show];    
+    UIAlertView* nonExistantEvent = [[UIAlertView alloc] initWithTitle:@"Join Failed" message:@"UDJ couldn't connect to the event" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [nonExistantEvent show];
+    [self toggleJoiningView: NO];
+    [self.tableView reloadData];
 }
 
 -(void) showAlreadyInEventError:(RKResponse*)response{
