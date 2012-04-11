@@ -21,7 +21,7 @@
 
 @implementation PlaylistViewController
 
-@synthesize currentEvent, playlist, tableView, currentSongTitleLabel, currentSongArtistLabel, selectedSong, statusLabel, currentRequestNumber, globalData, leavingBackgroundView, leavingView, leaveButton, libraryButton, eventNameLabel, refreshButton, refreshIndicator, refreshLabel;
+@synthesize currentEvent, playlist, tableView, currentSongTitleLabel, currentSongArtistLabel, selectedSong, statusLabel, currentRequestNumber, globalData, leavingBackgroundView, leavingView, leaveButton, libraryButton, eventNameLabel, refreshButton, refreshIndicator, refreshLabel, voteNotificationView, voteNotificationLabel, voteNotificationArrowView;
 
 static PlaylistViewController* _sharedPlaylistViewController;
 
@@ -109,6 +109,31 @@ static PlaylistViewController* _sharedPlaylistViewController;
     [self.tableView reloadData];
 }
 
+-(void)hideVoteNotification:(id)arg{
+    [NSThread sleepForTimeInterval:2];
+    [UIView animateWithDuration:1.0 animations:^{
+        voteNotificationView.alpha = 0;
+    }];
+}
+
+// briefly show the vote notification view
+-(void)showVoteNotification:(BOOL)up{
+    voteNotificationLabel.text = selectedSong.title;
+    if(up) voteNotificationArrowView.image = [UIImage imageNamed:@"smalluparrow"];
+    else voteNotificationArrowView.image = [UIImage imageNamed:@"smalldownarrow"];
+    
+    [self.view addSubview: voteNotificationView];
+    voteNotificationView.alpha = 0;
+    voteNotificationView.frame = CGRectMake(35, 380, 251, 25);
+    [UIView animateWithDuration:0.5 animations:^{
+        voteNotificationView.alpha = 1;
+    } completion:^(BOOL finished){
+        if(finished){
+            [NSThread detachNewThreadSelector:@selector(hideVoteNotification:) toTarget:self withObject:nil];
+        }
+    }];
+}
+
 // vote: voting helper function
 -(void)vote:(BOOL)up{
     
@@ -130,31 +155,18 @@ static PlaylistViewController* _sharedPlaylistViewController;
     else{
         NSNumber* songIdAsNumber = [NSNumber numberWithInteger:selectedSong.songId];
         
-        // haven't voted for this song yet
-        if(![[playlist.voteRecordKeeper objectForKey:songIdAsNumber] boolValue]){
-            [playlist.voteRecordKeeper setObject:[NSNumber numberWithBool:YES] forKey:songIdAsNumber];
-            
-            // send the vote request
-            self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
-            [playlist sendVoteRequest:up songId:selectedSong.songId];
-            
-            // let the client know it sent a vote
-            NSString* msg = @"Your vote for ";
-            msg = [msg stringByAppendingString:selectedSong.title];
-            msg = [msg stringByAppendingString:@" has been sent!"];
-            notification = [[UIAlertView alloc] initWithTitle:@"Vote Sent" message:msg delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            
-        }
-        // Let user know they can't vote for a song twice
-        else{
-            NSString* msg = @"You have already voted for ";
-            msg = [msg stringByAppendingString:selectedSong.title];
-            msg = [msg stringByAppendingString:@"!"];
-            notification = [[UIAlertView alloc] initWithTitle:@"Vote Denied" message:msg delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        }
+        [playlist.voteRecordKeeper setObject:[NSNumber numberWithBool:YES] forKey:songIdAsNumber];
         
-        // show the appropriate notificaton
-        [notification show];
+        // send the vote request
+        self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
+        [playlist sendVoteRequest:up songId:selectedSong.songId];
+        
+        // let the client know it sent a vote
+        /*NSString* msg = @"Your vote for ";
+        msg = [msg stringByAppendingString:selectedSong.title];
+        msg = [msg stringByAppendingString:@" has been sent!"];
+        notification = [[UIAlertView alloc] initWithTitle:@"Vote Sent" message:msg delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];*/
+        [self showVoteNotification:up];
     }
 }
 
@@ -448,7 +460,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     NSNumber* requestNumber = request.userData;
     
-    //NSLog([NSString stringWithFormat: @"response number %d, waiting on %d", [requestNumber intValue], [currentRequestNumber intValue]]);
+    NSLog(@"response %d, waiting on %d", [requestNumber intValue], [currentRequestNumber intValue]);
 
     if(![requestNumber isEqualToNumber: currentRequestNumber]) return;
     
@@ -465,11 +477,13 @@ static PlaylistViewController* _sharedPlaylistViewController;
         if([response isOK]) [self handleLeaveEvent];
     }
     else if([request isPUT]){
-        NSLog(@"put");
+        if([response isOK]) [self sendRefreshRequest];
+    }
+    else if([request isPOST]){
         if([response isOK]) [self sendRefreshRequest];
     }
     
-    self.currentRequestNumber = [NSNumber numberWithInt: -1];
+    //self.currentRequestNumber = [NSNumber numberWithInt: -1];
 }
 
 

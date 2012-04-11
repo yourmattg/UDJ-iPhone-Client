@@ -11,7 +11,7 @@
 #import "UDJData.h"
 #import "EventCell.h"
 
-@interface EventResultsViewController : UIViewController <RKRequestDelegate>
+@interface EventResultsViewController : UIViewController <RKRequestDelegate, UIAlertViewDelegate>
 
 @property(nonatomic,strong) UDJEventData* eventData;
 @property(nonatomic,strong) NSMutableArray* tableList;
@@ -24,5 +24,7 @@
 @property(nonatomic,strong) IBOutlet UIButton* cancelButton;
 
 -(void) showPasswordScreen;
+-(void) toggleJoiningView:(BOOL) active;
+-(void)joinEvent;
 
 @end

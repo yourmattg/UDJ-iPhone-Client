@@ -32,9 +32,6 @@
     request.method = RKRequestMethodGET;
     request.additionalHTTPHeaders = globalData.headers;    
     
-    NSLog([request.additionalHTTPHeaders objectForKey:@"X-Udj-User-Id"]);
-    NSLog([request.additionalHTTPHeaders objectForKey:@"X-Udj-Ticket-Hash"]);
-    
     request.userData = [NSNumber numberWithInt: globalData.requestCount++]; 
     request.queue = client.requestQueue;
     

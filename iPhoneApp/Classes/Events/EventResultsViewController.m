@@ -15,6 +15,22 @@
 
 @synthesize tableList, tableView, eventData, currentRequestNumber, globalData, joiningView, joiningBackgroundView, cancelButton;
 
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if([alertView.title isEqualToString:@"Event Conflict"]){
+        
+        // log the user out of the last event
+        if(buttonIndex == 0){
+            [self toggleJoiningView:NO];
+            self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
+            [[UDJEventData sharedEventData] leaveEvent];
+        }
+        // join the event the user was logged into
+        else if(buttonIndex == 1){
+            [self joinEvent];
+        }
+    }
+}
+
 // Show or hide the "joining event..." view; active = YES will show the view
 -(void) toggleJoiningView:(BOOL) active{
     joiningBackgroundView.hidden = !active;
@@ -73,6 +89,8 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [UDJEventData sharedEventData].leaveEventDelegate = self;
+    
     [self toggleJoiningView: NO];
     [self.tableView reloadData];
     [super viewDidAppear:animated];
@@ -192,12 +210,24 @@
     [nonExistantEvent show];    
 }
 
--(void) showAlreadyInEventError{
+-(void) showAlreadyInEventError:(RKResponse*)response{
+    
+    [self.tableView reloadData];
+    
+    RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
+    NSDictionary* eventDict = [parser objectFromString:[response bodyAsString] error:nil];
+    [UDJEventData sharedEventData].currentEvent = [UDJEvent eventFromDictionary:eventDict];
+    
     NSString* msg = [NSString stringWithFormat:@"%@%@%@", @"You are already logged into another event, \"", [UDJEventData sharedEventData].currentEvent.name, @"\". Would you like to log out of that event or rejoin it?", nil];
     UIAlertView* alreadyInEvent = [[UIAlertView alloc] initWithTitle:@"Event Conflict" message: msg delegate: self cancelButtonTitle:@"Log Out" otherButtonTitles:@"Rejoin",nil];
     [alreadyInEvent show];
+    
 }
 
+-(void)showLoggedOutMessage{
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Logout Success" message:@"You are no longer logged in to any events." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];
+}
 
 
 
@@ -207,14 +237,14 @@
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
     NSNumber* requestNumber = request.userData;
     
-    NSLog(@"status code %d", [response statusCode]);
+    NSLog(@"EventResultsViewController: status code %d", [response statusCode]);
     
     if(![requestNumber isEqualToNumber: currentRequestNumber]) return;
     
     // check if the event has ended
     if(response.statusCode == 410){
         //[self resetToEventView];
-    }
+    } 
     else if([request isPUT]){
         
         if(response.statusCode == 201)
@@ -224,9 +254,14 @@
             [self showEventNotFoundError];
         
         else if(response.statusCode == 409)
-            [self showAlreadyInEventError];
+            [self showAlreadyInEventError:response];
         
     } 
+    
+    // let the user know they were logged out
+    else if([request isDELETE] && [response isOK]){
+        [self showLoggedOutMessage];
+    }
     
     self.currentRequestNumber = [NSNumber numberWithInt: -1];
 }

@@ -64,6 +64,7 @@
 		A3D334D514C6A02300A90D58 /* downarrow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3D334D414C6A02300A90D58 /* downarrow.jpg */; };
 		A3D334D714C6A02A00A90D58 /* uparrow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3D334D614C6A02A00A90D58 /* uparrow.jpg */; };
 		A3DAD57D14BD253600688CE0 /* UDJMappableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DAD57C14BD253600688CE0 /* UDJMappableArray.m */; };
+		A3DDD0A71533EFEF00DB5E1F /* smalldownarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A3DDD0A61533EFEF00DB5E1F /* smalldownarrow.png */; };
 		A3EF398114C64D33003889E0 /* addbutton.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3EF398014C64D33003889E0 /* addbutton.jpg */; };
 		A3F58D9514C753D300E350F4 /* UDJEventGoer.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58D9414C753D300E350F4 /* UDJEventGoer.m */; };
 		A3F58D9914C75F0800E350F4 /* EventGoerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58D9714C75F0800E350F4 /* EventGoerViewController.m */; };
@@ -206,6 +207,7 @@
 		A3D334D614C6A02A00A90D58 /* uparrow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = uparrow.jpg; sourceTree = "<group>"; };
 		A3DAD57B14BD253600688CE0 /* UDJMappableArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJMappableArray.h; sourceTree = "<group>"; };
 		A3DAD57C14BD253600688CE0 /* UDJMappableArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJMappableArray.m; sourceTree = "<group>"; };
+		A3DDD0A61533EFEF00DB5E1F /* smalldownarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smalldownarrow.png; sourceTree = "<group>"; };
 		A3EF398014C64D33003889E0 /* addbutton.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addbutton.jpg; sourceTree = "<group>"; };
 		A3F58D9314C753D300E350F4 /* UDJEventGoer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJEventGoer.h; sourceTree = "<group>"; };
 		A3F58D9414C753D300E350F4 /* UDJEventGoer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJEventGoer.m; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A3DDD0A61533EFEF00DB5E1F /* smalldownarrow.png */,
 				A3210D8E15328763009A9318 /* smalluparrow.png */,
 				A321A58C151FCBAB001ECC30 /* backbutton.png */,
 				A351B57C151F7AB200368F6F /* playlistbutton.png */,
@@ -636,6 +639,7 @@
 				A321A58D151FCBAB001ECC30 /* backbutton.png in Resources */,
 				A3FAB10015228A9000BA8654 /* FBDialog.bundle in Resources */,
 				A3210D8F15328763009A9318 /* smalluparrow.png in Resources */,
+				A3DDD0A71533EFEF00DB5E1F /* smalldownarrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
