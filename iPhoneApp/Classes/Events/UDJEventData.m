@@ -62,7 +62,8 @@
 }
 
 // enterEventRequest: attempts to log in user to party, returns status code of response
-- (void) enterEvent{
+- (void) enterEvent:(NSString*)password{
+
     RKClient* client = [RKClient sharedClient];
     
     //create url
@@ -78,6 +79,11 @@
     request.additionalHTTPHeaders = globalData.headers;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++];
     request.queue = client.requestQueue;
+    
+    // add the password to the header if neccessary
+    if(password != nil){
+        [request.additionalHTTPHeaders setValue:password forKey:@"X-Udj-Event-Password"];
+    }
     
     //send request
     [request send];

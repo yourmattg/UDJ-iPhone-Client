@@ -16,6 +16,8 @@
 @synthesize tableList, tableView, eventData, currentRequestNumber, globalData, joiningView, joiningBackgroundView, cancelButton;
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    // handle event conflicts
     if([alertView.title isEqualToString:@"Event Conflict"]){
         
         // log the user out of the last event
@@ -27,6 +29,16 @@
         // join the event the user was logged into
         else if(buttonIndex == 1){
             [self joinEvent];
+        }
+    }
+    
+    // send a join request with a password
+    else if([alertView.title isEqualToString:@"Password Required"]){
+        if(buttonIndex == 1){
+            // send an event join request with the password specified
+            [self toggleJoiningView: YES];
+            self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
+            [[UDJEventData sharedEventData] enterEvent: [alertView textFieldAtIndex:0].text];
         }
     }
 }
@@ -173,15 +185,18 @@
     [UDJEventData sharedEventData].currentEvent = [[UDJEventData sharedEventData].currentList objectAtIndex:index];
     
     // there's a password: go the password screen
-	if([UDJEventData sharedEventData].currentEvent.hasPassword)
-        [self showPasswordScreen];
+	if([UDJEventData sharedEventData].currentEvent.hasPassword){
+        UIAlertView* passwordAlertView = [[UIAlertView alloc] initWithTitle:@"Password Required" message:@"This party requires a password to join." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Enter", nil];
+        passwordAlertView.alertViewStyle = UIAlertViewStyleSecureTextInput;
+        [passwordAlertView show];
+    }
     
     // no password: attempt login
     else{
         // send event request
         [self toggleJoiningView: YES];
         self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
-        [eventData enterEvent];
+        [eventData enterEvent:nil];
     }
     
 }

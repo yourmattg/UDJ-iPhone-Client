@@ -14,7 +14,7 @@
 
 @implementation PartyLoginViewController
 
-@synthesize passwordField, nearbyPartiesButton, enterPartyButton, eventNameLabel;
+@synthesize passwordField, backButton, enterPartyButton, eventNameLabel;
 
 /*
  // The designated initializer. Override to perform setup that is required before the view is loaded.
@@ -71,7 +71,7 @@
 
 - (IBAction) OnButtonClick:(id) sender {
 	//pop this view to go back to nearby parties view
-	if(sender == nearbyPartiesButton) [self.navigationController popViewControllerAnimated:YES];
+	if(sender == backButton) [self.navigationController popViewControllerAnimated:YES];
 	//do something when user attempts to enter party
 	else if(sender == enterPartyButton) {
 		//authentication would go here

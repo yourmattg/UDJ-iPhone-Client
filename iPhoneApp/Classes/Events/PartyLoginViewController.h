@@ -12,13 +12,12 @@
 @interface PartyLoginViewController : UIViewController {
 
 	UITextField *passwordField;
-	UIButton *nearbyPartiesButton;
 	UIButton *enterPartyButton;
     UILabel* eventNameLabel;
 }
 
 @property (strong,nonatomic) IBOutlet UITextField *passwordField;
-@property (strong,nonatomic) IBOutlet UIButton *nearbyPartiesButton;
+@property (strong,nonatomic) IBOutlet UIButton *backButton;
 @property (strong,nonatomic) IBOutlet UIButton *enterPartyButton;
 @property(nonatomic,strong) IBOutlet UILabel* eventNameLabel;
 

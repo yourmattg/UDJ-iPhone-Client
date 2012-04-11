@@ -28,7 +28,7 @@
 + (UDJEventData*)sharedEventData;
 - (void)getNearbyEvents; // put the nearby events into templist, then set it to currentList
 - (void)getEventsByName:(NSString*)name; // search for events by name and put them in table
-- (void)enterEvent;
+- (void)enterEvent:(NSString*)password;
 - (void)leaveEvent;
 
 @property(nonatomic,strong) NSMutableArray* currentList;
