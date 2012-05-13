@@ -74,7 +74,7 @@
     NSDictionary* nameAndPass = [NSDictionary dictionaryWithObjectsAndKeys:username, @"username", pass, @"password", nil]; 
     
     // put the API version in the header
-    NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"0.2", @"X-Udj-Api-Version", nil];
+    NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"0.5", @"X-Udj-Api-Version", nil];
     
     // create the URL
     NSMutableString* urlString = [NSMutableString stringWithString: client.baseURL];
@@ -106,12 +106,13 @@
     globalData.password = passwordField.text;
     
     // only handle if we are waiting for an auth response
-    NSDictionary* headerDict = [response allHeaderFields];
-    globalData.ticket=[headerDict valueForKey:@"X-Udj-Ticket-Hash"];
-    globalData.userID=[headerDict valueForKey:@"X-Udj-User-Id"];
+    RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
+    NSDictionary* responseDict = [parser objectFromString:[response bodyAsString] error:nil];
+    globalData.ticket=[responseDict valueForKey:@"ticket_hash"];
+    globalData.userID=[responseDict valueForKey:@"user_id"];
         
     //TODO: may need to change userID to [userID intValue]
-    globalData.headers = [NSDictionary dictionaryWithObjectsAndKeys:globalData.ticket, @"X-Udj-Ticket-Hash", globalData.userID, @"X-Udj-User-Id", nil];
+    globalData.headers = [NSDictionary dictionaryWithObjectsAndKeys:globalData.ticket, @"X-Udj-Ticket-Hash", nil];
         
     // load the party list view
     EventSearchViewController* eventSearchViewController = [[EventSearchViewController alloc] initWithNibName:@"EventSearchViewController" bundle:[NSBundle mainBundle]];

@@ -95,6 +95,13 @@
     
     NSString* searchParam = eventNameField.text;
     
+    // if search query is blank, alert the user
+    if([searchParam isEqualToString:@""]){
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Invalid Query" message:@"You forgot to enter something in the search field." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+        return;
+    }
+    
     // if the search query is invalid, alert the user
     if(![self isValidSearchQuery:searchParam]){
         UIAlertView* invalidSearchParam = [[UIAlertView alloc] initWithTitle:@"Invalid Query" message:@"Your search query can only contain alphanumeric characters. This includes A-Z, 0-9." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -299,8 +306,9 @@
 
 // Handle responses from the server
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
-    
+    NSLog(@"got response");
     NSLog(@"status code %d", [response statusCode]);
+    NSLog(globalData.ticket);
     
     NSNumber* requestNumber = request.userData;
     

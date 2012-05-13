@@ -51,7 +51,7 @@
     [UDJEventData new]; // eventData singleton
     
     // initialize udjConnection
-    baseUrl = @"https://udjevents.com:4897/udj";
+    baseUrl = @"https://udjplayer.com:4898/udj";
     //baseUrl = @"https://0.0.0.0:4897/udj";
     
     [[UDJConnection sharedConnection] initWithServerPrefix: baseUrl];

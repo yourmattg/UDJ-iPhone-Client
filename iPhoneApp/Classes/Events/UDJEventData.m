@@ -24,7 +24,7 @@
     
     // create URL
     NSString* urlString = client.baseURL;
-    urlString = [urlString stringByAppendingFormat:@"%@%f%@%f", @"/events/", latitude, @"/", longitude];
+    urlString = [urlString stringByAppendingFormat:@"%@%f%@%f", @"/players/", latitude, @"/", longitude];
     NSURL* url = [NSURL URLWithString:urlString];
     
     // create GET request
@@ -46,7 +46,7 @@
     
     // create the URL
     NSString* urlString = client.baseURL;
-    urlString = [urlString stringByAppendingString:@"/events?name="];
+    urlString = [urlString stringByAppendingString:@"/players?name="];
     urlString = [urlString stringByAppendingString:name];
     NSURL* url = [NSURL URLWithString:urlString];
     
@@ -104,7 +104,7 @@
     RKClient* client = [RKClient sharedClient];
     //create url
     NSString* urlString = client.baseURL;
-    urlString = [urlString stringByAppendingString:@"/events/"];
+    urlString = [urlString stringByAppendingString:@"/players/"];
     urlString = [urlString stringByAppendingFormat:@"%d",[UDJEventData sharedEventData].currentEvent.eventId];
     urlString = [urlString stringByAppendingString:@"/users/"];
     urlString = [urlString stringByAppendingFormat:@"%d", [[UDJData sharedUDJData].userID intValue]];
