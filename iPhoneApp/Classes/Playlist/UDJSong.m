@@ -11,7 +11,7 @@
 // Active Playlist Entry
 @implementation UDJSong
 
-@synthesize songId, librarySongId, title, artist, album, duration, downVoters, upVoters, timeAdded, adderId, adderName;
+@synthesize songId, librarySongId, title, artist, album, duration, downVoters, upVoters, timeAdded, adderId, adderName, track, genre;
 
 + (id) songFromDictionary:(NSDictionary *)songDict isLibraryEntry:(BOOL)isLibEntry{
     if([songDict count]==0) return nil;
@@ -20,18 +20,20 @@
     // get the library entry info
     NSDictionary* libEntryDict = [songDict objectForKey: @"song"];
     
-    song.title = [songDict objectForKey:@"title"];
-    song.songId = [[songDict objectForKey:@"id"] intValue];
-    if(isLibEntry) song.librarySongId = [[songDict objectForKey:@"id"] intValue];
-    else song.librarySongId = [[songDict objectForKey:@"lib_song_id"] intValue];
-    song.artist = [songDict objectForKey:@"artist"];
-    song.album = [songDict objectForKey:@"album"];
-    song.duration = [[songDict objectForKey:@"duration"] intValue];
+    song.title = [libEntryDict objectForKey:@"title"];
+    song.librarySongId = [[libEntryDict objectForKey:@"id"] intValue];
+    song.artist = [libEntryDict objectForKey:@"artist"];
+    song.album = [libEntryDict objectForKey:@"album"];
+    song.duration = [[libEntryDict objectForKey:@"duration"] intValue];
+    song.track = [[libEntryDict objectForKey:@"track"] intValue];
+    song.genre = [libEntryDict objectForKey:@"genre"];
     song.upVoters = [songDict objectForKey:@"upvoters"];
     song.downVoters = [songDict objectForKey:@"downvoters"];
     song.timeAdded = [songDict objectForKey:@"time_added"];
-    song.adderId = [[songDict objectForKey:@"adder_id"] intValue];
-    song.adderName = [songDict objectForKey:@"adder_username"];
+    
+    // TODO: parse adder JSON object
+    //song.adderId = [[songDict objectForKey:@"adder_id"] intValue];
+    //song.adderName = [songDict objectForKey:@"adder_username"];
     return song;
 }
 

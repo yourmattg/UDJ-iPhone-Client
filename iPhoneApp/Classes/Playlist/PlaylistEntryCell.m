@@ -30,7 +30,7 @@
     CGFloat boundsX = contentRect.origin.x;
     CGRect frame;
 
-    frame= CGRectMake(boundsX+10 ,3, 300, 16);
+    frame= CGRectMake(boundsX+10 ,3, 300, 20);
     songLabel.frame = frame;
     
     frame= CGRectMake(boundsX+20 ,24, 250, 14);

@@ -35,5 +35,7 @@
 @property(nonatomic,strong) NSString* adderName;
 @property(nonatomic,strong) NSArray* upVoters;
 @property(nonatomic,strong) NSArray* downVoters;
+@property NSInteger track;
+@property(nonatomic,strong) NSString* genre;
 
 @end
