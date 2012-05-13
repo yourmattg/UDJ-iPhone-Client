@@ -29,7 +29,7 @@
     
     //create url [GET] {prefix}/events/event_id/active_playlist
     NSString* urlString = client.baseURL;
-    urlString = [urlString stringByAppendingFormat:@"%@%d%@", @"/events/", eventId, @"/active_playlist"];
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@", @"/players/", eventId, @"/active_playlist"];
 
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: delegate];
@@ -48,7 +48,7 @@
     
     //create url [POST] {prefix}/udj/events/event_id/active_playlist/playlist_id/users/user_id/upvote
     NSString* urlString = client.baseURL;
-    urlString = [urlString stringByAppendingFormat:@"%@%d%@%d%@%d%@", @"/events/", eventId, @"/active_playlist/",songId,@"/users/",[globalData.userID intValue],@"/"];
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@%d%@%d%@", @"/players/", eventId, @"/active_playlist/",songId,@"/users/",[globalData.userID intValue],@"/"];
     if(up) urlString = [urlString stringByAppendingString:@"upvote"];
     else urlString = [urlString stringByAppendingString:@"downvote"];
     

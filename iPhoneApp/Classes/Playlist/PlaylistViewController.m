@@ -44,12 +44,18 @@ static PlaylistViewController* _sharedPlaylistViewController;
 
 // leaveEvent: log the client out of the event, return to event list
 - (IBAction)leaveButtonClick:(id)sender{
+    
+    [self.navigationController popViewControllerAnimated: YES];
+    // TODO: verify that I can actually just comment this out
+    /*
     // show "Leaving" view
     [self toggleLeavingView: YES];
     
     // increment requestCount and send leave event request
     self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
     [[UDJEventData sharedEventData] leaveEvent];
+     
+     */
 }
 
 // handleLeaveEvent: go back to the event results page
@@ -361,8 +367,8 @@ static PlaylistViewController* _sharedPlaylistViewController;
     else adderName = song.adderName;
     cell.addedByLabel.text = [NSString stringWithFormat:@"%@%@", @"Added by ", adderName];
     
-    cell.upVoteLabel.text = [NSString stringWithFormat:@"%d", song.upVotes];
-    cell.downVoteLabel.text = [NSString stringWithFormat:@"%d", song.downVotes];
+    cell.upVoteLabel.text = [NSString stringWithFormat:@"%d", [song.upVoters count]];
+    cell.downVoteLabel.text = [NSString stringWithFormat:@"%d", [song.downVoters count]];
     
     cell.downVoteButton.tag = rowNumber;
     cell.upVoteButton.tag = rowNumber;
@@ -428,10 +434,12 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     // the array holding the songs on the playlist
     NSArray* songArray = [responseDict objectForKey:@"active_playlist"];
+    NSLog(@"count %d", [songArray count]);
     for(int i=0; i<[songArray count]; i++){
         NSDictionary* songDict = [songArray objectAtIndex:i];
         UDJSong* song = [UDJSong songFromDictionary:songDict isLibraryEntry:NO];
         [tempList addObject:song];
+        //NSLog(song.title);
         
         NSNumber* songIdAsNumber = [NSNumber numberWithInteger:song.songId];
         // if this song hasnt been added to the playlist before i.e. isnt in the voteRecordKeeper

@@ -30,10 +30,10 @@
 @property(nonatomic,strong) NSString* artist;
 @property(nonatomic,strong) NSString* album;
 @property(nonatomic) NSInteger duration;
-@property(nonatomic) NSInteger downVotes;
-@property(nonatomic) NSInteger upVotes;
 @property(nonatomic,strong) NSString* timeAdded;
 @property(nonatomic) NSInteger adderId;
 @property(nonatomic,strong) NSString* adderName;
+@property(nonatomic,strong) NSArray* upVoters;
+@property(nonatomic,strong) NSArray* downVoters;
 
 @end

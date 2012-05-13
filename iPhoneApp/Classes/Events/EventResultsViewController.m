@@ -24,7 +24,7 @@
         if(buttonIndex == 0){
             [self toggleJoiningView:NO];
             self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
-            [[UDJEventData sharedEventData] leaveEvent];
+            //[[UDJEventData sharedEventData] leaveEvent];
         }
         // join the event the user was logged into
         else if(buttonIndex == 1){

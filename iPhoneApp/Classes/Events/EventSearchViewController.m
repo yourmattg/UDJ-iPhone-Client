@@ -145,7 +145,7 @@
             [self rejoinEvent];
         }
     }
-    else if(alertView.title == @"No Events Found"){
+    else if(alertView.title == @"No Players Found"){
         [self toggleSearchingView: NO];
     }
 }
@@ -246,7 +246,7 @@
             [self.navigationController pushViewController:playlistViewController animated:YES];
         }
         else if(statusCode==404){
-            UIAlertView* nonExistantEvent = [[UIAlertView alloc] initWithTitle:@"Join Failed" message:@"The event you are trying to join does not exist. Sorry!" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            UIAlertView* nonExistantEvent = [[UIAlertView alloc] initWithTitle:@"Join Failed" message:@"The player you are trying to access does not exist. Sorry!" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [nonExistantEvent show];
         }
         else if(statusCode==409){
@@ -265,11 +265,11 @@
     self.searchingView.hidden = YES;
     
     if(lastSearchType == @"Name"){
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No Events Found" message:@"Sorry, there were no events that matched the name you specified." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No Players Found" message:@"Sorry, there were no players that matched the name you specified." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alert show];
     }
     else if(lastSearchType == @"Nearby"){
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No Events Found" message:@"Sorry, there are no public events near you." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No Players Found" message:@"Sorry, there are no active players near you." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alert show];        
     }
     

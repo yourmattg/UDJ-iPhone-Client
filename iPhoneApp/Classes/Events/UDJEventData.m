@@ -68,7 +68,7 @@
     
     //create url
     NSString* urlString = client.baseURL;
-    urlString = [urlString stringByAppendingString:@"/events/"];
+    urlString = [urlString stringByAppendingString:@"/players/"];
     urlString = [urlString stringByAppendingFormat:@"%d",[UDJEventData sharedEventData].currentEvent.eventId];
     urlString = [urlString stringByAppendingString:@"/users/"];
     urlString = [urlString stringByAppendingFormat:@"%i", [globalData.userID intValue]];
@@ -83,7 +83,7 @@
     // add the password to the header if neccessary
     if(password != nil){ 
         NSMutableDictionary* dictionaryWithPass = [NSMutableDictionary dictionaryWithDictionary: globalData.headers];
-        [dictionaryWithPass setValue:password forKey:@"X-Udj-Event-Password"];
+        [dictionaryWithPass setValue:password forKey:@"X-Udj-Player-Password"];
         request.additionalHTTPHeaders = dictionaryWithPass;
     }
     
