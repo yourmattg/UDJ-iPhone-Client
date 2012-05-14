@@ -308,7 +308,6 @@
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
     NSLog(@"got response");
     NSLog(@"status code %d", [response statusCode]);
-    NSLog(globalData.ticket);
     
     NSNumber* requestNumber = request.userData;
     
