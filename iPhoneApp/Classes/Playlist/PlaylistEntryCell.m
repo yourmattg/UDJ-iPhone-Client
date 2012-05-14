@@ -33,7 +33,7 @@
     frame= CGRectMake(boundsX+10 ,3, 300, 20);
     songLabel.frame = frame;
     
-    frame= CGRectMake(boundsX+20 ,24, 250, 14);
+    frame= CGRectMake(boundsX+20 ,24, 250, 17);
     artistLabel.frame = frame;
     
     frame= CGRectMake(boundsX+20 ,42, 250, 16);
@@ -50,6 +50,11 @@
     
     frame = CGRectMake(boundsX+289, 42, 30, 20);
     downVoteLabel.frame = frame;
+    
+    if(!self.upVoteLabel.hidden){
+        frame= CGRectMake(boundsX+10 ,3, 200, 20);
+        songLabel.frame = frame;
+    }
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier

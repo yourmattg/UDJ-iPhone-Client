@@ -379,6 +379,9 @@ static PlaylistViewController* _sharedPlaylistViewController;
     cell.downVoteLabel.hidden=extrasHidden;
     cell.upVoteButton.hidden = extrasHidden;
     cell.downVoteButton.hidden = extrasHidden;
+    if(!extrasHidden){
+        [cell layoutSubviews];
+    }
     
     return cell;
 }
@@ -416,6 +419,8 @@ static PlaylistViewController* _sharedPlaylistViewController;
     cell.downVoteButton.highlighted = NO;
     cell.upVoteButton.highlighted = NO;
     
+    // resize song label frame so it doesn't overlap the buttons
+    NSLog(@"updating bounds");
 }
 
 
