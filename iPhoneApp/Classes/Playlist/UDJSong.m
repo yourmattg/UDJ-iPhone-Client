@@ -7,11 +7,12 @@
 //
 
 #import "UDJSong.h"
+#import "RestKit/RKJSONParserJSONKit.h"
 
 // Active Playlist Entry
 @implementation UDJSong
 
-@synthesize songId, librarySongId, title, artist, album, duration, downVoters, upVoters, timeAdded, adderId, adderName, track, genre;
+@synthesize songId, librarySongId, title, artist, album, duration, downVoters, upVoters, timeAdded, track, genre, adder;
 
 + (id) songFromDictionary:(NSDictionary *)songDict isLibraryEntry:(BOOL)isLibEntry{
     if([songDict count]==0) return nil;
@@ -31,9 +32,10 @@
     song.downVoters = [songDict objectForKey:@"downvoters"];
     song.timeAdded = [songDict objectForKey:@"time_added"];
     
-    // TODO: parse adder JSON object
-    //song.adderId = [[songDict objectForKey:@"adder_id"] intValue];
-    //song.adderName = [songDict objectForKey:@"adder_username"];
+    // parse the adder into a dictionary to create UDJUser object
+    /*RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
+    NSDictionary* adderDict = [parser objectFromString:[songDict objectForKey:@"adder"] error:nil];*/
+    song.adder = [UDJUser userFromDict: [songDict objectForKey:@"adder"]];
     return song;
 }
 

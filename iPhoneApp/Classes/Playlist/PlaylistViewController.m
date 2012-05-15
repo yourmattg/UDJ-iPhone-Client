@@ -349,9 +349,9 @@ static PlaylistViewController* _sharedPlaylistViewController;
     // if there's no current song, show "nothing" and "nobody" as title/artist
     if(song==nil){
         song = [[UDJSong alloc] init];
-        song.title = @"nothing";
-        song.artist = @"nobody";
-        song.adderName = @"nobody";
+        song.title = @"";
+        song.artist = @"";
+        song.adder = nil;
     }
     
     NSString* songText = @"";
@@ -363,8 +363,9 @@ static PlaylistViewController* _sharedPlaylistViewController;
     NSString* adderName;
     NSInteger userId = [globalData.userID intValue];
     
-    if(song.adderId == userId) adderName = @"You";
-    else adderName = song.adderName;
+    if(song.adder == nil) adderName = @"";
+    else if(song.adder.userID == userId) adderName = @"You";
+    else adderName = song.adder.username;
     cell.addedByLabel.text = [NSString stringWithFormat:@"%@%@", @"Added by ", adderName];
     
     cell.upVoteLabel.text = [NSString stringWithFormat:@"%d", [song.upVoters count]];

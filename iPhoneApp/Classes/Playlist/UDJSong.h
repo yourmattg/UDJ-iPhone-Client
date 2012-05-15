@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UDJUser.h"
 
 @interface UDJSong : NSObject{
     NSInteger songId;
@@ -18,8 +19,6 @@
     NSInteger downVotes;
     NSInteger upVotes;
     NSString* timeAdded;
-    NSInteger adderId;
-    NSString* adderName;
 }
 
 + (id)songFromDictionary:(NSDictionary*)songDict isLibraryEntry:(BOOL)isLibEntry;
@@ -31,11 +30,11 @@
 @property(nonatomic,strong) NSString* album;
 @property(nonatomic) NSInteger duration;
 @property(nonatomic,strong) NSString* timeAdded;
-@property(nonatomic) NSInteger adderId;
-@property(nonatomic,strong) NSString* adderName;
 @property(nonatomic,strong) NSArray* upVoters;
 @property(nonatomic,strong) NSArray* downVoters;
 @property NSInteger track;
 @property(nonatomic,strong) NSString* genre;
+
+@property(nonatomic,strong) UDJUser* adder;
 
 @end
