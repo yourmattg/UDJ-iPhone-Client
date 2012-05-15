@@ -110,6 +110,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [self toggleJoiningView: NO];
+    [self.tableView reloadData];
     [super viewWillAppear:animated];
 }
 
@@ -117,8 +119,6 @@
 {
     [UDJEventData sharedEventData].leaveEventDelegate = self;
     
-    [self toggleJoiningView: NO];
-    [self.tableView reloadData];
     [super viewDidAppear:animated];
 }
 

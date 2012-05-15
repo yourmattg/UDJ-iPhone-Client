@@ -48,7 +48,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 
 -(void)removeSong{
     NSInteger eventIdParam = [UDJEventData sharedEventData].currentEvent.eventId;
-    [[UDJConnection sharedConnection] sendSongRemoveRequest:selectedSong.songId eventId:eventIdParam];
+    [[UDJConnection sharedConnection] sendSongRemoveRequest:selectedSong.librarySongId eventId:eventIdParam];
     UIAlertView* notification = [[UIAlertView alloc] initWithTitle:@"Song Removed" message:@"Your song will be removed from the playlist." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [notification show];
 }
@@ -170,13 +170,13 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     // If everything is OK, send the vote
     else{
-        NSNumber* songIdAsNumber = [NSNumber numberWithInteger:selectedSong.songId];
+        NSNumber* songIdAsNumber = [NSNumber numberWithInteger:selectedSong.librarySongId];
         
         [playlist.voteRecordKeeper setObject:[NSNumber numberWithBool:YES] forKey:songIdAsNumber];
         
         // send the vote request
         self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
-        [playlist sendVoteRequest:up songId:selectedSong.songId];
+        [playlist sendVoteRequest:up songId:selectedSong.librarySongId];
         
         // let the client know it sent a vote
         /*NSString* msg = @"Your vote for ";
@@ -430,9 +430,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
     PlaylistEntryCell* cell = (PlaylistEntryCell*) [self.tableView cellForRowAtIndexPath:indexPath];
     cell.downVoteButton.highlighted = NO;
     cell.upVoteButton.highlighted = NO;
-    
-    // resize song label frame so it doesn't overlap the buttons
-    NSLog(@"updating bounds");
 }
 
 
@@ -458,7 +455,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
         [tempList addObject:song];
         //NSLog(song.title);
         
-        NSNumber* songIdAsNumber = [NSNumber numberWithInteger:song.songId];
+        NSNumber* songIdAsNumber = [NSNumber numberWithInteger:song.librarySongId];
         // if this song hasnt been added to the playlist before i.e. isnt in the voteRecordKeeper
         if([[UDJPlaylist sharedUDJPlaylist].voteRecordKeeper objectForKey:songIdAsNumber]==nil){
             // set its songId to NO, meaning the user hasn't voted for it yet
@@ -481,7 +478,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 // Handle responses from the server
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response { 
     
-    NSLog(@"status code %d", [response statusCode]);
+    NSLog(@"Playlist: status code %d", [response statusCode]);
     
     NSNumber* requestNumber = request.userData;
     

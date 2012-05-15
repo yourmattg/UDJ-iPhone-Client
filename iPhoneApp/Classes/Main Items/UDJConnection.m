@@ -267,7 +267,7 @@ static UDJConnection* sharedUDJConnection = nil;
         UDJSong* song = [UDJSong songFromDictionary:songDict isLibraryEntry:NO];
         [playlist addObject:song];
         
-        NSNumber* songIdAsNumber = [NSNumber numberWithInteger:song.songId];
+        NSNumber* songIdAsNumber = [NSNumber numberWithInteger:song.librarySongId];
         // if this song hasnt been added to the playlist before i.e. isnt in the voteRecordKeeper
         if([[UDJPlaylist sharedUDJPlaylist].voteRecordKeeper objectForKey:songIdAsNumber]==nil){
             // set its songId to NO, meaning the user hasn't voted for it yet
@@ -282,7 +282,7 @@ static UDJConnection* sharedUDJConnection = nil;
 
 - (void)sendSongRemoveRequest:(NSInteger)songId eventId:(NSInteger)eventId{
     //[DELETE] /events/event_id/active_playlist/playlist_id
-    NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@%d", client.baseURL, @"/events/", eventId, @"/active_playlist/songs/", songId];
+    NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@%d", client.baseURL, @"/players/", eventId, @"/active_playlist/songs/", songId];
     // set up request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
     request.queue = client.requestQueue;
@@ -298,7 +298,7 @@ static UDJConnection* sharedUDJConnection = nil;
 -(void)sendVoteRequest:(BOOL)up songId:(NSInteger)songId eventId:(NSInteger)eventId{
     //create url [POST] {prefix}/udj/events/event_id/active_playlist/playlist_id/users/user_id/upvote
     NSString* urlString = client.baseURL;
-    urlString = [urlString stringByAppendingFormat:@"%@%d%@%d%@%d%@", @"/events/", eventId, @"/active_playlist/",songId,@"/users/",[userID intValue],@"/"];
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@%d%@%d%@", @"/players/", eventId, @"/active_playlist/",songId,@"/users/",[userID intValue],@"/"];
     if(up) urlString = [urlString stringByAppendingString:@"upvote"];
     else urlString = [urlString stringByAppendingString:@"downvote"];
     // create request

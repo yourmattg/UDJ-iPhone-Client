@@ -21,7 +21,6 @@
 #import "UDJUser.h"
 
 @interface UDJSong : NSObject{
-    NSInteger songId;
     NSInteger librarySongId;
     NSString* title;
     NSString* artist;
@@ -34,7 +33,6 @@
 
 + (id)songFromDictionary:(NSDictionary*)songDict isLibraryEntry:(BOOL)isLibEntry;
 
-@property(nonatomic) NSInteger songId;
 @property(nonatomic) NSInteger librarySongId;
 @property(nonatomic,strong) NSString* title;
 @property(nonatomic,strong) NSString* artist;

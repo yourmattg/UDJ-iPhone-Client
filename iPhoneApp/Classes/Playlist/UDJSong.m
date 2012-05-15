@@ -23,7 +23,7 @@
 // Active Playlist Entry
 @implementation UDJSong
 
-@synthesize songId, librarySongId, title, artist, album, duration, downVoters, upVoters, timeAdded, track, genre, adder;
+@synthesize librarySongId, title, artist, album, duration, downVoters, upVoters, timeAdded, track, genre, adder;
 
 + (id) songFromDictionary:(NSDictionary *)songDict isLibraryEntry:(BOOL)isLibEntry{
     if([songDict count]==0) return nil;
