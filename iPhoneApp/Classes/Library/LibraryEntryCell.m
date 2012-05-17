@@ -48,10 +48,10 @@
     frame = CGRectMake(boundsX+275 ,2, 40, 40);
     addButton.frame = frame;
     
-    frame= CGRectMake(boundsX+10 ,3, 250, 16);
+    frame= CGRectMake(boundsX+10 ,3, 250, 19);
     songLabel.frame = frame;
     
-    frame= CGRectMake(boundsX+20 ,22, 250, 14);
+    frame= CGRectMake(boundsX+14 ,25, 250, 14);
     artistLabel.frame = frame;
 }
 

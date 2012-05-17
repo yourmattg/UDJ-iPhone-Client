@@ -44,10 +44,10 @@
     frame= CGRectMake(boundsX+10 ,3, 300, 20);
     songLabel.frame = frame;
     
-    frame= CGRectMake(boundsX+20 ,24, 250, 17);
+    frame= CGRectMake(boundsX+14 ,24, 250, 17);
     artistLabel.frame = frame;
     
-    frame= CGRectMake(boundsX+20 ,42, 250, 16);
+    frame= CGRectMake(boundsX+14 ,42, 250, 16);
     addedByLabel.frame = frame;
     
     frame = CGRectMake(boundsX+215, 4, 38, 38);

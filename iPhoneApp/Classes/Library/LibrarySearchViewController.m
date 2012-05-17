@@ -35,7 +35,7 @@
     //create url [GET] /udj/events/event_id/available_music?query=query{&max_results=maximum_number_of_results}
     NSString* urlString = client.baseURL;
     param = [param stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    urlString = [urlString stringByAppendingFormat:@"%@%d%@%@%@%d",@"/events/",eventId,@"/available_music?query=",param,@"&max_results=",maxResults];
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@%@%@%d",@"/players/",eventId,@"/available_music?query=",param,@"&max_results=",maxResults];
     
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
@@ -53,7 +53,7 @@
     
     //create url [GET] /udj/events/event_id/available_music/random_songs{?max_randoms=number_desired}
     NSString* urlString = client.baseURL;
-    urlString = [urlString stringByAppendingFormat:@"%@%d%@%d",@"/events/",eventId,@"/available_music/random_songs?max_randoms=",maxResults];
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@%d",@"/players/",eventId,@"/available_music/random_songs?max_randoms=",maxResults];
     
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
@@ -179,6 +179,7 @@
         NSDictionary* songDict = [songArray objectAtIndex:i];
         UDJSong* song = [UDJSong songFromDictionary:songDict isLibraryEntry:YES];
         [tempList addSong:song];
+        NSLog(song.title);
     }
     
     [self toggleSearchingView: NO];

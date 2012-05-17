@@ -29,8 +29,10 @@
     if([songDict count]==0) return nil;
     UDJSong* song = [UDJSong new];
     
-    // get the library entry info
-    NSDictionary* libEntryDict = [songDict objectForKey: @"song"];
+    // this dictionary will be used for reading the Library Entry fields
+    NSDictionary* libEntryDict;
+    if(isLibEntry) libEntryDict = songDict;
+    else libEntryDict = [songDict objectForKey: @"song"];
     
     song.title = [libEntryDict objectForKey:@"title"];
     song.librarySongId = [[libEntryDict objectForKey:@"id"] intValue];
