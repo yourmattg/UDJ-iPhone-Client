@@ -29,6 +29,17 @@
 
 @synthesize searchField, searchButton, randomButton, playlistButton, searchingBackgroundView, searchingView, cancelButton, currentRequestNumber, globalData;
 
+-(void)resetToPlayerResultView{
+    // return to player search results screen
+    NSInteger numViewControllers = [self.navigationController.viewControllers count];
+    UIViewController* targetViewController = [self.navigationController.viewControllers objectAtIndex: numViewControllers - 3];
+    [self.navigationController popToViewController: targetViewController animated: YES];
+    
+    // alert user that player is inactive
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Player Inactive" message: @"The player you are trying to access is now inactive." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alertView show];
+}
+
 -(void)sendLibSearchRequest:(NSString *)param eventId:(NSInteger)eventId maxResults:(NSInteger)maxResults{
     RKClient* client = [RKClient sharedClient];
     
@@ -179,7 +190,6 @@
         NSDictionary* songDict = [songArray objectAtIndex:i];
         UDJSong* song = [UDJSong songFromDictionary:songDict isLibraryEntry:YES];
         [tempList addSong:song];
-        NSLog(song.title);
     }
     
     [self toggleSearchingView: NO];
@@ -197,14 +207,16 @@
     NSLog(@"status code %d", [response statusCode]);
     
     NSNumber* requestNumber = request.userData;
+    NSDictionary* headerDict = [response allHeaderFields];
     
     //NSLog([NSString stringWithFormat: @"response number %d, waiting on %d", [requestNumber intValue], [currentRequestNumber intValue]]);
     
     if(![requestNumber isEqualToNumber: currentRequestNumber]) return;
     
-    // check if the event has ended
-    if(response.statusCode == 410){
-        //[self resetToEventView];
+    // check if player has ended
+    if(response.statusCode == 404){
+        if([[headerDict objectForKey: @"X-Udj-Missing-Resource"] isEqualToString:@"player"])
+            [self resetToPlayerResultView];
     }
     else if ([request isGET]) {
         [self handleLibSearchResults: response];        

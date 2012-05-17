@@ -27,6 +27,17 @@
 
 @synthesize resultList, selectedSong, tableView, statusLabel, randomButton, backButton, globalData, currentRequestNumber, searchingLabel, searchingIndicator;
 
+-(void)resetToPlayerResultView{
+    // return to player search results screen
+    NSInteger numViewControllers = [self.navigationController.viewControllers count];
+    UIViewController* targetViewController = [self.navigationController.viewControllers objectAtIndex: numViewControllers - 4];
+    [self.navigationController popToViewController: targetViewController animated: YES];
+    
+    // alert user that player is inactive
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Player Inactive" message: @"The player you are trying to access is now inactive." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alertView show];
+}
+
 -(void)toggleSearchingStatus:(BOOL)active{
     self.randomButton.hidden = active;
     self.searchingIndicator.hidden = !active;
@@ -39,7 +50,7 @@
     
     //create url [GET] /udj/events/event_id/available_music/random_songs{?max_randoms=number_desired}
     NSString* urlString = client.baseURL;
-    urlString = [urlString stringByAppendingFormat:@"%@%d%@%d",@"/events/",eventId,@"/available_music/random_songs?max_randoms=",maxResults];
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@%d",@"/players/",eventId,@"/available_music/random_songs?max_randoms=",maxResults];
     
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
@@ -56,29 +67,14 @@
     RKClient* client = [RKClient sharedClient];
     
     //create url [PUT] /udj/events/event_id/active_playlist/songs
-    NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@",client.baseURL,@"/events/",eventId,@"/active_playlist/songs"];
-    
-    // make a dictionary for the song request, with a "lib_id" and "client_request_id"
-    NSMutableDictionary* songAddDictionary = [NSMutableDictionary new];
-    NSDate *currentDate = [NSDate date];
-    NSNumber* clientRequestIdAsNumber = [NSNumber numberWithDouble:[currentDate timeIntervalSinceReferenceDate]];
-    NSNumber* libraryIdAsNumber = [NSNumber numberWithInt:librarySongId];
-    [songAddDictionary setObject:clientRequestIdAsNumber forKey:@"client_request_id"];
-    [songAddDictionary setObject:libraryIdAsNumber forKey:@"lib_id"];
-    
-    // then make an array to hold this song dictionary, convert it to JSON string
-    NSMutableArray* arrayToSend = [NSMutableArray arrayWithObject:songAddDictionary];;
-    NSString* songAsJSONArray = [arrayToSend JSONString];
+    NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@%d",client.baseURL,@"/players/",eventId,@"/active_playlist/songs/",librarySongId, nil];
     
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
     request.queue = client.requestQueue;
     request.method = RKRequestMethodPUT;
+    request.additionalHTTPHeaders = globalData.headers;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++];
-    NSMutableDictionary* headersWithContentType = [NSMutableDictionary dictionaryWithDictionary: globalData.headers];
-    [headersWithContentType setObject:@"text/json" forKey:@"Content-Type"];
-    request.additionalHTTPHeaders = headersWithContentType;
-    request.HTTPBodyString = songAsJSONArray;
     
     //TODO: find a way to keep track of the requests
     //[currentRequests setObject:@"songAdd" forKey:request];
@@ -247,14 +243,16 @@
     NSLog(@"status code %d", [response statusCode]);
     
     NSNumber* requestNumber = request.userData;
+    NSDictionary* headerDict = [response allHeaderFields];
     
     //NSLog([NSString stringWithFormat: @"response number %d, waiting on %d", [requestNumber intValue], [currentRequestNumber intValue]]);
     
     if(![requestNumber isEqualToNumber: currentRequestNumber]) return;
     
-    // check if the event has ended
-    if(response.statusCode == 410){
-        //[self resetToEventView];
+    // check if player is inactive
+    if(response.statusCode == 404){
+        if([[headerDict objectForKey: @"X-Udj-Missing-Resource"] isEqualToString:@"player"])
+            [self resetToPlayerResultView];
     }
     else if ([request isGET]) {
         [self handleLibSearchResults: response];        

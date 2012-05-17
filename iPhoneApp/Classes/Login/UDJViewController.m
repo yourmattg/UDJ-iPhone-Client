@@ -134,14 +134,14 @@
     // hide the login view
     [self toggleLoginView:NO];
     
-    if([response statusCode] == 403){
+    if([response statusCode] == 401){
         //let user know their credentials were invalid
         UIAlertView* authNotification = [[UIAlertView alloc] initWithTitle:@"Login Failed" message:@"The username or password you entered is invalid." delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [authNotification show];        
     }
     
     if([response statusCode] == 501){
-        //let user know their credentials were invalid
+        //let user know theiy have to update
         UIAlertView* authNotification = [[UIAlertView alloc] initWithTitle:@"Needs Update" message:@"It looks like your UDJ client is outdated. Please take a moment to download the latest version from the App Store." delegate: self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Update", nil];
         [authNotification show];        
     }

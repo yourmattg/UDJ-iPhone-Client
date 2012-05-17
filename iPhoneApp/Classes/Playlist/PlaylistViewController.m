@@ -36,6 +36,15 @@
 
 static PlaylistViewController* _sharedPlaylistViewController;
 
+-(void)resetToPlayerResultView{
+    // return to player search results screen
+    [self.navigationController popViewControllerAnimated: YES];
+    
+    // alert user that player is inactive
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Player Inactive" message: @"The player you are trying to access is now inactive." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alertView show];
+}
+
 +(PlaylistViewController*) sharedPlaylistViewController{
     return _sharedPlaylistViewController;
 }
@@ -481,6 +490,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     NSLog(@"Playlist: status code %d", [response statusCode]);
     
     NSNumber* requestNumber = request.userData;
+    NSDictionary* headerDict = [response allHeaderFields];
     
     NSLog(@"response %d, waiting on %d", [requestNumber intValue], [currentRequestNumber intValue]);
 
@@ -488,9 +498,10 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     //NSLog([NSString stringWithFormat:@"code %d", response.statusCode]);
     
-    // check if the event has ended
-    if(response.statusCode == 410){
-        //[self resetToEventView];
+    // check if player is inactive
+    if(response.statusCode == 404){
+        if([[headerDict objectForKey: @"X-Udj-Missing-Resource"] isEqualToString:@"player"])
+            [self resetToPlayerResultView];
     }
     else if ([request isGET]) {
         [self handlePlaylistResponse:response];        

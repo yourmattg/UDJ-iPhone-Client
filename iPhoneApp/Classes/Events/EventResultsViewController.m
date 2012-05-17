@@ -234,9 +234,9 @@
 
 
 
-#pragma mark Error methods
+#pragma mark - Error methods
 -(void) showEventNotFoundError{
-    UIAlertView* nonExistantEvent = [[UIAlertView alloc] initWithTitle:@"Join Failed" message:@"UDJ couldn't connect to the event" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView* nonExistantEvent = [[UIAlertView alloc] initWithTitle:@"Player Inactive" message:@"The player you are trying to access is inactive." delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [nonExistantEvent show];
     [self toggleJoiningView: NO];
     [self.tableView reloadData];
