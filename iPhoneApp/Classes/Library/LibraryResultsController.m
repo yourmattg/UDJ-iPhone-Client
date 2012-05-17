@@ -27,6 +27,7 @@
 
 @synthesize resultList, selectedSong, tableView, statusLabel, randomButton, backButton, globalData, currentRequestNumber, searchingLabel, searchingIndicator;
 
+
 -(void)resetToPlayerResultView{
     // return to player search results screen
     NSInteger numViewControllers = [self.navigationController.viewControllers count];
