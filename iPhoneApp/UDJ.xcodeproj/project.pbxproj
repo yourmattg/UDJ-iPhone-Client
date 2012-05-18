@@ -17,6 +17,7 @@
 		28D7ACF80DDB3853001CB0EB /* UDJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* UDJViewController.m */; };
 		A3028B861564A2AE00EF6EE8 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3028B841564A2AE00EF6EE8 /* MainTabBarController.m */; };
 		A3028B871564A2AE00EF6EE8 /* MainTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3028B851564A2AE00EF6EE8 /* MainTabBarController.xib */; };
+		A3028B891564B39700EF6EE8 /* smallicon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3028B881564B39600EF6EE8 /* smallicon.png */; };
 		A309CC6415194A8000912EA2 /* EventResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A309CC6215194A7F00912EA2 /* EventResultsViewController.m */; };
 		A309CC6515194A8000912EA2 /* EventResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A309CC6315194A8000912EA2 /* EventResultsViewController.xib */; };
 		A31A9B6315608C0B005268C0 /* separator.png in Resources */ = {isa = PBXBuildFile; fileRef = A31A9B6215608C0B005268C0 /* separator.png */; };
@@ -63,6 +64,12 @@
 		A3BB46E314E2086400554179 /* EventGoerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BB46E214E2086400554179 /* EventGoerCell.m */; };
 		A3C608FA151E3593004AB623 /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C608F9151E3593004AB623 /* EventCell.m */; };
 		A3C608FC151E52BB004AB623 /* eventcellselected.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C608FB151E52BB004AB623 /* eventcellselected.png */; };
+		A3C6A46A1565E6FF00F1E42E /* darknavbar.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C6A4691565E6FF00F1E42E /* darknavbar.png */; };
+		A3C6A4721565F9FA00F1E42E /* RandomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C6A4701565F9FA00F1E42E /* RandomViewController.m */; };
+		A3C6A4731565F9FA00F1E42E /* RandomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3C6A4711565F9FA00F1E42E /* RandomViewController.xib */; };
+		A3C6A4791566002600F1E42E /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C6A4771566002600F1E42E /* SearchViewController.m */; };
+		A3C6A47A1566002600F1E42E /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3C6A4781566002600F1E42E /* SearchViewController.xib */; };
+		A3C6A47C1566017A00F1E42E /* artists.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C6A47B1566017A00F1E42E /* artists.png */; };
 		A3CE2C06151D257400C13006 /* eventcell.png in Resources */ = {isa = PBXBuildFile; fileRef = A3CE2C05151D257400C13006 /* eventcell.png */; };
 		A3CF872F14B8F8F000A9F829 /* UDJSongList.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CF872E14B8F8F000A9F829 /* UDJSongList.m */; };
 		A3D334D514C6A02300A90D58 /* downarrow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3D334D414C6A02300A90D58 /* downarrow.jpg */; };
@@ -145,9 +152,10 @@
 		28D7ACF70DDB3853001CB0EB /* UDJViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* UDJ_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJ_Prefix.pch; sourceTree = "<group>"; };
-		A3028B831564A2AE00EF6EE8 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainTabBarController.h; path = "Main Views/MainTabBarController.h"; sourceTree = "<group>"; };
-		A3028B841564A2AE00EF6EE8 /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainTabBarController.m; path = "Main Views/MainTabBarController.m"; sourceTree = "<group>"; };
+		A3028B831564A2AE00EF6EE8 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
+		A3028B841564A2AE00EF6EE8 /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 		A3028B851564A2AE00EF6EE8 /* MainTabBarController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainTabBarController.xib; path = "../Classes/Main Views/MainTabBarController.xib"; sourceTree = "<group>"; };
+		A3028B881564B39600EF6EE8 /* smallicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smallicon.png; sourceTree = "<group>"; };
 		A309CC6115194A7F00912EA2 /* EventResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventResultsViewController.h; sourceTree = "<group>"; };
 		A309CC6215194A7F00912EA2 /* EventResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventResultsViewController.m; sourceTree = "<group>"; };
 		A309CC6315194A8000912EA2 /* EventResultsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventResultsViewController.xib; path = ../Classes/Events/EventResultsViewController.xib; sourceTree = "<group>"; };
@@ -210,6 +218,14 @@
 		A3C608F8151E3593004AB623 /* EventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventCell.h; sourceTree = "<group>"; };
 		A3C608F9151E3593004AB623 /* EventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventCell.m; sourceTree = "<group>"; };
 		A3C608FB151E52BB004AB623 /* eventcellselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eventcellselected.png; sourceTree = "<group>"; };
+		A3C6A4691565E6FF00F1E42E /* darknavbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = darknavbar.png; sourceTree = "<group>"; };
+		A3C6A46F1565F9FA00F1E42E /* RandomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomViewController.h; sourceTree = "<group>"; };
+		A3C6A4701565F9FA00F1E42E /* RandomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RandomViewController.m; sourceTree = "<group>"; };
+		A3C6A4711565F9FA00F1E42E /* RandomViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RandomViewController.xib; path = ../Classes/Library/RandomViewController.xib; sourceTree = "<group>"; };
+		A3C6A4761566002600F1E42E /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		A3C6A4771566002600F1E42E /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		A3C6A4781566002600F1E42E /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchViewController.xib; path = ../Classes/Library/SearchViewController.xib; sourceTree = "<group>"; };
+		A3C6A47B1566017A00F1E42E /* artists.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = artists.png; sourceTree = "<group>"; };
 		A3CE2C05151D257400C13006 /* eventcell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eventcell.png; sourceTree = "<group>"; };
 		A3CF872D14B8F8F000A9F829 /* UDJSongList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJSongList.h; sourceTree = "<group>"; };
 		A3CF872E14B8F8F000A9F829 /* UDJSongList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJSongList.m; sourceTree = "<group>"; };
@@ -297,8 +313,6 @@
 				A3F58C5414A1517900756F7D /* Main Views */,
 				A31AA6A91561CE3B0032FEAB /* UDJUser.h */,
 				A31AA6AA1561CE3B0032FEAB /* UDJUser.m */,
-				A3028B831564A2AE00EF6EE8 /* MainTabBarController.h */,
-				A3028B841564A2AE00EF6EE8 /* MainTabBarController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -344,39 +358,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A31A9B6215608C0B005268C0 /* separator.png */,
-				A3DDD0A61533EFEF00DB5E1F /* smalldownarrow.png */,
-				A3210D8E15328763009A9318 /* smalluparrow.png */,
-				A321A58C151FCBAB001ECC30 /* backbutton.png */,
-				A351B57C151F7AB200368F6F /* playlistbutton.png */,
-				A3495613151EF3D800AAEF7E /* refresh.png */,
-				A3F877E7151EE545005EC5EE /* navbar.png */,
-				A3F877E3151EE53C005EC5EE /* leavebutton.png */,
-				A3F877E4151EE53C005EC5EE /* librarybutton.png */,
-				A3C608FB151E52BB004AB623 /* eventcellselected.png */,
-				A3CE2C05151D257400C13006 /* eventcell.png */,
-				A35D3DEF14F985460007B374 /* votedown.png */,
-				A35D3DF014F985460007B374 /* voteup.png */,
-				A341B92814F86C61001892C5 /* addbutton.png */,
-				A341B92614F86824001892C5 /* uparrow.png */,
-				A341B92414F8681C001892C5 /* downarrow.png */,
-				A34796A414F85AE0001DEE15 /* default.jpg */,
-				A38B629F14C736C70088640D /* udjlauncher.png */,
-				A3D334D614C6A02A00A90D58 /* uparrow.jpg */,
-				A3D334D414C6A02300A90D58 /* downarrow.jpg */,
-				A3EF398014C64D33003889E0 /* addbutton.jpg */,
+				A3C6A4751565FA2400F1E42E /* xib files */,
+				A3C6A4741565FA1400F1E42E /* images */,
 				A32A384614AE917600D166CF /* UDJ-Info.plist */,
-				A3028B851564A2AE00EF6EE8 /* MainTabBarController.xib */,
-				A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */,
-				A3F9C051142EAD610016717B /* EventSearchViewController.xib */,
-				A36D2CCB14A818130087E992 /* SearchingViewController.xib */,
-				A33C461D148F11FC009C1BC6 /* LibrarySearchViewController.xib */,
-				A34FB30214B8EB5F00BE5CE2 /* LibraryResultsController.xib */,
-				A3F9C1D7142EBB880016717B /* PartyLoginViewController.xib */,
-				A309CC6315194A8000912EA2 /* EventResultsViewController.xib */,
-				2899E5210DE3E06400AC0155 /* UDJViewController.xib */,
-				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
-				A3F58D9B14C75FAF00E350F4 /* EventGoerViewController.xib */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -458,13 +442,70 @@
 				A3CF872E14B8F8F000A9F829 /* UDJSongList.m */,
 				A39A0C8914C4ADDF008A6D54 /* LibraryEntryCell.h */,
 				A39A0C8A14C4ADDF008A6D54 /* LibraryEntryCell.m */,
+				A3C6A46F1565F9FA00F1E42E /* RandomViewController.h */,
+				A3C6A4701565F9FA00F1E42E /* RandomViewController.m */,
+				A3C6A4761566002600F1E42E /* SearchViewController.h */,
+				A3C6A4771566002600F1E42E /* SearchViewController.m */,
 			);
 			path = Library;
+			sourceTree = "<group>";
+		};
+		A3C6A4741565FA1400F1E42E /* images */ = {
+			isa = PBXGroup;
+			children = (
+				A3C6A47B1566017A00F1E42E /* artists.png */,
+				A3C6A4691565E6FF00F1E42E /* darknavbar.png */,
+				A3028B881564B39600EF6EE8 /* smallicon.png */,
+				A31A9B6215608C0B005268C0 /* separator.png */,
+				A3DDD0A61533EFEF00DB5E1F /* smalldownarrow.png */,
+				A3210D8E15328763009A9318 /* smalluparrow.png */,
+				A321A58C151FCBAB001ECC30 /* backbutton.png */,
+				A351B57C151F7AB200368F6F /* playlistbutton.png */,
+				A3495613151EF3D800AAEF7E /* refresh.png */,
+				A3F877E7151EE545005EC5EE /* navbar.png */,
+				A3F877E3151EE53C005EC5EE /* leavebutton.png */,
+				A3F877E4151EE53C005EC5EE /* librarybutton.png */,
+				A3C608FB151E52BB004AB623 /* eventcellselected.png */,
+				A3CE2C05151D257400C13006 /* eventcell.png */,
+				A35D3DEF14F985460007B374 /* votedown.png */,
+				A35D3DF014F985460007B374 /* voteup.png */,
+				A341B92814F86C61001892C5 /* addbutton.png */,
+				A341B92614F86824001892C5 /* uparrow.png */,
+				A341B92414F8681C001892C5 /* downarrow.png */,
+				A34796A414F85AE0001DEE15 /* default.jpg */,
+				A38B629F14C736C70088640D /* udjlauncher.png */,
+				A3D334D614C6A02A00A90D58 /* uparrow.jpg */,
+				A3D334D414C6A02300A90D58 /* downarrow.jpg */,
+				A3EF398014C64D33003889E0 /* addbutton.jpg */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
+		A3C6A4751565FA2400F1E42E /* xib files */ = {
+			isa = PBXGroup;
+			children = (
+				A3C6A4781566002600F1E42E /* SearchViewController.xib */,
+				A3C6A4711565F9FA00F1E42E /* RandomViewController.xib */,
+				A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */,
+				A3F9C051142EAD610016717B /* EventSearchViewController.xib */,
+				A36D2CCB14A818130087E992 /* SearchingViewController.xib */,
+				A33C461D148F11FC009C1BC6 /* LibrarySearchViewController.xib */,
+				A34FB30214B8EB5F00BE5CE2 /* LibraryResultsController.xib */,
+				A3F9C1D7142EBB880016717B /* PartyLoginViewController.xib */,
+				A309CC6315194A8000912EA2 /* EventResultsViewController.xib */,
+				2899E5210DE3E06400AC0155 /* UDJViewController.xib */,
+				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
+				A3F58D9B14C75FAF00E350F4 /* EventGoerViewController.xib */,
+				A3028B851564A2AE00EF6EE8 /* MainTabBarController.xib */,
+			);
+			name = "xib files";
 			sourceTree = "<group>";
 		};
 		A3F58C5414A1517900756F7D /* Main Views */ = {
 			isa = PBXGroup;
 			children = (
+				A3028B831564A2AE00EF6EE8 /* MainTabBarController.h */,
+				A3028B841564A2AE00EF6EE8 /* MainTabBarController.m */,
 				A3F58D9614C75F0800E350F4 /* EventGoerViewController.h */,
 				A3F58D9714C75F0800E350F4 /* EventGoerViewController.m */,
 				A36D2CC914A818130087E992 /* SearchingViewController.h */,
@@ -658,6 +699,11 @@
 				A3DDD0A71533EFEF00DB5E1F /* smalldownarrow.png in Resources */,
 				A31A9B6315608C0B005268C0 /* separator.png in Resources */,
 				A3028B871564A2AE00EF6EE8 /* MainTabBarController.xib in Resources */,
+				A3028B891564B39700EF6EE8 /* smallicon.png in Resources */,
+				A3C6A46A1565E6FF00F1E42E /* darknavbar.png in Resources */,
+				A3C6A4731565F9FA00F1E42E /* RandomViewController.xib in Resources */,
+				A3C6A47A1566002600F1E42E /* SearchViewController.xib in Resources */,
+				A3C6A47C1566017A00F1E42E /* artists.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -707,6 +753,8 @@
 				A3FAB10915228A9000BA8654 /* SBJsonWriter.m in Sources */,
 				A31AA6AB1561CE3B0032FEAB /* UDJUser.m in Sources */,
 				A3028B861564A2AE00EF6EE8 /* MainTabBarController.m in Sources */,
+				A3C6A4721565F9FA00F1E42E /* RandomViewController.m in Sources */,
+				A3C6A4791566002600F1E42E /* SearchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

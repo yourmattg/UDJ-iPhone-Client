@@ -7,6 +7,8 @@
 //
 
 #import "MainTabBarController.h"
+#import "PlaylistViewController.h"
+#import "LibrarySearchViewController.h"
 
 @implementation MainTabBarController
 
@@ -32,7 +34,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    // Do any additional setup after loading the view from its nib. 
+    PlaylistViewController* playlistViewController = [[PlaylistViewController alloc] initWithNibName:@"NewPlaylistViewController" bundle:[NSBundle mainBundle]];
+    playlistViewController.title = NSLocalizedString(@"Playlist", @"Playlist");
+    LibrarySearchViewController* librarySearchViewController = [[LibrarySearchViewController alloc] initWithNibName:@"LibrarySearchViewController" bundle:[NSBundle mainBundle]];
+    librarySearchViewController.title = NSLocalizedString(@"Library", @"Library");
+    self.viewControllers = [NSArray arrayWithObjects:playlistViewController, librarySearchViewController, nil];
+    
+    self.tabBar.tintColor = [UIColor colorWithRed:(57.0/255.0) green:(97.0/255.0) blue:(127.0/255.0) alpha:1];
+    
 }
 
 - (void)viewDidUnload

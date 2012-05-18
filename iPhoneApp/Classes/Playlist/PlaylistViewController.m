@@ -293,6 +293,9 @@ static PlaylistViewController* _sharedPlaylistViewController;
     self.refreshIndicator.hidden = NO;
     self.refreshButton.hidden = YES;
     
+    // set up tab bar stuff
+    self.title = NSLocalizedString(@"Playlist", @"Playlist");
+    
     
 }
 

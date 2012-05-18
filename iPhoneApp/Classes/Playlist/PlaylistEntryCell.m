@@ -112,11 +112,6 @@
         downVoteLabel.backgroundColor = [UIColor clearColor];
         downVoteLabel.font = [UIFont fontWithName:@"Helvetica" size:18];
         downVoteLabel.textAlignment = UITextAlignmentLeft;
-        
-        upVoteLabel.hidden=YES;
-        downVoteLabel.hidden=YES;
-        addedByLabel.hidden=YES;
-        
         self.backgroundColor = [UIColor clearColor];
         
         [self.contentView addSubview:songLabel];

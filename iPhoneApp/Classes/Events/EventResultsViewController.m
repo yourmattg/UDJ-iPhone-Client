@@ -20,6 +20,7 @@
 #import "EventResultsViewController.h"
 #import "UDJEvent.h"
 #import "PartyLoginViewController.h"
+#import "MainTabBarController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation EventResultsViewController
@@ -227,8 +228,12 @@
 
 // joinEvent: login was successful, show playlist view
 -(void) joinEvent{
+    MainTabBarController* viewController = [[MainTabBarController alloc] initWithNibName:@"MainTabBarController" bundle:[NSBundle mainBundle]];
+    [self.navigationController pushViewController:viewController animated:YES];
+    /*
     PlaylistViewController* playlistViewController = [[PlaylistViewController alloc] initWithNibName:@"NewPlaylistViewController" bundle:[NSBundle mainBundle]];
-    [self.navigationController pushViewController:playlistViewController animated:YES];    
+    [self.navigationController pushViewController:playlistViewController animated:YES];
+     */
 }
 
 
