@@ -53,6 +53,9 @@
     
     // intialize artists array
     artistsArray = [[NSMutableArray alloc] initWithCapacity:50];
+    
+    // get artists
+    [self sendArtistsRequest];
 }
 
 - (void)viewDidUnload
@@ -73,7 +76,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return [artistsArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -88,10 +91,19 @@
     cell.textLabel.text = [artistsArray objectAtIndex: indexPath.row];
     
     // cosmetics
-    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:16];
+    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:18];
+    cell.textLabel.textColor = [UIColor whiteColor];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
+}
+
+#pragma mark - Table view delegate methods
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString* artistName = [artistsArray objectAtIndex: indexPath.row];
+    
+    // create SongListViewController & go
 }
 
 

@@ -109,7 +109,6 @@
 						<string key="NSFrame">{{-1, 71}, {320, 340}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MCAwIDAgMAA</bytes>
@@ -242,10 +241,10 @@
 						<int key="objectID">1</int>
 						<reference key="object" ref="191373211"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="897718799"/>
-							<reference ref="409937786"/>
 							<reference ref="292494499"/>
+							<reference ref="897718799"/>
 							<reference ref="316581573"/>
+							<reference ref="409937786"/>
 							<reference ref="375553752"/>
 							<reference ref="665205022"/>
 						</array>
@@ -309,12 +308,17 @@
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="artistsTableView">UITableView</string>
+						<string key="globalData">UDJData</string>
 						<string key="searchBar">UISearchBar</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="artistsTableView">
 							<string key="name">artistsTableView</string>
 							<string key="candidateClassName">UITableView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="globalData">
+							<string key="name">globalData</string>
+							<string key="candidateClassName">UDJData</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="searchBar">
 							<string key="name">searchBar</string>
@@ -324,6 +328,14 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/ArtistsViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">UDJData</string>
+					<string key="superclassName">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/UDJData.h</string>
 					</object>
 				</object>
 			</array>

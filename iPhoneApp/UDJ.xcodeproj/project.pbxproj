@@ -74,9 +74,9 @@
 		A3C6A46A1565E6FF00F1E42E /* darknavbar.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C6A4691565E6FF00F1E42E /* darknavbar.png */; };
 		A3C6A4721565F9FA00F1E42E /* RandomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C6A4701565F9FA00F1E42E /* RandomViewController.m */; };
 		A3C6A4731565F9FA00F1E42E /* RandomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3C6A4711565F9FA00F1E42E /* RandomViewController.xib */; };
-		A3C6A4791566002600F1E42E /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C6A4771566002600F1E42E /* SearchViewController.m */; };
-		A3C6A47A1566002600F1E42E /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3C6A4781566002600F1E42E /* SearchViewController.xib */; };
 		A3C6A47C1566017A00F1E42E /* artists.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C6A47B1566017A00F1E42E /* artists.png */; };
+		A3C7A442156714F20085150A /* SongListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C7A440156714F20085150A /* SongListViewController.m */; };
+		A3C7A443156714F20085150A /* SongListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3C7A441156714F20085150A /* SongListViewController.xib */; };
 		A3CE2C06151D257400C13006 /* eventcell.png in Resources */ = {isa = PBXBuildFile; fileRef = A3CE2C05151D257400C13006 /* eventcell.png */; };
 		A3CF872F14B8F8F000A9F829 /* UDJSongList.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CF872E14B8F8F000A9F829 /* UDJSongList.m */; };
 		A3D334D514C6A02300A90D58 /* downarrow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3D334D414C6A02300A90D58 /* downarrow.jpg */; };
@@ -237,10 +237,10 @@
 		A3C6A46F1565F9FA00F1E42E /* RandomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomViewController.h; sourceTree = "<group>"; };
 		A3C6A4701565F9FA00F1E42E /* RandomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RandomViewController.m; sourceTree = "<group>"; };
 		A3C6A4711565F9FA00F1E42E /* RandomViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RandomViewController.xib; path = ../Classes/Library/RandomViewController.xib; sourceTree = "<group>"; };
-		A3C6A4761566002600F1E42E /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
-		A3C6A4771566002600F1E42E /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
-		A3C6A4781566002600F1E42E /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchViewController.xib; path = ../Classes/Library/SearchViewController.xib; sourceTree = "<group>"; };
 		A3C6A47B1566017A00F1E42E /* artists.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = artists.png; sourceTree = "<group>"; };
+		A3C7A43F156714F20085150A /* SongListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongListViewController.h; sourceTree = "<group>"; };
+		A3C7A440156714F20085150A /* SongListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongListViewController.m; sourceTree = "<group>"; };
+		A3C7A441156714F20085150A /* SongListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SongListViewController.xib; path = ../Classes/Library/SongListViewController.xib; sourceTree = "<group>"; };
 		A3CE2C05151D257400C13006 /* eventcell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eventcell.png; sourceTree = "<group>"; };
 		A3CF872D14B8F8F000A9F829 /* UDJSongList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJSongList.h; sourceTree = "<group>"; };
 		A3CF872E14B8F8F000A9F829 /* UDJSongList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJSongList.m; sourceTree = "<group>"; };
@@ -459,10 +459,10 @@
 				A39A0C8A14C4ADDF008A6D54 /* LibraryEntryCell.m */,
 				A3C6A46F1565F9FA00F1E42E /* RandomViewController.h */,
 				A3C6A4701565F9FA00F1E42E /* RandomViewController.m */,
-				A3C6A4761566002600F1E42E /* SearchViewController.h */,
-				A3C6A4771566002600F1E42E /* SearchViewController.m */,
 				A37BBF3C15670A1500251CC8 /* ArtistsViewController.h */,
 				A37BBF3D15670A1500251CC8 /* ArtistsViewController.m */,
+				A3C7A43F156714F20085150A /* SongListViewController.h */,
+				A3C7A440156714F20085150A /* SongListViewController.m */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -506,8 +506,8 @@
 		A3C6A4751565FA2400F1E42E /* xib files */ = {
 			isa = PBXGroup;
 			children = (
+				A3C7A441156714F20085150A /* SongListViewController.xib */,
 				A37BBF3E15670A1500251CC8 /* ArtistsViewController.xib */,
-				A3C6A4781566002600F1E42E /* SearchViewController.xib */,
 				A3C6A4711565F9FA00F1E42E /* RandomViewController.xib */,
 				A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */,
 				A3F9C051142EAD610016717B /* EventSearchViewController.xib */,
@@ -725,7 +725,6 @@
 				A3028B891564B39700EF6EE8 /* smallicon.png in Resources */,
 				A3C6A46A1565E6FF00F1E42E /* darknavbar.png in Resources */,
 				A3C6A4731565F9FA00F1E42E /* RandomViewController.xib in Resources */,
-				A3C6A47A1566002600F1E42E /* SearchViewController.xib in Resources */,
 				A3C6A47C1566017A00F1E42E /* artists.png in Resources */,
 				A3C22D551566D4D50066B9F8 /* playlisticon.png in Resources */,
 				A3C22D571566D62E0066B9F8 /* libraryicon.png in Resources */,
@@ -733,6 +732,7 @@
 				A3C22D5B1566D9EA0066B9F8 /* playingbar.png in Resources */,
 				A37BBF3B1567085000251CC8 /* playersbutton.png in Resources */,
 				A37BBF4015670A1500251CC8 /* ArtistsViewController.xib in Resources */,
+				A3C7A443156714F20085150A /* SongListViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -783,8 +783,8 @@
 				A31AA6AB1561CE3B0032FEAB /* UDJUser.m in Sources */,
 				A3028B861564A2AE00EF6EE8 /* MainTabBarController.m in Sources */,
 				A3C6A4721565F9FA00F1E42E /* RandomViewController.m in Sources */,
-				A3C6A4791566002600F1E42E /* SearchViewController.m in Sources */,
 				A37BBF3F15670A1500251CC8 /* ArtistsViewController.m in Sources */,
+				A3C7A442156714F20085150A /* SongListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -812,6 +812,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "\"$(SOURCE_ROOT)/RestKit/Build\"";
 				INFOPLIST_FILE = "UDJ-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -832,6 +833,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "\"$(SOURCE_ROOT)/RestKit/Build\"";
 				INFOPLIST_FILE = "UDJ-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -871,6 +873,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "\"$(SOURCE_ROOT)/RestKit/Build\"";
 				INFOPLIST_FILE = "UDJ-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",

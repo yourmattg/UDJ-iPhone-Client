@@ -28,4 +28,6 @@
 @property(nonatomic,strong) NSMutableArray* artistsArray;
 @property(nonatomic,strong) IBOutlet UDJData* globalData;
 
+-(void)sendArtistsRequest;
+
 @end
