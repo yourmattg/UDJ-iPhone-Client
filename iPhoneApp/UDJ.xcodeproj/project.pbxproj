@@ -53,6 +53,8 @@
 		A3720B3414C7514400D1E30C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3720B3314C7514400D1E30C /* CoreFoundation.framework */; };
 		A374BE0114A2EF36001A0DE0 /* UDJEventData.m in Sources */ = {isa = PBXBuildFile; fileRef = A374BE0014A2EF36001A0DE0 /* UDJEventData.m */; };
 		A37BBF3B1567085000251CC8 /* playersbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A37BBF3A1567085000251CC8 /* playersbutton.png */; };
+		A37BBF3F15670A1500251CC8 /* ArtistsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A37BBF3D15670A1500251CC8 /* ArtistsViewController.m */; };
+		A37BBF4015670A1500251CC8 /* ArtistsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A37BBF3E15670A1500251CC8 /* ArtistsViewController.xib */; };
 		A38B62A014C736C70088640D /* udjlauncher.png in Resources */ = {isa = PBXBuildFile; fileRef = A38B629F14C736C70088640D /* udjlauncher.png */; };
 		A39A0C8B14C4ADDF008A6D54 /* LibraryEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A39A0C8A14C4ADDF008A6D54 /* LibraryEntryCell.m */; };
 		A39AF6701497CB74006ADF19 /* UDJConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A39AF66F1497CB74006ADF19 /* UDJConnection.m */; };
@@ -207,6 +209,9 @@
 		A374BDFF14A2EF36001A0DE0 /* UDJEventData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJEventData.h; sourceTree = "<group>"; };
 		A374BE0014A2EF36001A0DE0 /* UDJEventData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJEventData.m; sourceTree = "<group>"; };
 		A37BBF3A1567085000251CC8 /* playersbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playersbutton.png; sourceTree = "<group>"; };
+		A37BBF3C15670A1500251CC8 /* ArtistsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtistsViewController.h; sourceTree = "<group>"; };
+		A37BBF3D15670A1500251CC8 /* ArtistsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtistsViewController.m; sourceTree = "<group>"; };
+		A37BBF3E15670A1500251CC8 /* ArtistsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ArtistsViewController.xib; path = ../Classes/Library/ArtistsViewController.xib; sourceTree = "<group>"; };
 		A38B629F14C736C70088640D /* udjlauncher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = udjlauncher.png; sourceTree = "<group>"; };
 		A39A0C8914C4ADDF008A6D54 /* LibraryEntryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryEntryCell.h; sourceTree = "<group>"; };
 		A39A0C8A14C4ADDF008A6D54 /* LibraryEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryEntryCell.m; sourceTree = "<group>"; };
@@ -455,6 +460,8 @@
 				A3C6A46F1565F9FA00F1E42E /* RandomViewController.h */,
 				A3C6A4701565F9FA00F1E42E /* RandomViewController.m */,
 				A3C6A4761566002600F1E42E /* SearchViewController.h */,
+				A37BBF3C15670A1500251CC8 /* ArtistsViewController.h */,
+				A37BBF3D15670A1500251CC8 /* ArtistsViewController.m */,
 				A3C6A4771566002600F1E42E /* SearchViewController.m */,
 			);
 			path = Library;
@@ -499,6 +506,7 @@
 		A3C6A4751565FA2400F1E42E /* xib files */ = {
 			isa = PBXGroup;
 			children = (
+				A37BBF3E15670A1500251CC8 /* ArtistsViewController.xib */,
 				A3C6A4781566002600F1E42E /* SearchViewController.xib */,
 				A3C6A4711565F9FA00F1E42E /* RandomViewController.xib */,
 				A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */,
@@ -724,6 +732,7 @@
 				A3C22D591566D8510066B9F8 /* randomicon.png in Resources */,
 				A3C22D5B1566D9EA0066B9F8 /* playingbar.png in Resources */,
 				A37BBF3B1567085000251CC8 /* playersbutton.png in Resources */,
+				A37BBF4015670A1500251CC8 /* ArtistsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -775,6 +784,7 @@
 				A3028B861564A2AE00EF6EE8 /* MainTabBarController.m in Sources */,
 				A3C6A4721565F9FA00F1E42E /* RandomViewController.m in Sources */,
 				A3C6A4791566002600F1E42E /* SearchViewController.m in Sources */,
+				A37BBF3F15670A1500251CC8 /* ArtistsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

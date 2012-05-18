@@ -10,7 +10,7 @@
 #import "PlaylistViewController.h"
 #import "LibrarySearchViewController.h"
 #import "RandomViewController.h"
-#import "SearchViewController.h"
+#import "ArtistsViewController.h"
 
 @implementation MainTabBarController
 
@@ -39,11 +39,11 @@
     // Do any additional setup after loading the view from its nib. 
     PlaylistViewController* playlistViewController = [[PlaylistViewController alloc] initWithNibName:@"NewPlaylistViewController" bundle:[NSBundle mainBundle]];
     playlistViewController.title = NSLocalizedString(@"Playlist", @"Playlist");
-    SearchViewController* searchViewController = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:[NSBundle mainBundle]];
-    searchViewController.title = NSLocalizedString(@"Library", @"Library");
+    ArtistsViewController* artistsViewController = [[ArtistsViewController alloc] initWithNibName:@"ArtistsViewController" bundle:[NSBundle mainBundle]];
+    artistsViewController.title = NSLocalizedString(@"Library", @"Library");
     RandomViewController* randomViewController = [[RandomViewController alloc] initWithNibName:@"RandomViewController" bundle:[NSBundle mainBundle]];
     randomViewController.title = NSLocalizedString(@"Random", @"Random");
-    self.viewControllers = [NSArray arrayWithObjects:playlistViewController, searchViewController, randomViewController, nil];
+    self.viewControllers = [NSArray arrayWithObjects:playlistViewController, artistsViewController, randomViewController, nil];
     
     self.tabBar.tintColor = [UIColor colorWithRed:(35.0/255.0) green:(59.0/255.0) blue:(79.0/255.0) alpha:1];
     
