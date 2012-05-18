@@ -111,7 +111,7 @@
      */
     
     // TODO: check if our ticket is still valid
-    [[UDJData sharedUDJData] renewTicket];
+    //[[UDJData sharedUDJData] renewTicket];
 }
 
 

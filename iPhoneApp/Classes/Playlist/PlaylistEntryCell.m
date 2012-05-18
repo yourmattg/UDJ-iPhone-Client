@@ -41,7 +41,7 @@
     CGFloat boundsX = contentRect.origin.x;
     CGRect frame;
 
-    frame= CGRectMake(boundsX+10 ,3, 300, 20);
+    frame= CGRectMake(boundsX+10 ,3, 210, 20);
     songLabel.frame = frame;
     
     frame= CGRectMake(boundsX+14 ,24, 250, 17);
@@ -50,22 +50,18 @@
     frame= CGRectMake(boundsX+14 ,42, 250, 16);
     addedByLabel.frame = frame;
     
-    frame = CGRectMake(boundsX+215, 4, 38, 38);
+    frame = CGRectMake(boundsX+225, 4, 38, 38);
     upVoteButton.frame = frame;
     
     frame = CGRectMake(boundsX+275, 4, 38, 38);
     downVoteButton.frame = frame;
     
-    frame = CGRectMake(boundsX+229, 42, 30, 20);
+    frame = CGRectMake(boundsX+239, 42, 30, 20);
     upVoteLabel.frame = frame;
     
     frame = CGRectMake(boundsX+289, 42, 30, 20);
     downVoteLabel.frame = frame;
     
-    if(!self.upVoteLabel.hidden){
-        frame= CGRectMake(boundsX+10 ,3, 200, 20);
-        songLabel.frame = frame;
-    }
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -73,6 +69,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         songLabel = [[UILabel alloc] init];
         songLabel.textAlignment = UITextAlignmentLeft;
         songLabel.font = [UIFont fontWithName:@"Helvetica" size:16];

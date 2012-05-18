@@ -30,11 +30,42 @@
 #import <QuartzCore/QuartzCore.h>
 #import "FacebookHandler.h"
 
+
 @implementation PlaylistViewController
 
 @synthesize currentEvent, playlist, tableView, currentSongTitleLabel, currentSongArtistLabel, selectedSong, statusLabel, currentRequestNumber, globalData, leavingBackgroundView, leavingView, leaveButton, libraryButton, eventNameLabel, refreshButton, refreshIndicator, refreshLabel, voteNotificationView, voteNotificationLabel, voteNotificationArrowView;
 
 static PlaylistViewController* _sharedPlaylistViewController;
+
+
+
+#pragma mark - udj button methods
+
+// handleLeaveEvent: go back to the event results page
+-(void)handleLeaveEvent{
+    // user is no longer in an event, reset currentEvent
+    [UDJEventData sharedEventData].currentEvent=nil;
+    
+    // we have no need for this party's playlist
+    [[UDJPlaylist sharedUDJPlaylist] clearPlaylist];
+    
+    // show the event results page
+    [self.navigationController popViewControllerAnimated:YES]; 
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if([alertView.title isEqualToString: currentEvent.name]){
+        
+        // option: leave the player
+        if(buttonIndex == 1){
+            [self handleLeaveEvent];
+        }
+    }
+}
+
+-(IBAction)backButtonClick:(id)sender{
+    [self handleLeaveEvent];
+}
 
 -(void)resetToPlayerResultView{
     // return to player search results screen
@@ -49,10 +80,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
     return _sharedPlaylistViewController;
 }
 
--(void)showEventGoers{
-    EventGoerViewController* eventGoerViewController = [[EventGoerViewController alloc] initWithNibName:@"EventGoerViewController" bundle:[NSBundle mainBundle]];
-    [self.navigationController pushViewController:eventGoerViewController animated:YES];
-}
 
 
 -(void)removeSong{
@@ -62,39 +89,15 @@ static PlaylistViewController* _sharedPlaylistViewController;
     [notification show];
 }
 
-// leaveEvent: log the client out of the event, return to event list
-- (IBAction)leaveButtonClick:(id)sender{
-    
-    [self.navigationController popViewControllerAnimated: YES];
-    // TODO: verify that I can actually just comment this out
-    /*
-    // show "Leaving" view
-    [self toggleLeavingView: YES];
-    
-    // increment requestCount and send leave event request
-    self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
-    [[UDJEventData sharedEventData] leaveEvent];
-     
-     */
-}
-
-// handleLeaveEvent: go back to the event results page
--(void)handleLeaveEvent{
-    // user is no longer in an event, reset currentEvent
-    [UDJEventData sharedEventData].currentEvent=nil;
-    
-    // we have no need for this party's playlist
-    [[UDJPlaylist sharedUDJPlaylist] clearPlaylist];
-    
-    // show the event results page
-    [self.navigationController popViewControllerAnimated:YES]; 
-}
-
 // loadLibrary: push the library search view
 - (IBAction)showLibrary:(id)sender{
     LibrarySearchViewController* librarySearchViewController = [[LibrarySearchViewController alloc] initWithNibName:@"LibrarySearchViewController" bundle:[NSBundle mainBundle]];
     [self.navigationController pushViewController:librarySearchViewController animated:YES];
 }
+
+
+
+#pragma mark - Refresh methods
 
 -(void)toggleRefreshingStatus:(BOOL)active{
     self.refreshButton.hidden = active;
@@ -135,6 +138,9 @@ static PlaylistViewController* _sharedPlaylistViewController;
     [self.tableView reloadData];
 }
 
+
+#pragma mark Voting methods
+
 -(void)hideVoteNotification:(id)arg{
     [NSThread sleepForTimeInterval:2];
     [UIView animateWithDuration:1.0 animations:^{
@@ -150,7 +156,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     [self.view addSubview: voteNotificationView];
     voteNotificationView.alpha = 0;
-    voteNotificationView.frame = CGRectMake(35, 380, 251, 25);
+    voteNotificationView.frame = CGRectMake(20, 370, 280, 32);
     [UIView animateWithDuration:0.5 animations:^{
         voteNotificationView.alpha = 1;
     } completion:^(BOOL finished){
@@ -206,6 +212,10 @@ static PlaylistViewController* _sharedPlaylistViewController;
     [self vote:NO];
 }
 
+
+
+#pragma mark Facebook sharing
+
 // Login to Facebook
 - (void)login {
     [[FacebookHandler sharedHandler] login];
@@ -233,15 +243,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
     [[FacebookHandler sharedHandler] postWithParam:params];
     NSLog(@"post called");
 }
-/*
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        //custom initialization
-    }
-    return self;
-}*/
 
 
 // Show or hide the "Leaving event" view; active = YES will show the view
@@ -250,13 +251,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
     leavingView.hidden = !active;
     
     // TODO: disable toolbar?
-}
-
-// When user presses cancel, hide leaving view and let controller know
-// we aren't waiting on any requests
--(IBAction)cancelButtonClick:(id)sender{
-    self.currentRequestNumber = [NSNumber numberWithInt: -1];
-    [self toggleLeavingView: NO];
 }
 
 #pragma mark - View lifecycle
@@ -380,7 +374,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     NSString* songText = @"";
     if(song!=nil) songText = [songText stringByAppendingString: song.title];
 	cell.songLabel.text = songText;
-    cell.artistLabel.text = [NSString stringWithFormat: @"%@%@", @"By ", song.artist, nil];
+    cell.artistLabel.text = song.artist;
     
     // figure out who added the song: either "You" or another user
     NSString* adderName;
@@ -397,23 +391,11 @@ static PlaylistViewController* _sharedPlaylistViewController;
     cell.downVoteButton.tag = rowNumber;
     cell.upVoteButton.tag = rowNumber;
     
-    BOOL extrasHidden = (song != selectedSong);
-    cell.addedByLabel.hidden=extrasHidden;
-    cell.upVoteLabel.hidden=extrasHidden;
-    cell.downVoteLabel.hidden=extrasHidden;
-    cell.upVoteButton.hidden = extrasHidden;
-    cell.downVoteButton.hidden = extrasHidden;
-    if(!extrasHidden){
-        [cell layoutSubviews];
-    }
-    
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSInteger row = indexPath.row;
-    if([playlist songAtIndex:row]==selectedSong) return 64;
-    return 48.0;
+    return 64;
 }
 
 
@@ -445,7 +427,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 }
 
 
-#pragma mark Response handling
+#pragma mark - Response handling
 
 // handlePlaylistResponse: this is done asynchronously from the send method so the client can do other things meanwhile
 // NOTE: this calls [playlistView refreshTableList] for you!

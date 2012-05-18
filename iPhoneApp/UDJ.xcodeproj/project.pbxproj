@@ -52,6 +52,7 @@
 		A3720B3214C7513600D1E30C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3720B3114C7513600D1E30C /* CoreLocation.framework */; };
 		A3720B3414C7514400D1E30C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3720B3314C7514400D1E30C /* CoreFoundation.framework */; };
 		A374BE0114A2EF36001A0DE0 /* UDJEventData.m in Sources */ = {isa = PBXBuildFile; fileRef = A374BE0014A2EF36001A0DE0 /* UDJEventData.m */; };
+		A37BBF3B1567085000251CC8 /* playersbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A37BBF3A1567085000251CC8 /* playersbutton.png */; };
 		A38B62A014C736C70088640D /* udjlauncher.png in Resources */ = {isa = PBXBuildFile; fileRef = A38B629F14C736C70088640D /* udjlauncher.png */; };
 		A39A0C8B14C4ADDF008A6D54 /* LibraryEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A39A0C8A14C4ADDF008A6D54 /* LibraryEntryCell.m */; };
 		A39AF6701497CB74006ADF19 /* UDJConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A39AF66F1497CB74006ADF19 /* UDJConnection.m */; };
@@ -205,6 +206,7 @@
 		A3720B3314C7514400D1E30C /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		A374BDFF14A2EF36001A0DE0 /* UDJEventData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJEventData.h; sourceTree = "<group>"; };
 		A374BE0014A2EF36001A0DE0 /* UDJEventData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJEventData.m; sourceTree = "<group>"; };
+		A37BBF3A1567085000251CC8 /* playersbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playersbutton.png; sourceTree = "<group>"; };
 		A38B629F14C736C70088640D /* udjlauncher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = udjlauncher.png; sourceTree = "<group>"; };
 		A39A0C8914C4ADDF008A6D54 /* LibraryEntryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryEntryCell.h; sourceTree = "<group>"; };
 		A39A0C8A14C4ADDF008A6D54 /* LibraryEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryEntryCell.m; sourceTree = "<group>"; };
@@ -461,6 +463,7 @@
 		A3C6A4741565FA1400F1E42E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				A37BBF3A1567085000251CC8 /* playersbutton.png */,
 				A3C22D5A1566D9EA0066B9F8 /* playingbar.png */,
 				A3C22D581566D8510066B9F8 /* randomicon.png */,
 				A3C22D561566D62E0066B9F8 /* libraryicon.png */,
@@ -720,6 +723,7 @@
 				A3C22D571566D62E0066B9F8 /* libraryicon.png in Resources */,
 				A3C22D591566D8510066B9F8 /* randomicon.png in Resources */,
 				A3C22D5B1566D9EA0066B9F8 /* playingbar.png in Resources */,
+				A37BBF3B1567085000251CC8 /* playersbutton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

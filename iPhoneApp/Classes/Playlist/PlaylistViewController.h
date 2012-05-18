@@ -46,7 +46,6 @@
 -(void)login;
 -(void)post;
 -(void)removeSong;
--(void)showEventGoers;
 +(PlaylistViewController*) sharedPlaylistViewController;
 -(void) toggleLeavingView:(BOOL) active;
 
