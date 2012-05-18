@@ -62,6 +62,10 @@
 		A39AF6941497D09A006ADF19 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF6931497D09A006ADF19 /* SystemConfiguration.framework */; };
 		A39AF6961497D0A4006ADF19 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF6951497D0A4006ADF19 /* libxml2.dylib */; };
 		A3BB46E314E2086400554179 /* EventGoerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BB46E214E2086400554179 /* EventGoerCell.m */; };
+		A3C22D551566D4D50066B9F8 /* playlisticon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C22D541566D4D50066B9F8 /* playlisticon.png */; };
+		A3C22D571566D62E0066B9F8 /* libraryicon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C22D561566D62E0066B9F8 /* libraryicon.png */; };
+		A3C22D591566D8510066B9F8 /* randomicon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C22D581566D8510066B9F8 /* randomicon.png */; };
+		A3C22D5B1566D9EA0066B9F8 /* playingbar.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C22D5A1566D9EA0066B9F8 /* playingbar.png */; };
 		A3C608FA151E3593004AB623 /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C608F9151E3593004AB623 /* EventCell.m */; };
 		A3C608FC151E52BB004AB623 /* eventcellselected.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C608FB151E52BB004AB623 /* eventcellselected.png */; };
 		A3C6A46A1565E6FF00F1E42E /* darknavbar.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C6A4691565E6FF00F1E42E /* darknavbar.png */; };
@@ -215,6 +219,10 @@
 		A39AF6951497D0A4006ADF19 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		A3BB46E114E2086400554179 /* EventGoerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventGoerCell.h; sourceTree = "<group>"; };
 		A3BB46E214E2086400554179 /* EventGoerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventGoerCell.m; sourceTree = "<group>"; };
+		A3C22D541566D4D50066B9F8 /* playlisticon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playlisticon.png; sourceTree = "<group>"; };
+		A3C22D561566D62E0066B9F8 /* libraryicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = libraryicon.png; sourceTree = "<group>"; };
+		A3C22D581566D8510066B9F8 /* randomicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = randomicon.png; sourceTree = "<group>"; };
+		A3C22D5A1566D9EA0066B9F8 /* playingbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playingbar.png; sourceTree = "<group>"; };
 		A3C608F8151E3593004AB623 /* EventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventCell.h; sourceTree = "<group>"; };
 		A3C608F9151E3593004AB623 /* EventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventCell.m; sourceTree = "<group>"; };
 		A3C608FB151E52BB004AB623 /* eventcellselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eventcellselected.png; sourceTree = "<group>"; };
@@ -453,6 +461,10 @@
 		A3C6A4741565FA1400F1E42E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				A3C22D5A1566D9EA0066B9F8 /* playingbar.png */,
+				A3C22D581566D8510066B9F8 /* randomicon.png */,
+				A3C22D561566D62E0066B9F8 /* libraryicon.png */,
+				A3C22D541566D4D50066B9F8 /* playlisticon.png */,
 				A3C6A47B1566017A00F1E42E /* artists.png */,
 				A3C6A4691565E6FF00F1E42E /* darknavbar.png */,
 				A3028B881564B39600EF6EE8 /* smallicon.png */,
@@ -704,6 +716,10 @@
 				A3C6A4731565F9FA00F1E42E /* RandomViewController.xib in Resources */,
 				A3C6A47A1566002600F1E42E /* SearchViewController.xib in Resources */,
 				A3C6A47C1566017A00F1E42E /* artists.png in Resources */,
+				A3C22D551566D4D50066B9F8 /* playlisticon.png in Resources */,
+				A3C22D571566D62E0066B9F8 /* libraryicon.png in Resources */,
+				A3C22D591566D8510066B9F8 /* randomicon.png in Resources */,
+				A3C22D5B1566D9EA0066B9F8 /* playingbar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

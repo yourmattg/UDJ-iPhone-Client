@@ -10,6 +10,8 @@
 
 @implementation SearchViewController
 
+@synthesize artistsButton;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -33,6 +35,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    // fade out artists button
+    artistsButton.alpha = 0.5;
+    artistsButton.enabled = NO;
 }
 
 - (void)viewDidUnload

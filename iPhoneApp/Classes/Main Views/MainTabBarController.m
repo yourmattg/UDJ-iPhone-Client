@@ -47,6 +47,16 @@
     
     self.tabBar.tintColor = [UIColor colorWithRed:(35.0/255.0) green:(59.0/255.0) blue:(79.0/255.0) alpha:1];
     
+    // set tab bar images
+    UITabBarItem* playlistItem = [self.tabBar.items objectAtIndex: 0];
+    [playlistItem setImage: [UIImage imageNamed: @"playlisticon.png"]];
+    
+    UITabBarItem* libraryItem = [self.tabBar.items objectAtIndex: 1];
+    [libraryItem setImage: [UIImage imageNamed: @"libraryicon.png"]];
+    
+    UITabBarItem* randomItem = [self.tabBar.items objectAtIndex: 2];
+    [randomItem setImage: [UIImage imageNamed: @"randomicon.png"]];
+    
 }
 
 - (void)viewDidUnload
