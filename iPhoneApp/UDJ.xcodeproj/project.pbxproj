@@ -460,9 +460,9 @@
 				A3C6A46F1565F9FA00F1E42E /* RandomViewController.h */,
 				A3C6A4701565F9FA00F1E42E /* RandomViewController.m */,
 				A3C6A4761566002600F1E42E /* SearchViewController.h */,
+				A3C6A4771566002600F1E42E /* SearchViewController.m */,
 				A37BBF3C15670A1500251CC8 /* ArtistsViewController.h */,
 				A37BBF3D15670A1500251CC8 /* ArtistsViewController.m */,
-				A3C6A4771566002600F1E42E /* SearchViewController.m */,
 			);
 			path = Library;
 			sourceTree = "<group>";
