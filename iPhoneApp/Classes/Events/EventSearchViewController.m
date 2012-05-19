@@ -57,6 +57,10 @@
     eventNameField.autocorrectionType = UITextAutocorrectionTypeNo;
     
     [self toggleSearchingView: NO];
+    
+    /*
+    self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:(57.0/255.0) green:(97.0/255.0) blue:(127.0/255.0) alpha:1];*/
 }
 
 // Show or hide the "Searching events" view; active = YES will show the view

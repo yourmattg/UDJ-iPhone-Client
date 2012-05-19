@@ -8,10 +8,14 @@
 
 #import "SongListViewController.h"
 #import "RestKit/RestKit.h"
+#import "RestKit/RKJSONParserJSONKit.h"
+#import "UDJEventData.h"
+#import "UDJData.h"
+
 
 @implementation SongListViewController
 
-@synthesize statusLabel, searchIndicatorView, currentRequestNumber, songTableView;
+@synthesize statusLabel, searchIndicatorView, currentRequestNumber, songTableView, resultList;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,6 +41,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    MAX_RESULTS = 100;
+    
 }
 
 - (void)viewDidUnload
@@ -53,6 +59,13 @@
 }
 
 
+#pragma mark - UI Events
+
+-(IBAction)artistButtonClick:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
 #pragma mark - Search request methods
 
 -(void)getSongsByArtist:(NSString *)artist{
@@ -62,6 +75,28 @@
     statusLabel.text = [NSString stringWithFormat: @"Getting songs by %@", artist, nil];
     songTableView.hidden = YES;
     
+    RKClient* client = [RKClient sharedClient];
+    
+    // create URL
+    
+    NSString* urlString = client.baseURL;
+    artist = [artist stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    NSInteger playerID = [UDJEventData sharedEventData].currentEvent.eventId;
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@%@",@"/players/",playerID,@"/available_music/artists/",artist,nil];
+    
+    // create request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
+    request.queue = client.requestQueue;
+    request.method = RKRequestMethodGET;
+    request.additionalHTTPHeaders = [UDJData sharedUDJData].headers;
+    
+    // track current request number
+    currentRequestNumber = [NSNumber numberWithInt: [UDJData sharedUDJData].requestCount];
+    request.userData = [NSNumber numberWithInt: [UDJData sharedUDJData].requestCount++];
+    
+    //send request
+    [request send]; 
+    
 }
 
 -(void)getSongsByQuery:(NSString *)query{
@@ -69,6 +104,23 @@
 }
 
 #pragma mark - Response handling
+
+-(void)handleSearchResults:(RKResponse *)response{
+    UDJSongList* tempList = [UDJSongList new];
+    RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
+    NSArray* songArray = [parser objectFromString:[response bodyAsString] error:nil];
+    NSLog(@"hurp count %d", [songArray count]);
+    for(int i=0; i<[songArray count]; i++){
+        NSLog(@"iteration %d", i);
+        NSDictionary* songDict = [songArray objectAtIndex:i];
+        UDJSong* song = [UDJSong songFromDictionary:songDict isLibraryEntry:YES];
+        [tempList addSong:song];
+    }
+    
+    self.resultList = tempList;
+    
+    // refresh table view
+}
 
 // Handle responses from the server
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response { 
@@ -86,7 +138,7 @@
         //[self resetToPlayerResultView];
     }
     else if ([request isGET] && [response isOK]) {
-              
+        [self handleSearchResults: response];
     }
     
     //self.currentRequestNumber = [NSNumber numberWithInt: -1];

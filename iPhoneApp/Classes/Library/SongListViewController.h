@@ -7,14 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UDJSong.h"
+#import "UDJSongList.h"
 
-@interface SongListViewController : UIViewController
+@interface SongListViewController : UIViewController{
+    NSInteger MAX_RESULTS;
+}
+
+
 
 @property(nonatomic,strong) IBOutlet UILabel* statusLabel;
 @property(nonatomic,strong) IBOutlet UIActivityIndicatorView* searchIndicatorView;
 @property(nonatomic,strong) IBOutlet UITableView* songTableView;
 
 @property(nonatomic,strong) NSNumber* currentRequestNumber;
+
+@property(nonatomic,strong) UDJSongList* resultList;
 
 -(void)getSongsByArtist:(NSString*)artist;
 -(void)getSongsByQuery:(NSString*)query;
