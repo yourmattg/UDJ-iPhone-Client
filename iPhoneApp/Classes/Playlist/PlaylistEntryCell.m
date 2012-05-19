@@ -22,7 +22,7 @@
 
 @implementation PlaylistEntryCell
 
-@synthesize songLabel, addedByLabel, artistLabel, upVoteButton, downVoteButton, upVoteLabel, downVoteLabel, parentViewController;
+@synthesize songLabel, addedByLabel, artistLabel, upVoteButton, downVoteButton, upVoteLabel, downVoteLabel, parentViewController, playingImageView, playingLabel;
 
 - (IBAction) onButtonClick: (id) sender {
     UIButton* button = sender;
@@ -61,6 +61,12 @@
     
     frame = CGRectMake(boundsX+289, 42, 30, 20);
     downVoteLabel.frame = frame;
+    
+    frame = CGRectMake(boundsX + 271, 3, 42, 42);
+    playingImageView.frame = frame;
+    
+    frame = CGRectMake(boundsX + 274, 46, 42, 12);
+    playingLabel.frame = frame;
     
 }
 
@@ -112,6 +118,17 @@
         downVoteLabel.textAlignment = UITextAlignmentLeft;
         self.backgroundColor = [UIColor clearColor];
         
+        playingImageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed: @"playing.png"]];
+        playingImageView.hidden = YES;
+        
+        playingLabel = [[UILabel alloc] init];
+        [playingLabel setText: @"playing"];
+        playingLabel.font = [UIFont fontWithName:@"Helvetica" size:11];
+        playingLabel.backgroundColor = [UIColor clearColor];
+        playingLabel.textColor = [UIColor whiteColor];
+        playingLabel.hidden = YES;
+        
+        
         [self.contentView addSubview:songLabel];
         [self.contentView addSubview:artistLabel];
         [self.contentView addSubview:addedByLabel];
@@ -119,6 +136,8 @@
         [self.contentView addSubview:downVoteButton];
         [self.contentView addSubview:upVoteLabel];
         [self.contentView addSubview:downVoteLabel];
+        [self.contentView addSubview:playingImageView];
+        [self.contentView addSubview:playingLabel];
     }
     return self;
 }

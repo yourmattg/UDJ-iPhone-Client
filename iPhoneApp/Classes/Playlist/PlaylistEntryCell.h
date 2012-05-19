@@ -38,6 +38,9 @@
 @property(nonatomic,strong) UILabel* upVoteLabel;
 @property(nonatomic,strong) UILabel* downVoteLabel;
 
+@property(nonatomic,strong) UIImageView* playingImageView;
+@property(nonatomic,strong) UILabel* playingLabel;
+
 @property(nonatomic,strong) PlaylistViewController* parentViewController;
 
 @end

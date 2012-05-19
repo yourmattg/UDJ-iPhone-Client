@@ -121,10 +121,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
 // refreshes our list
 // NOTE: this is automatically called by UDJConnection when it gets a response
 - (void)refreshTableList{
-    self.currentSongTitleLabel.text = [UDJPlaylist sharedUDJPlaylist].currentSong.title;
-    NSString* artistText = [NSString stringWithFormat:@"by %@",[UDJPlaylist sharedUDJPlaylist].currentSong.artist];
-    if([UDJPlaylist sharedUDJPlaylist].currentSong == nil) artistText = @"";
-    self.currentSongArtistLabel.text = artistText;
     
     // if the playlist is empty, let them know, and hide the tableview
     if([[UDJPlaylist sharedUDJPlaylist].playlist count] == 0){
@@ -348,6 +344,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if([UDJPlaylist sharedUDJPlaylist].currentSong == nil) return [playlist count];
     return [playlist count];
 }
 
@@ -360,13 +357,18 @@ static PlaylistViewController* _sharedPlaylistViewController;
     if (cell == nil) {
         cell = [[PlaylistEntryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    
+    NSInteger rowNumber = indexPath.row;
 	
     // combine song number and name into one string
     UDJSong* song;
-    NSInteger rowNumber = indexPath.row;
-	song = [playlist songAtIndex:rowNumber];
     
-    // if there's no current song, show "nothing" and "nobody" as title/artist
+    // check if current song playing
+    if(indexPath.row == 0) song = [playlist songPlaying];
+    else song = [playlist songAtIndex: rowNumber - 1];
+    
+    
+    // if there's no current song
     if(song==nil){
         song = [[UDJSong alloc] init];
         song.title = @"";
@@ -393,6 +395,17 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     cell.downVoteButton.tag = rowNumber;
     cell.upVoteButton.tag = rowNumber;
+    
+    // Current song playing symbol
+    
+    if(rowNumber == 0){
+        cell.upVoteLabel.hidden = YES;
+        cell.downVoteLabel.hidden = YES;
+        cell.upVoteButton.hidden = YES;
+        cell.downVoteButton.hidden = YES;
+        cell.playingImageView.hidden = NO;
+        cell.playingLabel.hidden = NO;
+    }
     
     return cell;
 }

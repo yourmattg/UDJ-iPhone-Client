@@ -32,6 +32,7 @@
 		A33C461E148F11FC009C1BC6 /* LibrarySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A33C461C148F11FC009C1BC6 /* LibrarySearchViewController.m */; };
 		A33C461F148F11FC009C1BC6 /* LibrarySearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A33C461D148F11FC009C1BC6 /* LibrarySearchViewController.xib */; };
 		A33EE1DF1568459C00D49B85 /* dicesmall.png in Resources */ = {isa = PBXBuildFile; fileRef = A33EE1DE1568459C00D49B85 /* dicesmall.png */; };
+		A33EE1E115684B7D00D49B85 /* playing.png in Resources */ = {isa = PBXBuildFile; fileRef = A33EE1E015684B7D00D49B85 /* playing.png */; };
 		A341B92514F8681C001892C5 /* downarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A341B92414F8681C001892C5 /* downarrow.png */; };
 		A341B92714F86824001892C5 /* uparrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A341B92614F86824001892C5 /* uparrow.png */; };
 		A341B92914F86C61001892C5 /* addbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A341B92814F86C61001892C5 /* addbutton.png */; };
@@ -185,6 +186,7 @@
 		A33C461C148F11FC009C1BC6 /* LibrarySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibrarySearchViewController.m; sourceTree = "<group>"; };
 		A33C461D148F11FC009C1BC6 /* LibrarySearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LibrarySearchViewController.xib; sourceTree = "<group>"; };
 		A33EE1DE1568459C00D49B85 /* dicesmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dicesmall.png; sourceTree = "<group>"; };
+		A33EE1E015684B7D00D49B85 /* playing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playing.png; sourceTree = "<group>"; };
 		A341B92414F8681C001892C5 /* downarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downarrow.png; sourceTree = "<group>"; };
 		A341B92614F86824001892C5 /* uparrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uparrow.png; sourceTree = "<group>"; };
 		A341B92814F86C61001892C5 /* addbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addbutton.png; sourceTree = "<group>"; };
@@ -471,6 +473,7 @@
 		A3C6A4741565FA1400F1E42E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				A33EE1E015684B7D00D49B85 /* playing.png */,
 				A33EE1DE1568459C00D49B85 /* dicesmall.png */,
 				A37BBF3A1567085000251CC8 /* playersbutton.png */,
 				A3C22D5A1566D9EA0066B9F8 /* playingbar.png */,
@@ -735,6 +738,7 @@
 				A37BBF4015670A1500251CC8 /* ArtistsViewController.xib in Resources */,
 				A3C7A443156714F20085150A /* SongListViewController.xib in Resources */,
 				A33EE1DF1568459C00D49B85 /* dicesmall.png in Resources */,
+				A33EE1E115684B7D00D49B85 /* playing.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
