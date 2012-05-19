@@ -81,7 +81,7 @@
         addNotificationView.alpha = 1;
     } completion:^(BOOL finished){
         if(finished){
-            [NSThread detachNewThreadSelector:@selector(hideVoteNotification:) toTarget:self withObject:nil];
+            [NSThread detachNewThreadSelector:@selector(hideAddNotification:) toTarget:self withObject:nil];
         }
     }];
 }
