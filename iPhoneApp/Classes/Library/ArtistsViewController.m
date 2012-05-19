@@ -24,7 +24,7 @@
 @implementation ArtistsViewController
 
 @synthesize artistsTableView, searchBar, artistsArray, globalData;
-@synthesize statusLabel, searchIndicatorView;
+@synthesize statusLabel, searchIndicatorView, currentRequestNumber;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -152,6 +152,9 @@
     request.queue = client.requestQueue;
     request.method = RKRequestMethodGET;
     request.additionalHTTPHeaders = globalData.headers;
+    
+    // track current request number
+    currentRequestNumber = [NSNumber numberWithInt: [UDJData sharedUDJData].requestCount];
     request.userData = [NSNumber numberWithInt: globalData.requestCount++];
     
     //send request
@@ -160,6 +163,15 @@
 
 
 #pragma mark - Response handling
+
+-(void)resetToPlayerResultView{
+    
+    [self.navigationController.navigationController popViewControllerAnimated:YES];
+    
+    // alert user that player is inactive
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Player Inactive" message: @"The player you are trying to access is now inactive." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alertView show];
+}
 
 -(void)handleArtistResponse:(RKResponse*)response{
     // clear the current artists array
@@ -193,8 +205,8 @@
     
     // check if player has ended
     if(response.statusCode == 404){
-        if([[headerDict objectForKey: @"X-Udj-Missing-Resource"] isEqualToString:@"player"]){}
-            //[self resetToPlayerResultView];
+        if([[headerDict objectForKey: @"X-Udj-Missing-Resource"] isEqualToString:@"player"])
+            [self resetToPlayerResultView];
     }
     else if ([request isGET] && [response isOK]) {
         [self handleArtistResponse: response];        

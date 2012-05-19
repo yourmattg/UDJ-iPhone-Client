@@ -277,6 +277,15 @@
 
 #pragma mark Response handling
 
+-(void)showPlayerInactiveError{
+    [self toggleJoiningView: NO];
+    
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Player Inactive" message:@"The player you are trying to access is now inactive" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alertView show];
+    
+    [tableView reloadData];
+}
+
 // Handle responses from the server
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
     NSNumber* requestNumber = request.userData;
@@ -294,6 +303,10 @@
         
         if(response.statusCode == 201)
             [self joinEvent];
+        
+        else if(response.statusCode == 404){
+            [self showPlayerInactiveError];
+        }
         
         // let user know they entered the wrong password
         else if(response.statusCode == 401 && [[headerDict objectForKey: @"WWW-Authenticate"] isEqualToString: @"player-password"])

@@ -100,6 +100,9 @@
     request.queue = client.requestQueue;
     request.method = RKRequestMethodPUT;
     request.additionalHTTPHeaders = globalData.headers;
+    
+    // track current request number 
+    currentRequestNumber = [NSNumber numberWithInt: [UDJData sharedUDJData].requestCount];
     request.userData = [NSNumber numberWithInt: globalData.requestCount++];
     
     //TODO: find a way to keep track of the requests
@@ -228,6 +231,14 @@
 
 #pragma mark - Response handling
 
+-(void)resetToPlayerResultView{
+    
+     [self.navigationController.navigationController popViewControllerAnimated:YES];
+    
+    // alert user that player is inactive
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Player Inactive" message: @"The player you are trying to access is now inactive." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alertView show];
+}
 
 -(void)refreshStatusLabel{
     if(lastQueryType == UDJQueryTypeArtist){
@@ -270,8 +281,9 @@
     
     // check if player has ended
     if(response.statusCode == 404){
-        if([[headerDict objectForKey: @"X-Udj-Missing-Resource"] isEqualToString:@"player"]){}
-        //[self resetToPlayerResultView];
+        NSLog(@"missing resource: %@", [headerDict objectForKey: @"X-Udj-Missing-Resource"]);
+        if([[headerDict objectForKey: @"X-Udj-Missing-Resource"] isEqualToString:@"player"])
+            [self resetToPlayerResultView];
     }
     else if ([request isGET] && [response isOK]) {
         [self handleSearchResults: response];
