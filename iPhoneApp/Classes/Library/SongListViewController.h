@@ -37,6 +37,8 @@ enum UDJQueryType {
 @property(nonatomic,strong) IBOutlet UIView* addNotificationView;
 @property(nonatomic,strong) IBOutlet UILabel* addNotificationLabel;
 
+@property(nonatomic,strong) IBOutlet UISearchBar* searchBar;
+
 -(void)getSongsByArtist:(NSString*)artist;
 -(void)getSongsByQuery:(NSString*)query;
 

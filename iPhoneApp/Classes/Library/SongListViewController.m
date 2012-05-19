@@ -16,7 +16,7 @@
 @implementation SongListViewController
 
 @synthesize statusLabel, searchIndicatorView, currentRequestNumber, songTableView, resultList, globalData, lastQuery, lastQueryType;
-@synthesize addNotificationView, addNotificationLabel;
+@synthesize addNotificationView, addNotificationLabel, searchBar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,6 +45,7 @@
     globalData = [UDJData sharedUDJData];
     MAX_RESULTS = 100;
     
+    searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
 }
 
 - (void)viewDidUnload
@@ -52,6 +53,7 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -59,6 +61,7 @@
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+
 
 #pragma mark - Song adding
 
@@ -141,11 +144,18 @@
 }
 
 
-#pragma mark - UI Events
+#pragma mark - UI, SearchBar Events
 
 -(IBAction)artistButtonClick:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)theSearchBar{
+    [self getSongsByQuery: theSearchBar.text];
+    [self resignFirstResponder];
+}
+
+
 
 
 #pragma mark - Search request methods
@@ -184,7 +194,36 @@
 }
 
 -(void)getSongsByQuery:(NSString *)query{
+    // /udj/players/player_id/available_music?query=query{&max_results=maximum_number_of_results}
     
+    // update the status label
+    statusLabel.text = [NSString stringWithFormat: @"Searching for '%@'", query, nil];
+    searchIndicatorView.hidden = NO;
+    songTableView.hidden = YES;
+    lastQueryType = UDJQueryTypeGeneric;
+    lastQuery = query;
+    
+    RKClient* client = [RKClient sharedClient];
+    
+    // create URL
+    
+    NSString* urlString = client.baseURL;
+    query = [query stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    NSInteger playerID = [UDJEventData sharedEventData].currentEvent.eventId;
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@%@%@%d",@"/players/",playerID,@"/available_music?query=",query, @"&max_results=", MAX_RESULTS, nil];
+    
+    // create request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
+    request.queue = client.requestQueue;
+    request.method = RKRequestMethodGET;
+    request.additionalHTTPHeaders = [UDJData sharedUDJData].headers;
+    
+    // track current request number
+    currentRequestNumber = [NSNumber numberWithInt: [UDJData sharedUDJData].requestCount];
+    request.userData = [NSNumber numberWithInt: [UDJData sharedUDJData].requestCount++];
+    
+    //send request
+    [request send]; 
 }
 
 #pragma mark - Response handling

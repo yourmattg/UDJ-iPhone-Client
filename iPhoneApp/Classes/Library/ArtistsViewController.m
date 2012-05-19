@@ -58,6 +58,8 @@
     
     // get artists
     [self sendArtistsRequest];
+    
+    searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
 }
 
 - (void)viewDidUnload

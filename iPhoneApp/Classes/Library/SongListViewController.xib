@@ -175,6 +175,7 @@
 						<string key="NSFrame">{{142, 211}, {37, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -246,6 +247,7 @@
 						<string key="NSFrame">{{45, 2}, {235, 27}}</string>
 						<reference key="NSSuperview" ref="7161986"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:328</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -348,6 +350,22 @@
 						<reference key="destination" ref="7161986"/>
 					</object>
 					<int key="connectionID">27</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">searchBar</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="373887774"/>
+					</object>
+					<int key="connectionID">29</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="373887774"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">28</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -501,7 +519,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">27</int>
+			<int key="maxID">29</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -511,6 +529,7 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="addNotificationLabel">UILabel</string>
 						<string key="addNotificationView">UIView</string>
+						<string key="searchBar">UISearchBar</string>
 						<string key="searchIndicatorView">UIActivityIndicatorView</string>
 						<string key="songTableView">UITableView</string>
 						<string key="statusLabel">UILabel</string>
@@ -523,6 +542,10 @@
 						<object class="IBToOneOutletInfo" key="addNotificationView">
 							<string key="name">addNotificationView</string>
 							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="searchBar">
+							<string key="name">searchBar</string>
+							<string key="candidateClassName">UISearchBar</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="searchIndicatorView">
 							<string key="name">searchIndicatorView</string>

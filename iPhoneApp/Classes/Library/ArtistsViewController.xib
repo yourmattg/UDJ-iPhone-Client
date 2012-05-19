@@ -110,7 +110,7 @@
 						<string key="NSFrame">{{-1, 71}, {320, 340}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="120450038"/>
+						<reference key="NSNextKeyView" ref="912771235"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MCAwIDAgMAA</bytes>
@@ -168,7 +168,7 @@
 							<int key="NSfFlags">16</int>
 						</object>
 					</object>
-					<object class="IBUIActivityIndicatorView" id="120450038">
+					<object class="IBUIActivityIndicatorView" id="912771235">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{142, 211}, {37, 37}}</string>
@@ -221,7 +221,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">searchIndicatorView</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="120450038"/>
+						<reference key="destination" ref="912771235"/>
 					</object>
 					<int key="connectionID">21</int>
 				</object>
@@ -232,6 +232,22 @@
 						<reference key="destination" ref="665205022"/>
 					</object>
 					<int key="connectionID">22</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">searchBar</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="409937786"/>
+					</object>
+					<int key="connectionID">23</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="409937786"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">24</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -279,7 +295,7 @@
 							<reference ref="409937786"/>
 							<reference ref="375553752"/>
 							<reference ref="665205022"/>
-							<reference ref="120450038"/>
+							<reference ref="912771235"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -315,7 +331,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">20</int>
-						<reference key="object" ref="120450038"/>
+						<reference key="object" ref="912771235"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>
@@ -338,7 +354,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">22</int>
+			<int key="maxID">24</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
