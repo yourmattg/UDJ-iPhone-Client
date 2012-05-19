@@ -34,6 +34,7 @@
 @implementation PlaylistViewController
 
 @synthesize currentEvent, playlist, tableView, currentSongTitleLabel, currentSongArtistLabel, selectedSong, statusLabel, currentRequestNumber, globalData, leavingBackgroundView, leavingView, leaveButton, libraryButton, eventNameLabel, refreshButton, refreshIndicator, refreshLabel, voteNotificationView, voteNotificationLabel, voteNotificationArrowView;
+@synthesize playerNameLabel;
 
 static PlaylistViewController* _sharedPlaylistViewController;
 
@@ -289,6 +290,8 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     // set up tab bar stuff
     self.title = NSLocalizedString(@"Playlist", @"Playlist");
+    
+    [playerNameLabel setText: currentEvent.name];
     
     
 }

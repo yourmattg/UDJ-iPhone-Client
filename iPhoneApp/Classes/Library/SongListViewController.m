@@ -152,7 +152,7 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)theSearchBar{
     [self getSongsByQuery: theSearchBar.text];
-    [self resignFirstResponder];
+    [theSearchBar resignFirstResponder];
 }
 
 
@@ -232,6 +232,9 @@
 -(void)refreshStatusLabel{
     if(lastQueryType == UDJQueryTypeArtist){
         statusLabel.text = [NSString stringWithFormat: @"Songs by %@", lastQuery];
+    }
+    else{
+        statusLabel.text = [NSString stringWithFormat: @"Songs matching '%@'", lastQuery];
     }
 }
 

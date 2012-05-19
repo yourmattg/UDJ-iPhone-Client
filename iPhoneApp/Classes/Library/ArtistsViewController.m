@@ -81,6 +81,16 @@
 }
 
 
+#pragma mark Search bar methods
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)theSearchBar{
+    [theSearchBar resignFirstResponder];
+    SongListViewController* songListViewController = [[SongListViewController alloc] initWithNibName:@"SongListViewController" bundle:[NSBundle mainBundle]];
+    [self.navigationController pushViewController: songListViewController animated:YES];
+    [songListViewController getSongsByQuery: theSearchBar.text];
+}
+
+
 
 #pragma mark - Table view data source
 

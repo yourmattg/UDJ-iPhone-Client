@@ -75,4 +75,6 @@
 @property(nonatomic,strong) IBOutlet UILabel* voteNotificationLabel;
 @property(nonatomic,strong) IBOutlet UIImageView* voteNotificationArrowView;
 
+@property(nonatomic,strong) IBOutlet UILabel* playerNameLabel;
+
 @end
