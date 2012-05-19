@@ -203,7 +203,9 @@
     cell.artistLabel.text = song.artist;
     cell.addButton.tag = song.librarySongId;
     
-    cell.parentViewController = self;
+    
+    
+    //cell.parentViewController = self;
     
     return cell;
 }

@@ -10,12 +10,13 @@
 #import "RestKit/RestKit.h"
 #import "RestKit/RKJSONParserJSONKit.h"
 #import "UDJEventData.h"
-#import "UDJData.h"
+#import "LibraryEntryCell.h"
 
 
 @implementation SongListViewController
 
-@synthesize statusLabel, searchIndicatorView, currentRequestNumber, songTableView, resultList;
+@synthesize statusLabel, searchIndicatorView, currentRequestNumber, songTableView, resultList, globalData, lastQuery, lastQueryType;
+@synthesize addNotificationView, addNotificationLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,6 +42,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    globalData = [UDJData sharedUDJData];
     MAX_RESULTS = 100;
     
 }
@@ -56,6 +58,87 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - Song adding
+
+
+-(void)hideAddNotification:(id)arg{
+    [NSThread sleepForTimeInterval:2];
+    [UIView animateWithDuration:1.0 animations:^{
+        addNotificationView.alpha = 0;
+    }];
+}
+
+// briefly show the vote notification view
+-(void)showAddNotification:(NSString*)title{
+    addNotificationLabel.text = title;
+    
+    [self.view addSubview: addNotificationView];
+    addNotificationView.alpha = 0;
+    addNotificationView.frame = CGRectMake(20, 370, 280, 32);
+    [UIView animateWithDuration:0.5 animations:^{
+        addNotificationView.alpha = 1;
+    } completion:^(BOOL finished){
+        if(finished){
+            [NSThread detachNewThreadSelector:@selector(hideVoteNotification:) toTarget:self withObject:nil];
+        }
+    }];
+}
+
+-(void)sendAddSongRequest:(NSInteger)librarySongId playerID:(NSInteger)playerID{
+    RKClient* client = [RKClient sharedClient];
+    
+    //create url [PUT] /udj/events/event_id/active_playlist/songs
+    NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@%d",client.baseURL,@"/players/",playerID,@"/active_playlist/songs/",librarySongId, nil];
+
+    // create request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
+    request.queue = client.requestQueue;
+    request.method = RKRequestMethodPUT;
+    request.additionalHTTPHeaders = globalData.headers;
+    request.userData = [NSNumber numberWithInt: globalData.requestCount++];
+    
+    //TODO: find a way to keep track of the requests
+    //[currentRequests setObject:@"songAdd" forKey:request];
+    [request send]; 
+    
+}
+
+-(IBAction)addButtonClick:(id)sender{
+    UIButton* button = (UIButton*)sender;
+    [self sendAddSongRequest: button.tag playerID: [UDJEventData sharedEventData].currentEvent.eventId];
+    [self showAddNotification: button.titleLabel.text];
+}
+
+#pragma mark - Tableview data source
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [resultList count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)TableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    
+    LibraryEntryCell* cell = [TableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[LibraryEntryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    UDJSong* song = [resultList songAtIndex:indexPath.row];
+    NSLog(@"song %@", song.title);
+    cell.songLabel.text = song.title;
+    cell.artistLabel.text = song.artist;
+    cell.addButton.tag = song.librarySongId;
+    cell.addButton.titleLabel.text = song.title;
+    
+    [cell.addButton addTarget:self action:@selector(addButtonClick:)   
+        forControlEvents:UIControlEventTouchUpInside];
+    
+    // TODO: check if song is already on playlist, yes = hide/fade add button
+    
+    return cell;
 }
 
 
@@ -74,15 +157,18 @@
     // update the status label
     statusLabel.text = [NSString stringWithFormat: @"Getting songs by %@", artist, nil];
     songTableView.hidden = YES;
+    lastQueryType = UDJQueryTypeArtist;
+    lastQuery = artist;
     
     RKClient* client = [RKClient sharedClient];
     
     // create URL
     
     NSString* urlString = client.baseURL;
-    artist = [artist stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    artist = [artist stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     NSInteger playerID = [UDJEventData sharedEventData].currentEvent.eventId;
     urlString = [urlString stringByAppendingFormat:@"%@%d%@%@",@"/players/",playerID,@"/available_music/artists/",artist,nil];
+    NSLog(urlString);
     
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
@@ -105,13 +191,18 @@
 
 #pragma mark - Response handling
 
+
+-(void)refreshStatusLabel{
+    if(lastQueryType == UDJQueryTypeArtist){
+        statusLabel.text = [NSString stringWithFormat: @"Songs by %@", lastQuery];
+    }
+}
+
 -(void)handleSearchResults:(RKResponse *)response{
     UDJSongList* tempList = [UDJSongList new];
     RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
     NSArray* songArray = [parser objectFromString:[response bodyAsString] error:nil];
-    NSLog(@"hurp count %d", [songArray count]);
     for(int i=0; i<[songArray count]; i++){
-        NSLog(@"iteration %d", i);
         NSDictionary* songDict = [songArray objectAtIndex:i];
         UDJSong* song = [UDJSong songFromDictionary:songDict isLibraryEntry:YES];
         [tempList addSong:song];
@@ -119,7 +210,12 @@
     
     self.resultList = tempList;
     
-    // refresh table view
+    // refresh table view, hide activity indicator
+    [songTableView reloadData];
+    songTableView.hidden = NO;
+    searchIndicatorView.hidden = YES;
+    
+    [self refreshStatusLabel];
 }
 
 // Handle responses from the server
@@ -141,7 +237,7 @@
         [self handleSearchResults: response];
     }
     
-    //self.currentRequestNumber = [NSNumber numberWithInt: -1];
+    self.currentRequestNumber = [NSNumber numberWithInt: -1];
 }
 
 @end

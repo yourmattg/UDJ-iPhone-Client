@@ -128,7 +128,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     // if the playlist is empty, let them know, and hide the tableview
     if([[UDJPlaylist sharedUDJPlaylist].playlist count] == 0){
         self.tableView.hidden = YES;
-        self.statusLabel.text = @"There are no songs queued up to play next. Click the Library button to add some to the playlist!";
+        self.statusLabel.text = @"There are no songs queued up to play next.\nGo find some songs to add to the playlist!";
     }
     else{
         self.tableView.hidden = NO;
