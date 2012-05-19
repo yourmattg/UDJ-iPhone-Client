@@ -87,7 +87,7 @@
 					<object class="IBUISearchBar" id="373887774">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">290</int>
-						<string key="NSFrameSize">{320, 44}</string>
+						<string key="NSFrame">{{51, 0}, {269, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="548703317"/>
@@ -166,7 +166,7 @@
 							<int key="NSfFlags">16</int>
 						</object>
 					</object>
-					<object class="IBUIActivityIndicatorView" id="850169721">
+					<object class="IBUIActivityIndicatorView" id="846222407">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{142, 187}, {37, 37}}</string>
@@ -208,19 +208,27 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">searchIndicatorView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="846222407"/>
+					</object>
+					<int key="connectionID">12</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">statusLabel</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="908073519"/>
 					</object>
-					<int key="connectionID">11</int>
+					<int key="connectionID">13</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">searchIndicatorView</string>
+						<string key="label">songTableView</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="850169721"/>
+						<reference key="destination" ref="750198204"/>
 					</object>
-					<int key="connectionID">12</int>
+					<int key="connectionID">14</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -241,7 +249,7 @@
 							<reference ref="750198204"/>
 							<reference ref="908073519"/>
 							<reference ref="179501131"/>
-							<reference ref="850169721"/>
+							<reference ref="846222407"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -288,7 +296,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">10</int>
-						<reference key="object" ref="850169721"/>
+						<reference key="object" ref="846222407"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>
@@ -311,7 +319,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">12</int>
+			<int key="maxID">14</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -320,12 +328,17 @@
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="searchIndicatorView">UIActivityIndicatorView</string>
+						<string key="songTableView">UITableView</string>
 						<string key="statusLabel">UILabel</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="searchIndicatorView">
 							<string key="name">searchIndicatorView</string>
 							<string key="candidateClassName">UIActivityIndicatorView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="songTableView">
+							<string key="name">songTableView</string>
+							<string key="candidateClassName">UITableView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="statusLabel">
 							<string key="name">statusLabel</string>

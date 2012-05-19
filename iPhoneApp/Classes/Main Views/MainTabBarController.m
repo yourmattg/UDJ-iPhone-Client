@@ -39,11 +39,16 @@
     // Do any additional setup after loading the view from its nib. 
     PlaylistViewController* playlistViewController = [[PlaylistViewController alloc] initWithNibName:@"NewPlaylistViewController" bundle:[NSBundle mainBundle]];
     playlistViewController.title = NSLocalizedString(@"Playlist", @"Playlist");
+    
+    // the artists page should be the root view of a new navigation controller
     ArtistsViewController* artistsViewController = [[ArtistsViewController alloc] initWithNibName:@"ArtistsViewController" bundle:[NSBundle mainBundle]];
-    artistsViewController.title = NSLocalizedString(@"Library", @"Library");
+    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:artistsViewController];
+    navigationController.title = NSLocalizedString(@"Library", @"Library");
+    navigationController.navigationBarHidden = YES;
+    
     RandomViewController* randomViewController = [[RandomViewController alloc] initWithNibName:@"RandomViewController" bundle:[NSBundle mainBundle]];
     randomViewController.title = NSLocalizedString(@"Random", @"Random");
-    self.viewControllers = [NSArray arrayWithObjects:playlistViewController, artistsViewController, randomViewController, nil];
+    self.viewControllers = [NSArray arrayWithObjects:playlistViewController, navigationController, randomViewController, nil];
     
     self.tabBar.tintColor = [UIColor colorWithRed:(35.0/255.0) green:(59.0/255.0) blue:(79.0/255.0) alpha:1];
     

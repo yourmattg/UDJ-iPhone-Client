@@ -11,7 +11,7 @@
 
 @implementation SongListViewController
 
-@synthesize statusLabel, searchIndicatorView, currentRequestNumber;
+@synthesize statusLabel, searchIndicatorView, currentRequestNumber, songTableView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -60,7 +60,8 @@
     
     // update the status label
     statusLabel.text = [NSString stringWithFormat: @"Getting songs by %@", artist, nil];
-    [statusLabel sizeToFit];
+    songTableView.hidden = YES;
+    
 }
 
 -(void)getSongsByQuery:(NSString *)query{

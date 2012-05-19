@@ -106,8 +106,8 @@
     
     // transition to SongListViewController
     SongListViewController* songListViewController = [[SongListViewController alloc] initWithNibName:@"SongListViewController" bundle:[NSBundle mainBundle]];
-    [songListViewController getSongsByArtist: artistName];
     [self.navigationController pushViewController:songListViewController animated:YES];
+    [songListViewController getSongsByArtist: artistName];
     
     
 }
@@ -148,7 +148,8 @@
     for(int i=0; i<[responseArray count]; i++)
         [artistsArray addObject: [responseArray objectAtIndex: i]];
     
-    // reload the table data 
+    // sort array and reload table data
+    [artistsArray sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     [artistsTableView reloadData];
 }
 

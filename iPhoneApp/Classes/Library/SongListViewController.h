@@ -12,6 +12,7 @@
 
 @property(nonatomic,strong) IBOutlet UILabel* statusLabel;
 @property(nonatomic,strong) IBOutlet UIActivityIndicatorView* searchIndicatorView;
+@property(nonatomic,strong) IBOutlet UITableView* songTableView;
 
 @property(nonatomic,strong) NSNumber* currentRequestNumber;
 
