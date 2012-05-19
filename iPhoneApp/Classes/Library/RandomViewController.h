@@ -7,7 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UDJSongList.h"
+#import "UDJData.h"
 
-@interface RandomViewController : UIViewController
+@interface RandomViewController : UIViewController{
+    NSInteger MAX_RESULTS;
+}
+
+
+@property(nonatomic,strong) IBOutlet UIActivityIndicatorView* searchIndicatorView;
+@property(nonatomic,strong) IBOutlet UIButton* refreshButton;
+
+@property(nonatomic,strong) IBOutlet UITableView* songTableView;
+@property(nonatomic,strong) UDJSongList* resultList;
+
+@property(nonatomic,strong) UDJData* globalData;
+@property(nonatomic,strong) NSNumber* currentRequestNumber;
 
 @end
