@@ -24,4 +24,7 @@
 @property(nonatomic,strong) UDJData* globalData;
 @property(nonatomic,strong) NSNumber* currentRequestNumber;
 
+@property(nonatomic,strong) IBOutlet UIView* addNotificationView;
+@property(nonatomic,strong) IBOutlet UILabel* addNotificationLabel;
+
 @end

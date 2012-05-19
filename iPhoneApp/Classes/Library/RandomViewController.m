@@ -15,6 +15,7 @@
 @implementation RandomViewController
 
 @synthesize searchIndicatorView, refreshButton, songTableView, resultList, globalData, currentRequestNumber;
+@synthesize addNotificationView, addNotificationLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -59,6 +60,58 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+
+#pragma mark - Song adding
+
+
+-(void)hideAddNotification:(id)arg{
+    [NSThread sleepForTimeInterval:2];
+    [UIView animateWithDuration:1.0 animations:^{
+        addNotificationView.alpha = 0;
+    }];
+}
+
+// briefly show the vote notification view
+-(void)showAddNotification:(NSString*)title{
+    addNotificationLabel.text = title;
+    
+    [self.view addSubview: addNotificationView];
+    addNotificationView.alpha = 0;
+    addNotificationView.frame = CGRectMake(20, 370, 280, 32);
+    [UIView animateWithDuration:0.5 animations:^{
+        addNotificationView.alpha = 1;
+    } completion:^(BOOL finished){
+        if(finished){
+            [NSThread detachNewThreadSelector:@selector(hideAddNotification:) toTarget:self withObject:nil];
+        }
+    }];
+}
+
+-(void)sendAddSongRequest:(NSInteger)librarySongId playerID:(NSInteger)playerID{
+    RKClient* client = [RKClient sharedClient];
+    
+    //create url [PUT] /udj/events/event_id/active_playlist/songs
+    NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@%d",client.baseURL,@"/players/",playerID,@"/active_playlist/songs/",librarySongId, nil];
+    
+    // create request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
+    request.queue = client.requestQueue;
+    request.method = RKRequestMethodPUT;
+    request.additionalHTTPHeaders = globalData.headers;
+    request.userData = [NSNumber numberWithInt: globalData.requestCount++];
+    
+    //TODO: find a way to keep track of the requests
+    //[currentRequests setObject:@"songAdd" forKey:request];
+    [request send]; 
+    
+}
+
+-(IBAction)addButtonClick:(id)sender{
+    UIButton* button = (UIButton*)sender;
+    [self sendAddSongRequest: button.tag playerID: [UDJEventData sharedEventData].currentEvent.eventId];
+    [self showAddNotification: button.titleLabel.text];
 }
 
 
