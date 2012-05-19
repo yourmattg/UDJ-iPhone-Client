@@ -168,7 +168,6 @@
     artist = [artist stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     NSInteger playerID = [UDJEventData sharedEventData].currentEvent.eventId;
     urlString = [urlString stringByAppendingFormat:@"%@%d%@%@",@"/players/",playerID,@"/available_music/artists/",artist,nil];
-    NSLog(urlString);
     
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];

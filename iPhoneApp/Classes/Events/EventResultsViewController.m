@@ -247,6 +247,13 @@
     [self.tableView reloadData];
 }
 
+-(void) showWrongPasswordError{
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Access Denied" message:@"You have entered an incorrect password for the player." delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertView show];
+    [self toggleJoiningView: NO];
+    [self.tableView reloadData];
+}
+
 -(void) showAlreadyInEventError:(RKResponse*)response{
     
     [self.tableView reloadData];
@@ -273,6 +280,7 @@
 // Handle responses from the server
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
     NSNumber* requestNumber = request.userData;
+    NSDictionary* headerDict = [response allHeaderFields];
     
     NSLog(@"EventResultsViewController: status code %d", [response statusCode]);
     
@@ -287,8 +295,9 @@
         if(response.statusCode == 201)
             [self joinEvent];
         
-        else if(response.statusCode == 404)
-            [self showEventNotFoundError];
+        // let user know they entered the wrong password
+        else if(response.statusCode == 401 && [[headerDict objectForKey: @"WWW-Authenticate"] isEqualToString: @"player-password"])
+            [self showWrongPasswordError];
         
         else if(response.statusCode == 409)
             [self showAlreadyInEventError:response];
