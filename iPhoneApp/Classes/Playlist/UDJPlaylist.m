@@ -111,7 +111,7 @@ static UDJPlaylist* _sharedUDJPlaylist = nil;
 +(UDJPlaylist*)sharedUDJPlaylist{
 	@synchronized([UDJPlaylist class]){
 		if (!_sharedUDJPlaylist)
-			self = [[self alloc] init];        
+			_sharedUDJPlaylist = [[self alloc] init];        
 		return _sharedUDJPlaylist;
 	}    
 	return nil;

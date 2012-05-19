@@ -140,7 +140,7 @@ static UDJEventData* _sharedEventList = nil;
 +(UDJEventData*)sharedEventData{
 	@synchronized([UDJEventData class]){
 		if (!_sharedEventList)
-			self = [[self alloc] init];        
+			_sharedEventList = [[self alloc] init];        
 		return _sharedEventList;
 	}    
 	return nil;

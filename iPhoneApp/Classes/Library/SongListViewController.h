@@ -10,4 +10,12 @@
 
 @interface SongListViewController : UIViewController
 
+@property(nonatomic,strong) IBOutlet UILabel* statusLabel;
+@property(nonatomic,strong) IBOutlet UIActivityIndicatorView* searchIndicatorView;
+
+@property(nonatomic,strong) NSNumber* currentRequestNumber;
+
+-(void)getSongsByArtist:(NSString*)artist;
+-(void)getSongsByQuery:(NSString*)query;
+
 @end

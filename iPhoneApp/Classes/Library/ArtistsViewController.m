@@ -19,6 +19,7 @@
 
 #import "ArtistsViewController.h"
 #import "UDJEventData.h"
+#import "SongListViewController.h"
 
 @implementation ArtistsViewController
 
@@ -103,7 +104,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString* artistName = [artistsArray objectAtIndex: indexPath.row];
     
-    // create SongListViewController & go
+    // transition to SongListViewController
+    SongListViewController* songListViewController = [[SongListViewController alloc] initWithNibName:@"SongListViewController" bundle:[NSBundle mainBundle]];
+    [songListViewController getSongsByArtist: artistName];
+    [self.navigationController pushViewController:songListViewController animated:YES];
+    
+    
 }
 
 

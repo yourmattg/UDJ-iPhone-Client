@@ -83,7 +83,7 @@ static UDJData* _sharedUDJData = nil;
 +(UDJData*)sharedUDJData{
 	@synchronized([UDJData class]){
 		if (!_sharedUDJData){
-			self = [[self alloc] init]; 
+			_sharedUDJData = [[self alloc] init]; 
     
         }
 		return _sharedUDJData;
