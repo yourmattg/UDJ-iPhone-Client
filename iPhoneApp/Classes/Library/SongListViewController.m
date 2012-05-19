@@ -127,7 +127,6 @@
     }
     
     UDJSong* song = [resultList songAtIndex:indexPath.row];
-    NSLog(@"song %@", song.title);
     cell.songLabel.text = song.title;
     cell.artistLabel.text = song.artist;
     cell.addButton.tag = song.librarySongId;

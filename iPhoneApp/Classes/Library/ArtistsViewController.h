@@ -28,6 +28,9 @@
 @property(nonatomic,strong) NSMutableArray* artistsArray;
 @property(nonatomic,strong) IBOutlet UDJData* globalData;
 
+@property(nonatomic,strong) IBOutlet UILabel* statusLabel;
+@property(nonatomic,strong) IBOutlet UIActivityIndicatorView* searchIndicatorView;
+
 -(void)sendArtistsRequest;
 
 @end

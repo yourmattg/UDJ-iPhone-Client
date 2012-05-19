@@ -24,6 +24,7 @@
 @implementation ArtistsViewController
 
 @synthesize artistsTableView, searchBar, artistsArray, globalData;
+@synthesize statusLabel, searchIndicatorView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -122,6 +123,11 @@
 
 -(void)sendArtistsRequest{
     
+    // update status label
+    [statusLabel setText: @"Getting artists from library"];
+    artistsTableView.hidden = YES;
+    
+    
     // gets JSON array of artists
     RKClient* client = [RKClient sharedClient];
     
@@ -156,6 +162,11 @@
     // sort array and reload table data
     [artistsArray sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     [artistsTableView reloadData];
+    
+    // update status label
+    [statusLabel setText: @"Artists"];
+    searchIndicatorView.hidden = YES;
+    artistsTableView.hidden = NO;
 }
 
 // Handle responses from the server
