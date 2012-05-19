@@ -53,7 +53,7 @@
     frame= CGRectMake(boundsX+10 ,3, 250, 19);
     songLabel.frame = frame;
     
-    frame= CGRectMake(boundsX+14 ,25, 250, 14);
+    frame= CGRectMake(boundsX+14 ,22, 250, 17);
     artistLabel.frame = frame;
 }
 
