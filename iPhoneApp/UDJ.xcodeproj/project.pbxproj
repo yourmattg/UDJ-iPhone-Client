@@ -31,7 +31,6 @@
 		A33C4614148F0707009C1BC6 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A33C4612148F0707009C1BC6 /* PlaylistViewController.m */; };
 		A33C461E148F11FC009C1BC6 /* LibrarySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A33C461C148F11FC009C1BC6 /* LibrarySearchViewController.m */; };
 		A33C461F148F11FC009C1BC6 /* LibrarySearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A33C461D148F11FC009C1BC6 /* LibrarySearchViewController.xib */; };
-		A33EE1DF1568459C00D49B85 /* dicesmall.png in Resources */ = {isa = PBXBuildFile; fileRef = A33EE1DE1568459C00D49B85 /* dicesmall.png */; };
 		A33EE1E115684B7D00D49B85 /* playing.png in Resources */ = {isa = PBXBuildFile; fileRef = A33EE1E015684B7D00D49B85 /* playing.png */; };
 		A341B92514F8681C001892C5 /* downarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A341B92414F8681C001892C5 /* downarrow.png */; };
 		A341B92714F86824001892C5 /* uparrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A341B92614F86824001892C5 /* uparrow.png */; };
@@ -80,6 +79,7 @@
 		A3C7A443156714F20085150A /* SongListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3C7A441156714F20085150A /* SongListViewController.xib */; };
 		A3CE2C06151D257400C13006 /* eventcell.png in Resources */ = {isa = PBXBuildFile; fileRef = A3CE2C05151D257400C13006 /* eventcell.png */; };
 		A3CF872F14B8F8F000A9F829 /* UDJSongList.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CF872E14B8F8F000A9F829 /* UDJSongList.m */; };
+		A3CFBEE915685DA5002B7658 /* playtoggle.png in Resources */ = {isa = PBXBuildFile; fileRef = A3CFBEE815685DA5002B7658 /* playtoggle.png */; };
 		A3D334D514C6A02300A90D58 /* downarrow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3D334D414C6A02300A90D58 /* downarrow.jpg */; };
 		A3D334D714C6A02A00A90D58 /* uparrow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3D334D614C6A02A00A90D58 /* uparrow.jpg */; };
 		A3DAD57D14BD253600688CE0 /* UDJMappableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DAD57C14BD253600688CE0 /* UDJMappableArray.m */; };
@@ -185,7 +185,6 @@
 		A33C461B148F11FC009C1BC6 /* LibrarySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibrarySearchViewController.h; sourceTree = "<group>"; };
 		A33C461C148F11FC009C1BC6 /* LibrarySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibrarySearchViewController.m; sourceTree = "<group>"; };
 		A33C461D148F11FC009C1BC6 /* LibrarySearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LibrarySearchViewController.xib; sourceTree = "<group>"; };
-		A33EE1DE1568459C00D49B85 /* dicesmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dicesmall.png; sourceTree = "<group>"; };
 		A33EE1E015684B7D00D49B85 /* playing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playing.png; sourceTree = "<group>"; };
 		A341B92414F8681C001892C5 /* downarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downarrow.png; sourceTree = "<group>"; };
 		A341B92614F86824001892C5 /* uparrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uparrow.png; sourceTree = "<group>"; };
@@ -247,6 +246,7 @@
 		A3CE2C05151D257400C13006 /* eventcell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eventcell.png; sourceTree = "<group>"; };
 		A3CF872D14B8F8F000A9F829 /* UDJSongList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJSongList.h; sourceTree = "<group>"; };
 		A3CF872E14B8F8F000A9F829 /* UDJSongList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJSongList.m; sourceTree = "<group>"; };
+		A3CFBEE815685DA5002B7658 /* playtoggle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playtoggle.png; sourceTree = "<group>"; };
 		A3D334D414C6A02300A90D58 /* downarrow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = downarrow.jpg; sourceTree = "<group>"; };
 		A3D334D614C6A02A00A90D58 /* uparrow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = uparrow.jpg; sourceTree = "<group>"; };
 		A3DAD57B14BD253600688CE0 /* UDJMappableArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJMappableArray.h; sourceTree = "<group>"; };
@@ -473,8 +473,8 @@
 		A3C6A4741565FA1400F1E42E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				A3CFBEE815685DA5002B7658 /* playtoggle.png */,
 				A33EE1E015684B7D00D49B85 /* playing.png */,
-				A33EE1DE1568459C00D49B85 /* dicesmall.png */,
 				A37BBF3A1567085000251CC8 /* playersbutton.png */,
 				A3C22D5A1566D9EA0066B9F8 /* playingbar.png */,
 				A3C22D581566D8510066B9F8 /* randomicon.png */,
@@ -737,8 +737,8 @@
 				A37BBF3B1567085000251CC8 /* playersbutton.png in Resources */,
 				A37BBF4015670A1500251CC8 /* ArtistsViewController.xib in Resources */,
 				A3C7A443156714F20085150A /* SongListViewController.xib in Resources */,
-				A33EE1DF1568459C00D49B85 /* dicesmall.png in Resources */,
 				A33EE1E115684B7D00D49B85 /* playing.png in Resources */,
+				A3CFBEE915685DA5002B7658 /* playtoggle.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

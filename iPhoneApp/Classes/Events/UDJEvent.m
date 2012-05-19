@@ -27,10 +27,10 @@
     UDJEvent* event = [UDJEvent new];
     event.name = [eventDict objectForKey:@"name"];
     event.eventId = [[eventDict objectForKey:@"id"] integerValue];
-    event.hostId = [[eventDict objectForKey:@"host_id"] integerValue];
+    event.hostId = [[eventDict objectForKey:@"owner_id"] integerValue];
     event.latitude = [[eventDict objectForKey:@"latitude"] doubleValue];
     event.longitude = [[eventDict objectForKey:@"longitude"] doubleValue];
-    event.hostUsername = [eventDict objectForKey:@"host_username"];
+    event.hostUsername = [eventDict objectForKey:@"owner_username"];
     event.hasPassword = [[eventDict objectForKey:@"has_password"] boolValue];
     return event;
 }
