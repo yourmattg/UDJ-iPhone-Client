@@ -82,6 +82,9 @@
 		A3CFBEE915685DA5002B7658 /* playtoggle.png in Resources */ = {isa = PBXBuildFile; fileRef = A3CFBEE815685DA5002B7658 /* playtoggle.png */; };
 		A3CFBEEB156865B7002B7658 /* controls.png in Resources */ = {isa = PBXBuildFile; fileRef = A3CFBEEA156865B7002B7658 /* controls.png */; };
 		A3CFBEED1568730A002B7658 /* pausetoggle.png in Resources */ = {isa = PBXBuildFile; fileRef = A3CFBEEC1568730A002B7658 /* pausetoggle.png */; };
+		A3CFBEF015688811002B7658 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CFBEEF15688811002B7658 /* KeychainItemWrapper.m */; };
+		A3CFBEF3156888E8002B7658 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3CFBEF1156888E8002B7658 /* Model.xcdatamodeld */; };
+		A3CFBEF615688947002B7658 /* LastInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CFBEF515688947002B7658 /* LastInfo.m */; };
 		A3D334D514C6A02300A90D58 /* downarrow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3D334D414C6A02300A90D58 /* downarrow.jpg */; };
 		A3D334D714C6A02A00A90D58 /* uparrow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3D334D614C6A02A00A90D58 /* uparrow.jpg */; };
 		A3DAD57D14BD253600688CE0 /* UDJMappableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DAD57C14BD253600688CE0 /* UDJMappableArray.m */; };
@@ -251,6 +254,11 @@
 		A3CFBEE815685DA5002B7658 /* playtoggle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playtoggle.png; sourceTree = "<group>"; };
 		A3CFBEEA156865B7002B7658 /* controls.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = controls.png; sourceTree = "<group>"; };
 		A3CFBEEC1568730A002B7658 /* pausetoggle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pausetoggle.png; sourceTree = "<group>"; };
+		A3CFBEEE15688811002B7658 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+		A3CFBEEF15688811002B7658 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
+		A3CFBEF2156888E8002B7658 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		A3CFBEF415688947002B7658 /* LastInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LastInfo.h; sourceTree = "<group>"; };
+		A3CFBEF515688947002B7658 /* LastInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LastInfo.m; sourceTree = "<group>"; };
 		A3D334D414C6A02300A90D58 /* downarrow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = downarrow.jpg; sourceTree = "<group>"; };
 		A3D334D614C6A02A00A90D58 /* uparrow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = uparrow.jpg; sourceTree = "<group>"; };
 		A3DAD57B14BD253600688CE0 /* UDJMappableArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJMappableArray.h; sourceTree = "<group>"; };
@@ -335,6 +343,7 @@
 				A3F58C5414A1517900756F7D /* Main Views */,
 				A31AA6A91561CE3B0032FEAB /* UDJUser.h */,
 				A31AA6AA1561CE3B0032FEAB /* UDJUser.m */,
+				A3CFBEF1156888E8002B7658 /* Model.xcdatamodeld */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -438,6 +447,10 @@
 			children = (
 				28D7ACF60DDB3853001CB0EB /* UDJViewController.h */,
 				28D7ACF70DDB3853001CB0EB /* UDJViewController.m */,
+				A3CFBEEE15688811002B7658 /* KeychainItemWrapper.h */,
+				A3CFBEEF15688811002B7658 /* KeychainItemWrapper.m */,
+				A3CFBEF415688947002B7658 /* LastInfo.h */,
+				A3CFBEF515688947002B7658 /* LastInfo.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -799,6 +812,9 @@
 				A3C6A4721565F9FA00F1E42E /* RandomViewController.m in Sources */,
 				A37BBF3F15670A1500251CC8 /* ArtistsViewController.m in Sources */,
 				A3C7A442156714F20085150A /* SongListViewController.m in Sources */,
+				A3CFBEF015688811002B7658 /* KeychainItemWrapper.m in Sources */,
+				A3CFBEF3156888E8002B7658 /* Model.xcdatamodeld in Sources */,
+				A3CFBEF615688947002B7658 /* LastInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -953,6 +969,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A3CFBEF1156888E8002B7658 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A3CFBEF2156888E8002B7658 /* Model.xcdatamodel */,
+			);
+			currentVersion = A3CFBEF2156888E8002B7658 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
 }

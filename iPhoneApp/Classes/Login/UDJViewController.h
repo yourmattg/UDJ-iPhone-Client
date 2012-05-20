@@ -50,6 +50,8 @@
 @property(nonatomic,strong) IBOutlet UIView* loginBackgroundView;
 @property(nonatomic,strong) IBOutlet UIButton* cancelButton;
 
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;  
+
 - (IBAction) OnButtonClick:(id) sender;
 - (IBAction) cancelButtonClick:(id)sender;
 

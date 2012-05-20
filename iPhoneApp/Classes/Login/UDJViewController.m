@@ -22,10 +22,16 @@
 #import "UDJConnection.h"
 #import "PlaylistViewController.h"
 #import "UDJData.h"
+#import "KeychainItemWrapper.h"
+#import "LastInfo.h"
+#import "UDJAppDelegate.h"
+#import <Security/Security.h>
 
 @implementation UDJViewController
 
 @synthesize loginButton, usernameField, passwordField, registerButton, currentRequestNumber, globalData, loginView, loginBackgroundView, cancelButton;
+
+@synthesize managedObjectContext;
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -51,6 +57,12 @@
     passwordField.placeholder = @"Password";
     usernameField.autocorrectionType = UITextAutocorrectionTypeNo;
     
+    
+    UDJAppDelegate* appDelegate = (UDJAppDelegate*)[[UIApplication sharedApplication] delegate];
+    managedObjectContext = appDelegate.managedObjectContext;
+    
+    [self checkForUsername];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -72,6 +84,80 @@
     registerButton.enabled = !active;
     usernameField.enabled = !active;
     passwordField.enabled = !active;
+}
+
+
+#pragma mark Keychain methods
+
+-(void)savePasswordToKeychain{
+    KeychainItemWrapper* keychain = [[KeychainItemWrapper alloc] initWithIdentifier:@"UDJLoginData" accessGroup:nil];
+    [keychain setObject: passwordField.text forKey: (__bridge id)kSecValueData];
+}
+
+-(void)saveUsername{
+    
+    LastInfo* lastInfo;
+    NSError* error;
+    
+    //Set up a request to get the last info
+    NSFetchRequest * request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"LastInfo" inManagedObjectContext:managedObjectContext]];
+    
+    // find last info
+    lastInfo = [[managedObjectContext executeFetchRequest:request error:&error] lastObject];
+    
+    if (error) {
+        // error in getting info
+    }
+    
+    // if there was no username before, create one
+    if (!lastInfo) {
+        lastInfo = (LastInfo*)[NSEntityDescription insertNewObjectForEntityForName:@"LastInfo" inManagedObjectContext:managedObjectContext];  
+    }
+    
+    // update the username
+    [lastInfo setUsername: usernameField.text]; 
+    
+    //Save it
+    error = nil;
+    if (![managedObjectContext save:&error]) {
+        //Handle any error with the saving of the context
+    }
+    
+    // save password in keychain
+    [self savePasswordToKeychain];
+    
+}
+
+-(void)getPasswordFromKeychain:(NSString*)username{
+    KeychainItemWrapper* keychain = [[KeychainItemWrapper alloc] initWithIdentifier:@"UDJLoginData" accessGroup:nil];
+    
+    NSString* password = [keychain objectForKey: (__bridge id)kSecValueData];
+
+    usernameField.text = username;
+    passwordField.text = password;
+}
+
+-(void)checkForUsername{
+    
+    LastInfo* lastInfo;
+    NSError* error;
+    
+    //Set up a request to get the last info
+    NSFetchRequest * request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"LastInfo" inManagedObjectContext:managedObjectContext]];
+    
+    // find last info
+    lastInfo = [[managedObjectContext executeFetchRequest:request error:&error] lastObject];
+    
+    if (error) {
+        // error in getting info
+    }
+    
+    // if there was a username,
+    if (lastInfo) {
+        [self getPasswordFromKeychain: lastInfo.username];
+    }
 }
 
 
@@ -160,10 +246,9 @@
     NSString* username = usernameField.text;
     NSString* password = passwordField.text;
     
-	if(![username isEqualToString: @""] && ![password isEqualToString: @""])
-	{
-        [self sendAuthRequest:username password:password];
-        
+	if(![username isEqualToString: @""] && ![password isEqualToString: @""]){
+            [self sendAuthRequest:username password:password];
+            [self saveUsername];
 	}
 }
 
