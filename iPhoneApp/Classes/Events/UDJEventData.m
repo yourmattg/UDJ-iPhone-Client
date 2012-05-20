@@ -132,6 +132,45 @@
 }
 
 
+-(void)setState:(NSString*)state{
+    RKClient* client = [RKClient sharedClient];
+    //create url [POST] /udj/users/user_id/players/player_id/state
+    NSString* urlString = client.baseURL;
+    urlString = [urlString stringByAppendingFormat: @"%@%d%@%d%@", @"/users/", [globalData.userID intValue], @"/players/", currentEvent.eventId, @"/state", nil];
+    
+    //set up request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: nil];
+    NSDictionary* stateParam = [NSDictionary dictionaryWithObjectsAndKeys: state, @"state", nil]; 
+    request.params = stateParam;
+    request.method = RKRequestMethodPOST;
+    request.additionalHTTPHeaders = globalData.headers;
+    request.userData = [NSNumber numberWithInt: globalData.requestCount++];
+    request.queue = client.requestQueue;
+    
+    //send request, handle results
+    [request send];    
+}
+
+//[POST] /udj/users/user_id/players/player_id/volume
+-(void)setVolume:(NSInteger)volume{
+    RKClient* client = [RKClient sharedClient];
+    //create url [POST] /udj/users/user_id/players/player_id/state
+    NSString* urlString = client.baseURL;
+    urlString = [urlString stringByAppendingFormat: @"%@%d%@%d%@", @"/users/", [globalData.userID intValue], @"/players/", currentEvent.eventId, @"/volume", nil];
+    
+    //set up request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: nil];
+    NSDictionary* volumeParam = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt: volume], @"volume", nil]; 
+    request.params = volumeParam;
+    request.method = RKRequestMethodPOST;
+    request.additionalHTTPHeaders = globalData.headers;
+    request.userData = [NSNumber numberWithInt: globalData.requestCount++];
+    request.queue = client.requestQueue;
+    
+    //send request, handle results
+    [request send];    
+}
+
 
 // access the EventList anywhere using [EventList sharedEventList]
 #pragma mark Singleton methods

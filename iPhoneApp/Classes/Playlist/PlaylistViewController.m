@@ -33,8 +33,9 @@
 
 @implementation PlaylistViewController
 
-@synthesize currentEvent, playlist, tableView, currentSongTitleLabel, currentSongArtistLabel, selectedSong, statusLabel, currentRequestNumber, globalData, leavingBackgroundView, leavingView, leaveButton, libraryButton, eventNameLabel, refreshButton, refreshIndicator, refreshLabel, voteNotificationView, voteNotificationLabel, voteNotificationArrowView;
+@synthesize currentEvent, playlist, tableView, currentSongTitleLabel, currentSongArtistLabel, selectedSong, statusLabel, currentRequestNumber, globalData, leaveButton, libraryButton, eventNameLabel, refreshButton, refreshIndicator, refreshLabel, voteNotificationView, voteNotificationLabel, voteNotificationArrowView;
 @synthesize playerNameLabel;
+@synthesize hostControlView, playButton, volumeSlider, volumeLabel, controlButton, playing;
 
 static PlaylistViewController* _sharedPlaylistViewController;
 
@@ -123,9 +124,9 @@ static PlaylistViewController* _sharedPlaylistViewController;
 - (void)refreshTableList{
     
     // if the playlist is empty, let them know, and hide the tableview
-    if([[UDJPlaylist sharedUDJPlaylist].playlist count] == 0){
+    if([[UDJPlaylist sharedUDJPlaylist].playlist count] == 0 && playlist.currentSong == nil){
         self.tableView.hidden = YES;
-        self.statusLabel.text = @"There are no songs queued up to play next.\nGo find some songs to add to the playlist!";
+        self.statusLabel.text = @"There are no songs queued up to play.\nGo find some songs to add to the playlist!";
     }
     else{
         self.tableView.hidden = NO;
@@ -289,6 +290,8 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     [playerNameLabel setText: currentEvent.name];
     
+    [self checkIfHost];
+    
     
 }
 
@@ -344,8 +347,8 @@ static PlaylistViewController* _sharedPlaylistViewController;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if([UDJPlaylist sharedUDJPlaylist].currentSong == nil) return [playlist count];
-    return [playlist count];
+    if(playlist.currentSong == nil) return [playlist count];
+    return [playlist count]+1;
 }
 
 // this is used for setting up each cell in the table
@@ -393,8 +396,8 @@ static PlaylistViewController* _sharedPlaylistViewController;
     cell.upVoteLabel.text = [NSString stringWithFormat:@"%d", [song.upVoters count]];
     cell.downVoteLabel.text = [NSString stringWithFormat:@"%d", [song.downVoters count]];
     
-    cell.downVoteButton.tag = rowNumber;
-    cell.upVoteButton.tag = rowNumber;
+    cell.downVoteButton.tag = rowNumber-1;
+    cell.upVoteButton.tag = rowNumber-1;
     
     // Current song playing symbol
     
@@ -422,7 +425,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 {
     
     NSInteger rowNumber = indexPath.row;
-    selectedSong = [playlist songAtIndex:rowNumber];
+    selectedSong = [playlist songAtIndex:rowNumber-1];
     /*
     UIAlertView* songOptionBox = [[UIAlertView alloc] initWithTitle: selectedSong.title message: selectedSong.artist delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: nil];
     // include vote buttons if its not the song playing
@@ -441,6 +444,78 @@ static PlaylistViewController* _sharedPlaylistViewController;
     cell.downVoteButton.highlighted = NO;
     cell.upVoteButton.highlighted = NO;
 }
+
+
+#pragma mark - Host methods
+
+-(IBAction)controlsButtonClick:(id)sender{
+    
+}
+
+-(void)updateVolumeAndState:(NSDictionary*)responseDict{
+    // get volume of player
+    NSNumber* volume = [responseDict objectForKey: @"volume"];
+    volumeLabel.text = [NSString stringWithFormat: @"%d", [volume intValue]];
+    volumeSlider.value = [volume intValue];
+    
+    // get state of player
+    NSString* state = [responseDict objectForKey: @"state"];
+    if([state isEqualToString: @"playing"]){
+        [playButton setImage: [UIImage imageNamed:@"pausetoggle.png"] forState: UIControlStateNormal];
+    }
+    else{
+        [playButton setImage: [UIImage imageNamed:@"playtoggle.png"] forState: UIControlStateNormal];
+    }
+}
+
+-(void)checkIfHost{
+    if([globalData.userID intValue] == currentEvent.hostId){
+        playerNameLabel.hidden = YES;
+        controlButton.hidden = NO;
+    }
+    
+    // remove after debugging
+    playing = YES;
+    playerNameLabel.hidden = YES;
+    controlButton.hidden = NO;
+    hostControlView.hidden = NO;
+    [self.view addSubview: hostControlView];
+    hostControlView.frame =  CGRectMake(0, 40, 320, 50);
+    
+}
+
+-(IBAction)playButtonClick:(id)sender{
+    UIButton* button = sender;
+    
+    playing = !playing;
+    
+    NSString* state;
+    if(!playing) {
+        [button setImage: [UIImage imageNamed:@"playtoggle.png"] forState:UIControlStateNormal];
+        state = @"paused";
+    }
+    else {
+        [button setImage: [UIImage imageNamed:@"pausetoggle.png"] forState: UIControlStateNormal];
+        state = @"playing";
+    }
+    
+    //[POST] /udj/users/user_id/players/player_id/state
+    [[UDJEventData sharedEventData] setState: state];
+}
+
+-(IBAction)volumeSliderChanged:(id)sender{
+    UISlider* slider = sender;
+    NSInteger value = slider.value;
+    [volumeLabel setText: [NSString stringWithFormat: @"%d", value]];
+}
+
+-(IBAction)volumeSliderDoneChanging:(id)sender{
+    UISlider* slider = sender;
+    NSInteger value = slider.value;
+    [[UDJEventData sharedEventData] setVolume: value];
+}
+
+//-(void)setVolume:(NSInteger)volume
 
 
 #pragma mark - Response handling
@@ -481,6 +556,8 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     // bring back the refresh button
     [self toggleRefreshingStatus: NO];
+    
+    [self updateVolumeAndState: responseDict];
     
 }
 

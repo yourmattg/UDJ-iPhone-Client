@@ -59,9 +59,6 @@
 @property(nonatomic,strong) NSNumber* currentRequestNumber;
 @property(nonatomic,strong) UDJData* globalData;
 
-@property(nonatomic,strong) IBOutlet UIView* leavingBackgroundView;
-@property(nonatomic,strong) IBOutlet UIView* leavingView;
-
 @property(nonatomic,strong) IBOutlet UIButton* leaveButton;
 @property(nonatomic,strong) IBOutlet UIButton* libraryButton;
 
@@ -76,5 +73,13 @@
 @property(nonatomic,strong) IBOutlet UIImageView* voteNotificationArrowView;
 
 @property(nonatomic,strong) IBOutlet UILabel* playerNameLabel;
+
+// host controls
+@property(nonatomic,strong) IBOutlet UIView* hostControlView;
+@property(nonatomic,strong) IBOutlet UIButton* playButton;
+@property(nonatomic,strong) IBOutlet UISlider* volumeSlider;
+@property(nonatomic,strong) IBOutlet UILabel* volumeLabel;
+@property(nonatomic,strong) IBOutlet UIButton* controlButton;
+@property BOOL playing;
 
 @end
