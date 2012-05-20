@@ -401,14 +401,13 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     // Current song playing symbol
     
-    if(rowNumber == 0){
-        cell.upVoteLabel.hidden = YES;
-        cell.downVoteLabel.hidden = YES;
-        cell.upVoteButton.hidden = YES;
-        cell.downVoteButton.hidden = YES;
-        cell.playingImageView.hidden = NO;
-        cell.playingLabel.hidden = NO;
-    }
+    BOOL hidden = (rowNumber == 0);
+    cell.upVoteLabel.hidden = hidden;
+    cell.downVoteLabel.hidden = hidden;
+    cell.upVoteButton.hidden = hidden;
+    cell.downVoteButton.hidden = hidden;
+    cell.playingImageView.hidden = !hidden;
+    cell.playingLabel.hidden = !hidden;
     
     return cell;
 }
