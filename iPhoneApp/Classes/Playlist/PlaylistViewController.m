@@ -449,7 +449,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 #pragma mark - Host methods
 
 -(IBAction)controlsButtonClick:(id)sender{
-    
+    hostControlView.hidden = !hostControlView.hidden;
 }
 
 -(void)updateVolumeAndState:(NSDictionary*)responseDict{
@@ -462,26 +462,24 @@ static PlaylistViewController* _sharedPlaylistViewController;
     NSString* state = [responseDict objectForKey: @"state"];
     if([state isEqualToString: @"playing"]){
         [playButton setImage: [UIImage imageNamed:@"pausetoggle.png"] forState: UIControlStateNormal];
+        playing = YES;
     }
     else{
         [playButton setImage: [UIImage imageNamed:@"playtoggle.png"] forState: UIControlStateNormal];
+        playing = NO;
     }
 }
 
 -(void)checkIfHost{
     if([globalData.userID intValue] == currentEvent.hostId){
+        // remove after debugging
         playerNameLabel.hidden = YES;
         controlButton.hidden = NO;
+        hostControlView.hidden = YES;
+        [self.view addSubview: hostControlView];
+        hostControlView.frame =  CGRectMake(0, 40, 320, 50);
+        
     }
-    
-    // remove after debugging
-    playing = YES;
-    playerNameLabel.hidden = YES;
-    controlButton.hidden = NO;
-    hostControlView.hidden = NO;
-    [self.view addSubview: hostControlView];
-    hostControlView.frame =  CGRectMake(0, 40, 320, 50);
-    
 }
 
 -(IBAction)playButtonClick:(id)sender{
