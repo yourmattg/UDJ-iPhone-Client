@@ -75,7 +75,7 @@
     NSDictionary* nameAndPass = [NSDictionary dictionaryWithObjectsAndKeys:username, @"username", password, @"password", nil]; 
     
     // put the API version in the header
-    NSDictionary* apiHeader = [NSDictionary dictionaryWithObjectsAndKeys:@"0.2", @"X-Udj-Api-Version", nil];
+    NSDictionary* apiHeader = [NSDictionary dictionaryWithObjectsAndKeys:@"0.5", @"X-Udj-Api-Version", nil];
     
     // create the URL
     NSMutableString* urlString = [NSMutableString stringWithString: client.baseURL];
@@ -93,14 +93,13 @@
 
 -(void)handleRenewTicket:(RKResponse*)response{
     if([response isOK]){
-        NSLog(@"successfully renewed ticket");
-        // create a new dictionary for our ticket and user id
-        NSDictionary* headerDict = [response allHeaderFields];
-        self.ticket=[headerDict valueForKey:@"X-Udj-Ticket-Hash"];
-        self.userID=[headerDict valueForKey:@"X-Udj-User-Id"];
+        // only handle if we are waiting for an auth response
+        RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
+        NSDictionary* responseDict = [parser objectFromString:[response bodyAsString] error:nil];
+        ticket=[responseDict valueForKey:@"ticket_hash"];
+        userID=[responseDict valueForKey:@"user_id"];
         
-        //TODO: may need to change userID to [userID intValue]
-        self.headers = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.ticket, @"X-Udj-Ticket-Hash", self.userID, @"X-Udj-User-Id", nil];
+        headers = [NSDictionary dictionaryWithObjectsAndKeys:ticket, @"X-Udj-Ticket-Hash", nil];
     }
     else{
         NSLog(@"couldnt renew ticket, trying again");
