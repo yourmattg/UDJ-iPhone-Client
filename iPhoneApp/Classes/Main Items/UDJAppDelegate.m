@@ -162,7 +162,9 @@
      */
     
     // TODO: check if our ticket is still valid
-    //[[UDJData sharedUDJData] renewTicket];
+    if(![[UDJData sharedUDJData] ticketIsValid]){
+        [[UDJData sharedUDJData] renewTicket];
+    }
 }
 
 

@@ -64,6 +64,7 @@
 		A39AF6921497D081006ADF19 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF6911497D081006ADF19 /* MobileCoreServices.framework */; };
 		A39AF6941497D09A006ADF19 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF6931497D09A006ADF19 /* SystemConfiguration.framework */; };
 		A39AF6961497D0A4006ADF19 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF6951497D0A4006ADF19 /* libxml2.dylib */; };
+		A3A2B370156DD6C600C4FF90 /* UDJStoredData.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A2B36F156DD6C600C4FF90 /* UDJStoredData.m */; };
 		A3BB46E314E2086400554179 /* EventGoerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BB46E214E2086400554179 /* EventGoerCell.m */; };
 		A3C22D551566D4D50066B9F8 /* playlisticon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C22D541566D4D50066B9F8 /* playlisticon.png */; };
 		A3C22D571566D62E0066B9F8 /* libraryicon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C22D561566D62E0066B9F8 /* libraryicon.png */; };
@@ -84,7 +85,6 @@
 		A3CFBEED1568730A002B7658 /* pausetoggle.png in Resources */ = {isa = PBXBuildFile; fileRef = A3CFBEEC1568730A002B7658 /* pausetoggle.png */; };
 		A3CFBEF015688811002B7658 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CFBEEF15688811002B7658 /* KeychainItemWrapper.m */; };
 		A3CFBEF3156888E8002B7658 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3CFBEF1156888E8002B7658 /* Model.xcdatamodeld */; };
-		A3CFBEF615688947002B7658 /* LastInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CFBEF515688947002B7658 /* LastInfo.m */; };
 		A3D334D514C6A02300A90D58 /* downarrow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3D334D414C6A02300A90D58 /* downarrow.jpg */; };
 		A3D334D714C6A02A00A90D58 /* uparrow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3D334D614C6A02A00A90D58 /* uparrow.jpg */; };
 		A3DAD57D14BD253600688CE0 /* UDJMappableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DAD57C14BD253600688CE0 /* UDJMappableArray.m */; };
@@ -154,8 +154,8 @@
 
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1D3623240D0F684500981E51 /* UDJAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJAppDelegate.h; sourceTree = "<group>"; };
-		1D3623250D0F684500981E51 /* UDJAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJAppDelegate.m; sourceTree = "<group>"; };
+		1D3623240D0F684500981E51 /* UDJAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDJAppDelegate.h; path = "Main Items/UDJAppDelegate.h"; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* UDJAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDJAppDelegate.m; path = "Main Items/UDJAppDelegate.m"; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* UDJ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UDJ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -231,6 +231,8 @@
 		A39AF6911497D081006ADF19 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		A39AF6931497D09A006ADF19 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A39AF6951497D0A4006ADF19 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		A3A2B36E156DD6C600C4FF90 /* UDJStoredData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDJStoredData.h; path = ../UDJStoredData.h; sourceTree = "<group>"; };
+		A3A2B36F156DD6C600C4FF90 /* UDJStoredData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDJStoredData.m; path = ../UDJStoredData.m; sourceTree = "<group>"; };
 		A3BB46E114E2086400554179 /* EventGoerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventGoerCell.h; sourceTree = "<group>"; };
 		A3BB46E214E2086400554179 /* EventGoerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventGoerCell.m; sourceTree = "<group>"; };
 		A3C22D541566D4D50066B9F8 /* playlisticon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playlisticon.png; sourceTree = "<group>"; };
@@ -257,8 +259,6 @@
 		A3CFBEEE15688811002B7658 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		A3CFBEEF15688811002B7658 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		A3CFBEF2156888E8002B7658 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		A3CFBEF415688947002B7658 /* LastInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LastInfo.h; sourceTree = "<group>"; };
-		A3CFBEF515688947002B7658 /* LastInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LastInfo.m; sourceTree = "<group>"; };
 		A3D334D414C6A02300A90D58 /* downarrow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = downarrow.jpg; sourceTree = "<group>"; };
 		A3D334D614C6A02A00A90D58 /* uparrow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = uparrow.jpg; sourceTree = "<group>"; };
 		A3DAD57B14BD253600688CE0 /* UDJMappableArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJMappableArray.h; sourceTree = "<group>"; };
@@ -334,6 +334,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1D3623240D0F684500981E51 /* UDJAppDelegate.h */,
+				1D3623250D0F684500981E51 /* UDJAppDelegate.m */,
 				A3FAB0E315228A9000BA8654 /* Sharing */,
 				A396EF1E14B558B300BCEF8F /* Library */,
 				A324ABF714AAB74F00388514 /* Playlist */,
@@ -449,8 +451,8 @@
 				28D7ACF70DDB3853001CB0EB /* UDJViewController.m */,
 				A3CFBEEE15688811002B7658 /* KeychainItemWrapper.h */,
 				A3CFBEEF15688811002B7658 /* KeychainItemWrapper.m */,
-				A3CFBEF415688947002B7658 /* LastInfo.h */,
-				A3CFBEF515688947002B7658 /* LastInfo.m */,
+				A3A2B36E156DD6C600C4FF90 /* UDJStoredData.h */,
+				A3A2B36F156DD6C600C4FF90 /* UDJStoredData.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -566,8 +568,6 @@
 			children = (
 				A3720B2E14C74FE800D1E30C /* LocationManager.h */,
 				A3720B2F14C74FE800D1E30C /* LocationManager.m */,
-				1D3623240D0F684500981E51 /* UDJAppDelegate.h */,
-				1D3623250D0F684500981E51 /* UDJAppDelegate.m */,
 				A39AF66E1497CB74006ADF19 /* UDJConnection.h */,
 				A39AF66F1497CB74006ADF19 /* UDJConnection.m */,
 				A3DAD57B14BD253600688CE0 /* UDJMappableArray.h */,
@@ -814,7 +814,7 @@
 				A3C7A442156714F20085150A /* SongListViewController.m in Sources */,
 				A3CFBEF015688811002B7658 /* KeychainItemWrapper.m in Sources */,
 				A3CFBEF3156888E8002B7658 /* Model.xcdatamodeld in Sources */,
-				A3CFBEF615688947002B7658 /* LastInfo.m in Sources */,
+				A3A2B370156DD6C600C4FF90 /* UDJStoredData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

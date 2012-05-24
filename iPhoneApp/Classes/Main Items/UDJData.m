@@ -18,10 +18,52 @@
  */
 
 #import "UDJData.h"
+#import "UDJStoredData.h"
+#import "UDJAppDelegate.h"
 
 @implementation UDJData
 
-@synthesize requestCount, ticket, headers, userID, username, password, loggedIn;
+@synthesize requestCount, ticket, headers, userID, username, password, loggedIn, managedObjectContext;
+
+
+#pragma mark - Ticket validation
+
+-(BOOL)ticketIsValid{
+    
+    UDJStoredData* storedData;
+    NSError* error;
+    
+    //Set up a request to get the stored data
+    NSFetchRequest * request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"UDJStoredData" inManagedObjectContext:managedObjectContext]];
+    storedData = [[managedObjectContext executeFetchRequest:request error:&error] lastObject];
+    
+    if (error) {
+        // error in getting info
+    }
+    
+    // if there we had previous data
+    if (storedData) {
+        NSDate* currentDate = [NSDate date];
+        NSDate* lastDate = [storedData ticketDate];
+        float secondsSince = [currentDate timeIntervalSinceDate: lastDate];
+        float hoursSince = secondsSince/60/60;
+        
+        // if it has been more than 20 hours, we'll renew the ticket to be safe
+        if(hoursSince >= 20){
+            return NO;
+        }
+        
+        // otherwise this ticket is valid (at least for the next 4 hours)
+        else return YES;
+    }
+    
+    // If there is no data that means we've never logged in,
+    // meaning the user is about to log in and get a ticket.
+    // So don't worry about it and consider it valid
+    
+    return YES;
+}
 
 -(void)renewTicket{
     
@@ -98,6 +140,14 @@ static UDJData* _sharedUDJData = nil;
 		return _sharedUDJData;
 	}
 	return nil;
+}
+
+-(id)init{
+    if(self = [super init]){
+        UDJAppDelegate* appDelegate = (UDJAppDelegate*)[[UIApplication sharedApplication] delegate];
+        self.managedObjectContext = [appDelegate managedObjectContext];
+    }
+    return self;
 }
 
 @end

@@ -34,7 +34,10 @@
 @property(nonatomic,strong) NSString* password;
 @property BOOL loggedIn;
 
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext; 
+
 +(UDJData*)sharedUDJData;
+-(BOOL)ticketIsValid;
 -(void)renewTicket;
 -(void)handleRenewTicket:(RKResponse*)response;
 

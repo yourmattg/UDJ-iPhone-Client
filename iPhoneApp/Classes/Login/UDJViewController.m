@@ -23,9 +23,8 @@
 #import "PlaylistViewController.h"
 #import "UDJData.h"
 #import "KeychainItemWrapper.h"
-#import "LastInfo.h"
 #import "UDJAppDelegate.h"
-#import <Security/Security.h>
+
 
 @implementation UDJViewController
 
@@ -94,31 +93,31 @@
     [keychain setObject: passwordField.text forKey: (__bridge id)kSecValueData];
 }
 
--(void)saveUsername{
+-(void)saveUsernameAndDate{
     
-    LastInfo* lastInfo;
+    UDJStoredData* storedData;
     NSError* error;
     
-    //Set up a request to get the last info
+    //Set up a request to get the last stored data
     NSFetchRequest * request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"LastInfo" inManagedObjectContext:managedObjectContext]];
-    
-    // find last info
-    lastInfo = [[managedObjectContext executeFetchRequest:request error:&error] lastObject];
+    [request setEntity:[NSEntityDescription entityForName:@"UDJStoredData" inManagedObjectContext:managedObjectContext]];
+    storedData = [[managedObjectContext executeFetchRequest:request error:&error] lastObject];
     
     if (error) {
         // error in getting info
     }
     
-    // if there was no username before, create one
-    if (!lastInfo) {
-        lastInfo = (LastInfo*)[NSEntityDescription insertNewObjectForEntityForName:@"LastInfo" inManagedObjectContext:managedObjectContext];  
+    // if there was no stored data before, create it
+    if (!storedData) {
+        storedData = (UDJStoredData*)[NSEntityDescription insertNewObjectForEntityForName:@"UDJStoredData" inManagedObjectContext:managedObjectContext];  
     }
     
-    // update the username
-    [lastInfo setUsername: usernameField.text]; 
+    // update the username, save the date the ticket was assigned
+    [storedData setUsername: usernameField.text]; 
+    NSDate* currentDate = [NSDate date];
+    [storedData setTicketDate: currentDate];
     
-    //Save it
+    //Save the data
     error = nil;
     if (![managedObjectContext save:&error]) {
         //Handle any error with the saving of the context
@@ -140,23 +139,23 @@
 
 -(void)checkForUsername{
     
-    LastInfo* lastInfo;
+    UDJStoredData* storedData;
     NSError* error;
     
     //Set up a request to get the last info
     NSFetchRequest * request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"LastInfo" inManagedObjectContext:managedObjectContext]];
+    [request setEntity:[NSEntityDescription entityForName:@"UDJStoredData" inManagedObjectContext:managedObjectContext]];
     
     // find last info
-    lastInfo = [[managedObjectContext executeFetchRequest:request error:&error] lastObject];
+    storedData = [[managedObjectContext executeFetchRequest:request error:&error] lastObject];
     
     if (error) {
         // error in getting info
     }
     
     // if there was a username,
-    if (lastInfo) {
-        [self getPasswordFromKeychain: lastInfo.username];
+    if (storedData) {
+        [self getPasswordFromKeychain: storedData.username];
     }
 }
 
@@ -196,6 +195,10 @@
 
 // handleAuth: handle authorization response if credentials are valid
 - (void)handleAuth:(RKResponse*)response{
+    
+    // save the username, password, and ticket assign date information to Core Data
+    [self saveUsernameAndDate];
+    
     self.currentRequestNumber = [NSNumber numberWithInt: -1];
     
     // save our username and password
@@ -248,7 +251,6 @@
     
 	if(![username isEqualToString: @""] && ![password isEqualToString: @""]){
             [self sendAuthRequest:username password:password];
-            [self saveUsername];
 	}
 }
 
