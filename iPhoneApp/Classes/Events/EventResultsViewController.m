@@ -22,6 +22,7 @@
 #import "PartyLoginViewController.h"
 #import "MainTabBarController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "RestKit/RKJSONParserJSONKit.h"
 
 @implementation EventResultsViewController
 

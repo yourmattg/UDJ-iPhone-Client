@@ -20,6 +20,7 @@
 #import "UDJData.h"
 #import "UDJStoredData.h"
 #import "UDJAppDelegate.h"
+#import "RestKit/RKJSONParserJSONKit.h"
 
 @implementation UDJData
 

@@ -18,7 +18,6 @@
  */
 
 #import <UIKit/UIKit.h>
-#import "UDJConnection.h"
 
 @class UDJViewController;
 
@@ -26,7 +25,6 @@
     UIWindow *window;
     UDJViewController *viewController;
 	UINavigationController *navigationController;
-    UDJConnection* udjConnection;
     NSString* baseUrl;
 	
 	//Application Model Data
@@ -37,7 +35,6 @@
 @property (nonatomic, strong) IBOutlet UIWindow *window;
 @property (nonatomic, strong) IBOutlet UDJViewController *viewController;
 @property (nonatomic, strong) UINavigationController *navigationController;
-@property (nonatomic, strong) UDJConnection* udjConnection;
 @property (nonatomic, strong) NSString* baseUrl;
 
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;  

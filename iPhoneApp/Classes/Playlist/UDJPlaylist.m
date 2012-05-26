@@ -19,7 +19,6 @@
 
 #import "UDJPlaylist.h"
 #import "UDJSong.h"
-#import "UDJConnection.h"
 
 @implementation UDJPlaylist
 

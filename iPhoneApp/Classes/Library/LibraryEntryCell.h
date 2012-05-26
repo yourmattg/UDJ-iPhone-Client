@@ -18,7 +18,6 @@
  */
 
 #import <UIKit/UIKit.h>
-#import "LibraryResultsController.h"
 #import "SongListViewController.h"
 
 @interface LibraryEntryCell : UITableViewCell{

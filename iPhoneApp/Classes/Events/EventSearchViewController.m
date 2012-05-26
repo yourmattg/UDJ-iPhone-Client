@@ -19,12 +19,12 @@
 
 #import "EventSearchViewController.h"
 #import "PartyLoginViewController.h"
-#import "UDJConnection.h"
 #import "UDJEventData.h"
 #import "UDJEvent.h"
 #import "PlaylistViewController.h"
 #import "EventResultsViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "RestKit/RKJSONParserJSONKit.h"
 
 
 @implementation EventSearchViewController
@@ -78,22 +78,6 @@
 	return NO;
 }
 
-// logOutOfEvent: log the client out of the current event
-- (void)logOutOfEvent{
-    NSInteger statusCode = [[UDJConnection sharedConnection] leaveEventRequest];
-    if(statusCode==200){
-        [UDJEventData sharedEventData].currentEvent=nil;
-        [[UDJPlaylist sharedUDJPlaylist] clearPlaylist];
-        UIAlertView* loggedOut = [[UIAlertView alloc] initWithTitle:@"Logout Success" message:@"You are no longer logged into any events." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [loggedOut show];
-    }
-}
-
-// rejoinEvent: rejoin the event the user was in
-- (void)rejoinEvent{
-    PlaylistViewController* playlistViewController = [[PlaylistViewController alloc] initWithNibName:@"NewPlaylistViewController" bundle:[NSBundle mainBundle]];
-    [self.navigationController pushViewController:playlistViewController animated:YES];
-}
 
 #pragma mark Button click methods
 
@@ -145,24 +129,6 @@
 -(IBAction)cancelButtonClick:(id)sender{
     self.currentRequestNumber = [NSNumber numberWithInt: -1];
     [self toggleSearchingView: NO];
-}
-
-// handle button clicks from alertview (pop up message boxes)
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(alertView.title == @"Event Conflict"){
-        // log out of the current event
-        if(buttonIndex==0){
-            [self logOutOfEvent];
-        }
-        // go back to the current event
-        if(buttonIndex==1){
-            [self rejoinEvent];
-        }
-    }
-    else if(alertView.title == @"No Players Found"){
-        [self toggleSearchingView: NO];
-    }
 }
 
 - (void)refreshTableList{
@@ -238,40 +204,6 @@
 
 
 
-
-#pragma mark -
-#pragma mark Table view delegate
-
-// user selects a cell: attempt to enter that party
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // get the party and remember the event we are trying to join
-    NSInteger index = [indexPath indexAtPosition:1];
-    [UDJEventData sharedEventData].currentEvent = [[UDJEventData sharedEventData].currentList objectAtIndex:index];
-    // there's a password: go the password screen
-	if([UDJEventData sharedEventData].currentEvent.hasPassword){
-        PartyLoginViewController* partyLoginViewController = [[PartyLoginViewController alloc] initWithNibName:@"PartyLoginViewController" bundle:[NSBundle mainBundle]];
-        [self.navigationController pushViewController:partyLoginViewController animated:YES];
-    }
-    // no password: go straight to playlist
-    else{
-        NSInteger statusCode = [[UDJConnection sharedConnection] enterEventRequest];
-        // 200: join success
-        if(statusCode==201){
-            PlaylistViewController* playlistViewController = [[PlaylistViewController alloc] initWithNibName:@"NewPlaylistViewController" bundle:[NSBundle mainBundle]];
-            [self.navigationController pushViewController:playlistViewController animated:YES];
-        }
-        else if(statusCode==404){
-            UIAlertView* nonExistantEvent = [[UIAlertView alloc] initWithTitle:@"Join Failed" message:@"The player you are trying to access does not exist. Sorry!" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [nonExistantEvent show];
-        }
-        else if(statusCode==409){
-            NSString* msg = [NSString stringWithFormat:@"%@%@%@", @"You are already logged into another event, \"", [UDJEventData sharedEventData].currentEvent.name, @"\". Would you like to log out of that event or rejoin it?", nil];
-            UIAlertView* alreadyInEvent = [[UIAlertView alloc] initWithTitle:@"Event Conflict" message: msg delegate: self cancelButtonTitle:@"Log Out" otherButtonTitles:@"Rejoin",nil];
-            [alreadyInEvent show];
-        }
-        // TODO: add other event possibilities (see API)
-    }
-}
 
 #pragma mark Event search methods
 

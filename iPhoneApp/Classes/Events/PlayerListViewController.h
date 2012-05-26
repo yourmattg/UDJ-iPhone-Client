@@ -11,12 +11,15 @@
 #import "UDJEventData.h"
 
 enum SearchType {
-    SearchTypeName = 0,
-    SearchTypeNearby = 1
+    SearchTypeNull = 0,
+    SearchTypeName = 1,
+    SearchTypeNearby = 2
 };
 
 @interface PlayerListViewController : UIViewController
 
+
+@property enum SearchType lastSearchType;
 
 @property(nonatomic,strong) UDJEventData* eventData;
 

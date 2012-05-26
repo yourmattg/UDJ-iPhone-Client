@@ -45,9 +45,6 @@
 -(void)upVote;
 -(void)login;
 -(void)post;
--(void)removeSong;
-+(PlaylistViewController*) sharedPlaylistViewController;
--(void) toggleLeavingView:(BOOL) active;
 
 @property(nonatomic, strong) UDJSong* selectedSong;
 @property (nonatomic, strong) UDJEvent* currentEvent;

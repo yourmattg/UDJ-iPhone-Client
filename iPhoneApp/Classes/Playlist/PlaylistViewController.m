@@ -22,13 +22,13 @@
 #import "UDJEvent.h"
 #import "UDJPlaylist.h"
 #import "UDJSong.h"
-#import "LibrarySearchViewController.h"
 #import "PlaylistEntryCell.h"
 #import "LibraryEntryCell.h"
 #import "EventGoerViewController.h"
 #import "PlaylistEntryCell.h"
 #import <QuartzCore/QuartzCore.h>
 #import "FacebookHandler.h"
+#import "RestKit/RKJSONParserJSONKit.h"
 
 
 @implementation PlaylistViewController
@@ -77,27 +77,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Player Inactive" message: @"The player you are trying to access is now inactive." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alertView show];
 }
-
-+(PlaylistViewController*) sharedPlaylistViewController{
-    return _sharedPlaylistViewController;
-}
-
-
-
--(void)removeSong{
-    NSInteger eventIdParam = [UDJEventData sharedEventData].currentEvent.eventId;
-    [[UDJConnection sharedConnection] sendSongRemoveRequest:selectedSong.librarySongId eventId:eventIdParam];
-    UIAlertView* notification = [[UIAlertView alloc] initWithTitle:@"Song Removed" message:@"Your song will be removed from the playlist." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [notification show];
-}
-
-// loadLibrary: push the library search view
-- (IBAction)showLibrary:(id)sender{
-    LibrarySearchViewController* librarySearchViewController = [[LibrarySearchViewController alloc] initWithNibName:@"LibrarySearchViewController" bundle:[NSBundle mainBundle]];
-    [self.navigationController pushViewController:librarySearchViewController animated:YES];
-}
-
-
 
 #pragma mark - Refresh methods
 

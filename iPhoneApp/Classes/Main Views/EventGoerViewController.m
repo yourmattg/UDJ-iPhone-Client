@@ -19,7 +19,7 @@
 
 #import "EventGoerViewController.h"
 #import "UDJEventData.h"
-#import "UDJConnection.h"
+#import "RestKit/RKJSONParserJSONKit.h"
 
 @implementation EventGoerViewController
 
@@ -65,7 +65,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[UDJConnection sharedConnection] sendEventGoerRequest:[UDJEventData sharedEventData].currentEvent.eventId delegate:self];
 }
 
 - (void)viewDidAppear:(BOOL)animated

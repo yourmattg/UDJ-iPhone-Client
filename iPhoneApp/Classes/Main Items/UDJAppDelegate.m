@@ -19,7 +19,6 @@
 
 #import "UDJAppDelegate.h"
 #import "UDJViewController.h"
-#import "UDJConnection.h"
 #import "UDJEvent.h"
 #import "UDJEventData.h"
 #import "UDJPlaylist.h"
@@ -32,7 +31,6 @@
 
 @synthesize window;
 @synthesize viewController, navigationController;
-@synthesize udjConnection;
 @synthesize baseUrl;
 @synthesize managedObjectModel, managedObjectContext, persistentStoreCoordinator;
 
@@ -115,16 +113,18 @@
     baseUrl = @"https://udjplayer.com:4898/udj";
     //baseUrl = @"https://0.0.0.0:4897/udj";
     
-    [[UDJConnection sharedConnection] initWithServerPrefix: baseUrl];
+    // initialize RestKit client
+    RKClient* client = [RKClient alloc];
+    client = [client initWithBaseURL: baseUrl];
+    
     [UDJPlaylist new]; // make UDJPlaylist singleton
     [UDJPlaylist sharedUDJPlaylist].globalData = [UDJData sharedUDJData];
     [[UDJPlaylist sharedUDJPlaylist] initVoteRecordKeeper];
     
-	//create a UDJViewController (the login screen), and make it the root view
-	viewController    = [[UDJViewController alloc] initWithNibName:@"UDJViewController" bundle:nil];
-	self.navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    [[UDJConnection sharedConnection] setNavigationController: self.navigationController];
-	[self.navigationController setNavigationBarHidden:YES];
+    //create a UDJViewController (the login screen), and make it the root view
+    viewController    = [[UDJViewController alloc] initWithNibName:@"UDJViewController" bundle:nil];
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [self.navigationController setNavigationBarHidden:YES];
 	//[self.navigationController setDelegate:self];
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
@@ -170,7 +170,6 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // leave any event we may be in
-    [[UDJConnection sharedConnection] leaveEventRequest];
 }
 
 //Facebook

@@ -20,6 +20,7 @@
 #import "ArtistsViewController.h"
 #import "UDJEventData.h"
 #import "SongListViewController.h"
+#import "RestKit/RKJSONParserJSONKit.h"
 
 @implementation ArtistsViewController
 

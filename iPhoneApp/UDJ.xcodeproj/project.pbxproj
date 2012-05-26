@@ -27,13 +27,11 @@
 		A32BEEA1157163A1005B573B /* nearbybutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A32BEEA0157163A1005B573B /* nearbybutton.png */; };
 		A3360BCF14F5E14F00541726 /* NewPlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */; };
 		A33C4614148F0707009C1BC6 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A33C4612148F0707009C1BC6 /* PlaylistViewController.m */; };
-		A33C461E148F11FC009C1BC6 /* LibrarySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A33C461C148F11FC009C1BC6 /* LibrarySearchViewController.m */; };
 		A33C461F148F11FC009C1BC6 /* LibrarySearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A33C461D148F11FC009C1BC6 /* LibrarySearchViewController.xib */; };
 		A33EE1E115684B7D00D49B85 /* playing.png in Resources */ = {isa = PBXBuildFile; fileRef = A33EE1E015684B7D00D49B85 /* playing.png */; };
 		A341B92914F86C61001892C5 /* addbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A341B92814F86C61001892C5 /* addbutton.png */; };
 		A34796A514F85AE0001DEE15 /* default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A34796A414F85AE0001DEE15 /* default.jpg */; };
 		A3495614151EF3D800AAEF7E /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = A3495613151EF3D800AAEF7E /* refresh.png */; };
-		A34FB30314B8EB5F00BE5CE2 /* LibraryResultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = A34FB30114B8EB5F00BE5CE2 /* LibraryResultsController.m */; };
 		A34FB30414B8EB5F00BE5CE2 /* LibraryResultsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A34FB30214B8EB5F00BE5CE2 /* LibraryResultsController.xib */; };
 		A3515C421524098500C89661 /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FAB0E515228A9000BA8654 /* Facebook.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A3536FB314A5218F00B5C95F /* UDJEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A3536FB214A5218F00B5C95F /* UDJEvent.m */; };
@@ -41,7 +39,6 @@
 		A35D3DF214F985460007B374 /* voteup.png in Resources */ = {isa = PBXBuildFile; fileRef = A35D3DF014F985460007B374 /* voteup.png */; };
 		A35E3E9A1516680100A2882D /* UDJData.m in Sources */ = {isa = PBXBuildFile; fileRef = A35E3E991516680100A2882D /* UDJData.m */; };
 		A3632F6814FC8AE10073EDF4 /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3632F5F14FC8AC40073EDF4 /* libRestKit.a */; };
-		A36D2CCC14A818130087E992 /* SearchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A36D2CCA14A818130087E992 /* SearchingViewController.m */; };
 		A3720B3014C74FE800D1E30C /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A3720B2F14C74FE800D1E30C /* LocationManager.m */; };
 		A3720B3214C7513600D1E30C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3720B3114C7513600D1E30C /* CoreLocation.framework */; };
 		A3720B3414C7514400D1E30C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3720B3314C7514400D1E30C /* CoreFoundation.framework */; };
@@ -51,7 +48,6 @@
 		A37BBF4015670A1500251CC8 /* ArtistsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A37BBF3E15670A1500251CC8 /* ArtistsViewController.xib */; };
 		A38B62A014C736C70088640D /* udjlauncher.png in Resources */ = {isa = PBXBuildFile; fileRef = A38B629F14C736C70088640D /* udjlauncher.png */; };
 		A39A0C8B14C4ADDF008A6D54 /* LibraryEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A39A0C8A14C4ADDF008A6D54 /* LibraryEntryCell.m */; };
-		A39AF6701497CB74006ADF19 /* UDJConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A39AF66F1497CB74006ADF19 /* UDJConnection.m */; };
 		A39AF68B1497CFBC006ADF19 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF68A1497CFBC006ADF19 /* Security.framework */; };
 		A39AF68E1497D072006ADF19 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF68D1497D072006ADF19 /* CFNetwork.framework */; };
 		A39AF6901497D079006ADF19 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF68F1497D079006ADF19 /* CoreData.framework */; };
@@ -172,15 +168,11 @@
 		A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewPlaylistViewController.xib; path = Resources/NewPlaylistViewController.xib; sourceTree = SOURCE_ROOT; };
 		A33C4611148F0707009C1BC6 /* PlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistViewController.h; sourceTree = "<group>"; };
 		A33C4612148F0707009C1BC6 /* PlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistViewController.m; sourceTree = "<group>"; };
-		A33C461B148F11FC009C1BC6 /* LibrarySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibrarySearchViewController.h; sourceTree = "<group>"; };
-		A33C461C148F11FC009C1BC6 /* LibrarySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibrarySearchViewController.m; sourceTree = "<group>"; };
 		A33C461D148F11FC009C1BC6 /* LibrarySearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LibrarySearchViewController.xib; sourceTree = "<group>"; };
 		A33EE1E015684B7D00D49B85 /* playing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playing.png; sourceTree = "<group>"; };
 		A341B92814F86C61001892C5 /* addbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addbutton.png; sourceTree = "<group>"; };
 		A34796A414F85AE0001DEE15 /* default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpg; sourceTree = "<group>"; };
 		A3495613151EF3D800AAEF7E /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
-		A34FB30014B8EB5F00BE5CE2 /* LibraryResultsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryResultsController.h; sourceTree = "<group>"; };
-		A34FB30114B8EB5F00BE5CE2 /* LibraryResultsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryResultsController.m; sourceTree = "<group>"; };
 		A34FB30214B8EB5F00BE5CE2 /* LibraryResultsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LibraryResultsController.xib; path = ../Classes/Library/LibraryResultsController.xib; sourceTree = "<group>"; };
 		A3536FB114A5218F00B5C95F /* UDJEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJEvent.h; sourceTree = "<group>"; };
 		A3536FB214A5218F00B5C95F /* UDJEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJEvent.m; sourceTree = "<group>"; };
@@ -188,8 +180,6 @@
 		A35D3DF014F985460007B374 /* voteup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voteup.png; sourceTree = "<group>"; };
 		A35E3E981516680100A2882D /* UDJData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJData.h; sourceTree = "<group>"; };
 		A35E3E991516680100A2882D /* UDJData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJData.m; sourceTree = "<group>"; };
-		A36D2CC914A818130087E992 /* SearchingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchingViewController.h; sourceTree = "<group>"; };
-		A36D2CCA14A818130087E992 /* SearchingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchingViewController.m; sourceTree = "<group>"; };
 		A3720B2E14C74FE800D1E30C /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		A3720B2F14C74FE800D1E30C /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		A3720B3114C7513600D1E30C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -204,8 +194,6 @@
 		A39A0C8914C4ADDF008A6D54 /* LibraryEntryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryEntryCell.h; sourceTree = "<group>"; };
 		A39A0C8A14C4ADDF008A6D54 /* LibraryEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryEntryCell.m; sourceTree = "<group>"; };
 		A39AF6581497C803006ADF19 /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = RestKit/RestKit.xcodeproj; sourceTree = "<group>"; };
-		A39AF66E1497CB74006ADF19 /* UDJConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJConnection.h; sourceTree = "<group>"; };
-		A39AF66F1497CB74006ADF19 /* UDJConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJConnection.m; sourceTree = "<group>"; };
 		A39AF68A1497CFBC006ADF19 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A39AF68D1497D072006ADF19 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		A39AF68F1497D079006ADF19 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -386,16 +374,16 @@
 		A324ABF714AAB74F00388514 /* Playlist */ = {
 			isa = PBXGroup;
 			children = (
-				A3F58D9314C753D300E350F4 /* UDJEventGoer.h */,
-				A3F58D9414C753D300E350F4 /* UDJEventGoer.m */,
-				A324ABF414AAB74700388514 /* UDJSong.h */,
-				A324ABF514AAB74700388514 /* UDJSong.m */,
-				A324AC0314AABB8900388514 /* UDJPlaylist.h */,
-				A324AC0414AABB8900388514 /* UDJPlaylist.m */,
 				A33C4611148F0707009C1BC6 /* PlaylistViewController.h */,
 				A33C4612148F0707009C1BC6 /* PlaylistViewController.m */,
+				A324AC0314AABB8900388514 /* UDJPlaylist.h */,
+				A324AC0414AABB8900388514 /* UDJPlaylist.m */,
+				A324ABF414AAB74700388514 /* UDJSong.h */,
+				A324ABF514AAB74700388514 /* UDJSong.m */,
 				A3265DB114C6101400FC692B /* PlaylistEntryCell.h */,
 				A3265DB214C6101400FC692B /* PlaylistEntryCell.m */,
+				A3F58D9314C753D300E350F4 /* UDJEventGoer.h */,
+				A3F58D9414C753D300E350F4 /* UDJEventGoer.m */,
 			);
 			path = Playlist;
 			sourceTree = "<group>";
@@ -407,10 +395,10 @@
 				A3F9C050142EAD610016717B /* EventSearchViewController.m */,
 				A309CC6115194A7F00912EA2 /* EventResultsViewController.h */,
 				A309CC6215194A7F00912EA2 /* EventResultsViewController.m */,
-				A3C608F8151E3593004AB623 /* EventCell.h */,
-				A3C608F9151E3593004AB623 /* EventCell.m */,
 				A3536FB114A5218F00B5C95F /* UDJEvent.h */,
 				A3536FB214A5218F00B5C95F /* UDJEvent.m */,
+				A3C608F8151E3593004AB623 /* EventCell.h */,
+				A3C608F9151E3593004AB623 /* EventCell.m */,
 				A374BDFF14A2EF36001A0DE0 /* UDJEventData.h */,
 				A374BE0014A2EF36001A0DE0 /* UDJEventData.m */,
 				A3F9C1D5142EBB880016717B /* PartyLoginViewController.h */,
@@ -448,20 +436,16 @@
 		A396EF1E14B558B300BCEF8F /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				A33C461B148F11FC009C1BC6 /* LibrarySearchViewController.h */,
-				A33C461C148F11FC009C1BC6 /* LibrarySearchViewController.m */,
-				A34FB30014B8EB5F00BE5CE2 /* LibraryResultsController.h */,
-				A34FB30114B8EB5F00BE5CE2 /* LibraryResultsController.m */,
-				A3CF872D14B8F8F000A9F829 /* UDJSongList.h */,
-				A3CF872E14B8F8F000A9F829 /* UDJSongList.m */,
-				A39A0C8914C4ADDF008A6D54 /* LibraryEntryCell.h */,
-				A39A0C8A14C4ADDF008A6D54 /* LibraryEntryCell.m */,
-				A3C6A46F1565F9FA00F1E42E /* RandomViewController.h */,
-				A3C6A4701565F9FA00F1E42E /* RandomViewController.m */,
 				A37BBF3C15670A1500251CC8 /* ArtistsViewController.h */,
 				A37BBF3D15670A1500251CC8 /* ArtistsViewController.m */,
 				A3C7A43F156714F20085150A /* SongListViewController.h */,
 				A3C7A440156714F20085150A /* SongListViewController.m */,
+				A3C6A46F1565F9FA00F1E42E /* RandomViewController.h */,
+				A3C6A4701565F9FA00F1E42E /* RandomViewController.m */,
+				A3CF872D14B8F8F000A9F829 /* UDJSongList.h */,
+				A3CF872E14B8F8F000A9F829 /* UDJSongList.m */,
+				A39A0C8914C4ADDF008A6D54 /* LibraryEntryCell.h */,
+				A39A0C8A14C4ADDF008A6D54 /* LibraryEntryCell.m */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -520,8 +504,6 @@
 				A3028B841564A2AE00EF6EE8 /* MainTabBarController.m */,
 				A3F58D9614C75F0800E350F4 /* EventGoerViewController.h */,
 				A3F58D9714C75F0800E350F4 /* EventGoerViewController.m */,
-				A36D2CC914A818130087E992 /* SearchingViewController.h */,
-				A36D2CCA14A818130087E992 /* SearchingViewController.m */,
 			);
 			path = "Main Views";
 			sourceTree = "<group>";
@@ -531,8 +513,6 @@
 			children = (
 				A3720B2E14C74FE800D1E30C /* LocationManager.h */,
 				A3720B2F14C74FE800D1E30C /* LocationManager.m */,
-				A39AF66E1497CB74006ADF19 /* UDJConnection.h */,
-				A39AF66F1497CB74006ADF19 /* UDJConnection.m */,
 				A3DAD57B14BD253600688CE0 /* UDJMappableArray.h */,
 				A3DAD57C14BD253600688CE0 /* UDJMappableArray.m */,
 				A3F58D9D14C765C100E350F4 /* UDJEventGoerList.h */,
@@ -726,14 +706,10 @@
 				A3F9C052142EAD610016717B /* EventSearchViewController.m in Sources */,
 				A3F9C1D8142EBB880016717B /* PartyLoginViewController.m in Sources */,
 				A33C4614148F0707009C1BC6 /* PlaylistViewController.m in Sources */,
-				A33C461E148F11FC009C1BC6 /* LibrarySearchViewController.m in Sources */,
-				A39AF6701497CB74006ADF19 /* UDJConnection.m in Sources */,
 				A374BE0114A2EF36001A0DE0 /* UDJEventData.m in Sources */,
 				A3536FB314A5218F00B5C95F /* UDJEvent.m in Sources */,
-				A36D2CCC14A818130087E992 /* SearchingViewController.m in Sources */,
 				A324ABF614AAB74700388514 /* UDJSong.m in Sources */,
 				A324AC0514AABB8900388514 /* UDJPlaylist.m in Sources */,
-				A34FB30314B8EB5F00BE5CE2 /* LibraryResultsController.m in Sources */,
 				A3CF872F14B8F8F000A9F829 /* UDJSongList.m in Sources */,
 				A3DAD57D14BD253600688CE0 /* UDJMappableArray.m in Sources */,
 				A39A0C8B14C4ADDF008A6D54 /* LibraryEntryCell.m in Sources */,

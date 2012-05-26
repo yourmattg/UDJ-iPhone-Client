@@ -18,7 +18,6 @@
  */
 
 #import "UDJEventData.h"
-#import "UDJConnection.h"
 #import "RestKit/RestKit.h"
 
 @implementation UDJEventData

@@ -18,12 +18,12 @@
  */
 
 #import "UDJViewController.h"
-#import "UDJConnection.h"
 #import "PlaylistViewController.h"
 #import "UDJData.h"
 #import "KeychainItemWrapper.h"
 #import "UDJAppDelegate.h"
 #import "PlayerListViewController.h"
+#import "RestKit/RKJSONParserJSONKit.h"
 
 
 @implementation UDJViewController
@@ -164,6 +164,7 @@
 
 // authenticate: sends a POST with the username and password
 - (void) sendAuthRequest:(NSString*)username password:(NSString*)pass{
+    
     RKClient* client = [RKClient sharedClient];
     
     // make sure the right api version is being passed in
@@ -171,7 +172,7 @@
     
     // put the API version in the header
     NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"0.5", @"X-Udj-Api-Version", nil];
-    
+
     // create the URL
     NSMutableString* urlString = [NSMutableString stringWithString: client.baseURL];
     [urlString appendString: @"/auth"];
@@ -188,7 +189,6 @@
     self.currentRequestNumber = request.userData;
     
     [self toggleLoginView:YES];
-    
     [request send];
     
 }

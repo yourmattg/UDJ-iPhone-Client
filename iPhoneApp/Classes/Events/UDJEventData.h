@@ -19,7 +19,6 @@
 
 #import <Foundation/Foundation.h>
 #import "LocationManager.h"
-#import "UDJConnection.h"
 #import "UDJEvent.h"
 #import "UDJData.h"
 

@@ -7,6 +7,7 @@
 //
 
 #import "PlayerListViewController.h"
+#import "RestKit/RKJSONParserJSONKit.h"
 
 @interface PlayerListViewController ()
 
@@ -17,6 +18,7 @@
 @synthesize eventData, tableList, tableView;
 @synthesize statusLabel, globalData, currentRequestNumber;
 @synthesize playerSearchBar, findNearbyButton, searchIndicatorView;
+@synthesize lastSearchType;
 
 
 #pragma mark - View lifecycle
@@ -33,6 +35,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSLog(@"hurp");
     
     self.tableList = [[NSMutableArray alloc] init];
     
@@ -66,6 +70,64 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return NO;
+}
+
+
+#pragma mark Event search methods
+
+-(void)showResultsMessage{
+    
+    if(lastSearchType == SearchTypeName){
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No Players Found" message:@"Sorry, there were no players that matched the name you specified." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alert show];
+        [statusLabel setText: @"No players found"];
+    }
+    else if(lastSearchType == SearchTypeNearby){
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No Players Found" message:@"Sorry, there are no active players near you." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alert show];  
+        [statusLabel setText: @"No players found"];
+    }
+    
+    lastSearchType = SearchTypeNull;
+
+}
+
+// handleEventResults: get the list of returned events from either the name or location search
+- (void) handleEventResults:(RKResponse*)response{
+    
+    // Parse the response into an array of UDJEvents
+    NSMutableArray* cList = [NSMutableArray new];
+    RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
+    NSArray* eventArray = [parser objectFromString:[response bodyAsString] error:nil];
+    for(int i=0; i<[eventArray count]; i++){
+        NSDictionary* eventDict = [eventArray objectAtIndex:i];
+        UDJEvent* event = [UDJEvent eventFromDictionary:eventDict];
+        [cList addObject:event];
+    }
+    
+    // Update the global event list
+    [UDJEventData sharedEventData].currentList = cList;
+    
+    // show "No Events Found" message if there were no events,
+    if([cList count] == 0) [self showResultsMessage];
+    
+    // refresh table
+}
+
+// Handle responses from the server
+- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
+    NSLog(@"status code %d", [response statusCode]);
+    
+    NSNumber* requestNumber = request.userData;
+    
+    if(![requestNumber isEqualToNumber: currentRequestNumber]) return;
+    
+    if ([request isGET]) {
+        // TODO: change isNearbySearch accordingly
+        [self handleEventResults:response];        
+    }
+    
+    self.currentRequestNumber = [NSNumber numberWithInt: -1];
 }
 
 @end

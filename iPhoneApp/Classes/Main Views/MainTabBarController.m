@@ -8,7 +8,6 @@
 
 #import "MainTabBarController.h"
 #import "PlaylistViewController.h"
-#import "LibrarySearchViewController.h"
 #import "RandomViewController.h"
 #import "ArtistsViewController.h"
 

@@ -24,6 +24,7 @@
 
 @synthesize songLabel, addedByLabel, artistLabel, upVoteButton, downVoteButton, upVoteLabel, downVoteLabel, parentViewController, playingImageView, playingLabel;
 
+/*
 - (IBAction) onButtonClick: (id) sender {
     UIButton* button = sender;
     [PlaylistViewController sharedPlaylistViewController].selectedSong = [[UDJPlaylist sharedUDJPlaylist] songAtIndex: button.tag];
@@ -33,7 +34,7 @@
     else if(sender == downVoteButton){
         [[PlaylistViewController sharedPlaylistViewController] vote:NO];
     }
-}
+}*/
 
 - (void)layoutSubviews {
     [super layoutSubviews];
