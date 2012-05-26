@@ -7,7 +7,30 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UDJData.h"
+#import "UDJEventData.h"
+
+enum SearchType {
+    SearchTypeName = 0,
+    SearchTypeNearby = 1
+};
 
 @interface PlayerListViewController : UIViewController
+
+
+@property(nonatomic,strong) UDJEventData* eventData;
+
+@property(nonatomic,strong) NSMutableArray *tableList;
+@property(nonatomic,strong) IBOutlet UITableView* tableView;
+@property(nonatomic,strong) IBOutlet UILabel* statusLabel;
+
+@property(nonatomic,strong) UDJData* globalData;
+@property(nonatomic,strong) NSNumber* currentRequestNumber;
+
+@property(nonatomic,strong) IBOutlet UISearchBar* playerSearchBar;
+@property(nonatomic,strong) IBOutlet UIButton* findNearbyButton;
+@property(nonatomic,strong) IBOutlet UIActivityIndicatorView* searchIndicatorView;
+
+//@property enum SearchType lastSearchType;
 
 @end

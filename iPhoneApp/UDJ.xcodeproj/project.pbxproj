@@ -13,41 +13,35 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		2899E5220DE3E06400AC0155 /* UDJViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* UDJViewController.xib */; };
-		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* UDJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* UDJViewController.m */; };
 		A3028B861564A2AE00EF6EE8 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3028B841564A2AE00EF6EE8 /* MainTabBarController.m */; };
 		A3028B871564A2AE00EF6EE8 /* MainTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3028B851564A2AE00EF6EE8 /* MainTabBarController.xib */; };
-		A3028B891564B39700EF6EE8 /* smallicon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3028B881564B39600EF6EE8 /* smallicon.png */; };
 		A309CC6415194A8000912EA2 /* EventResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A309CC6215194A7F00912EA2 /* EventResultsViewController.m */; };
 		A309CC6515194A8000912EA2 /* EventResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A309CC6315194A8000912EA2 /* EventResultsViewController.xib */; };
 		A31A9B6315608C0B005268C0 /* separator.png in Resources */ = {isa = PBXBuildFile; fileRef = A31A9B6215608C0B005268C0 /* separator.png */; };
 		A31AA6AB1561CE3B0032FEAB /* UDJUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A31AA6AA1561CE3B0032FEAB /* UDJUser.m */; };
 		A3210D8F15328763009A9318 /* smalluparrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A3210D8E15328763009A9318 /* smalluparrow.png */; };
-		A321A58D151FCBAB001ECC30 /* backbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A321A58C151FCBAB001ECC30 /* backbutton.png */; };
 		A324ABF614AAB74700388514 /* UDJSong.m in Sources */ = {isa = PBXBuildFile; fileRef = A324ABF514AAB74700388514 /* UDJSong.m */; };
 		A324AC0514AABB8900388514 /* UDJPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = A324AC0414AABB8900388514 /* UDJPlaylist.m */; };
 		A3265DB314C6101400FC692B /* PlaylistEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3265DB214C6101400FC692B /* PlaylistEntryCell.m */; };
+		A32BEEA1157163A1005B573B /* nearbybutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A32BEEA0157163A1005B573B /* nearbybutton.png */; };
 		A3360BCF14F5E14F00541726 /* NewPlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */; };
 		A33C4614148F0707009C1BC6 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A33C4612148F0707009C1BC6 /* PlaylistViewController.m */; };
 		A33C461E148F11FC009C1BC6 /* LibrarySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A33C461C148F11FC009C1BC6 /* LibrarySearchViewController.m */; };
 		A33C461F148F11FC009C1BC6 /* LibrarySearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A33C461D148F11FC009C1BC6 /* LibrarySearchViewController.xib */; };
 		A33EE1E115684B7D00D49B85 /* playing.png in Resources */ = {isa = PBXBuildFile; fileRef = A33EE1E015684B7D00D49B85 /* playing.png */; };
-		A341B92514F8681C001892C5 /* downarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A341B92414F8681C001892C5 /* downarrow.png */; };
-		A341B92714F86824001892C5 /* uparrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A341B92614F86824001892C5 /* uparrow.png */; };
 		A341B92914F86C61001892C5 /* addbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A341B92814F86C61001892C5 /* addbutton.png */; };
 		A34796A514F85AE0001DEE15 /* default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A34796A414F85AE0001DEE15 /* default.jpg */; };
 		A3495614151EF3D800AAEF7E /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = A3495613151EF3D800AAEF7E /* refresh.png */; };
 		A34FB30314B8EB5F00BE5CE2 /* LibraryResultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = A34FB30114B8EB5F00BE5CE2 /* LibraryResultsController.m */; };
 		A34FB30414B8EB5F00BE5CE2 /* LibraryResultsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A34FB30214B8EB5F00BE5CE2 /* LibraryResultsController.xib */; };
 		A3515C421524098500C89661 /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FAB0E515228A9000BA8654 /* Facebook.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		A351B57D151F7AB200368F6F /* playlistbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A351B57C151F7AB200368F6F /* playlistbutton.png */; };
 		A3536FB314A5218F00B5C95F /* UDJEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A3536FB214A5218F00B5C95F /* UDJEvent.m */; };
 		A35D3DF114F985460007B374 /* votedown.png in Resources */ = {isa = PBXBuildFile; fileRef = A35D3DEF14F985460007B374 /* votedown.png */; };
 		A35D3DF214F985460007B374 /* voteup.png in Resources */ = {isa = PBXBuildFile; fileRef = A35D3DF014F985460007B374 /* voteup.png */; };
 		A35E3E9A1516680100A2882D /* UDJData.m in Sources */ = {isa = PBXBuildFile; fileRef = A35E3E991516680100A2882D /* UDJData.m */; };
 		A3632F6814FC8AE10073EDF4 /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3632F5F14FC8AC40073EDF4 /* libRestKit.a */; };
 		A36D2CCC14A818130087E992 /* SearchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A36D2CCA14A818130087E992 /* SearchingViewController.m */; };
-		A36D2CCD14A818130087E992 /* SearchingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A36D2CCB14A818130087E992 /* SearchingViewController.xib */; };
 		A3720B3014C74FE800D1E30C /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A3720B2F14C74FE800D1E30C /* LocationManager.m */; };
 		A3720B3214C7513600D1E30C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3720B3114C7513600D1E30C /* CoreLocation.framework */; };
 		A3720B3414C7514400D1E30C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3720B3314C7514400D1E30C /* CoreFoundation.framework */; };
@@ -71,38 +65,29 @@
 		A3C22D591566D8510066B9F8 /* randomicon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C22D581566D8510066B9F8 /* randomicon.png */; };
 		A3C22D5B1566D9EA0066B9F8 /* playingbar.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C22D5A1566D9EA0066B9F8 /* playingbar.png */; };
 		A3C608FA151E3593004AB623 /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C608F9151E3593004AB623 /* EventCell.m */; };
-		A3C608FC151E52BB004AB623 /* eventcellselected.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C608FB151E52BB004AB623 /* eventcellselected.png */; };
 		A3C6A46A1565E6FF00F1E42E /* darknavbar.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C6A4691565E6FF00F1E42E /* darknavbar.png */; };
 		A3C6A4721565F9FA00F1E42E /* RandomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C6A4701565F9FA00F1E42E /* RandomViewController.m */; };
 		A3C6A4731565F9FA00F1E42E /* RandomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3C6A4711565F9FA00F1E42E /* RandomViewController.xib */; };
 		A3C6A47C1566017A00F1E42E /* artists.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C6A47B1566017A00F1E42E /* artists.png */; };
 		A3C7A442156714F20085150A /* SongListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C7A440156714F20085150A /* SongListViewController.m */; };
 		A3C7A443156714F20085150A /* SongListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3C7A441156714F20085150A /* SongListViewController.xib */; };
-		A3CE2C06151D257400C13006 /* eventcell.png in Resources */ = {isa = PBXBuildFile; fileRef = A3CE2C05151D257400C13006 /* eventcell.png */; };
 		A3CF872F14B8F8F000A9F829 /* UDJSongList.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CF872E14B8F8F000A9F829 /* UDJSongList.m */; };
 		A3CFBEE915685DA5002B7658 /* playtoggle.png in Resources */ = {isa = PBXBuildFile; fileRef = A3CFBEE815685DA5002B7658 /* playtoggle.png */; };
 		A3CFBEEB156865B7002B7658 /* controls.png in Resources */ = {isa = PBXBuildFile; fileRef = A3CFBEEA156865B7002B7658 /* controls.png */; };
 		A3CFBEED1568730A002B7658 /* pausetoggle.png in Resources */ = {isa = PBXBuildFile; fileRef = A3CFBEEC1568730A002B7658 /* pausetoggle.png */; };
 		A3CFBEF015688811002B7658 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CFBEEF15688811002B7658 /* KeychainItemWrapper.m */; };
 		A3CFBEF3156888E8002B7658 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3CFBEF1156888E8002B7658 /* Model.xcdatamodeld */; };
-		A3D334D514C6A02300A90D58 /* downarrow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3D334D414C6A02300A90D58 /* downarrow.jpg */; };
-		A3D334D714C6A02A00A90D58 /* uparrow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3D334D614C6A02A00A90D58 /* uparrow.jpg */; };
 		A3DAD57D14BD253600688CE0 /* UDJMappableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DAD57C14BD253600688CE0 /* UDJMappableArray.m */; };
 		A3DDD0A71533EFEF00DB5E1F /* smalldownarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A3DDD0A61533EFEF00DB5E1F /* smalldownarrow.png */; };
-		A3EF398114C64D33003889E0 /* addbutton.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3EF398014C64D33003889E0 /* addbutton.jpg */; };
 		A3F58D9514C753D300E350F4 /* UDJEventGoer.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58D9414C753D300E350F4 /* UDJEventGoer.m */; };
 		A3F58D9914C75F0800E350F4 /* EventGoerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58D9714C75F0800E350F4 /* EventGoerViewController.m */; };
 		A3F58D9C14C75FAF00E350F4 /* EventGoerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F58D9B14C75FAF00E350F4 /* EventGoerViewController.xib */; };
 		A3F58D9F14C765C100E350F4 /* UDJEventGoerList.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58D9E14C765C100E350F4 /* UDJEventGoerList.m */; };
 		A3F86A6F156F03250036FBCE /* PlayerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F86A6D156F03250036FBCE /* PlayerListViewController.m */; };
 		A3F86A70156F03250036FBCE /* PlayerListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F86A6E156F03250036FBCE /* PlayerListViewController.xib */; };
-		A3F877E5151EE53C005EC5EE /* leavebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A3F877E3151EE53C005EC5EE /* leavebutton.png */; };
-		A3F877E6151EE53C005EC5EE /* librarybutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A3F877E4151EE53C005EC5EE /* librarybutton.png */; };
-		A3F877E8151EE545005EC5EE /* navbar.png in Resources */ = {isa = PBXBuildFile; fileRef = A3F877E7151EE545005EC5EE /* navbar.png */; };
 		A3F9C052142EAD610016717B /* EventSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F9C050142EAD610016717B /* EventSearchViewController.m */; };
 		A3F9C053142EAD610016717B /* EventSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F9C051142EAD610016717B /* EventSearchViewController.xib */; };
 		A3F9C1D8142EBB880016717B /* PartyLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F9C1D6142EBB880016717B /* PartyLoginViewController.m */; };
-		A3F9C1D9142EBB880016717B /* PartyLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F9C1D7142EBB880016717B /* PartyLoginViewController.xib */; };
 		A3FAB0FF15228A9000BA8654 /* FacebookHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FAB0E715228A9000BA8654 /* FacebookHandler.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A3FAB10015228A9000BA8654 /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A3FAB0E915228A9000BA8654 /* FBDialog.bundle */; };
 		A3FAB10115228A9000BA8654 /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FAB0EB15228A9000BA8654 /* FBDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -162,7 +147,6 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2899E5210DE3E06400AC0155 /* UDJViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UDJViewController.xib; sourceTree = "<group>"; };
-		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		28D7ACF60DDB3853001CB0EB /* UDJViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJViewController.h; sourceTree = "<group>"; };
 		28D7ACF70DDB3853001CB0EB /* UDJViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -170,7 +154,6 @@
 		A3028B831564A2AE00EF6EE8 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
 		A3028B841564A2AE00EF6EE8 /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 		A3028B851564A2AE00EF6EE8 /* MainTabBarController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainTabBarController.xib; path = "../Classes/Main Views/MainTabBarController.xib"; sourceTree = "<group>"; };
-		A3028B881564B39600EF6EE8 /* smallicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smallicon.png; sourceTree = "<group>"; };
 		A309CC6115194A7F00912EA2 /* EventResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventResultsViewController.h; sourceTree = "<group>"; };
 		A309CC6215194A7F00912EA2 /* EventResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventResultsViewController.m; sourceTree = "<group>"; };
 		A309CC6315194A8000912EA2 /* EventResultsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventResultsViewController.xib; path = ../Classes/Events/EventResultsViewController.xib; sourceTree = "<group>"; };
@@ -178,7 +161,6 @@
 		A31AA6A91561CE3B0032FEAB /* UDJUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJUser.h; sourceTree = "<group>"; };
 		A31AA6AA1561CE3B0032FEAB /* UDJUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJUser.m; sourceTree = "<group>"; };
 		A3210D8E15328763009A9318 /* smalluparrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smalluparrow.png; sourceTree = "<group>"; };
-		A321A58C151FCBAB001ECC30 /* backbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backbutton.png; sourceTree = "<group>"; };
 		A324ABF414AAB74700388514 /* UDJSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJSong.h; sourceTree = "<group>"; };
 		A324ABF514AAB74700388514 /* UDJSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJSong.m; sourceTree = "<group>"; };
 		A324AC0314AABB8900388514 /* UDJPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJPlaylist.h; sourceTree = "<group>"; };
@@ -186,6 +168,7 @@
 		A3265DB114C6101400FC692B /* PlaylistEntryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistEntryCell.h; sourceTree = "<group>"; };
 		A3265DB214C6101400FC692B /* PlaylistEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistEntryCell.m; sourceTree = "<group>"; };
 		A32A384614AE917600D166CF /* UDJ-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "UDJ-Info.plist"; path = "../UDJ-Info.plist"; sourceTree = "<group>"; };
+		A32BEEA0157163A1005B573B /* nearbybutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nearbybutton.png; sourceTree = "<group>"; };
 		A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewPlaylistViewController.xib; path = Resources/NewPlaylistViewController.xib; sourceTree = SOURCE_ROOT; };
 		A33C4611148F0707009C1BC6 /* PlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistViewController.h; sourceTree = "<group>"; };
 		A33C4612148F0707009C1BC6 /* PlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistViewController.m; sourceTree = "<group>"; };
@@ -193,15 +176,12 @@
 		A33C461C148F11FC009C1BC6 /* LibrarySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibrarySearchViewController.m; sourceTree = "<group>"; };
 		A33C461D148F11FC009C1BC6 /* LibrarySearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LibrarySearchViewController.xib; sourceTree = "<group>"; };
 		A33EE1E015684B7D00D49B85 /* playing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playing.png; sourceTree = "<group>"; };
-		A341B92414F8681C001892C5 /* downarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downarrow.png; sourceTree = "<group>"; };
-		A341B92614F86824001892C5 /* uparrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uparrow.png; sourceTree = "<group>"; };
 		A341B92814F86C61001892C5 /* addbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addbutton.png; sourceTree = "<group>"; };
 		A34796A414F85AE0001DEE15 /* default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpg; sourceTree = "<group>"; };
 		A3495613151EF3D800AAEF7E /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		A34FB30014B8EB5F00BE5CE2 /* LibraryResultsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryResultsController.h; sourceTree = "<group>"; };
 		A34FB30114B8EB5F00BE5CE2 /* LibraryResultsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryResultsController.m; sourceTree = "<group>"; };
 		A34FB30214B8EB5F00BE5CE2 /* LibraryResultsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LibraryResultsController.xib; path = ../Classes/Library/LibraryResultsController.xib; sourceTree = "<group>"; };
-		A351B57C151F7AB200368F6F /* playlistbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playlistbutton.png; sourceTree = "<group>"; };
 		A3536FB114A5218F00B5C95F /* UDJEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJEvent.h; sourceTree = "<group>"; };
 		A3536FB214A5218F00B5C95F /* UDJEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJEvent.m; sourceTree = "<group>"; };
 		A35D3DEF14F985460007B374 /* votedown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = votedown.png; sourceTree = "<group>"; };
@@ -210,7 +190,6 @@
 		A35E3E991516680100A2882D /* UDJData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJData.m; sourceTree = "<group>"; };
 		A36D2CC914A818130087E992 /* SearchingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchingViewController.h; sourceTree = "<group>"; };
 		A36D2CCA14A818130087E992 /* SearchingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchingViewController.m; sourceTree = "<group>"; };
-		A36D2CCB14A818130087E992 /* SearchingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchingViewController.xib; sourceTree = "<group>"; };
 		A3720B2E14C74FE800D1E30C /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		A3720B2F14C74FE800D1E30C /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		A3720B3114C7513600D1E30C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -243,7 +222,6 @@
 		A3C22D5A1566D9EA0066B9F8 /* playingbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playingbar.png; sourceTree = "<group>"; };
 		A3C608F8151E3593004AB623 /* EventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventCell.h; sourceTree = "<group>"; };
 		A3C608F9151E3593004AB623 /* EventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventCell.m; sourceTree = "<group>"; };
-		A3C608FB151E52BB004AB623 /* eventcellselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eventcellselected.png; sourceTree = "<group>"; };
 		A3C6A4691565E6FF00F1E42E /* darknavbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = darknavbar.png; sourceTree = "<group>"; };
 		A3C6A46F1565F9FA00F1E42E /* RandomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomViewController.h; sourceTree = "<group>"; };
 		A3C6A4701565F9FA00F1E42E /* RandomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RandomViewController.m; sourceTree = "<group>"; };
@@ -252,7 +230,6 @@
 		A3C7A43F156714F20085150A /* SongListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongListViewController.h; sourceTree = "<group>"; };
 		A3C7A440156714F20085150A /* SongListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongListViewController.m; sourceTree = "<group>"; };
 		A3C7A441156714F20085150A /* SongListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SongListViewController.xib; path = ../Classes/Library/SongListViewController.xib; sourceTree = "<group>"; };
-		A3CE2C05151D257400C13006 /* eventcell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eventcell.png; sourceTree = "<group>"; };
 		A3CF872D14B8F8F000A9F829 /* UDJSongList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJSongList.h; sourceTree = "<group>"; };
 		A3CF872E14B8F8F000A9F829 /* UDJSongList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJSongList.m; sourceTree = "<group>"; };
 		A3CFBEE815685DA5002B7658 /* playtoggle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playtoggle.png; sourceTree = "<group>"; };
@@ -261,12 +238,9 @@
 		A3CFBEEE15688811002B7658 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		A3CFBEEF15688811002B7658 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		A3CFBEF2156888E8002B7658 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		A3D334D414C6A02300A90D58 /* downarrow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = downarrow.jpg; sourceTree = "<group>"; };
-		A3D334D614C6A02A00A90D58 /* uparrow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = uparrow.jpg; sourceTree = "<group>"; };
 		A3DAD57B14BD253600688CE0 /* UDJMappableArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJMappableArray.h; sourceTree = "<group>"; };
 		A3DAD57C14BD253600688CE0 /* UDJMappableArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJMappableArray.m; sourceTree = "<group>"; };
 		A3DDD0A61533EFEF00DB5E1F /* smalldownarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smalldownarrow.png; sourceTree = "<group>"; };
-		A3EF398014C64D33003889E0 /* addbutton.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addbutton.jpg; sourceTree = "<group>"; };
 		A3F58D9314C753D300E350F4 /* UDJEventGoer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJEventGoer.h; sourceTree = "<group>"; };
 		A3F58D9414C753D300E350F4 /* UDJEventGoer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJEventGoer.m; sourceTree = "<group>"; };
 		A3F58D9614C75F0800E350F4 /* EventGoerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventGoerViewController.h; path = "Classes/Main Views/EventGoerViewController.h"; sourceTree = SOURCE_ROOT; };
@@ -277,15 +251,11 @@
 		A3F86A6C156F03250036FBCE /* PlayerListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerListViewController.h; sourceTree = "<group>"; };
 		A3F86A6D156F03250036FBCE /* PlayerListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerListViewController.m; sourceTree = "<group>"; };
 		A3F86A6E156F03250036FBCE /* PlayerListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlayerListViewController.xib; path = ../Classes/Events/PlayerListViewController.xib; sourceTree = "<group>"; };
-		A3F877E3151EE53C005EC5EE /* leavebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leavebutton.png; sourceTree = "<group>"; };
-		A3F877E4151EE53C005EC5EE /* librarybutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = librarybutton.png; sourceTree = "<group>"; };
-		A3F877E7151EE545005EC5EE /* navbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navbar.png; sourceTree = "<group>"; };
 		A3F9C04F142EAD610016717B /* EventSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventSearchViewController.h; sourceTree = "<group>"; };
 		A3F9C050142EAD610016717B /* EventSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventSearchViewController.m; sourceTree = "<group>"; };
 		A3F9C051142EAD610016717B /* EventSearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventSearchViewController.xib; sourceTree = "<group>"; };
 		A3F9C1D5142EBB880016717B /* PartyLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartyLoginViewController.h; sourceTree = "<group>"; };
 		A3F9C1D6142EBB880016717B /* PartyLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartyLoginViewController.m; sourceTree = "<group>"; };
-		A3F9C1D7142EBB880016717B /* PartyLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PartyLoginViewController.xib; sourceTree = "<group>"; };
 		A3FAB0E415228A9000BA8654 /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
 		A3FAB0E515228A9000BA8654 /* Facebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Facebook.m; sourceTree = "<group>"; };
 		A3FAB0E615228A9000BA8654 /* FacebookHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookHandler.h; sourceTree = "<group>"; };
@@ -499,6 +469,7 @@
 		A3C6A4741565FA1400F1E42E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				A32BEEA0157163A1005B573B /* nearbybutton.png */,
 				A3CFBEEC1568730A002B7658 /* pausetoggle.png */,
 				A3CFBEEA156865B7002B7658 /* controls.png */,
 				A3CFBEE815685DA5002B7658 /* playtoggle.png */,
@@ -510,28 +481,15 @@
 				A3C22D541566D4D50066B9F8 /* playlisticon.png */,
 				A3C6A47B1566017A00F1E42E /* artists.png */,
 				A3C6A4691565E6FF00F1E42E /* darknavbar.png */,
-				A3028B881564B39600EF6EE8 /* smallicon.png */,
 				A31A9B6215608C0B005268C0 /* separator.png */,
 				A3DDD0A61533EFEF00DB5E1F /* smalldownarrow.png */,
 				A3210D8E15328763009A9318 /* smalluparrow.png */,
-				A321A58C151FCBAB001ECC30 /* backbutton.png */,
-				A351B57C151F7AB200368F6F /* playlistbutton.png */,
 				A3495613151EF3D800AAEF7E /* refresh.png */,
-				A3F877E7151EE545005EC5EE /* navbar.png */,
-				A3F877E3151EE53C005EC5EE /* leavebutton.png */,
-				A3F877E4151EE53C005EC5EE /* librarybutton.png */,
-				A3C608FB151E52BB004AB623 /* eventcellselected.png */,
-				A3CE2C05151D257400C13006 /* eventcell.png */,
 				A35D3DEF14F985460007B374 /* votedown.png */,
 				A35D3DF014F985460007B374 /* voteup.png */,
 				A341B92814F86C61001892C5 /* addbutton.png */,
-				A341B92614F86824001892C5 /* uparrow.png */,
-				A341B92414F8681C001892C5 /* downarrow.png */,
 				A34796A414F85AE0001DEE15 /* default.jpg */,
 				A38B629F14C736C70088640D /* udjlauncher.png */,
-				A3D334D614C6A02A00A90D58 /* uparrow.jpg */,
-				A3D334D414C6A02300A90D58 /* downarrow.jpg */,
-				A3EF398014C64D33003889E0 /* addbutton.jpg */,
 			);
 			name = images;
 			sourceTree = "<group>";
@@ -546,12 +504,9 @@
 				A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */,
 				A3F9C051142EAD610016717B /* EventSearchViewController.xib */,
 				A309CC6315194A8000912EA2 /* EventResultsViewController.xib */,
-				A36D2CCB14A818130087E992 /* SearchingViewController.xib */,
 				A33C461D148F11FC009C1BC6 /* LibrarySearchViewController.xib */,
 				A34FB30214B8EB5F00BE5CE2 /* LibraryResultsController.xib */,
-				A3F9C1D7142EBB880016717B /* PartyLoginViewController.xib */,
 				2899E5210DE3E06400AC0155 /* UDJViewController.xib */,
-				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				A3F58D9B14C75FAF00E350F4 /* EventGoerViewController.xib */,
 				A3028B851564A2AE00EF6EE8 /* MainTabBarController.xib */,
 			);
@@ -720,40 +675,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				2899E5220DE3E06400AC0155 /* UDJViewController.xib in Resources */,
 				A3F9C053142EAD610016717B /* EventSearchViewController.xib in Resources */,
-				A3F9C1D9142EBB880016717B /* PartyLoginViewController.xib in Resources */,
 				A33C461F148F11FC009C1BC6 /* LibrarySearchViewController.xib in Resources */,
-				A36D2CCD14A818130087E992 /* SearchingViewController.xib in Resources */,
 				A34FB30414B8EB5F00BE5CE2 /* LibraryResultsController.xib in Resources */,
-				A3EF398114C64D33003889E0 /* addbutton.jpg in Resources */,
-				A3D334D514C6A02300A90D58 /* downarrow.jpg in Resources */,
-				A3D334D714C6A02A00A90D58 /* uparrow.jpg in Resources */,
 				A38B62A014C736C70088640D /* udjlauncher.png in Resources */,
 				A3F58D9C14C75FAF00E350F4 /* EventGoerViewController.xib in Resources */,
 				A3360BCF14F5E14F00541726 /* NewPlaylistViewController.xib in Resources */,
 				A34796A514F85AE0001DEE15 /* default.jpg in Resources */,
-				A341B92514F8681C001892C5 /* downarrow.png in Resources */,
-				A341B92714F86824001892C5 /* uparrow.png in Resources */,
 				A341B92914F86C61001892C5 /* addbutton.png in Resources */,
 				A35D3DF114F985460007B374 /* votedown.png in Resources */,
 				A35D3DF214F985460007B374 /* voteup.png in Resources */,
 				A309CC6515194A8000912EA2 /* EventResultsViewController.xib in Resources */,
-				A3CE2C06151D257400C13006 /* eventcell.png in Resources */,
-				A3C608FC151E52BB004AB623 /* eventcellselected.png in Resources */,
-				A3F877E5151EE53C005EC5EE /* leavebutton.png in Resources */,
-				A3F877E6151EE53C005EC5EE /* librarybutton.png in Resources */,
-				A3F877E8151EE545005EC5EE /* navbar.png in Resources */,
 				A3495614151EF3D800AAEF7E /* refresh.png in Resources */,
-				A351B57D151F7AB200368F6F /* playlistbutton.png in Resources */,
-				A321A58D151FCBAB001ECC30 /* backbutton.png in Resources */,
 				A3FAB10015228A9000BA8654 /* FBDialog.bundle in Resources */,
 				A3210D8F15328763009A9318 /* smalluparrow.png in Resources */,
 				A3DDD0A71533EFEF00DB5E1F /* smalldownarrow.png in Resources */,
 				A31A9B6315608C0B005268C0 /* separator.png in Resources */,
 				A3028B871564A2AE00EF6EE8 /* MainTabBarController.xib in Resources */,
-				A3028B891564B39700EF6EE8 /* smallicon.png in Resources */,
 				A3C6A46A1565E6FF00F1E42E /* darknavbar.png in Resources */,
 				A3C6A4731565F9FA00F1E42E /* RandomViewController.xib in Resources */,
 				A3C6A47C1566017A00F1E42E /* artists.png in Resources */,
@@ -769,6 +708,7 @@
 				A3CFBEEB156865B7002B7658 /* controls.png in Resources */,
 				A3CFBEED1568730A002B7658 /* pausetoggle.png in Resources */,
 				A3F86A70156F03250036FBCE /* PlayerListViewController.xib in Resources */,
+				A32BEEA1157163A1005B573B /* nearbybutton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

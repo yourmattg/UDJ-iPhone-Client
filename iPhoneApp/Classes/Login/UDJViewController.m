@@ -18,12 +18,12 @@
  */
 
 #import "UDJViewController.h"
-#import "EventSearchViewController.h"
 #import "UDJConnection.h"
 #import "PlaylistViewController.h"
 #import "UDJData.h"
 #import "KeychainItemWrapper.h"
 #import "UDJAppDelegate.h"
+#import "PlayerListViewController.h"
 
 
 @implementation UDJViewController
@@ -214,9 +214,9 @@
     //TODO: may need to change userID to [userID intValue]
     globalData.headers = [NSDictionary dictionaryWithObjectsAndKeys:globalData.ticket, @"X-Udj-Ticket-Hash", nil];
         
-    // load the party list view
-    EventSearchViewController* eventSearchViewController = [[EventSearchViewController alloc] initWithNibName:@"EventSearchViewController" bundle:[NSBundle mainBundle]];
-    [self.navigationController pushViewController:eventSearchViewController animated:YES];
+    // load the player list view
+    PlayerListViewController* viewController = [[PlayerListViewController alloc] initWithNibName:@"PlayerListViewController" bundle:[NSBundle mainBundle]];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 -(void)denyAuth:(RKResponse*)response{
