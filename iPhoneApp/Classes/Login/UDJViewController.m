@@ -223,7 +223,7 @@
     // hide the login view
     [self toggleLoginView:NO];
     
-    if([response statusCode] == 401){
+    if([response statusCode] == 401 || [response statusCode] == 404){
         //let user know their credentials were invalid
         UIAlertView* authNotification = [[UIAlertView alloc] initWithTitle:@"Login Failed" message:@"The username or password you entered is invalid." delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [authNotification show];        
@@ -256,7 +256,7 @@
 
 // Send user to the register page
 -(IBAction)registerButtonClick:(id)sender{
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.udjevents.com/registration/register/"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.udjplayer.com/registration/register/"]];
 }
 
 // Hide the keyboard when user hits return
