@@ -133,7 +133,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     [self.view addSubview: voteNotificationView];
     voteNotificationView.alpha = 0;
-    voteNotificationView.frame = CGRectMake(20, 370, 280, 32);
+    voteNotificationView.frame = CGRectMake(20, 370, 280, 32); // y coord used to be 370
     [UIView animateWithDuration:0.5 animations:^{
         voteNotificationView.alpha = 1;
     } completion:^(BOOL finished){
@@ -180,29 +180,17 @@ static PlaylistViewController* _sharedPlaylistViewController;
 }
 
 // upVote: send an upvote request
-- (IBAction)upVoteClick:(id)sender{
+- (IBAction)voteButtonClick:(id)sender{
     UIButton* button = sender;
     
     // figure out the correct index to vote on
     NSInteger songIndex;
     if([playlist currentSong] != nil) songIndex = button.tag - 1;
-    else songIndex = button.tag;
-    
+    else songIndex = button.tag;  
     selectedSong = [[UDJPlaylist sharedUDJPlaylist] songAtIndex: songIndex];
-    [self vote:YES];
-}
-
-// downVote: send a downvote request
-- (IBAction)downVoteClick:(id)sender{
-    UIButton* button = sender;
     
-    // figure out the correct index to vote on
-    NSInteger songIndex;
-    if([playlist currentSong] != nil) songIndex = button.tag - 1;
-    else songIndex = button.tag;
-    
-    selectedSong = [[UDJPlaylist sharedUDJPlaylist] songAtIndex: songIndex];
-    [self vote:NO];
+    if([button.imageView.image isEqual: [UIImage imageNamed: @"voteup.png"]]) [self vote:YES];
+    else [self vote:NO];
 }
 
 
@@ -402,9 +390,9 @@ static PlaylistViewController* _sharedPlaylistViewController;
     // initialize up/down vote buttons
     cell.downVoteButton.tag = rowNumber;
     cell.upVoteButton.tag = rowNumber;
-    [cell.downVoteButton addTarget:self action:@selector(downVoteClick:)   
+    [cell.downVoteButton addTarget:self action:@selector(voteButtonClick:)   
              forControlEvents:UIControlEventTouchUpInside];
-    [cell.upVoteButton addTarget:self action:@selector(upVoteClick:)   
+    [cell.upVoteButton addTarget:self action:@selector(voteButtonClick:)   
                   forControlEvents:UIControlEventTouchUpInside];
     
     // show/hide buttons if its the song currently playing
