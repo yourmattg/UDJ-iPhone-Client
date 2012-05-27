@@ -24,18 +24,6 @@
 
 @synthesize songLabel, addedByLabel, artistLabel, upVoteButton, downVoteButton, upVoteLabel, downVoteLabel, parentViewController, playingImageView, playingLabel;
 
-/*
-- (IBAction) onButtonClick: (id) sender {
-    UIButton* button = sender;
-    [PlaylistViewController sharedPlaylistViewController].selectedSong = [[UDJPlaylist sharedUDJPlaylist] songAtIndex: button.tag];
-    if(sender == upVoteButton) {
-        [[PlaylistViewController sharedPlaylistViewController] vote:YES];
-    }    
-    else if(sender == downVoteButton){
-        [[PlaylistViewController sharedPlaylistViewController] vote:NO];
-    }
-}*/
-
 - (void)layoutSubviews {
     [super layoutSubviews];
     CGRect contentRect = self.contentView.bounds;
@@ -99,13 +87,9 @@
         UIImage* upVoteImage = [UIImage imageNamed:@"voteup.png"];
         upVoteButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [upVoteButton setImage:upVoteImage forState:UIControlStateNormal];
-        [upVoteButton addTarget:self action:@selector(onButtonClick:)   
-            forControlEvents:UIControlEventTouchUpInside];
         UIImage* downVoteImage = [UIImage imageNamed:@"votedown.png"];
         downVoteButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [downVoteButton setImage:downVoteImage forState:UIControlStateNormal];
-        [downVoteButton addTarget:self action:@selector(onButtonClick:)   
-               forControlEvents:UIControlEventTouchUpInside];
      
         upVoteLabel = [[UILabel alloc] init];
         downVoteLabel = [[UILabel alloc] init];

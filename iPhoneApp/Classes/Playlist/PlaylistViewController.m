@@ -179,13 +179,29 @@ static PlaylistViewController* _sharedPlaylistViewController;
     }
 }
 
-// upVote: have UDJConnection send an upvote request
-- (void)upVote{
+// upVote: send an upvote request
+- (IBAction)upVoteClick:(id)sender{
+    UIButton* button = sender;
+    
+    // figure out the correct index to vote on
+    NSInteger songIndex;
+    if([playlist currentSong] != nil) songIndex = button.tag - 1;
+    else songIndex = button.tag;
+    
+    selectedSong = [[UDJPlaylist sharedUDJPlaylist] songAtIndex: songIndex];
     [self vote:YES];
 }
 
-// downVote: have UDJConnection send a downvote request
-- (void)downVote{
+// downVote: send a downvote request
+- (IBAction)downVoteClick:(id)sender{
+    UIButton* button = sender;
+    
+    // figure out the correct index to vote on
+    NSInteger songIndex;
+    if([playlist currentSong] != nil) songIndex = button.tag - 1;
+    else songIndex = button.tag;
+    
+    selectedSong = [[UDJPlaylist sharedUDJPlaylist] songAtIndex: songIndex];
     [self vote:NO];
 }
 
@@ -345,9 +361,15 @@ static PlaylistViewController* _sharedPlaylistViewController;
     // combine song number and name into one string
     UDJSong* song;
     
-    // check if current song playing
-    if(indexPath.row == 0) song = [playlist songPlaying];
-    else song = [playlist songAtIndex: rowNumber - 1];
+    // case where a song is playing
+    if([playlist songPlaying] != nil){
+        if(indexPath.row == 0) song = [playlist songPlaying];
+        else song = [playlist songAtIndex: rowNumber - 1];
+    }
+    // case where NO song is playing
+    else{
+        song = [playlist songAtIndex: rowNumber];
+    }
     
     
     // if there's no current song
@@ -367,20 +389,26 @@ static PlaylistViewController* _sharedPlaylistViewController;
     NSString* adderName;
     NSInteger userId = [globalData.userID intValue];
     
+    // initialize labels
     if(song.adder == nil) adderName = @"";
     else if(song.adder.userID == userId) adderName = @"You";
     else adderName = song.adder.username;
     cell.addedByLabel.text = [NSString stringWithFormat:@"%@%@", @"Added by ", adderName];
     
+    // show vote counts
     cell.upVoteLabel.text = [NSString stringWithFormat:@"%d", [song.upVoters count]];
     cell.downVoteLabel.text = [NSString stringWithFormat:@"%d", [song.downVoters count]];
     
-    cell.downVoteButton.tag = rowNumber-1;
-    cell.upVoteButton.tag = rowNumber-1;
+    // initialize up/down vote buttons
+    cell.downVoteButton.tag = rowNumber;
+    cell.upVoteButton.tag = rowNumber;
+    [cell.downVoteButton addTarget:self action:@selector(downVoteClick:)   
+             forControlEvents:UIControlEventTouchUpInside];
+    [cell.upVoteButton addTarget:self action:@selector(upVoteClick:)   
+                  forControlEvents:UIControlEventTouchUpInside];
     
-    // Current song playing symbol
-    
-    BOOL hidden = (rowNumber == 0);
+    // show/hide buttons if its the song currently playing
+    BOOL hidden = (rowNumber == 0 && [playlist songPlaying] != nil);
     cell.upVoteLabel.hidden = hidden;
     cell.downVoteLabel.hidden = hidden;
     cell.upVoteButton.hidden = hidden;

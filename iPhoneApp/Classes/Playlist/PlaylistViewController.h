@@ -41,8 +41,6 @@
 -(void)sendRefreshRequest;
 -(void)refreshTableList;
 -(void)vote:(BOOL)up;
--(void)downVote;
--(void)upVote;
 -(void)login;
 -(void)post;
 
