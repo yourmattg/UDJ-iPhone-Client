@@ -38,6 +38,8 @@
 		A35D3DF114F985460007B374 /* votedown.png in Resources */ = {isa = PBXBuildFile; fileRef = A35D3DEF14F985460007B374 /* votedown.png */; };
 		A35D3DF214F985460007B374 /* voteup.png in Resources */ = {isa = PBXBuildFile; fileRef = A35D3DF014F985460007B374 /* voteup.png */; };
 		A35E3E9A1516680100A2882D /* UDJData.m in Sources */ = {isa = PBXBuildFile; fileRef = A35E3E991516680100A2882D /* UDJData.m */; };
+		A35F57F41572D25D004AA5DB /* PullRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A35F57F31572D25D004AA5DB /* PullRefreshTableViewController.m */; };
+		A35F57F61572D477004AA5DB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35F57F51572D477004AA5DB /* QuartzCore.framework */; };
 		A3632F6814FC8AE10073EDF4 /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3632F5F14FC8AC40073EDF4 /* libRestKit.a */; };
 		A3720B3014C74FE800D1E30C /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A3720B2F14C74FE800D1E30C /* LocationManager.m */; };
 		A3720B3214C7513600D1E30C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3720B3114C7513600D1E30C /* CoreLocation.framework */; };
@@ -180,6 +182,9 @@
 		A35D3DF014F985460007B374 /* voteup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voteup.png; sourceTree = "<group>"; };
 		A35E3E981516680100A2882D /* UDJData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJData.h; sourceTree = "<group>"; };
 		A35E3E991516680100A2882D /* UDJData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJData.m; sourceTree = "<group>"; };
+		A35F57F21572D25D004AA5DB /* PullRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullRefreshTableViewController.h; sourceTree = "<group>"; };
+		A35F57F31572D25D004AA5DB /* PullRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullRefreshTableViewController.m; sourceTree = "<group>"; };
+		A35F57F51572D477004AA5DB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A3720B2E14C74FE800D1E30C /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		A3720B2F14C74FE800D1E30C /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		A3720B3114C7513600D1E30C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -276,6 +281,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A35F57F61572D477004AA5DB /* QuartzCore.framework in Frameworks */,
 				A3632F6814FC8AE10073EDF4 /* libRestKit.a in Frameworks */,
 				A3720B3414C7514400D1E30C /* CoreFoundation.framework in Frameworks */,
 				A3720B3214C7513600D1E30C /* CoreLocation.framework in Frameworks */,
@@ -297,6 +303,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A35F57F21572D25D004AA5DB /* PullRefreshTableViewController.h */,
+				A35F57F31572D25D004AA5DB /* PullRefreshTableViewController.m */,
 				1D3623240D0F684500981E51 /* UDJAppDelegate.h */,
 				1D3623250D0F684500981E51 /* UDJAppDelegate.m */,
 				A3FAB0E315228A9000BA8654 /* Sharing */,
@@ -324,14 +332,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				A3720B3314C7514400D1E30C /* CoreFoundation.framework */,
-				A3720B3114C7513600D1E30C /* CoreLocation.framework */,
-				A39AF6951497D0A4006ADF19 /* libxml2.dylib */,
-				A39AF6931497D09A006ADF19 /* SystemConfiguration.framework */,
-				A39AF6911497D081006ADF19 /* MobileCoreServices.framework */,
-				A39AF68F1497D079006ADF19 /* CoreData.framework */,
-				A39AF68D1497D072006ADF19 /* CFNetwork.framework */,
-				A39AF68A1497CFBC006ADF19 /* Security.framework */,
+				A35F57F71572D47C004AA5DB /* Frameworks */,
 				A39AF6581497C803006ADF19 /* RestKit.xcodeproj */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -420,6 +421,22 @@
 				A3A2B36F156DD6C600C4FF90 /* UDJStoredData.m */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		A35F57F71572D47C004AA5DB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A35F57F51572D477004AA5DB /* QuartzCore.framework */,
+				A3720B3314C7514400D1E30C /* CoreFoundation.framework */,
+				A3720B3114C7513600D1E30C /* CoreLocation.framework */,
+				A39AF6951497D0A4006ADF19 /* libxml2.dylib */,
+				A39AF6931497D09A006ADF19 /* SystemConfiguration.framework */,
+				A39AF6911497D081006ADF19 /* MobileCoreServices.framework */,
+				A39AF68F1497D079006ADF19 /* CoreData.framework */,
+				A39AF68D1497D072006ADF19 /* CFNetwork.framework */,
+				A39AF68A1497CFBC006ADF19 /* Security.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		A3632F5814FC8AC40073EDF4 /* Products */ = {
@@ -741,6 +758,7 @@
 				A3CFBEF3156888E8002B7658 /* Model.xcdatamodeld in Sources */,
 				A3A2B370156DD6C600C4FF90 /* UDJStoredData.m in Sources */,
 				A3F86A6F156F03250036FBCE /* PlayerListViewController.m in Sources */,
+				A35F57F41572D25D004AA5DB /* PullRefreshTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

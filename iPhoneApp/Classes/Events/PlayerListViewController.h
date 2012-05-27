@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UDJData.h"
 #import "UDJEventData.h"
+#import "PullRefreshTableViewController.h"
 
 enum SearchType {
     SearchTypeNull = 0,

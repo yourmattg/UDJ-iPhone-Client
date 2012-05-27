@@ -33,7 +33,7 @@
 
 @implementation PlaylistViewController
 
-@synthesize currentEvent, playlist, tableView, currentSongTitleLabel, currentSongArtistLabel, selectedSong, statusLabel, currentRequestNumber, globalData, leaveButton, libraryButton, eventNameLabel, refreshButton, refreshIndicator, refreshLabel, voteNotificationView, voteNotificationLabel, voteNotificationArrowView;
+@synthesize currentEvent, playlist, tableView, currentSongTitleLabel, currentSongArtistLabel, selectedSong, statusLabel, currentRequestNumber, globalData, leaveButton, libraryButton, eventNameLabel, refreshButton, refreshIndicator, voteNotificationView, voteNotificationLabel, voteNotificationArrowView;
 @synthesize playerNameLabel;
 @synthesize hostControlView, playButton, volumeSlider, volumeLabel, controlButton, playing;
 
@@ -83,7 +83,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
 -(void)toggleRefreshingStatus:(BOOL)active{
     self.refreshButton.hidden = active;
     self.refreshIndicator.hidden = !active;
-    self.refreshLabel.hidden = !active;
 }
 
 // sendRefreshRequest: ask the playlist for a refresh

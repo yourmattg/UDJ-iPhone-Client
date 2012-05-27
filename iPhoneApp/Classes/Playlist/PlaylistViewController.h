@@ -21,8 +21,9 @@
 #import "UDJEvent.h"
 #import "UDJPlaylist.h"
 #import "RestKit/RestKit.h"
+#import "PullRefreshTableViewController.h"
 
-@interface PlaylistViewController : UIViewController <UIAlertViewDelegate, RKRequestDelegate>{
+@interface PlaylistViewController : PullRefreshTableViewController <UIAlertViewDelegate, RKRequestDelegate>{
 
     UDJPlaylist *playlist;
     UDJEvent* currentEvent;
@@ -61,7 +62,6 @@
 
 @property(nonatomic,strong) IBOutlet UIButton* refreshButton;
 @property(nonatomic,strong) IBOutlet UIActivityIndicatorView* refreshIndicator;
-@property(nonatomic,strong) IBOutlet UILabel* refreshLabel;
 
 @property(nonatomic,strong) IBOutlet UIView* voteNotificationView;
 @property(nonatomic,strong) IBOutlet UILabel* voteNotificationLabel;
