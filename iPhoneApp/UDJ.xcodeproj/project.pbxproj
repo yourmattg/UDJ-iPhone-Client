@@ -40,6 +40,7 @@
 		A35E3E9A1516680100A2882D /* UDJData.m in Sources */ = {isa = PBXBuildFile; fileRef = A35E3E991516680100A2882D /* UDJData.m */; };
 		A35F57F41572D25D004AA5DB /* PullRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A35F57F31572D25D004AA5DB /* PullRefreshTableViewController.m */; };
 		A35F57F61572D477004AA5DB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35F57F51572D477004AA5DB /* QuartzCore.framework */; };
+		A35F57F91572DD04004AA5DB /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A35F57F81572DD04004AA5DB /* arrow.png */; };
 		A3632F6814FC8AE10073EDF4 /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3632F5F14FC8AC40073EDF4 /* libRestKit.a */; };
 		A3720B3014C74FE800D1E30C /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A3720B2F14C74FE800D1E30C /* LocationManager.m */; };
 		A3720B3214C7513600D1E30C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3720B3114C7513600D1E30C /* CoreLocation.framework */; };
@@ -185,6 +186,7 @@
 		A35F57F21572D25D004AA5DB /* PullRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullRefreshTableViewController.h; sourceTree = "<group>"; };
 		A35F57F31572D25D004AA5DB /* PullRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullRefreshTableViewController.m; sourceTree = "<group>"; };
 		A35F57F51572D477004AA5DB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A35F57F81572DD04004AA5DB /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		A3720B2E14C74FE800D1E30C /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		A3720B2F14C74FE800D1E30C /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		A3720B3114C7513600D1E30C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -470,6 +472,7 @@
 		A3C6A4741565FA1400F1E42E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				A35F57F81572DD04004AA5DB /* arrow.png */,
 				A32BEEA0157163A1005B573B /* nearbybutton.png */,
 				A3CFBEEC1568730A002B7658 /* pausetoggle.png */,
 				A3CFBEEA156865B7002B7658 /* controls.png */,
@@ -706,6 +709,7 @@
 				A3CFBEED1568730A002B7658 /* pausetoggle.png in Resources */,
 				A3F86A70156F03250036FBCE /* PlayerListViewController.xib in Resources */,
 				A32BEEA1157163A1005B573B /* nearbybutton.png in Resources */,
+				A35F57F91572DD04004AA5DB /* arrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

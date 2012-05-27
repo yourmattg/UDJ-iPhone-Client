@@ -80,9 +80,15 @@ static PlaylistViewController* _sharedPlaylistViewController;
 
 #pragma mark - Refresh methods
 
+// refresh method (overidden from superclass)
+-(void) refresh{
+    [self sendRefreshRequest];
+}
+
 -(void)toggleRefreshingStatus:(BOOL)active{
     self.refreshButton.hidden = active;
     self.refreshIndicator.hidden = !active;
+    if(!active) [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
 }
 
 // sendRefreshRequest: ask the playlist for a refresh
