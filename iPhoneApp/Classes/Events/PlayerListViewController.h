@@ -16,7 +16,7 @@ enum SearchType {
     SearchTypeNearby = 2
 };
 
-@interface PlayerListViewController : UIViewController
+@interface PlayerListViewController : UIViewController <UIAlertViewDelegate>
 
 
 @property enum SearchType lastSearchType;
@@ -35,6 +35,7 @@ enum SearchType {
 @property(nonatomic,strong) IBOutlet UIButton* findNearbyButton;
 @property(nonatomic,strong) IBOutlet UIActivityIndicatorView* searchIndicatorView;
 
+@property(nonatomic,strong) IBOutlet UIView* joiningView;
 @property(nonatomic,strong) IBOutlet UIView* joiningBackgroundView;
 
 @end

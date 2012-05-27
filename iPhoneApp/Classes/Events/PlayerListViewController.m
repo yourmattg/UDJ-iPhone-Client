@@ -10,6 +10,7 @@
 #import "RestKit/RKJSONParserJSONKit.h"
 #import "EventCell.h"
 #import "MainTabBarController.h"
+#import "QuartzCore/QuartzCore.h"
 
 @interface PlayerListViewController ()
 
@@ -21,7 +22,24 @@
 @synthesize statusLabel, globalData, currentRequestNumber;
 @synthesize playerSearchBar, findNearbyButton, searchIndicatorView;
 @synthesize lastSearchType, lastSearchQuery;
-@synthesize joiningBackgroundView;
+@synthesize joiningBackgroundView, joiningView;
+
+#pragma mark - Alert view delegate
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+
+    if([alertView.title isEqualToString:@"Password Required"]){
+        if(buttonIndex == 1){
+            // send an event join request with the password specified
+            [self toggleJoiningView: YES];
+            self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
+            [[UDJEventData sharedEventData] enterEvent: [alertView textFieldAtIndex:0].text];
+        }
+        else{
+            [self.tableView reloadData];
+        }
+    }
+}
 
 
 #pragma mark - View lifecycle
@@ -39,9 +57,16 @@
 {
     [super viewDidLoad];
     
+    [self toggleJoiningView: NO];
+    
     self.tableList = [[NSMutableArray alloc] init];
     
     self.globalData = [UDJData sharedUDJData];
+    
+    // initialize login view
+    joiningView.layer.cornerRadius = 8;
+    joiningView.layer.borderColor = [[UIColor whiteColor] CGColor];
+    joiningView.layer.borderWidth = 3;
     
     // set up eventData and get nearby events
     self.eventData = [UDJEventData sharedEventData];
@@ -57,6 +82,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.tableView reloadData];
+    [self toggleJoiningView: NO];
     [super viewWillAppear:animated];
 }
 
@@ -158,7 +184,7 @@
     
     // there's a password: go the password screen
     if([UDJEventData sharedEventData].currentEvent.hasPassword){
-        UIAlertView* passwordAlertView = [[UIAlertView alloc] initWithTitle:@"Password Required" message:@"This party requires a password." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Enter", nil];
+        UIAlertView* passwordAlertView = [[UIAlertView alloc] initWithTitle:@"Password Required" message:@"This player requires a password." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Enter", nil];
         passwordAlertView.alertViewStyle = UIAlertViewStyleSecureTextInput;
         [passwordAlertView textFieldAtIndex:0].placeholder = @"Password";
         [passwordAlertView show];
@@ -167,7 +193,7 @@
     // no password: attempt login
     else{
         // send event request
-        
+        [self toggleJoiningView: YES];
         self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
         [eventData enterEvent:nil];
     }
@@ -217,6 +243,7 @@
     UIAlertView* nonExistantEvent = [[UIAlertView alloc] initWithTitle:@"Player Inactive" message:@"The player you are trying to access is inactive." delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [nonExistantEvent show];
     
+    [self toggleJoiningView: NO];
     [self.tableView reloadData];
 }
 
@@ -224,6 +251,7 @@
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Access Denied" message:@"You have entered an incorrect password for the player." delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alertView show];
     
+    [self toggleJoiningView: NO];
     [self.tableView reloadData];
 }
 
@@ -231,6 +259,7 @@
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Player Inactive" message:@"The player you are trying to access is now inactive" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alertView show];
     
+    [self toggleJoiningView: NO];
     [tableView reloadData];
 }
 
