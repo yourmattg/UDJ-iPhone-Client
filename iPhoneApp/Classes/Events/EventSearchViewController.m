@@ -44,7 +44,7 @@
 
     // set up eventData and get nearby events
     self.eventData = [UDJEventData sharedEventData];
-    self.eventData.getEventsDelegate = self;
+    //self.eventData.getEventsDelegate = self;
     self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
     
     // initialize login view

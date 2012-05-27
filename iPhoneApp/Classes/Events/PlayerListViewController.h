@@ -20,6 +20,7 @@ enum SearchType {
 
 
 @property enum SearchType lastSearchType;
+@property(nonatomic,strong) NSString* lastSearchQuery;
 
 @property(nonatomic,strong) UDJEventData* eventData;
 
@@ -34,6 +35,6 @@ enum SearchType {
 @property(nonatomic,strong) IBOutlet UIButton* findNearbyButton;
 @property(nonatomic,strong) IBOutlet UIActivityIndicatorView* searchIndicatorView;
 
-//@property enum SearchType lastSearchType;
+@property(nonatomic,strong) IBOutlet UIView* joiningBackgroundView;
 
 @end

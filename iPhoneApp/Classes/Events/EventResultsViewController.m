@@ -97,7 +97,7 @@
 
     // initialize eventData
     self.eventData = [UDJEventData sharedEventData];
-    self.eventData.enterEventDelegate = self;
+    //self.eventData.enterEventDelegate = self;
     
     self.tableList = eventData.currentList;
     [self.tableView reloadData];

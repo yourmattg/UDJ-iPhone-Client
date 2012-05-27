@@ -22,7 +22,7 @@
 
 @implementation UDJEventData
 
-@synthesize currentList, lastSearchParam, currentEvent, locationManager, globalData, getEventsDelegate, enterEventDelegate, leaveEventDelegate;
+@synthesize currentList, lastSearchParam, currentEvent, locationManager, globalData, leaveEventDelegate, playerListDelegate;
 
 // getNearbyEvents: has the UDJConnection send a event search request
 - (void) getNearbyEvents{
@@ -38,7 +38,7 @@
     NSURL* url = [NSURL URLWithString:urlString];
     
     // create GET request
-    RKRequest* request = [[RKRequest alloc] initWithURL:url delegate: getEventsDelegate];
+    RKRequest* request = [[RKRequest alloc] initWithURL:url delegate: playerListDelegate];
     request.method = RKRequestMethodGET;
     request.additionalHTTPHeaders = globalData.headers;    
     
@@ -50,9 +50,11 @@
     //[self handleEventResults:response isNearbySearch:NO];
 }
 
-// getEventsByName: has the UDJConnection send a event search request
+// getEventsByName
 - (void)getEventsByName:(NSString *)name{
     RKClient* client = [RKClient sharedClient];
+    
+    name = [name stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     
     // create the URL
     NSString* urlString = client.baseURL;
@@ -61,7 +63,7 @@
     NSURL* url = [NSURL URLWithString:urlString];
     
     //create GET request with correct parameters and headers
-    RKRequest* request = [[RKRequest alloc] initWithURL:url delegate: getEventsDelegate];
+    RKRequest* request = [[RKRequest alloc] initWithURL:url delegate: playerListDelegate];
     request.method = RKRequestMethodGET;
     request.additionalHTTPHeaders = globalData.headers;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++]; 
@@ -84,7 +86,7 @@
     urlString = [urlString stringByAppendingFormat:@"%i", [globalData.userID intValue]];
     
     //set up request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: enterEventDelegate];
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: playerListDelegate];
     request.method = RKRequestMethodPUT;
     request.additionalHTTPHeaders = globalData.headers;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++];
@@ -109,26 +111,6 @@
     }*/
 }
 
-
-- (void) leaveEvent{
-    RKClient* client = [RKClient sharedClient];
-    //create url
-    NSString* urlString = client.baseURL;
-    urlString = [urlString stringByAppendingString:@"/players/"];
-    urlString = [urlString stringByAppendingFormat:@"%d",[UDJEventData sharedEventData].currentEvent.eventId];
-    urlString = [urlString stringByAppendingString:@"/users/"];
-    urlString = [urlString stringByAppendingFormat:@"%d", [[UDJData sharedUDJData].userID intValue]];
-    
-    //set up request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: leaveEventDelegate];
-    request.method = RKRequestMethodDELETE;
-    request.additionalHTTPHeaders = globalData.headers;
-    request.userData = [NSNumber numberWithInt: globalData.requestCount++];
-    request.queue = client.requestQueue;
-    
-    //send request, handle results
-    [request send];
-}
 
 
 -(void)setState:(NSString*)state{

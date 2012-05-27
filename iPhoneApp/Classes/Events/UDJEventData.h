@@ -41,15 +41,13 @@
 - (void)enterEvent:(NSString*)password;
 -(void)setState:(NSString*)state;
 -(void)setVolume:(NSInteger)volume;
-//- (void)leaveEvent;
 
 @property(nonatomic,strong) NSMutableArray* currentList;
 @property(nonatomic,strong) NSString* lastSearchParam;
 @property(nonatomic,strong) UDJEvent* currentEvent;
 @property(nonatomic,strong) LocationManager* locationManager;
 @property(nonatomic,strong) UDJData* globalData;
-@property(nonatomic,strong) UIViewController* getEventsDelegate;
-@property(nonatomic,strong) UIViewController* enterEventDelegate;
+@property(nonatomic,strong) UIViewController* playerListDelegate;
 @property(nonatomic,strong) UIViewController* leaveEventDelegate;
 
 @end
