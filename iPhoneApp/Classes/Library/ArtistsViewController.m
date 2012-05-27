@@ -213,6 +213,10 @@
         [self handleArtistResponse: response];        
     }
     
+    // check if our ticket was invalid
+    if(response.statusCode == 401 && [[headerDict objectForKey: @"WWW-Authenticate"] isEqualToString: @"ticket-hash"])
+        [globalData renewTicket];
+    
     //self.currentRequestNumber = [NSNumber numberWithInt: -1];
 }
 

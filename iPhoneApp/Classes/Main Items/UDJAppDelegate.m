@@ -162,7 +162,8 @@
      */
     
     // TODO: check if our ticket is still valid
-    if(![[UDJData sharedUDJData] ticketIsValid]){
+    if([UDJData sharedUDJData].username != nil && ![[UDJData sharedUDJData] ticketIsValid]){
+        NSLog(@"Renewing the ticket");
         [[UDJData sharedUDJData] renewTicket];
     }
 }
