@@ -321,10 +321,20 @@ static PlaylistViewController* _sharedPlaylistViewController;
 }
 
 -(NSInteger)voteStatusForSong:(UDJSong*)song{
+    NSInteger voteStatus = 0;
     
+    // check up voters
+    for(int i=0; i < [song.upVoters count]; i++){
+        UDJUser* user = [song.upVoters objectAtIndex: i];
+        if(user.userID == [globalData.userID intValue]) voteStatus = 1;
+    }
+    // check down voters
+    for(int i=0; i < [song.downVoters count]; i++){
+        UDJUser* user = [song.downVoters objectAtIndex: i];
+        if(user.userID == [globalData.userID intValue]) voteStatus = -1;
+    }
     
-    
-    return 0;
+    return voteStatus;
 }
 
 // this is used for setting up each cell in the table
@@ -397,8 +407,20 @@ static PlaylistViewController* _sharedPlaylistViewController;
     cell.playingImageView.hidden = !hidden;
     cell.playingLabel.hidden = !hidden;
     
-    // check vote status
-    
+    // check vote status, show/hide buttons accordingly
+    NSInteger voteStatus = [self voteStatusForSong: song];
+    cell.upVoteButton.alpha = 1;
+    cell.upVoteButton.enabled = YES;
+    cell.downVoteButton.alpha = 1;
+    cell.downVoteButton.enabled = YES;
+    if(voteStatus == 1){
+        cell.upVoteButton.alpha = 0.5;
+        cell.upVoteButton.enabled = NO;
+    }
+    else if(voteStatus == -1){
+        cell.downVoteButton.alpha = 0.5;
+        cell.downVoteButton.enabled = NO;
+    }
     
     return cell;
 }

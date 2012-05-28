@@ -50,12 +50,10 @@
     for(int i=0; i < [upVotersArray count]; i++){
         UDJUser* user = [UDJUser userFromDict: [upVotersArray objectAtIndex: i]];
         [song.upVoters addObject: user];
-        NSLog(@"upvoter: %@", user.username);
     }
     for(int i=0; i < [downVotersArray count]; i++){
         UDJUser* user = [UDJUser userFromDict: [downVotersArray objectAtIndex: i]];
         [song.downVoters addObject: user];
-        NSLog(@"downvoter: %@", user.username);
     }
     song.timeAdded = [songDict objectForKey:@"time_added"];
     

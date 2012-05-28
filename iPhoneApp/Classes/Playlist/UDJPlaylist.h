@@ -51,7 +51,7 @@ enum VoteStatus {
 @property(nonatomic,strong) NSMutableArray* playlist;
 @property(nonatomic) NSInteger eventId;
 @property(nonatomic,strong) UDJSong* currentSong;
-@property(nonatomic,strong) UIViewController* delegate;
+@property(nonatomic, strong) UIViewController* delegate;
 @property(nonatomic,strong) UDJData* globalData;
 
 
