@@ -14,7 +14,7 @@
 
 @implementation RandomViewController
 
-@synthesize searchIndicatorView, refreshButton, songTableView, resultList, globalData, currentRequestNumber;
+@synthesize resultList, globalData, currentRequestNumber;
 @synthesize addNotificationView, addNotificationLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -43,8 +43,6 @@
     
     globalData = [UDJData sharedUDJData];
     MAX_RESULTS = 50;
-    
-    songTableView.hidden = YES;
     
     [self sendRandomSongRequest];
 }
@@ -150,12 +148,11 @@
 
 #pragma mark - Random song request methods
 
+-(void)refresh{
+    [self sendRandomSongRequest];
+}
+
 -(void)sendRandomSongRequest{
-    
-    // show refreshing indicator
-    searchIndicatorView.hidden = NO;
-    refreshButton.hidden = YES;
-    
     
     RKClient* client = [RKClient sharedClient];
     
@@ -207,10 +204,7 @@
     self.resultList = tempList;
     
     // refresh table view, hide activity indicator
-    [songTableView reloadData];
-    searchIndicatorView.hidden = YES;
-    refreshButton.hidden = NO;
-    songTableView.hidden = NO;
+    [self.tableView reloadData];
 }
 
 // Handle responses from the server
@@ -235,6 +229,9 @@
     // check if our ticket was invalid
     if(response.statusCode == 401 && [[headerDict objectForKey: @"WWW-Authenticate"] isEqualToString: @"ticket-hash"])
         [globalData renewTicket];
+    
+    // hide the pulldown refresh
+    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
     
     self.currentRequestNumber = [NSNumber numberWithInt: -1];
 }

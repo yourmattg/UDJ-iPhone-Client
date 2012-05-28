@@ -20,11 +20,11 @@
 #import <UIKit/UIKit.h>
 #import "RestKit/RestKit.h"
 #import "UDJData.h"
+#import "PullRefreshTableViewController.h"
 
-@interface ArtistsViewController : UIViewController
+@interface ArtistsViewController : PullRefreshTableViewController
 
 @property(nonatomic,strong) IBOutlet UISearchBar* searchBar;
-@property(nonatomic,strong) IBOutlet UITableView* artistsTableView;
 @property(nonatomic,strong) NSMutableArray* artistsArray;
 @property(nonatomic,strong) IBOutlet UDJData* globalData;
 

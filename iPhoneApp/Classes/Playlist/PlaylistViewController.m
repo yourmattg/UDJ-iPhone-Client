@@ -33,7 +33,7 @@
 
 @implementation PlaylistViewController
 
-@synthesize currentEvent, playlist, tableView, currentSongTitleLabel, currentSongArtistLabel, selectedSong, statusLabel, currentRequestNumber, globalData, leaveButton, libraryButton, eventNameLabel, refreshButton, refreshIndicator, voteNotificationView, voteNotificationLabel, voteNotificationArrowView;
+@synthesize currentEvent, playlist, tableView, currentSongTitleLabel, currentSongArtistLabel, selectedSong, statusLabel, currentRequestNumber, globalData, leaveButton, libraryButton, eventNameLabel, voteNotificationView, voteNotificationLabel, voteNotificationArrowView;
 @synthesize playerNameLabel;
 @synthesize hostControlView, playButton, volumeSlider, volumeLabel, controlButton, playing;
 
@@ -85,15 +85,8 @@ static PlaylistViewController* _sharedPlaylistViewController;
     [self sendRefreshRequest];
 }
 
--(void)toggleRefreshingStatus:(BOOL)active{
-    self.refreshButton.hidden = active;
-    self.refreshIndicator.hidden = !active;
-    if(!active) [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
-}
-
 // sendRefreshRequest: ask the playlist for a refresh
 -(void)sendRefreshRequest{
-    [self toggleRefreshingStatus: YES];
     self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
     [self.playlist sendPlaylistRequest];
 }
@@ -263,15 +256,11 @@ static PlaylistViewController* _sharedPlaylistViewController;
     leavingView.layer.borderWidth = 3;
     
     [self toggleLeavingView: NO];
-    [self toggleRefreshingStatus: NO];
     
     // init playlist
     self.playlist = [UDJPlaylist sharedUDJPlaylist];
     self.playlist.eventId = currentEvent.eventId;
     self.playlist.delegate = self;
-    
-    self.refreshIndicator.hidden = NO;
-    self.refreshButton.hidden = YES;
     
     // set up tab bar stuff
     self.title = NSLocalizedString(@"Playlist", @"Playlist");
@@ -551,9 +540,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     [self refreshTableList];
     
-    // bring back the refresh button
-    [self toggleRefreshingStatus: NO];
-    
     [self updateVolumeAndState: responseDict];
     
 }
@@ -594,6 +580,9 @@ static PlaylistViewController* _sharedPlaylistViewController;
     // check if our ticket was invalid
     if(response.statusCode == 401 && [[headerDict objectForKey: @"WWW-Authenticate"] isEqualToString: @"ticket-hash"])
         [globalData renewTicket];
+    
+    // hide the pulldown refresh
+    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
     
     //self.currentRequestNumber = [NSNumber numberWithInt: -1];
 }

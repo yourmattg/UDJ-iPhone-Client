@@ -24,7 +24,7 @@
 
 @implementation ArtistsViewController
 
-@synthesize artistsTableView, searchBar, artistsArray, globalData;
+@synthesize searchBar, artistsArray, globalData;
 @synthesize statusLabel, searchIndicatorView, currentRequestNumber;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -72,7 +72,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [artistsTableView reloadData];
+    [self.tableView reloadData];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -134,11 +134,14 @@
 
 #pragma mark - Request methods
 
+-(void)refresh{
+    [self sendArtistsRequest];
+}
+
 -(void)sendArtistsRequest{
     
     // update status label
-    [statusLabel setText: @"Getting artists from library"];
-    artistsTableView.hidden = YES;
+    //[statusLabel setText: @"Getting artists from library"];
     
     
     // gets JSON array of artists
@@ -175,6 +178,9 @@
 }
 
 -(void)handleArtistResponse:(RKResponse*)response{
+    
+    
+    
     // clear the current artists array
     [artistsArray removeAllObjects];
     
@@ -186,12 +192,12 @@
     
     // sort array and reload table data
     [artistsArray sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-    [artistsTableView reloadData];
+    [self.tableView reloadData];
     
     // update status label
     [statusLabel setText: @"Artists"];
     searchIndicatorView.hidden = YES;
-    artistsTableView.hidden = NO;
+
 }
 
 // Handle responses from the server
@@ -216,6 +222,9 @@
     // check if our ticket was invalid
     if(response.statusCode == 401 && [[headerDict objectForKey: @"WWW-Authenticate"] isEqualToString: @"ticket-hash"])
         [globalData renewTicket];
+    
+    // hide the pulldown refresh
+    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
     
     //self.currentRequestNumber = [NSNumber numberWithInt: -1];
 }

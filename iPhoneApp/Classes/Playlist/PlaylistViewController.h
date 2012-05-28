@@ -60,9 +60,6 @@
 
 @property(nonatomic,strong) IBOutlet UILabel* eventNameLabel;
 
-@property(nonatomic,strong) IBOutlet UIButton* refreshButton;
-@property(nonatomic,strong) IBOutlet UIActivityIndicatorView* refreshIndicator;
-
 @property(nonatomic,strong) IBOutlet UIView* voteNotificationView;
 @property(nonatomic,strong) IBOutlet UILabel* voteNotificationLabel;
 @property(nonatomic,strong) IBOutlet UIImageView* voteNotificationArrowView;
