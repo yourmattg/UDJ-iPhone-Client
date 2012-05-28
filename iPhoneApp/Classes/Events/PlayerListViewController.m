@@ -118,6 +118,7 @@
 }
 
 -(IBAction)findNearbyButtonClick:(id)sender{
+    [playerSearchBar resignFirstResponder];
     [self findNearbyPlayers];
 }
 
