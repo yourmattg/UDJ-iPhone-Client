@@ -258,6 +258,10 @@
     else{
         statusLabel.text = [NSString stringWithFormat: @"Songs matching '%@'", lastQuery];
     }
+    
+    if([resultList count] == 0){
+        statusLabel.text = [NSString stringWithFormat: @"No songs matching '%@'", lastQuery];
+    }
 }
 
 -(void)handleSearchResults:(RKResponse *)response{
