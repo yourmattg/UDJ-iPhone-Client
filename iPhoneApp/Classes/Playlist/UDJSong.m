@@ -41,8 +41,22 @@
     song.duration = [[libEntryDict objectForKey:@"duration"] intValue];
     song.track = [[libEntryDict objectForKey:@"track"] intValue];
     song.genre = [libEntryDict objectForKey:@"genre"];
-    song.upVoters = [songDict objectForKey:@"upvoters"];
-    song.downVoters = [songDict objectForKey:@"downvoters"];
+    
+    // initialize up/down voters array
+    NSArray* upVotersArray = [songDict objectForKey:@"upvoters"];
+    NSArray* downVotersArray = [songDict objectForKey:@"downvoters"];
+    song.upVoters = [NSMutableArray arrayWithCapacity: [upVotersArray count]];
+    song.downVoters = [NSMutableArray arrayWithCapacity: [downVotersArray count]];
+    for(int i=0; i < [upVotersArray count]; i++){
+        UDJUser* user = [UDJUser userFromDict: [upVotersArray objectAtIndex: i]];
+        [song.upVoters addObject: user];
+        NSLog(@"upvoter: %@", user.username);
+    }
+    for(int i=0; i < [downVotersArray count]; i++){
+        UDJUser* user = [UDJUser userFromDict: [downVotersArray objectAtIndex: i]];
+        [song.downVoters addObject: user];
+        NSLog(@"downvoter: %@", user.username);
+    }
     song.timeAdded = [songDict objectForKey:@"time_added"];
     
     // parse the adder into a dictionary to create UDJUser object

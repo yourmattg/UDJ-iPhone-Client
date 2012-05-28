@@ -21,6 +21,12 @@
 #import "UDJSong.h"
 #import "UDJData.h"
 
+enum VoteStatus {
+    VoteStatusNull = 0,
+    VoteStatusDown = 1,
+    VoteStatusUp = 2
+};
+
 @interface UDJPlaylist : NSObject{
     
     NSMutableArray* playlist;
@@ -35,7 +41,6 @@
 }
 
 + (UDJPlaylist*)sharedUDJPlaylist;
-- (void)initVoteRecordKeeper;
 - (UDJSong*)songPlaying;
 - (UDJSong*)songAtIndex:(NSInteger)i;
 - (void)sendPlaylistRequest;
@@ -46,8 +51,8 @@
 @property(nonatomic,strong) NSMutableArray* playlist;
 @property(nonatomic) NSInteger eventId;
 @property(nonatomic,strong) UDJSong* currentSong;
-@property(nonatomic,strong) NSMutableDictionary* voteRecordKeeper;
 @property(nonatomic,strong) UIViewController* delegate;
 @property(nonatomic,strong) UDJData* globalData;
+
 
 @end

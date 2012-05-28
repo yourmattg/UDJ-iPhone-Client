@@ -39,8 +39,8 @@
 @property(nonatomic,strong) NSString* album;
 @property(nonatomic) NSInteger duration;
 @property(nonatomic,strong) NSString* timeAdded;
-@property(nonatomic,strong) NSArray* upVoters;
-@property(nonatomic,strong) NSArray* downVoters;
+@property(nonatomic,strong) NSMutableArray* upVoters;
+@property(nonatomic,strong) NSMutableArray* downVoters;
 @property NSInteger track;
 @property(nonatomic,strong) NSString* genre;
 

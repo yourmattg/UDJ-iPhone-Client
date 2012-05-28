@@ -160,19 +160,11 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     // If everything is OK, send the vote
     else{
-        NSNumber* songIdAsNumber = [NSNumber numberWithInteger:selectedSong.librarySongId];
-        
-        [playlist.voteRecordKeeper setObject:[NSNumber numberWithBool:YES] forKey:songIdAsNumber];
         
         // send the vote request
         self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
         [playlist sendVoteRequest:up songId:selectedSong.librarySongId];
         
-        // let the client know it sent a vote
-        /*NSString* msg = @"Your vote for ";
-        msg = [msg stringByAppendingString:selectedSong.title];
-        msg = [msg stringByAppendingString:@" has been sent!"];
-        notification = [[UIAlertView alloc] initWithTitle:@"Vote Sent" message:msg delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];*/
         [self showVoteNotification:up];
     }
 }
@@ -328,6 +320,13 @@ static PlaylistViewController* _sharedPlaylistViewController;
     return [playlist count]+1;
 }
 
+-(NSInteger)voteStatusForSong:(UDJSong*)song{
+    
+    
+    
+    return 0;
+}
+
 // this is used for setting up each cell in the table
 - (UITableViewCell *)tableView:(UITableView *)TableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -397,6 +396,9 @@ static PlaylistViewController* _sharedPlaylistViewController;
     cell.downVoteButton.hidden = hidden;
     cell.playingImageView.hidden = !hidden;
     cell.playingLabel.hidden = !hidden;
+    
+    // check vote status
+    
     
     return cell;
 }
@@ -524,15 +526,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
         NSDictionary* songDict = [songArray objectAtIndex:i];
         UDJSong* song = [UDJSong songFromDictionary:songDict isLibraryEntry:NO];
         [tempList addObject:song];
-        //NSLog(song.title);
-        
-        NSNumber* songIdAsNumber = [NSNumber numberWithInteger:song.librarySongId];
-        // if this song hasnt been added to the playlist before i.e. isnt in the voteRecordKeeper
-        if([[UDJPlaylist sharedUDJPlaylist].voteRecordKeeper objectForKey:songIdAsNumber]==nil){
-            // set its songId to NO, meaning the user hasn't voted for it yet
-            NSNumber* no =[NSNumber numberWithBool:NO];
-            [[UDJPlaylist sharedUDJPlaylist].voteRecordKeeper setObject:no forKey:songIdAsNumber];
-        }
     }
     
     [[UDJPlaylist sharedUDJPlaylist] setPlaylist: tempList];

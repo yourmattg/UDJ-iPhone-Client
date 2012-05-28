@@ -22,11 +22,8 @@
 
 @implementation UDJPlaylist
 
-@synthesize playlist, eventId, currentSong, voteRecordKeeper, delegate, globalData;
+@synthesize playlist, eventId, currentSong, delegate, globalData;
 
--(void)initVoteRecordKeeper{
-    voteRecordKeeper = [[NSMutableDictionary alloc] init];
-}
 - (UDJSong*)songAtIndex:(NSInteger)i{
     if(i<0 || i >= [playlist count]) return nil;
     return [playlist objectAtIndex:i];
@@ -94,8 +91,45 @@
 }
 
 
+/*
+#pragma mark - Vote record keeping
 
+-(void)addSong:(UDJSong *)song withVote:(BOOL)up{
+    //UDJVoteRecord* voteRecord = [[UDJVoteRecord alloc] initWithSong:song];
+    NSNumber* voteRecord = [NSNumber numberWithInteger: song.librarySongId];
+    NSNumber* vote = [NSNumber numberWithBool: up];
+    
+    // find the dictionary for the event we're in
+    NSNumber* playerID = [NSNumber numberWithInteger: eventId];
+    NSMutableDictionary* playerDictionary = [allPlayersDictionary objectForKey: playerID];
+    if(playerDictionary == nil){
+        playerDictionary = [[NSMutableDictionary alloc] initWithCapacity: 10];
+        [allPlayersDictionary setObject: playerDictionary forKey: playerID];
+    }
+    
+    // add the song with the appropriate vote status
+    [playerDictionary setObject: vote forKey: voteRecord];
+}
 
+-(enum VoteStatus)getVoteStatusForSong:(UDJSong *)song{
+    //UDJVoteRecord* voteRecord = [[UDJVoteRecord alloc] initWithSong:song];
+    NSNumber* voteRecord = [NSNumber numberWithInteger: song.librarySongId];
+    
+    // find the dictionary for the event we're in
+    NSNumber* playerID = [NSNumber numberWithInteger: eventId];
+    NSMutableDictionary* playerDictionary = [allPlayersDictionary objectForKey: playerID];
+    
+    // if there's no dictionary for this player, there's obviously no vote yet
+    if(playerDictionary == nil) return VoteStatusNull;
+    
+    // return the appropriate vote status
+    NSNumber* vote = [playerDictionary objectForKey: voteRecord];
+    if(vote == nil) return VoteStatusNull;
+    else if([vote boolValue] == NO) return VoteStatusDown;
+    return VoteStatusUp;
+}
+
+*/
 
 
 

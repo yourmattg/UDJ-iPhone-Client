@@ -119,7 +119,6 @@
     
     [UDJPlaylist new]; // make UDJPlaylist singleton
     [UDJPlaylist sharedUDJPlaylist].globalData = [UDJData sharedUDJData];
-    [[UDJPlaylist sharedUDJPlaylist] initVoteRecordKeeper];
     
     //create a UDJViewController (the login screen), and make it the root view
     viewController    = [[UDJViewController alloc] initWithNibName:@"UDJViewController" bundle:nil];
