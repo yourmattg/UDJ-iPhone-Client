@@ -64,7 +64,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        //self.selectionStyle = UITableViewCellSelectionStyleNone;
         
         songLabel = [[UILabel alloc] init];
         songLabel.textAlignment = UITextAlignmentLeft;
@@ -127,11 +127,21 @@
     return self;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
+#pragma mark - Selection methods
+
+// These methods have been overridden so that the voting buttons
+// do not get highlighted upon cell selection
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated{
     [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
+
+    self.upVoteButton.highlighted = NO;
+    self.downVoteButton.highlighted = NO;
+}
+
+- (void)setHighlighted: (BOOL)highlighted animated: (BOOL)animated{
+    self.upVoteButton.highlighted = NO;
+    self.downVoteButton.highlighted = NO;
 }
 
 

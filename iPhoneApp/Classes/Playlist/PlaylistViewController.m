@@ -433,28 +433,23 @@ static PlaylistViewController* _sharedPlaylistViewController;
 
 #pragma mark - Table view delegate
 
+- (NSIndexPath *)tableView:(UITableView *)TableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    PlaylistEntryCell* cell = (PlaylistEntryCell*)[TableView cellForRowAtIndexPath: indexPath];
+    cell.upVoteButton.highlighted = NO;
+    cell.downVoteButton.highlighted = NO;
+    return indexPath;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     NSInteger rowNumber = indexPath.row;
-    selectedSong = [playlist songAtIndex:rowNumber-1];
-    /*
-    UIAlertView* songOptionBox = [[UIAlertView alloc] initWithTitle: selectedSong.title message: selectedSong.artist delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: nil];
-    // include vote buttons if its not the song playing
-    //[songOptionBox addButtonWithTitle:@"Share"];
-    [songOptionBox addButtonWithTitle:@"Vote Up"];
-    [songOptionBox addButtonWithTitle:@"Vote Down"];
-    // include remove button if this user added the song
-    //UDJConnection* connection = [UDJConnection sharedConnection];
-    //if([connection.userID intValue]== selectedSong.adderId) [songOptionBox addButtonWithTitle:@"Remove Song"];
-    [songOptionBox show];
-    [songOptionBox release];*/
     
-    [self.tableView reloadData];
-    [self.tableView cellForRowAtIndexPath:indexPath].selected = YES;
-    PlaylistEntryCell* cell = (PlaylistEntryCell*) [self.tableView cellForRowAtIndexPath:indexPath];
-    cell.downVoteButton.highlighted = NO;
-    cell.upVoteButton.highlighted = NO;
+    // correctly set the selected song
+    if([playlist songPlaying] != nil){
+        if(indexPath.row == 0) self.selectedSong = [playlist songPlaying];
+        else self.selectedSong = [playlist songAtIndex: rowNumber - 1];
+    }
+    else self.selectedSong = [playlist songAtIndex: rowNumber];
 }
 
 
