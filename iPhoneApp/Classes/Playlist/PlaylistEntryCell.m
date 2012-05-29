@@ -22,7 +22,7 @@
 
 @implementation PlaylistEntryCell
 
-@synthesize songLabel, addedByLabel, artistLabel, upVoteButton, downVoteButton, upVoteLabel, downVoteLabel, parentViewController, playingImageView, playingLabel;
+@synthesize songLabel, addedByLabel, artistLabel, upVoteButton, downVoteButton, upVoteLabel, downVoteLabel, playingImageView, playingLabel;
 
 - (void)layoutSubviews {
     [super layoutSubviews];

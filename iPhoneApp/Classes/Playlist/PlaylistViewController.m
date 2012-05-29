@@ -56,13 +56,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if([alertView.title isEqualToString: currentEvent.name]){
-        
-        // option: leave the player
-        if(buttonIndex == 1){
-            [self handleLeaveEvent];
-        }
-    }
+    
 }
 
 -(IBAction)backButtonClick:(id)sender{
@@ -216,13 +210,11 @@ static PlaylistViewController* _sharedPlaylistViewController;
 }
 
 
-// Show or hide the "Leaving event" view; active = YES will show the view
--(void) toggleLeavingView:(BOOL) active{
-    leavingBackgroundView.hidden = !active;
-    leavingView.hidden = !active;
-    
-    // TODO: disable toolbar?
+-(void)showSongOptions{
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle: selectedSong.title message: [NSString stringWithFormat: @"%@\n%@", selectedSong.artist, selectedSong.album, nil] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Song Details", @"Share", nil];
+    [alertView show];
 }
+
 
 #pragma mark - View lifecycle
 
@@ -240,14 +232,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     // set delegate
     [UDJEventData sharedEventData].leaveEventDelegate = self;
-    
-    
-    // initialize leaving view
-    leavingView.layer.cornerRadius = 8;
-    leavingView.layer.borderColor = [[UIColor whiteColor] CGColor];
-    leavingView.layer.borderWidth = 3;
-    
-    [self toggleLeavingView: NO];
     
     // init playlist
     self.playlist = [UDJPlaylist sharedUDJPlaylist];
@@ -444,12 +428,18 @@ static PlaylistViewController* _sharedPlaylistViewController;
 {
     NSInteger rowNumber = indexPath.row;
     
+    UDJSong* previouslySelectedSong = self.selectedSong;
+    
     // correctly set the selected song
     if([playlist songPlaying] != nil){
         if(indexPath.row == 0) self.selectedSong = [playlist songPlaying];
         else self.selectedSong = [playlist songAtIndex: rowNumber - 1];
     }
     else self.selectedSong = [playlist songAtIndex: rowNumber];
+    
+    // if this was a double click, show song options
+    
+    if(selectedSong == previouslySelectedSong) [self showSongOptions];
 }
 
 

@@ -41,6 +41,4 @@
 @property(nonatomic,strong) UIImageView* playingImageView;
 @property(nonatomic,strong) UILabel* playingLabel;
 
-@property(nonatomic,strong) PlaylistViewController* parentViewController;
-
 @end
