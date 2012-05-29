@@ -25,6 +25,7 @@
 		A324AC0514AABB8900388514 /* UDJPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = A324AC0414AABB8900388514 /* UDJPlaylist.m */; };
 		A3265DB314C6101400FC692B /* PlaylistEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3265DB214C6101400FC692B /* PlaylistEntryCell.m */; };
 		A32BEEA1157163A1005B573B /* nearbybutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A32BEEA0157163A1005B573B /* nearbybutton.png */; };
+		A3344761157478E20033092E /* ShareKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A3E4D1E7157461510032CF8B /* ShareKit.bundle */; };
 		A3360BCF14F5E14F00541726 /* NewPlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */; };
 		A33C4614148F0707009C1BC6 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A33C4612148F0707009C1BC6 /* PlaylistViewController.m */; };
 		A33C461F148F11FC009C1BC6 /* LibrarySearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A33C461D148F11FC009C1BC6 /* LibrarySearchViewController.xib */; };
@@ -80,7 +81,6 @@
 		A3DDD0A71533EFEF00DB5E1F /* smalldownarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A3DDD0A61533EFEF00DB5E1F /* smalldownarrow.png */; };
 		A3E4D1831574570A0032CF8B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E4D1821574570A0032CF8B /* MessageUI.framework */; };
 		A3E4D185157457260032CF8B /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E4D184157457260032CF8B /* Twitter.framework */; };
-		A3E4D1EE157461640032CF8B /* ShareKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A3E4D1E7157461510032CF8B /* ShareKit.bundle */; };
 		A3E4D1EF1574616B0032CF8B /* libShareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E4D1E5157461510032CF8B /* libShareKit.a */; };
 		A3E4D1F3157468FA0032CF8B /* UDJConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E4D1F2157468FA0032CF8B /* UDJConfigurator.m */; };
 		A3F58D9514C753D300E350F4 /* UDJEventGoer.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58D9414C753D300E350F4 /* UDJEventGoer.m */; };
@@ -326,11 +326,11 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				A3E4D1F0157468DD0032CF8B /* Sharing */,
 				1D3623240D0F684500981E51 /* UDJAppDelegate.h */,
 				1D3623250D0F684500981E51 /* UDJAppDelegate.m */,
 				A35F57F21572D25D004AA5DB /* PullRefreshTableViewController.h */,
 				A35F57F31572D25D004AA5DB /* PullRefreshTableViewController.m */,
+				A3E4D1F0157468DD0032CF8B /* Sharing */,
 				A396EF1E14B558B300BCEF8F /* Library */,
 				A324ABF714AAB74F00388514 /* Playlist */,
 				A3F58C5514A1519F00756F7D /* Main Items */,
@@ -715,7 +715,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3E4D1EE157461640032CF8B /* ShareKit.bundle in Resources */,
 				2899E5220DE3E06400AC0155 /* UDJViewController.xib in Resources */,
 				A3F9C053142EAD610016717B /* EventSearchViewController.xib in Resources */,
 				A33C461F148F11FC009C1BC6 /* LibrarySearchViewController.xib in Resources */,
@@ -750,6 +749,7 @@
 				A3F86A70156F03250036FBCE /* PlayerListViewController.xib in Resources */,
 				A32BEEA1157163A1005B573B /* nearbybutton.png in Resources */,
 				A35F57F91572DD04004AA5DB /* arrow.png in Resources */,
+				A3344761157478E20033092E /* ShareKit.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -830,7 +830,7 @@
 				GCC_PREFIX_HEADER = UDJ_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
-					"\"$(SOURCE_ROOT)/RestKit/Build\"",
+					"\"$(SOURCE_ROOT)/RestKit/Build\"/**",
 					"ShareKit/**",
 				);
 				INFOPLIST_FILE = "UDJ-Info.plist";
@@ -854,7 +854,7 @@
 				GCC_PREFIX_HEADER = UDJ_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
-					"\"$(SOURCE_ROOT)/RestKit/Build\"",
+					"\"$(SOURCE_ROOT)/RestKit/Build\"/**",
 					"ShareKit/**",
 				);
 				INFOPLIST_FILE = "UDJ-Info.plist";
@@ -897,7 +897,7 @@
 				GCC_PREFIX_HEADER = UDJ_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
-					"\"$(SOURCE_ROOT)/RestKit/Build\"",
+					"\"$(SOURCE_ROOT)/RestKit/Build\"/**",
 					"ShareKit/**",
 				);
 				INFOPLIST_FILE = "UDJ-Info.plist";
