@@ -25,7 +25,8 @@
 #import "UDJSongList.h"
 #import "UDJMappableArray.h"
 #import "UDJData.h"
-#import "FacebookHandler.h"
+#import "SHKConfiguration.h"
+#import "UDJConfigurator.h"
 
 @implementation UDJAppDelegate
 
@@ -120,6 +121,10 @@
     [UDJPlaylist new]; // make UDJPlaylist singleton
     [UDJPlaylist sharedUDJPlaylist].globalData = [UDJData sharedUDJData];
     
+    // initialize SHK Congfigurator
+    DefaultSHKConfigurator *configurator = [[UDJConfigurator alloc] init];
+    [SHKConfiguration sharedInstanceWithConfigurator:configurator];
+    
     //create a UDJViewController (the login screen), and make it the root view
     viewController    = [[UDJViewController alloc] initWithNibName:@"UDJViewController" bundle:nil];
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
@@ -175,7 +180,8 @@
 //Facebook
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     
-    return [[[FacebookHandler sharedHandler] facebook] handleOpenURL:url]; 
+    //return [[[FacebookHandler sharedHandler] facebook] handleOpenURL:url]; 
+    return NO;
 }
 
 

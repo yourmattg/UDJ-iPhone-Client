@@ -27,8 +27,8 @@
 #import "EventGoerViewController.h"
 #import "PlaylistEntryCell.h"
 #import <QuartzCore/QuartzCore.h>
-#import "FacebookHandler.h"
 #import "RestKit/RKJSONParserJSONKit.h"
+#import "SHK.h"
 
 
 @implementation PlaylistViewController
@@ -180,7 +180,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 
 
 #pragma mark Facebook sharing
-
+/*
 // Login to Facebook
 - (void)login {
     [[FacebookHandler sharedHandler] login];
@@ -208,7 +208,23 @@ static PlaylistViewController* _sharedPlaylistViewController;
     [[FacebookHandler sharedHandler] postWithParam:params];
     NSLog(@"post called");
 }
+*/
 
+-(void)share{
+    // Create the item to share (in this example, a url)
+    NSURL *url = [NSURL URLWithString:@"http://getsharekit.com"];
+    SHKItem *item = [SHKItem URL:url title:@"ShareKit is Awesome!"];
+    
+    // Get the ShareKit action sheet
+    SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
+    
+    // ShareKit detects top view controller (the one intended to present ShareKit UI) automatically,
+    // but sometimes it may not find one. To be safe, set it explicitly
+    [SHK setRootViewController:self];
+    
+    // Display the action sheet
+    [actionSheet showFromToolbar: self.navigationController.toolbar];
+}
 
 -(void)showSongOptions{
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle: selectedSong.title message: [NSString stringWithFormat: @"%@\n%@", selectedSong.artist, selectedSong.album, nil] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Song Details", @"Share", nil];
@@ -439,7 +455,10 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     // if this was a double click, show song options
     
-    if(selectedSong == previouslySelectedSong) [self showSongOptions];
+    if(selectedSong == previouslySelectedSong) {
+        [self share];
+        //[self showSongOptions];
+    }
 }
 
 

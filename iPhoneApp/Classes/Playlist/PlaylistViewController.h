@@ -42,8 +42,8 @@
 -(void)sendRefreshRequest;
 -(void)refreshTableList;
 -(void)vote:(BOOL)up;
--(void)login;
--(void)post;
+//-(void)login;
+//-(void)post;
 
 @property(nonatomic, strong) UDJSong* selectedSong;
 @property (nonatomic, strong) UDJEvent* currentEvent;
