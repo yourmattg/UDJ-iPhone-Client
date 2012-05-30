@@ -211,13 +211,12 @@ static PlaylistViewController* _sharedPlaylistViewController;
 */
 
 -(void)share{
-    /*
+    
     // Create the item to share (in this example, a url)
-    NSURL *url = [NSURL URLWithString:@"http://udjplayer.com"];
-    SHKItem *item = [SHKItem URL:url title: [NSString stringWithFormat: @"We're listening to %@ with the UDJ music player :]", selectedSong.title, nil]];
+    SHKItem *item = [SHKItem text: [NSString stringWithFormat: @"We're listening to %@ by %@, at %@", selectedSong.title, selectedSong.artist, currentEvent.name, nil]];
     
     // Get the ShareKit action sheet
-    SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
+    SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem: item];
     
     // ShareKit detects top view controller (the one intended to present ShareKit UI) automatically,
     // but sometimes it may not find one. To be safe, set it explicitly
@@ -225,7 +224,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     // Display the action sheet
     [actionSheet showFromToolbar: self.navigationController.toolbar];
-     */
+     
 }
 
 -(void)showSongOptions{
