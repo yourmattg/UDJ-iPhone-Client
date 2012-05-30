@@ -41,7 +41,6 @@
  leaving that decision up to the user.
  */
 
-
 // Facebook - https://developers.facebook.com/apps
 // SHKFacebookAppID is the Application ID provided by Facebook
 // SHKFacebookLocalAppID is used if you need to differentiate between several iOS apps running against a single Facebook app. Useful, if you have full and lite versions of the same app,
@@ -95,7 +94,7 @@
 }
 
 - (NSString*)twitterSecret {
-    return @"";
+    return @"e9qalSMgeBweKaYRLagxVuqSKTkjdnEbYXZTWtdgc";
 }
 // You need to set this if using OAuth, see note above (xAuth users can skip it)
 - (NSString*)twitterCallbackUrl {
@@ -109,5 +108,6 @@
 - (NSString*)twitterUsername {
     return @"UDJPlayer";
 }
+
 
 @end
