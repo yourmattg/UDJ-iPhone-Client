@@ -844,6 +844,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = UDJ;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -870,6 +871,7 @@
 				PRODUCT_NAME = UDJ;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8B6E135E-7E47-4E6D-B5F9-EA5F8758B2EC";
 				SKIP_INSTALL = NO;
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -912,6 +914,7 @@
 				);
 				PRODUCT_NAME = UDJ;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8B6E135E-7E47-4E6D-B5F9-EA5F8758B2EC";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Distribution;
