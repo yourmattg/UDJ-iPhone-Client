@@ -60,6 +60,7 @@
 		A3A1EE671575DE590058555A /* SHKSharersCustom.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3A1EE661575DE590058555A /* SHKSharersCustom.plist */; };
 		A3A1EE6C1575E49E0058555A /* UDJConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A1EE6B1575E49E0058555A /* UDJConfigurator.m */; };
 		A3A2B370156DD6C600C4FF90 /* UDJStoredData.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A2B36F156DD6C600C4FF90 /* UDJStoredData.m */; };
+		A3B1ABB8157E759B008498EC /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3B1ABB7157E759B008498EC /* MainWindow.xib */; };
 		A3BB29AB15732146002276B0 /* UDJVoteRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BB29AA15732146002276B0 /* UDJVoteRecord.m */; };
 		A3BB46E314E2086400554179 /* EventGoerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BB46E214E2086400554179 /* EventGoerCell.m */; };
 		A3C22D551566D4D50066B9F8 /* playlisticon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C22D541566D4D50066B9F8 /* playlisticon.png */; };
@@ -249,6 +250,7 @@
 		A3A1EE6B1575E49E0058555A /* UDJConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJConfigurator.m; sourceTree = "<group>"; };
 		A3A2B36E156DD6C600C4FF90 /* UDJStoredData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDJStoredData.h; path = ../UDJStoredData.h; sourceTree = "<group>"; };
 		A3A2B36F156DD6C600C4FF90 /* UDJStoredData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDJStoredData.m; path = ../UDJStoredData.m; sourceTree = "<group>"; };
+		A3B1ABB7157E759B008498EC /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		A3BB29A915732146002276B0 /* UDJVoteRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJVoteRecord.h; sourceTree = "<group>"; };
 		A3BB29AA15732146002276B0 /* UDJVoteRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJVoteRecord.m; sourceTree = "<group>"; };
 		A3BB46E114E2086400554179 /* EventGoerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventGoerCell.h; sourceTree = "<group>"; };
@@ -529,6 +531,7 @@
 		A3C6A4751565FA2400F1E42E /* xib files */ = {
 			isa = PBXGroup;
 			children = (
+				A3B1ABB7157E759B008498EC /* MainWindow.xib */,
 				A3F86A6E156F03250036FBCE /* PlayerListViewController.xib */,
 				A3C7A441156714F20085150A /* SongListViewController.xib */,
 				A37BBF3E15670A1500251CC8 /* ArtistsViewController.xib */,
@@ -754,6 +757,7 @@
 				A35F57F91572DD04004AA5DB /* arrow.png in Resources */,
 				A3344761157478E20033092E /* ShareKit.bundle in Resources */,
 				A3A1EE671575DE590058555A /* SHKSharersCustom.plist in Resources */,
+				A3B1ABB8157E759B008498EC /* MainWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
