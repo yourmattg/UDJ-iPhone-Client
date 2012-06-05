@@ -127,7 +127,7 @@
     [SHKConfiguration sharedInstanceWithConfigurator:configurator];
     
     //create a UDJViewController (the login screen), and make it the root view
-    viewController    = [[UDJViewController alloc] initWithNibName:@"UDJViewController" bundle:nil];
+    viewController    = [[UDJViewController alloc] initWithNibName:@"UDJViewController" bundle:[NSBundle mainBundle]];
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     [self.navigationController setNavigationBarHidden:YES];
 	//[self.navigationController setDelegate:self];
