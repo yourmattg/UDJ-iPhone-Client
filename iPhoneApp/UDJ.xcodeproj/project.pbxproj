@@ -840,6 +840,7 @@
 				HEADER_SEARCH_PATHS = (
 					"\"$(SOURCE_ROOT)/RestKit/Build\"/**",
 					"ShareKit/**",
+					..,
 				);
 				INFOPLIST_FILE = "UDJ-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -865,6 +866,7 @@
 				HEADER_SEARCH_PATHS = (
 					"\"$(SOURCE_ROOT)/RestKit/Build\"/**",
 					"ShareKit/**",
+					..,
 				);
 				INFOPLIST_FILE = "UDJ-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -909,6 +911,7 @@
 				HEADER_SEARCH_PATHS = (
 					"\"$(SOURCE_ROOT)/RestKit/Build\"/**",
 					"ShareKit/**",
+					..,
 				);
 				INFOPLIST_FILE = "UDJ-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
