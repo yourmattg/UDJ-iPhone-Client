@@ -71,6 +71,7 @@
         songLabel.font = [UIFont fontWithName:@"Helvetica" size:16];
         songLabel.textColor=[UIColor whiteColor];
         songLabel.backgroundColor = [UIColor colorWithRed:50 green:112 blue:176 alpha:0];
+        songLabel.lineBreakMode = UILineBreakModeMiddleTruncation;
         
         artistLabel = [[UILabel alloc]init];
         artistLabel.textAlignment = UITextAlignmentLeft;
