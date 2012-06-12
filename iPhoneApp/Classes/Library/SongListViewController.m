@@ -22,6 +22,7 @@
 #import "RestKit/RKJSONParserJSONKit.h"
 #import "UDJEventData.h"
 #import "LibraryEntryCell.h"
+#import "UDJPlaylist.h"
 
 
 @implementation SongListViewController
@@ -112,9 +113,8 @@
     request.method = RKRequestMethodPUT;
     request.additionalHTTPHeaders = globalData.headers;
     
-    // track current request number 
-    currentRequestNumber = [NSNumber numberWithInt: [UDJData sharedUDJData].requestCount];
-    request.userData = [NSNumber numberWithInt: globalData.requestCount++];
+    // remember the song we are adding
+    request.userData = [NSNumber numberWithInt: librarySongId];
     
     //TODO: find a way to keep track of the requests
     //[currentRequests setObject:@"songAdd" forKey:request];
@@ -289,10 +289,10 @@
     
     NSLog(@"status code %d", [response statusCode]);
     
-    NSNumber* requestNumber = request.userData;
     NSDictionary* headerDict = [response allHeaderFields];
     
-    if(![requestNumber isEqualToNumber: currentRequestNumber]) return;
+    // NOTE: removed for now because there's no cancel option anywhere
+    //if(![requestNumber isEqualToNumber: currentRequestNumber]) return;
     
     // check if player has ended
     if(response.statusCode == 404){
@@ -304,11 +304,16 @@
         [self handleSearchResults: response];
     }
     
+    // Song conflicts i.e. song we tried to add is already on the playlist
+    else if(response.statusCode == 409){
+        // get the song number, vote up
+        NSNumber* songNumber = request.userData;
+        [[UDJPlaylist sharedUDJPlaylist] sendVoteRequest:YES songId: [songNumber intValue]];
+    }
+    
     // check if our ticket was invalid
     if(response.statusCode == 401 && [[headerDict objectForKey: @"WWW-Authenticate"] isEqualToString: @"ticket-hash"])
         [globalData renewTicket];
-    
-    self.currentRequestNumber = [NSNumber numberWithInt: -1];
 }
 
 @end
