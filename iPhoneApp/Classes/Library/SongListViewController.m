@@ -152,8 +152,6 @@
     [cell.addButton addTarget:self action:@selector(addButtonClick:)   
         forControlEvents:UIControlEventTouchUpInside];
     
-    // TODO: check if song is already on playlist, yes = hide/fade add button
-    
     return cell;
 }
 

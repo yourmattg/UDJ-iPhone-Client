@@ -179,36 +179,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 
 
 
-#pragma mark Facebook sharing
-/*
-// Login to Facebook
-- (void)login {
-    [[FacebookHandler sharedHandler] login];
-    NSLog(@"login called");
-}
-
-// Post to Facebook
-- (void)post {
-    SBJSON *jsonWriter = [SBJSON new];
-    
-    
-    // The action links to be shown with the post in the feed
-    NSArray* actionLinks = [NSArray arrayWithObjects:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                      @"Test...",@"name",@"http://github.com/simon911011/UDJ/",@"link", nil], nil];
-    NSString *actionLinksStr = [jsonWriter stringWithObject:actionLinks];
-    // Dialog parameters
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   @"UDJ", @"name",
-                                   selectedSong.title, @"caption",
-                                   @"We're listening to this song with UDJ. Come join the party!", @"description",
-                                   @"http://github.com/simon911011/UDJ/", @"link",
-                                   @"http://1.bp.blogspot.com/-RRRpZE314eQ/TkycUFS24II/AAAAAAAAPrM/z1b0peDvG6Q/s320/troll+face.jpg", @"picture",
-                                   actionLinksStr, @"actions",
-                                   nil];
-    [[FacebookHandler sharedHandler] postWithParam:params];
-    NSLog(@"post called");
-}
-*/
+#pragma mark - Sharing
 
 -(void)share{
     
@@ -260,6 +231,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     [playerNameLabel setText: currentEvent.name];
     
+    self.hostControlView.hidden = YES;
     [self checkIfHost];
     
     
@@ -458,7 +430,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     if(selectedSong == previouslySelectedSong) {
         [self share];
-        //[self showSongOptions];
     }
 }
 
@@ -466,7 +437,19 @@ static PlaylistViewController* _sharedPlaylistViewController;
 #pragma mark - Host methods
 
 -(IBAction)controlsButtonClick:(id)sender{
-    hostControlView.hidden = !hostControlView.hidden;
+    // animate to hide/show view
+    if(hostControlView.frame.origin.y == -5){
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:.3];
+        hostControlView.frame =  CGRectMake(0, 44, 320, 50);
+        [UIView commitAnimations];        
+    }
+    else if(hostControlView.frame.origin.y == 44){
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:.3];
+        hostControlView.frame =  CGRectMake(0, -5, 320, 50);
+        [UIView commitAnimations];        
+    }
 }
 
 -(void)updateVolumeAndState:(NSDictionary*)responseDict{
@@ -490,11 +473,9 @@ static PlaylistViewController* _sharedPlaylistViewController;
 -(void)checkIfHost{
     if([globalData.userID intValue] == currentEvent.hostId){
         // remove after debugging
-        playerNameLabel.hidden = YES;
         controlButton.hidden = NO;
-        hostControlView.hidden = YES;
-        [self.view addSubview: hostControlView];
-        hostControlView.frame =  CGRectMake(0, 40, 320, 50);
+        hostControlView.hidden = NO;
+        hostControlView.frame =  CGRectMake(0, -5, 320, 50);
         
     }
 }

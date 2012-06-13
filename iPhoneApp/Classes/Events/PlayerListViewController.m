@@ -87,6 +87,15 @@
     // initialize search bar
     playerSearchBar.autocorrectionType = UITextAutocorrectionTypeNo;
     
+    // TODO: put toolbar back in when phone player capabilities are complete
+    // initialize toolbar
+    self.navigationController.toolbar.tintColor = [UIColor colorWithRed:(35.0/255.0) green:(59.0/255.0) blue:(79.0/255.0) alpha:1];
+    UIBarButtonItem* createPlayerButton = [[UIBarButtonItem alloc] initWithTitle:@"Player Mode" style:UIBarButtonItemStyleBordered target:self action:nil];
+    //UIBarButtonItem* nearbyButton = [[UIBarButtonItem alloc] initWithTitle:@"Find Nearby" style:UIBarButtonItemStyleBordered target:self action:@selector(findNearbyButtonClick:)];
+    //UIBarButtonItem* flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    self.toolbarItems = [NSArray arrayWithObjects:createPlayerButton, nil];
+    
+    
     [self findNearbyPlayers];
 }
 
@@ -95,6 +104,12 @@
     [self.tableView reloadData];
     [self toggleJoiningView: NO];
     [super viewWillAppear:animated];
+    [self.navigationController setToolbarHidden: NO animated:YES];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.navigationController setToolbarHidden: YES animated:YES];
 }
 
 
