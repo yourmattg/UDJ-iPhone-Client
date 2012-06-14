@@ -104,12 +104,12 @@
     [self.tableView reloadData];
     [self toggleJoiningView: NO];
     [super viewWillAppear:animated];
-    //[self.navigationController setToolbarHidden: NO animated:YES];
+    [self.navigationController setToolbarHidden: NO animated:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    //[self.navigationController setToolbarHidden: YES animated:YES];
+    [self.navigationController setToolbarHidden: YES animated:YES];
 }
 
 
