@@ -72,6 +72,11 @@
     
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear: animated];
+    [UDJData sharedUDJData].songAddDelegate = nil;
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
@@ -233,10 +238,14 @@
     urlString = [urlString stringByAppendingFormat:@"%@%d%@%@%@%d",@"/players/",playerID,@"/available_music?query=",query, @"&max_results=", MAX_RESULTS, nil];
     
     // create request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: [UDJData sharedUDJData]];
     request.queue = client.requestQueue;
     request.method = RKRequestMethodGET;
-    request.additionalHTTPHeaders = [UDJData sharedUDJData].headers;
+
+    // set up the headers, including which type of request this is
+    NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJData sharedUDJData].headers];
+    [requestHeaders setValue:@"songAddDelegate" forKey:@"delegate"];
+    request.additionalHTTPHeaders = requestHeaders;
     
     // track current request number
     currentRequestNumber = [NSNumber numberWithInt: [UDJData sharedUDJData].requestCount];

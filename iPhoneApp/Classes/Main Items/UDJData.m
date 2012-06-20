@@ -126,6 +126,7 @@
             SongListViewController* songListViewController = (SongListViewController*)songAddDelegate;
             [songListViewController request: request didLoadResponse: response];
         }
+        else NSLog(@"delegate was nil");
     }
     
     if([request isPOST]) {
