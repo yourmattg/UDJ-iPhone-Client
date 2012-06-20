@@ -18,7 +18,6 @@
  */
 
 #import "PartyLoginViewController.h"
-#import	"EventSearchViewController.h"
 #import "PlaylistViewController.h"
 #import "UDJEventData.h"
 

@@ -16,8 +16,10 @@
 		28D7ACF80DDB3853001CB0EB /* UDJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* UDJViewController.m */; };
 		A3028B861564A2AE00EF6EE8 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3028B841564A2AE00EF6EE8 /* MainTabBarController.m */; };
 		A3028B871564A2AE00EF6EE8 /* MainTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3028B851564A2AE00EF6EE8 /* MainTabBarController.xib */; };
-		A309CC6415194A8000912EA2 /* EventResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A309CC6215194A7F00912EA2 /* EventResultsViewController.m */; };
 		A309CC6515194A8000912EA2 /* EventResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A309CC6315194A8000912EA2 /* EventResultsViewController.xib */; };
+		A30CE22A159164E600DA054D /* UDJConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A30CE229159164E600DA054D /* UDJConnection.m */; };
+		A30CE22C1591695800DA054D /* backg.png in Resources */ = {isa = PBXBuildFile; fileRef = A30CE22B1591695800DA054D /* backg.png */; };
+		A30CE22E15916C0500DA054D /* underline.png in Resources */ = {isa = PBXBuildFile; fileRef = A30CE22D15916C0500DA054D /* underline.png */; };
 		A31A9B6315608C0B005268C0 /* separator.png in Resources */ = {isa = PBXBuildFile; fileRef = A31A9B6215608C0B005268C0 /* separator.png */; };
 		A31AA6AB1561CE3B0032FEAB /* UDJUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A31AA6AA1561CE3B0032FEAB /* UDJUser.m */; };
 		A3210D8F15328763009A9318 /* smalluparrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A3210D8E15328763009A9318 /* smalluparrow.png */; };
@@ -92,7 +94,6 @@
 		A3F58D9F14C765C100E350F4 /* UDJEventGoerList.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58D9E14C765C100E350F4 /* UDJEventGoerList.m */; };
 		A3F86A6F156F03250036FBCE /* PlayerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F86A6D156F03250036FBCE /* PlayerListViewController.m */; };
 		A3F86A70156F03250036FBCE /* PlayerListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F86A6E156F03250036FBCE /* PlayerListViewController.xib */; };
-		A3F9C052142EAD610016717B /* EventSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F9C050142EAD610016717B /* EventSearchViewController.m */; };
 		A3F9C053142EAD610016717B /* EventSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F9C051142EAD610016717B /* EventSearchViewController.xib */; };
 		A3F9C1D8142EBB880016717B /* PartyLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F9C1D6142EBB880016717B /* PartyLoginViewController.m */; };
 /* End PBXBuildFile section */
@@ -192,9 +193,11 @@
 		A3028B831564A2AE00EF6EE8 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
 		A3028B841564A2AE00EF6EE8 /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 		A3028B851564A2AE00EF6EE8 /* MainTabBarController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainTabBarController.xib; path = "../Classes/Main Views/MainTabBarController.xib"; sourceTree = "<group>"; };
-		A309CC6115194A7F00912EA2 /* EventResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventResultsViewController.h; sourceTree = "<group>"; };
-		A309CC6215194A7F00912EA2 /* EventResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventResultsViewController.m; sourceTree = "<group>"; };
 		A309CC6315194A8000912EA2 /* EventResultsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventResultsViewController.xib; path = ../Classes/Events/EventResultsViewController.xib; sourceTree = "<group>"; };
+		A30CE228159164E600DA054D /* UDJConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJConnection.h; sourceTree = "<group>"; };
+		A30CE229159164E600DA054D /* UDJConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJConnection.m; sourceTree = "<group>"; };
+		A30CE22B1591695800DA054D /* backg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backg.png; sourceTree = "<group>"; };
+		A30CE22D15916C0500DA054D /* underline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = underline.png; sourceTree = "<group>"; };
 		A31A9B6215608C0B005268C0 /* separator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = separator.png; sourceTree = "<group>"; };
 		A31AA6A91561CE3B0032FEAB /* UDJUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJUser.h; sourceTree = "<group>"; };
 		A31AA6AA1561CE3B0032FEAB /* UDJUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJUser.m; sourceTree = "<group>"; };
@@ -295,8 +298,6 @@
 		A3F86A6C156F03250036FBCE /* PlayerListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerListViewController.h; sourceTree = "<group>"; };
 		A3F86A6D156F03250036FBCE /* PlayerListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerListViewController.m; sourceTree = "<group>"; };
 		A3F86A6E156F03250036FBCE /* PlayerListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlayerListViewController.xib; path = ../Classes/Events/PlayerListViewController.xib; sourceTree = "<group>"; };
-		A3F9C04F142EAD610016717B /* EventSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventSearchViewController.h; sourceTree = "<group>"; };
-		A3F9C050142EAD610016717B /* EventSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventSearchViewController.m; sourceTree = "<group>"; };
 		A3F9C051142EAD610016717B /* EventSearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventSearchViewController.xib; sourceTree = "<group>"; };
 		A3F9C1D5142EBB880016717B /* PartyLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartyLoginViewController.h; sourceTree = "<group>"; };
 		A3F9C1D6142EBB880016717B /* PartyLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartyLoginViewController.m; sourceTree = "<group>"; };
@@ -332,11 +333,11 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A30CE2271591649200DA054D /* Connection */,
 				1D3623240D0F684500981E51 /* UDJAppDelegate.h */,
 				1D3623250D0F684500981E51 /* UDJAppDelegate.m */,
 				A35F57F21572D25D004AA5DB /* PullRefreshTableViewController.h */,
 				A35F57F31572D25D004AA5DB /* PullRefreshTableViewController.m */,
-				A3E4D1F0157468DD0032CF8B /* Sharing */,
 				A396EF1E14B558B300BCEF8F /* Library */,
 				A324ABF714AAB74F00388514 /* Playlist */,
 				A3F58C5514A1519F00756F7D /* Main Items */,
@@ -402,6 +403,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A30CE2271591649200DA054D /* Connection */ = {
+			isa = PBXGroup;
+			children = (
+				A3A1EE661575DE590058555A /* SHKSharersCustom.plist */,
+				A3A1EE6A1575E49E0058555A /* UDJConfigurator.h */,
+				A3A1EE6B1575E49E0058555A /* UDJConfigurator.m */,
+				A30CE228159164E600DA054D /* UDJConnection.h */,
+				A30CE229159164E600DA054D /* UDJConnection.m */,
+			);
+			name = Connection;
+			sourceTree = "<group>";
+		};
 		A324ABF714AAB74F00388514 /* Playlist */ = {
 			isa = PBXGroup;
 			children = (
@@ -424,10 +437,6 @@
 		A3536FB414A5219E00B5C95F /* Events */ = {
 			isa = PBXGroup;
 			children = (
-				A3F9C04F142EAD610016717B /* EventSearchViewController.h */,
-				A3F9C050142EAD610016717B /* EventSearchViewController.m */,
-				A309CC6115194A7F00912EA2 /* EventResultsViewController.h */,
-				A309CC6215194A7F00912EA2 /* EventResultsViewController.m */,
 				A3536FB114A5218F00B5C95F /* UDJEvent.h */,
 				A3536FB214A5218F00B5C95F /* UDJEvent.m */,
 				A3C608F8151E3593004AB623 /* EventCell.h */,
@@ -504,6 +513,8 @@
 		A3C6A4741565FA1400F1E42E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				A30CE22D15916C0500DA054D /* underline.png */,
+				A30CE22B1591695800DA054D /* backg.png */,
 				A35F57F81572DD04004AA5DB /* arrow.png */,
 				A32BEEA0157163A1005B573B /* nearbybutton.png */,
 				A3CFBEEC1568730A002B7658 /* pausetoggle.png */,
@@ -560,16 +571,6 @@
 				A3E4D1E9157461510032CF8B /* libShareKitNoSubmodules.a */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		A3E4D1F0157468DD0032CF8B /* Sharing */ = {
-			isa = PBXGroup;
-			children = (
-				A3A1EE661575DE590058555A /* SHKSharersCustom.plist */,
-				A3A1EE6A1575E49E0058555A /* UDJConfigurator.h */,
-				A3A1EE6B1575E49E0058555A /* UDJConfigurator.m */,
-			);
-			name = Sharing;
 			sourceTree = "<group>";
 		};
 		A3F58C5414A1517900756F7D /* Main Views */ = {
@@ -762,6 +763,8 @@
 				A3A1EE671575DE590058555A /* SHKSharersCustom.plist in Resources */,
 				A3B1ABB8157E759B008498EC /* MainWindow.xib in Resources */,
 				A3D61A3215882EA300ACE780 /* PlayerInfoViewController.xib in Resources */,
+				A30CE22C1591695800DA054D /* backg.png in Resources */,
+				A30CE22E15916C0500DA054D /* underline.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -775,7 +778,6 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* UDJAppDelegate.m in Sources */,
 				28D7ACF80DDB3853001CB0EB /* UDJViewController.m in Sources */,
-				A3F9C052142EAD610016717B /* EventSearchViewController.m in Sources */,
 				A3F9C1D8142EBB880016717B /* PartyLoginViewController.m in Sources */,
 				A33C4614148F0707009C1BC6 /* PlaylistViewController.m in Sources */,
 				A374BE0114A2EF36001A0DE0 /* UDJEventData.m in Sources */,
@@ -792,7 +794,6 @@
 				A3F58D9F14C765C100E350F4 /* UDJEventGoerList.m in Sources */,
 				A3BB46E314E2086400554179 /* EventGoerCell.m in Sources */,
 				A35E3E9A1516680100A2882D /* UDJData.m in Sources */,
-				A309CC6415194A8000912EA2 /* EventResultsViewController.m in Sources */,
 				A3C608FA151E3593004AB623 /* EventCell.m in Sources */,
 				A31AA6AB1561CE3B0032FEAB /* UDJUser.m in Sources */,
 				A3028B861564A2AE00EF6EE8 /* MainTabBarController.m in Sources */,
@@ -806,6 +807,7 @@
 				A35F57F41572D25D004AA5DB /* PullRefreshTableViewController.m in Sources */,
 				A3BB29AB15732146002276B0 /* UDJVoteRecord.m in Sources */,
 				A3A1EE6C1575E49E0058555A /* UDJConfigurator.m in Sources */,
+				A30CE22A159164E600DA054D /* UDJConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

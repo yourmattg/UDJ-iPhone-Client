@@ -78,6 +78,7 @@
 
 // Show or hide the "logging in.." view; active = YES will show the view
 -(void) toggleLoginView:(BOOL) active{
+    NSLog(@"toggle");
     loginBackgroundView.hidden = !active;
     loginButton.enabled = !active;
     registerButton.enabled = !active;

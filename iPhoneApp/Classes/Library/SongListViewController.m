@@ -29,6 +29,7 @@
 
 @synthesize statusLabel, searchIndicatorView, currentRequestNumber, songTableView, resultList, globalData, lastQuery, lastQueryType;
 @synthesize addNotificationView, addNotificationLabel, searchBar;
+@synthesize parentViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -108,7 +109,7 @@
     NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@%d",client.baseURL,@"/players/",playerID,@"/active_playlist/songs/",librarySongId, nil];
 
     // create request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:parentViewController];
     request.queue = client.requestQueue;
     request.method = RKRequestMethodPUT;
     request.additionalHTTPHeaders = globalData.headers;
@@ -159,7 +160,7 @@
 #pragma mark - UI, SearchBar Events
 
 -(IBAction)artistButtonClick:(id)sender{
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)theSearchBar{
