@@ -21,10 +21,12 @@
 #import "UDJStoredData.h"
 #import "UDJAppDelegate.h"
 #import "RestKit/RKJSONParserJSONKit.h"
+#import "SongListViewController.h"
 
 @implementation UDJData
 
 @synthesize requestCount, ticket, headers, userID, username, password, loggedIn, managedObjectContext;
+@synthesize songAddDelegate;
 
 
 #pragma mark - Ticket validation
@@ -116,6 +118,15 @@
 // Handle responses from the server
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
     NSLog(@"status code %d", [response statusCode]);
+    
+    NSDictionary* responseHeaders = request.additionalHTTPHeaders;
+    
+    if([[responseHeaders objectForKey: @"delegate"] isEqualToString: @"songAddDelegate"]){
+        if(songAddDelegate != nil){
+            SongListViewController* songListViewController = (SongListViewController*)songAddDelegate;
+            [songListViewController request: request didLoadResponse: response];
+        }
+    }
     
     if([request isPOST]) {
         [self handleRenewTicket:response];

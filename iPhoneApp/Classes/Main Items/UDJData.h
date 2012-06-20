@@ -36,6 +36,8 @@
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext; 
 
+@property(nonatomic,weak) UIViewController* songAddDelegate;
+
 +(UDJData*)sharedUDJData;
 -(BOOL)ticketIsValid;
 -(void)renewTicket;

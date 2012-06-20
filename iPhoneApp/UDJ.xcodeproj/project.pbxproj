@@ -17,7 +17,6 @@
 		A3028B861564A2AE00EF6EE8 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3028B841564A2AE00EF6EE8 /* MainTabBarController.m */; };
 		A3028B871564A2AE00EF6EE8 /* MainTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3028B851564A2AE00EF6EE8 /* MainTabBarController.xib */; };
 		A309CC6515194A8000912EA2 /* EventResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A309CC6315194A8000912EA2 /* EventResultsViewController.xib */; };
-		A30CE22A159164E600DA054D /* UDJConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A30CE229159164E600DA054D /* UDJConnection.m */; };
 		A30CE22C1591695800DA054D /* backg.png in Resources */ = {isa = PBXBuildFile; fileRef = A30CE22B1591695800DA054D /* backg.png */; };
 		A30CE22E15916C0500DA054D /* underline.png in Resources */ = {isa = PBXBuildFile; fileRef = A30CE22D15916C0500DA054D /* underline.png */; };
 		A31A9B6315608C0B005268C0 /* separator.png in Resources */ = {isa = PBXBuildFile; fileRef = A31A9B6215608C0B005268C0 /* separator.png */; };
@@ -194,8 +193,6 @@
 		A3028B841564A2AE00EF6EE8 /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 		A3028B851564A2AE00EF6EE8 /* MainTabBarController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainTabBarController.xib; path = "../Classes/Main Views/MainTabBarController.xib"; sourceTree = "<group>"; };
 		A309CC6315194A8000912EA2 /* EventResultsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventResultsViewController.xib; path = ../Classes/Events/EventResultsViewController.xib; sourceTree = "<group>"; };
-		A30CE228159164E600DA054D /* UDJConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJConnection.h; sourceTree = "<group>"; };
-		A30CE229159164E600DA054D /* UDJConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJConnection.m; sourceTree = "<group>"; };
 		A30CE22B1591695800DA054D /* backg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backg.png; sourceTree = "<group>"; };
 		A30CE22D15916C0500DA054D /* underline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = underline.png; sourceTree = "<group>"; };
 		A31A9B6215608C0B005268C0 /* separator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = separator.png; sourceTree = "<group>"; };
@@ -409,8 +406,6 @@
 				A3A1EE661575DE590058555A /* SHKSharersCustom.plist */,
 				A3A1EE6A1575E49E0058555A /* UDJConfigurator.h */,
 				A3A1EE6B1575E49E0058555A /* UDJConfigurator.m */,
-				A30CE228159164E600DA054D /* UDJConnection.h */,
-				A30CE229159164E600DA054D /* UDJConnection.m */,
 			);
 			name = Connection;
 			sourceTree = "<group>";
@@ -807,7 +802,6 @@
 				A35F57F41572D25D004AA5DB /* PullRefreshTableViewController.m in Sources */,
 				A3BB29AB15732146002276B0 /* UDJVoteRecord.m in Sources */,
 				A3A1EE6C1575E49E0058555A /* UDJConfigurator.m in Sources */,
-				A30CE22A159164E600DA054D /* UDJConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

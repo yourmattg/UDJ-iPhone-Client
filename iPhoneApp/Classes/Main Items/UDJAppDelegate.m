@@ -109,7 +109,10 @@
     //init UDJData
     UDJData* udjData = [[UDJData alloc] init];
     udjData.requestCount = 0;
+    
     [UDJEventData new]; // eventData singleton
+    //[UDJConnection new]; // UDJConnection singleton
+    
     
     // initialize udjConnection
     baseUrl = @"https://udjplayer.com:4898/udj";

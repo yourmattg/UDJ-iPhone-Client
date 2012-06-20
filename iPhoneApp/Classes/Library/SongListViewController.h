@@ -52,7 +52,10 @@ enum UDJQueryType {
 
 @property(nonatomic,weak) UIViewController* parentViewController;
 
+
 -(void)getSongsByArtist:(NSString*)artist;
 -(void)getSongsByQuery:(NSString*)query;
+
+- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response;
 
 @end

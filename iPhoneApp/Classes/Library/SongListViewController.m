@@ -59,6 +59,9 @@
     MAX_RESULTS = 100;
     
     searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+    
+    // tell UDJData that this is the songAddDelegate
+    [UDJData sharedUDJData].songAddDelegate = self;
 }
 
 - (void)viewDidUnload
@@ -192,10 +195,14 @@
     urlString = [urlString stringByAppendingFormat:@"%@%d%@%@",@"/players/",playerID,@"/available_music/artists/",artist,nil];
     
     // create request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: [UDJData sharedUDJData]];
     request.queue = client.requestQueue;
     request.method = RKRequestMethodGET;
-    request.additionalHTTPHeaders = [UDJData sharedUDJData].headers;
+    
+    // set up the headers, including which type of request this is
+    NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJData sharedUDJData].headers];
+    [requestHeaders setValue:@"songAddDelegate" forKey:@"delegate"];
+    request.additionalHTTPHeaders = requestHeaders;
     
     // track current request number
     currentRequestNumber = [NSNumber numberWithInt: [UDJData sharedUDJData].requestCount];
