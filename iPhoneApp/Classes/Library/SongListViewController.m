@@ -29,7 +29,7 @@
 
 @synthesize statusLabel, searchIndicatorView, currentRequestNumber, songTableView, resultList, globalData, lastQuery, lastQueryType;
 @synthesize addNotificationView, addNotificationLabel, searchBar;
-@synthesize parentViewController;
+@synthesize artistViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -117,7 +117,7 @@
     NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@%d",client.baseURL,@"/players/",playerID,@"/active_playlist/songs/",librarySongId, nil];
 
     // create request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:parentViewController];
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:artistViewController];
     request.queue = client.requestQueue;
     request.method = RKRequestMethodPUT;
     request.additionalHTTPHeaders = globalData.headers;
@@ -128,7 +128,8 @@
     //TODO: find a way to keep track of the requests
     //[currentRequests setObject:@"songAdd" forKey:request];
     [request send]; 
-    
+    NSLog(@"sent")
+    ;    
 }
 
 -(IBAction)addButtonClick:(id)sender{

@@ -50,7 +50,7 @@ enum UDJQueryType {
 
 @property(nonatomic,strong) IBOutlet UISearchBar* searchBar;
 
-@property(nonatomic,weak) UIViewController* parentViewController;
+@property(nonatomic,weak) UIViewController* artistViewController;
 
 
 -(void)getSongsByArtist:(NSString*)artist;

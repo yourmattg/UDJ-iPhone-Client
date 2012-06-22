@@ -21,6 +21,7 @@
 #import "UDJEventData.h"
 #import "SongListViewController.h"
 #import "RestKit/RKJSONParserJSONKit.h"
+#import "UDJPlaylist.h"
 
 @implementation ArtistsViewController
 
@@ -149,8 +150,8 @@
     
     // transition to SongListViewController
     SongListViewController* songListViewController = [[SongListViewController alloc] initWithNibName:@"SongListViewController" bundle:[NSBundle mainBundle]];
-    songListViewController.parentViewController = self;
     [self.navigationController pushViewController:songListViewController animated:NO];
+    songListViewController.artistViewController = self;
     [songListViewController getSongsByArtist: artistName];
     
     
@@ -204,8 +205,6 @@
 
 -(void)handleArtistResponse:(RKResponse*)response{
     
-    
-    
     // clear the current artists array
     [artistsArray removeAllObjects];
     
@@ -236,12 +235,20 @@
     //if(![requestNumber isEqualToNumber: currentRequestNumber]) return;
     
     // check if player has ended
+    
     if(response.statusCode == 404){
         if([[headerDict objectForKey: @"X-Udj-Missing-Resource"] isEqualToString:@"player"])
             [self resetToPlayerResultView];
     }
     else if ([request isGET] && [response isOK]) {
         [self handleArtistResponse: response];        
+    }
+    
+    // upvote if the song is already on the playlist
+    else if(response.statusCode == 409){
+        NSLog(@"conflict");
+        NSNumber* songNumber = (NSNumber*)[request userData];
+        [[UDJPlaylist sharedUDJPlaylist] sendVoteRequest:YES songId: [songNumber intValue]];
     }
     
     // check if our ticket was invalid
