@@ -33,6 +33,8 @@
 
 @property(nonatomic,strong) NSNumber* currentRequestNumber;
 
+@property(nonatomic,strong) IBOutlet UIButton* cancelSearchButton;
+
 -(void)sendArtistsRequest;
 
 @end

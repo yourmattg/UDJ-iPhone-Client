@@ -168,12 +168,33 @@
 #pragma mark - UI, SearchBar Events
 
 -(IBAction)artistButtonClick:(id)sender{
-    [self.navigationController popViewControllerAnimated:NO];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)theSearchBar{
+     
+    [searchBar sizeToFit];    
+    [searchBar setShowsCancelButton:NO animated:YES]; 
+    [searchBar setFrame: CGRectMake(65, 0, 252, 44)];
+    
     [self getSongsByQuery: theSearchBar.text];
     [theSearchBar resignFirstResponder];
+    searchBar.showsScopeBar = NO;
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)theSearchBar{  
+    [searchBar sizeToFit];    
+    [searchBar setShowsCancelButton:NO animated:YES];
+    [searchBar setFrame: CGRectMake(65, 0, 252, 44)];
+    [searchBar resignFirstResponder];
+    searchBar.showsScopeBar = NO;
+}
+
+-(void)searchBarTextDidBeginEditing:(UISearchBar*)theSearchBar{
+    searchBar.showsScopeBar = YES;  
+    [searchBar sizeToFit];    
+    [searchBar setShowsCancelButton:YES animated:YES]; 
+    [searchBar setFrame: CGRectMake(65, 0, 252, 44)];
 }
 
 
