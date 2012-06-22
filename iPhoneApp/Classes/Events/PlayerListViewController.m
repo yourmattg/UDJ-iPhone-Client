@@ -31,7 +31,7 @@
 
 @synthesize eventData, tableList, tableView;
 @synthesize statusLabel, globalData, currentRequestNumber;
-@synthesize playerSearchBar, findNearbyButton, searchIndicatorView;
+@synthesize playerSearchBar, findNearbyButton, cancelSearchButton, searchIndicatorView;
 @synthesize lastSearchType, lastSearchQuery;
 @synthesize joiningBackgroundView, joiningView;
 
@@ -89,9 +89,12 @@
     
     // TODO: put toolbar back in when phone player capabilities are complete
     // initialize toolbar
-    /*
-    self.navigationController.toolbar.tintColor = [UIColor colorWithRed:(35.0/255.0) green:(59.0/255.0) blue:(79.0/255.0) alpha:1];
-    UIBarButtonItem* createPlayerButton = [[UIBarButtonItem alloc] initWithTitle:@"Create Player" style:UIBarButtonItemStyleBordered target:self action:nil];
+    
+    /*self.navigationController.toolbar.tintColor = [UIColor colorWithRed:(35.0/255.0) green:(59.0/255.0) blue:(79.0/255.0) alpha:1];
+    self.navigationController.toolbarHidden = NO;
+    
+    
+    UIBarButtonItem* createPlayerButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:nil];
     //UIBarButtonItem* nearbyButton = [[UIBarButtonItem alloc] initWithTitle:@"Find Nearby" style:UIBarButtonItemStyleBordered target:self action:@selector(findNearbyButtonClick:)];
     //UIBarButtonItem* flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     self.toolbarItems = [NSArray arrayWithObjects:createPlayerButton, nil];
@@ -138,6 +141,17 @@
     [self findNearbyPlayers];
 }
 
+-(void)searchBarTextDidBeginEditing:(UISearchBar*)theSearchBar{
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        cancelSearchButton.alpha = 1;
+        cancelSearchButton.frame = CGRectMake(250, 8, 60, 29);
+        findNearbyButton.alpha = 0;
+        findNearbyButton.frame = CGRectMake(249, -18, 61, 29);
+    }];
+    
+}
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)theSearchBar{
     [theSearchBar resignFirstResponder];
     
@@ -151,6 +165,23 @@
     
     else if(![searchParam isEqualToString:@""]) [self findPlayersByName: searchParam];
     
+    [UIView animateWithDuration:0.5 animations:^{
+        cancelSearchButton.alpha = 0;
+        cancelSearchButton.frame = CGRectMake(250, -18, 60, 29);
+        findNearbyButton.alpha = 1;
+        findNearbyButton.frame = CGRectMake(249, 8, 61, 29);
+    }];
+    
+}
+
+-(IBAction)cancelSearchButtonClick:(id)sender{
+    [UIView animateWithDuration:0.5 animations:^{
+        cancelSearchButton.alpha = 0;
+        cancelSearchButton.frame = CGRectMake(250, -18, 60, 29);
+        findNearbyButton.alpha = 1;
+        findNearbyButton.frame = CGRectMake(249, 8, 61, 29);
+    }];
+    [playerSearchBar resignFirstResponder];
 }
 
 
@@ -158,6 +189,13 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return NO;
+}
+
+
+#pragma mark - Animation methods
+
+-(void)hideCancelButton{
+    
 }
 
 

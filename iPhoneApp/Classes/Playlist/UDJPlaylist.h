@@ -33,7 +33,7 @@ enum VoteStatus {
     NSInteger eventId;
     UDJSong* currentSong;
     
-    NSMutableDictiona sry* voteRecordKeeper;
+    NSMutableDictionary* voteRecordKeeper;
     
     
     UDJData* globalData;

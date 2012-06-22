@@ -45,6 +45,7 @@ enum SearchType {
 
 @property(nonatomic,strong) IBOutlet UISearchBar* playerSearchBar;
 @property(nonatomic,strong) IBOutlet UIButton* findNearbyButton;
+@property(nonatomic,strong) IBOutlet UIButton* cancelSearchButton;
 @property(nonatomic,strong) IBOutlet UIActivityIndicatorView* searchIndicatorView;
 
 @property(nonatomic,strong) IBOutlet UIView* joiningView;

@@ -16,6 +16,7 @@
 		28D7ACF80DDB3853001CB0EB /* UDJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* UDJViewController.m */; };
 		A3028B861564A2AE00EF6EE8 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3028B841564A2AE00EF6EE8 /* MainTabBarController.m */; };
 		A3028B871564A2AE00EF6EE8 /* MainTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3028B851564A2AE00EF6EE8 /* MainTabBarController.xib */; };
+		A302C4121593F52A008B3793 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = A302C4111593F52A008B3793 /* cancel.png */; };
 		A309CC6515194A8000912EA2 /* EventResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A309CC6315194A8000912EA2 /* EventResultsViewController.xib */; };
 		A30CE22C1591695800DA054D /* backg.png in Resources */ = {isa = PBXBuildFile; fileRef = A30CE22B1591695800DA054D /* backg.png */; };
 		A30CE22E15916C0500DA054D /* underline.png in Resources */ = {isa = PBXBuildFile; fileRef = A30CE22D15916C0500DA054D /* underline.png */; };
@@ -94,7 +95,7 @@
 		A3F86A6F156F03250036FBCE /* PlayerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F86A6D156F03250036FBCE /* PlayerListViewController.m */; };
 		A3F86A70156F03250036FBCE /* PlayerListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F86A6E156F03250036FBCE /* PlayerListViewController.xib */; };
 		A3F9C053142EAD610016717B /* EventSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F9C051142EAD610016717B /* EventSearchViewController.xib */; };
-		A3F9C1D8142EBB880016717B /* PartyLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F9C1D6142EBB880016717B /* PartyLoginViewController.m */; };
+		A3FCF8B715918F5D00B6CB95 /* keyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = A3FCF8B615918F5D00B6CB95 /* keyboard.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -192,6 +193,7 @@
 		A3028B831564A2AE00EF6EE8 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
 		A3028B841564A2AE00EF6EE8 /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 		A3028B851564A2AE00EF6EE8 /* MainTabBarController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainTabBarController.xib; path = "../Classes/Main Views/MainTabBarController.xib"; sourceTree = "<group>"; };
+		A302C4111593F52A008B3793 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
 		A309CC6315194A8000912EA2 /* EventResultsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventResultsViewController.xib; path = ../Classes/Events/EventResultsViewController.xib; sourceTree = "<group>"; };
 		A30CE22B1591695800DA054D /* backg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backg.png; sourceTree = "<group>"; };
 		A30CE22D15916C0500DA054D /* underline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = underline.png; sourceTree = "<group>"; };
@@ -296,8 +298,7 @@
 		A3F86A6D156F03250036FBCE /* PlayerListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerListViewController.m; sourceTree = "<group>"; };
 		A3F86A6E156F03250036FBCE /* PlayerListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlayerListViewController.xib; path = ../Classes/Events/PlayerListViewController.xib; sourceTree = "<group>"; };
 		A3F9C051142EAD610016717B /* EventSearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventSearchViewController.xib; sourceTree = "<group>"; };
-		A3F9C1D5142EBB880016717B /* PartyLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartyLoginViewController.h; sourceTree = "<group>"; };
-		A3F9C1D6142EBB880016717B /* PartyLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartyLoginViewController.m; sourceTree = "<group>"; };
+		A3FCF8B615918F5D00B6CB95 /* keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keyboard.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -438,8 +439,6 @@
 				A3C608F9151E3593004AB623 /* EventCell.m */,
 				A374BDFF14A2EF36001A0DE0 /* UDJEventData.h */,
 				A374BE0014A2EF36001A0DE0 /* UDJEventData.m */,
-				A3F9C1D5142EBB880016717B /* PartyLoginViewController.h */,
-				A3F9C1D6142EBB880016717B /* PartyLoginViewController.m */,
 				A3F86A6C156F03250036FBCE /* PlayerListViewController.h */,
 				A3F86A6D156F03250036FBCE /* PlayerListViewController.m */,
 			);
@@ -508,7 +507,9 @@
 		A3C6A4741565FA1400F1E42E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				A3FCF8B615918F5D00B6CB95 /* keyboard.png */,
 				A30CE22D15916C0500DA054D /* underline.png */,
+				A302C4111593F52A008B3793 /* cancel.png */,
 				A30CE22B1591695800DA054D /* backg.png */,
 				A35F57F81572DD04004AA5DB /* arrow.png */,
 				A32BEEA0157163A1005B573B /* nearbybutton.png */,
@@ -760,6 +761,8 @@
 				A3D61A3215882EA300ACE780 /* PlayerInfoViewController.xib in Resources */,
 				A30CE22C1591695800DA054D /* backg.png in Resources */,
 				A30CE22E15916C0500DA054D /* underline.png in Resources */,
+				A3FCF8B715918F5D00B6CB95 /* keyboard.png in Resources */,
+				A302C4121593F52A008B3793 /* cancel.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -773,7 +776,6 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* UDJAppDelegate.m in Sources */,
 				28D7ACF80DDB3853001CB0EB /* UDJViewController.m in Sources */,
-				A3F9C1D8142EBB880016717B /* PartyLoginViewController.m in Sources */,
 				A33C4614148F0707009C1BC6 /* PlaylistViewController.m in Sources */,
 				A374BE0114A2EF36001A0DE0 /* UDJEventData.m in Sources */,
 				A3536FB314A5218F00B5C95F /* UDJEvent.m in Sources */,
