@@ -52,7 +52,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     [[UDJPlaylist sharedUDJPlaylist] clearPlaylist];
     
     // show the event results page
-    [self.navigationController popViewControllerAnimated:NO]; 
+    [self.navigationController popViewControllerAnimated: YES]; 
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{

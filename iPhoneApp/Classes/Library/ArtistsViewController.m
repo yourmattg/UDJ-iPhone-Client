@@ -150,7 +150,7 @@
     
     // transition to SongListViewController
     SongListViewController* songListViewController = [[SongListViewController alloc] initWithNibName:@"SongListViewController" bundle:[NSBundle mainBundle]];
-    [self.navigationController pushViewController:songListViewController animated:NO];
+    [self.navigationController pushViewController:songListViewController animated:YES];
     songListViewController.artistViewController = self;
     [songListViewController getSongsByArtist: artistName];
     

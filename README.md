@@ -29,7 +29,7 @@ the [UDJ mailing list][mailing].
 [home]:https://www.udjplayer.com
 [server]:https://github.com/klnusbaum/UDJ
 [kln]:https://github.com/klnusbaum/
-[gpl]:https://github.com/klnusbaum/UDJ-Android-Client/blob/master/LICENSE
+[gpl]:https://github.com/yourmattg/UDJ/blob/master/LICENSE:
 [mailing]:mailto:udjdev@bazaarsolutions.com
 [mg]:https://github.com/yourmattg/
 [rk]:https://github.com/RestKit/RestKit

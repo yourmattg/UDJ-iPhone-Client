@@ -103,7 +103,6 @@
 #pragma mark Appelication lifecycle
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
-    
     // Override point for customization after application launch.
     
     //init UDJData
