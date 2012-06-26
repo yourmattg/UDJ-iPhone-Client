@@ -21,6 +21,7 @@
 #import "RestKit/RKJSONParserJSONKit.h"
 #import "EventCell.h"
 #import "MainTabBarController.h"
+#import "PlayerInfoViewController.h"
 #import "QuartzCore/QuartzCore.h"
 
 @interface PlayerListViewController ()
@@ -90,15 +91,15 @@
     // TODO: put toolbar back in when phone player capabilities are complete
     // initialize toolbar
     
-    /*self.navigationController.toolbar.tintColor = [UIColor colorWithRed:(35.0/255.0) green:(59.0/255.0) blue:(79.0/255.0) alpha:1];
+    self.navigationController.toolbar.tintColor = [UIColor colorWithRed:(35.0/255.0) green:(59.0/255.0) blue:(79.0/255.0) alpha:1];
     self.navigationController.toolbarHidden = NO;
     
     
-    UIBarButtonItem* createPlayerButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:nil];
+    UIBarButtonItem* createPlayerButton = [[UIBarButtonItem alloc] initWithTitle:@"Create Player" style:UIBarButtonItemStyleBordered target:self action:@selector(createPlayerClick)];
     //UIBarButtonItem* nearbyButton = [[UIBarButtonItem alloc] initWithTitle:@"Find Nearby" style:UIBarButtonItemStyleBordered target:self action:@selector(findNearbyButtonClick:)];
-    //UIBarButtonItem* flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    self.toolbarItems = [NSArray arrayWithObjects:createPlayerButton, nil];
-    */
+    UIBarButtonItem* flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    self.toolbarItems = [NSArray arrayWithObjects: flexible, createPlayerButton, nil];
+    
     
     [self findNearbyPlayers];
 }
@@ -108,16 +109,23 @@
     [self.tableView reloadData];
     [self toggleJoiningView: NO];
     [super viewWillAppear:animated];
-    //[self.navigationController setToolbarHidden: NO animated:YES];
+    [self.navigationController setToolbarHidden: NO animated:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    //[self.navigationController setToolbarHidden: YES animated:YES];
+    [self.navigationController setToolbarHidden: YES animated:YES];
 }
 
 
 
+#pragma mark - Player creation methods
+
+-(void)createPlayerClick{
+    MainTabBarController* tabBarController = [[MainTabBarController alloc] initWithNibName:@"MainTabBarController" bundle: [NSBundle mainBundle]];
+    [tabBarController initForPlayerMode: YES];
+    [self.navigationController pushViewController: tabBarController animated:YES];
+}
 
 
 
@@ -362,6 +370,7 @@
 // joinEvent: login was successful, show playlist view
 -(void) joinEvent{
     MainTabBarController* viewController = [[MainTabBarController alloc] initWithNibName:@"MainTabBarController" bundle:[NSBundle mainBundle]];
+    [viewController initForPlayerMode: NO];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

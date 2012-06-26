@@ -88,6 +88,7 @@
 		A3E4D1831574570A0032CF8B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E4D1821574570A0032CF8B /* MessageUI.framework */; };
 		A3E4D185157457260032CF8B /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E4D184157457260032CF8B /* Twitter.framework */; };
 		A3E4D1EF1574616B0032CF8B /* libShareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E4D1E5157461510032CF8B /* libShareKit.a */; };
+		A3EECC0215994ED30003BEF8 /* PlayerInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EECC0115994ED30003BEF8 /* PlayerInfoViewController.m */; };
 		A3F58D9514C753D300E350F4 /* UDJEventGoer.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58D9414C753D300E350F4 /* UDJEventGoer.m */; };
 		A3F58D9914C75F0800E350F4 /* EventGoerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58D9714C75F0800E350F4 /* EventGoerViewController.m */; };
 		A3F58D9C14C75FAF00E350F4 /* EventGoerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F58D9B14C75FAF00E350F4 /* EventGoerViewController.xib */; };
@@ -287,6 +288,8 @@
 		A3E4D1821574570A0032CF8B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		A3E4D184157457260032CF8B /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		A3E4D1D7157461500032CF8B /* ShareKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ShareKit.xcodeproj; path = ShareKit/ShareKit.xcodeproj; sourceTree = "<group>"; };
+		A3EECC0015994ED30003BEF8 /* PlayerInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerInfoViewController.h; path = Classes/Player/PlayerInfoViewController.h; sourceTree = SOURCE_ROOT; };
+		A3EECC0115994ED30003BEF8 /* PlayerInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerInfoViewController.m; path = Classes/Player/PlayerInfoViewController.m; sourceTree = SOURCE_ROOT; };
 		A3F58D9314C753D300E350F4 /* UDJEventGoer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJEventGoer.h; sourceTree = "<group>"; };
 		A3F58D9414C753D300E350F4 /* UDJEventGoer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJEventGoer.m; sourceTree = "<group>"; };
 		A3F58D9614C75F0800E350F4 /* EventGoerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventGoerViewController.h; path = "Classes/Main Views/EventGoerViewController.h"; sourceTree = SOURCE_ROOT; };
@@ -340,6 +343,7 @@
 				A324ABF714AAB74F00388514 /* Playlist */,
 				A3F58C5514A1519F00756F7D /* Main Items */,
 				A3536FB414A5219E00B5C95F /* Events */,
+				A3EECBFF15994E2F0003BEF8 /* Player */,
 				A354F04014A2CA5A00F3AAEF /* Login */,
 				A3F58C5414A1517900756F7D /* Main Views */,
 				A31AA6A91561CE3B0032FEAB /* UDJUser.h */,
@@ -567,6 +571,16 @@
 				A3E4D1E9157461510032CF8B /* libShareKitNoSubmodules.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A3EECBFF15994E2F0003BEF8 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				A3EECC0015994ED30003BEF8 /* PlayerInfoViewController.h */,
+				A3EECC0115994ED30003BEF8 /* PlayerInfoViewController.m */,
+			);
+			name = Player;
+			path = Events;
 			sourceTree = "<group>";
 		};
 		A3F58C5414A1517900756F7D /* Main Views */ = {
@@ -804,6 +818,7 @@
 				A35F57F41572D25D004AA5DB /* PullRefreshTableViewController.m in Sources */,
 				A3BB29AB15732146002276B0 /* UDJVoteRecord.m in Sources */,
 				A3A1EE6C1575E49E0058555A /* UDJConfigurator.m in Sources */,
+				A3EECC0215994ED30003BEF8 /* PlayerInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

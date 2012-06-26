@@ -21,4 +21,6 @@
 
 @interface MainTabBarController : UITabBarController
 
+-(void)initForPlayerMode:(BOOL)playerModeOn;
+
 @end

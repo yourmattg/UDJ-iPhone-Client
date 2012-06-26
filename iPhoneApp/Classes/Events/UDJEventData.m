@@ -101,14 +101,6 @@
     
     //send request
     [request send];
-    
-    /*
-    // if user is already in another event, set currentEvent to that event
-    if(response.statusCode==409){
-        RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
-        NSDictionary* eventDict = [parser objectFromString:[response bodyAsString] error:nil];
-        [UDJEventData sharedEventData].currentEvent = [UDJEvent eventFromDictionary:eventDict];
-    }*/
 }
 
 

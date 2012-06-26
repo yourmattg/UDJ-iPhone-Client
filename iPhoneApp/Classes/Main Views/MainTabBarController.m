@@ -21,6 +21,7 @@
 #import "PlaylistViewController.h"
 #import "RandomViewController.h"
 #import "ArtistsViewController.h"
+#import "PlayerInfoViewController.h"
 
 @implementation MainTabBarController
 
@@ -41,11 +42,8 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-#pragma mark - View lifecycle
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+-(void)initForPlayerMode:(BOOL)isPlayer{
+    
     // Do any additional setup after loading the view from its nib. 
     PlaylistViewController* playlistViewController = [[PlaylistViewController alloc] initWithNibName:@"NewPlaylistViewController" bundle:[NSBundle mainBundle]];
     playlistViewController.title = NSLocalizedString(@"Playlist", @"Playlist");
@@ -58,19 +56,42 @@
     
     RandomViewController* randomViewController = [[RandomViewController alloc] initWithNibName:@"RandomViewController" bundle:[NSBundle mainBundle]];
     randomViewController.title = NSLocalizedString(@"Random", @"Random");
-    self.viewControllers = [NSArray arrayWithObjects:playlistViewController, navigationController, randomViewController, nil];
+    
+    PlayerInfoViewController* playerInfoViewController = [[PlayerInfoViewController alloc] initWithNibName:@"PlayerInfoViewController" bundle: [NSBundle mainBundle]];
+    playerInfoViewController.title = NSLocalizedString(@"My Player", @"My Player");
+    
+    // if this isn't being used as a player, just push the regular views
+    if(!isPlayer){
+        self.viewControllers = [NSArray arrayWithObjects:playlistViewController, navigationController, randomViewController, nil];        
+    }
+    // if this is a player, add the player info view
+    else {
+        self.viewControllers = [NSArray arrayWithObjects:playerInfoViewController, playlistViewController, navigationController, randomViewController, nil];
+    }
     
     self.tabBar.tintColor = [UIColor colorWithRed:(35.0/255.0) green:(59.0/255.0) blue:(79.0/255.0) alpha:1];
     
+    
+    
     // set tab bar images
-    UITabBarItem* playlistItem = [self.tabBar.items objectAtIndex: 0];
+    NSInteger indexModify = isPlayer ? 1 : 0;
+    UITabBarItem* playlistItem = [self.tabBar.items objectAtIndex: 0 + indexModify];
     [playlistItem setImage: [UIImage imageNamed: @"playlisticon.png"]];
     
-    UITabBarItem* libraryItem = [self.tabBar.items objectAtIndex: 1];
+    UITabBarItem* libraryItem = [self.tabBar.items objectAtIndex: 1 + indexModify];
     [libraryItem setImage: [UIImage imageNamed: @"libraryicon.png"]];
     
-    UITabBarItem* randomItem = [self.tabBar.items objectAtIndex: 2];
-    [randomItem setImage: [UIImage imageNamed: @"randomicon.png"]];
+    UITabBarItem* randomItem = [self.tabBar.items objectAtIndex: 2 + indexModify];
+    [randomItem setImage: [UIImage imageNamed: @"randomicon.png"]];    
+}
+
+#pragma mark - View lifecycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    
     
 }
 
