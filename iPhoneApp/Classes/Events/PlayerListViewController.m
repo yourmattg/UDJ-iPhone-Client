@@ -91,6 +91,7 @@
     // TODO: put toolbar back in when phone player capabilities are complete
     // initialize toolbar
     
+    
     self.navigationController.toolbar.tintColor = [UIColor colorWithRed:(35.0/255.0) green:(59.0/255.0) blue:(79.0/255.0) alpha:1];
     self.navigationController.toolbarHidden = NO;
     

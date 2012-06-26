@@ -18,13 +18,26 @@
 @synthesize useLocationSwitch, addressField, cityField, stateField, zipCodeField;
 @synthesize playerStateSwitch;
 
-
-
--(IBAction)locationSwitchValueChanged:(id)sender{
-    BOOL enabled = [(UISwitch*)sender isOn];
+-(void)toggleAddressFields:(BOOL)showing{
+    
+    BOOL enabled = showing;
     addressField.enabled = enabled;
     cityField.enabled = enabled;
     zipCodeField.enabled = enabled;
+    stateField.enabled = enabled;
+    
+    float alpha = enabled ? 1 : 0.5;
+    addressField.alpha = alpha;
+    cityField.alpha = alpha;
+    zipCodeField.alpha = alpha;
+    stateField.alpha = alpha; 
+    
+}
+
+-(IBAction)locationSwitchValueChanged:(id)sender{
+    BOOL enabled = ![(UISwitch*)sender isOn];
+    
+    [self toggleAddressFields: enabled];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -40,6 +53,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    [self toggleAddressFields: NO];
     
 }
 
