@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PlayerInfoViewController : UIViewController
+@interface PlayerInfoViewController : UIViewController <UITextFieldDelegate>
 
+@property(nonatomic,strong) IBOutlet UIScrollView* mainScrollView;
+
+@property(nonatomic,strong) IBOutletCollection(UITextField) NSArray* textFieldArray;
 
 @property(nonatomic,strong) IBOutlet UITextField* playerNameField;
 @property(nonatomic,strong) IBOutlet UITextField* playerPasswordField;
@@ -21,5 +24,7 @@
 @property(nonatomic,strong) IBOutlet UITextField* zipCodeField;
 
 @property(nonatomic,strong) IBOutlet UISwitch* playerStateSwitch;
+
+@property(nonatomic,strong) IBOutlet UIView* shadeView;
 
 @end

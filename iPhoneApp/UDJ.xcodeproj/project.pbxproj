@@ -88,6 +88,7 @@
 		A3E4D1831574570A0032CF8B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E4D1821574570A0032CF8B /* MessageUI.framework */; };
 		A3E4D185157457260032CF8B /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E4D184157457260032CF8B /* Twitter.framework */; };
 		A3E4D1EF1574616B0032CF8B /* libShareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E4D1E5157461510032CF8B /* libShareKit.a */; };
+		A3E70CDC159BF7E00037A60B /* blackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A3E70CDB159BF7E00037A60B /* blackground.png */; };
 		A3EECC0215994ED30003BEF8 /* PlayerInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EECC0115994ED30003BEF8 /* PlayerInfoViewController.m */; };
 		A3F58D9514C753D300E350F4 /* UDJEventGoer.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58D9414C753D300E350F4 /* UDJEventGoer.m */; };
 		A3F58D9914C75F0800E350F4 /* EventGoerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58D9714C75F0800E350F4 /* EventGoerViewController.m */; };
@@ -288,6 +289,7 @@
 		A3E4D1821574570A0032CF8B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		A3E4D184157457260032CF8B /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		A3E4D1D7157461500032CF8B /* ShareKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ShareKit.xcodeproj; path = ShareKit/ShareKit.xcodeproj; sourceTree = "<group>"; };
+		A3E70CDB159BF7E00037A60B /* blackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackground.png; sourceTree = "<group>"; };
 		A3EECC0015994ED30003BEF8 /* PlayerInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerInfoViewController.h; path = Classes/Player/PlayerInfoViewController.h; sourceTree = SOURCE_ROOT; };
 		A3EECC0115994ED30003BEF8 /* PlayerInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerInfoViewController.m; path = Classes/Player/PlayerInfoViewController.m; sourceTree = SOURCE_ROOT; };
 		A3F58D9314C753D300E350F4 /* UDJEventGoer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJEventGoer.h; sourceTree = "<group>"; };
@@ -511,6 +513,7 @@
 		A3C6A4741565FA1400F1E42E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				A3E70CDB159BF7E00037A60B /* blackground.png */,
 				A3FCF8B615918F5D00B6CB95 /* keyboard.png */,
 				A30CE22D15916C0500DA054D /* underline.png */,
 				A302C4111593F52A008B3793 /* cancel.png */,
@@ -777,6 +780,7 @@
 				A30CE22E15916C0500DA054D /* underline.png in Resources */,
 				A3FCF8B715918F5D00B6CB95 /* keyboard.png in Resources */,
 				A302C4121593F52A008B3793 /* cancel.png in Resources */,
+				A3E70CDC159BF7E00037A60B /* blackground.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
