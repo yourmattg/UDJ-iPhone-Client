@@ -25,6 +25,4 @@
 
 @property(nonatomic,strong) IBOutlet UISwitch* playerStateSwitch;
 
-@property(nonatomic,strong) IBOutlet UIView* shadeView;
-
 @end

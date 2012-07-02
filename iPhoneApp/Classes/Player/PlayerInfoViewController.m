@@ -19,7 +19,6 @@
 @synthesize playerNameField, playerPasswordField;
 @synthesize useLocationSwitch, addressField, cityField, stateField, zipCodeField;
 @synthesize playerStateSwitch;
-@synthesize shadeView;
 
 #pragma mark - Text fields
 
@@ -34,24 +33,21 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     NSInteger yCoord = textField.frame.origin.y;
     [self.mainScrollView scrollRectToVisible: CGRectMake(0, yCoord-6, 320, 367) animated:YES];
-    
-    [self.mainScrollView bringSubviewToFront: self.shadeView];
-    self.shadeView.hidden = NO;
-    [self.mainScrollView bringSubviewToFront: textField];
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     NSInteger index = textField.tag + 1;
+    UITextField* nextField;
+    if(index < [textFieldArray count]) nextField = [textFieldArray objectAtIndex: index]; 
+    else nextField = nil;
     
-    // if this is the last field, hide the keyboard
-    if(index >= [textFieldArray count]){
+    // if this is the last enabled field, hide the keyboard
+    if(!nextField || !nextField.enabled){
         [textField resignFirstResponder];
-        self.shadeView.hidden = YES;
     }
     
     // set focus to the next field
     else{
-        UITextField* nextField = [textFieldArray objectAtIndex: index];
         [nextField becomeFirstResponder];        
     }
     
@@ -99,12 +95,8 @@
 	// Do any additional setup after loading the view.
     [self toggleAddressFields: NO];
     
-    [self.mainScrollView setContentSize: CGSizeMake(320, 700)];
-    
-    // initialize shade view
-    self.shadeView.frame = CGRectMake(0, 0, 320, 700);
-    self.shadeView.hidden = YES;
-    [self.mainScrollView addSubview: self.shadeView];
+    [self.mainScrollView setContentSize: CGSizeMake(320, 700)
+];
     
     [self initTextFields];
     
