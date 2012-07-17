@@ -18,10 +18,18 @@
 @synthesize textFieldArray;
 @synthesize playerNameLabel;
 @synthesize playerNameField, playerPasswordField;
+@synthesize cancelButton;
 @synthesize useLocationSwitch, addressField, cityField, stateField, zipCodeField;
 @synthesize playerStateSwitch;
 
 #pragma mark - Text fields
+
+-(IBAction)cancelButtonClick:(id)sender{
+    for(int i=0; i < [textFieldArray count]; i++){
+        UITextField* textField= [textFieldArray objectAtIndex: i];
+        [textField resignFirstResponder];
+    }
+}
 
 -(void)initTextFields{
     for(int i=0; i < [textFieldArray count]; i++){
@@ -34,12 +42,14 @@
 -(void)textFieldDidBeginEditing:(UITextField*)textField{
     NSInteger yCoord = textField.frame.origin.y;
     [self.mainScrollView scrollRectToVisible: CGRectMake(0, yCoord-6, 320, 367) animated:YES];
+    self.cancelButton.hidden = NO;
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     if(textField == self.playerNameField){
         [playerNameLabel setText: self.playerNameField.text];
     }
+    self.cancelButton.hidden = YES;
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -64,7 +74,7 @@
 }
 
 #pragma mark - Address fields
-
+/*
 -(void)toggleAddressFields:(BOOL)showing{
     
     BOOL enabled = showing;
@@ -79,12 +89,12 @@
     zipCodeField.alpha = alpha;
     stateField.alpha = alpha; 
     
-}
+}*/
 
 -(IBAction)locationSwitchValueChanged:(id)sender{
-    BOOL enabled = ![(UISwitch*)sender isOn];
+    //BOOL enabled = ![(UISwitch*)sender isOn];
     
-    [self toggleAddressFields: enabled];
+    //[self toggleAddressFields: enabled];
 }
 
 #pragma mark - View lifecycle
@@ -102,7 +112,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self toggleAddressFields: NO];
+    //[self toggleAddressFields: NO];
     
     [self.mainScrollView setContentSize: CGSizeMake(320, 700)
 ];

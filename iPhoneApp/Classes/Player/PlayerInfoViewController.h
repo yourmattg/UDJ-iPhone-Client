@@ -19,6 +19,8 @@
 @property(nonatomic,strong) IBOutlet UITextField* playerNameField;
 @property(nonatomic,strong) IBOutlet UITextField* playerPasswordField;
 
+@property(nonatomic,strong) IBOutlet UIButton* cancelButton;
+
 @property(nonatomic,strong) IBOutlet UISwitch* useLocationSwitch;
 @property(nonatomic,strong) IBOutlet UITextField* addressField;
 @property(nonatomic,strong) IBOutlet UITextField* cityField;
