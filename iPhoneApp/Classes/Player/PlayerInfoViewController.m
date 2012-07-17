@@ -16,6 +16,7 @@
 
 @synthesize mainScrollView;
 @synthesize textFieldArray;
+@synthesize playerNameLabel;
 @synthesize playerNameField, playerPasswordField;
 @synthesize useLocationSwitch, addressField, cityField, stateField, zipCodeField;
 @synthesize playerStateSwitch;
@@ -30,12 +31,20 @@
     }
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField{
+-(void)textFieldDidBeginEditing:(UITextField*)textField{
     NSInteger yCoord = textField.frame.origin.y;
     [self.mainScrollView scrollRectToVisible: CGRectMake(0, yCoord-6, 320, 367) animated:YES];
 }
 
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    if(textField == self.playerNameField){
+        [playerNameLabel setText: self.playerNameField.text];
+    }
+}
+
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    // find the next text field
     NSInteger index = textField.tag + 1;
     UITextField* nextField;
     if(index < [textFieldArray count]) nextField = [textFieldArray objectAtIndex: index]; 

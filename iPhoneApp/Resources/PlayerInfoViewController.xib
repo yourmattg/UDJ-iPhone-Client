@@ -15,6 +15,7 @@
 			<string>IBUIImageView</string>
 			<string>IBUILabel</string>
 			<string>IBUISwitch</string>
+			<string>IBUIButton</string>
 			<string>IBUITextField</string>
 			<string>IBUIScrollView</string>
 			<string>IBUIView</string>
@@ -73,7 +74,7 @@
 					<object class="IBUILabel" id="679524548">
 						<reference key="NSNextResponder" ref="559625925"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{78, 11}, {164, 21}}</string>
+						<string key="NSFrame">{{71, 11}, {178, 21}}</string>
 						<reference key="NSSuperview" ref="559625925"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="616588155"/>
@@ -392,6 +393,43 @@
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
+					<object class="IBUIButton" id="827035600">
+						<reference key="NSNextResponder" ref="559625925"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{254, 7}, {60, 29}}</string>
+						<reference key="NSSuperview" ref="559625925"/>
+						<reference key="NSWindow"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<object class="NSColor" key="IBUIHighlightedTitleColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MQA</bytes>
+						</object>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+						</object>
+						<object class="NSColor" key="IBUINormalTitleShadowColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MC41AA</bytes>
+						</object>
+						<object class="NSCustomResource" key="IBUINormalImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">cancel.png</string>
+						</object>
+						<object class="IBUIFontDescription" key="IBUIFontDescription">
+							<int key="type">2</int>
+							<double key="pointSize">15</double>
+						</object>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">Helvetica-Bold</string>
+							<double key="NSSize">15</double>
+							<int key="NSfFlags">16</int>
+						</object>
+					</object>
 				</array>
 				<string key="NSFrame">{{0, 20}, {320, 411}}</string>
 				<reference key="NSSuperview"/>
@@ -519,6 +557,22 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">playerNameLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="679524548"/>
+					</object>
+					<int key="connectionID">85</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">playerNameField</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="42241612"/>
+					</object>
+					<int key="connectionID">86</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="616588155"/>
 						<reference key="destination" ref="841351856"/>
@@ -562,6 +616,7 @@
 							<reference ref="679524548"/>
 							<reference ref="786212666"/>
 							<reference ref="616588155"/>
+							<reference ref="827035600"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -653,6 +708,11 @@
 						<reference key="object" ref="42241612"/>
 						<reference key="parent" ref="616588155"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">88</int>
+						<reference key="object" ref="827035600"/>
+						<reference key="parent" ref="559625925"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -675,13 +735,14 @@
 				<string key="62.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="63.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="88.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">84</int>
+			<int key="maxID">88</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -693,9 +754,9 @@
 						<string key="cityField">UITextField</string>
 						<string key="mainScrollView">UIScrollView</string>
 						<string key="playerNameField">UITextField</string>
+						<string key="playerNameLabel">UILabel</string>
 						<string key="playerPasswordField">UITextField</string>
 						<string key="playerStateSwitch">UISwitch</string>
-						<string key="shadeView">UIView</string>
 						<string key="stateField">UITextField</string>
 						<string key="useLocationSwitch">UISwitch</string>
 						<string key="zipCodeField">UITextField</string>
@@ -717,6 +778,10 @@
 							<string key="name">playerNameField</string>
 							<string key="candidateClassName">UITextField</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="playerNameLabel">
+							<string key="name">playerNameLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="playerPasswordField">
 							<string key="name">playerPasswordField</string>
 							<string key="candidateClassName">UITextField</string>
@@ -724,10 +789,6 @@
 						<object class="IBToOneOutletInfo" key="playerStateSwitch">
 							<string key="name">playerStateSwitch</string>
 							<string key="candidateClassName">UISwitch</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="shadeView">
-							<string key="name">shadeView</string>
-							<string key="candidateClassName">UIView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="stateField">
 							<string key="name">stateField</string>
@@ -766,6 +827,7 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="cancel.png">{60, 29}</string>
 			<string key="darknavbar.png">{320, 44}</string>
 			<string key="default.jpg">{320, 420}</string>
 		</dictionary>

@@ -14,6 +14,8 @@
 
 @property(nonatomic,strong) IBOutletCollection(UITextField) NSArray* textFieldArray;
 
+@property(nonatomic,strong) IBOutlet UILabel* playerNameLabel;
+
 @property(nonatomic,strong) IBOutlet UITextField* playerNameField;
 @property(nonatomic,strong) IBOutlet UITextField* playerPasswordField;
 

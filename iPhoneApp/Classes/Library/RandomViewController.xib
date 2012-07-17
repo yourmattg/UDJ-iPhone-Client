@@ -55,7 +55,7 @@
 					<object class="IBUIImageView" id="861423872">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{-16, -28}, {378, 515}}</string>
+						<string key="NSFrame">{{0, -28}, {320, 515}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="312787484"/>
@@ -426,7 +426,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="addbutton.png">{80, 80}</string>
-			<string key="backg.png">{464, 485}</string>
+			<string key="backg.png">{393, 466}</string>
 			<string key="darknavbar.png">{320, 44}</string>
 			<string key="default.jpg">{320, 420}</string>
 		</dictionary>
