@@ -55,7 +55,7 @@
 							<string key="NSResourceName">default.jpg</string>
 						</object>
 					</object>
-					<object class="IBUIImageView" id="27520256">
+					<object class="IBUIImageView" id="41136914">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{0, -10}, {320, 480}}</string>
@@ -241,7 +241,7 @@
 				<string key="NSFrame">{{0, 20}, {320, 411}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="27520256"/>
+				<reference key="NSNextKeyView" ref="41136914"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
@@ -437,7 +437,7 @@
 							<reference ref="179501131"/>
 							<reference ref="224345415"/>
 							<reference ref="681438345"/>
-							<reference ref="27520256"/>
+							<reference ref="41136914"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -513,7 +513,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">31</int>
-						<reference key="object" ref="27520256"/>
+						<reference key="object" ref="41136914"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>
