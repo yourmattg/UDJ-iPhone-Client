@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RestKit/RestKit.h"
+#import "UDJData.h"
 
-@interface PlayerInfoViewController : UIViewController <UITextFieldDelegate>
+@interface PlayerInfoViewController : UIViewController <UITextFieldDelegate, RKRequestDelegate>
 
 @property(nonatomic,strong) IBOutlet UIScrollView* mainScrollView;
 
@@ -28,5 +30,9 @@
 @property(nonatomic,strong) IBOutlet UITextField* zipCodeField;
 
 @property(nonatomic,strong) IBOutlet UISwitch* playerStateSwitch;
+
+@property(nonatomic,strong) IBOutlet UIButton* createPlayerButton;
+
+@property(nonatomic,strong) UDJData* globalData;
 
 @end

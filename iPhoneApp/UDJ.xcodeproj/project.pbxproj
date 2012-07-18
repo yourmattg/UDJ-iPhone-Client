@@ -17,7 +17,6 @@
 		A3028B861564A2AE00EF6EE8 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3028B841564A2AE00EF6EE8 /* MainTabBarController.m */; };
 		A3028B871564A2AE00EF6EE8 /* MainTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3028B851564A2AE00EF6EE8 /* MainTabBarController.xib */; };
 		A302C4121593F52A008B3793 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = A302C4111593F52A008B3793 /* cancel.png */; };
-		A309CC6515194A8000912EA2 /* EventResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A309CC6315194A8000912EA2 /* EventResultsViewController.xib */; };
 		A30CE22C1591695800DA054D /* backg.png in Resources */ = {isa = PBXBuildFile; fileRef = A30CE22B1591695800DA054D /* backg.png */; };
 		A30CE22E15916C0500DA054D /* underline.png in Resources */ = {isa = PBXBuildFile; fileRef = A30CE22D15916C0500DA054D /* underline.png */; };
 		A31A9B6315608C0B005268C0 /* separator.png in Resources */ = {isa = PBXBuildFile; fileRef = A31A9B6215608C0B005268C0 /* separator.png */; };
@@ -30,12 +29,10 @@
 		A3344761157478E20033092E /* ShareKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A3E4D1E7157461510032CF8B /* ShareKit.bundle */; };
 		A3360BCF14F5E14F00541726 /* NewPlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */; };
 		A33C4614148F0707009C1BC6 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A33C4612148F0707009C1BC6 /* PlaylistViewController.m */; };
-		A33C461F148F11FC009C1BC6 /* LibrarySearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A33C461D148F11FC009C1BC6 /* LibrarySearchViewController.xib */; };
 		A33EE1E115684B7D00D49B85 /* playing.png in Resources */ = {isa = PBXBuildFile; fileRef = A33EE1E015684B7D00D49B85 /* playing.png */; };
 		A341B92914F86C61001892C5 /* addbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A341B92814F86C61001892C5 /* addbutton.png */; };
 		A34796A514F85AE0001DEE15 /* default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A34796A414F85AE0001DEE15 /* default.jpg */; };
 		A3495614151EF3D800AAEF7E /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = A3495613151EF3D800AAEF7E /* refresh.png */; };
-		A34FB30414B8EB5F00BE5CE2 /* LibraryResultsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A34FB30214B8EB5F00BE5CE2 /* LibraryResultsController.xib */; };
 		A3536FB314A5218F00B5C95F /* UDJEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A3536FB214A5218F00B5C95F /* UDJEvent.m */; };
 		A35D3DF114F985460007B374 /* votedown.png in Resources */ = {isa = PBXBuildFile; fileRef = A35D3DEF14F985460007B374 /* votedown.png */; };
 		A35D3DF214F985460007B374 /* voteup.png in Resources */ = {isa = PBXBuildFile; fileRef = A35D3DF014F985460007B374 /* voteup.png */; };
@@ -86,7 +83,7 @@
 		A3DAD57D14BD253600688CE0 /* UDJMappableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DAD57C14BD253600688CE0 /* UDJMappableArray.m */; };
 		A3DDD0A71533EFEF00DB5E1F /* smalldownarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A3DDD0A61533EFEF00DB5E1F /* smalldownarrow.png */; };
 		A3E4D1831574570A0032CF8B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E4D1821574570A0032CF8B /* MessageUI.framework */; };
-		A3E4D185157457260032CF8B /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E4D184157457260032CF8B /* Twitter.framework */; };
+		A3E4D185157457260032CF8B /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E4D184157457260032CF8B /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A3E4D1EF1574616B0032CF8B /* libShareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E4D1E5157461510032CF8B /* libShareKit.a */; };
 		A3E70CDC159BF7E00037A60B /* blackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A3E70CDB159BF7E00037A60B /* blackground.png */; };
 		A3EECC0215994ED30003BEF8 /* PlayerInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EECC0115994ED30003BEF8 /* PlayerInfoViewController.m */; };
@@ -96,7 +93,6 @@
 		A3F58D9F14C765C100E350F4 /* UDJEventGoerList.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58D9E14C765C100E350F4 /* UDJEventGoerList.m */; };
 		A3F86A6F156F03250036FBCE /* PlayerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F86A6D156F03250036FBCE /* PlayerListViewController.m */; };
 		A3F86A70156F03250036FBCE /* PlayerListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F86A6E156F03250036FBCE /* PlayerListViewController.xib */; };
-		A3F9C053142EAD610016717B /* EventSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F9C051142EAD610016717B /* EventSearchViewController.xib */; };
 		A3FCF8B715918F5D00B6CB95 /* keyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = A3FCF8B615918F5D00B6CB95 /* keyboard.png */; };
 /* End PBXBuildFile section */
 
@@ -196,7 +192,6 @@
 		A3028B841564A2AE00EF6EE8 /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 		A3028B851564A2AE00EF6EE8 /* MainTabBarController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainTabBarController.xib; path = "../Classes/Main Views/MainTabBarController.xib"; sourceTree = "<group>"; };
 		A302C4111593F52A008B3793 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
-		A309CC6315194A8000912EA2 /* EventResultsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventResultsViewController.xib; path = ../Classes/Events/EventResultsViewController.xib; sourceTree = "<group>"; };
 		A30CE22B1591695800DA054D /* backg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backg.png; sourceTree = "<group>"; };
 		A30CE22D15916C0500DA054D /* underline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = underline.png; sourceTree = "<group>"; };
 		A31A9B6215608C0B005268C0 /* separator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = separator.png; sourceTree = "<group>"; };
@@ -214,12 +209,10 @@
 		A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewPlaylistViewController.xib; path = Resources/NewPlaylistViewController.xib; sourceTree = SOURCE_ROOT; };
 		A33C4611148F0707009C1BC6 /* PlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistViewController.h; sourceTree = "<group>"; };
 		A33C4612148F0707009C1BC6 /* PlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistViewController.m; sourceTree = "<group>"; };
-		A33C461D148F11FC009C1BC6 /* LibrarySearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LibrarySearchViewController.xib; sourceTree = "<group>"; };
 		A33EE1E015684B7D00D49B85 /* playing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playing.png; sourceTree = "<group>"; };
 		A341B92814F86C61001892C5 /* addbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addbutton.png; sourceTree = "<group>"; };
 		A34796A414F85AE0001DEE15 /* default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpg; sourceTree = "<group>"; };
 		A3495613151EF3D800AAEF7E /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
-		A34FB30214B8EB5F00BE5CE2 /* LibraryResultsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LibraryResultsController.xib; path = ../Classes/Library/LibraryResultsController.xib; sourceTree = "<group>"; };
 		A3536FB114A5218F00B5C95F /* UDJEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJEvent.h; sourceTree = "<group>"; };
 		A3536FB214A5218F00B5C95F /* UDJEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJEvent.m; sourceTree = "<group>"; };
 		A35D3DEF14F985460007B374 /* votedown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = votedown.png; sourceTree = "<group>"; };
@@ -302,7 +295,6 @@
 		A3F86A6C156F03250036FBCE /* PlayerListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerListViewController.h; sourceTree = "<group>"; };
 		A3F86A6D156F03250036FBCE /* PlayerListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerListViewController.m; sourceTree = "<group>"; };
 		A3F86A6E156F03250036FBCE /* PlayerListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlayerListViewController.xib; path = ../Classes/Events/PlayerListViewController.xib; sourceTree = "<group>"; };
-		A3F9C051142EAD610016717B /* EventSearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventSearchViewController.xib; sourceTree = "<group>"; };
 		A3FCF8B615918F5D00B6CB95 /* keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keyboard.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -554,10 +546,6 @@
 				A37BBF3E15670A1500251CC8 /* ArtistsViewController.xib */,
 				A3C6A4711565F9FA00F1E42E /* RandomViewController.xib */,
 				A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */,
-				A3F9C051142EAD610016717B /* EventSearchViewController.xib */,
-				A309CC6315194A8000912EA2 /* EventResultsViewController.xib */,
-				A33C461D148F11FC009C1BC6 /* LibrarySearchViewController.xib */,
-				A34FB30214B8EB5F00BE5CE2 /* LibraryResultsController.xib */,
 				2899E5210DE3E06400AC0155 /* UDJViewController.xib */,
 				A3F58D9B14C75FAF00E350F4 /* EventGoerViewController.xib */,
 				A3028B851564A2AE00EF6EE8 /* MainTabBarController.xib */,
@@ -739,9 +727,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2899E5220DE3E06400AC0155 /* UDJViewController.xib in Resources */,
-				A3F9C053142EAD610016717B /* EventSearchViewController.xib in Resources */,
-				A33C461F148F11FC009C1BC6 /* LibrarySearchViewController.xib in Resources */,
-				A34FB30414B8EB5F00BE5CE2 /* LibraryResultsController.xib in Resources */,
 				A38B62A014C736C70088640D /* udjlauncher.png in Resources */,
 				A3F58D9C14C75FAF00E350F4 /* EventGoerViewController.xib in Resources */,
 				A3360BCF14F5E14F00541726 /* NewPlaylistViewController.xib in Resources */,
@@ -749,7 +734,6 @@
 				A341B92914F86C61001892C5 /* addbutton.png in Resources */,
 				A35D3DF114F985460007B374 /* votedown.png in Resources */,
 				A35D3DF214F985460007B374 /* voteup.png in Resources */,
-				A309CC6515194A8000912EA2 /* EventResultsViewController.xib in Resources */,
 				A3495614151EF3D800AAEF7E /* refresh.png in Resources */,
 				A3210D8F15328763009A9318 /* smalluparrow.png in Resources */,
 				A3DDD0A71533EFEF00DB5E1F /* smalldownarrow.png in Resources */,
@@ -912,7 +896,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "0D88DA8D-C513-43A2-A81C-D71FBF6AEB31";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0D88DA8D-C513-43A2-A81C-D71FBF6AEB31";
@@ -957,7 +941,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PROVISIONING_PROFILE = "8B6E135E-7E47-4E6D-B5F9-EA5F8758B2EC";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -973,7 +957,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "0D88DA8D-C513-43A2-A81C-D71FBF6AEB31";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0D88DA8D-C513-43A2-A81C-D71FBF6AEB31";

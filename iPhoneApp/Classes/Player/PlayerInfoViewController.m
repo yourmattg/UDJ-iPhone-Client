@@ -21,6 +21,8 @@
 @synthesize cancelButton;
 @synthesize useLocationSwitch, addressField, cityField, stateField, zipCodeField;
 @synthesize playerStateSwitch;
+@synthesize createPlayerButton;
+@synthesize globalData;
 
 #pragma mark - Text fields
 
@@ -97,6 +99,13 @@
     //[self toggleAddressFields: enabled];
 }
 
+
+#pragma mark - Player creation
+
+-(IBAction)createButtonClick:(id)sender{
+    
+}
+
 #pragma mark - View lifecycle
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -114,11 +123,13 @@
 	// Do any additional setup after loading the view.
     //[self toggleAddressFields: NO];
     
-    [self.mainScrollView setContentSize: CGSizeMake(320, 700)
-];
+    [self.mainScrollView setContentSize: CGSizeMake(320, 650)];
     
     [self initTextFields];
     
+    globalData = [UDJData sharedUDJData];
+    globalData.playerMethodsDelegate = self;
+
 }
 
 - (void)viewDidUnload
@@ -130,6 +141,36 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+
+#pragma mark - Player modification requests
+
+-(void)sendCreatePlayerRequest{
+    RKClient* client = [RKClient sharedClient];
+    
+    //create url [POST] {prefix}/udj/users/user_id/players/player_id/name
+    NSString* urlString = client.baseURL;
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@%@", @"/users/", [globalData.userID intValue], @"/players/", self.playerNameField.text, nil];
+    
+    //NSLog(urlString);
+    
+    /*
+    // create request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: globalData];
+    request.queue = client.requestQueue;
+    request.method = RKRequestMethodPOST;
+    request.additionalHTTPHeaders = globalData.headers;
+    
+    //send request
+    [request send];
+     */
+}
+
+#pragma mark - Response handling
+
+-(void)request:(RKRequest *)request didLoadResponse:(RKResponse *)response{
+    
 }
 
 @end

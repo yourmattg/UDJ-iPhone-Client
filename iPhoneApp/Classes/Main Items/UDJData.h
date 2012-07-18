@@ -34,9 +34,10 @@
 @property(nonatomic,strong) NSString* password;
 @property BOOL loggedIn;
 
-@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext; 
+@property(nonatomic, retain) NSManagedObjectContext *managedObjectContext; 
 
-@property(nonatomic,weak) UIViewController* songAddDelegate;
+@property(nonatomic,unsafe_unretained) UIViewController* songAddDelegate;
+@property(nonatomic,unsafe_unretained) UIViewController* playerMethodsDelegate;
 
 +(UDJData*)sharedUDJData;
 -(BOOL)ticketIsValid;

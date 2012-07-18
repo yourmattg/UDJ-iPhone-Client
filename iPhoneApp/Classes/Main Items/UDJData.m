@@ -22,11 +22,12 @@
 #import "UDJAppDelegate.h"
 #import "RestKit/RKJSONParserJSONKit.h"
 #import "SongListViewController.h"
+#import "PlayerInfoViewController.h"
 
 @implementation UDJData
 
 @synthesize requestCount, ticket, headers, userID, username, password, loggedIn, managedObjectContext;
-@synthesize songAddDelegate;
+@synthesize songAddDelegate, playerMethodsDelegate;
 
 
 #pragma mark - Ticket validation
@@ -127,6 +128,13 @@
             [songListViewController request: request didLoadResponse: response];
         }
         else NSLog(@"delegate was nil");
+    }
+    
+    if([[responseHeaders objectForKey: @"delegate"] isEqualToString: @"playerMethodsDelegate"]){
+        if(playerMethodsDelegate != nil){
+            PlayerInfoViewController* playerInfoViewController = (PlayerInfoViewController*)songAddDelegate;
+            [playerInfoViewController request: request didLoadResponse: response];            
+        }
     }
     
     if([request isPOST]) {

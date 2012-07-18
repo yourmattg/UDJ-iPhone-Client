@@ -24,11 +24,11 @@
 @interface UDJAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
     UDJViewController *viewController;
-	UINavigationController *navigationController;
+    UINavigationController *navigationController;
     NSString* baseUrl;
 	
-	//Application Model Data
-	NSString *modelData;
+    //Application Model Data
+    NSString *modelData;
 	
 }
 
