@@ -26,7 +26,6 @@
 		A324AC0514AABB8900388514 /* UDJPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = A324AC0414AABB8900388514 /* UDJPlaylist.m */; };
 		A3265DB314C6101400FC692B /* PlaylistEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3265DB214C6101400FC692B /* PlaylistEntryCell.m */; };
 		A32BEEA1157163A1005B573B /* nearbybutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A32BEEA0157163A1005B573B /* nearbybutton.png */; };
-		A3344761157478E20033092E /* ShareKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A3E4D1E7157461510032CF8B /* ShareKit.bundle */; };
 		A3360BCF14F5E14F00541726 /* NewPlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */; };
 		A33C4614148F0707009C1BC6 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A33C4612148F0707009C1BC6 /* PlaylistViewController.m */; };
 		A33EE1E115684B7D00D49B85 /* playing.png in Resources */ = {isa = PBXBuildFile; fileRef = A33EE1E015684B7D00D49B85 /* playing.png */; };
@@ -56,7 +55,6 @@
 		A39AF6921497D081006ADF19 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF6911497D081006ADF19 /* MobileCoreServices.framework */; };
 		A39AF6941497D09A006ADF19 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF6931497D09A006ADF19 /* SystemConfiguration.framework */; };
 		A39AF6961497D0A4006ADF19 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF6951497D0A4006ADF19 /* libxml2.dylib */; };
-		A3A1EE671575DE590058555A /* SHKSharersCustom.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3A1EE661575DE590058555A /* SHKSharersCustom.plist */; };
 		A3A1EE6C1575E49E0058555A /* UDJConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A1EE6B1575E49E0058555A /* UDJConfigurator.m */; };
 		A3A2B370156DD6C600C4FF90 /* UDJStoredData.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A2B36F156DD6C600C4FF90 /* UDJStoredData.m */; };
 		A3B1ABB8157E759B008498EC /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3B1ABB7157E759B008498EC /* MainWindow.xib */; };
@@ -79,12 +77,13 @@
 		A3CFBEED1568730A002B7658 /* pausetoggle.png in Resources */ = {isa = PBXBuildFile; fileRef = A3CFBEEC1568730A002B7658 /* pausetoggle.png */; };
 		A3CFBEF015688811002B7658 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CFBEEF15688811002B7658 /* KeychainItemWrapper.m */; };
 		A3CFBEF3156888E8002B7658 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3CFBEF1156888E8002B7658 /* Model.xcdatamodeld */; };
+		A3D5EBB015BA243F0019FBAF /* libShareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3D5EBA715BA24060019FBAF /* libShareKit.a */; };
+		A3D5EBB115BA24B40019FBAF /* ShareKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A3D5EBA915BA24060019FBAF /* ShareKit.bundle */; };
 		A3D61A3215882EA300ACE780 /* PlayerInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3D61A3115882EA300ACE780 /* PlayerInfoViewController.xib */; };
 		A3DAD57D14BD253600688CE0 /* UDJMappableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DAD57C14BD253600688CE0 /* UDJMappableArray.m */; };
 		A3DDD0A71533EFEF00DB5E1F /* smalldownarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A3DDD0A61533EFEF00DB5E1F /* smalldownarrow.png */; };
 		A3E4D1831574570A0032CF8B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E4D1821574570A0032CF8B /* MessageUI.framework */; };
-		A3E4D185157457260032CF8B /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E4D184157457260032CF8B /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		A3E4D1EF1574616B0032CF8B /* libShareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E4D1E5157461510032CF8B /* libShareKit.a */; };
+		A3E4D185157457260032CF8B /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E4D184157457260032CF8B /* Twitter.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		A3E70CDC159BF7E00037A60B /* blackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A3E70CDB159BF7E00037A60B /* blackground.png */; };
 		A3EECC0215994ED30003BEF8 /* PlayerInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EECC0115994ED30003BEF8 /* PlayerInfoViewController.m */; };
 		A3F58D9514C753D300E350F4 /* UDJEventGoer.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58D9414C753D300E350F4 /* UDJEventGoer.m */; };
@@ -132,44 +131,44 @@
 			remoteGlobalIDString = 25160D1514564E810060A5C5;
 			remoteInfo = RestKit;
 		};
-		A3E4D1E2157461510032CF8B /* PBXContainerItemProxy */ = {
+		A3D5EBA415BA24060019FBAF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A3E4D1D7157461500032CF8B /* ShareKit.xcodeproj */;
+			containerPortal = A3D5EB9915BA24060019FBAF /* ShareKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 1D6058910D05DD3D006BFB54;
 			remoteInfo = "Demo App";
 		};
-		A3E4D1E4157461510032CF8B /* PBXContainerItemProxy */ = {
+		A3D5EBA615BA24060019FBAF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A3E4D1D7157461500032CF8B /* ShareKit.xcodeproj */;
+			containerPortal = A3D5EB9915BA24060019FBAF /* ShareKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 7AB5342E1552AADD00171BCE;
 			remoteInfo = "Static Library";
 		};
-		A3E4D1E6157461510032CF8B /* PBXContainerItemProxy */ = {
+		A3D5EBA815BA24060019FBAF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A3E4D1D7157461500032CF8B /* ShareKit.xcodeproj */;
+			containerPortal = A3D5EB9915BA24060019FBAF /* ShareKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 7AB5360F1552E26800171BCE;
 			remoteInfo = "Resource Bundle";
 		};
-		A3E4D1E8157461510032CF8B /* PBXContainerItemProxy */ = {
+		A3D5EBAA15BA24060019FBAF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A3E4D1D7157461500032CF8B /* ShareKit.xcodeproj */;
+			containerPortal = A3D5EB9915BA24060019FBAF /* ShareKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 7A0F9246156BA2A0009CB40A;
 			remoteInfo = "Static Library No Submodules";
 		};
-		A3E4D1EA1574615A0032CF8B /* PBXContainerItemProxy */ = {
+		A3D5EBAC15BA242F0019FBAF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A3E4D1D7157461500032CF8B /* ShareKit.xcodeproj */;
+			containerPortal = A3D5EB9915BA24060019FBAF /* ShareKit.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 7AB5342D1552AADD00171BCE;
 			remoteInfo = "Static Library";
 		};
-		A3E4D1EC1574615A0032CF8B /* PBXContainerItemProxy */ = {
+		A3D5EBAE15BA242F0019FBAF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A3E4D1D7157461500032CF8B /* ShareKit.xcodeproj */;
+			containerPortal = A3D5EB9915BA24060019FBAF /* ShareKit.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 7AB5360E1552E26800171BCE;
 			remoteInfo = "Resource Bundle";
@@ -275,13 +274,13 @@
 		A3CFBEEE15688811002B7658 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		A3CFBEEF15688811002B7658 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		A3CFBEF2156888E8002B7658 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		A3D5EB9915BA24060019FBAF /* ShareKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ShareKit.xcodeproj; path = ../Submodules/ShareKit/ShareKit.xcodeproj; sourceTree = "<group>"; };
 		A3D61A3115882EA300ACE780 /* PlayerInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerInfoViewController.xib; sourceTree = "<group>"; };
 		A3DAD57B14BD253600688CE0 /* UDJMappableArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJMappableArray.h; sourceTree = "<group>"; };
 		A3DAD57C14BD253600688CE0 /* UDJMappableArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJMappableArray.m; sourceTree = "<group>"; };
 		A3DDD0A61533EFEF00DB5E1F /* smalldownarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smalldownarrow.png; sourceTree = "<group>"; };
 		A3E4D1821574570A0032CF8B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		A3E4D184157457260032CF8B /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
-		A3E4D1D7157461500032CF8B /* ShareKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ShareKit.xcodeproj; path = ShareKit/ShareKit.xcodeproj; sourceTree = "<group>"; };
 		A3E70CDB159BF7E00037A60B /* blackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackground.png; sourceTree = "<group>"; };
 		A3EECC0015994ED30003BEF8 /* PlayerInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerInfoViewController.h; path = Classes/Player/PlayerInfoViewController.h; sourceTree = SOURCE_ROOT; };
 		A3EECC0115994ED30003BEF8 /* PlayerInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerInfoViewController.m; path = Classes/Player/PlayerInfoViewController.m; sourceTree = SOURCE_ROOT; };
@@ -303,7 +302,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3E4D1EF1574616B0032CF8B /* libShareKit.a in Frameworks */,
+				A3D5EBB015BA243F0019FBAF /* libShareKit.a in Frameworks */,
 				A3E4D185157457260032CF8B /* Twitter.framework in Frameworks */,
 				A3E4D1831574570A0032CF8B /* MessageUI.framework in Frameworks */,
 				A35F57F61572D477004AA5DB /* QuartzCore.framework in Frameworks */,
@@ -358,7 +357,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				A3E4D1D7157461500032CF8B /* ShareKit.xcodeproj */,
+				A3D5EB9915BA24060019FBAF /* ShareKit.xcodeproj */,
 				A39AF6581497C803006ADF19 /* RestKit.xcodeproj */,
 				A35F57F71572D47C004AA5DB /* Frameworks */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -553,13 +552,13 @@
 			name = "xib files";
 			sourceTree = "<group>";
 		};
-		A3E4D1D8157461500032CF8B /* Products */ = {
+		A3D5EB9A15BA24060019FBAF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A3E4D1E3157461510032CF8B /* ShareKitDemo.app */,
-				A3E4D1E5157461510032CF8B /* libShareKit.a */,
-				A3E4D1E7157461510032CF8B /* ShareKit.bundle */,
-				A3E4D1E9157461510032CF8B /* libShareKitNoSubmodules.a */,
+				A3D5EBA515BA24060019FBAF /* ShareKitDemo.app */,
+				A3D5EBA715BA24060019FBAF /* libShareKit.a */,
+				A3D5EBA915BA24060019FBAF /* ShareKit.bundle */,
+				A3D5EBAB15BA24060019FBAF /* libShareKitNoSubmodules.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -616,8 +615,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				A3E4D1EB1574615A0032CF8B /* PBXTargetDependency */,
-				A3E4D1ED1574615A0032CF8B /* PBXTargetDependency */,
+				A3D5EBAD15BA242F0019FBAF /* PBXTargetDependency */,
+				A3D5EBAF15BA242F0019FBAF /* PBXTargetDependency */,
 				A3632F6714FC8ADB0073EDF4 /* PBXTargetDependency */,
 			);
 			name = UDJ;
@@ -651,8 +650,8 @@
 					ProjectRef = A39AF6581497C803006ADF19 /* RestKit.xcodeproj */;
 				},
 				{
-					ProductGroup = A3E4D1D8157461500032CF8B /* Products */;
-					ProjectRef = A3E4D1D7157461500032CF8B /* ShareKit.xcodeproj */;
+					ProductGroup = A3D5EB9A15BA24060019FBAF /* Products */;
+					ProjectRef = A3D5EB9915BA24060019FBAF /* ShareKit.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -691,32 +690,32 @@
 			remoteRef = A3632F6414FC8AC40073EDF4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A3E4D1E3157461510032CF8B /* ShareKitDemo.app */ = {
+		A3D5EBA515BA24060019FBAF /* ShareKitDemo.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
 			path = ShareKitDemo.app;
-			remoteRef = A3E4D1E2157461510032CF8B /* PBXContainerItemProxy */;
+			remoteRef = A3D5EBA415BA24060019FBAF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A3E4D1E5157461510032CF8B /* libShareKit.a */ = {
+		A3D5EBA715BA24060019FBAF /* libShareKit.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libShareKit.a;
-			remoteRef = A3E4D1E4157461510032CF8B /* PBXContainerItemProxy */;
+			remoteRef = A3D5EBA615BA24060019FBAF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A3E4D1E7157461510032CF8B /* ShareKit.bundle */ = {
+		A3D5EBA915BA24060019FBAF /* ShareKit.bundle */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = ShareKit.bundle;
-			remoteRef = A3E4D1E6157461510032CF8B /* PBXContainerItemProxy */;
+			remoteRef = A3D5EBA815BA24060019FBAF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A3E4D1E9157461510032CF8B /* libShareKitNoSubmodules.a */ = {
+		A3D5EBAB15BA24060019FBAF /* libShareKitNoSubmodules.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libShareKitNoSubmodules.a;
-			remoteRef = A3E4D1E8157461510032CF8B /* PBXContainerItemProxy */;
+			remoteRef = A3D5EBAA15BA24060019FBAF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -756,8 +755,6 @@
 				A3F86A70156F03250036FBCE /* PlayerListViewController.xib in Resources */,
 				A32BEEA1157163A1005B573B /* nearbybutton.png in Resources */,
 				A35F57F91572DD04004AA5DB /* arrow.png in Resources */,
-				A3344761157478E20033092E /* ShareKit.bundle in Resources */,
-				A3A1EE671575DE590058555A /* SHKSharersCustom.plist in Resources */,
 				A3B1ABB8157E759B008498EC /* MainWindow.xib in Resources */,
 				A3D61A3215882EA300ACE780 /* PlayerInfoViewController.xib in Resources */,
 				A30CE22C1591695800DA054D /* backg.png in Resources */,
@@ -765,6 +762,7 @@
 				A3FCF8B715918F5D00B6CB95 /* keyboard.png in Resources */,
 				A302C4121593F52A008B3793 /* cancel.png in Resources */,
 				A3E70CDC159BF7E00037A60B /* blackground.png in Resources */,
+				A3D5EBB115BA24B40019FBAF /* ShareKit.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -818,15 +816,15 @@
 			name = RestKit;
 			targetProxy = A3632F6614FC8ADB0073EDF4 /* PBXContainerItemProxy */;
 		};
-		A3E4D1EB1574615A0032CF8B /* PBXTargetDependency */ = {
+		A3D5EBAD15BA242F0019FBAF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Static Library";
-			targetProxy = A3E4D1EA1574615A0032CF8B /* PBXContainerItemProxy */;
+			targetProxy = A3D5EBAC15BA242F0019FBAF /* PBXContainerItemProxy */;
 		};
-		A3E4D1ED1574615A0032CF8B /* PBXTargetDependency */ = {
+		A3D5EBAF15BA242F0019FBAF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Resource Bundle";
-			targetProxy = A3E4D1EC1574615A0032CF8B /* PBXContainerItemProxy */;
+			targetProxy = A3D5EBAE15BA242F0019FBAF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -834,7 +832,7 @@
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -846,6 +844,10 @@
 					"\"$(SOURCE_ROOT)/RestKit/Build\"/**",
 					"ShareKit/**",
 					..,
+					"../Submodules/ShareKit/**/**",
+					"/Users/mattgraf/sandbox/UDJ/Submodules/ShareKit/**/**",
+					"../**/**",
+					"/../**/**",
 				);
 				INFOPLIST_FILE = "UDJ-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -855,13 +857,14 @@
 				);
 				PRODUCT_NAME = UDJ;
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "../Submodules/ShareKit/** $(BUILT_PRODUCTS_DIR)/** RestKit/**/** \"$(SOURCE_ROOT)/RestKit/Build\"/** \"$(SOURCE_ROOT)/**/** $(BUILT_PRODUCTS_DIR)/**";
 			};
 			name = Debug;
 		};
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kurtis Nusbaum (M4UE32J8NM)";
 				COPY_PHASE_STRIP = YES;
@@ -872,6 +875,10 @@
 					"\"$(SOURCE_ROOT)/RestKit/Build\"/**",
 					"ShareKit/**",
 					..,
+					"../Submodules/ShareKit/**/**",
+					"/Users/mattgraf/sandbox/UDJ/Submodules/ShareKit/**/**",
+					"../**/**",
+					"/../**/**",
 				);
 				INFOPLIST_FILE = "UDJ-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -883,6 +890,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8B6E135E-7E47-4E6D-B5F9-EA5F8758B2EC";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "../Submodules/ShareKit/** $(BUILT_PRODUCTS_DIR)/** RestKit/**/** \"$(SOURCE_ROOT)/RestKit/Build\"/** \"$(SOURCE_ROOT)/**/** $(BUILT_PRODUCTS_DIR)/**";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -907,7 +915,7 @@
 		A3FA511614FF26EF004169C2 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kurtis Nusbaum (M4UE32J8NM)";
 				COPY_PHASE_STRIP = YES;
@@ -918,6 +926,10 @@
 					"\"$(SOURCE_ROOT)/RestKit/Build\"/**",
 					"ShareKit/**",
 					..,
+					"../Submodules/ShareKit/**/**",
+					"/Users/mattgraf/sandbox/UDJ/Submodules/ShareKit/**/**",
+					"../**/**",
+					"/../**/**",
 				);
 				INFOPLIST_FILE = "UDJ-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -928,6 +940,7 @@
 				PRODUCT_NAME = UDJ;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8B6E135E-7E47-4E6D-B5F9-EA5F8758B2EC";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "../Submodules/ShareKit/** $(BUILT_PRODUCTS_DIR)/** RestKit/**/** \"$(SOURCE_ROOT)/RestKit/Build\"/** \"$(SOURCE_ROOT)/**/** $(BUILT_PRODUCTS_DIR)/**";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Distribution;

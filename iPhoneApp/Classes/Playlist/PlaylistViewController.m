@@ -194,7 +194,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     [SHK setRootViewController:self];
     
     // Display the action sheet
-    [actionSheet showFromToolbar: self.navigationController.toolbar];
+    [actionSheet showFromTabBar: self.tabBarController.tabBar];
      
 }
 
