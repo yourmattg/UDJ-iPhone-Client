@@ -7,6 +7,7 @@
 //
 
 #import "PlayerInfoViewController.h"
+#import "JSONKit.h"
 
 @interface PlayerInfoViewController ()
 
@@ -99,13 +100,6 @@
     //[self toggleAddressFields: enabled];
 }
 
-
-#pragma mark - Player creation
-
--(IBAction)createButtonClick:(id)sender{
-    
-}
-
 #pragma mark - View lifecycle
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -127,8 +121,8 @@
     
     [self initTextFields];
     
-    globalData = [UDJData sharedUDJData];
-    globalData.playerMethodsDelegate = self;
+    self.globalData = [UDJData sharedUDJData];
+    self.globalData.playerMethodsDelegate = self;
 
 }
 
@@ -143,34 +137,62 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark - Player methods helpers
 
-#pragma mark - Player modification requests
+-(NSString*)JSONStringWithPlayerInfo{    
+    // create dictionary with name/pass
+    NSMutableDictionary* dict = [[NSMutableDictionary alloc] initWithCapacity: 3];
+    [dict setValue: self.playerNameField.text forKey:@"name"];
+    if(![self.playerPasswordField.text isEqualToString:@""])
+        [dict setValue:self.playerPasswordField.text forKey:@"password"];
+    
+    // create location dictionary
+    NSMutableDictionary* locationDict = [[NSMutableDictionary alloc] initWithCapacity: 4];
+    [locationDict setValue:self.addressField.text forKey:@"address"];
+    [locationDict setValue:self.cityField.text forKey:@"city"];
+    [locationDict setValue:self.stateField.text forKey:@"state"];
+    [locationDict setValue:self.zipCodeField.text forKey:@"zipcode"];
+    [dict setObject: locationDict forKey: @"location"];
+    
+    return [dict JSONString];
+}
+
+
+#pragma mark - Player methods
+
+-(IBAction)createButtonClick:(id)sender{
+    [self sendCreatePlayerRequest];
+}
 
 -(void)sendCreatePlayerRequest{
     RKClient* client = [RKClient sharedClient];
     
     //create url [POST] {prefix}/udj/users/user_id/players/player_id/name
     NSString* urlString = client.baseURL;
-    urlString = [urlString stringByAppendingFormat:@"%@%d%@%@", @"/users/", [globalData.userID intValue], @"/players/", self.playerNameField.text, nil];
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@", @"/users/", [globalData.userID intValue], @"/players/player", nil];
     
-    //NSLog(urlString);
+    NSLog(urlString);
     
-    /*
     // create request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: globalData];
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: self.globalData];
     request.queue = client.requestQueue;
-    request.method = RKRequestMethodPOST;
-    request.additionalHTTPHeaders = globalData.headers;
+    request.method = RKRequestMethodPUT;
+    request.HTTPBodyString = [self JSONStringWithPlayerInfo];
+    
+    // set up the headers, including which type of request this is
+    NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJData sharedUDJData].headers];
+    [requestHeaders setValue:@"playerMethodsDelegate" forKey:@"delegate"];
+    [requestHeaders setValue:@"text/json" forKey:@"content-type"];
+    request.additionalHTTPHeaders = requestHeaders;
     
     //send request
     [request send];
-     */
 }
 
 #pragma mark - Response handling
 
--(void)request:(RKRequest *)request didLoadResponse:(RKResponse *)response{
-    
+-(void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
+    NSLog(@"Body: %@", response.bodyAsString);
 }
 
 @end

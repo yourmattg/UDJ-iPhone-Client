@@ -275,7 +275,7 @@
 		A3CFBEEF15688811002B7658 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		A3CFBEF2156888E8002B7658 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		A3D5EB9915BA24060019FBAF /* ShareKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ShareKit.xcodeproj; path = ../Submodules/ShareKit/ShareKit.xcodeproj; sourceTree = "<group>"; };
-		A3D61A3115882EA300ACE780 /* PlayerInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerInfoViewController.xib; sourceTree = "<group>"; };
+		A3D61A3115882EA300ACE780 /* PlayerInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlayerInfoViewController.xib; path = ../../Resources/PlayerInfoViewController.xib; sourceTree = "<group>"; };
 		A3DAD57B14BD253600688CE0 /* UDJMappableArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJMappableArray.h; sourceTree = "<group>"; };
 		A3DAD57C14BD253600688CE0 /* UDJMappableArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJMappableArray.m; sourceTree = "<group>"; };
 		A3DDD0A61533EFEF00DB5E1F /* smalldownarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smalldownarrow.png; sourceTree = "<group>"; };
@@ -539,7 +539,6 @@
 			isa = PBXGroup;
 			children = (
 				A3B1ABB7157E759B008498EC /* MainWindow.xib */,
-				A3D61A3115882EA300ACE780 /* PlayerInfoViewController.xib */,
 				A3F86A6E156F03250036FBCE /* PlayerListViewController.xib */,
 				A3C7A441156714F20085150A /* SongListViewController.xib */,
 				A37BBF3E15670A1500251CC8 /* ArtistsViewController.xib */,
@@ -568,6 +567,7 @@
 			children = (
 				A3EECC0015994ED30003BEF8 /* PlayerInfoViewController.h */,
 				A3EECC0115994ED30003BEF8 /* PlayerInfoViewController.m */,
+				A3D61A3115882EA300ACE780 /* PlayerInfoViewController.xib */,
 			);
 			name = Player;
 			path = Events;

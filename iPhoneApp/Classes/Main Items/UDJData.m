@@ -81,7 +81,7 @@
     NSDictionary* nameAndPass = [NSDictionary dictionaryWithObjectsAndKeys:username, @"username", password, @"password", nil]; 
     
     // put the API version in the header
-    NSDictionary* apiHeader = [NSDictionary dictionaryWithObjectsAndKeys:@"0.5", @"X-Udj-Api-Version", nil];
+    NSDictionary* apiHeader = [NSDictionary dictionaryWithObjectsAndKeys:@"0.5", @"X-Udj-Api-Version", @"renewTicket", @"requestType", nil];
     
     // create the URL
     NSMutableString* urlString = [NSMutableString stringWithString: client.baseURL];
@@ -130,14 +130,15 @@
         else NSLog(@"delegate was nil");
     }
     
-    if([[responseHeaders objectForKey: @"delegate"] isEqualToString: @"playerMethodsDelegate"]){
+    else if([[responseHeaders objectForKey: @"delegate"] isEqualToString: @"playerMethodsDelegate"]){
         if(playerMethodsDelegate != nil){
-            PlayerInfoViewController* playerInfoViewController = (PlayerInfoViewController*)songAddDelegate;
+            NSLog(@"isnt nil");
+            PlayerInfoViewController* playerInfoViewController = (PlayerInfoViewController*)playerMethodsDelegate;
             [playerInfoViewController request: request didLoadResponse: response];            
         }
     }
-    
-    if([request isPOST]) {
+        //  && [[responseHeaders objectForKey: @"requestType"] isEqualToString:@"renewTicket"]
+    else if([request isPOST]) {
         [self handleRenewTicket:response];
     }
 }
