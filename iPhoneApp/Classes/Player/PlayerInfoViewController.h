@@ -24,6 +24,7 @@
 @property(nonatomic,strong) IBOutlet UIButton* cancelButton;
 
 @property(nonatomic,strong) IBOutlet UISwitch* useLocationSwitch;
+@property(nonatomic,strong) IBOutletCollection(UITextField) NSArray* locationFields;
 @property(nonatomic,strong) IBOutlet UITextField* addressField;
 @property(nonatomic,strong) IBOutlet UITextField* cityField;
 @property(nonatomic,strong) IBOutlet UITextField* stateField;

@@ -20,7 +20,7 @@
 @synthesize playerNameLabel;
 @synthesize playerNameField, playerPasswordField;
 @synthesize cancelButton;
-@synthesize useLocationSwitch, addressField, cityField, stateField, zipCodeField;
+@synthesize useLocationSwitch, addressField, cityField, stateField, zipCodeField, locationFields;
 @synthesize playerStateSwitch;
 @synthesize createPlayerButton;
 @synthesize globalData;
@@ -139,6 +139,17 @@
 
 #pragma mark - Player methods helpers
 
+-(BOOL)completedLocationFields{
+    BOOL complete = YES;
+    for(int i=0; i < [locationFields count]; i++){
+        UITextField* textField = [locationFields objectAtIndex: i];
+        NSString* textWithoutSpaces = [textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+        if([textWithoutSpaces isEqualToString:@""]) complete = NO;
+    }
+    
+    return complete;
+}
+
 -(NSString*)JSONStringWithPlayerInfo{    
     // create dictionary with name/pass
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] initWithCapacity: 3];
@@ -161,7 +172,12 @@
 #pragma mark - Player methods
 
 -(IBAction)createButtonClick:(id)sender{
-    [self sendCreatePlayerRequest];
+    if([self completedLocationFields])
+        [self sendCreatePlayerRequest];
+    else{
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Incomplete Location" message:@"You must complete all the address fields." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+    }
 }
 
 -(void)sendCreatePlayerRequest{
