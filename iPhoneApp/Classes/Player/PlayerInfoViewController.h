@@ -37,6 +37,5 @@
 @property(nonatomic,strong) UDJData* globalData;
 
 -(void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response;
--(void)speak;
 
 @end
