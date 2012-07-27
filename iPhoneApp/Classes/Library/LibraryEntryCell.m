@@ -41,7 +41,7 @@
     CGRect contentRect = self.contentView.bounds;
     CGFloat boundsX = contentRect.origin.x;
     CGRect frame;
-    frame = CGRectMake(boundsX+275 ,2, 40, 40);
+    frame = CGRectMake(boundsX+275 ,1, 40, 40);
     addButton.frame = frame;
     
     frame= CGRectMake(boundsX+10 ,3, 250, 19);
@@ -69,7 +69,7 @@
         artistLabel.textColor = [UIColor whiteColor];
         artistLabel.backgroundColor = [UIColor clearColor];
         
-        UIImage* addButtonImg = [UIImage imageNamed:@"addbutton.png"];
+        UIImage* addButtonImg = [UIImage imageNamed:@"plus.png"];
         addButton = [UIButton buttonWithType:UIButtonTypeCustom];
         addButton.tintColor = [UIColor blackColor];
         [addButton setImage:addButtonImg forState:UIControlStateNormal];

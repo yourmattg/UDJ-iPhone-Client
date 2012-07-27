@@ -8,6 +8,8 @@
 
 #import "PlayerInfoViewController.h"
 #import "JSONKit.h"
+#import "UDJAppDelegate.h"
+#import "UDJStoredPlayer.h"
 
 @interface PlayerInfoViewController ()
 
@@ -23,7 +25,7 @@
 @synthesize useLocationSwitch, addressField, cityField, stateField, zipCodeField, locationFields;
 @synthesize playerStateSwitch;
 @synthesize createPlayerButton;
-@synthesize globalData;
+@synthesize globalData, managedObjectContext;
 
 #pragma mark - Text fields
 
@@ -123,6 +125,9 @@
     
     self.globalData = [UDJData sharedUDJData];
     self.globalData.playerMethodsDelegate = self;
+    
+    UDJAppDelegate* appDelegate = (UDJAppDelegate*)[[UIApplication sharedApplication] delegate];
+    managedObjectContext = appDelegate.managedObjectContext;
 
 }
 
@@ -135,6 +140,42 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - Saving player to persistent store
+
+-(void)savePlayerInfo{
+    
+    UDJStoredPlayer* storedPlayer;
+    NSError* error;
+    
+    //Set up a request to get the last stored playlist
+    NSFetchRequest * request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"UDJStoredPlayer" inManagedObjectContext:managedObjectContext]];
+    storedPlayer = [[managedObjectContext executeFetchRequest:request error:&error] lastObject];
+    
+    if (error) {
+        // error in getting info
+    }
+    
+    // if there was no stored player before, create it
+    if (!storedPlayer) {
+        storedPlayer = (UDJStoredPlayer*)[NSEntityDescription insertNewObjectForEntityForName:@"UDJStoredPlayer" inManagedObjectContext: managedObjectContext]; ;
+    }
+    
+    // update the username, save the date the ticket was assigned
+    [storedPlayer setName: self.playerNameField.text];
+    [storedPlayer setCity: self.cityField.text];
+    [storedPlayer setState: self.stateField.text];
+    [storedPlayer setPassword: self.playerPasswordField.text];
+    // 
+    
+    //Save the data
+    error = nil;
+    if (![managedObjectContext save:&error]) {
+        //Handle any error with the saving of the context
+    }
+    
 }
 
 #pragma mark - Player methods helpers

@@ -32,6 +32,9 @@
 		A341B92914F86C61001892C5 /* addbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A341B92814F86C61001892C5 /* addbutton.png */; };
 		A34796A514F85AE0001DEE15 /* default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A34796A414F85AE0001DEE15 /* default.jpg */; };
 		A3495614151EF3D800AAEF7E /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = A3495613151EF3D800AAEF7E /* refresh.png */; };
+		A34FA21B15C22D540022EF46 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = A34FA21A15C22D540022EF46 /* plus.png */; };
+		A34FA21E15C22E120022EF46 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A34FA21C15C22E120022EF46 /* Default.png */; };
+		A34FA21F15C22E120022EF46 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A34FA21D15C22E120022EF46 /* Default@2x.png */; };
 		A3536FB314A5218F00B5C95F /* UDJEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A3536FB214A5218F00B5C95F /* UDJEvent.m */; };
 		A35D3DF114F985460007B374 /* votedown.png in Resources */ = {isa = PBXBuildFile; fileRef = A35D3DEF14F985460007B374 /* votedown.png */; };
 		A35D3DF214F985460007B374 /* voteup.png in Resources */ = {isa = PBXBuildFile; fileRef = A35D3DF014F985460007B374 /* voteup.png */; };
@@ -40,6 +43,7 @@
 		A35F57F61572D477004AA5DB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35F57F51572D477004AA5DB /* QuartzCore.framework */; };
 		A35F57F91572DD04004AA5DB /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A35F57F81572DD04004AA5DB /* arrow.png */; };
 		A3632F6814FC8AE10073EDF4 /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3632F5F14FC8AC40073EDF4 /* libRestKit.a */; };
+		A36CF96215BF87DC0032AF31 /* UDJStoredPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A36CF96115BF87DC0032AF31 /* UDJStoredPlayer.m */; };
 		A3720B3014C74FE800D1E30C /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A3720B2F14C74FE800D1E30C /* LocationManager.m */; };
 		A3720B3214C7513600D1E30C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3720B3114C7513600D1E30C /* CoreLocation.framework */; };
 		A3720B3414C7514400D1E30C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3720B3314C7514400D1E30C /* CoreFoundation.framework */; };
@@ -212,6 +216,9 @@
 		A341B92814F86C61001892C5 /* addbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addbutton.png; sourceTree = "<group>"; };
 		A34796A414F85AE0001DEE15 /* default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpg; sourceTree = "<group>"; };
 		A3495613151EF3D800AAEF7E /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
+		A34FA21A15C22D540022EF46 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
+		A34FA21C15C22E120022EF46 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		A34FA21D15C22E120022EF46 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		A3536FB114A5218F00B5C95F /* UDJEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJEvent.h; sourceTree = "<group>"; };
 		A3536FB214A5218F00B5C95F /* UDJEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJEvent.m; sourceTree = "<group>"; };
 		A35D3DEF14F985460007B374 /* votedown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = votedown.png; sourceTree = "<group>"; };
@@ -222,6 +229,8 @@
 		A35F57F31572D25D004AA5DB /* PullRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullRefreshTableViewController.m; sourceTree = "<group>"; };
 		A35F57F51572D477004AA5DB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A35F57F81572DD04004AA5DB /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		A36CF96015BF87DC0032AF31 /* UDJStoredPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDJStoredPlayer.h; path = Classes/Player/UDJStoredPlayer.h; sourceTree = SOURCE_ROOT; };
+		A36CF96115BF87DC0032AF31 /* UDJStoredPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDJStoredPlayer.m; path = Classes/Player/UDJStoredPlayer.m; sourceTree = SOURCE_ROOT; };
 		A3720B2E14C74FE800D1E30C /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		A3720B2F14C74FE800D1E30C /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		A3720B3114C7513600D1E30C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -504,6 +513,9 @@
 		A3C6A4741565FA1400F1E42E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				A34FA21C15C22E120022EF46 /* Default.png */,
+				A34FA21D15C22E120022EF46 /* Default@2x.png */,
+				A34FA21A15C22D540022EF46 /* plus.png */,
 				A3E70CDB159BF7E00037A60B /* blackground.png */,
 				A3FCF8B615918F5D00B6CB95 /* keyboard.png */,
 				A30CE22D15916C0500DA054D /* underline.png */,
@@ -568,6 +580,8 @@
 				A3EECC0015994ED30003BEF8 /* PlayerInfoViewController.h */,
 				A3EECC0115994ED30003BEF8 /* PlayerInfoViewController.m */,
 				A3D61A3115882EA300ACE780 /* PlayerInfoViewController.xib */,
+				A36CF96015BF87DC0032AF31 /* UDJStoredPlayer.h */,
+				A36CF96115BF87DC0032AF31 /* UDJStoredPlayer.m */,
 			);
 			name = Player;
 			path = Events;
@@ -763,6 +777,9 @@
 				A302C4121593F52A008B3793 /* cancel.png in Resources */,
 				A3E70CDC159BF7E00037A60B /* blackground.png in Resources */,
 				A3D5EBB115BA24B40019FBAF /* ShareKit.bundle in Resources */,
+				A34FA21B15C22D540022EF46 /* plus.png in Resources */,
+				A34FA21E15C22E120022EF46 /* Default.png in Resources */,
+				A34FA21F15C22E120022EF46 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -805,6 +822,7 @@
 				A3BB29AB15732146002276B0 /* UDJVoteRecord.m in Sources */,
 				A3A1EE6C1575E49E0058555A /* UDJConfigurator.m in Sources */,
 				A3EECC0215994ED30003BEF8 /* PlayerInfoViewController.m in Sources */,
+				A36CF96215BF87DC0032AF31 /* UDJStoredPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
