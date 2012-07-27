@@ -35,7 +35,9 @@
 @property(nonatomic,strong) IBOutlet UIButton* createPlayerButton;
 
 @property(nonatomic,strong) UDJData* globalData;
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;  
+@property(nonatomic,strong) NSManagedObjectContext *managedObjectContext;
+@property NSInteger playerID;
+
 
 -(void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response;
 

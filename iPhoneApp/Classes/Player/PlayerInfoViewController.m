@@ -25,7 +25,7 @@
 @synthesize useLocationSwitch, addressField, cityField, stateField, zipCodeField, locationFields;
 @synthesize playerStateSwitch;
 @synthesize createPlayerButton;
-@synthesize globalData, managedObjectContext;
+@synthesize globalData, managedObjectContext, playerID;
 
 #pragma mark - Text fields
 
@@ -128,6 +128,8 @@
     
     UDJAppDelegate* appDelegate = (UDJAppDelegate*)[[UIApplication sharedApplication] delegate];
     managedObjectContext = appDelegate.managedObjectContext;
+    
+    [self loadPlayerInfo];
 
 }
 
@@ -165,9 +167,12 @@
     
     // update the username, save the date the ticket was assigned
     [storedPlayer setName: self.playerNameField.text];
+    [storedPlayer setAddress: self.addressField.text];
     [storedPlayer setCity: self.cityField.text];
     [storedPlayer setState: self.stateField.text];
     [storedPlayer setPassword: self.playerPasswordField.text];
+    [storedPlayer setZipcode: self.zipCodeField.text];
+    [storedPlayer setPlayerID: [NSNumber numberWithInt: [self.zipCodeField.text intValue]]];
     // 
     
     //Save the data
@@ -176,6 +181,34 @@
         //Handle any error with the saving of the context
     }
     
+}
+
+-(void)loadPlayerInfo{
+    
+    UDJStoredPlayer* storedPlayer;
+    NSError* error;
+    
+    //Set up a request to get the last stored player
+    NSFetchRequest * request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"UDJStoredPlayer" inManagedObjectContext:managedObjectContext]];
+    storedPlayer = [[managedObjectContext executeFetchRequest:request error:&error] lastObject];
+    
+    if (error) {
+        // error in getting info
+    }
+    
+    // if there was a stored player, fill in the fields
+    if (storedPlayer) {
+        [self.playerNameField setText: storedPlayer.name];
+        [self.playerPasswordField setText: storedPlayer.password];
+        [self.addressField setText: storedPlayer.address];
+        [self.cityField setText: storedPlayer.city];
+        [self.stateField setText: storedPlayer.state];
+        [self.zipCodeField setText: storedPlayer.zipcode];
+        self.playerID = [storedPlayer.playerID intValue];
+        
+        self.createPlayerButton.hidden = YES;
+    }
 }
 
 #pragma mark - Player methods helpers
@@ -213,8 +246,10 @@
 #pragma mark - Player methods
 
 -(IBAction)createButtonClick:(id)sender{
-    if([self completedLocationFields])
+    if([self completedLocationFields]){
         [self sendCreatePlayerRequest];
+        self.createPlayerButton.hidden = YES;
+    }
     else{
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Incomplete Location" message:@"You must complete all the address fields." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
@@ -227,9 +262,7 @@
     //create url [POST] {prefix}/udj/users/user_id/players/player_id/name
     NSString* urlString = client.baseURL;
     urlString = [urlString stringByAppendingFormat:@"%@%d%@", @"/users/", [globalData.userID intValue], @"/players/player", nil];
-    
-    NSLog(urlString);
-    
+
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: self.globalData];
     request.queue = client.requestQueue;
@@ -250,6 +283,14 @@
 
 -(void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
     NSLog(@"Body: %@", response.bodyAsString);
+    if([request isPUT]){
+        // Save player ID
+        NSDictionary* responseDict = [response.bodyAsString objectFromJSONString];
+        NSNumber* playerIDAsNumber = [responseDict objectForKey: @"player_id"];
+        self.playerID = [playerIDAsNumber intValue];
+        
+        [self savePlayerInfo];
+    }
 }
 
 @end

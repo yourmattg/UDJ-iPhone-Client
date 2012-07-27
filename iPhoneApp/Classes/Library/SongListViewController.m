@@ -128,8 +128,6 @@
     //TODO: find a way to keep track of the requests
     //[currentRequests setObject:@"songAdd" forKey:request];
     [request send]; 
-    NSLog(@"sent")
-    ;    
 }
 
 -(IBAction)addButtonClick:(id)sender{

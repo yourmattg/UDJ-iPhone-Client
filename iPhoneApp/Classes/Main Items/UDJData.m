@@ -132,7 +132,6 @@
     
     else if([[responseHeaders objectForKey: @"delegate"] isEqualToString: @"playerMethodsDelegate"]){
         if(playerMethodsDelegate != nil){
-            NSLog(@"isnt nil");
             PlayerInfoViewController* playerInfoViewController = (PlayerInfoViewController*)playerMethodsDelegate;
             [playerInfoViewController request: request didLoadResponse: response];            
         }

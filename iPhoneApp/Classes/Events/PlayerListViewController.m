@@ -96,7 +96,7 @@
     self.navigationController.toolbarHidden = NO;
     
     
-    UIBarButtonItem* createPlayerButton = [[UIBarButtonItem alloc] initWithTitle:@"Create Player" style:UIBarButtonItemStyleBordered target:self action:@selector(createPlayerClick)];
+    UIBarButtonItem* createPlayerButton = [[UIBarButtonItem alloc] initWithTitle:@"My Player" style:UIBarButtonItemStyleBordered target:self action:@selector(createPlayerClick)];
     //UIBarButtonItem* nearbyButton = [[UIBarButtonItem alloc] initWithTitle:@"Find Nearby" style:UIBarButtonItemStyleBordered target:self action:@selector(findNearbyButtonClick:)];
     UIBarButtonItem* flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     self.toolbarItems = [NSArray arrayWithObjects: flexible, createPlayerButton, nil];
