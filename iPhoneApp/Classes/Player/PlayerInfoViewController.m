@@ -10,6 +10,7 @@
 #import "JSONKit.h"
 #import "UDJAppDelegate.h"
 #import "UDJStoredPlayer.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface PlayerInfoViewController ()
 
@@ -143,6 +144,38 @@
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+
+#pragma mark - Media player
+
+-(NSMutableDictionary*)dictionaryForMediaItem:(MPMediaItem*)item{
+    NSMutableDictionary* songDict = [NSMutableDictionary dictionaryWithCapacity: 7];
+    [songDict setObject: [item valueForKey: MPMediaItemPropertyPersistentID] forKey:@"id"];
+    [songDict setObject: [item valueForKey: MPMediaItemPropertyTitle] forKey:@"title"];
+    [songDict setObject: [item valueForKey: MPMediaItemPropertyArtist] forKey:@"artist"];
+    [songDict setObject: [item valueForKey: MPMediaItemPropertyAlbumTitle] forKey:@"album"];
+    [songDict setObject: [item valueForKey: MPMediaItemPropertyGenre] forKey:@"genre"];
+    [songDict setObject: [item valueForKey: MPMediaItemPropertyAlbumTrackNumber] forKey:@"track"];
+    [songDict setObject: [item valueForKey: MPMediaItemPropertyPlaybackDuration] forKey:@"duration"];
+    return songDict;
+}
+
+-(void)initMediaPlayer{
+    MPMediaQuery* songQuery = [[MPMediaQuery alloc] init];
+    NSArray* songArray = [songQuery items];
+    NSMutableArray* songUploadArray = [NSMutableArray arrayWithCapacity: [songArray count]];
+    NSLog(@"%d songs", [songArray count]);
+    
+    // add all songs to server
+    for(int i=0; i < [songArray count]; i++){
+        MPMediaItem* item = [songArray objectAtIndex: i];
+        [songUploadArray addObject: [self dictionaryForMediaItem: item]];
+    }
+}
+
+-(IBAction)playerButton:(id)sender{
+    [self initMediaPlayer];
+}
+
 
 #pragma mark - Saving player to persistent store
 
@@ -290,6 +323,7 @@
         self.playerID = [playerIDAsNumber intValue];
         
         [self savePlayerInfo];
+        [self initMediaPlayer];
     }
 }
 

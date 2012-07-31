@@ -30,6 +30,7 @@
 		A33C4614148F0707009C1BC6 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A33C4612148F0707009C1BC6 /* PlaylistViewController.m */; };
 		A33EE1E115684B7D00D49B85 /* playing.png in Resources */ = {isa = PBXBuildFile; fileRef = A33EE1E015684B7D00D49B85 /* playing.png */; };
 		A341B92914F86C61001892C5 /* addbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A341B92814F86C61001892C5 /* addbutton.png */; };
+		A3443FBB15C78053005A6A67 /* UDJStoredLibraryEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A3443FBA15C78053005A6A67 /* UDJStoredLibraryEntry.m */; };
 		A34796A514F85AE0001DEE15 /* default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A34796A414F85AE0001DEE15 /* default.jpg */; };
 		A3495614151EF3D800AAEF7E /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = A3495613151EF3D800AAEF7E /* refresh.png */; };
 		A34FA21B15C22D540022EF46 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = A34FA21A15C22D540022EF46 /* plus.png */; };
@@ -52,6 +53,8 @@
 		A37BBF3F15670A1500251CC8 /* ArtistsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A37BBF3D15670A1500251CC8 /* ArtistsViewController.m */; };
 		A37BBF4015670A1500251CC8 /* ArtistsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A37BBF3E15670A1500251CC8 /* ArtistsViewController.xib */; };
 		A38B62A014C736C70088640D /* udjlauncher.png in Resources */ = {isa = PBXBuildFile; fileRef = A38B629F14C736C70088640D /* udjlauncher.png */; };
+		A38DC7C515C4928700BF9A68 /* UDJPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A38DC7C415C4928700BF9A68 /* UDJPlayerManager.m */; };
+		A38DC7C715C496CF00BF9A68 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A38DC7C615C496CF00BF9A68 /* MediaPlayer.framework */; };
 		A39A0C8B14C4ADDF008A6D54 /* LibraryEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A39A0C8A14C4ADDF008A6D54 /* LibraryEntryCell.m */; };
 		A39AF68B1497CFBC006ADF19 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF68A1497CFBC006ADF19 /* Security.framework */; };
 		A39AF68E1497D072006ADF19 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF68D1497D072006ADF19 /* CFNetwork.framework */; };
@@ -214,6 +217,8 @@
 		A33C4612148F0707009C1BC6 /* PlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistViewController.m; sourceTree = "<group>"; };
 		A33EE1E015684B7D00D49B85 /* playing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playing.png; sourceTree = "<group>"; };
 		A341B92814F86C61001892C5 /* addbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addbutton.png; sourceTree = "<group>"; };
+		A3443FB915C78053005A6A67 /* UDJStoredLibraryEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDJStoredLibraryEntry.h; path = Classes/Player/UDJStoredLibraryEntry.h; sourceTree = SOURCE_ROOT; };
+		A3443FBA15C78053005A6A67 /* UDJStoredLibraryEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDJStoredLibraryEntry.m; path = Classes/Player/UDJStoredLibraryEntry.m; sourceTree = SOURCE_ROOT; };
 		A34796A414F85AE0001DEE15 /* default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpg; sourceTree = "<group>"; };
 		A3495613151EF3D800AAEF7E /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		A34FA21A15C22D540022EF46 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
@@ -242,6 +247,9 @@
 		A37BBF3D15670A1500251CC8 /* ArtistsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtistsViewController.m; sourceTree = "<group>"; };
 		A37BBF3E15670A1500251CC8 /* ArtistsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ArtistsViewController.xib; path = ../Classes/Library/ArtistsViewController.xib; sourceTree = "<group>"; };
 		A38B629F14C736C70088640D /* udjlauncher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = udjlauncher.png; sourceTree = "<group>"; };
+		A38DC7C315C4928700BF9A68 /* UDJPlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJPlayerManager.h; sourceTree = "<group>"; };
+		A38DC7C415C4928700BF9A68 /* UDJPlayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJPlayerManager.m; sourceTree = "<group>"; };
+		A38DC7C615C496CF00BF9A68 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		A39A0C8914C4ADDF008A6D54 /* LibraryEntryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryEntryCell.h; sourceTree = "<group>"; };
 		A39A0C8A14C4ADDF008A6D54 /* LibraryEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryEntryCell.m; sourceTree = "<group>"; };
 		A39AF6581497C803006ADF19 /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = RestKit/RestKit.xcodeproj; sourceTree = "<group>"; };
@@ -311,6 +319,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A38DC7C715C496CF00BF9A68 /* MediaPlayer.framework in Frameworks */,
 				A3D5EBB015BA243F0019FBAF /* libShareKit.a in Frameworks */,
 				A3E4D185157457260032CF8B /* Twitter.framework in Frameworks */,
 				A3E4D1831574570A0032CF8B /* MessageUI.framework in Frameworks */,
@@ -366,6 +375,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				A38DC7C615C496CF00BF9A68 /* MediaPlayer.framework */,
 				A3D5EB9915BA24060019FBAF /* ShareKit.xcodeproj */,
 				A39AF6581497C803006ADF19 /* RestKit.xcodeproj */,
 				A35F57F71572D47C004AA5DB /* Frameworks */,
@@ -582,6 +592,10 @@
 				A3D61A3115882EA300ACE780 /* PlayerInfoViewController.xib */,
 				A36CF96015BF87DC0032AF31 /* UDJStoredPlayer.h */,
 				A36CF96115BF87DC0032AF31 /* UDJStoredPlayer.m */,
+				A38DC7C315C4928700BF9A68 /* UDJPlayerManager.h */,
+				A38DC7C415C4928700BF9A68 /* UDJPlayerManager.m */,
+				A3443FB915C78053005A6A67 /* UDJStoredLibraryEntry.h */,
+				A3443FBA15C78053005A6A67 /* UDJStoredLibraryEntry.m */,
 			);
 			name = Player;
 			path = Events;
@@ -823,6 +837,8 @@
 				A3A1EE6C1575E49E0058555A /* UDJConfigurator.m in Sources */,
 				A3EECC0215994ED30003BEF8 /* PlayerInfoViewController.m in Sources */,
 				A36CF96215BF87DC0032AF31 /* UDJStoredPlayer.m in Sources */,
+				A38DC7C515C4928700BF9A68 /* UDJPlayerManager.m in Sources */,
+				A3443FBB15C78053005A6A67 /* UDJStoredLibraryEntry.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

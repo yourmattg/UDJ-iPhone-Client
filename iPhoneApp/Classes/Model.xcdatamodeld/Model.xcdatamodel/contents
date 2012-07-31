@@ -4,6 +4,10 @@
         <attribute name="ticketDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="UDJStoredLibraryEntry" representedClassName="UDJStoredLibraryEntry" syncable="YES">
+        <attribute name="libraryID" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="synced" optional="YES" syncable="YES"/>
+    </entity>
     <entity name="UDJStoredPlayer" representedClassName="UDJStoredPlayer" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
@@ -16,5 +20,6 @@
     <elements>
         <element name="UDJStoredData" positionX="160" positionY="192" width="128" height="75"/>
         <element name="UDJStoredPlayer" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="UDJStoredLibraryEntry" positionX="160" positionY="192" width="128" height="75"/>
     </elements>
 </model>
