@@ -11,6 +11,7 @@
 #import "UDJAppDelegate.h"
 #import "UDJStoredPlayer.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import "UDJStoredLibraryEntry.h"
 
 @interface PlayerInfoViewController ()
 
@@ -145,17 +146,43 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark - Storing library info
+
+-(NSArray*)arrayWithAllLibraryEntries{
+    NSError* error;
+    //Set up a request to get the all library entries
+    NSFetchRequest * request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"UDJStoredLibraryEntry" inManagedObjectContext:managedObjectContext]];
+    NSArray* libraryEntryArray = [managedObjectContext executeFetchRequest:request error:&error];
+    
+    if(error) return [[NSArray alloc] init];
+    else return libraryEntryArray;
+}
+
+-(void)updateLibrary{
+    NSArray* libraryEntryArray = [self arrayWithAllLibraryEntries];
+    
+    
+    
+}
+
 #pragma mark - Media player
 
 -(NSMutableDictionary*)dictionaryForMediaItem:(MPMediaItem*)item{
     NSMutableDictionary* songDict = [NSMutableDictionary dictionaryWithCapacity: 7];
     [songDict setObject: [item valueForKey: MPMediaItemPropertyPersistentID] forKey:@"id"];
-    [songDict setObject: [item valueForKey: MPMediaItemPropertyTitle] forKey:@"title"];
-    [songDict setObject: [item valueForKey: MPMediaItemPropertyArtist] forKey:@"artist"];
-    [songDict setObject: [item valueForKey: MPMediaItemPropertyAlbumTitle] forKey:@"album"];
-    [songDict setObject: [item valueForKey: MPMediaItemPropertyGenre] forKey:@"genre"];
-    [songDict setObject: [item valueForKey: MPMediaItemPropertyAlbumTrackNumber] forKey:@"track"];
-    [songDict setObject: [item valueForKey: MPMediaItemPropertyPlaybackDuration] forKey:@"duration"];
+    if([item valueForKey: MPMediaItemPropertyTitle] != nil) 
+        [songDict setObject: [item valueForKey: MPMediaItemPropertyTitle] forKey:@"title"];
+    if([item valueForKey: MPMediaItemPropertyArtist] != nil) 
+        [songDict setObject: [item valueForKey: MPMediaItemPropertyArtist] forKey:@"artist"];
+    if([item valueForKey: MPMediaItemPropertyAlbumTitle] != nil) 
+        [songDict setObject: [item valueForKey: MPMediaItemPropertyAlbumTitle] forKey:@"album"];
+    if([item valueForKey: MPMediaItemPropertyGenre] != nil) 
+        [songDict setObject: [item valueForKey: MPMediaItemPropertyGenre] forKey:@"genre"];
+    if([item valueForKey: MPMediaItemPropertyAlbumTrackNumber] != nil) 
+        [songDict setObject: [item valueForKey: MPMediaItemPropertyAlbumTrackNumber] forKey:@"track"];
+    if([item valueForKey: MPMediaItemPropertyPlaybackDuration] != nil) 
+        [songDict setObject: [item valueForKey: MPMediaItemPropertyPlaybackDuration] forKey:@"duration"];
     return songDict;
 }
 
