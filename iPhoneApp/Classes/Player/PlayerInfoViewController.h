@@ -37,7 +37,7 @@
 @property(nonatomic,strong) UDJData* globalData;
 @property(nonatomic,strong) NSManagedObjectContext *managedObjectContext;
 @property NSInteger playerID;
-
+@property(nonatomic,strong) NSMutableDictionary* songSyncDictionary;
 
 -(void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response;
 

@@ -27,7 +27,7 @@
 @synthesize useLocationSwitch, addressField, cityField, stateField, zipCodeField, locationFields;
 @synthesize playerStateSwitch;
 @synthesize createPlayerButton;
-@synthesize globalData, managedObjectContext, playerID;
+@synthesize globalData, managedObjectContext, playerID, songSyncDictionary;
 
 #pragma mark - Text fields
 
@@ -132,7 +132,6 @@
     managedObjectContext = appDelegate.managedObjectContext;
     
     [self loadPlayerInfo];
-
 }
 
 - (void)viewDidUnload
@@ -146,7 +145,7 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark - Storing library info
+#pragma mark - Updating library
 
 -(NSArray*)arrayWithAllLibraryEntries{
     NSError* error;
@@ -155,18 +154,19 @@
     [request setEntity:[NSEntityDescription entityForName:@"UDJStoredLibraryEntry" inManagedObjectContext:managedObjectContext]];
     NSArray* libraryEntryArray = [managedObjectContext executeFetchRequest:request error:&error];
     
-    if(error) return [[NSArray alloc] init];
-    else return libraryEntryArray;
+    if(error) {}
+    return libraryEntryArray;
 }
 
--(void)updateLibrary{
+-(void)buildSyncDictionary{
+    // build sync status dictionary
     NSArray* libraryEntryArray = [self arrayWithAllLibraryEntries];
-    
-    
-    
+    self.songSyncDictionary = [NSMutableDictionary dictionaryWithCapacity: [libraryEntryArray count]];
+    for(int i=0; i<[libraryEntryArray count]; i++){
+        UDJStoredLibraryEntry* libEntry = [libraryEntryArray objectAtIndex: i];
+        [self.songSyncDictionary setObject: libEntry.synced forKey: libEntry.libraryID];
+    }
 }
-
-#pragma mark - Media player
 
 -(NSMutableDictionary*)dictionaryForMediaItem:(MPMediaItem*)item{
     NSMutableDictionary* songDict = [NSMutableDictionary dictionaryWithCapacity: 7];
@@ -179,28 +179,53 @@
         [songDict setObject: [item valueForKey: MPMediaItemPropertyAlbumTitle] forKey:@"album"];
     if([item valueForKey: MPMediaItemPropertyGenre] != nil) 
         [songDict setObject: [item valueForKey: MPMediaItemPropertyGenre] forKey:@"genre"];
-    if([item valueForKey: MPMediaItemPropertyAlbumTrackNumber] != nil) 
-        [songDict setObject: [item valueForKey: MPMediaItemPropertyAlbumTrackNumber] forKey:@"track"];
+    //if([item valueForKey: MPMediaItemPropertyAlbumTrackNumber] != nil) 
+    //    [songDict setObject: [item valueForKey: MPMediaItemPropertyAlbumTrackNumber] forKey:@"track"];
     if([item valueForKey: MPMediaItemPropertyPlaybackDuration] != nil) 
         [songDict setObject: [item valueForKey: MPMediaItemPropertyPlaybackDuration] forKey:@"duration"];
     return songDict;
 }
 
--(void)initMediaPlayer{
-    MPMediaQuery* songQuery = [[MPMediaQuery alloc] init];
-    NSArray* songArray = [songQuery items];
-    NSMutableArray* songUploadArray = [NSMutableArray arrayWithCapacity: [songArray count]];
-    NSLog(@"%d songs", [songArray count]);
+-(void)updatePlayerMusic{
+    [self buildSyncDictionary];
     
-    // add all songs to server
-    for(int i=0; i < [songArray count]; i++){
-        MPMediaItem* item = [songArray objectAtIndex: i];
-        [songUploadArray addObject: [self dictionaryForMediaItem: item]];
+    // get all songs from library
+    MPMediaQuery* songQuery = [MPMediaQuery songsQuery];
+    NSArray* songArray = [songQuery items];
+    
+    // song accumulator, used to send sets of 200 songs to server
+    NSMutableArray* songAddArray = [NSMutableArray arrayWithCapacity: 200];
+
+    // check each song in the library
+    for(int i=0; i<[songArray count]; i++){
+        MPMediaItem* mediaItem = [songArray objectAtIndex: i];
+        
+        // get this song's sync status
+        NSString* libraryID = [mediaItem valueForKey: MPMediaItemPropertyPersistentID];
+        NSNumber* syncStatus = [songSyncDictionary objectForKey: libraryID];
+        
+        // if this song hasn't been synced, add it to a set of songs to be added
+        if(syncStatus == nil || [syncStatus boolValue] == NO){
+            NSDictionary* songAddDict = [self dictionaryForMediaItem: mediaItem];
+            [songAddArray addObject: songAddDict];
+            
+            // if we have 200 songs, send them off to the server
+            if([songAddArray count] == 200 || i == [songArray count]-1){
+                [self addSongsToServer: songAddArray];
+                // verify that they were added before clearing the array
+                [songAddArray removeAllObjects];
+            }
+        }
     }
 }
 
+-(void)addSongsToServer:(NSArray*)songsToAdd{
+    NSString* songsAsJSON = [songsToAdd JSONString];
+    
+}
+
 -(IBAction)playerButton:(id)sender{
-    [self initMediaPlayer];
+    [self updatePlayerMusic];
 }
 
 
@@ -350,7 +375,7 @@
         self.playerID = [playerIDAsNumber intValue];
         
         [self savePlayerInfo];
-        [self initMediaPlayer];
+        [self updatePlayerMusic];
     }
 }
 

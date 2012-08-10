@@ -12,7 +12,7 @@
 
 @interface UDJStoredLibraryEntry : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * libraryID;
-@property (nonatomic, retain) NSNumber * synced;
+@property (nonatomic, retain) NSString* libraryID;
+@property (nonatomic, retain) NSNumber* synced;
 
 @end
