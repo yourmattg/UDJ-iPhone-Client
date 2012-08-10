@@ -212,7 +212,8 @@
             // if we have 200 songs, send them off to the server
             if([songAddArray count] == 200 || i == [songArray count]-1){
                 [self addSongsToServer: songAddArray];
-                // verify that they were added before clearing the array
+                
+                // verify that they were added before clearing 
                 [songAddArray removeAllObjects];
             }
         }
@@ -220,8 +221,30 @@
 }
 
 -(void)addSongsToServer:(NSArray*)songsToAdd{
-    NSString* songsAsJSON = [songsToAdd JSONString];
+
+    RKClient* client = [RKClient sharedClient];
     
+    //create url users/user_id/players/player_id/library/songs
+    NSString* urlString = client.baseURL;
+    urlString = [urlString stringByAppendingFormat: @"/users/%d/players/%d/library/songs", [globalData.userID intValue], self.playerID, nil];
+    
+    //set up request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: self];
+    request.method = RKRequestMethodPUT;
+    request.queue = client.requestQueue;
+    request.userData = @"songSetAdd";
+    
+    // set up the headers, including which type of request this is
+    NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJData sharedUDJData].headers];
+    [requestHeaders setValue:@"playerMethodsDelegate" forKey:@"delegate"];
+    [requestHeaders setValue:@"text/json" forKey:@"content-type"];
+    request.additionalHTTPHeaders = requestHeaders;
+    
+    // set body to the JSON song array
+    NSString* songsAsJSON = [songsToAdd JSONString];
+    request.HTTPBodyString = songsAsJSON;
+    
+    [request send];
 }
 
 -(IBAction)playerButton:(id)sender{
@@ -353,6 +376,7 @@
     request.queue = client.requestQueue;
     request.method = RKRequestMethodPUT;
     request.HTTPBodyString = [self JSONStringWithPlayerInfo];
+    request.userData = @"createPlayer";
     
     // set up the headers, including which type of request this is
     NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJData sharedUDJData].headers];
@@ -367,8 +391,10 @@
 #pragma mark - Response handling
 
 -(void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
-    NSLog(@"Body: %@", response.bodyAsString);
-    if([request isPUT]){
+    NSString* requestType = request.userData;
+    NSLog(response.bodyAsString);
+    
+    if([requestType isEqualToString: @"createPlayer"] && [response isOK]){
         // Save player ID
         NSDictionary* responseDict = [response.bodyAsString objectFromJSONString];
         NSNumber* playerIDAsNumber = [responseDict objectForKey: @"player_id"];
@@ -376,6 +402,9 @@
         
         [self savePlayerInfo];
         [self updatePlayerMusic];
+    }
+    else if([requestType isEqualToString: @"songSetAdd"] && [response isOK]){
+        NSLog(@"status code: %d", [response statusCode]);
     }
 }
 
