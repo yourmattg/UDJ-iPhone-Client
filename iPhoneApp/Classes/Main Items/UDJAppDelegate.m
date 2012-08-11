@@ -178,6 +178,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // leave any event we may be in
+    NSLog(@"terminated");
 }
 
 //Facebook

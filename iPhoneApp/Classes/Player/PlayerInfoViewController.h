@@ -33,6 +33,10 @@
 @property(nonatomic,strong) IBOutlet UISwitch* playerStateSwitch;
 
 @property(nonatomic,strong) IBOutlet UIButton* createPlayerButton;
+@property(nonatomic,strong) IBOutlet UILabel* playerStateLabel;
+
+@property(nonatomic,strong) IBOutlet UIView* activityView;
+@property(nonatomic,strong) IBOutlet UILabel* activityLabel;
 
 @property(nonatomic,strong) UDJData* globalData;
 @property(nonatomic,strong) NSManagedObjectContext *managedObjectContext;

@@ -25,9 +25,9 @@
 @synthesize playerNameField, playerPasswordField;
 @synthesize cancelButton;
 @synthesize useLocationSwitch, addressField, cityField, stateField, zipCodeField, locationFields;
-@synthesize playerStateSwitch;
-@synthesize createPlayerButton;
+@synthesize createPlayerButton, playerStateLabel, playerStateSwitch;
 @synthesize globalData, managedObjectContext, playerID, songSyncDictionary;
+@synthesize activityView, activityLabel;
 
 #pragma mark - Text fields
 
@@ -36,6 +36,8 @@
         UITextField* textField= [textFieldArray objectAtIndex: i];
         [textField resignFirstResponder];
     }
+    [self.mainScrollView scrollRectToVisible: CGRectMake(0, 0, 320, 367) animated:YES];
+    self.mainScrollView.scrollEnabled = NO;
 }
 
 -(void)initTextFields{
@@ -50,6 +52,7 @@
     NSInteger yCoord = textField.frame.origin.y;
     [self.mainScrollView scrollRectToVisible: CGRectMake(0, yCoord-6, 320, 367) animated:YES];
     self.cancelButton.hidden = NO;
+    self.mainScrollView.scrollEnabled = YES;
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField{
@@ -70,6 +73,8 @@
     // if this is the last enabled field, hide the keyboard
     if(!nextField || !nextField.enabled){
         [textField resignFirstResponder];
+        [self.mainScrollView scrollRectToVisible: CGRectMake(0, 0, 320, 367) animated:YES];
+        self.mainScrollView.scrollEnabled = NO;
     }
     
     // set focus to the next field
@@ -121,7 +126,9 @@
 	// Do any additional setup after loading the view.
     //[self toggleAddressFields: NO];
     
-    [self.mainScrollView setContentSize: CGSizeMake(320, 650)];
+    [self.mainScrollView setContentSize: CGSizeMake(320, 590)]; // 320, 367
+    [self.mainScrollView scrollRectToVisible: CGRectMake(0, 8, 320, 367) animated:YES];
+    self.mainScrollView.scrollEnabled = NO;
     
     [self initTextFields];
     
@@ -209,8 +216,7 @@
     NSMutableArray* songAddArray = [NSMutableArray arrayWithCapacity: 201];
 
     // check each song in the library
-    //for(int i=0; i<[songArray count]; i++){
-    for(int i=0; i<1; i++){
+    for(int i=0; i<[songArray count]; i++){
         MPMediaItem* mediaItem = [songArray objectAtIndex: i];
         
         // get this song's sync status
@@ -362,6 +368,10 @@
     return [dict JSONString];
 }
 
+-(void)toggleActivityView:(BOOL)visible{
+    
+}
+
 
 #pragma mark - Player methods
 
@@ -369,6 +379,9 @@
     if([self completedLocationFields]){
         [self sendCreatePlayerRequest];
         self.createPlayerButton.hidden = YES;
+        
+        [self.activityLabel setText: @"Creating player"];
+        [self toggleActivityView: YES];
     }
     else{
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Incomplete Location" message:@"You must complete all the address fields." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -402,10 +415,17 @@
 
 #pragma mark - Response handling
 
+-(void)additionalPlayerSetup{
+    self.playerStateLabel.hidden = NO;
+    self.playerStateSwitch.hidden = NO;
+    
+    [self savePlayerInfo];
+    [self updatePlayerMusic];
+}
+
 -(void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
     NSLog(@"status code: %d", [response statusCode]);
     NSString* requestType = request.userData;
-    NSLog(@"response: %@", response.bodyAsString);
     
     if([requestType isEqualToString: @"createPlayer"] && [response statusCode] == 201){
         // Save player ID
@@ -413,8 +433,7 @@
         NSNumber* playerIDAsNumber = [responseDict objectForKey: @"player_id"];
         self.playerID = [playerIDAsNumber intValue];
         
-        [self savePlayerInfo];
-        [self updatePlayerMusic];
+        [self additionalPlayerSetup];
     }
     else if([requestType isEqualToString: @"songSetAdd"] && [response statusCode] == 201){
         NSLog(@"status code: %d", [response statusCode]);
