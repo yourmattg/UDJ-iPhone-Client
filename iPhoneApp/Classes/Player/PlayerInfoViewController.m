@@ -130,6 +130,9 @@
     [self.mainScrollView scrollRectToVisible: CGRectMake(0, 8, 320, 367) animated:YES];
     self.mainScrollView.scrollEnabled = NO;
     
+    [self.view addSubview: self.activityView];
+    self.activityView.frame = CGRectMake(20, 420, 280, 32);
+    
     [self initTextFields];
     
     self.globalData = [UDJData sharedUDJData];
@@ -334,6 +337,8 @@
         self.playerID = [storedPlayer.playerID intValue];
         
         self.createPlayerButton.hidden = YES;
+        self.playerStateLabel.hidden = NO;
+        self.playerStateSwitch.hidden = NO;
     }
 }
 
@@ -369,7 +374,11 @@
 }
 
 -(void)toggleActivityView:(BOOL)visible{
-    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration: 0.5];
+    NSInteger yPos = visible ? 370 : 420;
+    self.activityView.frame = CGRectMake(20, yPos, 280, 32);
+    [UIView commitAnimations];
 }
 
 
@@ -379,6 +388,14 @@
     if([self completedLocationFields]){
         [self sendCreatePlayerRequest];
         self.createPlayerButton.hidden = YES;
+        
+        for(int i=0; i < [textFieldArray count]; i++){
+            UITextField* textField= [textFieldArray objectAtIndex: i];
+            [textField resignFirstResponder];
+        }
+        
+        [self.mainScrollView scrollRectToVisible: CGRectMake(0, 0, 320, 367) animated:YES];
+        self.mainScrollView.scrollEnabled = NO;
         
         [self.activityLabel setText: @"Creating player"];
         [self toggleActivityView: YES];
@@ -420,6 +437,8 @@
     self.playerStateSwitch.hidden = NO;
     
     [self savePlayerInfo];
+    
+    [self.activityLabel setText: @"Updating music library"];
     [self updatePlayerMusic];
 }
 
@@ -437,6 +456,7 @@
     }
     else if([requestType isEqualToString: @"songSetAdd"] && [response statusCode] == 201){
         NSLog(@"status code: %d", [response statusCode]);
+        [self toggleActivityView: NO];
     }
 }
 
