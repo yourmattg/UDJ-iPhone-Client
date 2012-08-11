@@ -170,19 +170,31 @@
 
 -(NSMutableDictionary*)dictionaryForMediaItem:(MPMediaItem*)item{
     NSMutableDictionary* songDict = [NSMutableDictionary dictionaryWithCapacity: 7];
+    
+    NSString *title, *artist, *album, *genre;
+    
     [songDict setObject: [item valueForKey: MPMediaItemPropertyPersistentID] forKey:@"id"];
-    if([item valueForKey: MPMediaItemPropertyTitle] != nil) 
-        [songDict setObject: [item valueForKey: MPMediaItemPropertyTitle] forKey:@"title"];
-    if([item valueForKey: MPMediaItemPropertyArtist] != nil) 
-        [songDict setObject: [item valueForKey: MPMediaItemPropertyArtist] forKey:@"artist"];
-    if([item valueForKey: MPMediaItemPropertyAlbumTitle] != nil) 
-        [songDict setObject: [item valueForKey: MPMediaItemPropertyAlbumTitle] forKey:@"album"];
-    if([item valueForKey: MPMediaItemPropertyGenre] != nil) 
-        [songDict setObject: [item valueForKey: MPMediaItemPropertyGenre] forKey:@"genre"];
-    //if([item valueForKey: MPMediaItemPropertyAlbumTrackNumber] != nil) 
-    //    [songDict setObject: [item valueForKey: MPMediaItemPropertyAlbumTrackNumber] forKey:@"track"];
-    if([item valueForKey: MPMediaItemPropertyPlaybackDuration] != nil) 
-        [songDict setObject: [item valueForKey: MPMediaItemPropertyPlaybackDuration] forKey:@"duration"];
+    
+    if([item valueForKey: MPMediaItemPropertyTitle] == nil) title = @"Untitled";
+    else title = [item valueForKey: MPMediaItemPropertyTitle];
+    [songDict setObject: title forKey:@"title"];
+    
+    if([item valueForKey: MPMediaItemPropertyArtist] == nil) artist = @"Unknown Artist";
+    else artist = [item valueForKey: MPMediaItemPropertyArtist];
+    [songDict setObject: artist forKey:@"artist"];
+    
+    if([item valueForKey: MPMediaItemPropertyAlbumTitle] == nil) album = @"Unknown Album";
+    else album = [item valueForKey: MPMediaItemPropertyAlbumTitle];
+    [songDict setObject: album forKey:@"album"];
+    
+    if([item valueForKey: MPMediaItemPropertyGenre] == nil) genre = @"";
+    else genre = [item valueForKey: MPMediaItemPropertyGenre];
+    [songDict setObject: genre forKey:@"genre"];
+    
+    [songDict setObject: [NSNumber numberWithInt: 0] forKey:@"track"];
+        
+    [songDict setObject: [item valueForKey: MPMediaItemPropertyPlaybackDuration] forKey:@"duration"];
+
     return songDict;
 }
 
@@ -194,10 +206,11 @@
     NSArray* songArray = [songQuery items];
     
     // song accumulator, used to send sets of 200 songs to server
-    NSMutableArray* songAddArray = [NSMutableArray arrayWithCapacity: 200];
+    NSMutableArray* songAddArray = [NSMutableArray arrayWithCapacity: 201];
 
     // check each song in the library
-    for(int i=0; i<[songArray count]; i++){
+    //for(int i=0; i<[songArray count]; i++){
+    for(int i=0; i<1; i++){
         MPMediaItem* mediaItem = [songArray objectAtIndex: i];
         
         // get this song's sync status
@@ -211,17 +224,17 @@
             
             // if we have 200 songs, send them off to the server
             if([songAddArray count] == 200 || i == [songArray count]-1){
-                [self addSongsToServer: songAddArray];
-                
+                [self addSongsToServer: [songAddArray JSONString]];
+
                 // verify that they were added before clearing 
-                [songAddArray removeAllObjects];
+                //[songAddArray removeAllObjects];
             }
         }
     }
 }
 
--(void)addSongsToServer:(NSArray*)songsToAdd{
-
+-(void)addSongsToServer:(NSString*)songCollectionString{
+    
     RKClient* client = [RKClient sharedClient];
     
     //create url users/user_id/players/player_id/library/songs
@@ -241,8 +254,7 @@
     request.additionalHTTPHeaders = requestHeaders;
     
     // set body to the JSON song array
-    NSString* songsAsJSON = [songsToAdd JSONString];
-    request.HTTPBodyString = songsAsJSON;
+    [request setHTTPBody: [songCollectionString dataUsingEncoding: NSUTF8StringEncoding]];
     
     [request send];
 }
@@ -280,7 +292,7 @@
     [storedPlayer setState: self.stateField.text];
     [storedPlayer setPassword: self.playerPasswordField.text];
     [storedPlayer setZipcode: self.zipCodeField.text];
-    [storedPlayer setPlayerID: [NSNumber numberWithInt: [self.zipCodeField.text intValue]]];
+    [storedPlayer setPlayerID: [NSNumber numberWithInt: self.playerID]];
     // 
     
     //Save the data
@@ -376,7 +388,7 @@
     request.queue = client.requestQueue;
     request.method = RKRequestMethodPUT;
     request.HTTPBodyString = [self JSONStringWithPlayerInfo];
-    request.userData = @"createPlayer";
+    request.userData = [NSString stringWithString: @"createPlayer"];
     
     // set up the headers, including which type of request this is
     NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJData sharedUDJData].headers];
@@ -391,10 +403,11 @@
 #pragma mark - Response handling
 
 -(void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
+    NSLog(@"status code: %d", [response statusCode]);
     NSString* requestType = request.userData;
-    NSLog(response.bodyAsString);
+    NSLog(@"response: %@", response.bodyAsString);
     
-    if([requestType isEqualToString: @"createPlayer"] && [response isOK]){
+    if([requestType isEqualToString: @"createPlayer"] && [response statusCode] == 201){
         // Save player ID
         NSDictionary* responseDict = [response.bodyAsString objectFromJSONString];
         NSNumber* playerIDAsNumber = [responseDict objectForKey: @"player_id"];
@@ -403,7 +416,7 @@
         [self savePlayerInfo];
         [self updatePlayerMusic];
     }
-    else if([requestType isEqualToString: @"songSetAdd"] && [response isOK]){
+    else if([requestType isEqualToString: @"songSetAdd"] && [response statusCode] == 201){
         NSLog(@"status code: %d", [response statusCode]);
     }
 }
