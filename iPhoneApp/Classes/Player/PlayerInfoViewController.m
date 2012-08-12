@@ -12,6 +12,7 @@
 #import "UDJStoredPlayer.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "UDJStoredLibraryEntry.h"
+#import <objc/runtime.h>
 
 @interface PlayerInfoViewController ()
 
@@ -156,13 +157,14 @@
 }
 
 #pragma mark - Updating library
-
 -(NSArray*)arrayWithAllLibraryEntries{
     NSError* error;
     //Set up a request to get the all library entries
     NSFetchRequest * request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"UDJStoredLibraryEntry" inManagedObjectContext:managedObjectContext]];
     NSArray* libraryEntryArray = [managedObjectContext executeFetchRequest:request error:&error];
+    
+    NSLog(@"Loaded %d library entries from store", [libraryEntryArray count]);
     
     if(error) {}
     return libraryEntryArray;
@@ -208,7 +210,37 @@
     return songDict;
 }
 
+-(void)deletePreviousLibraryEntries{
+    // Fetch and delete all previous entries
+    NSError* error;
+    NSFetchRequest * request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"UDJStoredLibraryEntry" inManagedObjectContext:managedObjectContext]];
+    NSArray* storedEntryArray = [[managedObjectContext executeFetchRequest:request error:&error] lastObject];
+    for(UDJStoredLibraryEntry* entry in storedEntryArray){
+        [managedObjectContext deleteObject: entry];
+    }
+    [managedObjectContext save: &error];
+}
+
+-(void)saveLibraryEntries{  
+    [self deletePreviousLibraryEntries];
+    
+    for(NSString* entryID in self.songSyncDictionary){
+        UDJStoredLibraryEntry* entry = (UDJStoredLibraryEntry*)[NSEntityDescription insertNewObjectForEntityForName:@"UDJStoredLibraryEntry" inManagedObjectContext:managedObjectContext];  
+        // TODO: need to fix persistent store type
+        //[entry setSynced: [self.songSyncDictionary objectForKey: entryID]];
+        [entry setLibraryID: entryID];
+    }
+    
+    NSError* error;
+    [managedObjectContext save: &error];
+}
+
 -(void)updatePlayerMusic{
+    
+    if(self.activityView.frame.origin.y == 420) 
+        [self toggleActivityView: YES];
+    
     [self buildSyncDictionary];
     
     // get all songs from library
@@ -231,24 +263,39 @@
             NSDictionary* songAddDict = [self dictionaryForMediaItem: mediaItem];
             [songAddArray addObject: songAddDict];
             
+            // mark the song as synced initially (we'll mark it as unsynced in the case of a 409)
+            [songSyncDictionary setObject: [NSNumber numberWithBool: YES] forKey:libraryID];
+            
             // if we have 200 songs, send them off to the server
-            if([songAddArray count] == 200 || i == [songArray count]-1){
-                [self addSongsToServer: [songAddArray JSONString]];
+            // TODO: change 50 to 200
+            if([songAddArray count] == 50 || i == [songArray count]-1){
+                RKResponse* response = [self addSongsToServer: [songAddArray JSONString]];
 
-                // verify that they were added before clearing 
-                //[songAddArray removeAllObjects];
+                // if there were conflicts, mark those songs as unsynced
+                if([response statusCode] == 409){
+                    NSArray* songConflictArray = [[response bodyAsString] objectFromJSONString];
+                    if([songConflictArray isMemberOfClass: [NSArray class]]) NSLog(@"is an array");
+                    for(int i=0; i<[songConflictArray count]; i++){
+                        [songSyncDictionary setObject: [NSNumber numberWithBool: NO] forKey: [songConflictArray objectAtIndex: i]];
+                    }
+                }
+                else if([response statusCode] == 201) NSLog(@"20 songs added");
+                [songAddArray removeAllObjects];
             }
         }
     }
+    
+    [self saveLibraryEntries];
+    [self toggleActivityView: NO];
 }
 
--(void)addSongsToServer:(NSString*)songCollectionString{
+-(RKResponse*)addSongsToServer:(NSString*)songCollectionString{
     
     RKClient* client = [RKClient sharedClient];
     
     //create url users/user_id/players/player_id/library/songs
     NSString* urlString = client.baseURL;
-    urlString = [urlString stringByAppendingFormat: @"/users/%d/players/%d/library/songs", [globalData.userID intValue], self.playerID, nil];
+    urlString = [urlString stringByAppendingFormat: @"/0_6/players/%d/library/songs", self.playerID, nil];
     
     //set up request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: self];
@@ -265,7 +312,7 @@
     // set body to the JSON song array
     [request setHTTPBody: [songCollectionString dataUsingEncoding: NSUTF8StringEncoding]];
     
-    [request send];
+    return [request sendSynchronously];
 }
 
 -(IBAction)playerButton:(id)sender{
@@ -339,6 +386,8 @@
         self.createPlayerButton.hidden = YES;
         self.playerStateLabel.hidden = NO;
         self.playerStateSwitch.hidden = NO;
+        
+        [NSThread detachNewThreadSelector:@selector(updatePlayerMusic) toTarget:self withObject:nil];
     }
 }
 
@@ -439,7 +488,7 @@
     [self savePlayerInfo];
     
     [self.activityLabel setText: @"Updating music library"];
-    [self updatePlayerMusic];
+    [NSThread detachNewThreadSelector:@selector(updatePlayerMusic) toTarget:self withObject:nil];
 }
 
 -(void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {

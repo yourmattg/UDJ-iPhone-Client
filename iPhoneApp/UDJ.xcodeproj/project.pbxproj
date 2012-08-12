@@ -248,7 +248,7 @@
 		A37BBF3E15670A1500251CC8 /* ArtistsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ArtistsViewController.xib; path = ../Classes/Library/ArtistsViewController.xib; sourceTree = "<group>"; };
 		A38B629F14C736C70088640D /* udjlauncher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = udjlauncher.png; sourceTree = "<group>"; };
 		A38DC7C315C4928700BF9A68 /* UDJPlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJPlayerManager.h; sourceTree = "<group>"; };
-		A38DC7C415C4928700BF9A68 /* UDJPlayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJPlayerManager.m; sourceTree = "<group>"; };
+		A38DC7C415C4928700BF9A68 /* UDJPlayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDJPlayerManager.m; path = ../Events/UDJPlayerManager.m; sourceTree = "<group>"; };
 		A38DC7C615C496CF00BF9A68 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		A39A0C8914C4ADDF008A6D54 /* LibraryEntryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryEntryCell.h; sourceTree = "<group>"; };
 		A39A0C8A14C4ADDF008A6D54 /* LibraryEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryEntryCell.m; sourceTree = "<group>"; };
@@ -506,6 +506,7 @@
 		A396EF1E14B558B300BCEF8F /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				A38DC7C415C4928700BF9A68 /* UDJPlayerManager.m */,
 				A37BBF3C15670A1500251CC8 /* ArtistsViewController.h */,
 				A37BBF3D15670A1500251CC8 /* ArtistsViewController.m */,
 				A3C7A43F156714F20085150A /* SongListViewController.h */,
@@ -593,7 +594,6 @@
 				A36CF96015BF87DC0032AF31 /* UDJStoredPlayer.h */,
 				A36CF96115BF87DC0032AF31 /* UDJStoredPlayer.m */,
 				A38DC7C315C4928700BF9A68 /* UDJPlayerManager.h */,
-				A38DC7C415C4928700BF9A68 /* UDJPlayerManager.m */,
 				A3443FC315C78D73005A6A67 /* UDJStoredLibraryEntry.h */,
 				A3443FC415C78D73005A6A67 /* UDJStoredLibraryEntry.m */,
 			);
