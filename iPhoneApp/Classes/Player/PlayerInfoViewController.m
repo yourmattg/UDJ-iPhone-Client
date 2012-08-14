@@ -176,6 +176,7 @@
     self.songSyncDictionary = [NSMutableDictionary dictionaryWithCapacity: [libraryEntryArray count]];
     for(int i=0; i<[libraryEntryArray count]; i++){
         UDJStoredLibraryEntry* libEntry = [libraryEntryArray objectAtIndex: i];
+        NSLog(@"ID: %llu, synced: %d", [[libEntry libraryID] unsignedLongLongValue], [[libEntry synced] boolValue]);
         [self.songSyncDictionary setObject: libEntry.synced forKey: libEntry.libraryID];
     }
 }
@@ -215,7 +216,7 @@
     NSError* error;
     NSFetchRequest * request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"UDJStoredLibraryEntry" inManagedObjectContext:managedObjectContext]];
-    NSArray* storedEntryArray = [[managedObjectContext executeFetchRequest:request error:&error] lastObject];
+    NSArray* storedEntryArray = [managedObjectContext executeFetchRequest:request error:&error];
     for(UDJStoredLibraryEntry* entry in storedEntryArray){
         [managedObjectContext deleteObject: entry];
     }
@@ -225,10 +226,10 @@
 -(void)saveLibraryEntries{  
     [self deletePreviousLibraryEntries];
     
-    for(NSString* entryID in self.songSyncDictionary){
+    for(NSNumber* entryID in self.songSyncDictionary){
         UDJStoredLibraryEntry* entry = (UDJStoredLibraryEntry*)[NSEntityDescription insertNewObjectForEntityForName:@"UDJStoredLibraryEntry" inManagedObjectContext:managedObjectContext];  
         // TODO: need to fix persistent store type
-        //[entry setSynced: [self.songSyncDictionary objectForKey: entryID]];
+        [entry setSynced: [self.songSyncDictionary objectForKey: entryID]];
         [entry setLibraryID: entryID];
     }
     
@@ -255,7 +256,8 @@
         MPMediaItem* mediaItem = [songArray objectAtIndex: i];
         
         // get this song's sync status
-        NSString* libraryID = [mediaItem valueForKey: MPMediaItemPropertyPersistentID];
+        NSNumber* libraryID = [mediaItem valueForKey: MPMediaItemPropertyPersistentID];
+        NSLog(@"libraryID from mediaItem: %llu", [libraryID unsignedLongLongValue]);
         NSNumber* syncStatus = [songSyncDictionary objectForKey: libraryID];
         
         // if this song hasn't been synced, add it to a set of songs to be added
@@ -269,6 +271,7 @@
             // if we have 200 songs, send them off to the server
             // TODO: change 50 to 200
             if([songAddArray count] == 50 || i == [songArray count]-1){
+                NSLog(@"songAddArray count: %d", [songAddArray count]);
                 RKResponse* response = [self addSongsToServer: [songAddArray JSONString]];
 
                 // if there were conflicts, mark those songs as unsynced
@@ -279,7 +282,7 @@
                         [songSyncDictionary setObject: [NSNumber numberWithBool: NO] forKey: [songConflictArray objectAtIndex: i]];
                     }
                 }
-                else if([response statusCode] == 201) NSLog(@"20 songs added");
+                else if([response statusCode] == 201) NSLog(@"50 songs added");
                 [songAddArray removeAllObjects];
             }
         }
@@ -495,17 +498,25 @@
     NSLog(@"status code: %d", [response statusCode]);
     NSString* requestType = request.userData;
     
-    if([requestType isEqualToString: @"createPlayer"] && [response statusCode] == 201){
-        // Save player ID
-        NSDictionary* responseDict = [response.bodyAsString objectFromJSONString];
-        NSNumber* playerIDAsNumber = [responseDict objectForKey: @"player_id"];
-        self.playerID = [playerIDAsNumber intValue];
-        
-        [self additionalPlayerSetup];
+    if([requestType isEqualToString: @"createPlayer"]){
+        if([response statusCode] == 201){
+            // Save player ID
+            NSDictionary* responseDict = [response.bodyAsString objectFromJSONString];
+            NSNumber* playerIDAsNumber = [responseDict objectForKey: @"player_id"];
+            self.playerID = [playerIDAsNumber intValue];
+            
+            [self additionalPlayerSetup];            
+        }
+        else if([response statusCode] == 409){
+            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Player Name Taken" message:@"Sorry, but there is already a player with this name!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alertView show];
+            [self toggleActivityView: NO];
+            self.createPlayerButton.hidden = NO;
+        }
     }
     else if([requestType isEqualToString: @"songSetAdd"] && [response statusCode] == 201){
-        NSLog(@"status code: %d", [response statusCode]);
-        [self toggleActivityView: NO];
+        NSLog(@"Status code: %d", [response statusCode]);
+        //[self toggleActivityView: NO];
     }
 }
 
