@@ -157,6 +157,7 @@
 }
 
 #pragma mark - Updating library
+
 -(NSArray*)arrayWithAllLibraryEntries{
     NSError* error;
     //Set up a request to get the all library entries
@@ -173,11 +174,11 @@
 -(void)buildSyncDictionary{
     // build sync status dictionary
     NSArray* libraryEntryArray = [self arrayWithAllLibraryEntries];
-    self.songSyncDictionary = [NSMutableDictionary dictionaryWithCapacity: [libraryEntryArray count]];
+    NSInteger dictionarySize = [libraryEntryArray count] == 0 ? 200 : [libraryEntryArray count];
+    self.songSyncDictionary = [NSMutableDictionary dictionaryWithCapacity: dictionarySize];
     for(int i=0; i<[libraryEntryArray count]; i++){
         UDJStoredLibraryEntry* libEntry = [libraryEntryArray objectAtIndex: i];
-        NSLog(@"ID: %llu, synced: %d", [[libEntry libraryID] unsignedLongLongValue], [[libEntry synced] boolValue]);
-        [self.songSyncDictionary setObject: libEntry.synced forKey: libEntry.libraryID];
+        [self.songSyncDictionary setObject: libEntry.synced forKey: [NSNumber numberWithUnsignedLongLong: [libEntry.libraryID unsignedLongLongValue]]];
     }
 }
 
@@ -217,24 +218,48 @@
     NSFetchRequest * request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"UDJStoredLibraryEntry" inManagedObjectContext:managedObjectContext]];
     NSArray* storedEntryArray = [managedObjectContext executeFetchRequest:request error:&error];
-    for(UDJStoredLibraryEntry* entry in storedEntryArray){
+    NSLog(@"Deleting %d stored library entires", [storedEntryArray count]);
+    for(int i=0; i <[storedEntryArray count]; i++){
+        UDJStoredLibraryEntry* entry = [storedEntryArray objectAtIndex: i];
         [managedObjectContext deleteObject: entry];
     }
     [managedObjectContext save: &error];
+    if(error) NSLog(@"error");
 }
 
 -(void)saveLibraryEntries{  
     [self deletePreviousLibraryEntries];
     
-    for(NSNumber* entryID in self.songSyncDictionary){
+    NSLog(@"about to save %d library entries (from songSyncDictionary)", [songSyncDictionary count]);
+    NSArray* keyArray = [self.songSyncDictionary allKeys];
+    for(int i=0; i<[keyArray count]; i++){
+        NSNumber* entryID = [keyArray objectAtIndex: i];
         UDJStoredLibraryEntry* entry = (UDJStoredLibraryEntry*)[NSEntityDescription insertNewObjectForEntityForName:@"UDJStoredLibraryEntry" inManagedObjectContext:managedObjectContext];  
         // TODO: need to fix persistent store type
-        [entry setSynced: [self.songSyncDictionary objectForKey: entryID]];
-        [entry setLibraryID: entryID];
+        NSNumber* number = [[NSNumber alloc] initWithUnsignedLongLong: [entryID unsignedLongLongValue]];
+        [entry setSynced: [self.songSyncDictionary objectForKey: number]];
+        //[entry setSynced: [self.songSyncDictionary objectForKey: entryID]];
+        [entry setLibraryID: number];
     }
     
     NSError* error;
     [managedObjectContext save: &error];
+}
+
+-(void)printDictionaryKeys{
+    NSMutableArray* allKeys = [NSMutableArray arrayWithArray:[songSyncDictionary allKeys]];
+    [allKeys sortUsingComparator:^NSComparisonResult(id obj1, id obj2){
+        NSNumber* objA = obj1;
+        NSNumber* objB = obj2;
+        if([objA unsignedLongLongValue] > [objB unsignedLongLongValue]) return (NSComparisonResult)NSOrderedDescending;
+        else if([objB unsignedLongLongValue] > [objA unsignedLongLongValue]) return (NSComparisonResult)NSOrderedAscending;
+        return (NSComparisonResult)NSOrderedSame;
+    }];
+    for(int i=0; i<[allKeys count]; i++){
+        NSNumber* key = [allKeys objectAtIndex: i];
+        //NSLog(@"Key: %llu    value: %d", [key unsignedLongLongValue], [[songSyncDictionary objectForKey: key] boolValue]);
+        if(i!=[allKeys count]-1 && ![key isEqualToNumber: [allKeys objectAtIndex: i+1]]) NSLog(@"%llu is not equal to %llu", [key unsignedLongLongValue], [[allKeys objectAtIndex: i+1] unsignedLongLongValue]);
+    }
 }
 
 -(void)updatePlayerMusic{
@@ -257,32 +282,34 @@
         
         // get this song's sync status
         NSNumber* libraryID = [mediaItem valueForKey: MPMediaItemPropertyPersistentID];
-        NSLog(@"libraryID from mediaItem: %llu", [libraryID unsignedLongLongValue]);
-        NSNumber* syncStatus = [songSyncDictionary objectForKey: libraryID];
+        NSNumber* number = [NSNumber numberWithUnsignedLongLong: [libraryID unsignedLongLongValue]];
+        NSNumber* syncStatus = [songSyncDictionary objectForKey: number]; //objectForKey: libraryID
         
         // if this song hasn't been synced, add it to a set of songs to be added
         if(syncStatus == nil || [syncStatus boolValue] == NO){
             NSDictionary* songAddDict = [self dictionaryForMediaItem: mediaItem];
             [songAddArray addObject: songAddDict];
             
+            //if(syncStatus == nil) NSLog(@"new ID: %llu", [libraryID unsignedLongLongValue]);
+            
             // mark the song as synced initially (we'll mark it as unsynced in the case of a 409)
-            [songSyncDictionary setObject: [NSNumber numberWithBool: YES] forKey:libraryID];
+            [songSyncDictionary setObject: [NSNumber numberWithBool: YES] forKey:number];
             
             // if we have 200 songs, send them off to the server
             // TODO: change 50 to 200
-            if([songAddArray count] == 50 || i == [songArray count]-1){
-                NSLog(@"songAddArray count: %d", [songAddArray count]);
+            if([songAddArray count] == 200 || i == [songArray count]-1){
+                NSLog(@"Sending %d songs to server", [songAddArray count]);
                 RKResponse* response = [self addSongsToServer: [songAddArray JSONString]];
 
                 // if there were conflicts, mark those songs as unsynced
                 if([response statusCode] == 409){
                     NSArray* songConflictArray = [[response bodyAsString] objectFromJSONString];
-                    if([songConflictArray isMemberOfClass: [NSArray class]]) NSLog(@"is an array");
+                    NSLog(@"%d conflicts", [songConflictArray count]);
                     for(int i=0; i<[songConflictArray count]; i++){
                         [songSyncDictionary setObject: [NSNumber numberWithBool: NO] forKey: [songConflictArray objectAtIndex: i]];
                     }
                 }
-                else if([response statusCode] == 201) NSLog(@"50 songs added");
+                else if([response statusCode] == 201) NSLog(@"%d songs added", [songAddArray count]);
                 [songAddArray removeAllObjects];
             }
         }
@@ -290,6 +317,7 @@
     
     [self saveLibraryEntries];
     [self toggleActivityView: NO];
+    //[self printDictionaryKeys];
 }
 
 -(RKResponse*)addSongsToServer:(NSString*)songCollectionString{
@@ -301,7 +329,7 @@
     urlString = [urlString stringByAppendingFormat: @"/0_6/players/%d/library/songs", self.playerID, nil];
     
     //set up request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: self];
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: self.globalData];
     request.method = RKRequestMethodPUT;
     request.queue = client.requestQueue;
     request.userData = @"songSetAdd";
