@@ -14,6 +14,12 @@
 #import "UDJStoredLibraryEntry.h"
 #import <objc/runtime.h>
 
+typedef enum {
+    PlayerStateInactive,
+    PlayerStatePlaying,
+    PlayerStatePaused
+} PlayerState;
+
 @interface PlayerInfoViewController ()
 
 @end
@@ -246,22 +252,6 @@
     [managedObjectContext save: &error];
 }
 
--(void)printDictionaryKeys{
-    NSMutableArray* allKeys = [NSMutableArray arrayWithArray:[songSyncDictionary allKeys]];
-    [allKeys sortUsingComparator:^NSComparisonResult(id obj1, id obj2){
-        NSNumber* objA = obj1;
-        NSNumber* objB = obj2;
-        if([objA unsignedLongLongValue] > [objB unsignedLongLongValue]) return (NSComparisonResult)NSOrderedDescending;
-        else if([objB unsignedLongLongValue] > [objA unsignedLongLongValue]) return (NSComparisonResult)NSOrderedAscending;
-        return (NSComparisonResult)NSOrderedSame;
-    }];
-    for(int i=0; i<[allKeys count]; i++){
-        NSNumber* key = [allKeys objectAtIndex: i];
-        //NSLog(@"Key: %llu    value: %d", [key unsignedLongLongValue], [[songSyncDictionary objectForKey: key] boolValue]);
-        if(i!=[allKeys count]-1 && ![key isEqualToNumber: [allKeys objectAtIndex: i+1]]) NSLog(@"%llu is not equal to %llu", [key unsignedLongLongValue], [[allKeys objectAtIndex: i+1] unsignedLongLongValue]);
-    }
-}
-
 -(void)updatePlayerMusic{
     
     if(self.activityView.frame.origin.y == 420) 
@@ -317,7 +307,6 @@
     
     [self saveLibraryEntries];
     [self toggleActivityView: NO];
-    //[self printDictionaryKeys];
 }
 
 -(RKResponse*)addSongsToServer:(NSString*)songCollectionString{
@@ -463,6 +452,36 @@
 
 
 #pragma mark - Player methods
+
+-(void)sendPlayerStateRequest:(PlayerState)newState{
+    /*RKClient* client = [RKClient sharedClient];
+    
+    //create url [POST] {prefix}/udj/users/user_id/players/player_id/name
+    NSString* urlString = client.baseURL;
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@", @"/users/", [globalData.userID intValue], @"/players/player", nil];
+    
+    // create request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: self.globalData];
+    request.queue = client.requestQueue;
+    request.method = RKRequestMethodPUT;
+    request.HTTPBodyString = [self JSONStringWithPlayerInfo];
+    request.userData = [NSString stringWithString: @"createPlayer"];
+    
+    // set up the headers, including which type of request this is
+    NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJData sharedUDJData].headers];
+    [requestHeaders setValue:@"playerMethodsDelegate" forKey:@"delegate"];
+    [requestHeaders setValue:@"text/json" forKey:@"content-type"];
+    request.additionalHTTPHeaders = requestHeaders;
+    
+    //send request
+    [request send];*/
+}
+
+-(IBAction)playerStateValueChanged:(id)sender{
+    UISwitch* stateSwitch = sender;
+    PlayerState newState = stateSwitch.on ? PlayerStatePlaying : PlayerStatePaused;
+    [self sendPlayerStateRequest: newState];
+}
 
 -(IBAction)createButtonClick:(id)sender{
     if([self completedLocationFields]){
