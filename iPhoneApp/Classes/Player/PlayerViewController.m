@@ -7,12 +7,20 @@
 //
 
 #import "PlayerViewController.h"
+#import "PlayerInfoViewController.h"
 
 @interface PlayerViewController ()
 
 @end
 
 @implementation PlayerViewController
+
+@synthesize playerNameLabel, playerInfoButton;
+@synthesize songTitleLabel, artistLabel, albumLabel;
+@synthesize timePassedLabel, timeLeftLabel;
+@synthesize songPositionSlider, togglePlayButton, skipButton;
+@synthesize volumeSlider;
+@synthesize globalData, managedObjectContext, playerID;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,6 +47,13 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - Player info
+
+-(IBAction)playerInfoButtonClick:(id)sender{
+    PlayerInfoViewController* viewController = [[PlayerInfoViewController alloc] initWithNibName: @"PlayerInfoViewController" bundle:[NSBundle mainBundle]];
+    [self presentModalViewController: viewController animated: YES];
 }
 
 @end

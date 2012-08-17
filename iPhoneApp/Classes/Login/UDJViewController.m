@@ -62,6 +62,11 @@
     
     [self checkForUsername];
     
+    // navigationBar (leave commented out, for testing purposes)
+    /*self.navigationController.navigationBarHidden = NO;
+    [self.navigationController.navigationBar setTintColor: [UIColor colorWithRed:(35.0/255.0) green:(59.0/255.0) blue:(79.0/255.0) alpha:1]];
+    UIBarButtonItem* button = [[UIBarButtonItem alloc] initWithTitle:@"Info" style:UIBarButtonItemStyleBordered target:nil action:nil];
+    self.navigationItem.rightBarButtonItem = button;*/
 }
 
 - (void)didReceiveMemoryWarning {
@@ -233,7 +238,7 @@
     
     if([response statusCode] == 501){
         //let user know they have to update
-        UIAlertView* authNotification = [[UIAlertView alloc] initWithTitle:@"Needs Update" message:@"It looks like your UDJ client is outdated. Please take a moment to download the latest version from the App Store." delegate: self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Update", nil];
+        UIAlertView* authNotification = [[UIAlertView alloc] initWithTitle:@"Needs Update" message:@"Your UDJ client is outdated. Please download the latest version." delegate: self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Update", nil];
         [authNotification show];        
     }
 }

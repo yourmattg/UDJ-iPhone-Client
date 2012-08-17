@@ -22,6 +22,7 @@
 #import "RandomViewController.h"
 #import "ArtistsViewController.h"
 #import "PlayerInfoViewController.h"
+#import "PlayerViewController.h"
 
 @implementation MainTabBarController
 
@@ -57,8 +58,11 @@
     RandomViewController* randomViewController = [[RandomViewController alloc] initWithNibName:@"RandomViewController" bundle:[NSBundle mainBundle]];
     randomViewController.title = NSLocalizedString(@"Random", @"Random");
     
-    PlayerInfoViewController* playerInfoViewController = [[PlayerInfoViewController alloc] initWithNibName:@"PlayerInfoViewController" bundle: [NSBundle mainBundle]];
-    playerInfoViewController.title = NSLocalizedString(@"My Player", @"My Player");
+    /*PlayerInfoViewController* playerInfoViewController = [[PlayerInfoViewController alloc] initWithNibName:@"PlayerInfoViewController" bundle: [NSBundle mainBundle]];
+    playerInfoViewController.title = NSLocalizedString(@"My Player", @"My Player");*/
+    
+    PlayerViewController* playerViewController = [[PlayerViewController alloc] initWithNibName:@"PlayerViewController" bundle:[NSBundle mainBundle]];
+    playerViewController.title = NSLocalizedString(@"Player", @"Player");
     
     // if this isn't being used as a player, just push the regular views
     if(!isPlayer){
@@ -66,7 +70,7 @@
     }
     // if this is a player, add the player info view
     else {
-        self.viewControllers = [NSArray arrayWithObjects:playerInfoViewController, playlistViewController, navigationController, randomViewController, nil];
+        self.viewControllers = [NSArray arrayWithObjects:playerViewController, playlistViewController, navigationController, randomViewController, nil];
     }
     
     self.tabBar.tintColor = [UIColor colorWithRed:(35.0/255.0) green:(59.0/255.0) blue:(79.0/255.0) alpha:1];

@@ -7,7 +7,28 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UDJData.h"
 
 @interface PlayerViewController : UIViewController
+
+@property(nonatomic,strong) IBOutlet UILabel* playerNameLabel;
+@property(nonatomic,strong) IBOutlet UIButton* playerInfoButton;
+
+@property(nonatomic,strong) IBOutlet UILabel* songTitleLabel;
+@property(nonatomic,strong) IBOutlet UILabel* artistLabel;
+@property(nonatomic,strong) IBOutlet UILabel* albumLabel;
+
+@property(nonatomic,strong) IBOutlet UILabel* timePassedLabel;
+@property(nonatomic,strong) IBOutlet UILabel* timeLeftLabel;
+@property(nonatomic,strong) IBOutlet UISlider* songPositionSlider;
+
+@property(nonatomic,strong) IBOutlet UIButton* togglePlayButton;
+@property(nonatomic,strong) IBOutlet UIButton* skipButton;
+
+@property(nonatomic,strong) IBOutlet UISlider* volumeSlider;
+
+@property(nonatomic,strong) UDJData* globalData;
+@property(nonatomic,strong) NSManagedObjectContext *managedObjectContext;
+@property NSInteger playerID;
 
 @end

@@ -138,7 +138,7 @@ typedef enum {
     self.mainScrollView.scrollEnabled = NO;
     
     [self.view addSubview: self.activityView];
-    self.activityView.frame = CGRectMake(20, 420, 280, 32);
+    self.activityView.frame = CGRectMake(20, 470, 280, 32);
     
     [self initTextFields];
     
@@ -254,7 +254,7 @@ typedef enum {
 
 -(void)updatePlayerMusic{
     
-    if(self.activityView.frame.origin.y == 420) 
+    if(self.activityView.frame.origin.y == 470) 
         [self toggleActivityView: YES];
     
     [self buildSyncDictionary];
@@ -450,7 +450,7 @@ typedef enum {
 -(void)toggleActivityView:(BOOL)visible{
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration: 0.5];
-    NSInteger yPos = visible ? 370 : 420;
+    NSInteger yPos = visible ? 420 : 470;
     self.activityView.frame = CGRectMake(20, yPos, 280, 32);
     [UIView commitAnimations];
 }

@@ -26,6 +26,7 @@
 		A324AC0514AABB8900388514 /* UDJPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = A324AC0414AABB8900388514 /* UDJPlaylist.m */; };
 		A3265DB314C6101400FC692B /* PlaylistEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3265DB214C6101400FC692B /* PlaylistEntryCell.m */; };
 		A32BEEA1157163A1005B573B /* nearbybutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A32BEEA0157163A1005B573B /* nearbybutton.png */; };
+		A331096E15DED3B6003D2AD3 /* playerinfobutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A331096D15DED3B6003D2AD3 /* playerinfobutton.png */; };
 		A3360BCF14F5E14F00541726 /* NewPlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */; };
 		A33C4614148F0707009C1BC6 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A33C4612148F0707009C1BC6 /* PlaylistViewController.m */; };
 		A33EE1E115684B7D00D49B85 /* playing.png in Resources */ = {isa = PBXBuildFile; fileRef = A33EE1E015684B7D00D49B85 /* playing.png */; };
@@ -214,6 +215,7 @@
 		A3265DB214C6101400FC692B /* PlaylistEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistEntryCell.m; sourceTree = "<group>"; };
 		A32A384614AE917600D166CF /* UDJ-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "UDJ-Info.plist"; path = "../UDJ-Info.plist"; sourceTree = "<group>"; };
 		A32BEEA0157163A1005B573B /* nearbybutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nearbybutton.png; sourceTree = "<group>"; };
+		A331096D15DED3B6003D2AD3 /* playerinfobutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playerinfobutton.png; sourceTree = "<group>"; };
 		A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewPlaylistViewController.xib; path = Resources/NewPlaylistViewController.xib; sourceTree = SOURCE_ROOT; };
 		A33C4611148F0707009C1BC6 /* PlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistViewController.h; sourceTree = "<group>"; };
 		A33C4612148F0707009C1BC6 /* PlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistViewController.m; sourceTree = "<group>"; };
@@ -250,7 +252,7 @@
 		A37BBF3E15670A1500251CC8 /* ArtistsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ArtistsViewController.xib; path = ../Classes/Library/ArtistsViewController.xib; sourceTree = "<group>"; };
 		A38B629F14C736C70088640D /* udjlauncher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = udjlauncher.png; sourceTree = "<group>"; };
 		A38DC7C315C4928700BF9A68 /* UDJPlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJPlayerManager.h; sourceTree = "<group>"; };
-		A38DC7C415C4928700BF9A68 /* UDJPlayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDJPlayerManager.m; path = ../Events/UDJPlayerManager.m; sourceTree = "<group>"; };
+		A38DC7C415C4928700BF9A68 /* UDJPlayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJPlayerManager.m; sourceTree = "<group>"; };
 		A38DC7C615C496CF00BF9A68 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		A39A0C8914C4ADDF008A6D54 /* LibraryEntryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryEntryCell.h; sourceTree = "<group>"; };
 		A39A0C8A14C4ADDF008A6D54 /* LibraryEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryEntryCell.m; sourceTree = "<group>"; };
@@ -512,7 +514,6 @@
 		A396EF1E14B558B300BCEF8F /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				A38DC7C415C4928700BF9A68 /* UDJPlayerManager.m */,
 				A37BBF3C15670A1500251CC8 /* ArtistsViewController.h */,
 				A37BBF3D15670A1500251CC8 /* ArtistsViewController.m */,
 				A3C7A43F156714F20085150A /* SongListViewController.h */,
@@ -530,6 +531,7 @@
 		A3C6A4741565FA1400F1E42E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				A331096D15DED3B6003D2AD3 /* playerinfobutton.png */,
 				A34FA21C15C22E120022EF46 /* Default.png */,
 				A34FA21D15C22E120022EF46 /* Default@2x.png */,
 				A34FA21A15C22D540022EF46 /* plus.png */,
@@ -600,9 +602,10 @@
 				A3EECC0015994ED30003BEF8 /* PlayerInfoViewController.h */,
 				A3EECC0115994ED30003BEF8 /* PlayerInfoViewController.m */,
 				A3D61A3115882EA300ACE780 /* PlayerInfoViewController.xib */,
+				A38DC7C315C4928700BF9A68 /* UDJPlayerManager.h */,
+				A38DC7C415C4928700BF9A68 /* UDJPlayerManager.m */,
 				A36CF96015BF87DC0032AF31 /* UDJStoredPlayer.h */,
 				A36CF96115BF87DC0032AF31 /* UDJStoredPlayer.m */,
-				A38DC7C315C4928700BF9A68 /* UDJPlayerManager.h */,
 				A3443FC315C78D73005A6A67 /* UDJStoredLibraryEntry.h */,
 				A3443FC415C78D73005A6A67 /* UDJStoredLibraryEntry.m */,
 			);
@@ -804,6 +807,7 @@
 				A34FA21E15C22E120022EF46 /* Default.png in Resources */,
 				A34FA21F15C22E120022EF46 /* Default@2x.png in Resources */,
 				A3E3D7CF15DDDAA000EBF087 /* PlayerViewController.xib in Resources */,
+				A331096E15DED3B6003D2AD3 /* playerinfobutton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
