@@ -18,7 +18,7 @@
  */
 
 #import "EventGoerViewController.h"
-#import "UDJEventData.h"
+#import "UDJPlayerData.h"
 #import "RestKit/RKJSONParserJSONKit.h"
 
 @implementation EventGoerViewController

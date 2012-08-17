@@ -17,10 +17,10 @@
  * along with UDJ.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "EventCell.h"
+#import "PlayerCell.h"
 #import <QuartzCore/QuartzCore.h>
 
-@implementation EventCell
+@implementation PlayerCell
 
 @synthesize cellImageView, eventNameLabel;
 

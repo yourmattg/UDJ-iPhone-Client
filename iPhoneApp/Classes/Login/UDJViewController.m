@@ -135,6 +135,8 @@
 
     usernameField.text = username;
     passwordField.text = password;
+    
+    [self sendAuthRequest:username password:password];
 }
 
 -(void)checkForUsername{
@@ -230,7 +232,7 @@
     }
     
     if([response statusCode] == 501){
-        //let user know theiy have to update
+        //let user know they have to update
         UIAlertView* authNotification = [[UIAlertView alloc] initWithTitle:@"Needs Update" message:@"It looks like your UDJ client is outdated. Please take a moment to download the latest version from the App Store." delegate: self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Update", nil];
         [authNotification show];        
     }
@@ -249,9 +251,9 @@
     NSString* username = usernameField.text;
     NSString* password = passwordField.text;
     
-	if(![username isEqualToString: @""] && ![password isEqualToString: @""]){
-            [self sendAuthRequest:username password:password];
-	}
+    if(![username isEqualToString: @""] && ![password isEqualToString: @""]){
+        [self sendAuthRequest:username password:password];
+    }
 }
 
 // Send user to the register page

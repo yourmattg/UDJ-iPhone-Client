@@ -19,7 +19,7 @@
 
 #import "PlayerListViewController.h"
 #import "RestKit/RKJSONParserJSONKit.h"
-#import "EventCell.h"
+#import "PlayerCell.h"
 #import "MainTabBarController.h"
 #import "PlayerInfoViewController.h"
 #import "QuartzCore/QuartzCore.h"
@@ -45,7 +45,7 @@
             // send an event join request with the password specified
             [self toggleJoiningView: YES];
             self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
-            [[UDJEventData sharedEventData] enterEvent: [alertView textFieldAtIndex:0].text];
+            [[UDJPlayerData sharedEventData] enterEvent: [alertView textFieldAtIndex:0].text];
         }
         else{
             [self.tableView reloadData];
@@ -81,7 +81,7 @@
     joiningView.layer.borderWidth = 3;
     
     // set up eventData and get nearby events
-    self.eventData = [UDJEventData sharedEventData];
+    self.eventData = [UDJPlayerData sharedEventData];
     self.eventData.playerListDelegate = self;
     self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
     
@@ -228,13 +228,13 @@
 {
     static NSString *CellIdentifier = @"Cell";
     
-    EventCell *cell = [TableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    PlayerCell *cell = [TableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[EventCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[PlayerCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     NSInteger row = indexPath.row;
-    UDJEvent* event = [tableList objectAtIndex: row];
+    UDJPlayer* event = [tableList objectAtIndex: row];
     
     cell.eventNameLabel.text = event.name;
     cell.backgroundColor = [UIColor clearColor];
@@ -248,17 +248,17 @@
 // user selects a cell: attempt to enter that party
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    EventCell* cell = (EventCell*) [self.tableView cellForRowAtIndexPath: indexPath];
+    PlayerCell* cell = (PlayerCell*) [self.tableView cellForRowAtIndexPath: indexPath];
     cell.cellImageView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:255 alpha: 0.3];
     
     // get the party and remember the event we are trying to join
     NSInteger index = [indexPath indexAtPosition:1];
     
     // get the event corresponding to that index
-    [UDJEventData sharedEventData].currentEvent = [[UDJEventData sharedEventData].currentList objectAtIndex:index];
+    [UDJPlayerData sharedEventData].currentPlayer = [[UDJPlayerData sharedEventData].currentList objectAtIndex:index];
     
     // there's a password: go the password screen
-    if([UDJEventData sharedEventData].currentEvent.hasPassword){
+    if([UDJPlayerData sharedEventData].currentPlayer.hasPassword){
         UIAlertView* passwordAlertView = [[UIAlertView alloc] initWithTitle:@"Password Required" message:@"This player requires a password." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Enter", nil];
         passwordAlertView.alertViewStyle = UIAlertViewStyleSecureTextInput;
         [passwordAlertView textFieldAtIndex:0].placeholder = @"Password";
@@ -402,12 +402,12 @@
     NSArray* eventArray = [parser objectFromString:[response bodyAsString] error:nil];
     for(int i=0; i<[eventArray count]; i++){
         NSDictionary* eventDict = [eventArray objectAtIndex:i];
-        UDJEvent* event = [UDJEvent eventFromDictionary:eventDict];
+        UDJPlayer* event = [UDJPlayer eventFromDictionary:eventDict];
         [cList addObject:event];
     }
     
     // Update the global event list
-    [UDJEventData sharedEventData].currentList = cList;
+    [UDJPlayerData sharedEventData].currentList = cList;
     
     // update status label accordingly
     if([cList count] == 0) [self showResultsMessage:NO];

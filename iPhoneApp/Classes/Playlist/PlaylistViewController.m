@@ -18,8 +18,8 @@
  */
 
 #import "PlaylistViewController.h"
-#import "UDJEventData.h"
-#import "UDJEvent.h"
+#import "UDJPlayerData.h"
+#import "UDJPlayer.h"
 #import "UDJPlaylist.h"
 #import "UDJSong.h"
 #import "PlaylistEntryCell.h"
@@ -46,7 +46,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 // handleLeaveEvent: go back to the event results page
 -(void)handleLeaveEvent{
     // user is no longer in an event, reset currentEvent
-    [UDJEventData sharedEventData].currentEvent=nil;
+    [UDJPlayerData sharedEventData].currentPlayer=nil;
     
     // we have no need for this party's playlist
     [[UDJPlaylist sharedUDJPlaylist] clearPlaylist];
@@ -215,15 +215,15 @@ static PlaylistViewController* _sharedPlaylistViewController;
     _sharedPlaylistViewController = self;
     
     // set event, event label text
-    self.currentEvent = [UDJEventData sharedEventData].currentEvent;
+    self.currentEvent = [UDJPlayerData sharedEventData].currentPlayer;
 	self.eventNameLabel.text = currentEvent.name;
     
     // set delegate
-    [UDJEventData sharedEventData].leaveEventDelegate = self;
+    [UDJPlayerData sharedEventData].leaveEventDelegate = self;
     
     // init playlist
     self.playlist = [UDJPlaylist sharedUDJPlaylist];
-    self.playlist.eventId = currentEvent.eventId;
+    self.playlist.eventId = currentEvent.playerID;
     self.playlist.delegate = self;
     
     // set up tab bar stuff
@@ -496,7 +496,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     }
     
     //[POST] /udj/users/user_id/players/player_id/state
-    [[UDJEventData sharedEventData] setState: state];
+    [[UDJPlayerData sharedEventData] setState: state];
 }
 
 -(IBAction)volumeSliderChanged:(id)sender{
@@ -508,7 +508,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 -(IBAction)volumeSliderDoneChanging:(id)sender{
     UISlider* slider = sender;
     NSInteger value = slider.value;
-    [[UDJEventData sharedEventData] setVolume: value];
+    [[UDJPlayerData sharedEventData] setVolume: value];
 }
 
 //-(void)setVolume:(NSInteger)volume

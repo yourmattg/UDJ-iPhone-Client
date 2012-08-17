@@ -20,7 +20,7 @@
 #import "SongListViewController.h"
 #import "RestKit/RestKit.h"
 #import "RestKit/RKJSONParserJSONKit.h"
-#import "UDJEventData.h"
+#import "UDJPlayerData.h"
 #import "LibraryEntryCell.h"
 #import "UDJPlaylist.h"
 
@@ -132,7 +132,7 @@
 
 -(IBAction)addButtonClick:(id)sender{
     UIButton* button = (UIButton*)sender;
-    [self sendAddSongRequest: button.tag playerID: [UDJEventData sharedEventData].currentEvent.eventId];
+    [self sendAddSongRequest: button.tag playerID: [UDJPlayerData sharedEventData].currentPlayer.playerID];
     [self showAddNotification: button.titleLabel.text];
 }
 
@@ -216,7 +216,7 @@
     
     NSString* urlString = client.baseURL;
     artist = [artist stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-    NSInteger playerID = [UDJEventData sharedEventData].currentEvent.eventId;
+    NSInteger playerID = [UDJPlayerData sharedEventData].currentPlayer.playerID;
     urlString = [urlString stringByAppendingFormat:@"%@%d%@%@",@"/players/",playerID,@"/available_music/artists/",artist,nil];
     
     // create request
@@ -254,7 +254,7 @@
     
     NSString* urlString = client.baseURL;
     query = [query stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-    NSInteger playerID = [UDJEventData sharedEventData].currentEvent.eventId;
+    NSInteger playerID = [UDJPlayerData sharedEventData].currentPlayer.playerID;
     urlString = [urlString stringByAppendingFormat:@"%@%d%@%@%@%d",@"/players/",playerID,@"/available_music?query=",query, @"&max_results=", MAX_RESULTS, nil];
     
     // create request

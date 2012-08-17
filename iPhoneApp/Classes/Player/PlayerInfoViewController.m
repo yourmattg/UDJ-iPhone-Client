@@ -403,6 +403,7 @@ typedef enum {
         [self.zipCodeField setText: storedPlayer.zipcode];
         self.playerID = [storedPlayer.playerID intValue];
         
+        [playerNameLabel setText: storedPlayer.name];
         self.createPlayerButton.hidden = YES;
         self.playerStateLabel.hidden = NO;
         self.playerStateSwitch.hidden = NO;
@@ -454,32 +455,34 @@ typedef enum {
 #pragma mark - Player methods
 
 -(void)sendPlayerStateRequest:(PlayerState)newState{
-    /*RKClient* client = [RKClient sharedClient];
+    RKClient* client = [RKClient sharedClient];
     
-    //create url [POST] {prefix}/udj/users/user_id/players/player_id/name
+    //create url [POST] {prefix}/udj/0_6/players/player_id/state
     NSString* urlString = client.baseURL;
-    urlString = [urlString stringByAppendingFormat:@"%@%d%@", @"/users/", [globalData.userID intValue], @"/players/player", nil];
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@", @"/0_6/players/", self.playerID, @"/state", nil];
     
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: self.globalData];
     request.queue = client.requestQueue;
-    request.method = RKRequestMethodPUT;
-    request.HTTPBodyString = [self JSONStringWithPlayerInfo];
-    request.userData = [NSString stringWithString: @"createPlayer"];
+    request.method = RKRequestMethodPOST;
+    request.userData = [NSString stringWithString: @"changeState"];
     
     // set up the headers, including which type of request this is
-    NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJData sharedUDJData].headers];
+    NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: globalData.headers];
     [requestHeaders setValue:@"playerMethodsDelegate" forKey:@"delegate"];
-    [requestHeaders setValue:@"text/json" forKey:@"content-type"];
     request.additionalHTTPHeaders = requestHeaders;
     
+    // include state parameter
+    NSArray* stateArray = [NSArray arrayWithObjects:@"inactive", @"playing", @"paused", nil];
+    request.params = [NSDictionary dictionaryWithObjectsAndKeys: [stateArray objectAtIndex: newState], @"state", nil];
+    
     //send request
-    [request send];*/
+    [request send];
 }
 
 -(IBAction)playerStateValueChanged:(id)sender{
     UISwitch* stateSwitch = sender;
-    PlayerState newState = stateSwitch.on ? PlayerStatePlaying : PlayerStatePaused;
+    PlayerState newState = stateSwitch.on ? PlayerStatePlaying : PlayerStateInactive;
     [self sendPlayerStateRequest: newState];
 }
 
@@ -542,7 +545,6 @@ typedef enum {
 }
 
 -(void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
-    NSLog(@"status code: %d", [response statusCode]);
     NSString* requestType = request.userData;
     
     if([requestType isEqualToString: @"createPlayer"]){
@@ -562,8 +564,10 @@ typedef enum {
         }
     }
     else if([requestType isEqualToString: @"songSetAdd"] && [response statusCode] == 201){
-        NSLog(@"Status code: %d", [response statusCode]);
         //[self toggleActivityView: NO];
+    }
+    else if([requestType isEqualToString: @"changeState"] && [response isOK]){
+        NSLog(@"Changed state");
     }
 }
 

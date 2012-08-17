@@ -18,7 +18,7 @@
  */
 
 #import "ArtistsViewController.h"
-#import "UDJEventData.h"
+#import "UDJPlayerData.h"
 #import "SongListViewController.h"
 #import "RestKit/RKJSONParserJSONKit.h"
 #import "UDJPlaylist.h"
@@ -175,7 +175,7 @@
     
     // create url /players/player_id/available_music/artists
     NSString* urlString = client.baseURL;
-    urlString = [urlString stringByAppendingFormat:@"%@%d%@",@"/players/",[UDJEventData sharedEventData].currentEvent.eventId,@"/available_music/artists"];
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@",@"/players/",[UDJPlayerData sharedEventData].currentPlayer.playerID,@"/available_music/artists"];
     
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];

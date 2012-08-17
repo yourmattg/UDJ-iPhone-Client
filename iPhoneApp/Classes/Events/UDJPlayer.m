@@ -17,16 +17,16 @@
  * along with UDJ.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "UDJEvent.h"
+#import "UDJPlayer.h"
 
-@implementation UDJEvent
+@implementation UDJPlayer
 
-@synthesize eventId, name, hostId, latitude, longitude, hostUsername, hasPassword;
+@synthesize playerID, name, hostId, latitude, longitude, hostUsername, hasPassword;
 
-+ (UDJEvent*) eventFromDictionary:(NSDictionary *)eventDict{
-    UDJEvent* event = [UDJEvent new];
++ (UDJPlayer*) eventFromDictionary:(NSDictionary *)eventDict{
+    UDJPlayer* event = [UDJPlayer new];
     event.name = [eventDict objectForKey:@"name"];
-    event.eventId = [[eventDict objectForKey:@"id"] integerValue];
+    event.playerID = [[eventDict objectForKey:@"id"] integerValue];
     event.hostId = [[eventDict objectForKey:@"owner_id"] integerValue];
     event.latitude = [[eventDict objectForKey:@"latitude"] doubleValue];
     event.longitude = [[eventDict objectForKey:@"longitude"] doubleValue];

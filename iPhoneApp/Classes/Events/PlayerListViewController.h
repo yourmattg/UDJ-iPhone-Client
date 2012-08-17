@@ -19,7 +19,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UDJData.h"
-#import "UDJEventData.h"
+#import "UDJPlayerData.h"
 #import "PullRefreshTableViewController.h"
 
 enum SearchType {
@@ -34,7 +34,7 @@ enum SearchType {
 @property enum SearchType lastSearchType;
 @property(nonatomic,strong) NSString* lastSearchQuery;
 
-@property(nonatomic,strong) UDJEventData* eventData;
+@property(nonatomic,strong) UDJPlayerData* eventData;
 
 @property(nonatomic,strong) NSMutableArray *tableList;
 @property(nonatomic,strong) IBOutlet UITableView* tableView;

@@ -19,8 +19,8 @@
 
 #import "UDJAppDelegate.h"
 #import "UDJViewController.h"
-#import "UDJEvent.h"
-#import "UDJEventData.h"
+#import "UDJPlayer.h"
+#import "UDJPlayerData.h"
 #import "UDJPlaylist.h"
 #import "UDJSongList.h"
 #import "UDJMappableArray.h"
@@ -109,7 +109,7 @@
     UDJData* udjData = [[UDJData alloc] init];
     udjData.requestCount = 0;
     
-    [UDJEventData new]; // eventData singleton
+    [UDJPlayerData new]; // eventData singleton
     //[UDJConnection new]; // UDJConnection singleton
     
     

@@ -17,12 +17,12 @@
  * along with UDJ.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "UDJEventData.h"
+#import "UDJPlayerData.h"
 #import "RestKit/RestKit.h"
 
-@implementation UDJEventData
+@implementation UDJPlayerData
 
-@synthesize currentList, lastSearchParam, currentEvent, locationManager, globalData, leaveEventDelegate, playerListDelegate;
+@synthesize currentList, lastSearchParam, currentPlayer, locationManager, globalData, leaveEventDelegate, playerListDelegate;
 
 // getNearbyEvents: has the UDJConnection send a event search request
 - (void) getNearbyEvents{
@@ -81,7 +81,7 @@
     //create url
     NSString* urlString = client.baseURL;
     urlString = [urlString stringByAppendingString:@"/players/"];
-    urlString = [urlString stringByAppendingFormat:@"%d",[UDJEventData sharedEventData].currentEvent.eventId];
+    urlString = [urlString stringByAppendingFormat:@"%d",[UDJPlayerData sharedEventData].currentPlayer.playerID];
     urlString = [urlString stringByAppendingString:@"/users/"];
     urlString = [urlString stringByAppendingFormat:@"%i", [globalData.userID intValue]];
     
@@ -109,7 +109,7 @@
     RKClient* client = [RKClient sharedClient];
     //create url [POST] /udj/users/user_id/players/player_id/state
     NSString* urlString = client.baseURL;
-    urlString = [urlString stringByAppendingFormat: @"%@%d%@%d%@", @"/users/", [globalData.userID intValue], @"/players/", currentEvent.eventId, @"/state", nil];
+    urlString = [urlString stringByAppendingFormat: @"%@%d%@%d%@", @"/users/", [globalData.userID intValue], @"/players/", currentPlayer.playerID, @"/state", nil];
     
     //set up request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: nil];
@@ -129,7 +129,7 @@
     RKClient* client = [RKClient sharedClient];
     //create url [POST] /udj/users/user_id/players/player_id/state
     NSString* urlString = client.baseURL;
-    urlString = [urlString stringByAppendingFormat: @"%@%d%@%d%@", @"/users/", [globalData.userID intValue], @"/players/", currentEvent.eventId, @"/volume", nil];
+    urlString = [urlString stringByAppendingFormat: @"%@%d%@%d%@", @"/users/", [globalData.userID intValue], @"/players/", currentPlayer.playerID, @"/volume", nil];
     
     //set up request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: nil];
@@ -147,10 +147,10 @@
 
 // access the EventList anywhere using [EventList sharedEventList]
 #pragma mark Singleton methods
-static UDJEventData* _sharedEventList = nil;
+static UDJPlayerData* _sharedEventList = nil;
 
-+(UDJEventData*)sharedEventData{
-	@synchronized([UDJEventData class]){
++(UDJPlayerData*)sharedEventData{
+	@synchronized([UDJPlayerData class]){
 		if (!_sharedEventList)
 			_sharedEventList = [[self alloc] init];        
 		return _sharedEventList;
@@ -159,7 +159,7 @@ static UDJEventData* _sharedEventList = nil;
 }
 
 +(id)alloc{
-	@synchronized([UDJEventData class]){
+	@synchronized([UDJPlayerData class]){
 		NSAssert(_sharedEventList == nil, @"Attempted to allocate a second instance of a singleton.");
 		_sharedEventList = [super alloc];
 		return _sharedEventList;

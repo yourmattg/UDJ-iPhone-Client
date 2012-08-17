@@ -17,11 +17,27 @@
  * along with UDJ.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-@interface EventCell : UITableViewCell
+@interface UDJPlayer : NSObject{
+    @private
+    NSInteger playerID;
+    NSString* name;
+    NSString* hostUsername;
+    NSInteger hostId;
+    BOOL hasPassword;
+    double latitude;
+    double longitude;
+    
+}
++ (UDJPlayer*) eventFromDictionary:(NSDictionary*)eventDict;
 
-@property(nonatomic,strong) UIImageView* cellImageView;
-@property(nonatomic,strong) UILabel* eventNameLabel;
+@property(nonatomic) NSInteger playerID;
+@property(nonatomic,strong) NSString* name;
+@property(nonatomic) NSInteger hostId;
+@property(nonatomic) double latitude;
+@property(nonatomic) double longitude;
+@property(nonatomic) BOOL hasPassword;
+@property(nonatomic,strong) NSString* hostUsername;
 
 @end

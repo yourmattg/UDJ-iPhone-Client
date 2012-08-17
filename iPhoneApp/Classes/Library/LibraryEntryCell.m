@@ -18,7 +18,7 @@
  */
 
 #import "LibraryEntryCell.h"
-#import "UDJEventData.h"
+#import "UDJPlayerData.h"
 
 @implementation LibraryEntryCell
 

@@ -18,7 +18,7 @@
  */
 
 #import <UIKit/UIKit.h>
-#import "UDJEvent.h"
+#import "UDJPlayer.h"
 #import "UDJPlaylist.h"
 #import "RestKit/RestKit.h"
 #import "PullRefreshTableViewController.h"
@@ -26,7 +26,7 @@
 @interface PlaylistViewController : PullRefreshTableViewController <UIAlertViewDelegate, RKRequestDelegate>{
 
     UDJPlaylist *playlist;
-    UDJEvent* currentEvent;
+    UDJPlayer* currentEvent;
     UITableView* tableView;
     UILabel* currentSongTitleLabel;
     UILabel* currentSongArtistLabel;
@@ -46,7 +46,7 @@
 //-(void)post;
 
 @property(nonatomic, strong) UDJSong* selectedSong;
-@property (nonatomic, strong) UDJEvent* currentEvent;
+@property (nonatomic, strong) UDJPlayer* currentEvent;
 @property (nonatomic, strong) UDJPlaylist* playlist;
 @property (nonatomic, strong) IBOutlet UITableView* tableView;
 @property (nonatomic, strong) IBOutlet UILabel* currentSongTitleLabel;
