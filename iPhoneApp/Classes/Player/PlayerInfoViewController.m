@@ -296,7 +296,9 @@ typedef enum {
                     NSArray* songConflictArray = [[response bodyAsString] objectFromJSONString];
                     NSLog(@"%d conflicts", [songConflictArray count]);
                     for(int i=0; i<[songConflictArray count]; i++){
-                        [songSyncDictionary setObject: [NSNumber numberWithBool: NO] forKey: [songConflictArray objectAtIndex: i]];
+                        // set synced to YES since that means we already have it
+                        NSNumber* conflictNumber = [songConflictArray objectAtIndex: i];
+                        [songSyncDictionary setObject: [NSNumber numberWithBool: YES] forKey: [NSNumber numberWithUnsignedLongLong: [conflictNumber unsignedLongLongValue]]];
                     }
                 }
                 else if([response statusCode] == 201) NSLog(@"%d songs added", [songAddArray count]);
@@ -304,6 +306,8 @@ typedef enum {
             }
         }
     }
+    
+    // TODO: figure out which songs have been deleted
     
     [self saveLibraryEntries];
     [self toggleActivityView: NO];
