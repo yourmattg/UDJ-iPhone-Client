@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UDJData.h"
+#import "UDJPlayerManager.h"
 
 @interface PlayerViewController : UIViewController
 
@@ -27,6 +28,7 @@
 
 @property(nonatomic,strong) IBOutlet UISlider* volumeSlider;
 
+@property(nonatomic,strong) UDJPlayerManager* playerManager;
 @property(nonatomic,strong) UDJData* globalData;
 @property(nonatomic,strong) NSManagedObjectContext *managedObjectContext;
 @property NSInteger playerID;

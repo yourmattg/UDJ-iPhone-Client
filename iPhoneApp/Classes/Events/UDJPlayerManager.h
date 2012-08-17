@@ -17,8 +17,10 @@
 @property(nonatomic,strong) NSString* stateLocation;
 @property(nonatomic,strong) NSString* city;
 @property(nonatomic,strong) NSString* zipCode;
+@property NSInteger playerID;
 
+@property(nonatomic,strong) NSManagedObjectContext* managedObjectContext;
 
-
+-(void)loadPlayerInfo;
 
 @end

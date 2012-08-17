@@ -369,13 +369,12 @@
 									<int key="NSfFlags">16</int>
 								</object>
 							</object>
-							<object class="IBUIButton" id="576232230">
+							<object class="IBUIButton" id="772699417">
 								<reference key="NSNextResponder" ref="616588155"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{20, 330}, {280, 37}}</string>
+								<int key="NSvFlags">-2147483356</int>
+								<string key="NSFrame">{{20, 286}, {280, 37}}</string>
 								<reference key="NSSuperview" ref="616588155"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -426,7 +425,7 @@
 								<string key="NSFrame">{{206, 291}, {94, 27}}</string>
 								<reference key="NSSuperview" ref="616588155"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="576232230"/>
+								<reference key="NSNextKeyView" ref="772699417"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -516,7 +515,6 @@
 						<string key="NSFrame">{{240, 6}, {20, 20}}</string>
 						<reference key="NSSuperview" ref="386408826"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -814,7 +812,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">createButtonClick:</string>
-						<reference key="source" ref="576232230"/>
+						<reference key="source" ref="772699417"/>
 						<reference key="destination" ref="841351856"/>
 						<int key="IBEventType">7</int>
 					</object>
@@ -823,7 +821,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">createButtonClick:</string>
-						<reference key="source" ref="576232230"/>
+						<reference key="source" ref="772699417"/>
 						<reference key="destination" ref="841351856"/>
 						<int key="IBEventType">20</int>
 					</object>
@@ -901,7 +899,7 @@
 							<reference ref="126984314"/>
 							<reference ref="509377985"/>
 							<reference ref="1004850256"/>
-							<reference ref="576232230"/>
+							<reference ref="772699417"/>
 						</array>
 						<reference key="parent" ref="559625925"/>
 					</object>
@@ -976,7 +974,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">122</int>
-						<reference key="object" ref="576232230"/>
+						<reference key="object" ref="772699417"/>
 						<reference key="parent" ref="616588155"/>
 					</object>
 				</array>

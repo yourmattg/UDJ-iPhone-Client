@@ -35,6 +35,7 @@ typedef enum {
 @synthesize createPlayerButton, playerStateLabel, playerStateSwitch;
 @synthesize globalData, managedObjectContext, playerID, songSyncDictionary;
 @synthesize activityView, activityLabel;
+@synthesize playerManager;
 
 #pragma mark - Text fields
 
@@ -90,30 +91,6 @@ typedef enum {
     }
     
     return NO;
-}
-
-#pragma mark - Address fields
-/*
--(void)toggleAddressFields:(BOOL)showing{
-    
-    BOOL enabled = showing;
-    addressField.enabled = enabled;
-    cityField.enabled = enabled;
-    zipCodeField.enabled = enabled;
-    stateField.enabled = enabled;
-    
-    float alpha = enabled ? 1 : 0.5;
-    addressField.alpha = alpha;
-    cityField.alpha = alpha;
-    zipCodeField.alpha = alpha;
-    stateField.alpha = alpha; 
-    
-}*/
-
--(IBAction)locationSwitchValueChanged:(id)sender{
-    //BOOL enabled = ![(UISwitch*)sender isOn];
-    
-    //[self toggleAddressFields: enabled];
 }
 
 #pragma mark - View lifecycle

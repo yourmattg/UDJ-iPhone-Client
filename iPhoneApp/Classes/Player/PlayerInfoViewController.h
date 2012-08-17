@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RestKit/RestKit.h"
 #import "UDJData.h"
+#import "UDJPlayerManager.h"
 
 @interface PlayerInfoViewController : UIViewController <UITextFieldDelegate, RKRequestDelegate>
 
@@ -38,6 +39,7 @@
 @property(nonatomic,strong) IBOutlet UIView* activityView;
 @property(nonatomic,strong) IBOutlet UILabel* activityLabel;
 
+@property(nonatomic,strong) UDJPlayerManager* playerManager;
 @property(nonatomic,strong) UDJData* globalData;
 @property(nonatomic,strong) NSManagedObjectContext *managedObjectContext;
 @property NSInteger playerID;
