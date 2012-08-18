@@ -21,6 +21,7 @@
 @synthesize songPositionSlider, togglePlayButton, skipButton;
 @synthesize volumeSlider;
 @synthesize playerManager, globalData, managedObjectContext, playerID;
+@synthesize leaveButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -44,7 +45,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.playerManager = [[UDJPlayerManager alloc] init];
+    self.playerManager = [UDJPlayerManager sharedPlayerManager];
     NSLog(@"playerManager ID: %d", self.playerManager.playerID);
 }
 
@@ -55,6 +56,19 @@
         [self presentModalViewController: viewController animated: YES];  
         viewController.playerManager = self.playerManager;
     }
+}
+
+#pragma mark - Closing out of player
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(buttonIndex == 1){
+        [self.navigationController popViewControllerAnimated: YES];
+    }
+}
+
+-(IBAction)leaveButtonClick:(id)sender{
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Player" message:@"Your player will become inactive if you leave this screen. Are you sure you want to leave?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Leave", nil];
+    [alertView show];
 }
 
 

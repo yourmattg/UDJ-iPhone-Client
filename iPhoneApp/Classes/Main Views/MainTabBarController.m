@@ -23,6 +23,7 @@
 #import "ArtistsViewController.h"
 #import "PlayerInfoViewController.h"
 #import "PlayerViewController.h"
+#import "UDJPlayerManager.h"
 
 @implementation MainTabBarController
 
@@ -45,9 +46,13 @@
 
 -(void)initForPlayerMode:(BOOL)isPlayer{
     
+    [UDJPlayerManager sharedPlayerManager].isInPlayerMode = isPlayer;
+    NSLog(@"Is in player mode = %d", [UDJPlayerManager sharedPlayerManager].isInPlayerMode);
+    
     // Do any additional setup after loading the view from its nib. 
     PlaylistViewController* playlistViewController = [[PlaylistViewController alloc] initWithNibName:@"NewPlaylistViewController" bundle:[NSBundle mainBundle]];
     playlistViewController.title = NSLocalizedString(@"Playlist", @"Playlist");
+    playlistViewController.leaveButton.hidden = YES;
     
     // the artists page should be the root view of a new navigation controller
     ArtistsViewController* artistsViewController = [[ArtistsViewController alloc] initWithNibName:@"ArtistsViewController" bundle:[NSBundle mainBundle]];
@@ -86,7 +91,7 @@
     [libraryItem setImage: [UIImage imageNamed: @"libraryicon.png"]];
     
     UITabBarItem* randomItem = [self.tabBar.items objectAtIndex: 2 + indexModify];
-    [randomItem setImage: [UIImage imageNamed: @"randomicon.png"]];    
+    [randomItem setImage: [UIImage imageNamed: @"randomicon.png"]];   
 }
 
 #pragma mark - View lifecycle

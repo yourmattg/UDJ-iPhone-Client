@@ -85,6 +85,7 @@
 		A3CFBEED1568730A002B7658 /* pausetoggle.png in Resources */ = {isa = PBXBuildFile; fileRef = A3CFBEEC1568730A002B7658 /* pausetoggle.png */; };
 		A3CFBEF015688811002B7658 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CFBEEF15688811002B7658 /* KeychainItemWrapper.m */; };
 		A3CFBEF3156888E8002B7658 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3CFBEF1156888E8002B7658 /* Model.xcdatamodeld */; };
+		A3CFEEDC15DFE8EB00962465 /* closebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A3CFEEDB15DFE8EB00962465 /* closebutton.png */; };
 		A3D5EBB015BA243F0019FBAF /* libShareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3D5EBA715BA24060019FBAF /* libShareKit.a */; };
 		A3D5EBB115BA24B40019FBAF /* ShareKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A3D5EBA915BA24060019FBAF /* ShareKit.bundle */; };
 		A3D61A3215882EA300ACE780 /* PlayerInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3D61A3115882EA300ACE780 /* PlayerInfoViewController.xib */; };
@@ -295,6 +296,7 @@
 		A3CFBEEE15688811002B7658 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		A3CFBEEF15688811002B7658 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		A3CFBEF2156888E8002B7658 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		A3CFEEDB15DFE8EB00962465 /* closebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closebutton.png; sourceTree = "<group>"; };
 		A3D5EB9915BA24060019FBAF /* ShareKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ShareKit.xcodeproj; path = ../Submodules/ShareKit/ShareKit.xcodeproj; sourceTree = "<group>"; };
 		A3D61A3115882EA300ACE780 /* PlayerInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlayerInfoViewController.xib; path = ../../Resources/PlayerInfoViewController.xib; sourceTree = "<group>"; };
 		A3DAD57B14BD253600688CE0 /* UDJMappableArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJMappableArray.h; sourceTree = "<group>"; };
@@ -361,7 +363,7 @@
 				A324ABF714AAB74F00388514 /* Playlist */,
 				A3F58C5514A1519F00756F7D /* Main Items */,
 				A3536FB414A5219E00B5C95F /* Player List */,
-				A3EECBFF15994E2F0003BEF8 /* Player */,
+				A3EECBFF15994E2F0003BEF8 /* My Player */,
 				A354F04014A2CA5A00F3AAEF /* Login */,
 				A3F58C5414A1517900756F7D /* Main Views */,
 				A31AA6A91561CE3B0032FEAB /* UDJUser.h */,
@@ -531,6 +533,7 @@
 		A3C6A4741565FA1400F1E42E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				A3CFEEDB15DFE8EB00962465 /* closebutton.png */,
 				A331096D15DED3B6003D2AD3 /* playerinfobutton.png */,
 				A34FA21C15C22E120022EF46 /* Default.png */,
 				A34FA21D15C22E120022EF46 /* Default@2x.png */,
@@ -593,7 +596,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A3EECBFF15994E2F0003BEF8 /* Player */ = {
+		A3EECBFF15994E2F0003BEF8 /* My Player */ = {
 			isa = PBXGroup;
 			children = (
 				A3E3D7CB15DDDAA000EBF087 /* PlayerViewController.h */,
@@ -604,12 +607,12 @@
 				A3D61A3115882EA300ACE780 /* PlayerInfoViewController.xib */,
 				A38DC7C315C4928700BF9A68 /* UDJPlayerManager.h */,
 				A38DC7C415C4928700BF9A68 /* UDJPlayerManager.m */,
-				A36CF96015BF87DC0032AF31 /* UDJStoredPlayer.h */,
-				A36CF96115BF87DC0032AF31 /* UDJStoredPlayer.m */,
 				A3443FC315C78D73005A6A67 /* UDJStoredLibraryEntry.h */,
 				A3443FC415C78D73005A6A67 /* UDJStoredLibraryEntry.m */,
+				A36CF96015BF87DC0032AF31 /* UDJStoredPlayer.h */,
+				A36CF96115BF87DC0032AF31 /* UDJStoredPlayer.m */,
 			);
-			name = Player;
+			name = "My Player";
 			path = Events;
 			sourceTree = "<group>";
 		};
@@ -808,6 +811,7 @@
 				A34FA21F15C22E120022EF46 /* Default@2x.png in Resources */,
 				A3E3D7CF15DDDAA000EBF087 /* PlayerViewController.xib in Resources */,
 				A331096E15DED3B6003D2AD3 /* playerinfobutton.png in Resources */,
+				A3CFEEDC15DFE8EB00962465 /* closebutton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

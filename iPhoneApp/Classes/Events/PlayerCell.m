@@ -30,10 +30,7 @@
     CGFloat boundsX = contentRect.origin.x;
     CGRect frame;
     
-    frame= CGRectMake(boundsX+25 ,3, 270, 50);
-    cellImageView.frame = frame;
-    
-    frame = CGRectMake(boundsX+50, 3, 250, 50);
+    frame = CGRectMake(boundsX+15, 3, 250, 42);
     eventNameLabel.frame = frame;
     
     
@@ -45,12 +42,6 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        cellImageView = [[UIImageView alloc] init];
-        cellImageView.backgroundColor = [UIColor colorWithRed:149 green:207 blue:233 alpha: 0.3];
-        cellImageView.layer.cornerRadius = 8;
-        cellImageView.layer.borderColor = [[UIColor whiteColor] CGColor];
-        cellImageView.layer.borderWidth = 3;
-        [self.contentView addSubview: cellImageView];
         
         eventNameLabel = [[UILabel alloc] init];
         eventNameLabel.font = [UIFont fontWithName:@"Helvetica" size:22];
@@ -59,6 +50,7 @@
         [self.contentView addSubview: eventNameLabel];
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
     }
     return self;

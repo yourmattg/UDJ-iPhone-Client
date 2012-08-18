@@ -16,10 +16,33 @@
 @synthesize address, stateLocation, city, zipCode;
 @synthesize playerID;
 @synthesize managedObjectContext;
+@synthesize isInPlayerMode;
+
+#pragma mark - Singleton methods
+static UDJPlayerManager* _sharedPlayerManager = nil;
+
++(UDJPlayerManager*)sharedPlayerManager{
+    @synchronized([UDJPlayerManager class]){
+        if (!_sharedPlayerManager)
+            _sharedPlayerManager = [[self alloc] init];        
+        return _sharedPlayerManager;
+    }    
+    return nil;
+}
+
++(id)alloc{
+    @synchronized([UDJPlayerManager class]){
+        NSAssert(_sharedPlayerManager == nil, @"Attempted to allocate a second instance of a singleton.");
+        _sharedPlayerManager = [super alloc];
+        return _sharedPlayerManager;
+    }
+    return nil;
+}
 
 -(id)init{
     if(self = [super init]){
         self.playerID = -1;
+        self.isInPlayerMode = NO;
         UDJAppDelegate* appDelegate = (UDJAppDelegate*)[[UIApplication sharedApplication] delegate];
         managedObjectContext = appDelegate.managedObjectContext;
         [self loadPlayerInfo];

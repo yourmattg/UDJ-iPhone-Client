@@ -51,4 +51,6 @@ enum SearchType {
 @property(nonatomic,strong) IBOutlet UIView* joiningView;
 @property(nonatomic,strong) IBOutlet UIView* joiningBackgroundView;
 
+@property BOOL shouldShowMyPlayer;
+
 @end

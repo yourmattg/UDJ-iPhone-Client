@@ -22,6 +22,7 @@
 @property(nonatomic,strong) IBOutlet UITextField* playerNameField;
 @property(nonatomic,strong) IBOutlet UITextField* playerPasswordField;
 
+@property(nonatomic,strong) IBOutlet UIButton* closeButton;
 @property(nonatomic,strong) IBOutlet UIButton* cancelButton;
 
 @property(nonatomic,strong) IBOutlet UISwitch* useLocationSwitch;
@@ -31,10 +32,8 @@
 @property(nonatomic,strong) IBOutlet UITextField* stateField;
 @property(nonatomic,strong) IBOutlet UITextField* zipCodeField;
 
-@property(nonatomic,strong) IBOutlet UISwitch* playerStateSwitch;
 
 @property(nonatomic,strong) IBOutlet UIButton* createPlayerButton;
-@property(nonatomic,strong) IBOutlet UILabel* playerStateLabel;
 
 @property(nonatomic,strong) IBOutlet UIView* activityView;
 @property(nonatomic,strong) IBOutlet UILabel* activityLabel;
@@ -44,6 +43,8 @@
 @property(nonatomic,strong) NSManagedObjectContext *managedObjectContext;
 @property NSInteger playerID;
 @property(nonatomic,strong) NSMutableDictionary* songSyncDictionary;
+
+@property(nonatomic,weak) UIViewController* parentViewController;
 
 -(void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response;
 

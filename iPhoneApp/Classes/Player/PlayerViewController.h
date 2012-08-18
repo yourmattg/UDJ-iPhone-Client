@@ -10,8 +10,9 @@
 #import "UDJData.h"
 #import "UDJPlayerManager.h"
 
-@interface PlayerViewController : UIViewController
+@interface PlayerViewController : UIViewController <UIAlertViewDelegate>
 
+@property(nonatomic,strong) IBOutlet UIButton* leaveButton;
 @property(nonatomic,strong) IBOutlet UILabel* playerNameLabel;
 @property(nonatomic,strong) IBOutlet UIButton* playerInfoButton;
 

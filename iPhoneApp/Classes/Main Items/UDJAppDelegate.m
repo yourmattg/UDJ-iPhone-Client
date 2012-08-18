@@ -35,6 +35,7 @@
 @synthesize viewController, navigationController;
 @synthesize baseUrl;
 @synthesize managedObjectModel, managedObjectContext, persistentStoreCoordinator;
+@synthesize playerManager;
 
 // accessor methods for "data" property
 
@@ -111,6 +112,7 @@
     
     [UDJPlayerData new]; // eventData singleton
     //[UDJConnection new]; // UDJConnection singleton
+    self.playerManager = [[UDJPlayerManager alloc] init]; // player manager singleton
     
     
     // initialize udjConnection

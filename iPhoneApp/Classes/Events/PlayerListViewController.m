@@ -23,6 +23,8 @@
 #import "MainTabBarController.h"
 #import "PlayerInfoViewController.h"
 #import "QuartzCore/QuartzCore.h"
+#import "PlayerInfoViewController.h"
+#import "UDJPlayerManager.h"
 
 @interface PlayerListViewController ()
 
@@ -35,6 +37,7 @@
 @synthesize playerSearchBar, findNearbyButton, cancelSearchButton, searchIndicatorView;
 @synthesize lastSearchType, lastSearchQuery;
 @synthesize joiningBackgroundView, joiningView;
+@synthesize shouldShowMyPlayer;
 
 #pragma mark - Alert view delegate
 
@@ -87,20 +90,15 @@
     
     // initialize search bar
     playerSearchBar.autocorrectionType = UITextAutocorrectionTypeNo;
-    
-    // TODO: put toolbar back in when phone player capabilities are complete
-    // initialize toolbar
-    
-    
+         
     self.navigationController.toolbar.tintColor = [UIColor colorWithRed:(35.0/255.0) green:(59.0/255.0) blue:(79.0/255.0) alpha:1];
     self.navigationController.toolbarHidden = NO;
     
-    
     UIBarButtonItem* createPlayerButton = [[UIBarButtonItem alloc] initWithTitle:@"My Player" style:UIBarButtonItemStyleBordered target:self action:@selector(createPlayerClick)];
-    //UIBarButtonItem* nearbyButton = [[UIBarButtonItem alloc] initWithTitle:@"Find Nearby" style:UIBarButtonItemStyleBordered target:self action:@selector(findNearbyButtonClick:)];
     UIBarButtonItem* flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     self.toolbarItems = [NSArray arrayWithObjects: flexible, createPlayerButton, nil];
     
+    self.shouldShowMyPlayer = NO;
     
     [self findNearbyPlayers];
 }
@@ -118,14 +116,35 @@
     [self.navigationController setToolbarHidden: YES animated:YES];
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear: animated];
+
+    [UDJPlayerManager sharedPlayerManager].isInPlayerMode = NO;
+    
+    if(shouldShowMyPlayer){
+        shouldShowMyPlayer = NO;
+        MainTabBarController* tabBarController = [[MainTabBarController alloc] initWithNibName:@"MainTabBarController" bundle: [NSBundle mainBundle]];
+        [tabBarController initForPlayerMode: YES];
+        [self.navigationController pushViewController: tabBarController animated:YES];          
+    }
+}
+
 
 
 #pragma mark - Player creation methods
 
 -(void)createPlayerClick{
-    MainTabBarController* tabBarController = [[MainTabBarController alloc] initWithNibName:@"MainTabBarController" bundle: [NSBundle mainBundle]];
-    [tabBarController initForPlayerMode: YES];
-    [self.navigationController pushViewController: tabBarController animated:YES];
+    UDJPlayerManager* playerManager = [UDJPlayerManager sharedPlayerManager];
+    if(playerManager.playerID == -1){
+        PlayerInfoViewController* viewController = [[PlayerInfoViewController alloc] initWithNibName:@"PlayerInfoViewController" bundle:[NSBundle mainBundle]];
+        [self presentModalViewController:viewController animated:YES];
+        viewController.parentViewController = self;
+    }
+    else{
+        MainTabBarController* tabBarController = [[MainTabBarController alloc] initWithNibName:@"MainTabBarController" bundle: [NSBundle mainBundle]];
+        [tabBarController initForPlayerMode: YES];
+        [self.navigationController pushViewController: tabBarController animated:YES];        
+    }
 }
 
 
@@ -221,7 +240,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 60.0;
+    return 50.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)TableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

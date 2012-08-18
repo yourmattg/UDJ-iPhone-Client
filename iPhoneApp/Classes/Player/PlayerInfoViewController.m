@@ -12,6 +12,7 @@
 #import "UDJStoredPlayer.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "UDJStoredLibraryEntry.h"
+#import "PlayerListViewController.h"
 #import <objc/runtime.h>
 
 typedef enum {
@@ -30,12 +31,13 @@ typedef enum {
 @synthesize textFieldArray;
 @synthesize playerNameLabel;
 @synthesize playerNameField, playerPasswordField;
-@synthesize cancelButton;
+@synthesize cancelButton, closeButton;
 @synthesize useLocationSwitch, addressField, cityField, stateField, zipCodeField, locationFields;
-@synthesize createPlayerButton, playerStateLabel, playerStateSwitch;
+@synthesize createPlayerButton;
 @synthesize globalData, managedObjectContext, playerID, songSyncDictionary;
 @synthesize activityView, activityLabel;
 @synthesize playerManager;
+@synthesize parentViewController;
 
 #pragma mark - Text fields
 
@@ -58,7 +60,7 @@ typedef enum {
 
 -(void)textFieldDidBeginEditing:(UITextField*)textField{
     NSInteger yCoord = textField.frame.origin.y;
-    [self.mainScrollView scrollRectToVisible: CGRectMake(0, yCoord-6, 320, 367) animated:YES];
+    [self.mainScrollView scrollRectToVisible: CGRectMake(0, yCoord+10, 320, 367) animated:YES];
     self.cancelButton.hidden = NO;
     self.mainScrollView.scrollEnabled = YES;
 }
@@ -110,7 +112,7 @@ typedef enum {
 	// Do any additional setup after loading the view.
     //[self toggleAddressFields: NO];
     
-    [self.mainScrollView setContentSize: CGSizeMake(320, 590)]; // 320, 367
+    [self.mainScrollView setContentSize: CGSizeMake(320, 630)]; // 320, 367
     [self.mainScrollView scrollRectToVisible: CGRectMake(0, 8, 320, 367) animated:YES];
     self.mainScrollView.scrollEnabled = NO;
     
@@ -121,11 +123,12 @@ typedef enum {
     
     self.globalData = [UDJData sharedUDJData];
     self.globalData.playerMethodsDelegate = self;
+    self.playerManager = [UDJPlayerManager sharedPlayerManager];
     
     UDJAppDelegate* appDelegate = (UDJAppDelegate*)[[UIApplication sharedApplication] delegate];
     managedObjectContext = appDelegate.managedObjectContext;
     
-    [self loadPlayerInfo];
+    [self updatePlayerInfo];
 }
 
 - (void)viewDidUnload
@@ -137,6 +140,47 @@ typedef enum {
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - Saving player to persistent store
+
+-(void)savePlayerInfo{
+    // update the player manager
+    [playerManager setPlayerName: self.playerNameField.text];
+    [playerManager setAddress: self.addressField.text];
+    [playerManager setCity: self.cityField.text];
+    [playerManager setStateLocation: self.stateField.text];
+    [playerManager setPlayerPassword: self.playerPasswordField.text];
+    [playerManager setZipCode: self.zipCodeField.text];
+    [playerManager setPlayerID: self.playerID];
+    
+    [playerManager savePlayerInfo];
+}
+
+-(void)updatePlayerInfo{
+    [playerManager loadPlayerInfo];
+    
+    // if there was a stored player, fill in the fields
+    if (playerManager.playerID != -1) {
+        [self.playerNameField setText: playerManager.playerName];
+        [self.playerPasswordField setText: playerManager.playerPassword];
+        [self.addressField setText: playerManager.address];
+        [self.cityField setText: playerManager.city];
+        [self.stateField setText: playerManager.stateLocation];
+        [self.zipCodeField setText: playerManager.zipCode];
+        self.playerID = playerManager.playerID;
+        
+        [playerNameLabel setText: playerManager.playerName];
+        self.createPlayerButton.hidden = YES;
+        
+        [NSThread detachNewThreadSelector:@selector(updatePlayerMusic) toTarget:self withObject:nil];
+    }
+}
+
+#pragma mark - Navigation
+
+-(IBAction)closeButtonClick:(id)sender{
+    [self dismissModalViewControllerAnimated: YES];
 }
 
 #pragma mark - Updating library
@@ -321,78 +365,6 @@ typedef enum {
 }
 
 
-#pragma mark - Saving player to persistent store
-
--(void)savePlayerInfo{
-    
-    UDJStoredPlayer* storedPlayer;
-    NSError* error;
-    
-    //Set up a request to get the last stored playlist
-    NSFetchRequest * request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"UDJStoredPlayer" inManagedObjectContext:managedObjectContext]];
-    storedPlayer = [[managedObjectContext executeFetchRequest:request error:&error] lastObject];
-    
-    if (error) {
-        // error in getting info
-    }
-    
-    // if there was no stored player before, create it
-    if (!storedPlayer) {
-        storedPlayer = (UDJStoredPlayer*)[NSEntityDescription insertNewObjectForEntityForName:@"UDJStoredPlayer" inManagedObjectContext: managedObjectContext]; ;
-    }
-    
-    // update the username, save the date the ticket was assigned
-    [storedPlayer setName: self.playerNameField.text];
-    [storedPlayer setAddress: self.addressField.text];
-    [storedPlayer setCity: self.cityField.text];
-    [storedPlayer setState: self.stateField.text];
-    [storedPlayer setPassword: self.playerPasswordField.text];
-    [storedPlayer setZipcode: self.zipCodeField.text];
-    [storedPlayer setPlayerID: [NSNumber numberWithInt: self.playerID]];
-    // 
-    
-    //Save the data
-    error = nil;
-    if (![managedObjectContext save:&error]) {
-        //Handle any error with the saving of the context
-    }
-    
-}
-
--(void)loadPlayerInfo{
-    
-    UDJStoredPlayer* storedPlayer;
-    NSError* error;
-    
-    //Set up a request to get the last stored player
-    NSFetchRequest * request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"UDJStoredPlayer" inManagedObjectContext:managedObjectContext]];
-    storedPlayer = [[managedObjectContext executeFetchRequest:request error:&error] lastObject];
-    
-    if (error) {
-        // error in getting info
-    }
-    
-    // if there was a stored player, fill in the fields
-    if (storedPlayer) {
-        [self.playerNameField setText: storedPlayer.name];
-        [self.playerPasswordField setText: storedPlayer.password];
-        [self.addressField setText: storedPlayer.address];
-        [self.cityField setText: storedPlayer.city];
-        [self.stateField setText: storedPlayer.state];
-        [self.zipCodeField setText: storedPlayer.zipcode];
-        self.playerID = [storedPlayer.playerID intValue];
-        
-        [playerNameLabel setText: storedPlayer.name];
-        self.createPlayerButton.hidden = YES;
-        self.playerStateLabel.hidden = NO;
-        self.playerStateSwitch.hidden = NO;
-        
-        [NSThread detachNewThreadSelector:@selector(updatePlayerMusic) toTarget:self withObject:nil];
-    }
-}
-
 #pragma mark - Player methods helpers
 
 -(BOOL)completedLocationFields{
@@ -516,13 +488,16 @@ typedef enum {
 #pragma mark - Response handling
 
 -(void)additionalPlayerSetup{
-    self.playerStateLabel.hidden = NO;
-    self.playerStateSwitch.hidden = NO;
     
     [self savePlayerInfo];
     
-    [self.activityLabel setText: @"Updating music library"];
-    [NSThread detachNewThreadSelector:@selector(updatePlayerMusic) toTarget:self withObject:nil];
+    // start using the new player
+    PlayerListViewController* playerListViewController = (PlayerListViewController*)self.parentViewController;
+    playerListViewController.shouldShowMyPlayer = YES;
+    [self dismissModalViewControllerAnimated: YES];
+    
+    //[self.activityLabel setText: @"Updating music library"];
+    //[NSThread detachNewThreadSelector:@selector(updatePlayerMusic) toTarget:self withObject:nil];
 }
 
 -(void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {

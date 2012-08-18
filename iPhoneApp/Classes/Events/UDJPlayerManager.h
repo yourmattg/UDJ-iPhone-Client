@@ -19,8 +19,12 @@
 @property(nonatomic,strong) NSString* zipCode;
 @property NSInteger playerID;
 
+@property BOOL isInPlayerMode;
+
 @property(nonatomic,strong) NSManagedObjectContext* managedObjectContext;
 
++(UDJPlayerManager*)sharedPlayerManager;
 -(void)loadPlayerInfo;
+-(void)savePlayerInfo;
 
 @end

@@ -150,30 +150,30 @@
 static UDJPlayerData* _sharedEventList = nil;
 
 +(UDJPlayerData*)sharedEventData{
-	@synchronized([UDJPlayerData class]){
-		if (!_sharedEventList)
-			_sharedEventList = [[self alloc] init];        
-		return _sharedEventList;
-	}    
-	return nil;
+    @synchronized([UDJPlayerData class]){
+        if (!_sharedEventList)
+                _sharedEventList = [[self alloc] init];        
+        return _sharedEventList;
+    }    
+    return nil;
 }
 
 +(id)alloc{
-	@synchronized([UDJPlayerData class]){
-		NSAssert(_sharedEventList == nil, @"Attempted to allocate a second instance of a singleton.");
-		_sharedEventList = [super alloc];
-		return _sharedEventList;
-	}
-	return nil;
+    @synchronized([UDJPlayerData class]){
+        NSAssert(_sharedEventList == nil, @"Attempted to allocate a second instance of a singleton.");
+        _sharedEventList = [super alloc];
+        return _sharedEventList;
+    }
+    return nil;
 }
 
 -(id)init {
-	self = [super init];
+    self = [super init];
     
     locationManager = [[LocationManager alloc] init];
     globalData = [UDJData sharedUDJData];
     
-	return self;
+    return self;
 }
 
 // memory managed

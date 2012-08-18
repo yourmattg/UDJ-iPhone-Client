@@ -29,6 +29,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "RestKit/RKJSONParserJSONKit.h"
 #import "SHK.h"
+#import "UDJPlayerManager.h"
 
 
 @implementation PlaylistViewController
@@ -230,6 +231,8 @@ static PlaylistViewController* _sharedPlaylistViewController;
     self.title = NSLocalizedString(@"Playlist", @"Playlist");
     
     [playerNameLabel setText: currentEvent.name];
+    NSLog(@"Is in player mode = %d", [UDJPlayerManager sharedPlayerManager].isInPlayerMode);
+    self.leaveButton.hidden = [UDJPlayerManager sharedPlayerManager].isInPlayerMode;
     
     self.hostControlView.hidden = YES;
     [self checkIfHost];
