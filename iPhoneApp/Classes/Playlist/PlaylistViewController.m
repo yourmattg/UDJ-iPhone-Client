@@ -224,8 +224,9 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     // init playlist
     self.playlist = [UDJPlaylist sharedUDJPlaylist];
-    self.playlist.eventId = currentEvent.playerID;
+    self.playlist.playerID = currentEvent.playerID;
     self.playlist.delegate = self;
+    self.playlist.playlistDelegate = self;
     
     // set up tab bar stuff
     self.title = NSLocalizedString(@"Playlist", @"Playlist");
@@ -518,34 +519,14 @@ static PlaylistViewController* _sharedPlaylistViewController;
 
 #pragma mark - Response handling
 
-// handlePlaylistResponse: this is done asynchronously from the send method so the client can do other things meanwhile
-// NOTE: this calls [playlistView refreshTableList] for you!
-- (void)handlePlaylistResponse:(RKResponse*)response{
-    
-    NSMutableArray* tempList = [NSMutableArray new];
-    
-    RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
-    // response dict: holds current song and array of songs
-    NSDictionary* responseDict = [parser objectFromString:[response bodyAsString] error:nil];
-    UDJSong* currentSong = [UDJSong songFromDictionary:[responseDict objectForKey:@"current_song"] isLibraryEntry:NO];
-    
-    // the array holding the songs on the playlist
-    NSArray* songArray = [responseDict objectForKey:@"active_playlist"];
-    NSLog(@"count %d", [songArray count]);
-    for(int i=0; i<[songArray count]; i++){
-        NSDictionary* songDict = [songArray objectAtIndex:i];
-        UDJSong* song = [UDJSong songFromDictionary:songDict isLibraryEntry:NO];
-        [tempList addObject:song];
-    }
-    
-    [[UDJPlaylist sharedUDJPlaylist] setPlaylist: tempList];
-    [[UDJPlaylist sharedUDJPlaylist] setCurrentSong: currentSong];
-    
+-(void)playlistDidUpdate:responseDictionary{
     [self refreshTableList];
+    [self updateVolumeAndState: responseDictionary];
     
-    [self updateVolumeAndState: responseDict];
-    
+    // hide the pulldown refresh
+    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
 }
+
 
 
 // Handle responses from the server
@@ -567,9 +548,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
         if([[headerDict objectForKey: @"X-Udj-Missing-Resource"] isEqualToString:@"player"])
             [self resetToPlayerResultView];
     }
-    else if ([request isGET]) {
-        [self handlePlaylistResponse:response];        
-    }
     else if([request isDELETE]){
         if([response isOK]) [self handleLeaveEvent];
     }
@@ -583,9 +561,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
     // check if our ticket was invalid
     if(response.statusCode == 401 && [[headerDict objectForKey: @"WWW-Authenticate"] isEqualToString: @"ticket-hash"])
         [globalData renewTicket];
-    
-    // hide the pulldown refresh
-    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:0];
     
     //self.currentRequestNumber = [NSNumber numberWithInt: -1];
 }

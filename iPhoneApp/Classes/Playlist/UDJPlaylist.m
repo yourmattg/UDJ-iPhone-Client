@@ -19,10 +19,12 @@
 
 #import "UDJPlaylist.h"
 #import "UDJSong.h"
+#import "RestKit/RKJSONParserJSONKit.h"
 
 @implementation UDJPlaylist
 
-@synthesize playlist, eventId, currentSong, delegate, globalData;
+@synthesize playlist, playerID, currentSong, delegate, globalData;
+@synthesize playlistDelegate;
 
 - (UDJSong*)songAtIndex:(NSInteger)i{
     if(i<0 || i >= [playlist count]) return nil;
@@ -36,10 +38,10 @@
     
     //create url [GET] {prefix}/events/event_id/active_playlist
     NSString* urlString = client.baseURL;
-    urlString = [urlString stringByAppendingFormat:@"%@%d%@", @"/players/", eventId, @"/active_playlist"];
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@", @"/players/", playerID, @"/active_playlist"];
 
     // create request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: delegate];
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: self];
     request.queue = client.requestQueue;
     request.method = RKRequestMethodGET;
     request.additionalHTTPHeaders = globalData.headers;
@@ -55,7 +57,7 @@
     
     //create url [POST] {prefix}/udj/events/event_id/active_playlist/playlist_id/users/user_id/upvote
     NSString* urlString = client.baseURL;
-    urlString = [urlString stringByAppendingFormat:@"%@%d%@%d%@%d%@", @"/players/", eventId, @"/active_playlist/songs/",songId,@"/users/",[globalData.userID intValue],@"/"];
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@%d%@%d%@", @"/players/", playerID, @"/active_playlist/songs/",songId,@"/users/",[globalData.userID intValue],@"/"];
     if(up) urlString = [urlString stringByAppendingString:@"upvote"];
     else urlString = [urlString stringByAppendingString:@"downvote"];
     
@@ -92,7 +94,40 @@
 
 
 
+#pragma mark - Response handling
 
+// handlePlaylistResponse: this is done asynchronously from the send method so the client can do other things meanwhile
+// NOTE: this calls [playlistView refreshTableList] for you!
+- (void)handlePlaylistResponse:(RKResponse*)response{
+    
+    NSMutableArray* tempList = [NSMutableArray new];
+    
+    RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
+    // response dict: holds current song and array of songs
+    NSDictionary* responseDict = [parser objectFromString:[response bodyAsString] error:nil];
+    UDJSong* newCurrentSong = [UDJSong songFromDictionary:[responseDict objectForKey:@"current_song"] isLibraryEntry:NO];
+    
+    // the array holding the songs on the playlist
+    NSArray* songArray = [responseDict objectForKey:@"active_playlist"];
+    for(int i=0; i<[songArray count]; i++){
+        NSDictionary* songDict = [songArray objectAtIndex:i];
+        UDJSong* song = [UDJSong songFromDictionary:songDict isLibraryEntry:NO];
+        [tempList addObject:song];
+    }
+    
+    [self setPlaylist: tempList];
+    [self setCurrentSong: newCurrentSong];
+    NSLog(@"updated playlist. current song = %@, playlist count = %d", newCurrentSong.title, [self count]);
+    
+    // send message to delegate (Playlist view controller)
+    [playlistDelegate playlistDidUpdate: responseDict];
+}
+
+-(void)request:(RKRequest *)request didLoadResponse:(RKResponse *)response{
+    if ([request isGET]) {
+        [self handlePlaylistResponse:response];        
+    }
+}
 
 
 

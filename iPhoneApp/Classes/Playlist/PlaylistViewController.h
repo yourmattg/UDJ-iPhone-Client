@@ -22,8 +22,9 @@
 #import "UDJPlaylist.h"
 #import "RestKit/RestKit.h"
 #import "PullRefreshTableViewController.h"
+#import "UDJPlaylistDelegate.h"
 
-@interface PlaylistViewController : PullRefreshTableViewController <UIAlertViewDelegate, RKRequestDelegate>{
+@interface PlaylistViewController : PullRefreshTableViewController <UIAlertViewDelegate, RKRequestDelegate, UDJPlaylistDelegate>{
 
     UDJPlaylist *playlist;
     UDJPlayer* currentEvent;

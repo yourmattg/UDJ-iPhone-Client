@@ -20,6 +20,7 @@
 #import <Foundation/Foundation.h>
 #import "UDJSong.h"
 #import "UDJData.h"
+#import "UDJPlaylistDelegate.h"
 
 enum VoteStatus {
     VoteStatusNull = 0,
@@ -27,10 +28,10 @@ enum VoteStatus {
     VoteStatusUp = 2
 };
 
-@interface UDJPlaylist : NSObject{
+@interface UDJPlaylist : NSObject<RKRequestDelegate>{
     
     NSMutableArray* playlist;
-    NSInteger eventId;
+    NSInteger playerID;
     UDJSong* currentSong;
     
     NSMutableDictionary* voteRecordKeeper;
@@ -48,10 +49,12 @@ enum VoteStatus {
 - (void)sendVoteRequest:(BOOL)up songId:(NSInteger)songId;
 
 @property(nonatomic,strong) NSMutableArray* playlist;
-@property(nonatomic) NSInteger eventId;
+@property(nonatomic) NSInteger playerID;
 @property(nonatomic,strong) UDJSong* currentSong;
 @property(nonatomic, strong) UIViewController* delegate;
 @property(nonatomic,strong) UDJData* globalData;
+
+@property(nonatomic,weak) id<UDJPlaylistDelegate> playlistDelegate;
 
 
 @end

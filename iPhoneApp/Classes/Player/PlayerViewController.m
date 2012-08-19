@@ -53,6 +53,7 @@
     
     
     [playerManager updateCurrentPlayer];
+    [[UDJPlaylist sharedUDJPlaylist] setPlayerID: playerManager.playerID];
     [[UDJPlaylist sharedUDJPlaylist] sendPlaylistRequest];
     
     [playerManager changePlayerState: PlayerStatePaused];

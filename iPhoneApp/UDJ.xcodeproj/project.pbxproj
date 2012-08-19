@@ -234,6 +234,7 @@
 		A35D3DF014F985460007B374 /* voteup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voteup.png; sourceTree = "<group>"; };
 		A35E3E981516680100A2882D /* UDJData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJData.h; sourceTree = "<group>"; };
 		A35E3E991516680100A2882D /* UDJData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJData.m; sourceTree = "<group>"; };
+		A35EEE1C15E194D7008CB29B /* UDJPlaylistDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UDJPlaylistDelegate.h; sourceTree = "<group>"; };
 		A35F57F21572D25D004AA5DB /* PullRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullRefreshTableViewController.h; sourceTree = "<group>"; };
 		A35F57F31572D25D004AA5DB /* PullRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullRefreshTableViewController.m; sourceTree = "<group>"; };
 		A35F57F51572D477004AA5DB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -446,6 +447,7 @@
 				A324ABF514AAB74700388514 /* UDJSong.m */,
 				A3F58D9314C753D300E350F4 /* UDJEventGoer.h */,
 				A3F58D9414C753D300E350F4 /* UDJEventGoer.m */,
+				A35EEE1C15E194D7008CB29B /* UDJPlaylistDelegate.h */,
 			);
 			path = Playlist;
 			sourceTree = "<group>";
