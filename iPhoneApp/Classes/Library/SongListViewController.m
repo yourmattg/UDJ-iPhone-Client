@@ -132,7 +132,7 @@
 
 -(IBAction)addButtonClick:(id)sender{
     UIButton* button = (UIButton*)sender;
-    [self sendAddSongRequest: button.tag playerID: [UDJPlayerData sharedEventData].currentPlayer.playerID];
+    [self sendAddSongRequest: button.tag playerID: [UDJPlayerData sharedPlayerData].currentPlayer.playerID];
     [self showAddNotification: button.titleLabel.text];
 }
 
@@ -216,7 +216,7 @@
     
     NSString* urlString = client.baseURL;
     artist = [artist stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-    NSInteger playerID = [UDJPlayerData sharedEventData].currentPlayer.playerID;
+    NSInteger playerID = [UDJPlayerData sharedPlayerData].currentPlayer.playerID;
     urlString = [urlString stringByAppendingFormat:@"%@%d%@%@",@"/players/",playerID,@"/available_music/artists/",artist,nil];
     
     // create request
@@ -254,7 +254,7 @@
     
     NSString* urlString = client.baseURL;
     query = [query stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-    NSInteger playerID = [UDJPlayerData sharedEventData].currentPlayer.playerID;
+    NSInteger playerID = [UDJPlayerData sharedPlayerData].currentPlayer.playerID;
     urlString = [urlString stringByAppendingFormat:@"%@%d%@%@%@%d",@"/players/",playerID,@"/available_music?query=",query, @"&max_results=", MAX_RESULTS, nil];
     
     // create request

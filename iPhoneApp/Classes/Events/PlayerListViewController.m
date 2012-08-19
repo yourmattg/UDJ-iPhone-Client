@@ -48,7 +48,7 @@
             // send an event join request with the password specified
             [self toggleJoiningView: YES];
             self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
-            [[UDJPlayerData sharedEventData] enterEvent: [alertView textFieldAtIndex:0].text];
+            [[UDJPlayerData sharedPlayerData] enterEvent: [alertView textFieldAtIndex:0].text];
         }
         else{
             [self.tableView reloadData];
@@ -84,7 +84,7 @@
     joiningView.layer.borderWidth = 3;
     
     // set up eventData and get nearby events
-    self.eventData = [UDJPlayerData sharedEventData];
+    self.eventData = [UDJPlayerData sharedPlayerData];
     self.eventData.playerListDelegate = self;
     self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
     
@@ -274,10 +274,10 @@
     NSInteger index = [indexPath indexAtPosition:1];
     
     // get the event corresponding to that index
-    [UDJPlayerData sharedEventData].currentPlayer = [[UDJPlayerData sharedEventData].currentList objectAtIndex:index];
+    [UDJPlayerData sharedPlayerData].currentPlayer = [[UDJPlayerData sharedPlayerData].currentList objectAtIndex:index];
     
     // there's a password: go the password screen
-    if([UDJPlayerData sharedEventData].currentPlayer.hasPassword){
+    if([UDJPlayerData sharedPlayerData].currentPlayer.hasPassword){
         UIAlertView* passwordAlertView = [[UIAlertView alloc] initWithTitle:@"Password Required" message:@"This player requires a password." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Enter", nil];
         passwordAlertView.alertViewStyle = UIAlertViewStyleSecureTextInput;
         [passwordAlertView textFieldAtIndex:0].placeholder = @"Password";
@@ -421,12 +421,12 @@
     NSArray* eventArray = [parser objectFromString:[response bodyAsString] error:nil];
     for(int i=0; i<[eventArray count]; i++){
         NSDictionary* eventDict = [eventArray objectAtIndex:i];
-        UDJPlayer* event = [UDJPlayer eventFromDictionary:eventDict];
+        UDJPlayer* event = [UDJPlayer playerFromDictionary:eventDict];
         [cList addObject:event];
     }
     
     // Update the global event list
-    [UDJPlayerData sharedEventData].currentList = cList;
+    [UDJPlayerData sharedPlayerData].currentList = cList;
     
     // update status label accordingly
     if([cList count] == 0) [self showResultsMessage:NO];

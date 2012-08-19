@@ -48,6 +48,7 @@
     self.playerManager = [UDJPlayerManager sharedPlayerManager];
     NSLog(@"playerManager ID: %d", self.playerManager.playerID);
     
+    [playerManager updateCurrentPlayer];
     [playerManager changePlayerState: PlayerStatePaused];
 }
 

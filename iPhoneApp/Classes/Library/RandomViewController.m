@@ -122,7 +122,7 @@
 
 -(IBAction)addButtonClick:(id)sender{
     UIButton* button = (UIButton*)sender;
-    [self sendAddSongRequest: button.tag playerID: [UDJPlayerData sharedEventData].currentPlayer.playerID];
+    [self sendAddSongRequest: button.tag playerID: [UDJPlayerData sharedPlayerData].currentPlayer.playerID];
     [self showAddNotification: button.titleLabel.text];
 }
 
@@ -169,7 +169,7 @@
     
     //create url [GET] /udj/events/event_id/available_music/random_songs{?max_randoms=number_desired}
     NSString* urlString = client.baseURL;
-    urlString = [urlString stringByAppendingFormat:@"%@%d%@%d",@"/players/", [UDJPlayerData sharedEventData].currentPlayer.playerID ,@"/available_music/random_songs?max_randoms=", MAX_RESULTS, nil];
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@%d",@"/players/", [UDJPlayerData sharedPlayerData].currentPlayer.playerID ,@"/available_music/random_songs?max_randoms=", MAX_RESULTS, nil];
     
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];

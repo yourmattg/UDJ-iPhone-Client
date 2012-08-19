@@ -11,6 +11,8 @@
 #import "UDJAppDelegate.h"
 #import "UDJStoredLibraryEntry.h"
 #import "JSONKit.h"
+#import "UDJPlayer.h"
+#import "UDJPlayerData.h"
 
 @implementation UDJPlayerManager
 
@@ -301,6 +303,13 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 }
 
 #pragma mark - Player state methods
+
+-(void)updateCurrentPlayer{
+    UDJPlayer* player = [[UDJPlayer alloc] init];
+    player.playerID = self.playerID;
+    player.name = self.playerName;
+    [UDJPlayerData sharedPlayerData].currentPlayer = player;
+}
 
 -(void)changePlayerState:(PlayerState)newState{
     [self sendPlayerStateRequest: newState];

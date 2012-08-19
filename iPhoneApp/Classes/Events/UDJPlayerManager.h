@@ -33,6 +33,7 @@ typedef enum {
 @property(nonatomic,strong) UDJData* globalData;
 
 +(UDJPlayerManager*)sharedPlayerManager;
+-(void)updateCurrentPlayer;
 -(void)loadPlayerInfo;
 -(void)savePlayerInfo;
 -(void)updatePlayerMusic;

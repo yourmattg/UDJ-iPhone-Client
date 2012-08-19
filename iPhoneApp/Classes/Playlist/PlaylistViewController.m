@@ -47,7 +47,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 // handleLeaveEvent: go back to the event results page
 -(void)handleLeaveEvent{
     // user is no longer in an event, reset currentEvent
-    [UDJPlayerData sharedEventData].currentPlayer=nil;
+    [UDJPlayerData sharedPlayerData].currentPlayer=nil;
     
     // we have no need for this party's playlist
     [[UDJPlaylist sharedUDJPlaylist] clearPlaylist];
@@ -216,11 +216,11 @@ static PlaylistViewController* _sharedPlaylistViewController;
     _sharedPlaylistViewController = self;
     
     // set event, event label text
-    self.currentEvent = [UDJPlayerData sharedEventData].currentPlayer;
+    self.currentEvent = [UDJPlayerData sharedPlayerData].currentPlayer;
 	self.eventNameLabel.text = currentEvent.name;
     
     // set delegate
-    [UDJPlayerData sharedEventData].leaveEventDelegate = self;
+    [UDJPlayerData sharedPlayerData].leaveEventDelegate = self;
     
     // init playlist
     self.playlist = [UDJPlaylist sharedUDJPlaylist];
@@ -499,7 +499,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     }
     
     //[POST] /udj/users/user_id/players/player_id/state
-    [[UDJPlayerData sharedEventData] setState: state];
+    [[UDJPlayerData sharedPlayerData] setState: state];
 }
 
 -(IBAction)volumeSliderChanged:(id)sender{
@@ -511,7 +511,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 -(IBAction)volumeSliderDoneChanging:(id)sender{
     UISlider* slider = sender;
     NSInteger value = slider.value;
-    [[UDJPlayerData sharedEventData] setVolume: value];
+    [[UDJPlayerData sharedPlayerData] setVolume: value];
 }
 
 //-(void)setVolume:(NSInteger)volume

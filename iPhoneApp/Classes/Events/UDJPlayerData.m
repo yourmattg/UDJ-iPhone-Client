@@ -81,7 +81,7 @@
     //create url
     NSString* urlString = client.baseURL;
     urlString = [urlString stringByAppendingString:@"/players/"];
-    urlString = [urlString stringByAppendingFormat:@"%d",[UDJPlayerData sharedEventData].currentPlayer.playerID];
+    urlString = [urlString stringByAppendingFormat:@"%d",[UDJPlayerData sharedPlayerData].currentPlayer.playerID];
     urlString = [urlString stringByAppendingString:@"/users/"];
     urlString = [urlString stringByAppendingFormat:@"%i", [globalData.userID intValue]];
     
@@ -149,7 +149,7 @@
 #pragma mark Singleton methods
 static UDJPlayerData* _sharedEventList = nil;
 
-+(UDJPlayerData*)sharedEventData{
++(UDJPlayerData*)sharedPlayerData{
     @synchronized([UDJPlayerData class]){
         if (!_sharedEventList)
                 _sharedEventList = [[self alloc] init];        

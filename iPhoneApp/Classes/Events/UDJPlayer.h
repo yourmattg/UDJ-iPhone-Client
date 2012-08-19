@@ -30,7 +30,8 @@
     double longitude;
     
 }
-+ (UDJPlayer*) eventFromDictionary:(NSDictionary*)eventDict;
+
++ (UDJPlayer*)playerFromDictionary:(NSDictionary*)playerDict;
 
 @property(nonatomic) NSInteger playerID;
 @property(nonatomic,strong) NSString* name;

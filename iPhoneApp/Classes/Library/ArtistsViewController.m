@@ -175,7 +175,7 @@
     
     // create url /players/player_id/available_music/artists
     NSString* urlString = client.baseURL;
-    urlString = [urlString stringByAppendingFormat:@"%@%d%@",@"/players/",[UDJPlayerData sharedEventData].currentPlayer.playerID,@"/available_music/artists"];
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@",@"/players/",[UDJPlayerData sharedPlayerData].currentPlayer.playerID,@"/available_music/artists"];
     
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];

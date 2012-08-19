@@ -23,16 +23,16 @@
 
 @synthesize playerID, name, hostId, latitude, longitude, hostUsername, hasPassword;
 
-+ (UDJPlayer*) eventFromDictionary:(NSDictionary *)eventDict{
-    UDJPlayer* event = [UDJPlayer new];
-    event.name = [eventDict objectForKey:@"name"];
-    event.playerID = [[eventDict objectForKey:@"id"] integerValue];
-    event.hostId = [[eventDict objectForKey:@"owner_id"] integerValue];
-    event.latitude = [[eventDict objectForKey:@"latitude"] doubleValue];
-    event.longitude = [[eventDict objectForKey:@"longitude"] doubleValue];
-    event.hostUsername = [eventDict objectForKey:@"owner_username"];
-    event.hasPassword = [[eventDict objectForKey:@"has_password"] boolValue];
-    return event;
++ (UDJPlayer*) playerFromDictionary:(NSDictionary *)playerDict{
+    UDJPlayer* player = [UDJPlayer new];
+    player.name = [playerDict objectForKey:@"name"];
+    player.playerID = [[playerDict objectForKey:@"id"] integerValue];
+    player.hostId = [[playerDict objectForKey:@"owner_id"] integerValue];
+    player.latitude = [[playerDict objectForKey:@"latitude"] doubleValue];
+    player.longitude = [[playerDict objectForKey:@"longitude"] doubleValue];
+    player.hostUsername = [playerDict objectForKey:@"owner_username"];
+    player.hasPassword = [[playerDict objectForKey:@"has_password"] boolValue];
+    return player;
 }
 
 // memory managed
