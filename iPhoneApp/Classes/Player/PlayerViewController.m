@@ -47,6 +47,7 @@
     // Do any additional setup after loading the view from its nib.
     
     self.playerManager = [UDJPlayerManager sharedPlayerManager];
+    self.playerManager.UIDelegate = self;
     
     //[playerNameLabel setText:[playerManager playerName]];
     
@@ -69,12 +70,21 @@
 
 #pragma mark - Play and pause
 
--(void)updateSongDisplay{
+-(void)updateDisplayWithItem:(MPMediaItem*)item;{
     // update the UI for current song
+    NSTimeInterval duration = [[item valueForKey: MPMediaItemPropertyPlaybackDuration] doubleValue];
+    //float maxValue = duration;
+    [songPositionSlider setMaximumValue: duration];
 }
 
 -(IBAction)playToggleClick:(id)sender{
     [playerManager play];
+}
+
+#pragma mark - Changing song position
+
+-(IBAction)positionSliderValueChanged:(id)sender{
+    NSLog(@"Position: %f", self.songPositionSlider.value);
 }
 
 #pragma mark - Closing out of player

@@ -38,6 +38,8 @@ typedef enum {
 @property double songLength;
 @property double songPosition;
 
+@property(nonatomic,weak) UIViewController* UIDelegate;
+
 +(UDJPlayerManager*)sharedPlayerManager;
 -(void)updateCurrentPlayer;
 -(void)loadPlayerInfo;

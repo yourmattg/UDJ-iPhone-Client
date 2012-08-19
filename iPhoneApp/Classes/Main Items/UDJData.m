@@ -122,7 +122,7 @@
     
     NSDictionary* responseHeaders = request.additionalHTTPHeaders;
     
-     NSLog(@"status code %d\n\nbody: %@\n\ndelegate: %@", [response statusCode], [request HTTPBodyString], [responseHeaders objectForKey:@"delegate"]);
+     NSLog(@"status code %d", [response statusCode]);
     
     if([[responseHeaders objectForKey: @"delegate"] isEqualToString: @"songAddDelegate"]){
         if(songAddDelegate != nil){

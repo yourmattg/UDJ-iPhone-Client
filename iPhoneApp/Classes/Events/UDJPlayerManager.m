@@ -14,6 +14,7 @@
 #import "UDJPlayer.h"
 #import "UDJPlayerData.h"
 #import "UDJPlaylist.h"
+#import "PlayerViewController.h"
 
 @implementation UDJPlayerManager
 
@@ -24,6 +25,8 @@
 @synthesize isInPlayerMode;
 @synthesize playerController, currentMediaItem;
 @synthesize songLength, songPosition;
+@synthesize UIDelegate;
+
 
 #pragma mark - Singleton methods
 static UDJPlayerManager* _sharedPlayerManager = nil;
@@ -59,6 +62,8 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
         [self loadPlayerInfo];
         
         self.playerController = [MPMusicPlayerController iPodMusicPlayer];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playingItemChanged) 
+            name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification object:nil];
     }
     return self;
 }
@@ -352,7 +357,12 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 -(void)saveState{
     NSTimeInterval playbackTime = [playerController currentPlaybackTime];
     self.songPosition = playbackTime;
-    NSLog(@"Saving song positon: %f, %f", playbackTime, self.songPosition);
+}
+
+#pragma mark - Playback item changed
+
+-(void)playingItemChanged{
+    NSLog(@"playing item changed");
 }
 
 #pragma mark - Playing music
@@ -362,6 +372,9 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     self.currentMediaItem = item;
     self.songLength = [[currentMediaItem valueForKey: MPMediaItemPropertyPlaybackDuration] floatValue];
     self.songPosition = 0;
+    
+    PlayerViewController* playerViewController = (PlayerViewController*)self.UIDelegate;
+    [playerViewController updateDisplayWithItem: item];
 }
 
 -(BOOL)play{
@@ -376,11 +389,13 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
         MPMediaQuery* query = [[MPMediaQuery alloc] initWithFilterPredicates: [NSSet setWithObject: predicate]];
         [self updateCurrentMediaItem: [[query items] objectAtIndex: 0]];
         [self.playerController setQueueWithQuery: query];
-        [playerController play];        
+        [playerController play];  
+        [playerController setVolume: 0];
+        [playerController beginGeneratingPlaybackNotifications];
     }
     else{
-        [playerController setCurrentPlaybackTime: self.songPosition];
-        [playerController play];
+        //[playerController setCurrentPlaybackTime: self.songPosition];
+        //[playerController play];
     }
     
     return YES;

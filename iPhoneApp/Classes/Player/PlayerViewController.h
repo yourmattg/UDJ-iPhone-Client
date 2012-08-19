@@ -34,4 +34,6 @@
 @property(nonatomic,strong) NSManagedObjectContext *managedObjectContext;
 @property NSInteger playerID;
 
+-(void)updateDisplayWithItem:(MPMediaItem*)item;
+
 @end
