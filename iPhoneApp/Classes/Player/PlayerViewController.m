@@ -46,10 +46,12 @@
     // Do any additional setup after loading the view from its nib.
     
     self.playerManager = [UDJPlayerManager sharedPlayerManager];
-    NSLog(@"playerManager ID: %d", self.playerManager.playerID);
+    
+    [playerNameLabel setText:[playerManager playerName]];
     
     [playerManager updateCurrentPlayer];
     [playerManager changePlayerState: PlayerStatePaused];
+    [playerManager updatePlayerMusic];
 }
 
 -(void)viewDidAppear:(BOOL)animated{

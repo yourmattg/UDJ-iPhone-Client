@@ -16,7 +16,7 @@ typedef enum {
     PlayerStatePaused
 } PlayerState;
 
-@interface UDJPlayerManager : NSObject
+@interface UDJPlayerManager : NSObject <RKRequestDelegate>
 
 @property(nonatomic,strong) NSString* playerName;
 @property(nonatomic,strong) NSString* playerPassword;
@@ -38,5 +38,7 @@ typedef enum {
 -(void)savePlayerInfo;
 -(void)updatePlayerMusic;
 -(void)changePlayerState:(PlayerState)newState;
+
+- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response;
 
 @end

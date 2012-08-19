@@ -116,13 +116,18 @@
     [self initTextFields];
     
     self.globalData = [UDJData sharedUDJData];
-    self.globalData.playerMethodsDelegate = self;
+    self.globalData.playerCreateDelegate = self;
     self.playerManager = [UDJPlayerManager sharedPlayerManager];
     
     UDJAppDelegate* appDelegate = (UDJAppDelegate*)[[UIApplication sharedApplication] delegate];
     managedObjectContext = appDelegate.managedObjectContext;
     
     [self updatePlayerInfo];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.globalData.playerCreateDelegate = nil;
 }
 
 - (void)viewDidUnload
@@ -258,7 +263,7 @@
     
     // set up the headers, including which type of request this is
     NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJData sharedUDJData].headers];
-    [requestHeaders setValue:@"playerMethodsDelegate" forKey:@"delegate"];
+    [requestHeaders setValue:@"playerCreateDelegate" forKey:@"delegate"];
     [requestHeaders setValue:@"text/json" forKey:@"content-type"];
     request.additionalHTTPHeaders = requestHeaders;
     

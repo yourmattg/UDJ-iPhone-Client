@@ -23,11 +23,12 @@
 #import "RestKit/RKJSONParserJSONKit.h"
 #import "SongListViewController.h"
 #import "PlayerInfoViewController.h"
+#import "UDJPlayerManager.h"
 
 @implementation UDJData
 
 @synthesize requestCount, ticket, headers, userID, username, password, loggedIn, managedObjectContext;
-@synthesize songAddDelegate, playerMethodsDelegate;
+@synthesize songAddDelegate, playerCreateDelegate;
 
 
 #pragma mark - Ticket validation
@@ -118,9 +119,10 @@
 
 // Handle responses from the server
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
-    NSLog(@"status code %d", [response statusCode]);
     
     NSDictionary* responseHeaders = request.additionalHTTPHeaders;
+    
+     NSLog(@"status code %d\n\nbody: %@\n\ndelegate: %@", [response statusCode], [request HTTPBodyString], [responseHeaders objectForKey:@"delegate"]);
     
     if([[responseHeaders objectForKey: @"delegate"] isEqualToString: @"songAddDelegate"]){
         if(songAddDelegate != nil){
@@ -130,11 +132,15 @@
         else NSLog(@"delegate was nil");
     }
     
-    else if([[responseHeaders objectForKey: @"delegate"] isEqualToString: @"playerMethodsDelegate"]){
-        if(playerMethodsDelegate != nil){
-            PlayerInfoViewController* playerInfoViewController = (PlayerInfoViewController*)playerMethodsDelegate;
+    else if([[responseHeaders objectForKey: @"delegate"] isEqualToString: @"playerCreateDelegate"]){
+        if(playerCreateDelegate != nil){
+            PlayerInfoViewController* playerInfoViewController = (PlayerInfoViewController*)playerCreateDelegate;
             [playerInfoViewController request: request didLoadResponse: response];            
         }
+    }
+    
+    else if([[responseHeaders objectForKey: @"delegate"] isEqualToString: @"playerMethodsDelegate"]){
+        [[UDJPlayerManager sharedPlayerManager] request:request didLoadResponse:response];
     }
         //  && [[responseHeaders objectForKey: @"requestType"] isEqualToString:@"renewTicket"]
     else if([request isPOST]) {

@@ -37,7 +37,7 @@
 @property(nonatomic, retain) NSManagedObjectContext *managedObjectContext; 
 
 @property(nonatomic,unsafe_unretained) UIViewController* songAddDelegate;
-@property(nonatomic,unsafe_unretained) UIViewController* playerMethodsDelegate;
+@property(nonatomic,unsafe_unretained) UIViewController* playerCreateDelegate;
 
 +(UDJData*)sharedUDJData;
 -(BOOL)ticketIsValid;

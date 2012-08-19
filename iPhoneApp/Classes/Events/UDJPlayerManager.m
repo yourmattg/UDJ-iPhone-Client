@@ -308,6 +308,8 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     UDJPlayer* player = [[UDJPlayer alloc] init];
     player.playerID = self.playerID;
     player.name = self.playerName;
+    player.hostId = [globalData.userID intValue];
+    player.hostUsername = globalData.username;
     [UDJPlayerData sharedPlayerData].currentPlayer = player;
 }
 
@@ -339,6 +341,14 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     
     //send request
     [request send];
+}
+
+
+#pragma mark - Response handling
+
+- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response{
+    NSLog(@"Player Manager response code: %d", [response statusCode]);
+    
 }
 
 

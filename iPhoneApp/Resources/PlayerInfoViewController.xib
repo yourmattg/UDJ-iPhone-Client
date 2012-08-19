@@ -61,7 +61,7 @@
 						<string key="NSFrame">{{0, 30}, {320, 480}}</string>
 						<reference key="NSSuperview" ref="559625925"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="124380055"/>
+						<reference key="NSNextKeyView" ref="788543467"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<float key="IBUIAlpha">0.30000001192092896</float>
 						<int key="IBUIContentMode">1</int>
@@ -136,7 +136,7 @@
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentVerticalAlignment">0</int>
-								<string key="IBUIText">player</string>
+								<string key="IBUIText">Matt's Test Player </string>
 								<int key="IBUIBorderStyle">3</int>
 								<string key="IBUIPlaceholder">Player name</string>
 								<object class="NSColor" key="IBUITextColor">
@@ -202,7 +202,7 @@
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentVerticalAlignment">0</int>
-								<string key="IBUIText"/>
+								<string key="IBUIText">1107 4th st</string>
 								<int key="IBUIBorderStyle">3</int>
 								<string key="IBUIPlaceholder">Address</string>
 								<object class="NSColor" key="IBUITextColor">
@@ -230,7 +230,7 @@
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentVerticalAlignment">0</int>
-								<string key="IBUIText"/>
+								<string key="IBUIText">Champaign</string>
 								<int key="IBUIBorderStyle">3</int>
 								<string key="IBUIPlaceholder">City</string>
 								<object class="NSColor" key="IBUITextColor">
@@ -258,7 +258,7 @@
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentVerticalAlignment">0</int>
-								<string key="IBUIText"/>
+								<string key="IBUIText">IL</string>
 								<int key="IBUIBorderStyle">3</int>
 								<string key="IBUIPlaceholder">State</string>
 								<object class="NSColor" key="IBUITextColor">
@@ -287,7 +287,7 @@
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentVerticalAlignment">0</int>
-								<string key="IBUIText"/>
+								<string key="IBUIText">61820</string>
 								<int key="IBUIBorderStyle">3</int>
 								<string key="IBUIPlaceholder">Zip code</string>
 								<object class="NSColor" key="IBUITextColor">
@@ -426,7 +426,7 @@
 						<reference key="IBUIFontDescription" ref="867109733"/>
 						<reference key="IBUIFont" ref="344642248"/>
 					</object>
-					<object class="IBUIButton" id="124380055">
+					<object class="IBUIButton" id="788543467">
 						<reference key="NSNextResponder" ref="559625925"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{8, 7}, {53, 29}}</string>
@@ -726,7 +726,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">closeButton</string>
 						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="124380055"/>
+						<reference key="destination" ref="788543467"/>
 					</object>
 					<int key="connectionID">138</int>
 				</object>
@@ -777,7 +777,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">closeButtonClick:</string>
-						<reference key="source" ref="124380055"/>
+						<reference key="source" ref="788543467"/>
 						<reference key="destination" ref="841351856"/>
 						<int key="IBEventType">20</int>
 					</object>
@@ -786,7 +786,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">closeButtonClick:</string>
-						<reference key="source" ref="124380055"/>
+						<reference key="source" ref="788543467"/>
 						<reference key="destination" ref="841351856"/>
 						<int key="IBEventType">7</int>
 					</object>
@@ -822,7 +822,7 @@
 							<reference ref="827035600"/>
 							<reference ref="616588155"/>
 							<reference ref="602172045"/>
-							<reference ref="124380055"/>
+							<reference ref="788543467"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -933,7 +933,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">132</int>
-						<reference key="object" ref="124380055"/>
+						<reference key="object" ref="788543467"/>
 						<reference key="parent" ref="559625925"/>
 					</object>
 				</array>
