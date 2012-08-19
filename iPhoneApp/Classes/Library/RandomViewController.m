@@ -99,11 +99,11 @@
     }];
 }
 
--(void)sendAddSongRequest:(NSInteger)librarySongId playerID:(NSInteger)playerID{
+-(void)sendAddSongRequest:(unsigned long long)librarySongId playerID:(NSInteger)playerID{
     RKClient* client = [RKClient sharedClient];
     
     //create url [PUT] /udj/events/event_id/active_playlist/songs
-    NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@%d",client.baseURL,@"/players/",playerID,@"/active_playlist/songs/",librarySongId, nil];
+    NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@%llu",client.baseURL,@"/players/",playerID,@"/active_playlist/songs/",librarySongId, nil];
     
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];

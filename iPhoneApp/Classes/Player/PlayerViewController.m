@@ -8,6 +8,7 @@
 
 #import "PlayerViewController.h"
 #import "PlayerInfoViewController.h"
+#import "UDJPlaylist.h"
 
 @interface PlayerViewController ()
 
@@ -22,6 +23,7 @@
 @synthesize volumeSlider;
 @synthesize playerManager, globalData, managedObjectContext, playerID;
 @synthesize leaveButton;
+@synthesize playerController, currentMediaItem;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -49,9 +51,14 @@
     
     //[playerNameLabel setText:[playerManager playerName]];
     
+    
     [playerManager updateCurrentPlayer];
+    [[UDJPlaylist sharedUDJPlaylist] sendPlaylistRequest];
+    
     [playerManager changePlayerState: PlayerStatePaused];
     [playerManager updatePlayerMusic];
+    
+    self.playerController = [MPMusicPlayerController applicationMusicPlayer];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -60,6 +67,31 @@
         PlayerInfoViewController* viewController = [[PlayerInfoViewController alloc] initWithNibName: @"PlayerInfoViewController" bundle:[NSBundle mainBundle]];
         [self presentModalViewController: viewController animated: YES];  
         viewController.playerManager = self.playerManager;
+    }
+}
+
+#pragma mark - Play and pause
+
+-(void)updateSongDisplay{
+    // update the UI for current song
+}
+
+-(IBAction)playToggleClick:(id)sender{
+    if(currentMediaItem == nil){
+        unsigned long long mediaItemID;
+        if(![UDJPlaylist sharedUDJPlaylist].currentSong && [[UDJPlaylist sharedUDJPlaylist] count] > 0) 
+            [UDJPlaylist sharedUDJPlaylist].currentSong = [[UDJPlaylist sharedUDJPlaylist] songAtIndex:0];
+        mediaItemID = [UDJPlaylist sharedUDJPlaylist].currentSong.librarySongId;
+        
+        NSLog(@"mediaItemID: %llu", mediaItemID);
+        MPMediaPropertyPredicate* predicate = [MPMediaPropertyPredicate predicateWithValue: [NSNumber numberWithUnsignedLongLong:mediaItemID] forProperty:MPMediaItemPropertyPersistentID];
+        MPMediaQuery* query = [[MPMediaQuery alloc] initWithFilterPredicates: [NSSet setWithObject: predicate]];
+        self.currentMediaItem = [[query items] objectAtIndex: 0];
+        [self.playerController setQueueWithQuery: query];
+        [playerController play];
+    }
+    else{
+        [playerController play];
     }
 }
 
