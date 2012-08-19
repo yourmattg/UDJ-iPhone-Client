@@ -15,12 +15,6 @@
 #import "PlayerListViewController.h"
 #import <objc/runtime.h>
 
-typedef enum {
-    PlayerStateInactive,
-    PlayerStatePlaying,
-    PlayerStatePaused
-} PlayerState;
-
 @interface PlayerInfoViewController ()
 
 @end
@@ -360,11 +354,6 @@ typedef enum {
     return [request sendSynchronously];
 }
 
--(IBAction)playerButton:(id)sender{
-    [self updatePlayerMusic];
-}
-
-
 #pragma mark - Player methods helpers
 
 -(BOOL)completedLocationFields{
@@ -495,6 +484,8 @@ typedef enum {
     PlayerListViewController* playerListViewController = (PlayerListViewController*)self.parentViewController;
     playerListViewController.shouldShowMyPlayer = YES;
     [self dismissModalViewControllerAnimated: YES];
+    
+    [self.playerManager updatePlayerMusic];
     
     //[self.activityLabel setText: @"Updating music library"];
     //[NSThread detachNewThreadSelector:@selector(updatePlayerMusic) toTarget:self withObject:nil];

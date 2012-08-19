@@ -47,6 +47,8 @@
     
     self.playerManager = [UDJPlayerManager sharedPlayerManager];
     NSLog(@"playerManager ID: %d", self.playerManager.playerID);
+    
+    [playerManager changePlayerState: PlayerStatePaused];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -63,6 +65,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if(buttonIndex == 1){
         [self.navigationController popViewControllerAnimated: YES];
+        [playerManager changePlayerState: PlayerStateInactive];
     }
 }
 

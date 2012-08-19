@@ -61,7 +61,7 @@
 						<string key="NSFrame">{{0, 30}, {320, 480}}</string>
 						<reference key="NSSuperview" ref="559625925"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="895074202"/>
+						<reference key="NSNextKeyView" ref="124380055"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<float key="IBUIAlpha">0.30000001192092896</float>
 						<int key="IBUIContentMode">1</int>
@@ -426,7 +426,7 @@
 						<reference key="IBUIFontDescription" ref="867109733"/>
 						<reference key="IBUIFont" ref="344642248"/>
 					</object>
-					<object class="IBUIButton" id="895074202">
+					<object class="IBUIButton" id="124380055">
 						<reference key="NSNextResponder" ref="559625925"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{8, 7}, {53, 29}}</string>
@@ -724,6 +724,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">closeButton</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="124380055"/>
+					</object>
+					<int key="connectionID">138</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="616588155"/>
 						<reference key="destination" ref="841351856"/>
@@ -769,7 +777,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">closeButtonClick:</string>
-						<reference key="source" ref="895074202"/>
+						<reference key="source" ref="124380055"/>
 						<reference key="destination" ref="841351856"/>
 						<int key="IBEventType">20</int>
 					</object>
@@ -778,7 +786,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">closeButtonClick:</string>
-						<reference key="source" ref="895074202"/>
+						<reference key="source" ref="124380055"/>
 						<reference key="destination" ref="841351856"/>
 						<int key="IBEventType">7</int>
 					</object>
@@ -814,7 +822,7 @@
 							<reference ref="827035600"/>
 							<reference ref="616588155"/>
 							<reference ref="602172045"/>
-							<reference ref="895074202"/>
+							<reference ref="124380055"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -925,7 +933,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">132</int>
-						<reference key="object" ref="895074202"/>
+						<reference key="object" ref="124380055"/>
 						<reference key="parent" ref="559625925"/>
 					</object>
 				</array>
@@ -961,7 +969,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">137</int>
+			<int key="maxID">138</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -974,7 +982,7 @@
 						<string key="addressField">UITextField</string>
 						<string key="cancelButton">UIButton</string>
 						<string key="cityField">UITextField</string>
-						<string key="closeButtonClick">UIButton</string>
+						<string key="closeButton">UIButton</string>
 						<string key="createPlayerButton">UIButton</string>
 						<string key="mainScrollView">UIScrollView</string>
 						<string key="playerNameField">UITextField</string>
@@ -1005,8 +1013,8 @@
 							<string key="name">cityField</string>
 							<string key="candidateClassName">UITextField</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="closeButtonClick">
-							<string key="name">closeButtonClick</string>
+						<object class="IBToOneOutletInfo" key="closeButton">
+							<string key="name">closeButton</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="createPlayerButton">

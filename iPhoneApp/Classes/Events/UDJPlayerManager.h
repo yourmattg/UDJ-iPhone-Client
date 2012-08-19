@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <MediaPlayer/MediaPlayer.h>
+#import "UDJData.h"
+
+typedef enum {
+    PlayerStateInactive,
+    PlayerStatePlaying,
+    PlayerStatePaused
+} PlayerState;
 
 @interface UDJPlayerManager : NSObject
 
@@ -22,9 +29,13 @@
 @property BOOL isInPlayerMode;
 
 @property(nonatomic,strong) NSManagedObjectContext* managedObjectContext;
+@property(nonatomic,strong) NSMutableDictionary* songSyncDictionary;
+@property(nonatomic,strong) UDJData* globalData;
 
 +(UDJPlayerManager*)sharedPlayerManager;
 -(void)loadPlayerInfo;
 -(void)savePlayerInfo;
+-(void)updatePlayerMusic;
+-(void)changePlayerState:(PlayerState)newState;
 
 @end
