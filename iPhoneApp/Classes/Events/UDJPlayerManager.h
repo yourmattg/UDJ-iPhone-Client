@@ -32,12 +32,22 @@ typedef enum {
 @property(nonatomic,strong) NSMutableDictionary* songSyncDictionary;
 @property(nonatomic,strong) UDJData* globalData;
 
+@property(nonatomic,strong) MPMusicPlayerController* playerController;
+@property(nonatomic,strong) MPMediaItem* currentMediaItem;
+
+@property double songLength;
+@property double songPosition;
+
 +(UDJPlayerManager*)sharedPlayerManager;
 -(void)updateCurrentPlayer;
 -(void)loadPlayerInfo;
 -(void)savePlayerInfo;
 -(void)updatePlayerMusic;
 -(void)changePlayerState:(PlayerState)newState;
+
+-(void)saveState;
+
+-(BOOL)play;
 
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response;
 

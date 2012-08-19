@@ -13,6 +13,7 @@
 #import "JSONKit.h"
 #import "UDJPlayer.h"
 #import "UDJPlayerData.h"
+#import "UDJPlaylist.h"
 
 @implementation UDJPlayerManager
 
@@ -21,6 +22,8 @@
 @synthesize playerID;
 @synthesize managedObjectContext, globalData, songSyncDictionary;
 @synthesize isInPlayerMode;
+@synthesize playerController, currentMediaItem;
+@synthesize songLength, songPosition;
 
 #pragma mark - Singleton methods
 static UDJPlayerManager* _sharedPlayerManager = nil;
@@ -54,6 +57,8 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
         self.globalData = [UDJData sharedUDJData];
         
         [self loadPlayerInfo];
+        
+        self.playerController = [MPMusicPlayerController iPodMusicPlayer];
     }
     return self;
 }
@@ -340,6 +345,45 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     
     //send request
     [request send];
+}
+
+#pragma mark - Preparing for background
+
+-(void)saveState{
+    NSTimeInterval playbackTime = [playerController currentPlaybackTime];
+    self.songPosition = playbackTime;
+    NSLog(@"Saving song positon: %f, %f", playbackTime, self.songPosition);
+}
+
+#pragma mark - Playing music
+
+
+-(void)updateCurrentMediaItem:(MPMediaItem*)item{
+    self.currentMediaItem = item;
+    self.songLength = [[currentMediaItem valueForKey: MPMediaItemPropertyPlaybackDuration] floatValue];
+    self.songPosition = 0;
+}
+
+-(BOOL)play{
+    if(currentMediaItem == nil){
+        unsigned long long mediaItemID;
+        if(![UDJPlaylist sharedUDJPlaylist].currentSong && [[UDJPlaylist sharedUDJPlaylist] count] > 0) 
+            [UDJPlaylist sharedUDJPlaylist].currentSong = [[UDJPlaylist sharedUDJPlaylist] songAtIndex:0];
+        mediaItemID = [UDJPlaylist sharedUDJPlaylist].currentSong.librarySongId;
+        
+        //NSLog(@"mediaItemID: %llu", mediaItemID);
+        MPMediaPropertyPredicate* predicate = [MPMediaPropertyPredicate predicateWithValue: [NSNumber numberWithUnsignedLongLong:mediaItemID] forProperty:MPMediaItemPropertyPersistentID];
+        MPMediaQuery* query = [[MPMediaQuery alloc] initWithFilterPredicates: [NSSet setWithObject: predicate]];
+        [self updateCurrentMediaItem: [[query items] objectAtIndex: 0]];
+        [self.playerController setQueueWithQuery: query];
+        [playerController play];        
+    }
+    else{
+        [playerController setCurrentPlaybackTime: self.songPosition];
+        [playerController play];
+    }
+    
+    return YES;
 }
 
 

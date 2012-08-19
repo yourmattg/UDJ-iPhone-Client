@@ -34,7 +34,4 @@
 @property(nonatomic,strong) NSManagedObjectContext *managedObjectContext;
 @property NSInteger playerID;
 
-@property(nonatomic,strong) MPMusicPlayerController* playerController;
-@property(nonatomic,strong) MPMediaItem* currentMediaItem;
-
 @end
