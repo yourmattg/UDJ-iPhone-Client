@@ -47,7 +47,7 @@
     
     self.playerManager = [UDJPlayerManager sharedPlayerManager];
     
-    [playerNameLabel setText:[playerManager playerName]];
+    //[playerNameLabel setText:[playerManager playerName]];
     
     [playerManager updateCurrentPlayer];
     [playerManager changePlayerState: PlayerStatePaused];

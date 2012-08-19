@@ -110,11 +110,13 @@
     }];
 }
 
--(void)sendAddSongRequest:(NSInteger)librarySongId playerID:(NSInteger)playerID{
+-(void)sendAddSongRequest:(unsigned long long)librarySongId playerID:(NSInteger)playerID{
     RKClient* client = [RKClient sharedClient];
     
     //create url [PUT] /udj/events/event_id/active_playlist/songs
-    NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@%d",client.baseURL,@"/players/",playerID,@"/active_playlist/songs/",librarySongId, nil];
+    NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@%llu",client.baseURL,@"/players/",playerID,@"/active_playlist/songs/",librarySongId, nil];
+    
+    NSLog(urlString);
 
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:artistViewController];
@@ -132,7 +134,8 @@
 
 -(IBAction)addButtonClick:(id)sender{
     UIButton* button = (UIButton*)sender;
-    [self sendAddSongRequest: button.tag playerID: [UDJPlayerData sharedPlayerData].currentPlayer.playerID];
+    LibraryEntryCell* parentCell = (LibraryEntryCell*)button.superview.superview;
+    [self sendAddSongRequest: parentCell.librarySongId playerID: [UDJPlayerData sharedPlayerData].currentPlayer.playerID];
     [self showAddNotification: button.titleLabel.text];
 }
 
@@ -156,9 +159,9 @@
     cell.artistLabel.text = song.artist;
     cell.addButton.tag = song.librarySongId;
     cell.addButton.titleLabel.text = song.title;
+    cell.librarySongId = song.librarySongId;
     
-    [cell.addButton addTarget:self action:@selector(addButtonClick:)   
-        forControlEvents:UIControlEventTouchUpInside];
+    [cell.addButton addTarget:self action:@selector(addButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     return cell;
 }

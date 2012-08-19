@@ -119,8 +119,6 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
         self.stateLocation = storedPlayer.state;
         self.zipCode = storedPlayer.zipcode;
         self.playerID = [storedPlayer.playerID intValue];
-        
-        NSLog(@"found a stored player with ID %d", self.playerID);
     }
 }
 
@@ -147,6 +145,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     self.songSyncDictionary = [NSMutableDictionary dictionaryWithCapacity: dictionarySize];
     for(int i=0; i<[libraryEntryArray count]; i++){
         UDJStoredLibraryEntry* libEntry = [libraryEntryArray objectAtIndex: i];
+        //NSLog(@"%llu", [libEntry.libraryID unsignedLongLongValue]);
         [self.songSyncDictionary setObject: libEntry.synced forKey: [NSNumber numberWithUnsignedLongLong: [libEntry.libraryID unsignedLongLongValue]]];
     }
 }

@@ -66,7 +66,6 @@
 		A3A1EE6C1575E49E0058555A /* UDJConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A1EE6B1575E49E0058555A /* UDJConfigurator.m */; };
 		A3A2B370156DD6C600C4FF90 /* UDJStoredData.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A2B36F156DD6C600C4FF90 /* UDJStoredData.m */; };
 		A3B1ABB8157E759B008498EC /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3B1ABB7157E759B008498EC /* MainWindow.xib */; };
-		A3BB29AB15732146002276B0 /* UDJVoteRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BB29AA15732146002276B0 /* UDJVoteRecord.m */; };
 		A3BB46E314E2086400554179 /* EventGoerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BB46E214E2086400554179 /* EventGoerCell.m */; };
 		A3C22D551566D4D50066B9F8 /* playlisticon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C22D541566D4D50066B9F8 /* playlisticon.png */; };
 		A3C22D571566D62E0066B9F8 /* libraryicon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C22D561566D62E0066B9F8 /* libraryicon.png */; };
@@ -270,8 +269,6 @@
 		A3A2B36E156DD6C600C4FF90 /* UDJStoredData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDJStoredData.h; path = ../UDJStoredData.h; sourceTree = "<group>"; };
 		A3A2B36F156DD6C600C4FF90 /* UDJStoredData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDJStoredData.m; path = ../UDJStoredData.m; sourceTree = "<group>"; };
 		A3B1ABB7157E759B008498EC /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
-		A3BB29A915732146002276B0 /* UDJVoteRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJVoteRecord.h; sourceTree = "<group>"; };
-		A3BB29AA15732146002276B0 /* UDJVoteRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJVoteRecord.m; sourceTree = "<group>"; };
 		A3BB46E114E2086400554179 /* EventGoerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventGoerCell.h; sourceTree = "<group>"; };
 		A3BB46E214E2086400554179 /* EventGoerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventGoerCell.m; sourceTree = "<group>"; };
 		A3C22D541566D4D50066B9F8 /* playlisticon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playlisticon.png; sourceTree = "<group>"; };
@@ -447,8 +444,6 @@
 				A324AC0414AABB8900388514 /* UDJPlaylist.m */,
 				A324ABF414AAB74700388514 /* UDJSong.h */,
 				A324ABF514AAB74700388514 /* UDJSong.m */,
-				A3BB29A915732146002276B0 /* UDJVoteRecord.h */,
-				A3BB29AA15732146002276B0 /* UDJVoteRecord.m */,
 				A3F58D9314C753D300E350F4 /* UDJEventGoer.h */,
 				A3F58D9414C753D300E350F4 /* UDJEventGoer.m */,
 			);
@@ -851,7 +846,6 @@
 				A3A2B370156DD6C600C4FF90 /* UDJStoredData.m in Sources */,
 				A3F86A6F156F03250036FBCE /* PlayerListViewController.m in Sources */,
 				A35F57F41572D25D004AA5DB /* PullRefreshTableViewController.m in Sources */,
-				A3BB29AB15732146002276B0 /* UDJVoteRecord.m in Sources */,
 				A3A1EE6C1575E49E0058555A /* UDJConfigurator.m in Sources */,
 				A3EECC0215994ED30003BEF8 /* PlayerInfoViewController.m in Sources */,
 				A36CF96215BF87DC0032AF31 /* UDJStoredPlayer.m in Sources */,

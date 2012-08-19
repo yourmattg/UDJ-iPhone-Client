@@ -22,19 +22,7 @@
 
 @implementation LibraryEntryCell
 
-@synthesize songLabel, artistLabel, addButton;
-
-// addSong: add the selected song to the event playlist
--(void)addSong:(NSInteger)librarySongId{
-    // TODO: make this notification less invasive
-    UIAlertView* notification = [[UIAlertView alloc] initWithTitle:@"Song Add" message:@"Thanks! Your song will be added to the playlist shortly!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [notification show];
-}
-
-- (IBAction) onButtonClick: (id) sender {
-    UIButton* button = sender;
-    [self addSong:button.tag];
-}
+@synthesize songLabel, artistLabel, addButton, librarySongId;
 
 - (void)layoutSubviews {
     [super layoutSubviews];
