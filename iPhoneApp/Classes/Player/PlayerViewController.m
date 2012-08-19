@@ -84,7 +84,11 @@
 #pragma mark - Changing song position
 
 -(IBAction)positionSliderValueChanged:(id)sender{
-    NSLog(@"Position: %f", self.songPositionSlider.value);
+    
+}
+
+-(IBAction)doneChangingPositionSlider:(id)sender{
+    
 }
 
 #pragma mark - Closing out of player
