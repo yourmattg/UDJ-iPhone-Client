@@ -27,6 +27,7 @@ typedef enum {
 @property NSInteger playerID;
 
 @property BOOL isInPlayerMode;
+@property PlayerState playerState;
 
 @property(nonatomic,strong) NSManagedObjectContext* managedObjectContext;
 @property(nonatomic,strong) NSMutableDictionary* songSyncDictionary;
@@ -50,6 +51,7 @@ typedef enum {
 -(void)saveState;
 
 -(BOOL)play;
+-(void)pause;
 -(void)updateSongPosition:(NSInteger)seconds;
 
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response;

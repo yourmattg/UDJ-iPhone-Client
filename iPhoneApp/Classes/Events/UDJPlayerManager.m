@@ -22,7 +22,7 @@
 @synthesize address, stateLocation, city, zipCode;
 @synthesize playerID;
 @synthesize managedObjectContext, globalData, songSyncDictionary;
-@synthesize isInPlayerMode;
+@synthesize isInPlayerMode, playerState;
 @synthesize playerController, currentMediaItem;
 @synthesize songLength, songPosition;
 @synthesize UIDelegate;
@@ -324,6 +324,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 }
 
 -(void)changePlayerState:(PlayerState)newState{
+    [self setPlayerState: newState];
     [self sendPlayerStateRequest: newState];
 }
 
@@ -382,26 +383,42 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 }
 
 -(BOOL)play{
-    if(currentMediaItem == nil){
-        unsigned long long mediaItemID;
-        if(![UDJPlaylist sharedUDJPlaylist].currentSong && [[UDJPlaylist sharedUDJPlaylist] count] > 0) 
-            [UDJPlaylist sharedUDJPlaylist].currentSong = [[UDJPlaylist sharedUDJPlaylist] songAtIndex:0];
-        if([UDJPlaylist sharedUDJPlaylist].currentSong){
-            mediaItemID = [UDJPlaylist sharedUDJPlaylist].currentSong.librarySongId;
-            
-            MPMediaPropertyPredicate* predicate = [MPMediaPropertyPredicate predicateWithValue: [NSNumber numberWithUnsignedLongLong:mediaItemID] forProperty:MPMediaItemPropertyPersistentID];
-            MPMediaQuery* query = [[MPMediaQuery alloc] initWithFilterPredicates: [NSSet setWithObject: predicate]];
-            [self updateCurrentMediaItem: [[query items] objectAtIndex: 0]];
-            [self.playerController setQueueWithQuery: query];
-            [playerController play];          
-        }
-    }
-    else{
-        //[playerController setCurrentPlaybackTime: self.songPosition];
-        //[playerController play];
+    unsigned long long mediaItemID;
+    
+    // if there is already a media item playing, resume it
+    if(currentMediaItem){
+        [playerController play];
+        return YES;
     }
     
-    return YES;
+    // if there are songs on the queue but no current song, update the current song to item at the top
+    if(![UDJPlaylist sharedUDJPlaylist].currentSong && [[UDJPlaylist sharedUDJPlaylist] count] > 0) 
+        [UDJPlaylist sharedUDJPlaylist].currentSong = [[UDJPlaylist sharedUDJPlaylist] songAtIndex:0];
+        
+    // if there is now a current song, update the current media item and begin playing
+    // return YES to let caller know there was a song to play
+    if([UDJPlaylist sharedUDJPlaylist].currentSong){
+        [self setPlayerState: PlayerStatePlaying];
+        
+        mediaItemID = [UDJPlaylist sharedUDJPlaylist].currentSong.librarySongId;
+            
+        MPMediaPropertyPredicate* predicate = [MPMediaPropertyPredicate predicateWithValue: [NSNumber numberWithUnsignedLongLong:mediaItemID]forProperty:MPMediaItemPropertyPersistentID];
+        MPMediaQuery* query = [[MPMediaQuery alloc] initWithFilterPredicates: [NSSet setWithObject: predicate]];
+        [self updateCurrentMediaItem: [[query items] objectAtIndex: 0]];
+        [self.playerController setQueueWithQuery: query]; 
+        [playerController play];
+        
+        return YES;
+    }
+    
+    // if there are no songs to play, return NO
+    return NO;
+}
+
+-(void)pause{
+    [playerController pause];
+    [self setPlayerState: PlayerStatePaused];
+    [self sendPlayerStateRequest: PlayerStatePaused];
 }
 
 

@@ -49,9 +49,6 @@
     self.playerManager = [UDJPlayerManager sharedPlayerManager];
     self.playerManager.UIDelegate = self;
     
-    //[playerNameLabel setText:[playerManager playerName]];
-    
-    
     [playerManager updateCurrentPlayer];
     [[UDJPlaylist sharedUDJPlaylist] setPlayerID: playerManager.playerID];
     [[UDJPlaylist sharedUDJPlaylist] sendPlaylistRequest];
@@ -88,7 +85,15 @@
 }
 
 -(IBAction)playToggleClick:(id)sender{
-    [playerManager play];
+    if([playerManager playerState] == PlayerStatePaused){
+        if([playerManager play]){
+            [togglePlayButton setTitle:@"Pause" forState:UIControlStateNormal];
+        }
+    }
+    else{
+        [togglePlayButton setTitle:@"Play" forState:UIControlStateNormal];
+        [playerManager pause];        
+    }
 }
 
 #pragma mark - Changing song position
