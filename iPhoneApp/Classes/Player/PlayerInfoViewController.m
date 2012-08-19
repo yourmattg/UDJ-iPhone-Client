@@ -166,8 +166,6 @@
         
         [playerNameLabel setText: playerManager.playerName];
         self.createPlayerButton.hidden = YES;
-        
-        [NSThread detachNewThreadSelector:@selector(updatePlayerMusic) toTarget:self withObject:nil];
     }
 }
 
@@ -177,182 +175,7 @@
     [self dismissModalViewControllerAnimated: YES];
 }
 
-#pragma mark - Updating library
 
--(NSArray*)arrayWithAllLibraryEntries{
-    NSError* error;
-    //Set up a request to get the all library entries
-    NSFetchRequest * request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"UDJStoredLibraryEntry" inManagedObjectContext:managedObjectContext]];
-    NSArray* libraryEntryArray = [managedObjectContext executeFetchRequest:request error:&error];
-    
-    NSLog(@"Loaded %d library entries from store", [libraryEntryArray count]);
-    
-    if(error) {}
-    return libraryEntryArray;
-}
-
--(void)buildSyncDictionary{
-    // build sync status dictionary
-    NSArray* libraryEntryArray = [self arrayWithAllLibraryEntries];
-    NSInteger dictionarySize = [libraryEntryArray count] == 0 ? 200 : [libraryEntryArray count];
-    self.songSyncDictionary = [NSMutableDictionary dictionaryWithCapacity: dictionarySize];
-    for(int i=0; i<[libraryEntryArray count]; i++){
-        UDJStoredLibraryEntry* libEntry = [libraryEntryArray objectAtIndex: i];
-        [self.songSyncDictionary setObject: libEntry.synced forKey: [NSNumber numberWithUnsignedLongLong: [libEntry.libraryID unsignedLongLongValue]]];
-    }
-}
-
--(NSMutableDictionary*)dictionaryForMediaItem:(MPMediaItem*)item{
-    NSMutableDictionary* songDict = [NSMutableDictionary dictionaryWithCapacity: 7];
-    
-    NSString *title, *artist, *album, *genre;
-    
-    [songDict setObject: [item valueForKey: MPMediaItemPropertyPersistentID] forKey:@"id"];
-    
-    if([item valueForKey: MPMediaItemPropertyTitle] == nil) title = @"Untitled";
-    else title = [item valueForKey: MPMediaItemPropertyTitle];
-    [songDict setObject: title forKey:@"title"];
-    
-    if([item valueForKey: MPMediaItemPropertyArtist] == nil) artist = @"Unknown Artist";
-    else artist = [item valueForKey: MPMediaItemPropertyArtist];
-    [songDict setObject: artist forKey:@"artist"];
-    
-    if([item valueForKey: MPMediaItemPropertyAlbumTitle] == nil) album = @"Unknown Album";
-    else album = [item valueForKey: MPMediaItemPropertyAlbumTitle];
-    [songDict setObject: album forKey:@"album"];
-    
-    if([item valueForKey: MPMediaItemPropertyGenre] == nil) genre = @"";
-    else genre = [item valueForKey: MPMediaItemPropertyGenre];
-    [songDict setObject: genre forKey:@"genre"];
-    
-    [songDict setObject: [NSNumber numberWithInt: 0] forKey:@"track"];
-        
-    [songDict setObject: [item valueForKey: MPMediaItemPropertyPlaybackDuration] forKey:@"duration"];
-
-    return songDict;
-}
-
--(void)deletePreviousLibraryEntries{
-    // Fetch and delete all previous entries
-    NSError* error;
-    NSFetchRequest * request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"UDJStoredLibraryEntry" inManagedObjectContext:managedObjectContext]];
-    NSArray* storedEntryArray = [managedObjectContext executeFetchRequest:request error:&error];
-    NSLog(@"Deleting %d stored library entires", [storedEntryArray count]);
-    for(int i=0; i <[storedEntryArray count]; i++){
-        UDJStoredLibraryEntry* entry = [storedEntryArray objectAtIndex: i];
-        [managedObjectContext deleteObject: entry];
-    }
-    [managedObjectContext save: &error];
-    if(error) NSLog(@"error");
-}
-
--(void)saveLibraryEntries{  
-    [self deletePreviousLibraryEntries];
-    
-    NSLog(@"about to save %d library entries (from songSyncDictionary)", [songSyncDictionary count]);
-    NSArray* keyArray = [self.songSyncDictionary allKeys];
-    for(int i=0; i<[keyArray count]; i++){
-        NSNumber* entryID = [keyArray objectAtIndex: i];
-        UDJStoredLibraryEntry* entry = (UDJStoredLibraryEntry*)[NSEntityDescription insertNewObjectForEntityForName:@"UDJStoredLibraryEntry" inManagedObjectContext:managedObjectContext];  
-        // TODO: need to fix persistent store type
-        NSNumber* number = [[NSNumber alloc] initWithUnsignedLongLong: [entryID unsignedLongLongValue]];
-        [entry setSynced: [self.songSyncDictionary objectForKey: number]];
-        //[entry setSynced: [self.songSyncDictionary objectForKey: entryID]];
-        [entry setLibraryID: number];
-    }
-    
-    NSError* error;
-    [managedObjectContext save: &error];
-}
-
--(void)updatePlayerMusic{
-    
-    if(self.activityView.frame.origin.y == 470) 
-        [self toggleActivityView: YES];
-    
-    [self buildSyncDictionary];
-    
-    // get all songs from library
-    MPMediaQuery* songQuery = [MPMediaQuery songsQuery];
-    NSArray* songArray = [songQuery items];
-    
-    // song accumulator, used to send sets of 200 songs to server
-    NSMutableArray* songAddArray = [NSMutableArray arrayWithCapacity: 201];
-
-    // check each song in the library
-    for(int i=0; i<[songArray count]; i++){
-        MPMediaItem* mediaItem = [songArray objectAtIndex: i];
-        
-        // get this song's sync status
-        NSNumber* libraryID = [mediaItem valueForKey: MPMediaItemPropertyPersistentID];
-        NSNumber* number = [NSNumber numberWithUnsignedLongLong: [libraryID unsignedLongLongValue]];
-        NSNumber* syncStatus = [songSyncDictionary objectForKey: number]; //objectForKey: libraryID
-        
-        // if this song hasn't been synced, add it to a set of songs to be added
-        if(syncStatus == nil || [syncStatus boolValue] == NO){
-            NSDictionary* songAddDict = [self dictionaryForMediaItem: mediaItem];
-            [songAddArray addObject: songAddDict];
-            
-            //if(syncStatus == nil) NSLog(@"new ID: %llu", [libraryID unsignedLongLongValue]);
-            
-            // mark the song as synced initially (we'll mark it as unsynced in the case of a 409)
-            [songSyncDictionary setObject: [NSNumber numberWithBool: YES] forKey:number];
-            
-            // if we have 200 songs, send them off to the server
-            // TODO: change 50 to 200
-            if([songAddArray count] == 200 || i == [songArray count]-1){
-                NSLog(@"Sending %d songs to server", [songAddArray count]);
-                RKResponse* response = [self addSongsToServer: [songAddArray JSONString]];
-
-                // if there were conflicts, mark those songs as unsynced
-                if([response statusCode] == 409){
-                    NSArray* songConflictArray = [[response bodyAsString] objectFromJSONString];
-                    NSLog(@"%d conflicts", [songConflictArray count]);
-                    for(int i=0; i<[songConflictArray count]; i++){
-                        // set synced to YES since that means we already have it
-                        NSNumber* conflictNumber = [songConflictArray objectAtIndex: i];
-                        [songSyncDictionary setObject: [NSNumber numberWithBool: YES] forKey: [NSNumber numberWithUnsignedLongLong: [conflictNumber unsignedLongLongValue]]];
-                    }
-                }
-                else if([response statusCode] == 201) NSLog(@"%d songs added", [songAddArray count]);
-                [songAddArray removeAllObjects];
-            }
-        }
-    }
-    
-    // TODO: figure out which songs have been deleted
-    
-    [self saveLibraryEntries];
-    [self toggleActivityView: NO];
-}
-
--(RKResponse*)addSongsToServer:(NSString*)songCollectionString{
-    
-    RKClient* client = [RKClient sharedClient];
-    
-    //create url users/user_id/players/player_id/library/songs
-    NSString* urlString = client.baseURL;
-    urlString = [urlString stringByAppendingFormat: @"/0_6/players/%d/library/songs", self.playerID, nil];
-    
-    //set up request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: self.globalData];
-    request.method = RKRequestMethodPUT;
-    request.queue = client.requestQueue;
-    request.userData = @"songSetAdd";
-    
-    // set up the headers, including which type of request this is
-    NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJData sharedUDJData].headers];
-    [requestHeaders setValue:@"playerMethodsDelegate" forKey:@"delegate"];
-    [requestHeaders setValue:@"text/json" forKey:@"content-type"];
-    request.additionalHTTPHeaders = requestHeaders;
-    
-    // set body to the JSON song array
-    [request setHTTPBody: [songCollectionString dataUsingEncoding: NSUTF8StringEncoding]];
-    
-    return [request sendSynchronously];
-}
 
 #pragma mark - Player methods helpers
 
@@ -394,39 +217,8 @@
 }
 
 
-#pragma mark - Player methods
+#pragma mark - Creating player
 
--(void)sendPlayerStateRequest:(PlayerState)newState{
-    RKClient* client = [RKClient sharedClient];
-    
-    //create url [POST] {prefix}/udj/0_6/players/player_id/state
-    NSString* urlString = client.baseURL;
-    urlString = [urlString stringByAppendingFormat:@"%@%d%@", @"/0_6/players/", self.playerID, @"/state", nil];
-    
-    // create request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: self.globalData];
-    request.queue = client.requestQueue;
-    request.method = RKRequestMethodPOST;
-    request.userData = [NSString stringWithString: @"changeState"];
-    
-    // set up the headers, including which type of request this is
-    NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: globalData.headers];
-    [requestHeaders setValue:@"playerMethodsDelegate" forKey:@"delegate"];
-    request.additionalHTTPHeaders = requestHeaders;
-    
-    // include state parameter
-    NSArray* stateArray = [NSArray arrayWithObjects:@"inactive", @"playing", @"paused", nil];
-    request.params = [NSDictionary dictionaryWithObjectsAndKeys: [stateArray objectAtIndex: newState], @"state", nil];
-    
-    //send request
-    [request send];
-}
-
--(IBAction)playerStateValueChanged:(id)sender{
-    UISwitch* stateSwitch = sender;
-    PlayerState newState = stateSwitch.on ? PlayerStatePlaying : PlayerStateInactive;
-    [self sendPlayerStateRequest: newState];
-}
 
 -(IBAction)createButtonClick:(id)sender{
     if([self completedLocationFields]){
@@ -484,11 +276,6 @@
     PlayerListViewController* playerListViewController = (PlayerListViewController*)self.parentViewController;
     playerListViewController.shouldShowMyPlayer = YES;
     [self dismissModalViewControllerAnimated: YES];
-    
-    [self.playerManager updatePlayerMusic];
-    
-    //[self.activityLabel setText: @"Updating music library"];
-    //[NSThread detachNewThreadSelector:@selector(updatePlayerMusic) toTarget:self withObject:nil];
 }
 
 -(void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
@@ -509,12 +296,6 @@
             [self toggleActivityView: NO];
             self.createPlayerButton.hidden = NO;
         }
-    }
-    else if([requestType isEqualToString: @"songSetAdd"] && [response statusCode] == 201){
-        //[self toggleActivityView: NO];
-    }
-    else if([requestType isEqualToString: @"changeState"] && [response isOK]){
-        NSLog(@"Changed state");
     }
 }
 

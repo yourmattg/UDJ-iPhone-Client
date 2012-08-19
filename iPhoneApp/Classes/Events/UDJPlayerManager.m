@@ -118,9 +118,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
         self.zipCode = storedPlayer.zipcode;
         self.playerID = [storedPlayer.playerID intValue];
         
-        NSLog(@"found a stored player");
-        
-        //[NSThread detachNewThreadSelector:@selector(updatePlayerMusic) toTarget:self withObject:nil];
+        NSLog(@"found a stored player with ID %d", self.playerID);
     }
 }
 
