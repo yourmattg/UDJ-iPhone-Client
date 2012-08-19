@@ -387,6 +387,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     
     // if there is already a media item playing, resume it
     if(currentMediaItem){
+        [self setPlayerState:PlayerStatePlaying];
         [playerController play];
         return YES;
     }
