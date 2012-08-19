@@ -367,6 +367,10 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 
 #pragma mark - Playing music
 
+-(void)updateSongPosition:(NSInteger)seconds{
+    NSLog(@"changing to %d seconds", seconds);
+    [playerController setCurrentPlaybackTime: seconds];
+}
 
 -(void)updateCurrentMediaItem:(MPMediaItem*)item{
     self.currentMediaItem = item;
@@ -389,8 +393,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
         MPMediaQuery* query = [[MPMediaQuery alloc] initWithFilterPredicates: [NSSet setWithObject: predicate]];
         [self updateCurrentMediaItem: [[query items] objectAtIndex: 0]];
         [self.playerController setQueueWithQuery: query];
-        [playerController play];  
-        [playerController setVolume: 0];
+        [playerController play];
         [playerController beginGeneratingPlaybackNotifications];
     }
     else{

@@ -73,8 +73,17 @@
 -(void)updateDisplayWithItem:(MPMediaItem*)item;{
     // update the UI for current song
     NSTimeInterval duration = [[item valueForKey: MPMediaItemPropertyPlaybackDuration] doubleValue];
-    //float maxValue = duration;
-    [songPositionSlider setMaximumValue: duration];
+    float maxValue = duration;
+    [songPositionSlider setMaximumValue: maxValue];
+    
+    NSInteger minutes = duration/60;
+    NSInteger seconds = (NSInteger)duration%60;
+    [self.timeLeftLabel setText: [NSString stringWithFormat: @"%d:%02d", minutes, seconds]];
+    
+    // update song title labels
+    [songTitleLabel setText: [item valueForKey: MPMediaItemPropertyTitle]];
+    [albumLabel setText: [item valueForKey: MPMediaItemPropertyAlbumTitle]];
+    [artistLabel setText: [item valueForKey: MPMediaItemPropertyArtist]];
 }
 
 -(IBAction)playToggleClick:(id)sender{
@@ -84,11 +93,18 @@
 #pragma mark - Changing song position
 
 -(IBAction)positionSliderValueChanged:(id)sender{
+    NSInteger minutes = self.songPositionSlider.value/60;
+    NSInteger seconds = ((NSInteger)self.songPositionSlider.value)%60;
+    [self.timePassedLabel setText: [NSString stringWithFormat: @"%d:%02d", minutes, seconds]];
     
+    NSInteger timeLeft = self.songPositionSlider.maximumValue - self.songPositionSlider.value;
+    minutes = timeLeft/60;
+    seconds = timeLeft%60;
+    [self.timeLeftLabel setText: [NSString stringWithFormat: @"-%d:%02d", minutes, seconds]];
 }
 
 -(IBAction)doneChangingPositionSlider:(id)sender{
-    
+    [playerManager updateSongPosition: self.songPositionSlider.value];
 }
 
 #pragma mark - Closing out of player

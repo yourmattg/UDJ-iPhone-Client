@@ -50,6 +50,7 @@ typedef enum {
 -(void)saveState;
 
 -(BOOL)play;
+-(void)updateSongPosition:(NSInteger)seconds;
 
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response;
 
