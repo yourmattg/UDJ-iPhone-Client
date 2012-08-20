@@ -35,6 +35,7 @@
 @property NSInteger playerID;
 
 @property(nonatomic,strong) NSTimer* playbackTimer;
+@property BOOL isChangingPlaybackSlider;
 
 -(void)updateDisplayWithItem:(MPMediaItem*)item;
 

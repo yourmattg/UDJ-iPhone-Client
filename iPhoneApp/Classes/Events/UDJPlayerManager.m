@@ -394,7 +394,6 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 
 -(float)currentPlaybackTime{
     float time = (float)[playerController currentPlaybackTime];
-    NSLog(@"current playbacktime: %f", time);
     return time;
 }
 

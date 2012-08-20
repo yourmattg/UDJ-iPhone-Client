@@ -23,7 +23,7 @@
 @synthesize volumeSlider;
 @synthesize playerManager, globalData, managedObjectContext, playerID;
 @synthesize leaveButton;
-@synthesize playbackTimer;
+@synthesize playbackTimer, isChangingPlaybackSlider;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -102,9 +102,11 @@
 #pragma mark - Changing song position
 
 -(void)updatePlaybackSlider{
-    float time = [playerManager currentPlaybackTime];
-    [playbackSlider setValue: time];
-    [self updatePlaybackLabels];
+    if(!isChangingPlaybackSlider){
+        float time = [playerManager currentPlaybackTime];
+        [playbackSlider setValue: time];
+        [self updatePlaybackLabels];        
+    }
 }
 
 -(void)updatePlaybackLabels{
@@ -118,12 +120,17 @@
     [self.timeLeftLabel setText: [NSString stringWithFormat: @"-%d:%02d", minutes, seconds]];    
 }
 
+-(IBAction)playbackSliderTouchDown:(id)sender{
+    self.isChangingPlaybackSlider = YES;
+}
+
 -(IBAction)positionSliderValueChanged:(id)sender{
     [self updatePlaybackLabels];
 }
 
 -(IBAction)doneChangingPositionSlider:(id)sender{
     [playerManager updateSongPosition: self.playbackSlider.value];
+    self.isChangingPlaybackSlider = NO;
 }
 
 #pragma mark - Closing out of player
