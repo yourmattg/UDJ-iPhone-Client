@@ -16,6 +16,8 @@
 #import "UDJPlaylist.h"
 #import "PlayerViewController.h"
 
+typedef unsigned long long UDJLibraryID;
+
 @implementation UDJPlayerManager
 
 @synthesize playerName, playerPassword;
@@ -62,8 +64,9 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
         [self loadPlayerInfo];
         
         self.playerController = [MPMusicPlayerController iPodMusicPlayer];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playingItemChanged) 
-            name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification object:nil];
+        //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playingItemChanged) 
+        //    name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackStateChanged) name:MPMusicPlayerControllerPlaybackStateDidChangeNotification object:nil];
         [playerController beginGeneratingPlaybackNotifications];  
     }
     return self;
@@ -363,14 +366,73 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 
 #pragma mark - Playback item changed
 
+-(void)playbackStateChanged{
+    NSLog(@"playback state changed");
+    if([playerController playbackState] == MPMusicPlaybackStateStopped){
+        [self playingItemChanged];
+    }
+}
+
 -(void)playingItemChanged{
     NSLog(@"playing item changed");
+    
+    // THIS ASSUMES THE PLAYER IS RELATIVELY UP TO DATE
+    UDJSong* nextSong = [[UDJPlaylist sharedUDJPlaylist] songAtIndex: 0];
+    
+    if(nextSong){
+        NSLog(@"sending request to change song");
+        // go ahead and change the UDJPlaylist next song so we can start playing it
+        [UDJPlaylist sharedUDJPlaylist].currentSong = nextSong;
+        [self playPlaylistCurrentSong];
+        [self sendCurrentSongRequest: nextSong.librarySongId];
+    }
+    else{
+        NSLog(@"setting state to paused");
+        [self sendPlayerStateRequest: PlayerStatePaused];
+    }
 }
 
 #pragma mark - Playing music
 
+-(void)sendCurrentSongRequest:(UDJLibraryID)libraryID{
+    RKClient* client = [RKClient sharedClient];
+    
+    //create url [POST] [POST] /udj/0_6/players/player_id/current_song
+    NSString* urlString = client.baseURL;
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@", @"/0_6/players/", self.playerID, @"/current_song", nil];
+    
+    // create request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: self.globalData];
+    request.queue = client.requestQueue;
+    request.method = RKRequestMethodPOST;
+    request.userData = [NSString stringWithString: @"changeCurrentSong"];
+    
+    // set up the headers, including which type of request this is
+    NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: globalData.headers];
+    [requestHeaders setValue:@"playerMethodsDelegate" forKey:@"delegate"];
+    request.additionalHTTPHeaders = requestHeaders;
+    
+    request.params = [NSDictionary dictionaryWithObject: [NSNumber numberWithUnsignedLongLong: libraryID] forKey: @"lib_id"];
+    
+    //send request
+    [request send];
+}
+
 -(void)updateSongPosition:(NSInteger)seconds{
     [playerController setCurrentPlaybackTime: seconds];
+}
+
+-(void)playPlaylistCurrentSong{
+    
+    [self setPlayerState: PlayerStatePlaying];
+    
+    UDJLibraryID mediaItemID = [UDJPlaylist sharedUDJPlaylist].currentSong.librarySongId;
+    
+    MPMediaPropertyPredicate* predicate = [MPMediaPropertyPredicate predicateWithValue: [NSNumber numberWithUnsignedLongLong:mediaItemID]forProperty:MPMediaItemPropertyPersistentID];
+    MPMediaQuery* query = [[MPMediaQuery alloc] initWithFilterPredicates: [NSSet setWithObject: predicate]];
+    [self updateCurrentMediaItem: [[query items] objectAtIndex: 0]];
+    [self.playerController setQueueWithQuery: query]; 
+    [playerController play];
 }
 
 -(void)updateCurrentMediaItem:(MPMediaItem*)item{
@@ -383,7 +445,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 }
 
 -(BOOL)play{
-    unsigned long long mediaItemID;
+    //UDJLibraryID mediaItemID;
     
     // if there is already a media item playing, resume it
     if(currentMediaItem){
@@ -393,22 +455,15 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     }
     
     // if there are songs on the queue but no current song, update the current song to item at the top
-    if(![UDJPlaylist sharedUDJPlaylist].currentSong && [[UDJPlaylist sharedUDJPlaylist] count] > 0) 
+    if(![UDJPlaylist sharedUDJPlaylist].currentSong && [[UDJPlaylist sharedUDJPlaylist] count] > 0){
+        [self sendCurrentSongRequest: [UDJPlaylist sharedUDJPlaylist].currentSong.librarySongId]; // update the current song on the server side
         [UDJPlaylist sharedUDJPlaylist].currentSong = [[UDJPlaylist sharedUDJPlaylist] songAtIndex:0];
+    }
         
     // if there is now a current song, update the current media item and begin playing
     // return YES to let caller know there was a song to play
     if([UDJPlaylist sharedUDJPlaylist].currentSong){
-        [self setPlayerState: PlayerStatePlaying];
-        
-        mediaItemID = [UDJPlaylist sharedUDJPlaylist].currentSong.librarySongId;
-            
-        MPMediaPropertyPredicate* predicate = [MPMediaPropertyPredicate predicateWithValue: [NSNumber numberWithUnsignedLongLong:mediaItemID]forProperty:MPMediaItemPropertyPersistentID];
-        MPMediaQuery* query = [[MPMediaQuery alloc] initWithFilterPredicates: [NSSet setWithObject: predicate]];
-        [self updateCurrentMediaItem: [[query items] objectAtIndex: 0]];
-        [self.playerController setQueueWithQuery: query]; 
-        [playerController play];
-        
+        [self playPlaylistCurrentSong];
         return YES;
     }
     

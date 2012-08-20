@@ -24,6 +24,8 @@
 #import "LibraryEntryCell.h"
 #import "UDJPlaylist.h"
 
+typedef unsigned long long UDJLibraryID;
+
 @implementation RandomViewController
 
 @synthesize resultList, globalData, currentRequestNumber;
@@ -99,7 +101,7 @@
     }];
 }
 
--(void)sendAddSongRequest:(unsigned long long)librarySongId playerID:(NSInteger)playerID{
+-(void)sendAddSongRequest:(UDJLibraryID)librarySongId playerID:(NSInteger)playerID{
     RKClient* client = [RKClient sharedClient];
     
     //create url [PUT] /udj/events/event_id/active_playlist/songs
@@ -114,15 +116,14 @@
     // remember song number
     request.userData = [NSNumber numberWithInt: librarySongId];
     
-    //TODO: find a way to keep track of the requests
-    //[currentRequests setObject:@"songAdd" forKey:request];
     [request send]; 
     
 }
 
 -(IBAction)addButtonClick:(id)sender{
     UIButton* button = (UIButton*)sender;
-    [self sendAddSongRequest: button.tag playerID: [UDJPlayerData sharedPlayerData].currentPlayer.playerID];
+    LibraryEntryCell* parentCell = (LibraryEntryCell*)button.superview.superview;
+    [self sendAddSongRequest: parentCell.librarySongId playerID: [UDJPlayerData sharedPlayerData].currentPlayer.playerID];
     [self showAddNotification: button.titleLabel.text];
 }
 
@@ -146,6 +147,7 @@
     cell.songLabel.text = song.title;
     cell.artistLabel.text = song.artist;
     cell.addButton.tag = song.librarySongId;
+    cell.librarySongId = song.librarySongId;
     cell.addButton.titleLabel.text = song.title;
     
     [cell.addButton addTarget:self action:@selector(addButtonClick:)   
