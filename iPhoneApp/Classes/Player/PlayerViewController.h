@@ -22,7 +22,7 @@
 
 @property(nonatomic,strong) IBOutlet UILabel* timePassedLabel;
 @property(nonatomic,strong) IBOutlet UILabel* timeLeftLabel;
-@property(nonatomic,strong) IBOutlet UISlider* songPositionSlider;
+@property(nonatomic,strong) IBOutlet UISlider* playbackSlider;
 
 @property(nonatomic,strong) IBOutlet UIButton* togglePlayButton;
 @property(nonatomic,strong) IBOutlet UIButton* skipButton;
@@ -33,6 +33,8 @@
 @property(nonatomic,strong) UDJData* globalData;
 @property(nonatomic,strong) NSManagedObjectContext *managedObjectContext;
 @property NSInteger playerID;
+
+@property(nonatomic,strong) NSTimer* playbackTimer;
 
 -(void)updateDisplayWithItem:(MPMediaItem*)item;
 

@@ -19,10 +19,11 @@
 @synthesize playerNameLabel, playerInfoButton;
 @synthesize songTitleLabel, artistLabel, albumLabel;
 @synthesize timePassedLabel, timeLeftLabel;
-@synthesize songPositionSlider, togglePlayButton, skipButton;
+@synthesize playbackSlider, togglePlayButton, skipButton;
 @synthesize volumeSlider;
 @synthesize playerManager, globalData, managedObjectContext, playerID;
 @synthesize leaveButton;
+@synthesize playbackTimer;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -55,6 +56,8 @@
     
     [playerManager changePlayerState: PlayerStatePaused];
     [playerManager updatePlayerMusic];
+    
+    [self setPlaybackTimer: [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updatePlaybackSlider) userInfo:nil repeats:YES]];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -72,7 +75,7 @@
     // update the UI for current song
     NSTimeInterval duration = [[item valueForKey: MPMediaItemPropertyPlaybackDuration] doubleValue];
     float maxValue = duration;
-    [songPositionSlider setMaximumValue: maxValue];
+    [playbackSlider setMaximumValue: maxValue];
     
     NSInteger minutes = duration/60;
     NSInteger seconds = (NSInteger)duration%60;
@@ -98,19 +101,29 @@
 
 #pragma mark - Changing song position
 
--(IBAction)positionSliderValueChanged:(id)sender{
-    NSInteger minutes = self.songPositionSlider.value/60;
-    NSInteger seconds = ((NSInteger)self.songPositionSlider.value)%60;
+-(void)updatePlaybackSlider{
+    float time = [playerManager currentPlaybackTime];
+    [playbackSlider setValue: time];
+    [self updatePlaybackLabels];
+}
+
+-(void)updatePlaybackLabels{
+    NSInteger minutes = self.playbackSlider.value/60;
+    NSInteger seconds = ((NSInteger)self.playbackSlider.value)%60;
     [self.timePassedLabel setText: [NSString stringWithFormat: @"%d:%02d", minutes, seconds]];
     
-    NSInteger timeLeft = self.songPositionSlider.maximumValue - self.songPositionSlider.value;
+    NSInteger timeLeft = self.playbackSlider.maximumValue - self.playbackSlider.value;
     minutes = timeLeft/60;
     seconds = timeLeft%60;
-    [self.timeLeftLabel setText: [NSString stringWithFormat: @"-%d:%02d", minutes, seconds]];
+    [self.timeLeftLabel setText: [NSString stringWithFormat: @"-%d:%02d", minutes, seconds]];    
+}
+
+-(IBAction)positionSliderValueChanged:(id)sender{
+    [self updatePlaybackLabels];
 }
 
 -(IBAction)doneChangingPositionSlider:(id)sender{
-    [playerManager updateSongPosition: self.songPositionSlider.value];
+    [playerManager updateSongPosition: self.playbackSlider.value];
 }
 
 #pragma mark - Closing out of player

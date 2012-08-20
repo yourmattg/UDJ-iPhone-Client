@@ -367,14 +367,12 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 #pragma mark - Playback item changed
 
 -(void)playbackStateChanged{
-    NSLog(@"playback state changed");
     if([playerController playbackState] == MPMusicPlaybackStateStopped){
         [self playingItemChanged];
     }
 }
 
 -(void)playingItemChanged{
-    NSLog(@"playing item changed");
     
     // THIS ASSUMES THE PLAYER IS RELATIVELY UP TO DATE
     UDJSong* nextSong = [[UDJPlaylist sharedUDJPlaylist] songAtIndex: 0];
@@ -393,6 +391,12 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 }
 
 #pragma mark - Playing music
+
+-(float)currentPlaybackTime{
+    float time = (float)[playerController currentPlaybackTime];
+    NSLog(@"current playbacktime: %f", time);
+    return time;
+}
 
 -(void)sendCurrentSongRequest:(UDJLibraryID)libraryID{
     RKClient* client = [RKClient sharedClient];

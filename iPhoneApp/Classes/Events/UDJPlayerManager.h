@@ -48,6 +48,8 @@ typedef enum {
 -(void)updatePlayerMusic;
 -(void)changePlayerState:(PlayerState)newState;
 
+-(float)currentPlaybackTime;
+
 -(void)saveState;
 
 -(BOOL)play;
