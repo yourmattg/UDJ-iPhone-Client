@@ -59,6 +59,7 @@
     [playerManager updatePlayerMusic];
     
     [self setPlaybackTimer: [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updatePlaybackSlider) userInfo:nil repeats:YES]];
+    [playerManager beginPlaylistUpdates];
     
     // set up AVAudioSession
     AVAudioSession* session = [AVAudioSession sharedInstance];
@@ -105,12 +106,15 @@
     }
 }
 
+-(IBAction)skipButtonClick:(id)sender{
+    [playerManager playNextSong];
+}
+
 #pragma mark - Changing song position
 
 -(void)updatePlaybackSlider{
     if(!isChangingPlaybackSlider){
         float time = [playerManager currentPlaybackTime];
-        NSLog(@"Updating time: %f", time);
         [playbackSlider setValue: time];
         [self updatePlaybackLabels];        
     }
@@ -145,6 +149,8 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if(buttonIndex == 1){
         [self.navigationController popViewControllerAnimated: YES];
+        [playerManager endPlaylistUpdates];
+        [playerManager pause];
         [playerManager changePlayerState: PlayerStateInactive];
     }
 }

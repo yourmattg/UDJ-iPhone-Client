@@ -47,7 +47,6 @@
 -(void)initForPlayerMode:(BOOL)isPlayer{
     
     [UDJPlayerManager sharedPlayerManager].isInPlayerMode = isPlayer;
-    NSLog(@"Is in player mode = %d", [UDJPlayerManager sharedPlayerManager].isInPlayerMode);
     
     // Do any additional setup after loading the view from its nib. 
     PlaylistViewController* playlistViewController = [[PlaylistViewController alloc] initWithNibName:@"NewPlaylistViewController" bundle:[NSBundle mainBundle]];

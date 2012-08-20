@@ -40,6 +40,8 @@ typedef enum {
 @property double songLength;
 @property double songPosition;
 
+@property(nonatomic,strong) NSTimer* playlistTimer;
+
 @property(nonatomic,weak) UIViewController* UIDelegate;
 
 +(UDJPlayerManager*)sharedPlayerManager;
@@ -56,6 +58,10 @@ typedef enum {
 -(BOOL)play;
 -(void)pause;
 -(void)updateSongPosition:(NSInteger)seconds;
+-(void)playNextSong;
+
+-(void)beginPlaylistUpdates;
+-(void)endPlaylistUpdates;
 
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response;
 

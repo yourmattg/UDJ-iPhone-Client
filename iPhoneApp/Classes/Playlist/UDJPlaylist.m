@@ -61,8 +61,6 @@
     if(up) urlString = [urlString stringByAppendingString:@"upvote"];
     else urlString = [urlString stringByAppendingString:@"downvote"];
     
-    NSLog(@"song id %d", songId);
-    
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: delegate];
     request.queue = client.requestQueue;

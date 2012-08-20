@@ -30,6 +30,7 @@ typedef unsigned long long UDJLibraryID;
 @synthesize currentMediaItem, audioPlayer;
 @synthesize songLength, songPosition;
 @synthesize UIDelegate;
+@synthesize playlistTimer;
 
 
 #pragma mark - Singleton methods
@@ -167,14 +168,33 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 
 -(NSMutableDictionary*)dictionaryForMediaItem:(MPMediaItem*)item{
     NSMutableDictionary* songDict = [NSMutableDictionary dictionaryWithCapacity: 7];
-     
+    NSString *title, *artist, *album, *genre;
+    NSNumber *track, *duration;
     [songDict setObject: [item valueForProperty: MPMediaItemPropertyPersistentID] forKey:@"id"];
-    [songDict setObject: [item valueForProperty: MPMediaItemPropertyTitle] forKey:@"title"];
-    [songDict setObject: [item valueForProperty: MPMediaItemPropertyArtist] forKey:@"artist"];
-    [songDict setObject: [item valueForProperty: MPMediaItemPropertyAlbumTitle] forKey:@"album"];
-    [songDict setObject: [item valueForProperty: MPMediaItemPropertyGenre] forKey:@"genre"];
-    [songDict setObject: [item valueForProperty: MPMediaItemPropertyAlbumTrackNumber] forKey:@"track"];
-    [songDict setObject: [item valueForProperty: MPMediaItemPropertyPlaybackDuration] forKey:@"duration"];
+    
+    if([item valueForProperty: MPMediaItemPropertyTitle]) title = [item valueForProperty: MPMediaItemPropertyTitle];
+    else title = @"Untitled";
+    [songDict setObject: title forKey:@"title"];
+    
+    if([item valueForProperty: MPMediaItemPropertyArtist]) artist = [item valueForProperty: MPMediaItemPropertyArtist];
+    else artist = @"Unknown Artist";
+    [songDict setObject: artist forKey:@"artist"];
+    
+    if([item valueForProperty: MPMediaItemPropertyAlbumTitle]) album = [item valueForProperty: MPMediaItemPropertyAlbumTitle];
+    else album = @"Unknown Album";
+    [songDict setObject: album forKey:@"album"];
+    
+    if([item valueForProperty: MPMediaItemPropertyGenre]) genre = [item valueForProperty: MPMediaItemPropertyGenre];
+    else genre = @"Unknown Genre";
+    [songDict setObject: genre forKey:@"genre"];
+    
+    if([item valueForProperty: MPMediaItemPropertyAlbumTrackNumber]) track = [item valueForProperty: MPMediaItemPropertyAlbumTrackNumber];
+    else track = [NSNumber numberWithInt: 0];
+    [songDict setObject: track forKey:@"track"];
+    
+    if([item valueForProperty: MPMediaItemPropertyPlaybackDuration]) duration = [item valueForProperty: MPMediaItemPropertyPlaybackDuration];
+    else duration = [NSNumber numberWithInt: 0];
+    [songDict setObject: duration forKey:@"duration"];
     
     return songDict;
 }
@@ -372,6 +392,24 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
         NSLog(@"setting state to paused");
         [self setPlayerState:PlayerStatePaused];
         [self sendPlayerStateRequest: PlayerStatePaused];
+    }
+}
+
+#pragma mark - Keeping playlist up to date
+
+-(void)playlistTimerFired{
+    NSLog(@"Updating playlist via playerManager");
+    [[UDJPlaylist sharedUDJPlaylist] sendPlaylistRequest];
+}
+
+-(void)beginPlaylistUpdates{
+    self.playlistTimer = [NSTimer scheduledTimerWithTimeInterval:7 target:self selector:@selector(playlistTimerFired) userInfo:nil repeats:YES];
+}
+
+-(void)endPlaylistUpdates{
+    if(self.playlistTimer){
+        [self.playlistTimer invalidate];
+        self.playlistTimer = nil;
     }
 }
 

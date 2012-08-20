@@ -36,7 +36,6 @@
     
     song.title = [libEntryDict objectForKey:@"title"];
     song.librarySongId = [[libEntryDict objectForKey:@"id"] unsignedLongLongValue]; // TODO: change this back to intValue?
-    NSLog(@"library song ID: %llu", song.librarySongId);
     song.artist = [libEntryDict objectForKey:@"artist"];
     song.album = [libEntryDict objectForKey:@"album"];
     song.duration = [[libEntryDict objectForKey:@"duration"] intValue];

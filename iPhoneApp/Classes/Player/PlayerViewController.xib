@@ -70,7 +70,7 @@
 							<string key="NSResourceName">backg.png</string>
 						</object>
 					</object>
-					<object class="IBUIImageView" id="824256865">
+					<object class="IBUIImageView" id="1053023404">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{0, 44}, {320, 100}}</string>
@@ -260,6 +260,7 @@
 						<string key="NSFrame">{{18, 332}, {284, 23}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -387,7 +388,7 @@
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">Next</string>
+						<string key="IBUINormalTitle">Skip</string>
 						<reference key="IBUIHighlightedTitleColor" ref="1010972670"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -403,7 +404,7 @@
 						<string key="NSFrame">{{270, 7}, {42, 29}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="824256865"/>
+						<reference key="NSNextKeyView" ref="1053023404"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -568,6 +569,24 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">skipButtonClick:</string>
+						<reference key="source" ref="805324563"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">20</int>
+					</object>
+					<int key="connectionID">66</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">skipButtonClick:</string>
+						<reference key="source" ref="805324563"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">67</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">playerInfoButtonClick:</string>
 						<reference key="source" ref="903176478"/>
 						<reference key="destination" ref="372490531"/>
@@ -631,7 +650,7 @@
 							<reference ref="160493006"/>
 							<reference ref="903176478"/>
 							<reference ref="71446770"/>
-							<reference ref="824256865"/>
+							<reference ref="1053023404"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -728,7 +747,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">65</int>
-						<reference key="object" ref="824256865"/>
+						<reference key="object" ref="1053023404"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>
@@ -761,7 +780,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">65</int>
+			<int key="maxID">68</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
