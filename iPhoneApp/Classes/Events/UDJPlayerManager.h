@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import "UDJData.h"
+#import <AVFoundation/AVFoundation.h>
 
 typedef enum {
     PlayerStateInactive,
@@ -33,7 +34,7 @@ typedef enum {
 @property(nonatomic,strong) NSMutableDictionary* songSyncDictionary;
 @property(nonatomic,strong) UDJData* globalData;
 
-@property(nonatomic,strong) MPMusicPlayerController* playerController;
+@property(nonatomic,strong) AVPlayer* audioPlayer;
 @property(nonatomic,strong) MPMediaItem* currentMediaItem;
 
 @property double songLength;

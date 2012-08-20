@@ -9,6 +9,7 @@
 #import "PlayerViewController.h"
 #import "PlayerInfoViewController.h"
 #import "UDJPlaylist.h"
+#import <AVFoundation/AVAudioSession.h>
 
 @interface PlayerViewController ()
 
@@ -58,6 +59,11 @@
     [playerManager updatePlayerMusic];
     
     [self setPlaybackTimer: [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updatePlaybackSlider) userInfo:nil repeats:YES]];
+    
+    // set up AVAudioSession
+    AVAudioSession* session = [AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [session setActive:YES error:nil];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -73,7 +79,7 @@
 
 -(void)updateDisplayWithItem:(MPMediaItem*)item;{
     // update the UI for current song
-    NSTimeInterval duration = [[item valueForKey: MPMediaItemPropertyPlaybackDuration] doubleValue];
+    NSTimeInterval duration = [[item valueForProperty: MPMediaItemPropertyPlaybackDuration] doubleValue];
     float maxValue = duration;
     [playbackSlider setMaximumValue: maxValue];
     
@@ -82,9 +88,9 @@
     [self.timeLeftLabel setText: [NSString stringWithFormat: @"%d:%02d", minutes, seconds]];
     
     // update song title labels
-    [songTitleLabel setText: [item valueForKey: MPMediaItemPropertyTitle]];
-    [albumLabel setText: [item valueForKey: MPMediaItemPropertyAlbumTitle]];
-    [artistLabel setText: [item valueForKey: MPMediaItemPropertyArtist]];
+    [songTitleLabel setText: [item valueForProperty: MPMediaItemPropertyTitle]];
+    [albumLabel setText: [item valueForProperty: MPMediaItemPropertyAlbumTitle]];
+    [artistLabel setText: [item valueForProperty: MPMediaItemPropertyArtist]];
 }
 
 -(IBAction)playToggleClick:(id)sender{
@@ -104,6 +110,7 @@
 -(void)updatePlaybackSlider{
     if(!isChangingPlaybackSlider){
         float time = [playerManager currentPlaybackTime];
+        NSLog(@"Updating time: %f", time);
         [playbackSlider setValue: time];
         [self updatePlaybackLabels];        
     }

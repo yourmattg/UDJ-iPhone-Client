@@ -15,6 +15,8 @@
 #import "UDJPlayerData.h"
 #import "UDJPlaylist.h"
 #import "PlayerViewController.h"
+#import <AVFoundation/AVFoundation.h>
+#import <CoreMedia/CMTime.h>
 
 typedef unsigned long long UDJLibraryID;
 
@@ -25,7 +27,7 @@ typedef unsigned long long UDJLibraryID;
 @synthesize playerID;
 @synthesize managedObjectContext, globalData, songSyncDictionary;
 @synthesize isInPlayerMode, playerState;
-@synthesize playerController, currentMediaItem;
+@synthesize currentMediaItem, audioPlayer;
 @synthesize songLength, songPosition;
 @synthesize UIDelegate;
 
@@ -63,11 +65,10 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
         
         [self loadPlayerInfo];
         
-        self.playerController = [MPMusicPlayerController iPodMusicPlayer];
-        //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playingItemChanged) 
-        //    name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackStateChanged) name:MPMusicPlayerControllerPlaybackStateDidChangeNotification object:nil];
-        [playerController beginGeneratingPlaybackNotifications];  
+        audioPlayer = [[AVPlayer alloc] init];
+        [audioPlayer addObserver:self forKeyPath:@"rate" options:0 context:nil];
+        
+        
     }
     return self;
 }
@@ -166,30 +167,14 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 
 -(NSMutableDictionary*)dictionaryForMediaItem:(MPMediaItem*)item{
     NSMutableDictionary* songDict = [NSMutableDictionary dictionaryWithCapacity: 7];
-    
-    NSString *title, *artist, *album, *genre;
-    
-    [songDict setObject: [item valueForKey: MPMediaItemPropertyPersistentID] forKey:@"id"];
-    
-    if([item valueForKey: MPMediaItemPropertyTitle] == nil) title = @"Untitled";
-    else title = [item valueForKey: MPMediaItemPropertyTitle];
-    [songDict setObject: title forKey:@"title"];
-    
-    if([item valueForKey: MPMediaItemPropertyArtist] == nil) artist = @"Unknown Artist";
-    else artist = [item valueForKey: MPMediaItemPropertyArtist];
-    [songDict setObject: artist forKey:@"artist"];
-    
-    if([item valueForKey: MPMediaItemPropertyAlbumTitle] == nil) album = @"Unknown Album";
-    else album = [item valueForKey: MPMediaItemPropertyAlbumTitle];
-    [songDict setObject: album forKey:@"album"];
-    
-    if([item valueForKey: MPMediaItemPropertyGenre] == nil) genre = @"";
-    else genre = [item valueForKey: MPMediaItemPropertyGenre];
-    [songDict setObject: genre forKey:@"genre"];
-    
-    [songDict setObject: [NSNumber numberWithInt: 0] forKey:@"track"];
-    
-    [songDict setObject: [item valueForKey: MPMediaItemPropertyPlaybackDuration] forKey:@"duration"];
+     
+    [songDict setObject: [item valueForProperty: MPMediaItemPropertyPersistentID] forKey:@"id"];
+    [songDict setObject: [item valueForProperty: MPMediaItemPropertyTitle] forKey:@"title"];
+    [songDict setObject: [item valueForProperty: MPMediaItemPropertyArtist] forKey:@"artist"];
+    [songDict setObject: [item valueForProperty: MPMediaItemPropertyAlbumTitle] forKey:@"album"];
+    [songDict setObject: [item valueForProperty: MPMediaItemPropertyGenre] forKey:@"genre"];
+    [songDict setObject: [item valueForProperty: MPMediaItemPropertyAlbumTrackNumber] forKey:@"track"];
+    [songDict setObject: [item valueForProperty: MPMediaItemPropertyPlaybackDuration] forKey:@"duration"];
     
     return songDict;
 }
@@ -243,7 +228,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
         MPMediaItem* mediaItem = [songArray objectAtIndex: i];
         
         // get this song's sync status
-        NSNumber* libraryID = [mediaItem valueForKey: MPMediaItemPropertyPersistentID];
+        NSNumber* libraryID = [mediaItem valueForProperty: MPMediaItemPropertyPersistentID];
         NSNumber* number = [NSNumber numberWithUnsignedLongLong: [libraryID unsignedLongLongValue]];
         NSNumber* syncStatus = [songSyncDictionary objectForKey: number]; //objectForKey: libraryID
         
@@ -360,19 +345,18 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 #pragma mark - Preparing for background
 
 -(void)saveState{
-    NSTimeInterval playbackTime = [playerController currentPlaybackTime];
-    self.songPosition = playbackTime;
+   
 }
 
 #pragma mark - Playback item changed
 
--(void)playbackStateChanged{
-    if([playerController playbackState] == MPMusicPlaybackStateStopped){
-        [self playingItemChanged];
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if([audioPlayer rate] == 0 && [self playerState] == PlayerStatePlaying){
+        [self playNextSong];
     }
 }
 
--(void)playingItemChanged{
+-(void)playNextSong{
     
     // THIS ASSUMES THE PLAYER IS RELATIVELY UP TO DATE
     UDJSong* nextSong = [[UDJPlaylist sharedUDJPlaylist] songAtIndex: 0];
@@ -386,6 +370,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     }
     else{
         NSLog(@"setting state to paused");
+        [self setPlayerState:PlayerStatePaused];
         [self sendPlayerStateRequest: PlayerStatePaused];
     }
 }
@@ -393,7 +378,8 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 #pragma mark - Playing music
 
 -(float)currentPlaybackTime{
-    float time = (float)[playerController currentPlaybackTime];
+    if(![audioPlayer currentItem]) return 0;
+    float time = (float)CMTimeGetSeconds([audioPlayer currentTime]);
     return time;
 }
 
@@ -422,7 +408,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 }
 
 -(void)updateSongPosition:(NSInteger)seconds{
-    [playerController setCurrentPlaybackTime: seconds];
+    [audioPlayer seekToTime: CMTimeMakeWithSeconds(seconds, 1)];
 }
 
 -(void)playPlaylistCurrentSong{
@@ -434,13 +420,17 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     MPMediaPropertyPredicate* predicate = [MPMediaPropertyPredicate predicateWithValue: [NSNumber numberWithUnsignedLongLong:mediaItemID]forProperty:MPMediaItemPropertyPersistentID];
     MPMediaQuery* query = [[MPMediaQuery alloc] initWithFilterPredicates: [NSSet setWithObject: predicate]];
     [self updateCurrentMediaItem: [[query items] objectAtIndex: 0]];
-    [self.playerController setQueueWithQuery: query]; 
-    [playerController play];
+    
+    NSURL* url = [currentMediaItem valueForProperty: MPMediaItemPropertyAssetURL];
+    AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:url];
+    [audioPlayer replaceCurrentItemWithPlayerItem:playerItem];
+    [audioPlayer play];
+    
 }
 
 -(void)updateCurrentMediaItem:(MPMediaItem*)item{
     self.currentMediaItem = item;
-    self.songLength = [[currentMediaItem valueForKey: MPMediaItemPropertyPlaybackDuration] floatValue];
+    self.songLength = [[currentMediaItem valueForProperty: MPMediaItemPropertyPlaybackDuration] floatValue];
     self.songPosition = 0;
     
     PlayerViewController* playerViewController = (PlayerViewController*)self.UIDelegate;
@@ -453,7 +443,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     // if there is already a media item playing, resume it
     if(currentMediaItem){
         [self setPlayerState:PlayerStatePlaying];
-        [playerController play];
+        [audioPlayer play];
         return YES;
     }
     
@@ -475,8 +465,8 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 }
 
 -(void)pause{
-    [playerController pause];
     [self setPlayerState: PlayerStatePaused];
+    [audioPlayer pause];
     [self sendPlayerStateRequest: PlayerStatePaused];
 }
 
