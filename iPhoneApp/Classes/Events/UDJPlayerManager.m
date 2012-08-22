@@ -30,7 +30,8 @@ typedef unsigned long long UDJLibraryID;
 @synthesize currentMediaItem, audioPlayer;
 @synthesize songLength, songPosition;
 @synthesize UIDelegate;
-@synthesize playlistTimer;
+@synthesize playlistTimer, nextSongAdded;
+@synthesize playlist;
 
 
 #pragma mark - Singleton methods
@@ -66,8 +67,12 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
         
         [self loadPlayerInfo];
         
-        audioPlayer = [[AVPlayer alloc] init];
-        [audioPlayer addObserver:self forKeyPath:@"rate" options:0 context:nil];
+        self.audioPlayer = [[AVQueuePlayer alloc] init];
+        [audioPlayer setActionAtItemEnd: AVPlayerActionAtItemEndAdvance];
+        
+        self.playlist = [UDJPlaylist sharedUDJPlaylist];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerItemDidReachEnd) name:AVPlayerItemDidPlayToEndTimeNotification object: nil];
         
         
     }
@@ -364,21 +369,25 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 
 #pragma mark - Preparing for background
 
--(void)saveState{
-   
+-(void)enterBackgroundMode{
+    [self setIsInBackground: YES];
 }
 
-#pragma mark - Playback item changed
+-(void)exitBackgroundMode{
+    [self setIsInBackground: NO];
+}
 
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if([audioPlayer rate] == 0 && [self playerState] == PlayerStatePlaying){
-        [self playNextSong];
-    }
+#pragma mark - Transition to next song
+
+-(void)playerItemDidReachEnd{
+    NSLog(@"song ended");
+    [self playNextSong];
 }
 
 -(void)playNextSong{
     
     // THIS ASSUMES THE PLAYER IS RELATIVELY UP TO DATE
+    // (and it will be since the timer updates the playlist every 7 seconds)
     UDJSong* nextSong = [[UDJPlaylist sharedUDJPlaylist] songAtIndex: 0];
     
     if(nextSong){
@@ -398,7 +407,6 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 #pragma mark - Keeping playlist up to date
 
 -(void)playlistTimerFired{
-    NSLog(@"Updating playlist via playerManager");
     [[UDJPlaylist sharedUDJPlaylist] sendPlaylistRequest];
 }
 
@@ -414,6 +422,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 }
 
 #pragma mark - Playing music
+
 
 -(float)currentPlaybackTime{
     if(![audioPlayer currentItem]) return 0;
@@ -451,19 +460,29 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 
 -(void)playPlaylistCurrentSong{
     
-    [self setPlayerState: PlayerStatePlaying];
-    
+    // find the mediaItem for the current song
     UDJLibraryID mediaItemID = [UDJPlaylist sharedUDJPlaylist].currentSong.librarySongId;
-    
     MPMediaPropertyPredicate* predicate = [MPMediaPropertyPredicate predicateWithValue: [NSNumber numberWithUnsignedLongLong:mediaItemID]forProperty:MPMediaItemPropertyPersistentID];
     MPMediaQuery* query = [[MPMediaQuery alloc] initWithFilterPredicates: [NSSet setWithObject: predicate]];
     [self updateCurrentMediaItem: [[query items] objectAtIndex: 0]];
     
+    // update the current item on the audioplayer
     NSURL* url = [currentMediaItem valueForProperty: MPMediaItemPropertyAssetURL];
-    AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:url];
-    [audioPlayer replaceCurrentItemWithPlayerItem:playerItem];
-    [audioPlayer play];
+    AVPlayerItem* playerItem = [[AVPlayerItem alloc] initWithURL:url];
+    [audioPlayer insertItem:playerItem afterItem: nil];
     
+    // start up the audioplayer
+    if([audioPlayer rate] == 0){
+        [audioPlayer play];
+    }
+    else{
+        [audioPlayer advanceToNextItem];
+        [audioPlayer seekToTime: CMTimeMake(0, 1)];
+        [audioPlayer play];
+    }
+    [self setPlayerState: PlayerStatePlaying];
+    
+    NSLog(@"%d songs on queue", [[audioPlayer items] count]);
 }
 
 -(void)updateCurrentMediaItem:(MPMediaItem*)item{
@@ -476,7 +495,6 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 }
 
 -(BOOL)play{
-    //UDJLibraryID mediaItemID;
     
     // if there is already a media item playing, resume it
     if(currentMediaItem){

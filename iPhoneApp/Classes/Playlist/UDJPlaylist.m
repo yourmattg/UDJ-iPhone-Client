@@ -47,8 +47,14 @@
     request.additionalHTTPHeaders = globalData.headers;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++];
     
+    request.backgroundPolicy = RKRequestBackgroundPolicyContinue;
+    
     //send request
     [request send];
+    
+    // TESTING for background
+    //RKResponse* response = [request sendSynchronously];
+    //[self request:request didLoadResponse:response];
 }
 
 
@@ -115,13 +121,14 @@
     
     [self setPlaylist: tempList];
     [self setCurrentSong: newCurrentSong];
-    NSLog(@"updated playlist. current song = %@, playlist count = %d", newCurrentSong.title, [self count]);
+    //NSLog(@"updated playlist. current song = %@, playlist count = %d", newCurrentSong.title, [self count]);
     
     // send message to delegate (Playlist view controller)
     [playlistDelegate playlistDidUpdate: responseDict];
 }
 
 -(void)request:(RKRequest *)request didLoadResponse:(RKResponse *)response{
+    //NSLog(@"got response in UDJPLaylist");
     if ([request isGET]) {
         [self handlePlaylistResponse:response];        
     }

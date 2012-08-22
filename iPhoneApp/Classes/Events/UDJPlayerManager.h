@@ -10,6 +10,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "UDJData.h"
 #import <AVFoundation/AVFoundation.h>
+#import "UDJPlaylist.h"
 
 typedef enum {
     PlayerStateInactive,
@@ -29,13 +30,15 @@ typedef enum {
 
 @property BOOL isInPlayerMode;
 @property PlayerState playerState;
+@property BOOL isInBackground;
 
 @property(nonatomic,strong) NSManagedObjectContext* managedObjectContext;
 @property(nonatomic,strong) NSMutableDictionary* songSyncDictionary;
 @property(nonatomic,strong) UDJData* globalData;
 
-@property(nonatomic,strong) AVPlayer* audioPlayer;
+@property(nonatomic,strong) AVQueuePlayer* audioPlayer;
 @property(nonatomic,strong) MPMediaItem* currentMediaItem;
+@property BOOL nextSongAdded;
 
 @property double songLength;
 @property double songPosition;
@@ -43,6 +46,7 @@ typedef enum {
 @property(nonatomic,strong) NSTimer* playlistTimer;
 
 @property(nonatomic,weak) UIViewController* UIDelegate;
+@property(nonatomic,weak) UDJPlaylist* playlist;
 
 +(UDJPlayerManager*)sharedPlayerManager;
 -(void)updateCurrentPlayer;
@@ -53,7 +57,8 @@ typedef enum {
 
 -(float)currentPlaybackTime;
 
--(void)saveState;
+-(void)enterBackgroundMode;
+-(void)exitBackgroundMode;
 
 -(BOOL)play;
 -(void)pause;
