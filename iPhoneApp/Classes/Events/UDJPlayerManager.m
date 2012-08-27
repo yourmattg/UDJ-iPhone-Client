@@ -26,7 +26,7 @@ typedef unsigned long long UDJLibraryID;
 @synthesize address, stateLocation, city, zipCode;
 @synthesize playerID;
 @synthesize managedObjectContext, globalData, songSyncDictionary;
-@synthesize isInPlayerMode, playerState;
+@synthesize isInPlayerMode, playerState, isInBackground;
 @synthesize currentMediaItem, audioPlayer;
 @synthesize songLength, songPosition;
 @synthesize UIDelegate;
@@ -290,13 +290,56 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     }
     
     // TODO: figure out which songs have been deleted
-    
+    [self deleteRemovedItems];
     [self saveLibraryEntries]; 
     NSLog(@"done updating library");
 }
 
 -(void)updatePlayerMusic{
     [NSThread detachNewThreadSelector:@selector(updatePlayerMusicHelper) toTarget:self withObject:nil];
+}
+
+-(RKResponse*)removeSongWithID:(UDJLibraryID)libID{
+    // [DELETE] /udj/0_6/players/player_id/library/lib_id
+    RKClient* client = [RKClient sharedClient];
+    
+    //create url users/user_id/players/player_id/library/songs
+    NSString* urlString = client.baseURL;
+    urlString = [urlString stringByAppendingFormat: @"/0_6/players/%d/library/%llu", self.playerID, libID, nil];
+    
+    //set up request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: self.globalData];
+    request.method = RKRequestMethodDELETE;
+    request.queue = client.requestQueue;
+    request.userData = @"songDelete";
+    
+    // set up the headers, including which type of request this is
+    NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJData sharedUDJData].headers];
+    [requestHeaders setValue:@"playerMethodsDelegate" forKey:@"delegate"];
+    request.additionalHTTPHeaders = requestHeaders;
+    
+    return [request sendSynchronously];
+}
+
+-(void)deleteRemovedItems{
+    // get all items actually in the iPod library
+    MPMediaQuery* songQuery = [MPMediaQuery songsQuery];
+    NSArray* songArray = [songQuery items];
+    NSMutableDictionary* libraryDictionary = [NSMutableDictionary dictionaryWithCapacity: [songArray count]];
+    for(MPMediaItem* item in songArray){
+        NSNumber* libraryID = [item valueForProperty: MPMediaItemPropertyPersistentID];
+        NSNumber* keyAsNumber = [NSNumber numberWithUnsignedLongLong: [libraryID unsignedLongLongValue]];
+        [libraryDictionary setObject: [NSNumber numberWithBool:YES] forKey: keyAsNumber];
+    }
+    
+    NSArray* songSyncKeys = [songSyncDictionary allKeys];
+    for(int i=0; i<[songSyncKeys count]; i++){
+        NSNumber* libraryID = [songSyncKeys objectAtIndex: i];
+        if([libraryDictionary objectForKey: libraryID] == nil){
+            RKResponse* response = [self removeSongWithID: [libraryID unsignedLongLongValue]];
+            if([response isOK]) NSLog(@"Successfully removed libraryID %llu", [libraryID unsignedLongLongValue]);
+        }
+    }
 }
 
 -(RKResponse*)addSongsToServer:(NSString*)songCollectionString{
@@ -365,9 +408,15 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     
     //send request
     [request send];
+    NSLog(@"Requested state change to %@", [stateArray objectAtIndex: newState]);
 }
 
 #pragma mark - Preparing for background
+
+-(void)resetAudioPlayer{
+    [audioPlayer removeAllItems];
+    self.currentMediaItem = nil;
+}
 
 -(void)enterBackgroundMode{
     [self setIsInBackground: YES];
@@ -375,13 +424,39 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 
 -(void)exitBackgroundMode{
     [self setIsInBackground: NO];
+    if([[audioPlayer items] count] > 1){
+        NSLog(@"removing last item on queue");
+        AVPlayerItem* itemToRemove = [[audioPlayer items] objectAtIndex: 1];
+        [audioPlayer removeItem: itemToRemove];
+    }
 }
 
 #pragma mark - Transition to next song
 
 -(void)playerItemDidReachEnd{
     NSLog(@"song ended");
-    [self playNextSong];
+    [self printItemDurations];
+    if(!isInBackground) [self playNextSong];
+    else{
+        NSLog(@"moving to next song");
+        //[audioPlayer advanceToNextItem];
+        //[audioPlayer seekToTime: CMTimeMake(0, 1)];
+        //[audioPlayer play];
+        
+        // if there are songs on the queue but no current song, update the current song to item at the top
+        if([[UDJPlaylist sharedUDJPlaylist] count] > 0){
+            // update the current song on the server side
+            [UDJPlaylist sharedUDJPlaylist].currentSong = [[UDJPlaylist sharedUDJPlaylist] songAtIndex:0];
+            [self sendCurrentSongRequest: [UDJPlaylist sharedUDJPlaylist].currentSong.librarySongId];
+            NSLog(@"new song %@", [UDJPlaylist sharedUDJPlaylist].currentSong.title);
+        }
+        
+        // find the mediaItem for the current song
+        UDJLibraryID mediaItemID = [UDJPlaylist sharedUDJPlaylist].currentSong.librarySongId;
+        MPMediaPropertyPredicate* predicate = [MPMediaPropertyPredicate predicateWithValue: [NSNumber numberWithUnsignedLongLong:mediaItemID]forProperty:MPMediaItemPropertyPersistentID];
+        MPMediaQuery* query = [[MPMediaQuery alloc] initWithFilterPredicates: [NSSet setWithObject: predicate]];
+        [self updateCurrentMediaItem: [[query items] objectAtIndex: 0]];
+    }
 }
 
 -(void)playNextSong{
@@ -395,6 +470,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
         // go ahead and change the UDJPlaylist next song so we can start playing it
         [UDJPlaylist sharedUDJPlaylist].currentSong = nextSong;
         [self playPlaylistCurrentSong];
+        [audioPlayer advanceToNextItem];
         [self sendCurrentSongRequest: nextSong.librarySongId];
     }
     else{
@@ -408,10 +484,13 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 
 -(void)playlistTimerFired{
     [[UDJPlaylist sharedUDJPlaylist] sendPlaylistRequest];
+    if(isInBackground){
+        [self queueUpNextSong];
+    }
 }
 
 -(void)beginPlaylistUpdates{
-    self.playlistTimer = [NSTimer scheduledTimerWithTimeInterval:7 target:self selector:@selector(playlistTimerFired) userInfo:nil repeats:YES];
+    self.playlistTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(playlistTimerFired) userInfo:nil repeats:YES];
 }
 
 -(void)endPlaylistUpdates{
@@ -423,6 +502,58 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 
 #pragma mark - Playing music
 
+-(void)printItemDurations{
+    for(int i=0; i<[[audioPlayer items] count]; i++){
+        AVPlayerItem* item = [[audioPlayer items] objectAtIndex: i];
+        float time = (float)[item duration].value/(float)[item duration].timescale;
+        NSLog(@"Item %d, time = %f", i, time);
+    }
+}
+
+-(BOOL)isntTooLate{
+    NSNumber* songTime = [currentMediaItem valueForProperty: MPMediaItemPropertyPlaybackDuration];
+    NSInteger timeAsInt = [songTime intValue];
+    NSLog(@"time: %f, total time: %d", [self currentPlaybackTime], timeAsInt);
+    if([self currentPlaybackTime] > timeAsInt-7) return NO;
+    return YES;
+}
+
+-(void)queueUpNextSong{
+    // find the mediaItem for the current song
+    UDJLibraryID mediaItemID = [[UDJPlaylist sharedUDJPlaylist] songAtIndex: 0].librarySongId;
+    MPMediaPropertyPredicate* predicate = [MPMediaPropertyPredicate predicateWithValue: [NSNumber numberWithUnsignedLongLong:mediaItemID]forProperty:MPMediaItemPropertyPersistentID];
+    MPMediaQuery* query = [[MPMediaQuery alloc] initWithFilterPredicates: [NSSet setWithObject: predicate]];
+    MPMediaItem* item = [[query items] objectAtIndex: 0];
+        
+    // get reference to second item on queue
+    AVPlayerItem* secondItem;
+    if([[audioPlayer items] count] > 1) [[audioPlayer items] objectAtIndex: 1];
+    else secondItem = nil;
+    
+    // add next item to queue, just after the item playing
+    NSURL* url = [item valueForProperty: MPMediaItemPropertyAssetURL];
+    AVPlayerItem* nextItem = [[AVPlayerItem alloc] initWithURL:url];
+    [audioPlayer insertItem:nextItem afterItem: secondItem];
+    
+    // remove last item
+    if([[audioPlayer items] count] > 2){
+        AVPlayerItem* itemToRemove = [[audioPlayer items] objectAtIndex: 1];
+        [audioPlayer removeItem: itemToRemove];
+    }
+    
+    // attempt to restart playback in case it stops
+    if([audioPlayer rate] == 0){
+        NSLog(@"stopped playback");
+        [audioPlayer advanceToNextItem];
+        [audioPlayer seekToTime: CMTimeMake(0, 1)];
+        [audioPlayer play];
+        [audioPlayer setRate: 1.0];
+    }
+    
+    [audioPlayer setActionAtItemEnd:AVPlayerActionAtItemEndAdvance]; 
+    
+    [self printItemDurations];
+}
 
 -(float)currentPlaybackTime{
     if(![audioPlayer currentItem]) return 0;
@@ -436,20 +567,20 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     //create url [POST] [POST] /udj/0_6/players/player_id/current_song
     NSString* urlString = client.baseURL;
     urlString = [urlString stringByAppendingFormat:@"%@%d%@", @"/0_6/players/", self.playerID, @"/current_song", nil];
-    
+
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: self.globalData];
     request.queue = client.requestQueue;
     request.method = RKRequestMethodPOST;
     request.userData = [NSString stringWithString: @"changeCurrentSong"];
-    
+
     // set up the headers, including which type of request this is
     NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: globalData.headers];
     [requestHeaders setValue:@"playerMethodsDelegate" forKey:@"delegate"];
     request.additionalHTTPHeaders = requestHeaders;
-    
+
     request.params = [NSDictionary dictionaryWithObject: [NSNumber numberWithUnsignedLongLong: libraryID] forKey: @"lib_id"];
-    
+
     //send request
     [request send];
 }
@@ -459,7 +590,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 }
 
 -(void)playPlaylistCurrentSong{
-    
+
     // find the mediaItem for the current song
     UDJLibraryID mediaItemID = [UDJPlaylist sharedUDJPlaylist].currentSong.librarySongId;
     MPMediaPropertyPredicate* predicate = [MPMediaPropertyPredicate predicateWithValue: [NSNumber numberWithUnsignedLongLong:mediaItemID]forProperty:MPMediaItemPropertyPersistentID];
@@ -473,11 +604,6 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     
     // start up the audioplayer
     if([audioPlayer rate] == 0){
-        [audioPlayer play];
-    }
-    else{
-        [audioPlayer advanceToNextItem];
-        [audioPlayer seekToTime: CMTimeMake(0, 1)];
         [audioPlayer play];
     }
     [self setPlayerState: PlayerStatePlaying];
@@ -498,6 +624,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     
     // if there is already a media item playing, resume it
     if(currentMediaItem){
+        NSLog(@"there's a media item already");
         [self setPlayerState:PlayerStatePlaying];
         [audioPlayer play];
         return YES;

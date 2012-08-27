@@ -150,7 +150,7 @@
     if(buttonIndex == 1){
         [self.navigationController popViewControllerAnimated: YES];
         [playerManager endPlaylistUpdates];
-        [playerManager pause];
+        [playerManager resetAudioPlayer];
         [playerManager changePlayerState: PlayerStateInactive];
     }
 }

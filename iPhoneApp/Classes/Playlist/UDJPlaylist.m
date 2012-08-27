@@ -20,6 +20,7 @@
 #import "UDJPlaylist.h"
 #import "UDJSong.h"
 #import "RestKit/RKJSONParserJSONKit.h"
+#import "UDJPlayerManager.h"
 
 @implementation UDJPlaylist
 
@@ -49,12 +50,15 @@
     
     request.backgroundPolicy = RKRequestBackgroundPolicyContinue;
     
-    //send request
-    [request send];
+    // foreground mode
+    if(![[UDJPlayerManager sharedPlayerManager] isInBackground]) [request send];
     
-    // TESTING for background
-    //RKResponse* response = [request sendSynchronously];
-    //[self request:request didLoadResponse:response];
+    // background mode
+    else{
+        RKResponse* response = [request sendSynchronously];
+        NSLog(@"got playlist response while in background");
+        [self request:request didLoadResponse:response];        
+    }
 }
 
 
@@ -128,7 +132,7 @@
 }
 
 -(void)request:(RKRequest *)request didLoadResponse:(RKResponse *)response{
-    //NSLog(@"got response in UDJPLaylist");
+    NSLog(@"Response Code: %d", [response statusCode]);
     if ([request isGET]) {
         [self handlePlaylistResponse:response];        
     }

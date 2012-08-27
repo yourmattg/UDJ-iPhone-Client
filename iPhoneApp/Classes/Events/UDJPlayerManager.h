@@ -65,6 +65,8 @@ typedef enum {
 -(void)updateSongPosition:(NSInteger)seconds;
 -(void)playNextSong;
 
+-(void)resetAudioPlayer;
+
 -(void)beginPlaylistUpdates;
 -(void)endPlaylistUpdates;
 
