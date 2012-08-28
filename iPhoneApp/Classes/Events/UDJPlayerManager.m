@@ -299,26 +299,39 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     [NSThread detachNewThreadSelector:@selector(updatePlayerMusicHelper) toTarget:self withObject:nil];
 }
 
--(RKResponse*)removeSongWithID:(UDJLibraryID)libID{
-    // [DELETE] /udj/0_6/players/player_id/library/lib_id
+-(RKResponse*)removeSongsFromServer:(NSArray*)songs{
     RKClient* client = [RKClient sharedClient];
     
-    //create url users/user_id/players/player_id/library/songs
+    //create url [DELETE] /udj/0_6/players/player_id/library/lib_id
     NSString* urlString = client.baseURL;
-    urlString = [urlString stringByAppendingFormat: @"/0_6/players/%d/library/%llu", self.playerID, libID, nil];
+    urlString = [urlString stringByAppendingFormat: @"/0_6/players/%d/library", self.playerID, nil];
     
     //set up request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: self.globalData];
-    request.method = RKRequestMethodDELETE;
+    request.method = RKRequestMethodPOST;
     request.queue = client.requestQueue;
     request.userData = @"songDelete";
+    
+    // add the songs to delete
+    request.params = [NSDictionary dictionaryWithObject:[songs JSONString] forKey: @"to_add"];
     
     // set up the headers, including which type of request this is
     NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJData sharedUDJData].headers];
     [requestHeaders setValue:@"playerMethodsDelegate" forKey:@"delegate"];
+    [requestHeaders setValue:@"text/json" forKey:@"content-type"];
     request.additionalHTTPHeaders = requestHeaders;
     
     return [request sendSynchronously];
+}
+
+// Songs is an array of NSNumbers
+-(void)removeSongsFromSyncDictionary:(NSArray*)songs{
+    for(int i=0; i<[songs count]; i++){
+        NSNumber* libraryID = [songs objectAtIndex: i];
+        if([songSyncDictionary objectForKey: libraryID] != nil){
+            [songSyncDictionary removeObjectForKey: libraryID];
+        }
+    }
 }
 
 -(void)deleteRemovedItems{
@@ -332,13 +345,25 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
         [libraryDictionary setObject: [NSNumber numberWithBool:YES] forKey: keyAsNumber];
     }
     
+    // check each song in our song sync dictionary, and if its
+    // not in the iPod library anymore, add it to the accumulating array
+    NSMutableArray* deleteItemsArray = [NSMutableArray arrayWithCapacity: 50];
     NSArray* songSyncKeys = [songSyncDictionary allKeys];
     for(int i=0; i<[songSyncKeys count]; i++){
         NSNumber* libraryID = [songSyncKeys objectAtIndex: i];
         if([libraryDictionary objectForKey: libraryID] == nil){
-            RKResponse* response = [self removeSongWithID: [libraryID unsignedLongLongValue]];
-            if([response isOK]) NSLog(@"Successfully removed libraryID %llu", [libraryID unsignedLongLongValue]);
+            [deleteItemsArray addObject: libraryID];
         }
+    }
+    
+    // if there were songs to delete, let the server know
+    if([deleteItemsArray count] > 0){
+        RKResponse* response = [self removeSongsFromServer: deleteItemsArray];
+        if([response statusCode] == 200){
+            NSLog(@"Successfully removed songs");
+            [self removeSongsFromSyncDictionary: deleteItemsArray];
+        }
+        else NSLog(@"There was a problem removing songs");
     }
 }
 
@@ -658,7 +683,6 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response{
     NSLog(@"Player Manager response code: %d", [response statusCode]);
-    
 }
 
 
