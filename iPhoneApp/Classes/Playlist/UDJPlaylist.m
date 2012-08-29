@@ -56,7 +56,7 @@
     // background mode
     else{
         RKResponse* response = [request sendSynchronously];
-        NSLog(@"got playlist response while in background");
+        //NSLog(@"got playlist response while in background");
         [self request:request didLoadResponse:response];        
     }
 }
@@ -132,7 +132,7 @@
 }
 
 -(void)request:(RKRequest *)request didLoadResponse:(RKResponse *)response{
-    NSLog(@"Response Code: %d", [response statusCode]);
+    //NSLog(@"Response Code: %d", [response statusCode]);
     if ([request isGET]) {
         [self handlePlaylistResponse:response];        
     }
