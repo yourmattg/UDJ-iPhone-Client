@@ -236,7 +236,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     [managedObjectContext save: &error];
 }
 
--(void)updatePlayerMusicHelper{
+-(void)updatePlayerMusic{
     [self buildSyncDictionary];
     
     // get all songs from library
@@ -260,27 +260,13 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
             NSDictionary* songAddDict = [self dictionaryForMediaItem: mediaItem];
             [songAddArray addObject: songAddDict];
             
-            //if(syncStatus == nil) NSLog(@"new ID: %llu", [libraryID unsignedLongLongValue]);
-            
-            // mark the song as synced initially (we'll mark it as unsynced in the case of a 409)
+            // mark the song as synced initially
             [songSyncDictionary setObject: [NSNumber numberWithBool: YES] forKey:number];
             
             // if we have 200 songs, send them off to the server
             if([songAddArray count] == 200 || i == [songArray count]-1){
                 NSLog(@"Sending %d songs to server", [songAddArray count]);
-                RKResponse* response = [self addSongsToServer: [songAddArray JSONString]];
-                
-                // if there were conflicts, mark those songs as unsynced
-                if([response statusCode] == 409){
-                    NSArray* songConflictArray = [[response bodyAsString] objectFromJSONString];
-                    NSLog(@"%d conflicts", [songConflictArray count]);
-                    for(int i=0; i<[songConflictArray count]; i++){
-                        // set synced to YES since that means we already have it
-                        NSNumber* conflictNumber = [songConflictArray objectAtIndex: i];
-                        [songSyncDictionary setObject: [NSNumber numberWithBool: YES] forKey: [NSNumber numberWithUnsignedLongLong: [conflictNumber unsignedLongLongValue]]];
-                    }
-                }
-                else if([response statusCode] == 201) NSLog(@"%d songs added", [songAddArray count]);
+                [self addSongsToServer: [songAddArray JSONString]];
                 [songAddArray removeAllObjects];
             }
         }
@@ -292,8 +278,31 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     NSLog(@"done updating library");
 }
 
--(void)updatePlayerMusic{
-    [NSThread detachNewThreadSelector:@selector(updatePlayerMusicHelper) toTarget:self withObject:nil];
+-(void)addSongsToServer:(NSString*)songCollectionString{
+    
+    RKClient* client = [RKClient sharedClient];
+    
+    //create url users/user_id/players/player_id/library/songs
+    NSString* urlString = [client.baseURL absoluteString];
+    urlString = [urlString stringByAppendingFormat: @"/0_6/players/%d/library/songs", self.playerID, nil];
+    
+    //set up request
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
+    request.delegate = self.globalData;
+    request.method = RKRequestMethodPUT;
+    request.queue = client.requestQueue;
+    request.userData = @"songSetAdd";
+    
+    // set up the headers, including which type of request this is
+    NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJData sharedUDJData].headers];
+    [requestHeaders setValue:@"playerMethodsDelegate" forKey:@"delegate"];
+    [requestHeaders setValue:@"text/json" forKey:@"content-type"];
+    request.additionalHTTPHeaders = requestHeaders;
+    
+    // set body to the JSON song array
+    [request setHTTPBody: [songCollectionString dataUsingEncoding: NSUTF8StringEncoding]];
+    
+    [request send];
 }
 
 -(RKResponse*)removeSongsFromServer:(NSArray*)songs{
@@ -363,33 +372,6 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
         }
         else NSLog(@"There was a problem removing songs");
     }
-}
-
--(RKResponse*)addSongsToServer:(NSString*)songCollectionString{
-    
-    RKClient* client = [RKClient sharedClient];
-    
-    //create url users/user_id/players/player_id/library/songs
-    NSString* urlString = [client.baseURL absoluteString];
-    urlString = [urlString stringByAppendingFormat: @"/0_6/players/%d/library/songs", self.playerID, nil];
-    
-    //set up request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
-    request.delegate = self.globalData;
-    request.method = RKRequestMethodPUT;
-    request.queue = client.requestQueue;
-    request.userData = @"songSetAdd";
-    
-    // set up the headers, including which type of request this is
-    NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJData sharedUDJData].headers];
-    [requestHeaders setValue:@"playerMethodsDelegate" forKey:@"delegate"];
-    [requestHeaders setValue:@"text/json" forKey:@"content-type"];
-    request.additionalHTTPHeaders = requestHeaders;
-    
-    // set body to the JSON song array
-    [request setHTTPBody: [songCollectionString dataUsingEncoding: NSUTF8StringEncoding]];
-    
-    return [request sendSynchronously];
 }
 
 #pragma mark - Player state methods
@@ -661,7 +643,8 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 #pragma mark - Response handling
 
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response{
-    NSLog(@"Player Manager response code: %d", [response statusCode]);
+    NSString* requestType = [request userData];
+    NSLog(@"Player Manager response code: %d, request type %@", [response statusCode], requestType);
 }
 
 
