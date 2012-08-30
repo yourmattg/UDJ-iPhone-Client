@@ -58,6 +58,11 @@
     [self.mainScrollView scrollRectToVisible: CGRectMake(0, yCoord+10, 320, 367) animated:YES];
     self.cancelButton.hidden = NO;
     self.mainScrollView.scrollEnabled = YES;
+    
+    if(textField.tag == 4 && self.statePickerView.frame.origin.y == 480){
+        [self toggleStatePicker: YES];
+        [textField resignFirstResponder];
+    }
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField{
@@ -92,13 +97,44 @@
 
 #pragma mark - State (location) picker
 
+-(void)toggleStatePicker:(BOOL)visible{
+    if(visible){
+        [self.statePickerView setFrame: CGRectMake(0, 480, 320, 260)];
+        [self.view addSubview: self.statePickerView];
+    }
+    
+    [UIView animateWithDuration:0.4 animations:^(void){
+        NSInteger yCoord = visible ? 200 : 480;
+        [self.statePickerView setFrame: CGRectMake(0, yCoord, 320, 260)];
+    } completion:^(BOOL finished){
+        if(finished && !visible)
+            [statePickerView removeFromSuperview];
+    }];   
+}
+
+-(IBAction)donePickingStateClick:(id)sender{
+    [self toggleStatePicker: NO];
+}
+
 -(void)initStateArrays{
     self.stateNameArray = [NSArray arrayWithObjects:@"Alabama", @"Alaska", @"Arizona", @"Arkansas", @"California", @"Colorado", @"Connecticut", @"Delaware", @"Florida", @"Georgia", @"Hawaii", @"Idaho", @"Illinois", @"Indiana", @"Iowa", @"Kansas", @"Kentucky", @"Louisiana", @"Maine", @"Maryland", @"Massachusetts", @"Michigan", @"Minnesota", @"Mississippi", @"Missouri", @"Montana", @"Nebraska", @"Nevada", @"New Hampshire", @"New Jersey", @"New Mexico", @"New York", @"North Carolina", @"North Dakota", @"Ohio", @"Oklahoma", @"Oregon", @"Pennsylvania", @"Rhode Island", @"South Carolina", @"South Dakota", @"Tennessee", @"Texas", @"Utah", @"Vermont", @"Virginia", @"Washington", @"West Virginia", @"Wisconsin", @"Wyoming", nil];
     self.stateAbbrArray = [NSArray arrayWithObjects:@"AL", @"AK", @"AZ", @"AR", @"CA", @"CO", @"CT", @"DE", @"FL", @"GA", @"HI", @"ID", @"IL", @"IN", @"IA", @"KS", @"KY", @"LA", @"ME", @"MD", @"MA", @"MI", @"MN", @"MS", @"MO", @"MT", @"NE", @"NV", @"NH", @"NJ", @"NM", @"NY", @"NC", @"ND", @"OH", @"OK", @"OR", @"PA", @"RI", @"SC", @"SD", @"TN", @"TX", @"UT", @"VT", @"VA", @"WA", @"WV", @"WI", @"WY", nil];
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
     return [stateNameArray count];
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    return (NSString*)[stateNameArray objectAtIndex: row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+    [stateField setText: [stateAbbrArray objectAtIndex: row]];
 }
 
 #pragma mark - View lifecycle
@@ -116,7 +152,7 @@
 {
     [super viewDidLoad];
     
-
+    [self initStateArrays];
     
     [self.mainScrollView setContentSize: CGSizeMake(320, 630)]; // 320, 367
     [self.mainScrollView scrollRectToVisible: CGRectMake(0, 8, 320, 367) animated:YES];

@@ -305,7 +305,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     [request send];
 }
 
--(RKResponse*)removeSongsFromServer:(NSArray*)songs{
+-(void)removeSongsFromServer:(NSArray*)songs{
     RKClient* client = [RKClient sharedClient];
     
     //create url [DELETE] /udj/0_6/players/player_id/library/lib_id
@@ -328,7 +328,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     [requestHeaders setValue:@"text/json" forKey:@"content-type"];
     request.additionalHTTPHeaders = requestHeaders;
     
-    return [request sendSynchronously];
+    [request send];
 }
 
 // Songs is an array of NSNumbers
@@ -365,12 +365,13 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     
     // if there were songs to delete, let the server know
     if([deleteItemsArray count] > 0){
-        RKResponse* response = [self removeSongsFromServer: deleteItemsArray];
-        if([response statusCode] == 200){
+        [self removeSongsFromServer: deleteItemsArray];
+        // TODO: move this do didLoadResponse
+        /*if([response statusCode] == 200){
             NSLog(@"Successfully removed songs");
             [self removeSongsFromSyncDictionary: deleteItemsArray];
         }
-        else NSLog(@"There was a problem removing songs");
+        else NSLog(@"There was a problem removing songs");*/
     }
 }
 
