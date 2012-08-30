@@ -11,7 +11,7 @@
 #import "UDJData.h"
 #import "UDJPlayerManager.h"
 
-@interface PlayerInfoViewController : UIViewController <UITextFieldDelegate, RKRequestDelegate>
+@interface PlayerInfoViewController : UIViewController <UITextFieldDelegate, RKRequestDelegate, UIPickerViewDataSource>
 
 @property(nonatomic,strong) IBOutlet UIScrollView* mainScrollView;
 
@@ -32,6 +32,9 @@
 @property(nonatomic,strong) IBOutlet UITextField* stateField;
 @property(nonatomic,strong) IBOutlet UITextField* zipCodeField;
 
+@property(nonatomic,strong) NSArray* stateNameArray;
+@property(nonatomic,strong) NSArray* stateAbbrArray;
+@property(nonatomic,strong) IBOutlet UIView* statePickerView;
 
 @property(nonatomic,strong) IBOutlet UIButton* createPlayerButton;
 
