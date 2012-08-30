@@ -33,12 +33,13 @@
     float longitude = [locationManager getLongitude];
     
     // create URL
-    NSString* urlString = client.baseURL;
+    NSString* urlString = [client.baseURL absoluteString];
     urlString = [urlString stringByAppendingFormat:@"%@%f%@%f", @"/players/", latitude, @"/", longitude];
     NSURL* url = [NSURL URLWithString:urlString];
     
     // create GET request
-    RKRequest* request = [[RKRequest alloc] initWithURL:url delegate: playerListDelegate];
+    RKRequest* request = [[RKRequest alloc] initWithURL:url];
+    request.delegate = playerListDelegate;
     request.method = RKRequestMethodGET;
     request.additionalHTTPHeaders = globalData.headers;    
     
@@ -57,13 +58,14 @@
     name = [name stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     
     // create the URL
-    NSString* urlString = client.baseURL;
+    NSString* urlString = [client.baseURL absoluteString];
     urlString = [urlString stringByAppendingString:@"/players?name="];
     urlString = [urlString stringByAppendingString:name];
     NSURL* url = [NSURL URLWithString:urlString];
     
     //create GET request with correct parameters and headers
-    RKRequest* request = [[RKRequest alloc] initWithURL:url delegate: playerListDelegate];
+    RKRequest* request = [[RKRequest alloc] initWithURL:url];
+    request.delegate = playerListDelegate;
     request.method = RKRequestMethodGET;
     request.additionalHTTPHeaders = globalData.headers;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++]; 
@@ -79,14 +81,15 @@
     RKClient* client = [RKClient sharedClient];
     
     //create url
-    NSString* urlString = client.baseURL;
+    NSString* urlString = [client.baseURL absoluteString];
     urlString = [urlString stringByAppendingString:@"/players/"];
     urlString = [urlString stringByAppendingFormat:@"%d",[UDJPlayerData sharedPlayerData].currentPlayer.playerID];
     urlString = [urlString stringByAppendingString:@"/users/"];
     urlString = [urlString stringByAppendingFormat:@"%i", [globalData.userID intValue]];
     
     //set up request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: playerListDelegate];
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
+    request.delegate = playerListDelegate;
     request.method = RKRequestMethodPUT;
     request.additionalHTTPHeaders = globalData.headers;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++];
@@ -108,11 +111,11 @@
 -(void)setState:(NSString*)state{
     RKClient* client = [RKClient sharedClient];
     //create url [POST] /udj/users/user_id/players/player_id/state
-    NSString* urlString = client.baseURL;
+    NSString* urlString = [client.baseURL absoluteString];
     urlString = [urlString stringByAppendingFormat: @"%@%d%@%d%@", @"/users/", [globalData.userID intValue], @"/players/", currentPlayer.playerID, @"/state", nil];
     
     //set up request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: nil];
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
     NSDictionary* stateParam = [NSDictionary dictionaryWithObjectsAndKeys: state, @"state", nil]; 
     request.params = stateParam;
     request.method = RKRequestMethodPOST;
@@ -128,11 +131,11 @@
 -(void)setVolume:(NSInteger)volume{
     RKClient* client = [RKClient sharedClient];
     //create url [POST] /udj/users/user_id/players/player_id/state
-    NSString* urlString = client.baseURL;
+    NSString* urlString = [client.baseURL absoluteString];
     urlString = [urlString stringByAppendingFormat: @"%@%d%@%d%@", @"/users/", [globalData.userID intValue], @"/players/", currentPlayer.playerID, @"/volume", nil];
     
     //set up request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: nil];
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
     NSDictionary* volumeParam = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt: volume], @"volume", nil]; 
     request.params = volumeParam;
     request.method = RKRequestMethodPOST;

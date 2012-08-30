@@ -22,7 +22,7 @@
 #import "UDJData.h"
 #import "PullRefreshTableViewController.h"
 
-@interface ArtistsViewController : PullRefreshTableViewController
+@interface ArtistsViewController : PullRefreshTableViewController <RKRequestDelegate>
 
 @property(nonatomic,strong) IBOutlet UISearchBar* searchBar;
 @property(nonatomic,strong) NSMutableArray* artistsArray;

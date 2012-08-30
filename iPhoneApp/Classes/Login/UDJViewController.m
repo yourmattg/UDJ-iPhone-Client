@@ -181,11 +181,12 @@
     NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"0.5", @"X-Udj-Api-Version", nil];
 
     // create the URL
-    NSMutableString* urlString = [NSMutableString stringWithString: client.baseURL];
+    NSMutableString* urlString = [NSMutableString stringWithString:[client.baseURL absoluteString]];
     [urlString appendString: @"/auth"];
     
     // set up request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
+    request.delegate = self;
     request.queue = client.requestQueue;
     request.params = nameAndPass;
     request.method = RKRequestMethodPOST;

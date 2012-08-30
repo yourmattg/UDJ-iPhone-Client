@@ -174,11 +174,12 @@
     RKClient* client = [RKClient sharedClient];
     
     // create url /players/player_id/available_music/artists
-    NSString* urlString = client.baseURL;
+    NSString* urlString = [client.baseURL absoluteString];
     urlString = [urlString stringByAppendingFormat:@"%@%d%@",@"/players/",[UDJPlayerData sharedPlayerData].currentPlayer.playerID,@"/available_music/artists"];
     
     // create request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:self];
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
+    request.delegate = self;
     request.queue = client.requestQueue;
     request.method = RKRequestMethodGET;
     request.additionalHTTPHeaders = globalData.headers;

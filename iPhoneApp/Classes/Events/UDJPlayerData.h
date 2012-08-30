@@ -47,7 +47,7 @@
 @property(nonatomic,strong) UDJPlayer* currentPlayer;
 @property(nonatomic,strong) LocationManager* locationManager;
 @property(nonatomic,strong) UDJData* globalData;
-@property(nonatomic,strong) UIViewController* playerListDelegate;
+@property(nonatomic,strong) id<RKRequestDelegate> playerListDelegate;
 @property(nonatomic,strong) UIViewController* leaveEventDelegate;
 
 @end

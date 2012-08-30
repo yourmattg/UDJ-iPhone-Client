@@ -115,11 +115,10 @@
     
     //create url [PUT] /udj/events/event_id/active_playlist/songs
     NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@%llu",client.baseURL,@"/players/",playerID,@"/active_playlist/songs/",librarySongId, nil];
-    
-    NSLog(urlString);
 
     // create request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate:artistViewController];
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
+    request.delegate = artistViewController;
     request.queue = client.requestQueue;
     request.method = RKRequestMethodPUT;
     request.additionalHTTPHeaders = globalData.headers;
@@ -217,13 +216,14 @@
     
     // create URL
     
-    NSString* urlString = client.baseURL;
+    NSString* urlString = [client.baseURL absoluteString];
     artist = [artist stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     NSInteger playerID = [UDJPlayerData sharedPlayerData].currentPlayer.playerID;
     urlString = [urlString stringByAppendingFormat:@"%@%d%@%@",@"/players/",playerID,@"/available_music/artists/",artist,nil];
     
     // create request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: [UDJData sharedUDJData]];
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
+    request.delegate = [UDJData sharedUDJData];
     request.queue = client.requestQueue;
     request.method = RKRequestMethodGET;
     
@@ -255,13 +255,14 @@
     
     // create URL
     
-    NSString* urlString = client.baseURL;
+    NSString* urlString = [client.baseURL absoluteString];
     query = [query stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     NSInteger playerID = [UDJPlayerData sharedPlayerData].currentPlayer.playerID;
     urlString = [urlString stringByAppendingFormat:@"%@%d%@%@%@%d",@"/players/",playerID,@"/available_music?query=",query, @"&max_results=", MAX_RESULTS, nil];
     
     // create request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: [UDJData sharedUDJData]];
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
+    request.delegate = [UDJData sharedUDJData];
     request.queue = client.requestQueue;
     request.method = RKRequestMethodGET;
 

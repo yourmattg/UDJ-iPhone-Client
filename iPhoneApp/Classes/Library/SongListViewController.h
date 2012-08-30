@@ -50,7 +50,7 @@ enum UDJQueryType {
 
 @property(nonatomic,strong) IBOutlet UISearchBar* searchBar;
 
-@property(nonatomic,unsafe_unretained) UIViewController* artistViewController;
+@property(nonatomic,unsafe_unretained) id<RKRequestDelegate> artistViewController;
 
 
 -(void)getSongsByArtist:(NSString*)artist;

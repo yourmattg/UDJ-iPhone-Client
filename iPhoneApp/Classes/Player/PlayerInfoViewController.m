@@ -251,11 +251,12 @@
     RKClient* client = [RKClient sharedClient];
     
     //create url [POST] {prefix}/udj/users/user_id/players/player_id/name
-    NSString* urlString = client.baseURL;
+    NSString* urlString = [client.baseURL absoluteString];
     urlString = [urlString stringByAppendingFormat:@"%@%d%@", @"/users/", [globalData.userID intValue], @"/players/player", nil];
 
     // create request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: self.globalData];
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
+    request.delegate = self.globalData;
     request.queue = client.requestQueue;
     request.method = RKRequestMethodPUT;
     request.HTTPBodyString = [self JSONStringWithPlayerInfo];

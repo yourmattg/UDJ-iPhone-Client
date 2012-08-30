@@ -46,7 +46,6 @@
 		A35F57F41572D25D004AA5DB /* PullRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A35F57F31572D25D004AA5DB /* PullRefreshTableViewController.m */; };
 		A35F57F61572D477004AA5DB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35F57F51572D477004AA5DB /* QuartzCore.framework */; };
 		A35F57F91572DD04004AA5DB /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A35F57F81572DD04004AA5DB /* arrow.png */; };
-		A3632F6814FC8AE10073EDF4 /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3632F5F14FC8AC40073EDF4 /* libRestKit.a */; };
 		A36CF96215BF87DC0032AF31 /* UDJStoredPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A36CF96115BF87DC0032AF31 /* UDJStoredPlayer.m */; };
 		A3720B3014C74FE800D1E30C /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A3720B2F14C74FE800D1E30C /* LocationManager.m */; };
 		A3720B3214C7513600D1E30C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3720B3114C7513600D1E30C /* CoreLocation.framework */; };
@@ -67,6 +66,7 @@
 		A39AF6961497D0A4006ADF19 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF6951497D0A4006ADF19 /* libxml2.dylib */; };
 		A3A1EE6C1575E49E0058555A /* UDJConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A1EE6B1575E49E0058555A /* UDJConfigurator.m */; };
 		A3A2B370156DD6C600C4FF90 /* UDJStoredData.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A2B36F156DD6C600C4FF90 /* UDJStoredData.m */; };
+		A3A72A6415EF061400E3723C /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3A72A5915EF056900E3723C /* libRestKit.a */; };
 		A3B1ABB8157E759B008498EC /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3B1ABB7157E759B008498EC /* MainWindow.xib */; };
 		A3BB46E314E2086400554179 /* EventGoerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BB46E214E2086400554179 /* EventGoerCell.m */; };
 		A3C22D551566D4D50066B9F8 /* playlisticon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C22D541566D4D50066B9F8 /* playlisticon.png */; };
@@ -108,37 +108,44 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A3632F5E14FC8AC40073EDF4 /* PBXContainerItemProxy */ = {
+		A3A72A5815EF056900E3723C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A39AF6581497C803006ADF19 /* RestKit.xcodeproj */;
+			containerPortal = A3A72A4D15EF056900E3723C /* RestKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 25160D1614564E810060A5C5;
 			remoteInfo = RestKit;
 		};
-		A3632F6014FC8AC40073EDF4 /* PBXContainerItemProxy */ = {
+		A3A72A5A15EF056900E3723C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A39AF6581497C803006ADF19 /* RestKit.xcodeproj */;
+			containerPortal = A3A72A4D15EF056900E3723C /* RestKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 25160D2614564E820060A5C5;
 			remoteInfo = RestKitTests;
 		};
-		A3632F6214FC8AC40073EDF4 /* PBXContainerItemProxy */ = {
+		A3A72A5C15EF056900E3723C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A39AF6581497C803006ADF19 /* RestKit.xcodeproj */;
+			containerPortal = A3A72A4D15EF056900E3723C /* RestKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 25160E62145651060060A5C5;
 			remoteInfo = RestKitFramework;
 		};
-		A3632F6414FC8AC40073EDF4 /* PBXContainerItemProxy */ = {
+		A3A72A5E15EF056900E3723C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A39AF6581497C803006ADF19 /* RestKit.xcodeproj */;
+			containerPortal = A3A72A4D15EF056900E3723C /* RestKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 25160E78145651060060A5C5;
 			remoteInfo = RestKitFrameworkTests;
 		};
-		A3632F6614FC8ADB0073EDF4 /* PBXContainerItemProxy */ = {
+		A3A72A6015EF056900E3723C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A39AF6581497C803006ADF19 /* RestKit.xcodeproj */;
+			containerPortal = A3A72A4D15EF056900E3723C /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 259C301615128079003066A2;
+			remoteInfo = RestKitResources;
+		};
+		A3A72A6215EF05DA00E3723C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A3A72A4D15EF056900E3723C /* RestKit.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 25160D1514564E810060A5C5;
 			remoteInfo = RestKit;
@@ -261,7 +268,6 @@
 		A38DC7C615C496CF00BF9A68 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		A39A0C8914C4ADDF008A6D54 /* LibraryEntryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryEntryCell.h; sourceTree = "<group>"; };
 		A39A0C8A14C4ADDF008A6D54 /* LibraryEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryEntryCell.m; sourceTree = "<group>"; };
-		A39AF6581497C803006ADF19 /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = RestKit/RestKit.xcodeproj; sourceTree = "<group>"; };
 		A39AF68A1497CFBC006ADF19 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A39AF68D1497D072006ADF19 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		A39AF68F1497D079006ADF19 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -273,6 +279,7 @@
 		A3A1EE6B1575E49E0058555A /* UDJConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJConfigurator.m; sourceTree = "<group>"; };
 		A3A2B36E156DD6C600C4FF90 /* UDJStoredData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDJStoredData.h; path = ../UDJStoredData.h; sourceTree = "<group>"; };
 		A3A2B36F156DD6C600C4FF90 /* UDJStoredData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDJStoredData.m; path = ../UDJStoredData.m; sourceTree = "<group>"; };
+		A3A72A4D15EF056900E3723C /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = ../RestKit/RestKit.xcodeproj; sourceTree = "<group>"; };
 		A3B1ABB7157E759B008498EC /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		A3BB46E114E2086400554179 /* EventGoerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventGoerCell.h; sourceTree = "<group>"; };
 		A3BB46E214E2086400554179 /* EventGoerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventGoerCell.m; sourceTree = "<group>"; };
@@ -330,6 +337,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3A72A6415EF061400E3723C /* libRestKit.a in Frameworks */,
 				A341E23015E2BC9200E92D84 /* CoreMedia.framework in Frameworks */,
 				A341E22E15E2B45300E92D84 /* AVFoundation.framework in Frameworks */,
 				A38DC7C715C496CF00BF9A68 /* MediaPlayer.framework in Frameworks */,
@@ -337,7 +345,6 @@
 				A3E4D185157457260032CF8B /* Twitter.framework in Frameworks */,
 				A3E4D1831574570A0032CF8B /* MessageUI.framework in Frameworks */,
 				A35F57F61572D477004AA5DB /* QuartzCore.framework in Frameworks */,
-				A3632F6814FC8AE10073EDF4 /* libRestKit.a in Frameworks */,
 				A3720B3414C7514400D1E30C /* CoreFoundation.framework in Frameworks */,
 				A3720B3214C7513600D1E30C /* CoreLocation.framework in Frameworks */,
 				A39AF6961497D0A4006ADF19 /* libxml2.dylib in Frameworks */,
@@ -392,7 +399,7 @@
 				A341E22D15E2B45300E92D84 /* AVFoundation.framework */,
 				A38DC7C615C496CF00BF9A68 /* MediaPlayer.framework */,
 				A3D5EB9915BA24060019FBAF /* ShareKit.xcodeproj */,
-				A39AF6581497C803006ADF19 /* RestKit.xcodeproj */,
+				A3A72A4D15EF056900E3723C /* RestKit.xcodeproj */,
 				A35F57F71572D47C004AA5DB /* Frameworks */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -507,17 +514,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A3632F5814FC8AC40073EDF4 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A3632F5F14FC8AC40073EDF4 /* libRestKit.a */,
-				A3632F6114FC8AC40073EDF4 /* RestKitTests.octest */,
-				A3632F6314FC8AC40073EDF4 /* RestKit.framework */,
-				A3632F6514FC8AC40073EDF4 /* RestKitFrameworkTests.octest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		A396EF1E14B558B300BCEF8F /* Library */ = {
 			isa = PBXGroup;
 			children = (
@@ -533,6 +529,18 @@
 				A39A0C8A14C4ADDF008A6D54 /* LibraryEntryCell.m */,
 			);
 			path = Library;
+			sourceTree = "<group>";
+		};
+		A3A72A4E15EF056900E3723C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A3A72A5915EF056900E3723C /* libRestKit.a */,
+				A3A72A5B15EF056900E3723C /* RestKitTests.octest */,
+				A3A72A5D15EF056900E3723C /* RestKit.framework */,
+				A3A72A5F15EF056900E3723C /* RestKitFrameworkTests.octest */,
+				A3A72A6115EF056900E3723C /* RestKitResources.bundle */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		A3C6A4741565FA1400F1E42E /* images */ = {
@@ -663,9 +671,9 @@
 			buildRules = (
 			);
 			dependencies = (
+				A3A72A6315EF05DA00E3723C /* PBXTargetDependency */,
 				A3D5EBAD15BA242F0019FBAF /* PBXTargetDependency */,
 				A3D5EBAF15BA242F0019FBAF /* PBXTargetDependency */,
-				A3632F6714FC8ADB0073EDF4 /* PBXTargetDependency */,
 			);
 			name = UDJ;
 			productName = UDJ;
@@ -694,8 +702,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = A3632F5814FC8AC40073EDF4 /* Products */;
-					ProjectRef = A39AF6581497C803006ADF19 /* RestKit.xcodeproj */;
+					ProductGroup = A3A72A4E15EF056900E3723C /* Products */;
+					ProjectRef = A3A72A4D15EF056900E3723C /* RestKit.xcodeproj */;
 				},
 				{
 					ProductGroup = A3D5EB9A15BA24060019FBAF /* Products */;
@@ -710,32 +718,39 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		A3632F5F14FC8AC40073EDF4 /* libRestKit.a */ = {
+		A3A72A5915EF056900E3723C /* libRestKit.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRestKit.a;
-			remoteRef = A3632F5E14FC8AC40073EDF4 /* PBXContainerItemProxy */;
+			remoteRef = A3A72A5815EF056900E3723C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A3632F6114FC8AC40073EDF4 /* RestKitTests.octest */ = {
+		A3A72A5B15EF056900E3723C /* RestKitTests.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = RestKitTests.octest;
-			remoteRef = A3632F6014FC8AC40073EDF4 /* PBXContainerItemProxy */;
+			remoteRef = A3A72A5A15EF056900E3723C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A3632F6314FC8AC40073EDF4 /* RestKit.framework */ = {
+		A3A72A5D15EF056900E3723C /* RestKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = RestKit.framework;
-			remoteRef = A3632F6214FC8AC40073EDF4 /* PBXContainerItemProxy */;
+			remoteRef = A3A72A5C15EF056900E3723C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A3632F6514FC8AC40073EDF4 /* RestKitFrameworkTests.octest */ = {
+		A3A72A5F15EF056900E3723C /* RestKitFrameworkTests.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = RestKitFrameworkTests.octest;
-			remoteRef = A3632F6414FC8AC40073EDF4 /* PBXContainerItemProxy */;
+			remoteRef = A3A72A5E15EF056900E3723C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A3A72A6115EF056900E3723C /* RestKitResources.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RestKitResources.bundle;
+			remoteRef = A3A72A6015EF056900E3723C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		A3D5EBA515BA24060019FBAF /* ShareKitDemo.app */ = {
@@ -868,10 +883,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A3632F6714FC8ADB0073EDF4 /* PBXTargetDependency */ = {
+		A3A72A6315EF05DA00E3723C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = RestKit;
-			targetProxy = A3632F6614FC8ADB0073EDF4 /* PBXContainerItemProxy */;
+			targetProxy = A3A72A6215EF05DA00E3723C /* PBXContainerItemProxy */;
 		};
 		A3D5EBAD15BA242F0019FBAF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -900,11 +915,14 @@
 				HEADER_SEARCH_PATHS = (
 					"\"$(SOURCE_ROOT)/RestKit/Build\"/**",
 					"ShareKit/**",
+					"/Users/mattgraf/sandbox/UDJ/RestKit/**/**",
 					..,
 					"../Submodules/ShareKit/**/**",
 					"/Users/mattgraf/sandbox/UDJ/Submodules/ShareKit/**/**",
 					"../**/**",
 					"/../**/**",
+					"\"$(SOURCE_ROOT)/RestKit/\"/**",
+					"\"$(BUILT_PRODUCTS_DIR)/../../Headers\"/**",
 				);
 				INFOPLIST_FILE = "UDJ-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -931,11 +949,14 @@
 				HEADER_SEARCH_PATHS = (
 					"\"$(SOURCE_ROOT)/RestKit/Build\"/**",
 					"ShareKit/**",
+					"/Users/mattgraf/sandbox/UDJ/RestKit/**/**",
 					..,
 					"../Submodules/ShareKit/**/**",
 					"/Users/mattgraf/sandbox/UDJ/Submodules/ShareKit/**/**",
 					"../**/**",
 					"/../**/**",
+					"\"$(SOURCE_ROOT)/RestKit/\"/**",
+					"\"$(BUILT_PRODUCTS_DIR)/../../Headers\"/**",
 				);
 				INFOPLIST_FILE = "UDJ-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -982,11 +1003,14 @@
 				HEADER_SEARCH_PATHS = (
 					"\"$(SOURCE_ROOT)/RestKit/Build\"/**",
 					"ShareKit/**",
+					"/Users/mattgraf/sandbox/UDJ/RestKit/**/**",
 					..,
 					"../Submodules/ShareKit/**/**",
 					"/Users/mattgraf/sandbox/UDJ/Submodules/ShareKit/**/**",
 					"../**/**",
 					"/../**/**",
+					"\"$(SOURCE_ROOT)/RestKit/\"/**",
+					"\"$(BUILT_PRODUCTS_DIR)/../../Headers\"/**",
 				);
 				INFOPLIST_FILE = "UDJ-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;

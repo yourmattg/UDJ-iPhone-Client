@@ -117,11 +117,10 @@
     
     // initialize udjConnection
     baseUrl = @"https://udjplayer.com:4898/udj";
-    //baseUrl = @"https://0.0.0.0:4897/udj";
     
     // initialize RestKit client
     RKClient* client = [RKClient alloc];
-    client = [client initWithBaseURL: baseUrl];
+    client = [client initWithBaseURL: [NSURL URLWithString: baseUrl]];
     
     [UDJPlaylist new]; // make UDJPlaylist singleton
     [UDJPlaylist sharedUDJPlaylist].globalData = [UDJData sharedUDJData];

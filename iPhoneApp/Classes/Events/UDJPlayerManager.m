@@ -227,10 +227,8 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     for(int i=0; i<[keyArray count]; i++){
         NSNumber* entryID = [keyArray objectAtIndex: i];
         UDJStoredLibraryEntry* entry = (UDJStoredLibraryEntry*)[NSEntityDescription insertNewObjectForEntityForName:@"UDJStoredLibraryEntry" inManagedObjectContext:managedObjectContext];  
-        // TODO: need to fix persistent store type
         NSNumber* number = [[NSNumber alloc] initWithUnsignedLongLong: [entryID unsignedLongLongValue]];
         [entry setSynced: [self.songSyncDictionary objectForKey: number]];
-        //[entry setSynced: [self.songSyncDictionary objectForKey: entryID]];
         [entry setLibraryID: number];
     }
     
@@ -268,7 +266,6 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
             [songSyncDictionary setObject: [NSNumber numberWithBool: YES] forKey:number];
             
             // if we have 200 songs, send them off to the server
-            // TODO: change 50 to 200
             if([songAddArray count] == 200 || i == [songArray count]-1){
                 NSLog(@"Sending %d songs to server", [songAddArray count]);
                 RKResponse* response = [self addSongsToServer: [songAddArray JSONString]];
@@ -303,11 +300,12 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     RKClient* client = [RKClient sharedClient];
     
     //create url [DELETE] /udj/0_6/players/player_id/library/lib_id
-    NSString* urlString = client.baseURL;
+    NSString* urlString = [client.baseURL absoluteString];
     urlString = [urlString stringByAppendingFormat: @"/0_6/players/%d/library", self.playerID, nil];
     
     //set up request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: self.globalData];
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
+    request.delegate = self.globalData;
     request.method = RKRequestMethodPOST;
     request.queue = client.requestQueue;
     request.userData = @"songDelete";
@@ -372,11 +370,12 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     RKClient* client = [RKClient sharedClient];
     
     //create url users/user_id/players/player_id/library/songs
-    NSString* urlString = client.baseURL;
+    NSString* urlString = [client.baseURL absoluteString];
     urlString = [urlString stringByAppendingFormat: @"/0_6/players/%d/library/songs", self.playerID, nil];
     
     //set up request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: self.globalData];
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
+    request.delegate = self.globalData;
     request.method = RKRequestMethodPUT;
     request.queue = client.requestQueue;
     request.userData = @"songSetAdd";
@@ -413,11 +412,12 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     RKClient* client = [RKClient sharedClient];
     
     //create url [POST] {prefix}/udj/0_6/players/player_id/state
-    NSString* urlString = client.baseURL;
+    NSString* urlString = [client.baseURL absoluteString];
     urlString = [urlString stringByAppendingFormat:@"%@%d%@", @"/0_6/players/", self.playerID, @"/state", nil];
     
     // create request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: self.globalData];
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
+    request.delegate = self.globalData;
     request.queue = client.requestQueue;
     request.method = RKRequestMethodPOST;
     request.userData = [NSString stringWithString: @"changeState"];
@@ -516,11 +516,12 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     RKClient* client = [RKClient sharedClient];
     
     //create url [POST] [POST] /udj/0_6/players/player_id/current_song
-    NSString* urlString = client.baseURL;
+    NSString* urlString = [client.baseURL absoluteString];
     urlString = [urlString stringByAppendingFormat:@"%@%d%@", @"/0_6/players/", self.playerID, @"/current_song", nil];
 
     // create request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString] delegate: self.globalData];
+    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
+    request.delegate = self.globalData;
     request.queue = client.requestQueue;
     request.method = RKRequestMethodPOST;
     request.userData = [NSString stringWithString: @"changeCurrentSong"];
@@ -614,7 +615,6 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 -(BOOL)canQueueNextSong{
     NSNumber* songTime = [currentMediaItem valueForProperty: MPMediaItemPropertyPlaybackDuration];
     NSInteger timeAsInt = [songTime intValue];
-    NSLog(@"time: %f, total time: %d", [self currentPlaybackTime], timeAsInt);
     if([self currentPlaybackTime] > timeAsInt-10) return NO;
     return YES;
 }
