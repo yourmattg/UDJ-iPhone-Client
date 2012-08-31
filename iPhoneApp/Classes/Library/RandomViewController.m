@@ -105,7 +105,10 @@ typedef unsigned long long UDJLibraryID;
     RKClient* client = [RKClient sharedClient];
     
     //create url [PUT] /udj/events/event_id/active_playlist/songs
-    NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@%llu",client.baseURL,@"/players/",playerID,@"/active_playlist/songs/",librarySongId, nil];
+    //NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@%llu",client.baseURL,@"/players/",playerID,@"/active_playlist/songs/",librarySongId, nil];
+    // TODO fix this URL thing
+    NSLog(@"Client base URL: %@", [client.baseURL absoluteString]);
+    NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@%llu",[client.baseURL absoluteString], @"/players/",playerID,@"/active_playlist/songs/",librarySongId, nil];
     
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
@@ -114,6 +117,8 @@ typedef unsigned long long UDJLibraryID;
     request.method = RKRequestMethodPUT;
     request.additionalHTTPHeaders = globalData.headers;
     
+    NSLog(@"URLString: %@", urlString);
+    NSLog(@"sent URL: %@", [request.URL absoluteString]);
     // remember song number
     request.userData = [NSNumber numberWithInt: librarySongId];
     

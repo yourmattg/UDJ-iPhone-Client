@@ -36,11 +36,14 @@
 
 #pragma mark - Text fields
 
--(IBAction)cancelButtonClick:(id)sender{
+-(void)forceKeyboardHide{
     for(int i=0; i < [textFieldArray count]; i++){
         UITextField* textField= [textFieldArray objectAtIndex: i];
         [textField resignFirstResponder];
     }
+}
+-(IBAction)cancelButtonClick:(id)sender{
+    [self forceKeyboardHide];
     [self.mainScrollView scrollRectToVisible: CGRectMake(0, 0, 320, 367) animated:YES];
     self.mainScrollView.scrollEnabled = NO;
 }
@@ -59,13 +62,17 @@
     self.cancelButton.hidden = NO;
     self.mainScrollView.scrollEnabled = YES;
     
-    if(textField.tag == 4 && self.statePickerView.frame.origin.y == 480){
-        [self toggleStatePicker: YES];
+    if(textField.tag == 4){
         [textField resignFirstResponder];
+        [self toggleStatePicker: YES];
+    }
+    else{
+        [self toggleStatePicker: NO];
     }
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField{
+    [textField resignFirstResponder];
     if(textField == self.playerNameField){
         [playerNameLabel setText: self.playerNameField.text];
     }
@@ -82,11 +89,13 @@
     
     // if this is the last enabled field, hide the keyboard
     if(!nextField || !nextField.enabled){
-        [textField resignFirstResponder];
         [self.mainScrollView scrollRectToVisible: CGRectMake(0, 0, 320, 367) animated:YES];
         self.mainScrollView.scrollEnabled = NO;
     }
-    
+    else if(index == 4){
+        [textField resignFirstResponder];
+        [self toggleStatePicker: YES];
+    }
     // set focus to the next field
     else{
         [nextField becomeFirstResponder];        
@@ -98,17 +107,10 @@
 #pragma mark - State (location) picker
 
 -(void)toggleStatePicker:(BOOL)visible{
-    if(visible){
-        [self.statePickerView setFrame: CGRectMake(0, 480, 320, 260)];
-        [self.view addSubview: self.statePickerView];
-    }
     
     [UIView animateWithDuration:0.4 animations:^(void){
         NSInteger yCoord = visible ? 200 : 480;
         [self.statePickerView setFrame: CGRectMake(0, yCoord, 320, 260)];
-    } completion:^(BOOL finished){
-        if(finished && !visible)
-            [statePickerView removeFromSuperview];
     }];   
 }
 
@@ -153,6 +155,8 @@
     [super viewDidLoad];
     
     [self initStateArrays];
+    [self.statePickerView setFrame: CGRectMake(0, 480, 320, 260)];
+    [self.view addSubview: self.statePickerView];
     
     [self.mainScrollView setContentSize: CGSizeMake(320, 630)]; // 320, 367
     [self.mainScrollView scrollRectToVisible: CGRectMake(0, 8, 320, 367) animated:YES];
