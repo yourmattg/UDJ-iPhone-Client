@@ -25,7 +25,7 @@
 @synthesize textFieldArray;
 @synthesize playerNameLabel;
 @synthesize playerNameField, playerPasswordField;
-@synthesize cancelButton, closeButton;
+@synthesize cancelButton, closeButton, editButton, doneButton;
 @synthesize useLocationSwitch, addressField, cityField, stateField, zipCodeField, locationFields;
 @synthesize createPlayerButton;
 @synthesize globalData, managedObjectContext, playerID, songSyncDictionary;
@@ -193,7 +193,7 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark - Saving player to persistent store
+#pragma mark - Saving & Loading player info
 
 -(void)savePlayerInfo{
     // update the player manager
@@ -220,10 +220,25 @@
         [self.stateField setText: playerManager.stateLocation];
         [self.zipCodeField setText: playerManager.zipCode];
         self.playerID = playerManager.playerID;
-        
         [playerNameLabel setText: playerManager.playerName];
+        
+        // disable fields that can't be changed after the player is first created
         self.createPlayerButton.hidden = YES;
+        self.playerNameField.enabled = NO;
+        self.playerNameField.alpha = 0.8;
+        
+        [self toggleEditable:NO];
     }
+}
+
+// toggleEditable: enable/disable certain text fields if we are/aren't in editing mode
+-(void)toggleEditable:(BOOL)isInEditingMode{
+    self.playerPasswordField.enabled = isInEditingMode;
+    self.addressField.enabled = isInEditingMode;
+    self.cityField.enabled = isInEditingMode;
+    self.stateField.enabled = isInEditingMode;
+    self.zipCodeField.enabled = isInEditingMode;
+    
 }
 
 #pragma mark - Navigation

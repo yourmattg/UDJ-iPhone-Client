@@ -24,6 +24,8 @@
 
 @property(nonatomic,strong) IBOutlet UIButton* closeButton;
 @property(nonatomic,strong) IBOutlet UIButton* cancelButton;
+@property(nonatomic,strong) IBOutlet UIButton* editButton;
+@property(nonatomic,strong) IBOutlet UIButton* doneButton;
 
 @property(nonatomic,strong) IBOutlet UISwitch* useLocationSwitch;
 @property(nonatomic,strong) IBOutletCollection(UITextField) NSArray* locationFields;

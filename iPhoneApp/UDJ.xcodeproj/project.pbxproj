@@ -24,6 +24,7 @@
 		A3210D8F15328763009A9318 /* smalluparrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A3210D8E15328763009A9318 /* smalluparrow.png */; };
 		A324ABF614AAB74700388514 /* UDJSong.m in Sources */ = {isa = PBXBuildFile; fileRef = A324ABF514AAB74700388514 /* UDJSong.m */; };
 		A324AC0514AABB8900388514 /* UDJPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = A324AC0414AABB8900388514 /* UDJPlaylist.m */; };
+		A325E0FB15F13C1100D54062 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = A325E0FA15F13C1100D54062 /* edit.png */; };
 		A3265DB314C6101400FC692B /* PlaylistEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3265DB214C6101400FC692B /* PlaylistEntryCell.m */; };
 		A32BEEA1157163A1005B573B /* nearbybutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A32BEEA0157163A1005B573B /* nearbybutton.png */; };
 		A331096E15DED3B6003D2AD3 /* playerinfobutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A331096D15DED3B6003D2AD3 /* playerinfobutton.png */; };
@@ -220,6 +221,7 @@
 		A324ABF514AAB74700388514 /* UDJSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJSong.m; sourceTree = "<group>"; };
 		A324AC0314AABB8900388514 /* UDJPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJPlaylist.h; sourceTree = "<group>"; };
 		A324AC0414AABB8900388514 /* UDJPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJPlaylist.m; sourceTree = "<group>"; };
+		A325E0FA15F13C1100D54062 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
 		A3265DB114C6101400FC692B /* PlaylistEntryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistEntryCell.h; sourceTree = "<group>"; };
 		A3265DB214C6101400FC692B /* PlaylistEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistEntryCell.m; sourceTree = "<group>"; };
 		A32A384614AE917600D166CF /* UDJ-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "UDJ-Info.plist"; path = "../UDJ-Info.plist"; sourceTree = "<group>"; };
@@ -546,6 +548,7 @@
 		A3C6A4741565FA1400F1E42E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				A325E0FA15F13C1100D54062 /* edit.png */,
 				A3CFEEDB15DFE8EB00962465 /* closebutton.png */,
 				A331096D15DED3B6003D2AD3 /* playerinfobutton.png */,
 				A34FA21C15C22E120022EF46 /* Default.png */,
@@ -832,6 +835,7 @@
 				A3E3D7CF15DDDAA000EBF087 /* PlayerViewController.xib in Resources */,
 				A331096E15DED3B6003D2AD3 /* playerinfobutton.png in Resources */,
 				A3CFEEDC15DFE8EB00962465 /* closebutton.png in Resources */,
+				A325E0FB15F13C1100D54062 /* edit.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
