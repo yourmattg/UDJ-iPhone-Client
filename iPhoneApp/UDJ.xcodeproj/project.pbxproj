@@ -25,6 +25,7 @@
 		A324ABF614AAB74700388514 /* UDJSong.m in Sources */ = {isa = PBXBuildFile; fileRef = A324ABF514AAB74700388514 /* UDJSong.m */; };
 		A324AC0514AABB8900388514 /* UDJPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = A324AC0414AABB8900388514 /* UDJPlaylist.m */; };
 		A325E0FB15F13C1100D54062 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = A325E0FA15F13C1100D54062 /* edit.png */; };
+		A325E0FD15F13D9600D54062 /* donebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A325E0FC15F13D9600D54062 /* donebutton.png */; };
 		A3265DB314C6101400FC692B /* PlaylistEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3265DB214C6101400FC692B /* PlaylistEntryCell.m */; };
 		A32BEEA1157163A1005B573B /* nearbybutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A32BEEA0157163A1005B573B /* nearbybutton.png */; };
 		A331096E15DED3B6003D2AD3 /* playerinfobutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A331096D15DED3B6003D2AD3 /* playerinfobutton.png */; };
@@ -105,7 +106,6 @@
 		A3F58D9F14C765C100E350F4 /* UDJEventGoerList.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58D9E14C765C100E350F4 /* UDJEventGoerList.m */; };
 		A3F86A6F156F03250036FBCE /* PlayerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F86A6D156F03250036FBCE /* PlayerListViewController.m */; };
 		A3F86A70156F03250036FBCE /* PlayerListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F86A6E156F03250036FBCE /* PlayerListViewController.xib */; };
-		A3FCF8B715918F5D00B6CB95 /* keyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = A3FCF8B615918F5D00B6CB95 /* keyboard.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -222,6 +222,7 @@
 		A324AC0314AABB8900388514 /* UDJPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJPlaylist.h; sourceTree = "<group>"; };
 		A324AC0414AABB8900388514 /* UDJPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJPlaylist.m; sourceTree = "<group>"; };
 		A325E0FA15F13C1100D54062 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
+		A325E0FC15F13D9600D54062 /* donebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = donebutton.png; sourceTree = "<group>"; };
 		A3265DB114C6101400FC692B /* PlaylistEntryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistEntryCell.h; sourceTree = "<group>"; };
 		A3265DB214C6101400FC692B /* PlaylistEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistEntryCell.m; sourceTree = "<group>"; };
 		A32A384614AE917600D166CF /* UDJ-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "UDJ-Info.plist"; path = "../UDJ-Info.plist"; sourceTree = "<group>"; };
@@ -331,7 +332,6 @@
 		A3F86A6C156F03250036FBCE /* PlayerListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerListViewController.h; sourceTree = "<group>"; };
 		A3F86A6D156F03250036FBCE /* PlayerListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerListViewController.m; sourceTree = "<group>"; };
 		A3F86A6E156F03250036FBCE /* PlayerListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlayerListViewController.xib; path = ../Classes/Events/PlayerListViewController.xib; sourceTree = "<group>"; };
-		A3FCF8B615918F5D00B6CB95 /* keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keyboard.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -548,6 +548,7 @@
 		A3C6A4741565FA1400F1E42E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				A325E0FC15F13D9600D54062 /* donebutton.png */,
 				A325E0FA15F13C1100D54062 /* edit.png */,
 				A3CFEEDB15DFE8EB00962465 /* closebutton.png */,
 				A331096D15DED3B6003D2AD3 /* playerinfobutton.png */,
@@ -555,7 +556,6 @@
 				A34FA21D15C22E120022EF46 /* Default@2x.png */,
 				A34FA21A15C22D540022EF46 /* plus.png */,
 				A3E70CDB159BF7E00037A60B /* blackground.png */,
-				A3FCF8B615918F5D00B6CB95 /* keyboard.png */,
 				A30CE22D15916C0500DA054D /* underline.png */,
 				A302C4111593F52A008B3793 /* cancel.png */,
 				A30CE22B1591695800DA054D /* backg.png */,
@@ -825,7 +825,6 @@
 				A3D61A3215882EA300ACE780 /* PlayerInfoViewController.xib in Resources */,
 				A30CE22C1591695800DA054D /* backg.png in Resources */,
 				A30CE22E15916C0500DA054D /* underline.png in Resources */,
-				A3FCF8B715918F5D00B6CB95 /* keyboard.png in Resources */,
 				A302C4121593F52A008B3793 /* cancel.png in Resources */,
 				A3E70CDC159BF7E00037A60B /* blackground.png in Resources */,
 				A3D5EBB115BA24B40019FBAF /* ShareKit.bundle in Resources */,
@@ -836,6 +835,7 @@
 				A331096E15DED3B6003D2AD3 /* playerinfobutton.png in Resources */,
 				A3CFEEDC15DFE8EB00962465 /* closebutton.png in Resources */,
 				A325E0FB15F13C1100D54062 /* edit.png in Resources */,
+				A325E0FD15F13D9600D54062 /* donebutton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
