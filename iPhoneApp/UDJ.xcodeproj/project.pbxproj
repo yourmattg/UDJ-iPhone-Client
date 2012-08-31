@@ -26,6 +26,8 @@
 		A324AC0514AABB8900388514 /* UDJPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = A324AC0414AABB8900388514 /* UDJPlaylist.m */; };
 		A325E0FB15F13C1100D54062 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = A325E0FA15F13C1100D54062 /* edit.png */; };
 		A325E0FD15F13D9600D54062 /* donebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A325E0FC15F13D9600D54062 /* donebutton.png */; };
+		A325E10015F1640900D54062 /* UDJPlayerInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A325E0FF15F1640900D54062 /* UDJPlayerInfoManager.m */; };
+		A325E10315F165A400D54062 /* RKRequest+UDJRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A325E10215F165A400D54062 /* RKRequest+UDJRequest.m */; };
 		A3265DB314C6101400FC692B /* PlaylistEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3265DB214C6101400FC692B /* PlaylistEntryCell.m */; };
 		A32BEEA1157163A1005B573B /* nearbybutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A32BEEA0157163A1005B573B /* nearbybutton.png */; };
 		A331096E15DED3B6003D2AD3 /* playerinfobutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A331096D15DED3B6003D2AD3 /* playerinfobutton.png */; };
@@ -223,6 +225,10 @@
 		A324AC0414AABB8900388514 /* UDJPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJPlaylist.m; sourceTree = "<group>"; };
 		A325E0FA15F13C1100D54062 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
 		A325E0FC15F13D9600D54062 /* donebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = donebutton.png; sourceTree = "<group>"; };
+		A325E0FE15F1640900D54062 /* UDJPlayerInfoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDJPlayerInfoManager.h; path = Classes/Player/UDJPlayerInfoManager.h; sourceTree = SOURCE_ROOT; };
+		A325E0FF15F1640900D54062 /* UDJPlayerInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDJPlayerInfoManager.m; path = Classes/Player/UDJPlayerInfoManager.m; sourceTree = SOURCE_ROOT; };
+		A325E10115F165A400D54062 /* RKRequest+UDJRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RKRequest+UDJRequest.h"; path = "Classes/RKRequest+UDJRequest.h"; sourceTree = SOURCE_ROOT; };
+		A325E10215F165A400D54062 /* RKRequest+UDJRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RKRequest+UDJRequest.m"; path = "Classes/RKRequest+UDJRequest.m"; sourceTree = SOURCE_ROOT; };
 		A3265DB114C6101400FC692B /* PlaylistEntryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistEntryCell.h; sourceTree = "<group>"; };
 		A3265DB214C6101400FC692B /* PlaylistEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistEntryCell.m; sourceTree = "<group>"; };
 		A32A384614AE917600D166CF /* UDJ-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "UDJ-Info.plist"; path = "../UDJ-Info.plist"; sourceTree = "<group>"; };
@@ -620,7 +626,11 @@
 				A3E3D7CD15DDDAA000EBF087 /* PlayerViewController.xib */,
 				A3EECC0015994ED30003BEF8 /* PlayerInfoViewController.h */,
 				A3EECC0115994ED30003BEF8 /* PlayerInfoViewController.m */,
+				A325E10115F165A400D54062 /* RKRequest+UDJRequest.h */,
+				A325E10215F165A400D54062 /* RKRequest+UDJRequest.m */,
 				A3D61A3115882EA300ACE780 /* PlayerInfoViewController.xib */,
+				A325E0FE15F1640900D54062 /* UDJPlayerInfoManager.h */,
+				A325E0FF15F1640900D54062 /* UDJPlayerInfoManager.m */,
 				A38DC7C315C4928700BF9A68 /* UDJPlayerManager.h */,
 				A38DC7C415C4928700BF9A68 /* UDJPlayerManager.m */,
 				A3443FC315C78D73005A6A67 /* UDJStoredLibraryEntry.h */,
@@ -881,6 +891,8 @@
 				A38DC7C515C4928700BF9A68 /* UDJPlayerManager.m in Sources */,
 				A3443FC515C78D73005A6A67 /* UDJStoredLibraryEntry.m in Sources */,
 				A3E3D7CE15DDDAA000EBF087 /* PlayerViewController.m in Sources */,
+				A325E10015F1640900D54062 /* UDJPlayerInfoManager.m in Sources */,
+				A325E10315F165A400D54062 /* RKRequest+UDJRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

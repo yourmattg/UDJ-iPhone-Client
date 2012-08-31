@@ -226,25 +226,23 @@
         self.createPlayerButton.hidden = YES;
         self.playerNameField.enabled = NO;
         self.playerNameField.alpha = 0.8;
-        
-        [self toggleEditable:NO];
     }
 }
 
-// toggleEditable: enable/disable certain text fields if we are/aren't in editing mode
--(void)toggleEditable:(BOOL)isInEditingMode{
-    self.playerPasswordField.enabled = isInEditingMode;
-    self.addressField.enabled = isInEditingMode;
-    self.cityField.enabled = isInEditingMode;
-    self.stateField.enabled = isInEditingMode;
-    self.zipCodeField.enabled = isInEditingMode;
-    
-}
+#pragma mark - Changing player info
+
+
 
 #pragma mark - Navigation
 
 -(IBAction)closeButtonClick:(id)sender{
     [self dismissModalViewControllerAnimated: YES];
+    
+    // If this player was created already, update the information
+    if(self.playerID != -1){
+        [self updatePlayerInfo];
+        
+    }
 }
 
 
