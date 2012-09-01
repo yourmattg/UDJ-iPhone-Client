@@ -10,6 +10,6 @@
 
 @interface RKRequest (UDJRequest)
 
--(RKRequest*)UDJRequestWithMethod:(RKRequestMethod)method;
++(RKRequest*)UDJRequestWithMethod:(RKRequestMethod)method;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "PlayerViewController.h"
 #import "PlayerInfoViewController.h"
+#import "UDJPlayerInfoManager.h"
 #import "UDJPlaylist.h"
 #import <AVFoundation/AVAudioSession.h>
 
@@ -51,7 +52,7 @@
     self.playerManager = [UDJPlayerManager sharedPlayerManager];
     self.playerManager.UIDelegate = self;
     
-    [playerManager updateCurrentPlayer];
+    [[UDJPlayerInfoManager sharedPlayerInfoManager] updateCurrentPlayer];
     [[UDJPlaylist sharedUDJPlaylist] setPlayerID: playerManager.playerID];
     [[UDJPlaylist sharedUDJPlaylist] sendPlaylistRequest];
     

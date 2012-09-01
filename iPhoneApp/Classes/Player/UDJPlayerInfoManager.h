@@ -7,7 +7,26 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RKRequest+UDJRequest.h"
+#import "UDJData.h"
 
-@interface UDJPlayerInfoManager : NSObject
+@interface UDJPlayerInfoManager : NSObject <RKRequestDelegate>
+
+@property NSInteger playerID;
+@property(nonatomic,strong) NSString* playerName;
+@property(nonatomic,strong) NSString* playerPassword;
+@property(nonatomic,strong) NSString* address;
+@property(nonatomic,strong) NSString* stateLocation;
+@property(nonatomic,strong) NSString* city;
+@property(nonatomic,strong) NSString* zipCode;
+
+@property(nonatomic,strong) NSManagedObjectContext* managedObjectContext;
+@property(nonatomic,strong) UDJData* globalData;
+
++(UDJPlayerInfoManager*)sharedPlayerInfoManager;
+-(void)updateCurrentPlayer;
+-(void)loadPlayerInfo;
+-(void)savePlayerInfo;
+-(void)updateInfoOnServer;
 
 @end

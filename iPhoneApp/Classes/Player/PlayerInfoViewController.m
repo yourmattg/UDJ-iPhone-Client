@@ -30,7 +30,7 @@
 @synthesize createPlayerButton;
 @synthesize globalData, managedObjectContext, playerID, songSyncDictionary;
 @synthesize activityView, activityLabel;
-@synthesize playerManager;
+@synthesize playerManager, playerInfoManager;
 @synthesize parentViewController;
 @synthesize statePickerView, stateNameArray, stateAbbrArray;
 
@@ -170,6 +170,7 @@
     self.globalData = [UDJData sharedUDJData];
     self.globalData.playerCreateDelegate = self;
     self.playerManager = [UDJPlayerManager sharedPlayerManager];
+    self.playerInfoManager = [UDJPlayerInfoManager sharedPlayerInfoManager];
     
     UDJAppDelegate* appDelegate = (UDJAppDelegate*)[[UIApplication sharedApplication] delegate];
     managedObjectContext = appDelegate.managedObjectContext;
@@ -196,31 +197,31 @@
 #pragma mark - Saving & Loading player info
 
 -(void)savePlayerInfo{
-    // update the player manager
-    [playerManager setPlayerName: self.playerNameField.text];
-    [playerManager setAddress: self.addressField.text];
-    [playerManager setCity: self.cityField.text];
-    [playerManager setStateLocation: self.stateField.text];
-    [playerManager setPlayerPassword: self.playerPasswordField.text];
-    [playerManager setZipCode: self.zipCodeField.text];
-    [playerManager setPlayerID: self.playerID];
+    // update the player info manager
+    [playerInfoManager setPlayerName: self.playerNameField.text];
+    [playerInfoManager setAddress: self.addressField.text];
+    [playerInfoManager setCity: self.cityField.text];
+    [playerInfoManager setStateLocation: self.stateField.text];
+    [playerInfoManager setPlayerPassword: self.playerPasswordField.text];
+    [playerInfoManager setZipCode: self.zipCodeField.text];
+    [playerInfoManager setPlayerID: self.playerID];
     
-    [playerManager savePlayerInfo];
+    [playerInfoManager savePlayerInfo];
 }
 
 -(void)updatePlayerInfo{
-    [playerManager loadPlayerInfo];
+    [playerInfoManager loadPlayerInfo];
     
     // if there was a stored player, fill in the fields
-    if (playerManager.playerID != -1) {
-        [self.playerNameField setText: playerManager.playerName];
-        [self.playerPasswordField setText: playerManager.playerPassword];
-        [self.addressField setText: playerManager.address];
-        [self.cityField setText: playerManager.city];
-        [self.stateField setText: playerManager.stateLocation];
-        [self.zipCodeField setText: playerManager.zipCode];
-        self.playerID = playerManager.playerID;
-        [playerNameLabel setText: playerManager.playerName];
+    if (playerInfoManager.playerID != -1) {
+        [self.playerNameField setText: playerInfoManager.playerName];
+        [self.playerPasswordField setText: playerInfoManager.playerPassword];
+        [self.addressField setText: playerInfoManager.address];
+        [self.cityField setText: playerInfoManager.city];
+        [self.stateField setText: playerInfoManager.stateLocation];
+        [self.zipCodeField setText: playerInfoManager.zipCode];
+        self.playerID = playerInfoManager.playerID;
+        [playerNameLabel setText: playerInfoManager.playerName];
         
         // disable fields that can't be changed after the player is first created
         self.createPlayerButton.hidden = YES;
@@ -240,8 +241,10 @@
     
     // If this player was created already, update the information
     if(self.playerID != -1){
-        [self updatePlayerInfo];
-        
+        // save the information to the device
+        [self savePlayerInfo];
+        // let the server know about the changes
+        [playerInfoManager updateInfoOnServer];
     }
 }
 

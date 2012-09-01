@@ -20,12 +20,6 @@ typedef enum {
 
 @interface UDJPlayerManager : NSObject <RKRequestDelegate>
 
-@property(nonatomic,strong) NSString* playerName;
-@property(nonatomic,strong) NSString* playerPassword;
-@property(nonatomic,strong) NSString* address;
-@property(nonatomic,strong) NSString* stateLocation;
-@property(nonatomic,strong) NSString* city;
-@property(nonatomic,strong) NSString* zipCode;
 @property NSInteger playerID;
 
 @property BOOL isInPlayerMode;
@@ -49,9 +43,6 @@ typedef enum {
 @property(nonatomic,weak) UDJPlaylist* playlist;
 
 +(UDJPlayerManager*)sharedPlayerManager;
--(void)updateCurrentPlayer;
--(void)loadPlayerInfo;
--(void)savePlayerInfo;
 -(void)updatePlayerMusic;
 -(void)changePlayerState:(PlayerState)newState;
 

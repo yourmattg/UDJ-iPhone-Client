@@ -12,7 +12,7 @@
 
 @implementation RKRequest (UDJRequest)
 
--(RKRequest*)UDJRequestWithMethod:(RKRequestMethod)method{
++(RKRequest*)UDJRequestWithMethod:(RKRequestMethod)method{
     RKClient* client = [RKClient sharedClient];
     RKRequest* request = [RKRequest requestWithURL: client.baseURL];
     request.method = method;
