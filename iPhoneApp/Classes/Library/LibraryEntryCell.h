@@ -29,6 +29,6 @@
 @property(nonatomic,strong) UILabel* songLabel;
 @property(nonatomic,strong) UILabel* artistLabel;
 @property(nonatomic,strong) UIButton* addButton;
-@property unsigned long long librarySongId;
+@property(nonatomic,strong) NSString* librarySongId;
 
 @end

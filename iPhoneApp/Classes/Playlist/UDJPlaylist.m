@@ -63,12 +63,12 @@
 }
 
 
--(void)sendVoteRequest:(BOOL)up songId:(NSInteger)songId{
+-(void)sendVoteRequest:(BOOL)up songId:(NSString*)songId{
     RKClient* client = [RKClient sharedClient];
     
     //create url [POST] {prefix}/udj/events/event_id/active_playlist/playlist_id/users/user_id/upvote
     NSString* urlString = [client.baseURL absoluteString];
-    urlString = [urlString stringByAppendingFormat:@"%@%d%@%d%@%d%@", @"/players/", playerID, @"/active_playlist/songs/",songId,@"/users/",[globalData.userID intValue],@"/"];
+    urlString = [urlString stringByAppendingFormat:@"%@%d%@%@%@%d%@", @"/players/", playerID, @"/active_playlist/songs/",songId,@"/users/",[globalData.userID intValue],@"/"];
     if(up) urlString = [urlString stringByAppendingString:@"upvote"];
     else urlString = [urlString stringByAppendingString:@"downvote"];
     

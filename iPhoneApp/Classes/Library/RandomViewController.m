@@ -101,14 +101,13 @@ typedef unsigned long long UDJLibraryID;
     }];
 }
 
--(void)sendAddSongRequest:(UDJLibraryID)librarySongId playerID:(NSInteger)playerID{
+-(void)sendAddSongRequest:(NSString*)librarySongId playerID:(NSInteger)playerID{
     RKClient* client = [RKClient sharedClient];
     
     //create url [PUT] /udj/events/event_id/active_playlist/songs
     //NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@%llu",client.baseURL,@"/players/",playerID,@"/active_playlist/songs/",librarySongId, nil];
     // TODO fix this URL thing
-    NSLog(@"Client base URL: %@", [client.baseURL absoluteString]);
-    NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@%llu",[client.baseURL absoluteString], @"/players/",playerID,@"/active_playlist/songs/",librarySongId, nil];
+    NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@%@",[client.baseURL absoluteString], @"/players/",playerID,@"/active_playlist/songs/",librarySongId, nil];
     
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
@@ -120,7 +119,7 @@ typedef unsigned long long UDJLibraryID;
     NSLog(@"URLString: %@", urlString);
     NSLog(@"sent URL: %@", [request.URL absoluteString]);
     // remember song number
-    request.userData = [NSNumber numberWithInt: librarySongId];
+    request.userData = librarySongId;
     
     [request send]; 
     
@@ -152,7 +151,6 @@ typedef unsigned long long UDJLibraryID;
     UDJSong* song = [resultList songAtIndex:indexPath.row];
     cell.songLabel.text = song.title;
     cell.artistLabel.text = song.artist;
-    cell.addButton.tag = song.librarySongId;
     cell.librarySongId = song.librarySongId;
     cell.addButton.titleLabel.text = song.title;
     
@@ -242,8 +240,8 @@ typedef unsigned long long UDJLibraryID;
     // Song conflicts i.e. song we tried to add is already on the playlist
     else if(response.statusCode == 409){
         // get the song number, vote up
-        NSNumber* songNumber = request.userData;
-        [[UDJPlaylist sharedUDJPlaylist] sendVoteRequest:YES songId: [songNumber intValue]];
+        NSString* songID = request.userData;
+        [[UDJPlaylist sharedUDJPlaylist] sendVoteRequest:YES songId: songID];
     }
     
     // check if our ticket was invalid

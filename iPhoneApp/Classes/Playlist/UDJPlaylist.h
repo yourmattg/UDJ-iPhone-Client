@@ -46,7 +46,7 @@ enum VoteStatus {
 - (void)sendPlaylistRequest;
 - (NSInteger)count;
 - (void)clearPlaylist;
-- (void)sendVoteRequest:(BOOL)up songId:(NSInteger)songId;
+- (void)sendVoteRequest:(BOOL)up songId:(NSString*)songId;
 
 @property(nonatomic,strong) NSMutableArray* playlist;
 @property(nonatomic) NSInteger playerID;

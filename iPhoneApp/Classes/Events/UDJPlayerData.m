@@ -25,7 +25,7 @@
 @synthesize currentList, lastSearchParam, currentPlayer, locationManager, globalData, leaveEventDelegate, playerListDelegate;
 
 // getNearbyEvents: has the UDJConnection send a event search request
-- (void) getNearbyEvents{
+- (void) getNearbyPlayers{
     RKClient* client = [RKClient sharedClient];
     
     // use location manager to get long/latitude
@@ -84,8 +84,7 @@
     NSString* urlString = [client.baseURL absoluteString];
     urlString = [urlString stringByAppendingString:@"/players/"];
     urlString = [urlString stringByAppendingFormat:@"%d",[UDJPlayerData sharedPlayerData].currentPlayer.playerID];
-    urlString = [urlString stringByAppendingString:@"/users/"];
-    urlString = [urlString stringByAppendingFormat:@"%i", [globalData.userID intValue]];
+    urlString = [urlString stringByAppendingString:@"/users/user"];
     
     //set up request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];

@@ -103,8 +103,7 @@
     [self findNearbyPlayers];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated{
     [self.tableView reloadData];
     [self toggleJoiningView: NO];
     [super viewWillAppear:animated];
@@ -134,8 +133,8 @@
 #pragma mark - Player creation methods
 
 -(void)createPlayerClick{
-    UDJPlayerManager* playerManager = [UDJPlayerManager sharedPlayerManager];
-    if(playerManager.playerID == -1){
+    UDJPlayerInfoManager* playerInfoManager = [UDJPlayerInfoManager sharedPlayerInfoManager];
+    if(playerInfoManager.playerID == -1){
         PlayerInfoViewController* viewController = [[PlayerInfoViewController alloc] initWithNibName:@"PlayerInfoViewController" bundle:[NSBundle mainBundle]];
         [self presentModalViewController:viewController animated:YES];
         viewController.parentViewController = self;
@@ -314,7 +313,7 @@
     
     self.lastSearchType = SearchTypeNearby;
     self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
-    [eventData getNearbyEvents];
+    [eventData getNearbyPlayers];
 }
 
 -(void)findPlayersByName:(NSString*)name{
@@ -456,6 +455,7 @@
             [self joinEvent];
         
         else if(response.statusCode == 404){
+            NSLog([response bodyAsString]);
             [self showPlayerInactiveError];
         }
         

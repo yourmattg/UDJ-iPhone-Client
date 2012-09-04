@@ -53,7 +53,9 @@
     self.playerManager.UIDelegate = self;
     
     [[UDJPlayerInfoManager sharedPlayerInfoManager] updateCurrentPlayer];
+    self.playerManager.playerID = [UDJPlayerInfoManager sharedPlayerInfoManager].playerID;
     [[UDJPlaylist sharedUDJPlaylist] setPlayerID: playerManager.playerID];
+    
     [[UDJPlaylist sharedUDJPlaylist] sendPlaylistRequest];
     
     [playerManager changePlayerState: PlayerStatePaused];
@@ -66,15 +68,6 @@
     AVAudioSession* session = [AVAudioSession sharedInstance];
     [session setCategory:AVAudioSessionCategoryPlayback error:nil];
     [session setActive:YES error:nil];
-}
-
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear: animated];
-    if(self.playerManager.playerID == -1){
-        PlayerInfoViewController* viewController = [[PlayerInfoViewController alloc] initWithNibName: @"PlayerInfoViewController" bundle:[NSBundle mainBundle]];
-        [self presentModalViewController: viewController animated: YES];  
-        viewController.playerManager = self.playerManager;
-    }
 }
 
 #pragma mark - Play and pause

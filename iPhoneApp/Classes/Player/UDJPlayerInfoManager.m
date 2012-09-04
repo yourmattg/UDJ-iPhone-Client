@@ -51,6 +51,8 @@ static UDJPlayerInfoManager* _sharedPlayerInfoManager = nil;
         UDJAppDelegate* appDelegate = (UDJAppDelegate*)[[UIApplication sharedApplication] delegate];
         self.managedObjectContext = appDelegate.managedObjectContext;
         self.playerID = -1;
+        
+        [self loadPlayerInfo];
     }
     return self;
 }
@@ -140,21 +142,59 @@ static UDJPlayerInfoManager* _sharedPlayerInfoManager = nil;
     // update password
     if([playerPassword isEqualToString:@""]) [self removePassword];
     else [self updatePassword];
+    [self updateLocation];
 }
 
 #pragma mark - Password modification
 
+// Deletes password on server
 -(void)removePassword{
-    
+    RKRequest* request = [RKRequest UDJRequestWithMethod: RKRequestMethodDELETE];
+    request.delegate = self;
+    NSString* urlString = [NSString stringWithFormat: @"%@/0_6/players/%d/password", [request.URL absoluteString], self.playerID];
+    request.URL = [NSURL URLWithString: urlString];
+    request.userData = @"updatePassword";
+    [request send];
 }
 
+// Changes password on server
 -(void)updatePassword{
     RKRequest* request = [RKRequest UDJRequestWithMethod: RKRequestMethodPOST];
     request.delegate = self;
     // url 0_6/players/player_id/password
     NSString* urlString = [NSString stringWithFormat: @"%@/0_6/players/%d/password", [request.URL absoluteString], self.playerID];
     request.URL = [NSURL URLWithString: urlString];
-    NSLog(urlString);
+    request.userData = @"updatePassword";
+    request.params = [NSDictionary dictionaryWithObject:self.playerPassword forKey:@"password"];
+    [request send];
+}
+
+// Changes location on server
+-(void)updateLocation{
+    RKRequest* request = [RKRequest UDJRequestWithMethod: RKRequestMethodPOST];
+    request.delegate = self;
+    // url 0_6/players/player_id/password
+    NSString* urlString = [NSString stringWithFormat: @"%@/0_6/players/%d/location", [request.URL absoluteString], self.playerID];
+    request.URL = [NSURL URLWithString: urlString];
+    request.userData = @"updateLocation";
+    request.params = [NSDictionary dictionaryWithObjectsAndKeys: self.address, @"address", self.city, @"locality", self.stateLocation, @"region", self.zipCode, @"postal_code", @"United States", @"country", nil];
+    [request send];
+}
+
+
+#pragma mark - Response handling
+
+-(void)request:(RKRequest *)request didLoadResponse:(RKResponse *)response{
+    NSString* requestType = [request userData];
+    if([requestType isEqualToString: @"updatePassword"]){
+        if([response statusCode] == 400){
+            NSLog(@"Bad password");
+        }
+        else NSLog(@"Password response %d", [response statusCode]);
+    }
+    else{
+        NSLog(@"Player info status code %d", [response statusCode]);
+    }
 }
 
 @end

@@ -116,6 +116,8 @@
 
 -(IBAction)donePickingStateClick:(id)sender{
     [self toggleStatePicker: NO];
+    [self.mainScrollView scrollRectToVisible: CGRectMake(0, 0, 320, 367) animated:YES];
+    self.mainScrollView.scrollEnabled = NO;
 }
 
 -(void)initStateArrays{
@@ -153,6 +155,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.playerID = -1;
     
     [self initStateArrays];
     [self.statePickerView setFrame: CGRectMake(0, 480, 320, 260)];
@@ -241,6 +245,7 @@
     
     // If this player was created already, update the information
     if(self.playerID != -1){
+        NSLog(@"Player ID: %d", self.playerID);
         // save the information to the device
         [self savePlayerInfo];
         // let the server know about the changes

@@ -110,11 +110,11 @@
     }];
 }
 
--(void)sendAddSongRequest:(unsigned long long)librarySongId playerID:(NSInteger)playerID{
+-(void)sendAddSongRequest:(NSString*)librarySongId playerID:(NSInteger)playerID{
     RKClient* client = [RKClient sharedClient];
     
     //create url [PUT] /udj/events/event_id/active_playlist/songs
-    NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@%llu",[client.baseURL absoluteString], @"/players/",playerID,@"/active_playlist/songs/",librarySongId, nil];
+    NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@%@",[client.baseURL absoluteString], @"/players/",playerID,@"/active_playlist/songs/",librarySongId, nil];
 
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
@@ -124,7 +124,7 @@
     request.additionalHTTPHeaders = globalData.headers;
     
     // remember the song we are adding
-    request.userData = [NSNumber numberWithInt: librarySongId];
+    request.userData = librarySongId;
     
     //TODO: find a way to keep track of the requests
     //[currentRequests setObject:@"songAdd" forKey:request];
@@ -156,7 +156,6 @@
     UDJSong* song = [resultList songAtIndex:indexPath.row];
     cell.songLabel.text = song.title;
     cell.artistLabel.text = song.artist;
-    cell.addButton.tag = song.librarySongId;
     cell.addButton.titleLabel.text = song.title;
     cell.librarySongId = song.librarySongId;
     
@@ -346,8 +345,8 @@
     // Song conflicts i.e. song we tried to add is already on the playlist
     else if(response.statusCode == 409){
         // get the song number, vote up
-        NSNumber* songNumber = request.userData;
-        [[UDJPlaylist sharedUDJPlaylist] sendVoteRequest:YES songId: [songNumber intValue]];
+        NSString* songID = request.userData;
+        [[UDJPlaylist sharedUDJPlaylist] sendVoteRequest:YES songId: songID];
     }
     
     // check if our ticket was invalid

@@ -20,14 +20,6 @@
 #import <Foundation/Foundation.h>
 
 @interface UDJPlayer : NSObject{
-    @private
-    NSInteger playerID;
-    NSString* name;
-    NSString* hostUsername;
-    NSInteger hostId;
-    BOOL hasPassword;
-    double latitude;
-    double longitude;
     
 }
 

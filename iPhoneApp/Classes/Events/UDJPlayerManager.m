@@ -366,7 +366,10 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 #pragma mark - Transition to next song
 
 -(void)playerItemDidReachEnd{
-    if(!isInBackground) [self playNextSong];
+    if(!isInBackground){
+        NSLog(@"Playing next song");
+        [self playNextSong];
+    }
     else{
         
         // if there are songs on the queue but no current song, update the current song to item at the top
@@ -378,7 +381,8 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
         }
         
         // find the mediaItem for the current song
-        UDJLibraryID mediaItemID = [UDJPlaylist sharedUDJPlaylist].currentSong.librarySongId;
+        NSNumberFormatter* formatter = [[NSNumberFormatter alloc] init];
+        UDJLibraryID mediaItemID = [[formatter numberFromString:[UDJPlaylist sharedUDJPlaylist].currentSong.librarySongId] unsignedLongLongValue];
         MPMediaPropertyPredicate* predicate = [MPMediaPropertyPredicate predicateWithValue: [NSNumber numberWithUnsignedLongLong:mediaItemID]forProperty:MPMediaItemPropertyPersistentID];
         MPMediaQuery* query = [[MPMediaQuery alloc] initWithFilterPredicates: [NSSet setWithObject: predicate]];
         [self updateCurrentMediaItem: [[query items] objectAtIndex: 0]];
@@ -418,7 +422,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     return time;
 }
 
--(void)sendCurrentSongRequest:(UDJLibraryID)libraryID{
+-(void)sendCurrentSongRequest:(NSString*)libraryID{
     RKClient* client = [RKClient sharedClient];
     
     //create url [POST] [POST] /udj/0_6/players/player_id/current_song
@@ -437,7 +441,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     [requestHeaders setValue:@"playerMethodsDelegate" forKey:@"delegate"];
     request.additionalHTTPHeaders = requestHeaders;
 
-    request.params = [NSDictionary dictionaryWithObject: [NSNumber numberWithUnsignedLongLong: libraryID] forKey: @"lib_id"];
+    request.params = [NSDictionary dictionaryWithObject: libraryID forKey: @"lib_id"];
 
     //send request
     [request send];
@@ -446,12 +450,17 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 -(void)playPlaylistCurrentSong{
 
     // find the mediaItem for the current song
-    UDJLibraryID mediaItemID = [UDJPlaylist sharedUDJPlaylist].currentSong.librarySongId;
+    NSNumberFormatter* formatter = [[NSNumberFormatter alloc] init];
+    UDJLibraryID mediaItemID = [[formatter numberFromString:[UDJPlaylist sharedUDJPlaylist].currentSong.librarySongId] unsignedLongLongValue];
     MPMediaPropertyPredicate* predicate = [MPMediaPropertyPredicate predicateWithValue: [NSNumber numberWithUnsignedLongLong:mediaItemID]forProperty:MPMediaItemPropertyPersistentID];
     MPMediaQuery* query = [[MPMediaQuery alloc] initWithFilterPredicates: [NSSet setWithObject: predicate]];
     [self updateCurrentMediaItem: [[query items] objectAtIndex: 0]];
     
     // update the current item on the audioplayer
+    if([[audioPlayer items] count] > 0){
+        AVPlayerItem* itemToRemove = [[audioPlayer items] objectAtIndex: 0];
+        [audioPlayer removeItem: itemToRemove];
+    }
     NSURL* url = [currentMediaItem valueForProperty: MPMediaItemPropertyAssetURL];
     AVPlayerItem* playerItem = [[AVPlayerItem alloc] initWithURL:url];
     [audioPlayer insertItem:playerItem afterItem: nil];
@@ -527,7 +536,8 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 
 -(void)queueUpNextSong{
     // find the mediaItem for the top song on the playlist
-    UDJLibraryID mediaItemID = [[UDJPlaylist sharedUDJPlaylist] songAtIndex: 0].librarySongId;
+    NSNumberFormatter* formatter = [[NSNumberFormatter alloc] init];
+    UDJLibraryID mediaItemID = [[formatter numberFromString:[UDJPlaylist sharedUDJPlaylist].currentSong.librarySongId] unsignedLongLongValue];
     MPMediaPropertyPredicate* predicate = [MPMediaPropertyPredicate predicateWithValue: [NSNumber numberWithUnsignedLongLong:mediaItemID]forProperty:MPMediaItemPropertyPersistentID];
     MPMediaQuery* query = [[MPMediaQuery alloc] initWithFilterPredicates: [NSSet setWithObject: predicate]];
     MPMediaItem* nextMediaItem = [[query items] objectAtIndex: 0];
@@ -569,6 +579,8 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response{
     NSString* requestType = [request userData];
     NSLog(@"Player Manager response code: %d, request type %@", [response statusCode], requestType);
+    NSDictionary* headers = [response allHeaderFields];
+    NSLog([headers objectForKey: @"X-UDJ-Missing-Resource"]);
 }
 
 

@@ -116,7 +116,7 @@
     
     
     // initialize udjConnection
-    baseUrl = @"https://udjplayer.com:4898/udj";
+    baseUrl = @"https://udjplayer.com:4898/udj/0_6";
     
     // initialize RestKit client
     RKClient* client = [RKClient alloc];

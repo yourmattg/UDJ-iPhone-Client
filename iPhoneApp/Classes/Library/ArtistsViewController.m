@@ -247,9 +247,8 @@
     
     // upvote if the song is already on the playlist
     else if(response.statusCode == 409){
-        NSLog(@"conflict");
-        NSNumber* songNumber = (NSNumber*)[request userData];
-        [[UDJPlaylist sharedUDJPlaylist] sendVoteRequest:YES songId: [songNumber intValue]];
+        NSString* songID = (NSString*)[request userData];
+        [[UDJPlaylist sharedUDJPlaylist] sendVoteRequest:YES songId: songID];
     }
     
     // check if our ticket was invalid
