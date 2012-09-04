@@ -75,15 +75,15 @@
     [request send];
 }
 
-// enterEventRequest: attempts to log in user to party, returns status code of response
-- (void) enterEvent:(NSString*)password{
+// joinPlayer: attempts to log in user to party, returns status code of response
+- (void)joinPlayer:(NSString*)password{
 
     RKClient* client = [RKClient sharedClient];
     
     //create url
     NSString* urlString = [client.baseURL absoluteString];
     urlString = [urlString stringByAppendingString:@"/players/"];
-    urlString = [urlString stringByAppendingFormat:@"%d",[UDJPlayerData sharedPlayerData].currentPlayer.playerID];
+    urlString = [urlString stringByAppendingFormat:@"%@",[UDJPlayerData sharedPlayerData].currentPlayer.playerID];
     urlString = [urlString stringByAppendingString:@"/users/user"];
     
     //set up request
@@ -111,7 +111,7 @@
     RKClient* client = [RKClient sharedClient];
     //create url [POST] /udj/users/user_id/players/player_id/state
     NSString* urlString = [client.baseURL absoluteString];
-    urlString = [urlString stringByAppendingFormat: @"%@%d%@%d%@", @"/users/", [globalData.userID intValue], @"/players/", currentPlayer.playerID, @"/state", nil];
+    urlString = [urlString stringByAppendingFormat: @"%@%d%@%@%@", @"/users/", [globalData.userID intValue], @"/players/", currentPlayer.playerID, @"/state", nil];
     
     //set up request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
@@ -131,7 +131,7 @@
     RKClient* client = [RKClient sharedClient];
     //create url [POST] /udj/users/user_id/players/player_id/state
     NSString* urlString = [client.baseURL absoluteString];
-    urlString = [urlString stringByAppendingFormat: @"%@%d%@%d%@", @"/users/", [globalData.userID intValue], @"/players/", currentPlayer.playerID, @"/volume", nil];
+    urlString = [urlString stringByAppendingFormat: @"%@%d%@%@%@", @"/users/", [globalData.userID intValue], @"/players/", currentPlayer.playerID, @"/volume", nil];
     
     //set up request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];

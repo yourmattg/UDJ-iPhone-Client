@@ -20,7 +20,7 @@ typedef enum {
 
 @interface UDJPlayerManager : NSObject <RKRequestDelegate>
 
-@property NSInteger playerID;
+@property NSString* playerID;
 
 @property BOOL isInPlayerMode;
 @property PlayerState playerState;

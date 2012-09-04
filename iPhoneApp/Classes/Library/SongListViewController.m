@@ -110,11 +110,11 @@
     }];
 }
 
--(void)sendAddSongRequest:(NSString*)librarySongId playerID:(NSInteger)playerID{
+-(void)sendAddSongRequest:(NSString*)librarySongId playerID:(NSString*)playerID{
     RKClient* client = [RKClient sharedClient];
     
     //create url [PUT] /udj/events/event_id/active_playlist/songs
-    NSString* urlString = [NSString stringWithFormat:@"%@%@%d%@%@",[client.baseURL absoluteString], @"/players/",playerID,@"/active_playlist/songs/",librarySongId, nil];
+    NSString* urlString = [NSString stringWithFormat: @"%@/players/%@/active_playlist/songs/%@", [client.baseURL absoluteString], playerID, librarySongId, nil];
 
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
@@ -217,8 +217,9 @@
     
     NSString* urlString = [client.baseURL absoluteString];
     artist = [artist stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-    NSInteger playerID = [UDJPlayerData sharedPlayerData].currentPlayer.playerID;
-    urlString = [urlString stringByAppendingFormat:@"%@%d%@%@",@"/players/",playerID,@"/available_music/artists/",artist,nil];
+    NSString* playerID = [UDJPlayerData sharedPlayerData].currentPlayer.playerID;
+    urlString = [urlString stringByAppendingFormat:@"/players/%@/available_music/artists/%@", playerID, artist, nil];
+    NSLog(@"%@",urlString);
     
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
@@ -256,8 +257,8 @@
     
     NSString* urlString = [client.baseURL absoluteString];
     query = [query stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-    NSInteger playerID = [UDJPlayerData sharedPlayerData].currentPlayer.playerID;
-    urlString = [urlString stringByAppendingFormat:@"%@%d%@%@%@%d",@"/players/",playerID,@"/available_music?query=",query, @"&max_results=", MAX_RESULTS, nil];
+    NSString* playerID = [UDJPlayerData sharedPlayerData].currentPlayer.playerID;
+    urlString = [urlString stringByAppendingFormat:@"%@%@%@%@%@%d",@"/players/",playerID,@"/available_music?query=",query, @"&max_results=", MAX_RESULTS, nil];
     
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];

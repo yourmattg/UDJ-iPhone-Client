@@ -55,7 +55,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 
 -(id)init{
     if(self = [super init]){
-        self.playerID = -1;
+        self.playerID = nil;
         self.isInPlayerMode = NO;
         
         UDJAppDelegate* appDelegate = (UDJAppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -579,8 +579,6 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response{
     NSString* requestType = [request userData];
     NSLog(@"Player Manager response code: %d, request type %@", [response statusCode], requestType);
-    NSDictionary* headers = [response allHeaderFields];
-    NSLog([headers objectForKey: @"X-UDJ-Missing-Resource"]);
 }
 
 

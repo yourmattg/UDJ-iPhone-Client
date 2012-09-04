@@ -48,7 +48,7 @@
             // send an event join request with the password specified
             [self toggleJoiningView: YES];
             self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
-            [[UDJPlayerData sharedPlayerData] enterEvent: [alertView textFieldAtIndex:0].text];
+            [[UDJPlayerData sharedPlayerData] joinPlayer: [alertView textFieldAtIndex:0].text];
         }
         else{
             [self.tableView reloadData];
@@ -134,7 +134,7 @@
 
 -(void)createPlayerClick{
     UDJPlayerInfoManager* playerInfoManager = [UDJPlayerInfoManager sharedPlayerInfoManager];
-    if(playerInfoManager.playerID == -1){
+    if(playerInfoManager.playerID == nil){
         PlayerInfoViewController* viewController = [[PlayerInfoViewController alloc] initWithNibName:@"PlayerInfoViewController" bundle:[NSBundle mainBundle]];
         [self presentModalViewController:viewController animated:YES];
         viewController.parentViewController = self;
@@ -275,8 +275,13 @@
     // get the event corresponding to that index
     [UDJPlayerData sharedPlayerData].currentPlayer = [[UDJPlayerData sharedPlayerData].currentList objectAtIndex:index];
     
+    // if we are the owner, we can go right into the player
+    NSString* ownerID = [UDJPlayerData sharedPlayerData].currentPlayer.owner.userID;
+    if([ownerID isEqualToString: globalData.userID]){
+        [self joinEvent];
+    }
     // there's a password: go the password screen
-    if([UDJPlayerData sharedPlayerData].currentPlayer.hasPassword){
+    else if([UDJPlayerData sharedPlayerData].currentPlayer.hasPassword){
         UIAlertView* passwordAlertView = [[UIAlertView alloc] initWithTitle:@"Password Required" message:@"This player requires a password." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Enter", nil];
         passwordAlertView.alertViewStyle = UIAlertViewStyleSecureTextInput;
         [passwordAlertView textFieldAtIndex:0].placeholder = @"Password";
@@ -288,7 +293,7 @@
         // send event request
         [self toggleJoiningView: YES];
         self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
-        [eventData enterEvent:nil];
+        [eventData joinPlayer:nil];
     }
     
 }
@@ -451,11 +456,10 @@
     
     else if([request isPUT]){
         
-        if(response.statusCode == 201)
+        if(response.statusCode == 201){
             [self joinEvent];
-        
+        }
         else if(response.statusCode == 404){
-            NSLog([response bodyAsString]);
             [self showPlayerInactiveError];
         }
         

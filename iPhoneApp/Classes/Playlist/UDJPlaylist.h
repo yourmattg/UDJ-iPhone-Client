@@ -31,7 +31,6 @@ enum VoteStatus {
 @interface UDJPlaylist : NSObject<RKRequestDelegate>{
     
     NSMutableArray* playlist;
-    NSInteger playerID;
     UDJSong* currentSong;
     
     NSMutableDictionary* voteRecordKeeper;
@@ -49,7 +48,7 @@ enum VoteStatus {
 - (void)sendVoteRequest:(BOOL)up songId:(NSString*)songId;
 
 @property(nonatomic,strong) NSMutableArray* playlist;
-@property(nonatomic) NSInteger playerID;
+@property(nonatomic,strong) NSString* playerID;
 @property(nonatomic,strong) UDJSong* currentSong;
 @property(nonatomic, strong) id<RKRequestDelegate> delegate;
 @property(nonatomic,strong) UDJData* globalData;

@@ -48,7 +48,7 @@
 @property(nonatomic,strong) UDJPlayerManager* playerManager;
 @property(nonatomic,strong) UDJData* globalData;
 @property(nonatomic,strong) NSManagedObjectContext *managedObjectContext;
-@property NSInteger playerID;
+@property(nonatomic,strong) NSString* playerID;
 @property(nonatomic,strong) NSMutableDictionary* songSyncDictionary;
 
 @property(nonatomic,weak) UIViewController* parentViewController;

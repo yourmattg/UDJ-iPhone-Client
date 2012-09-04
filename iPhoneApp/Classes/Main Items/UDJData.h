@@ -22,14 +22,13 @@
 
 @interface UDJData : NSObject<RKRequestDelegate>{
     NSString* ticket;
-    NSNumber* userID;
     NSString* username;
 }
 
 @property NSInteger requestCount;
 @property(nonatomic,strong) NSString* ticket;
 @property(nonatomic,strong) NSMutableDictionary* headers;
-@property(nonatomic,strong) NSNumber* userID;
+@property(nonatomic,strong) NSString* userID;
 @property(nonatomic,strong) NSString* username;
 @property(nonatomic,strong) NSString* password;
 @property BOOL loggedIn;

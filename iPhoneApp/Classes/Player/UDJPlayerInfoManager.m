@@ -50,7 +50,7 @@ static UDJPlayerInfoManager* _sharedPlayerInfoManager = nil;
     if(self = [super init]){
         UDJAppDelegate* appDelegate = (UDJAppDelegate*)[[UIApplication sharedApplication] delegate];
         self.managedObjectContext = appDelegate.managedObjectContext;
-        self.playerID = -1;
+        self.playerID = nil;
         
         [self loadPlayerInfo];
     }
@@ -87,7 +87,7 @@ static UDJPlayerInfoManager* _sharedPlayerInfoManager = nil;
     [storedPlayer setState: self.stateLocation];
     [storedPlayer setPassword: self.playerPassword];
     [storedPlayer setZipcode: self.zipCode];
-    [storedPlayer setPlayerID: [NSNumber numberWithInt: self.playerID]];
+    [storedPlayer setPlayerID: self.playerID];
     
     //Save the data
     error = nil;
@@ -120,7 +120,7 @@ static UDJPlayerInfoManager* _sharedPlayerInfoManager = nil;
         self.city = storedPlayer.city;
         self.stateLocation = storedPlayer.state;
         self.zipCode = storedPlayer.zipcode;
-        self.playerID = [storedPlayer.playerID intValue];
+        self.playerID = storedPlayer.playerID;
         
         [UDJPlayerManager sharedPlayerManager].playerID = self.playerID;
     }
@@ -133,8 +133,8 @@ static UDJPlayerInfoManager* _sharedPlayerInfoManager = nil;
     UDJPlayer* player = [[UDJPlayer alloc] init];
     player.playerID = self.playerID;
     player.name = self.playerName;
-    player.hostId = [globalData.userID intValue];
-    player.hostUsername = globalData.username;
+    player.owner.userID = globalData.userID;
+    player.owner.username = globalData.username;
     [UDJPlayerData sharedPlayerData].currentPlayer = player;
 }
 

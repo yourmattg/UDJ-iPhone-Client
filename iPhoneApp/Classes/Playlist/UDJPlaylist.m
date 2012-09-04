@@ -39,7 +39,7 @@
     
     //create url [GET] {prefix}/events/event_id/active_playlist
     NSString* urlString = [client.baseURL absoluteString];
-    urlString = [urlString stringByAppendingFormat:@"%@%d%@", @"/players/", playerID, @"/active_playlist"];
+    urlString = [urlString stringByAppendingFormat:@"/players/%@/active_playlist", playerID, nil];
 
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
@@ -66,17 +66,18 @@
 -(void)sendVoteRequest:(BOOL)up songId:(NSString*)songId{
     RKClient* client = [RKClient sharedClient];
     
-    //create url [POST] {prefix}/udj/events/event_id/active_playlist/playlist_id/users/user_id/upvote
+    //create url [POST] players/player_id/active_playlist/lib_id/upvote
     NSString* urlString = [client.baseURL absoluteString];
-    urlString = [urlString stringByAppendingFormat:@"%@%d%@%@%@%d%@", @"/players/", playerID, @"/active_playlist/songs/",songId,@"/users/",[globalData.userID intValue],@"/"];
+    urlString = [urlString stringByAppendingFormat:@"/players/%@/active_playlist/songs/%@/", playerID, songId, nil];
     if(up) urlString = [urlString stringByAppendingString:@"upvote"];
     else urlString = [urlString stringByAppendingString:@"downvote"];
+    NSLog(urlString);
     
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = self.delegate;
     request.queue = client.requestQueue;
-    request.method = RKRequestMethodPOST;
+    request.method = RKRequestMethodPUT;
     request.additionalHTTPHeaders = globalData.headers;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++];
     

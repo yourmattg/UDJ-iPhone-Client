@@ -156,7 +156,7 @@
 {
     [super viewDidLoad];
     
-    self.playerID = -1;
+    self.playerID = nil;
     
     [self initStateArrays];
     [self.statePickerView setFrame: CGRectMake(0, 480, 320, 260)];
@@ -217,7 +217,7 @@
     [playerInfoManager loadPlayerInfo];
     
     // if there was a stored player, fill in the fields
-    if (playerInfoManager.playerID != -1) {
+    if (playerInfoManager.playerID != nil) {
         [self.playerNameField setText: playerInfoManager.playerName];
         [self.playerPasswordField setText: playerInfoManager.playerPassword];
         [self.addressField setText: playerInfoManager.address];
@@ -244,8 +244,8 @@
     [self dismissModalViewControllerAnimated: YES];
     
     // If this player was created already, update the information
-    if(self.playerID != -1){
-        NSLog(@"Player ID: %d", self.playerID);
+    if(self.playerID != nil){
+        NSLog(@"Player ID: %@", self.playerID);
         // save the information to the device
         [self savePlayerInfo];
         // let the server know about the changes
@@ -364,8 +364,8 @@
         if([response statusCode] == 201){
             // Save player ID
             NSDictionary* responseDict = [response.bodyAsString objectFromJSONString];
-            NSNumber* playerIDAsNumber = [responseDict objectForKey: @"player_id"];
-            self.playerID = [playerIDAsNumber intValue];
+            NSString* recievedID = [responseDict objectForKey: @"player_id"];
+            self.playerID = recievedID;
             
             [self additionalPlayerSetup];            
         }

@@ -18,6 +18,6 @@
 @property (nonatomic, retain) NSString * password;
 @property (nonatomic, retain) NSString * state;
 @property (nonatomic, retain) NSString * zipcode;
-@property (nonatomic, retain) NSNumber * playerID;
+@property (nonatomic, retain) NSString * playerID;
 
 @end

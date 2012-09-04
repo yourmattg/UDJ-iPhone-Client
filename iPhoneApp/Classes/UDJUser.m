@@ -25,7 +25,7 @@
 
 +(UDJUser*)userFromDict:(NSDictionary*)dict{
     UDJUser* user = [UDJUser new];
-    user.userID = [[dict objectForKey: @"id"] intValue];
+    user.userID = [dict objectForKey: @"id"];
     user.username = [dict objectForKey: @"username"];
     user.firstName = [dict objectForKey: @"first_name"];
     user.lastName = [dict objectForKey: @"last_name"];

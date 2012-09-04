@@ -302,12 +302,12 @@ static PlaylistViewController* _sharedPlaylistViewController;
     // check up voters
     for(int i=0; i < [song.upVoters count]; i++){
         UDJUser* user = [song.upVoters objectAtIndex: i];
-        if(user.userID == [globalData.userID intValue]) voteStatus = 1;
+        if([user.userID isEqualToString: globalData.userID]) voteStatus = 1;
     }
     // check down voters
     for(int i=0; i < [song.downVoters count]; i++){
         UDJUser* user = [song.downVoters objectAtIndex: i];
-        if(user.userID == [globalData.userID intValue]) voteStatus = -1;
+        if([user.userID isEqualToString: globalData.userID]) voteStatus = -1;
     }
     
     return voteStatus;
@@ -354,11 +354,11 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     // figure out who added the song: either "You" or another user
     NSString* adderName;
-    NSInteger userId = [globalData.userID intValue];
+    NSString* userID = globalData.userID;
     
     // initialize labels
     if(song.adder == nil) adderName = @"";
-    else if(song.adder.userID == userId) adderName = @"You";
+    else if([song.adder.userID isEqualToString: userID]) adderName = @"You";
     else adderName = song.adder.username;
     cell.addedByLabel.text = [NSString stringWithFormat:@"%@%@", @"Added by ", adderName];
     
@@ -474,7 +474,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 }
 
 -(void)checkIfHost{
-    if([globalData.userID intValue] == currentEvent.hostId){
+    if([globalData.userID isEqualToString: currentEvent.owner.userID]){
         // remove after debugging
         controlButton.hidden = NO;
         hostControlView.hidden = NO;

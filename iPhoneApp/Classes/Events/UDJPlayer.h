@@ -18,6 +18,7 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "UDJUser.h"
 
 @interface UDJPlayer : NSObject{
     
@@ -25,12 +26,12 @@
 
 + (UDJPlayer*)playerFromDictionary:(NSDictionary*)playerDict;
 
-@property(nonatomic) NSInteger playerID;
+@property(nonatomic,strong) NSString* playerID;
 @property(nonatomic,strong) NSString* name;
-@property(nonatomic) NSInteger hostId;
 @property(nonatomic) double latitude;
 @property(nonatomic) double longitude;
 @property(nonatomic) BOOL hasPassword;
-@property(nonatomic,strong) NSString* hostUsername;
+
+@property(nonatomic,strong) UDJUser* owner;
 
 @end

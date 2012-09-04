@@ -21,7 +21,7 @@
 
 @interface UDJUser : NSObject
 
-@property NSInteger userID;
+@property(nonatomic,strong) NSString* userID;
 @property(nonatomic,strong) NSString* username;
 @property(nonatomic,strong) NSString* firstName;
 @property(nonatomic,strong) NSString* lastName;

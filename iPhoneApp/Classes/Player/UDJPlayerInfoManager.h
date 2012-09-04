@@ -12,7 +12,7 @@
 
 @interface UDJPlayerInfoManager : NSObject <RKRequestDelegate>
 
-@property NSInteger playerID;
+@property NSString* playerID;
 @property(nonatomic,strong) NSString* playerName;
 @property(nonatomic,strong) NSString* playerPassword;
 @property(nonatomic,strong) NSString* address;
