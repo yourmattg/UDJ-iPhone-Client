@@ -111,7 +111,7 @@
     RKClient* client = [RKClient sharedClient];
     //create url [POST] /udj/users/user_id/players/player_id/state
     NSString* urlString = [client.baseURL absoluteString];
-    urlString = [urlString stringByAppendingFormat: @"%@%d%@%@%@", @"/users/", [globalData.userID intValue], @"/players/", currentPlayer.playerID, @"/state", nil];
+    urlString = [urlString stringByAppendingFormat: @"/players/%@/state", currentPlayer.playerID, nil];
     
     //set up request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
@@ -131,7 +131,7 @@
     RKClient* client = [RKClient sharedClient];
     //create url [POST] /udj/users/user_id/players/player_id/state
     NSString* urlString = [client.baseURL absoluteString];
-    urlString = [urlString stringByAppendingFormat: @"%@%d%@%@%@", @"/users/", [globalData.userID intValue], @"/players/", currentPlayer.playerID, @"/volume", nil];
+    urlString = [urlString stringByAppendingFormat: @"/players/%@/volume", currentPlayer.playerID, nil];
     
     //set up request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];

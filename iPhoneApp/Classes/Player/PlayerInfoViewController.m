@@ -27,6 +27,7 @@
 @synthesize playerNameField, playerPasswordField;
 @synthesize cancelButton, closeButton, editButton, doneButton;
 @synthesize useLocationSwitch, addressField, cityField, stateField, zipCodeField, locationFields;
+@synthesize selectedFieldIndex;
 @synthesize createPlayerButton;
 @synthesize globalData, managedObjectContext, playerID, songSyncDictionary;
 @synthesize activityView, activityLabel;
@@ -41,7 +42,9 @@
         UITextField* textField= [textFieldArray objectAtIndex: i];
         [textField resignFirstResponder];
     }
+    [self.view endEditing: YES];
 }
+
 -(IBAction)cancelButtonClick:(id)sender{
     [self forceKeyboardHide];
     [self.mainScrollView scrollRectToVisible: CGRectMake(0, 0, 320, 367) animated:YES];
@@ -61,14 +64,24 @@
     [self.mainScrollView scrollRectToVisible: CGRectMake(0, yCoord+10, 320, 367) animated:YES];
     self.cancelButton.hidden = NO;
     self.mainScrollView.scrollEnabled = YES;
+    self.selectedFieldIndex = textField.tag;
     
     if(textField.tag == 4){
-        [textField resignFirstResponder];
+        [self forceKeyboardHide];
         [self toggleStatePicker: YES];
     }
     else{
         [self toggleStatePicker: NO];
     }
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    if(textField.tag == 4){
+        [self forceKeyboardHide];
+        [self toggleStatePicker: YES];
+        return NO;
+    }
+    return YES;
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField{
@@ -77,10 +90,15 @@
         [playerNameLabel setText: self.playerNameField.text];
     }
     self.cancelButton.hidden = YES;
+    
+    // hide keyboard if we are selecting state
+    if(selectedFieldIndex == 4){
+        [self forceKeyboardHide];
+        [self.view endEditing:YES];
+    }
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
-    
     // find the next text field
     NSInteger index = textField.tag + 1;
     UITextField* nextField;
@@ -93,7 +111,7 @@
         self.mainScrollView.scrollEnabled = NO;
     }
     else if(index == 4){
-        [textField resignFirstResponder];
+        [self forceKeyboardHide];
         [self toggleStatePicker: YES];
     }
     // set focus to the next field
@@ -107,7 +125,6 @@
 #pragma mark - State (location) picker
 
 -(void)toggleStatePicker:(BOOL)visible{
-    
     [UIView animateWithDuration:0.4 animations:^(void){
         NSInteger yCoord = visible ? 200 : 480;
         [self.statePickerView setFrame: CGRectMake(0, yCoord, 320, 260)];

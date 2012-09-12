@@ -34,6 +34,7 @@
 @property(nonatomic,strong) IBOutlet UITextField* cityField;
 @property(nonatomic,strong) IBOutlet UITextField* stateField;
 @property(nonatomic,strong) IBOutlet UITextField* zipCodeField;
+@property NSInteger selectedFieldIndex;
 
 @property(nonatomic,strong) NSArray* stateNameArray;
 @property(nonatomic,strong) NSArray* stateAbbrArray;
