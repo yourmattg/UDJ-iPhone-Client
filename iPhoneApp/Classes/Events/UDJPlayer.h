@@ -30,6 +30,7 @@
 @property(nonatomic,strong) NSString* name;
 @property(nonatomic) double latitude;
 @property(nonatomic) double longitude;
+@property(nonatomic,strong) NSDictionary* locationDict;
 @property(nonatomic) BOOL hasPassword;
 
 @property(nonatomic,strong) UDJUser* owner;

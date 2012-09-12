@@ -22,19 +22,20 @@
 @implementation UDJPlayer
 
 @synthesize playerID, name, latitude, longitude, hasPassword;
+@synthesize locationDict;
 @synthesize owner;
 
 + (UDJPlayer*) playerFromDictionary:(NSDictionary *)playerDict{
     UDJPlayer* player = [UDJPlayer new];
     player.name = [playerDict objectForKey:@"name"];
     player.playerID = [playerDict objectForKey:@"id"];
-    player.latitude = [[playerDict objectForKey:@"latitude"] doubleValue];
-    player.longitude = [[playerDict objectForKey:@"longitude"] doubleValue];
+    player.locationDict = [playerDict objectForKey:@"location"];
+    player.latitude = [[player.locationDict objectForKey: @"latitude"] doubleValue];
+    player.longitude = [[player.locationDict objectForKey: @"longitude"] doubleValue];
     player.hasPassword = [[playerDict objectForKey:@"has_password"] boolValue];
     
     NSDictionary* ownerDict = [playerDict objectForKey:@"owner"];
     player.owner = [UDJUser userFromDict: ownerDict];
-    
     return player;
 }
 

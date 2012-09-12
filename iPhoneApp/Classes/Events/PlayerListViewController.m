@@ -277,7 +277,9 @@
     
     // if we are the owner, we can go right into the player
     NSString* ownerID = [UDJPlayerData sharedPlayerData].currentPlayer.owner.userID;
+    NSLog(@"owner ID: <%@>, your ID: <%@>", ownerID, globalData.userID);
     if([ownerID isEqualToString: globalData.userID]){
+        NSLog(@"Equal");
         [self joinEvent];
     }
     // there's a password: go the password screen

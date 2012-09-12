@@ -217,7 +217,7 @@
     RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
     NSDictionary* responseDict = [parser objectFromString:[response bodyAsString] error:nil];
     globalData.ticket=[responseDict valueForKey:@"ticket_hash"];
-    globalData.userID=[responseDict valueForKey:@"user_id"];
+    globalData.userID=[[responseDict valueForKey:@"user_id"] stringValue];
         
     //TODO: may need to change userID to [userID intValue]
     globalData.headers = [NSDictionary dictionaryWithObjectsAndKeys:globalData.ticket, @"X-Udj-Ticket-Hash", nil];
