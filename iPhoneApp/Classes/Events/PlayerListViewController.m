@@ -120,6 +120,7 @@
 
     [UDJPlayerManager sharedPlayerManager].isInPlayerMode = NO;
     
+    // if we've just created a player, go to the player view
     if(shouldShowMyPlayer){
         shouldShowMyPlayer = NO;
         MainTabBarController* tabBarController = [[MainTabBarController alloc] initWithNibName:@"MainTabBarController" bundle: [NSBundle mainBundle]];
@@ -278,7 +279,6 @@
     // if we are the owner, we can go right into the player
     NSString* ownerID = [UDJPlayerData sharedPlayerData].currentPlayer.owner.userID;
     if([ownerID isEqualToString: globalData.userID]){
-        NSLog(@"Equal");
         [self joinEvent];
     }
     // there's a password: go the password screen
@@ -337,34 +337,14 @@
 }
 
 
-#pragma mark - Error messages
--(void) showEventNotFoundError{
-    UIAlertView* nonExistantEvent = [[UIAlertView alloc] initWithTitle:@"Player Inactive" message:@"The player you are trying to access is inactive." delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [nonExistantEvent show];
-    
-    [self toggleJoiningView: NO];
-    [self.tableView reloadData];
-}
-
--(void) showWrongPasswordError{
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Access Denied" message:@"You have entered an incorrect password for the player." delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alertView show];
-    
-    [self toggleJoiningView: NO];
-    [self.tableView reloadData];
-}
-
--(void)showPlayerInactiveError{
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Player Inactive" message:@"The player you are trying to access is now inactive" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alertView show];
-    
-    [self toggleJoiningView: NO];
-    [tableView reloadData];
-}
-
-
-
 #pragma mark - Response handling
+
+-(void)showMessage:(NSString*)message withTile:(NSString*)title{
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alertView show];
+    [self toggleJoiningView: NO];
+    [self.tableView reloadData];
+}
 
 -(void)showResultsMessage:(BOOL)found{
     
@@ -461,13 +441,22 @@
             [self joinEvent];
         }
         else if(response.statusCode == 404){
-            [self showPlayerInactiveError];
+            [self showMessage:@"The player you are trying to access is inactive." withTile:@"Player Inactive"];
         }
         
         // let user know they entered the wrong password
         else if(response.statusCode == 401 && [[headerDict objectForKey: @"WWW-Authenticate"] isEqualToString: @"player-password"])
-            [self showWrongPasswordError];
+            [self showMessage:@"You have entered an incorrect password for the player." withTile:@"Incorrect Password"];
         
+        // check if the player is full, or if the user is banned
+        else if(response.statusCode == 403){
+            if([[headerDict objectForKey: @"X-Udj-Forbidden-Reason"] isEqualToString:@"player-full"]){
+                [self showMessage:@"This player is currently at capacity. Please contact the owner." withTile:@"Player Full"];
+            }
+            else if([[headerDict objectForKey: @"X-Udj-Forbidden-Reason"] isEqualToString: @"banned"]){
+                [self showMessage:@"You have been banned from this player." withTile:@"Banned"];
+            }
+        }
     } 
     
     // check if our ticket was invalid

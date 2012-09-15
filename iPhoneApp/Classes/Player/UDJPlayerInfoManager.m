@@ -151,7 +151,7 @@ static UDJPlayerInfoManager* _sharedPlayerInfoManager = nil;
 -(void)removePassword{
     RKRequest* request = [RKRequest UDJRequestWithMethod: RKRequestMethodDELETE];
     request.delegate = self;
-    NSString* urlString = [NSString stringWithFormat: @"%@/0_6/players/%d/password", [request.URL absoluteString], self.playerID];
+    NSString* urlString = [NSString stringWithFormat: @"%@/players/%@/password", [request.URL absoluteString], self.playerID];
     request.URL = [NSURL URLWithString: urlString];
     request.userData = @"updatePassword";
     [request send];
@@ -161,8 +161,9 @@ static UDJPlayerInfoManager* _sharedPlayerInfoManager = nil;
 -(void)updatePassword{
     RKRequest* request = [RKRequest UDJRequestWithMethod: RKRequestMethodPOST];
     request.delegate = self;
-    // url 0_6/players/player_id/password
-    NSString* urlString = [NSString stringWithFormat: @"%@/0_6/players/%d/password", [request.URL absoluteString], self.playerID];
+
+    NSString* urlString = [NSString stringWithFormat: @"%@/players/%@/password", [request.URL absoluteString], self.playerID];
+    NSLog(urlString);
     request.URL = [NSURL URLWithString: urlString];
     request.userData = @"updatePassword";
     request.params = [NSDictionary dictionaryWithObject:self.playerPassword forKey:@"password"];
@@ -174,7 +175,7 @@ static UDJPlayerInfoManager* _sharedPlayerInfoManager = nil;
     RKRequest* request = [RKRequest UDJRequestWithMethod: RKRequestMethodPOST];
     request.delegate = self;
     // url 0_6/players/player_id/password
-    NSString* urlString = [NSString stringWithFormat: @"%@/0_6/players/%d/location", [request.URL absoluteString], self.playerID];
+    NSString* urlString = [NSString stringWithFormat: @"%@/players/%@/location", [request.URL absoluteString], self.playerID];
     request.URL = [NSURL URLWithString: urlString];
     request.userData = @"updateLocation";
     request.params = [NSDictionary dictionaryWithObjectsAndKeys: self.address, @"address", self.city, @"locality", self.stateLocation, @"region", self.zipCode, @"postal_code", @"United States", @"country", nil];
@@ -194,6 +195,7 @@ static UDJPlayerInfoManager* _sharedPlayerInfoManager = nil;
     }
     else{
         NSLog(@"Player info status code %d", [response statusCode]);
+        NSLog([[request URL] absoluteString]);
     }
 }
 

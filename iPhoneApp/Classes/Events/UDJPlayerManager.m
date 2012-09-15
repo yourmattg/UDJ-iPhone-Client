@@ -216,7 +216,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     
     //create url users/user_id/players/player_id/library/songs
     NSString* urlString = [client.baseURL absoluteString];
-    urlString = [urlString stringByAppendingFormat: @"/0_6/players/%d/library/songs", self.playerID, nil];
+    urlString = [urlString stringByAppendingFormat: @"/players/%d/library/songs", self.playerID, nil];
     
     //set up request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
@@ -240,9 +240,8 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 -(void)removeSongsFromServer:(NSArray*)songs{
     RKClient* client = [RKClient sharedClient];
     
-    //create url [DELETE] /udj/0_6/players/player_id/library/lib_id
     NSString* urlString = [client.baseURL absoluteString];
-    urlString = [urlString stringByAppendingFormat: @"/0_6/players/%d/library", self.playerID, nil];
+    urlString = [urlString stringByAppendingFormat: @"/players/%@/library", self.playerID, nil];
     
     //set up request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
@@ -317,9 +316,9 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 -(void)sendPlayerStateRequest:(PlayerState)newState{
     RKClient* client = [RKClient sharedClient];
     
-    //create url [POST] {prefix}/udj/0_6/players/player_id/state
     NSString* urlString = [client.baseURL absoluteString];
-    urlString = [urlString stringByAppendingFormat:@"%@%d%@", @"/0_6/players/", self.playerID, @"/state", nil];
+    urlString = [urlString stringByAppendingFormat:@"/players/%@/state", self.playerID, nil];
+    NSLog(urlString);
     
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
@@ -425,9 +424,8 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 -(void)sendCurrentSongRequest:(NSString*)libraryID{
     RKClient* client = [RKClient sharedClient];
     
-    //create url [POST] [POST] /udj/0_6/players/player_id/current_song
     NSString* urlString = [client.baseURL absoluteString];
-    urlString = [urlString stringByAppendingFormat:@"%@%d%@", @"/0_6/players/", self.playerID, @"/current_song", nil];
+    urlString = [urlString stringByAppendingFormat:@"/players/%@/current_song", self.playerID, nil];
 
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];

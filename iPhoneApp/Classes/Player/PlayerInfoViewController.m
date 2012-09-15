@@ -262,7 +262,7 @@
     
     // If this player was created already, update the information
     if(self.playerID != nil){
-        NSLog(@"Player ID: %@", self.playerID);
+        NSLog(@"Player id: %@", self.playerID);
         // save the information to the device
         [self savePlayerInfo];
         // let the server know about the changes
@@ -295,9 +295,10 @@
     // create location dictionary
     NSMutableDictionary* locationDict = [[NSMutableDictionary alloc] initWithCapacity: 4];
     [locationDict setValue:self.addressField.text forKey:@"address"];
-    [locationDict setValue:self.cityField.text forKey:@"city"];
-    [locationDict setValue:self.stateField.text forKey:@"state"];
-    [locationDict setValue:self.zipCodeField.text forKey:@"zipcode"];
+    [locationDict setValue:self.cityField.text forKey:@"locality"];
+    [locationDict setValue:self.stateField.text forKey:@"region"];
+    [locationDict setValue:self.zipCodeField.text forKey:@"postal_code"];
+    [locationDict setValue: @"United States" forKey:@"country"];
     [dict setObject: locationDict forKey: @"location"];
     
     return [dict JSONString];
@@ -342,7 +343,8 @@
     
     //create url [POST] {prefix}/udj/users/user_id/players/player_id/name
     NSString* urlString = [client.baseURL absoluteString];
-    urlString = [urlString stringByAppendingFormat:@"%@%d%@", @"/users/", [globalData.userID intValue], @"/players/player", nil];
+    urlString = [urlString stringByAppendingString:@"/players/player"];
+    NSLog(urlString);
 
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
@@ -367,6 +369,7 @@
 -(void)additionalPlayerSetup{
     
     [self savePlayerInfo];
+    NSLog(@"saved player info");
     
     // start using the new player
     PlayerListViewController* playerListViewController = (PlayerListViewController*)self.parentViewController;
@@ -376,12 +379,13 @@
 
 -(void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
     NSString* requestType = request.userData;
+    //NSDictionary* headerDict = [response allHeaderFields];
     
     if([requestType isEqualToString: @"createPlayer"]){
         if([response statusCode] == 201){
             // Save player ID
             NSDictionary* responseDict = [response.bodyAsString objectFromJSONString];
-            NSString* recievedID = [responseDict objectForKey: @"player_id"];
+            NSString* recievedID = [[responseDict objectForKey: @"player_id"] stringValue];
             self.playerID = recievedID;
             
             [self additionalPlayerSetup];            
@@ -392,7 +396,11 @@
             [self toggleActivityView: NO];
             self.createPlayerButton.hidden = NO;
         }
+        else if([response statusCode] == 400){
+            
+        }
     }
+    
 }
 
 @end
