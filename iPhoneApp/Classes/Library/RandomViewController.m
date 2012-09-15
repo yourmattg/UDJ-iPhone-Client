@@ -106,7 +106,6 @@ typedef unsigned long long UDJLibraryID;
     
     //create url [PUT] /udj/events/event_id/active_playlist/songs
     NSString* urlString = [NSString stringWithFormat: @"%@/players/%@/active_playlist/songs/%@", [client.baseURL absoluteString], playerID, librarySongId, nil];
-    NSLog(urlString);
     
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
@@ -175,7 +174,6 @@ typedef unsigned long long UDJLibraryID;
     //create url [GET] /udj/events/event_id/available_music/random_songs{?max_randoms=number_desired}
     NSString* urlString = [client.baseURL absoluteString];
     urlString = [urlString stringByAppendingFormat:@"/players/%@/available_music/random_songs?max_randoms=%d", [UDJPlayerData sharedPlayerData].currentPlayer.playerID, MAX_RESULTS, nil];
-    NSLog(urlString);
     
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];

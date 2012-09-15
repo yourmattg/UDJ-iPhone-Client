@@ -24,7 +24,6 @@
 #import "UDJSong.h"
 #import "PlaylistEntryCell.h"
 #import "LibraryEntryCell.h"
-#import "EventGoerViewController.h"
 #import "PlaylistEntryCell.h"
 #import <QuartzCore/QuartzCore.h>
 #import "RestKit/RKJSONParserJSONKit.h"
@@ -46,6 +45,9 @@ static PlaylistViewController* _sharedPlaylistViewController;
 
 // handleLeaveEvent: go back to the event results page
 -(void)handleLeaveEvent{
+    // log out on the server
+    [[UDJPlayerData sharedPlayerData] leavePlayer];
+    
     // user is no longer in an event, reset currentEvent
     [UDJPlayerData sharedPlayerData].currentPlayer=nil;
     

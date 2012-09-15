@@ -318,7 +318,6 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     
     NSString* urlString = [client.baseURL absoluteString];
     urlString = [urlString stringByAppendingFormat:@"/players/%@/state", self.playerID, nil];
-    NSLog(urlString);
     
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];

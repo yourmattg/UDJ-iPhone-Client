@@ -84,7 +84,7 @@
     //create url
     NSString* urlString = [client.baseURL absoluteString];
     urlString = [urlString stringByAppendingString:@"/players/"];
-    urlString = [urlString stringByAppendingFormat:@"%@",[UDJPlayerData sharedPlayerData].currentPlayer.playerID];
+    urlString = [urlString stringByAppendingFormat:@"%@", self.currentPlayer.playerID];
     urlString = [urlString stringByAppendingString:@"/users/user"];
     
     //set up request
@@ -109,15 +109,14 @@
 -(void)leavePlayer{
     RKRequest* request = [RKRequest UDJRequestWithMethod: RKRequestMethodDELETE];
     
-    NSString* urlString  = [NSString stringWithFormat: @"/players/%@/users/user", [UDJPlayerData sharedPlayerData].currentPlayer.playerID];
+    NSString* urlString  = [NSString stringWithFormat: @"%@/players/%@/users/user",[request.URL absoluteString], self.currentPlayer.playerID];
+    NSLog(urlString);
     request.URL = [NSURL URLWithString: urlString];
     request.delegate = playerListDelegate;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++];
     
     [request send];
 }
-
-
 
 -(void)setState:(NSString*)state{
     RKClient* client = [RKClient sharedClient];

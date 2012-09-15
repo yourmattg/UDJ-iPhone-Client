@@ -344,7 +344,6 @@
     //create url [POST] {prefix}/udj/users/user_id/players/player_id/name
     NSString* urlString = [client.baseURL absoluteString];
     urlString = [urlString stringByAppendingString:@"/players/player"];
-    NSLog(urlString);
 
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];

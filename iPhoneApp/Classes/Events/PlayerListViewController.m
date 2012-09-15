@@ -32,7 +32,7 @@
 
 @implementation PlayerListViewController
 
-@synthesize eventData, tableList, tableView;
+@synthesize playerData, tableList, tableView;
 @synthesize statusLabel, globalData, currentRequestNumber;
 @synthesize playerSearchBar, findNearbyButton, cancelSearchButton, searchIndicatorView;
 @synthesize lastSearchType, lastSearchQuery;
@@ -84,8 +84,8 @@
     joiningView.layer.borderWidth = 3;
     
     // set up eventData and get nearby events
-    self.eventData = [UDJPlayerData sharedPlayerData];
-    self.eventData.playerListDelegate = self;
+    self.playerData = [UDJPlayerData sharedPlayerData];
+    self.playerData.playerListDelegate = self;
     self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
     
     // initialize search bar
@@ -294,7 +294,7 @@
         // send event request
         [self toggleJoiningView: YES];
         self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
-        [eventData joinPlayer:nil];
+        [playerData joinPlayer:nil];
     }
     
 }
@@ -319,7 +319,7 @@
     
     self.lastSearchType = SearchTypeNearby;
     self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
-    [eventData getNearbyPlayers];
+    [playerData getNearbyPlayers];
 }
 
 -(void)findPlayersByName:(NSString*)name{
@@ -333,7 +333,7 @@
     self.lastSearchQuery = name;
     
     self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
-    [eventData getPlayersByName: name];
+    [playerData getPlayersByName: name];
 }
 
 
@@ -390,7 +390,7 @@
         [tableList addObject:partyName];
         NSLog(partyName);
     }*/
-    self.tableList = eventData.currentList;
+    self.tableList = playerData.currentList;
     [self.tableView reloadData];
 }
 

@@ -71,7 +71,6 @@
     urlString = [urlString stringByAppendingFormat:@"/players/%@/active_playlist/songs/%@/", playerID, songId, nil];
     if(up) urlString = [urlString stringByAppendingString:@"upvote"];
     else urlString = [urlString stringByAppendingString:@"downvote"];
-    NSLog(urlString);
     
     // create request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];

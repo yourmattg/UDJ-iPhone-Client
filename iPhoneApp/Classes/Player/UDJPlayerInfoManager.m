@@ -163,7 +163,6 @@ static UDJPlayerInfoManager* _sharedPlayerInfoManager = nil;
     request.delegate = self;
 
     NSString* urlString = [NSString stringWithFormat: @"%@/players/%@/password", [request.URL absoluteString], self.playerID];
-    NSLog(urlString);
     request.URL = [NSURL URLWithString: urlString];
     request.userData = @"updatePassword";
     request.params = [NSDictionary dictionaryWithObject:self.playerPassword forKey:@"password"];
@@ -195,7 +194,6 @@ static UDJPlayerInfoManager* _sharedPlayerInfoManager = nil;
     }
     else{
         NSLog(@"Player info status code %d", [response statusCode]);
-        NSLog([[request URL] absoluteString]);
     }
 }
 

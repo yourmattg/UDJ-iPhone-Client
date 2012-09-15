@@ -34,7 +34,7 @@ enum SearchType {
 @property enum SearchType lastSearchType;
 @property(nonatomic,strong) NSString* lastSearchQuery;
 
-@property(nonatomic,strong) UDJPlayerData* eventData;
+@property(nonatomic,strong) UDJPlayerData* playerData;
 
 @property(nonatomic,strong) NSMutableArray *tableList;
 @property(nonatomic,strong) IBOutlet UITableView* tableView;
