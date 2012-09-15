@@ -19,6 +19,9 @@
 		A302C4121593F52A008B3793 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = A302C4111593F52A008B3793 /* cancel.png */; };
 		A30CE22C1591695800DA054D /* backg.png in Resources */ = {isa = PBXBuildFile; fileRef = A30CE22B1591695800DA054D /* backg.png */; };
 		A30CE22E15916C0500DA054D /* underline.png in Resources */ = {isa = PBXBuildFile; fileRef = A30CE22D15916C0500DA054D /* underline.png */; };
+		A31837441604FB5400D9FC35 /* ParticipantsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A31837421604FB5400D9FC35 /* ParticipantsViewController.m */; };
+		A31837451604FB5400D9FC35 /* ParticipantsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A31837431604FB5400D9FC35 /* ParticipantsViewController.xib */; };
+		A31837481604FBB600D9FC35 /* ParticipantManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A31837471604FBB600D9FC35 /* ParticipantManager.m */; };
 		A31A9B6315608C0B005268C0 /* separator.png in Resources */ = {isa = PBXBuildFile; fileRef = A31A9B6215608C0B005268C0 /* separator.png */; };
 		A31AA6AB1561CE3B0032FEAB /* UDJUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A31AA6AA1561CE3B0032FEAB /* UDJUser.m */; };
 		A3210D8F15328763009A9318 /* smalluparrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A3210D8E15328763009A9318 /* smalluparrow.png */; };
@@ -215,6 +218,11 @@
 		A302C4111593F52A008B3793 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
 		A30CE22B1591695800DA054D /* backg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backg.png; sourceTree = "<group>"; };
 		A30CE22D15916C0500DA054D /* underline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = underline.png; sourceTree = "<group>"; };
+		A31837411604FB5400D9FC35 /* ParticipantsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParticipantsViewController.h; path = Participants/ParticipantsViewController.h; sourceTree = "<group>"; };
+		A31837421604FB5400D9FC35 /* ParticipantsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParticipantsViewController.m; path = Participants/ParticipantsViewController.m; sourceTree = "<group>"; };
+		A31837431604FB5400D9FC35 /* ParticipantsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ParticipantsViewController.xib; path = Participants/ParticipantsViewController.xib; sourceTree = "<group>"; };
+		A31837461604FBB600D9FC35 /* ParticipantManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParticipantManager.h; path = Participants/ParticipantManager.h; sourceTree = "<group>"; };
+		A31837471604FBB600D9FC35 /* ParticipantManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParticipantManager.m; path = Participants/ParticipantManager.m; sourceTree = "<group>"; };
 		A31A9B6215608C0B005268C0 /* separator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = separator.png; sourceTree = "<group>"; };
 		A31AA6A91561CE3B0032FEAB /* UDJUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJUser.h; sourceTree = "<group>"; };
 		A31AA6AA1561CE3B0032FEAB /* UDJUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJUser.m; sourceTree = "<group>"; };
@@ -387,8 +395,7 @@
 				A3EECBFF15994E2F0003BEF8 /* My Player */,
 				A354F04014A2CA5A00F3AAEF /* Login */,
 				A3F58C5414A1517900756F7D /* Main Views */,
-				A31AA6A91561CE3B0032FEAB /* UDJUser.h */,
-				A31AA6AA1561CE3B0032FEAB /* UDJUser.m */,
+				A318373D1604FAB000D9FC35 /* Participants */,
 				A3CFBEF1156888E8002B7658 /* Model.xcdatamodeld */,
 			);
 			path = Classes;
@@ -457,6 +464,20 @@
 				A3A1EE6B1575E49E0058555A /* UDJConfigurator.m */,
 			);
 			name = Connection;
+			sourceTree = "<group>";
+		};
+		A318373D1604FAB000D9FC35 /* Participants */ = {
+			isa = PBXGroup;
+			children = (
+				A31AA6A91561CE3B0032FEAB /* UDJUser.h */,
+				A31AA6AA1561CE3B0032FEAB /* UDJUser.m */,
+				A31837461604FBB600D9FC35 /* ParticipantManager.h */,
+				A31837471604FBB600D9FC35 /* ParticipantManager.m */,
+				A31837411604FB5400D9FC35 /* ParticipantsViewController.h */,
+				A31837421604FB5400D9FC35 /* ParticipantsViewController.m */,
+				A31837431604FB5400D9FC35 /* ParticipantsViewController.xib */,
+			);
+			name = Participants;
 			sourceTree = "<group>";
 		};
 		A324ABF714AAB74F00388514 /* Playlist */ = {
@@ -846,6 +867,7 @@
 				A3CFEEDC15DFE8EB00962465 /* closebutton.png in Resources */,
 				A325E0FB15F13C1100D54062 /* edit.png in Resources */,
 				A325E0FD15F13D9600D54062 /* donebutton.png in Resources */,
+				A31837451604FB5400D9FC35 /* ParticipantsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -893,6 +915,8 @@
 				A3E3D7CE15DDDAA000EBF087 /* PlayerViewController.m in Sources */,
 				A325E10015F1640900D54062 /* UDJPlayerInfoManager.m in Sources */,
 				A325E10315F165A400D54062 /* RKRequest+UDJRequest.m in Sources */,
+				A31837441604FB5400D9FC35 /* ParticipantsViewController.m in Sources */,
+				A31837481604FBB600D9FC35 /* ParticipantManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
