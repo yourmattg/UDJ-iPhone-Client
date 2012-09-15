@@ -21,4 +21,6 @@
 
 @interface ParticipantsViewController : UIViewController
 
+@property(nonatomic,strong) IBOutlet UITableView* usersTableView;
+
 @end

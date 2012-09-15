@@ -23,6 +23,7 @@
 #import "ArtistsViewController.h"
 #import "PlayerInfoViewController.h"
 #import "PlayerViewController.h"
+#import "ParticipantsViewController.h"
 #import "UDJPlayerManager.h"
 
 @implementation MainTabBarController
@@ -62,19 +63,19 @@
     RandomViewController* randomViewController = [[RandomViewController alloc] initWithNibName:@"RandomViewController" bundle:[NSBundle mainBundle]];
     randomViewController.title = NSLocalizedString(@"Random", @"Random");
     
-    /*PlayerInfoViewController* playerInfoViewController = [[PlayerInfoViewController alloc] initWithNibName:@"PlayerInfoViewController" bundle: [NSBundle mainBundle]];
-    playerInfoViewController.title = NSLocalizedString(@"My Player", @"My Player");*/
-    
     PlayerViewController* playerViewController = [[PlayerViewController alloc] initWithNibName:@"PlayerViewController" bundle:[NSBundle mainBundle]];
     playerViewController.title = NSLocalizedString(@"Player", @"Player");
     
+    ParticipantsViewController* participantsViewController = [[ParticipantsViewController alloc] initWithNibName:@"ParticipantsViewController" bundle:[NSBundle mainBundle]];
+    participantsViewController.title = NSLocalizedString(@"Participants", @"Participants");
+    
     // if this isn't being used as a player, just push the regular views
     if(!isPlayer){
-        self.viewControllers = [NSArray arrayWithObjects:playlistViewController, navigationController, randomViewController, nil];        
+        self.viewControllers = [NSArray arrayWithObjects:playlistViewController, navigationController, randomViewController, participantsViewController, nil];        
     }
     // if this is a player, add the player info view
     else {
-        self.viewControllers = [NSArray arrayWithObjects:playerViewController, playlistViewController, navigationController, randomViewController, nil];
+        self.viewControllers = [NSArray arrayWithObjects:playerViewController, playlistViewController, navigationController, randomViewController, participantsViewController, nil];
     }
     
     self.tabBar.tintColor = [UIColor colorWithRed:(35.0/255.0) green:(59.0/255.0) blue:(79.0/255.0) alpha:1];

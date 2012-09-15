@@ -382,14 +382,7 @@
 
 - (void)refreshTableList{
     [tableList removeAllObjects];
-    /*
-    int size = [eventData.currentList count];
-    for(int i=0; i<size; i++){
-        UDJEvent* event = [eventData.currentList objectAtIndex:i];
-        NSString* partyName = event.name;
-        [tableList addObject:partyName];
-        NSLog(partyName);
-    }*/
+
     self.tableList = playerData.currentList;
     [self.tableView reloadData];
 }
