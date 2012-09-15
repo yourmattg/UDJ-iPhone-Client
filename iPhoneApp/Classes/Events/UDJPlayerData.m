@@ -105,6 +105,10 @@
     [request send];
 }
 
+-(void)leavePlayer{
+    
+}
+
 
 
 -(void)setState:(NSString*)state{
