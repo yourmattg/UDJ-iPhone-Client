@@ -106,7 +106,6 @@
 		A3E70CDC159BF7E00037A60B /* blackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A3E70CDB159BF7E00037A60B /* blackground.png */; };
 		A3EECC0215994ED30003BEF8 /* PlayerInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EECC0115994ED30003BEF8 /* PlayerInfoViewController.m */; };
 		A3F58D9514C753D300E350F4 /* UDJEventGoer.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58D9414C753D300E350F4 /* UDJEventGoer.m */; };
-		A3F58D9914C75F0800E350F4 /* EventGoerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58D9714C75F0800E350F4 /* EventGoerViewController.m */; };
 		A3F58D9C14C75FAF00E350F4 /* EventGoerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F58D9B14C75FAF00E350F4 /* EventGoerViewController.xib */; };
 		A3F58D9F14C765C100E350F4 /* UDJEventGoerList.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58D9E14C765C100E350F4 /* UDJEventGoerList.m */; };
 		A3F86A6F156F03250036FBCE /* PlayerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F86A6D156F03250036FBCE /* PlayerListViewController.m */; };
@@ -338,8 +337,6 @@
 		A3EECC0115994ED30003BEF8 /* PlayerInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerInfoViewController.m; path = Classes/Player/PlayerInfoViewController.m; sourceTree = SOURCE_ROOT; };
 		A3F58D9314C753D300E350F4 /* UDJEventGoer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJEventGoer.h; sourceTree = "<group>"; };
 		A3F58D9414C753D300E350F4 /* UDJEventGoer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJEventGoer.m; sourceTree = "<group>"; };
-		A3F58D9614C75F0800E350F4 /* EventGoerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventGoerViewController.h; path = "Classes/Main Views/EventGoerViewController.h"; sourceTree = SOURCE_ROOT; };
-		A3F58D9714C75F0800E350F4 /* EventGoerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventGoerViewController.m; path = "Classes/Main Views/EventGoerViewController.m"; sourceTree = SOURCE_ROOT; };
 		A3F58D9B14C75FAF00E350F4 /* EventGoerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventGoerViewController.xib; sourceTree = "<group>"; };
 		A3F58D9D14C765C100E350F4 /* UDJEventGoerList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJEventGoerList.h; sourceTree = "<group>"; };
 		A3F58D9E14C765C100E350F4 /* UDJEventGoerList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJEventGoerList.m; sourceTree = "<group>"; };
@@ -668,8 +665,6 @@
 			children = (
 				A3028B831564A2AE00EF6EE8 /* MainTabBarController.h */,
 				A3028B841564A2AE00EF6EE8 /* MainTabBarController.m */,
-				A3F58D9614C75F0800E350F4 /* EventGoerViewController.h */,
-				A3F58D9714C75F0800E350F4 /* EventGoerViewController.m */,
 			);
 			path = "Main Views";
 			sourceTree = "<group>";
@@ -892,7 +887,6 @@
 				A3265DB314C6101400FC692B /* PlaylistEntryCell.m in Sources */,
 				A3720B3014C74FE800D1E30C /* LocationManager.m in Sources */,
 				A3F58D9514C753D300E350F4 /* UDJEventGoer.m in Sources */,
-				A3F58D9914C75F0800E350F4 /* EventGoerViewController.m in Sources */,
 				A3F58D9F14C765C100E350F4 /* UDJEventGoerList.m in Sources */,
 				A3BB46E314E2086400554179 /* EventGoerCell.m in Sources */,
 				A35E3E9A1516680100A2882D /* UDJData.m in Sources */,

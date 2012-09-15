@@ -333,7 +333,7 @@
     self.lastSearchQuery = name;
     
     self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
-    [eventData getEventsByName: name];
+    [eventData getPlayersByName: name];
 }
 
 

@@ -19,6 +19,7 @@
 
 #import "UDJPlayerData.h"
 #import "RestKit/RestKit.h"
+#import "RKRequest+UDJRequest.h"
 
 @implementation UDJPlayerData
 
@@ -52,7 +53,7 @@
 }
 
 // getEventsByName
-- (void)getEventsByName:(NSString *)name{
+- (void)getPlayersByName:(NSString *)name{
     RKClient* client = [RKClient sharedClient];
     
     name = [name stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
@@ -106,7 +107,14 @@
 }
 
 -(void)leavePlayer{
+    RKRequest* request = [RKRequest UDJRequestWithMethod: RKRequestMethodDELETE];
     
+    NSString* urlString  = [NSString stringWithFormat: @"/players/%@/users/user", [UDJPlayerData sharedPlayerData].currentPlayer.playerID];
+    request.URL = [NSURL URLWithString: urlString];
+    request.delegate = playerListDelegate;
+    request.userData = [NSNumber numberWithInt: globalData.requestCount++];
+    
+    [request send];
 }
 
 

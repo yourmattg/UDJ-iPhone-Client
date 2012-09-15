@@ -37,7 +37,7 @@
 
 + (UDJPlayerData*)sharedPlayerData;
 - (void)getNearbyPlayers; // put the nearby events into templist, then set it to currentList
-- (void)getEventsByName:(NSString*)name; // search for events by name and put them in table
+- (void)getPlayersByName:(NSString*)name; // search for events by name and put them in table
 - (void)joinPlayer:(NSString*)password;
 -(void)leavePlayer;
 -(void)setState:(NSString*)state;
