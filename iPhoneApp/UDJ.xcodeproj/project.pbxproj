@@ -53,6 +53,7 @@
 		A35F57F41572D25D004AA5DB /* PullRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A35F57F31572D25D004AA5DB /* PullRefreshTableViewController.m */; };
 		A35F57F61572D477004AA5DB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35F57F51572D477004AA5DB /* QuartzCore.framework */; };
 		A35F57F91572DD04004AA5DB /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A35F57F81572DD04004AA5DB /* arrow.png */; };
+		A3680CAC16067D2700ED0509 /* participanticon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3680CAB16067D2700ED0509 /* participanticon.png */; };
 		A36CF96215BF87DC0032AF31 /* UDJStoredPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A36CF96115BF87DC0032AF31 /* UDJStoredPlayer.m */; };
 		A3720B3014C74FE800D1E30C /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A3720B2F14C74FE800D1E30C /* LocationManager.m */; };
 		A3720B3214C7513600D1E30C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3720B3114C7513600D1E30C /* CoreLocation.framework */; };
@@ -75,7 +76,6 @@
 		A3A2B370156DD6C600C4FF90 /* UDJStoredData.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A2B36F156DD6C600C4FF90 /* UDJStoredData.m */; };
 		A3A72A6415EF061400E3723C /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3A72A5915EF056900E3723C /* libRestKit.a */; };
 		A3B1ABB8157E759B008498EC /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3B1ABB7157E759B008498EC /* MainWindow.xib */; };
-		A3BB46E314E2086400554179 /* EventGoerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BB46E214E2086400554179 /* EventGoerCell.m */; };
 		A3C22D551566D4D50066B9F8 /* playlisticon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C22D541566D4D50066B9F8 /* playlisticon.png */; };
 		A3C22D571566D62E0066B9F8 /* libraryicon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C22D561566D62E0066B9F8 /* libraryicon.png */; };
 		A3C22D591566D8510066B9F8 /* randomicon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C22D581566D8510066B9F8 /* randomicon.png */; };
@@ -97,7 +97,6 @@
 		A3D5EBB015BA243F0019FBAF /* libShareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3D5EBA715BA24060019FBAF /* libShareKit.a */; };
 		A3D5EBB115BA24B40019FBAF /* ShareKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A3D5EBA915BA24060019FBAF /* ShareKit.bundle */; };
 		A3D61A3215882EA300ACE780 /* PlayerInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3D61A3115882EA300ACE780 /* PlayerInfoViewController.xib */; };
-		A3DAD57D14BD253600688CE0 /* UDJMappableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DAD57C14BD253600688CE0 /* UDJMappableArray.m */; };
 		A3DDD0A71533EFEF00DB5E1F /* smalldownarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A3DDD0A61533EFEF00DB5E1F /* smalldownarrow.png */; };
 		A3E3D7CE15DDDAA000EBF087 /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E3D7CC15DDDAA000EBF087 /* PlayerViewController.m */; };
 		A3E3D7CF15DDDAA000EBF087 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3E3D7CD15DDDAA000EBF087 /* PlayerViewController.xib */; };
@@ -107,7 +106,6 @@
 		A3EECC0215994ED30003BEF8 /* PlayerInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EECC0115994ED30003BEF8 /* PlayerInfoViewController.m */; };
 		A3F58D9514C753D300E350F4 /* UDJEventGoer.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58D9414C753D300E350F4 /* UDJEventGoer.m */; };
 		A3F58D9C14C75FAF00E350F4 /* EventGoerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F58D9B14C75FAF00E350F4 /* EventGoerViewController.xib */; };
-		A3F58D9F14C765C100E350F4 /* UDJEventGoerList.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58D9E14C765C100E350F4 /* UDJEventGoerList.m */; };
 		A3F86A6F156F03250036FBCE /* PlayerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F86A6D156F03250036FBCE /* PlayerListViewController.m */; };
 		A3F86A70156F03250036FBCE /* PlayerListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F86A6E156F03250036FBCE /* PlayerListViewController.xib */; };
 /* End PBXBuildFile section */
@@ -266,6 +264,7 @@
 		A35F57F31572D25D004AA5DB /* PullRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullRefreshTableViewController.m; sourceTree = "<group>"; };
 		A35F57F51572D477004AA5DB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A35F57F81572DD04004AA5DB /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		A3680CAB16067D2700ED0509 /* participanticon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = participanticon.png; sourceTree = "<group>"; };
 		A36CF96015BF87DC0032AF31 /* UDJStoredPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDJStoredPlayer.h; path = Classes/Player/UDJStoredPlayer.h; sourceTree = SOURCE_ROOT; };
 		A36CF96115BF87DC0032AF31 /* UDJStoredPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDJStoredPlayer.m; path = Classes/Player/UDJStoredPlayer.m; sourceTree = SOURCE_ROOT; };
 		A3720B2E14C74FE800D1E30C /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
@@ -297,8 +296,6 @@
 		A3A2B36F156DD6C600C4FF90 /* UDJStoredData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDJStoredData.m; path = ../UDJStoredData.m; sourceTree = "<group>"; };
 		A3A72A4D15EF056900E3723C /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = ../RestKit/RestKit.xcodeproj; sourceTree = "<group>"; };
 		A3B1ABB7157E759B008498EC /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
-		A3BB46E114E2086400554179 /* EventGoerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventGoerCell.h; sourceTree = "<group>"; };
-		A3BB46E214E2086400554179 /* EventGoerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventGoerCell.m; sourceTree = "<group>"; };
 		A3C22D541566D4D50066B9F8 /* playlisticon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playlisticon.png; sourceTree = "<group>"; };
 		A3C22D561566D62E0066B9F8 /* libraryicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = libraryicon.png; sourceTree = "<group>"; };
 		A3C22D581566D8510066B9F8 /* randomicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = randomicon.png; sourceTree = "<group>"; };
@@ -324,8 +321,6 @@
 		A3CFEEDB15DFE8EB00962465 /* closebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closebutton.png; sourceTree = "<group>"; };
 		A3D5EB9915BA24060019FBAF /* ShareKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ShareKit.xcodeproj; path = ../Submodules/ShareKit/ShareKit.xcodeproj; sourceTree = "<group>"; };
 		A3D61A3115882EA300ACE780 /* PlayerInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlayerInfoViewController.xib; path = ../../Resources/PlayerInfoViewController.xib; sourceTree = "<group>"; };
-		A3DAD57B14BD253600688CE0 /* UDJMappableArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJMappableArray.h; sourceTree = "<group>"; };
-		A3DAD57C14BD253600688CE0 /* UDJMappableArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJMappableArray.m; sourceTree = "<group>"; };
 		A3DDD0A61533EFEF00DB5E1F /* smalldownarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smalldownarrow.png; sourceTree = "<group>"; };
 		A3E3D7CB15DDDAA000EBF087 /* PlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerViewController.h; path = Classes/Player/PlayerViewController.h; sourceTree = SOURCE_ROOT; };
 		A3E3D7CC15DDDAA000EBF087 /* PlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerViewController.m; path = Classes/Player/PlayerViewController.m; sourceTree = SOURCE_ROOT; };
@@ -338,8 +333,6 @@
 		A3F58D9314C753D300E350F4 /* UDJEventGoer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJEventGoer.h; sourceTree = "<group>"; };
 		A3F58D9414C753D300E350F4 /* UDJEventGoer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJEventGoer.m; sourceTree = "<group>"; };
 		A3F58D9B14C75FAF00E350F4 /* EventGoerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventGoerViewController.xib; sourceTree = "<group>"; };
-		A3F58D9D14C765C100E350F4 /* UDJEventGoerList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJEventGoerList.h; sourceTree = "<group>"; };
-		A3F58D9E14C765C100E350F4 /* UDJEventGoerList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJEventGoerList.m; sourceTree = "<group>"; };
 		A3F86A6C156F03250036FBCE /* PlayerListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerListViewController.h; sourceTree = "<group>"; };
 		A3F86A6D156F03250036FBCE /* PlayerListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerListViewController.m; sourceTree = "<group>"; };
 		A3F86A6E156F03250036FBCE /* PlayerListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlayerListViewController.xib; path = ../Classes/Events/PlayerListViewController.xib; sourceTree = "<group>"; };
@@ -574,6 +567,7 @@
 		A3C6A4741565FA1400F1E42E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				A3680CAB16067D2700ED0509 /* participanticon.png */,
 				A325E0FC15F13D9600D54062 /* donebutton.png */,
 				A325E0FA15F13C1100D54062 /* edit.png */,
 				A3CFEEDB15DFE8EB00962465 /* closebutton.png */,
@@ -674,12 +668,6 @@
 			children = (
 				A3720B2E14C74FE800D1E30C /* LocationManager.h */,
 				A3720B2F14C74FE800D1E30C /* LocationManager.m */,
-				A3DAD57B14BD253600688CE0 /* UDJMappableArray.h */,
-				A3DAD57C14BD253600688CE0 /* UDJMappableArray.m */,
-				A3F58D9D14C765C100E350F4 /* UDJEventGoerList.h */,
-				A3F58D9E14C765C100E350F4 /* UDJEventGoerList.m */,
-				A3BB46E114E2086400554179 /* EventGoerCell.h */,
-				A3BB46E214E2086400554179 /* EventGoerCell.m */,
 				A35E3E981516680100A2882D /* UDJData.h */,
 				A35E3E991516680100A2882D /* UDJData.m */,
 			);
@@ -863,6 +851,7 @@
 				A325E0FB15F13C1100D54062 /* edit.png in Resources */,
 				A325E0FD15F13D9600D54062 /* donebutton.png in Resources */,
 				A31837451604FB5400D9FC35 /* ParticipantsViewController.xib in Resources */,
+				A3680CAC16067D2700ED0509 /* participanticon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -882,13 +871,10 @@
 				A324ABF614AAB74700388514 /* UDJSong.m in Sources */,
 				A324AC0514AABB8900388514 /* UDJPlaylist.m in Sources */,
 				A3CF872F14B8F8F000A9F829 /* UDJSongList.m in Sources */,
-				A3DAD57D14BD253600688CE0 /* UDJMappableArray.m in Sources */,
 				A39A0C8B14C4ADDF008A6D54 /* LibraryEntryCell.m in Sources */,
 				A3265DB314C6101400FC692B /* PlaylistEntryCell.m in Sources */,
 				A3720B3014C74FE800D1E30C /* LocationManager.m in Sources */,
 				A3F58D9514C753D300E350F4 /* UDJEventGoer.m in Sources */,
-				A3F58D9F14C765C100E350F4 /* UDJEventGoerList.m in Sources */,
-				A3BB46E314E2086400554179 /* EventGoerCell.m in Sources */,
 				A35E3E9A1516680100A2882D /* UDJData.m in Sources */,
 				A3C608FA151E3593004AB623 /* PlayerCell.m in Sources */,
 				A31AA6AB1561CE3B0032FEAB /* UDJUser.m in Sources */,

@@ -18,7 +18,55 @@
  */
 
 #import "ParticipantManager.h"
+#import "UDJUser.h"
+#import "UDJPlayerData.h"
+#import "UDJData.h"
+#import "RKRequest+UDJRequest.h"
 
 @implementation ParticipantManager
+
+@synthesize playerID;
+@synthesize globalData;
+@synthesize participantArray;
+
+-(id)init{
+    if(self = [super init]){
+        self.playerID = [UDJPlayerData sharedPlayerData].currentPlayer.playerID;
+    }
+    return self;
+}
+
+-(void)getPlayerParticipants{
+    RKRequest* request = [RKRequest UDJRequestWithMethod: RKRequestMethodGET];
+
+    NSString* urlString = [NSString stringWithFormat: @"%@/players/%@/users", [request.URL absoluteString], self.playerID, nil];
+    request.URL = [NSURL URLWithString: urlString];
+    request.delegate = globalData;
+    
+    [request send];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [participantArray count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    UDJUser* user = (UDJUser*)[participantArray objectAtIndex: indexPath.row];
+    [cell.textLabel setText: user.username];
+    
+    return cell;
+}
+
+- (void)request:(RKRequest *)request didReceiveResponse:(RKResponse *)response{
+    
+}
+
 
 @end

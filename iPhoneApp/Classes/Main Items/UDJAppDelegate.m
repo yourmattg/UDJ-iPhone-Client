@@ -23,7 +23,6 @@
 #import "UDJPlayerData.h"
 #import "UDJPlaylist.h"
 #import "UDJSongList.h"
-#import "UDJMappableArray.h"
 #import "UDJData.h"
 #import "SHKConfiguration.h"
 #import "UDJConfigurator.h"

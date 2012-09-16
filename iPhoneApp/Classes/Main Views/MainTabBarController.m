@@ -92,6 +92,9 @@
     
     UITabBarItem* randomItem = [self.tabBar.items objectAtIndex: 2 + indexModify];
     [randomItem setImage: [UIImage imageNamed: @"randomicon.png"]];   
+    
+    UITabBarItem* participantsItem = [self.tabBar.items objectAtIndex: 3 + indexModify];
+    [participantsItem setImage: [UIImage imageNamed: @"participanticon.png"]];
 }
 
 #pragma mark - View lifecycle

@@ -18,8 +18,11 @@
  */
 
 #import <UIKit/UIKit.h>
+#import "ParticipantManager.h"
 
 @interface ParticipantsViewController : UIViewController
+
+@property(nonatomic,strong) IBOutlet ParticipantManager* participantManager;
 
 @property(nonatomic,strong) IBOutlet UITableView* usersTableView;
 

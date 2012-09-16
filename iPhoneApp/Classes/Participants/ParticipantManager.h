@@ -18,7 +18,15 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "RestKit.h"
+#import "UDJData.h"
 
-@interface ParticipantManager : NSObject
+@interface ParticipantManager : NSObject <UITableViewDataSource, RKRequestDelegate>
+
+@property(nonatomic,strong) NSString* playerID;
+@property(nonatomic,strong) UDJData* globalData;
+@property(nonatomic,strong) NSMutableArray* participantArray;
+
+-(void)getPlayerParticipants;
 
 @end
