@@ -263,7 +263,7 @@ typedef enum{
     }
     
     // Check if the ticket expired or if the user was kicked from the player
-    if(response.statusCode == 401 && [[headerDict objectForKey: @"WWW-Authenticate"] isEqualToString: @"ticket-hash"]){
+    if(response.statusCode == 401){
         NSString* authenticate = [headerDict objectForKey: @"WWW-Authenticate"];
         if([authenticate isEqualToString: @"ticket-hash"]){
             [globalData renewTicket];

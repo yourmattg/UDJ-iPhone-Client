@@ -30,7 +30,6 @@
 #import "SHK.h"
 #import "UDJPlayerManager.h"
 
-
 @implementation PlaylistViewController
 
 @synthesize currentEvent, playlist, tableView, currentSongTitleLabel, currentSongArtistLabel, selectedSong, statusLabel, currentRequestNumber, globalData, leaveButton, libraryButton, eventNameLabel, voteNotificationView, voteNotificationLabel, voteNotificationArrowView;
@@ -66,12 +65,18 @@ static PlaylistViewController* _sharedPlaylistViewController;
     [self handleLeaveEvent];
 }
 
--(void)resetToPlayerResultView{
-    // return to player search results screen
-    [self.navigationController popViewControllerAnimated: YES];
+-(void)resetToPlayerResultView:(ExitReason)reason{
     
-    // alert user that player is inactive
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Player Inactive" message: @"The player you are trying to access is now inactive." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [self.navigationController popViewControllerAnimated:YES];
+    
+    // let user know why they exited the player
+    UIAlertView* alertView;
+    if(reason == ExitReasonInactive){
+        alertView = [[UIAlertView alloc] initWithTitle:@"Player Inactive" message: @"The player you are trying to access is now inactive." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil]; 
+    }
+    else if(reason == ExitReasonKicked){
+        alertView = [[UIAlertView alloc] initWithTitle:@"Kicked" message: @"You have been kicked out of this player." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];  
+    }
     [alertView show];
 }
 
@@ -548,7 +553,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     // check if player is inactive
     if(response.statusCode == 404){
         if([[headerDict objectForKey: @"X-Udj-Missing-Resource"] isEqualToString:@"player"])
-            [self resetToPlayerResultView];
+            [self resetToPlayerResultView:ExitReasonInactive];
     }
     else if([request isDELETE]){
         if([response isOK]) [self handleLeaveEvent];
@@ -560,9 +565,16 @@ static PlaylistViewController* _sharedPlaylistViewController;
         if([response isOK]) [self sendRefreshRequest];
     }
     
-    // check if our ticket was invalid
-    if(response.statusCode == 401 && [[headerDict objectForKey: @"WWW-Authenticate"] isEqualToString: @"ticket-hash"])
-        [globalData renewTicket];
+    // Check if the ticket expired or if the user was kicked from the player
+    if(response.statusCode == 401){
+        NSString* authenticate = [headerDict objectForKey: @"WWW-Authenticate"];
+        if([authenticate isEqualToString: @"ticket-hash"]){
+            [globalData renewTicket];
+        }
+        else if([authenticate isEqualToString: @"kicked"]){
+            [self resetToPlayerResultView: ExitReasonKicked];
+        }
+    }
     
     //self.currentRequestNumber = [NSNumber numberWithInt: -1];
 }

@@ -21,6 +21,7 @@
 #import "UDJSong.h"
 #import "RestKit/RKJSONParserJSONKit.h"
 #import "UDJPlayerManager.h"
+#import "PlaylistViewController.h"
 
 @implementation UDJPlaylist
 
@@ -137,6 +138,10 @@
     //NSLog(@"Response Code: %d", [response statusCode]);
     if ([request isGET]) {
         [self handlePlaylistResponse:response];        
+    }
+    if([response statusCode] == 401){
+        PlaylistViewController* viewController = (PlaylistViewController*)playlistDelegate;
+        [viewController request:request didLoadResponse:response];
     }
 }
 

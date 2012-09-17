@@ -200,7 +200,7 @@ typedef enum{
 
 -(void)resetToPlayerResultView:(ExitReason)reason{
     
-    [self.navigationController.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
     
     // let user know why they exited the player
     UIAlertView* alertView;
@@ -253,8 +253,9 @@ typedef enum{
     }
     
     // Check if the ticket expired or if the user was kicked from the player
-    if(response.statusCode == 401 && [[headerDict objectForKey: @"WWW-Authenticate"] isEqualToString: @"ticket-hash"]){
+    if(response.statusCode == 401){
         NSString* authenticate = [headerDict objectForKey: @"WWW-Authenticate"];
+        NSLog(@"reason: %@", authenticate);
         if([authenticate isEqualToString: @"ticket-hash"]){
             [globalData renewTicket];
         }

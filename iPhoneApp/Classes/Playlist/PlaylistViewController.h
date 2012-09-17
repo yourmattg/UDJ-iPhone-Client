@@ -24,6 +24,11 @@
 #import "PullRefreshTableViewController.h"
 #import "UDJPlaylistDelegate.h"
 
+typedef enum{
+    ExitReasonInactive,
+    ExitReasonKicked
+} ExitReason;
+
 @interface PlaylistViewController : PullRefreshTableViewController <UIAlertViewDelegate, RKRequestDelegate, UDJPlaylistDelegate>{
 
     UDJPlaylist *playlist;
@@ -74,5 +79,7 @@
 @property(nonatomic,strong) IBOutlet UILabel* volumeLabel;
 @property(nonatomic,strong) IBOutlet UIButton* controlButton;
 @property BOOL playing;
+
+-(void)resetToPlayerResultView:(ExitReason)reason;
 
 @end

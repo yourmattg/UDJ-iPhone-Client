@@ -216,7 +216,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     
     //create url users/user_id/players/player_id/library/songs
     NSString* urlString = [client.baseURL absoluteString];
-    urlString = [urlString stringByAppendingFormat: @"/players/%d/library/songs", self.playerID, nil];
+    urlString = [urlString stringByAppendingFormat: @"/players/%@/library/songs", self.playerID, nil];
     
     //set up request
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
