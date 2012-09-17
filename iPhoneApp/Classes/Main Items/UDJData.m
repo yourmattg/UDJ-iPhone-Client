@@ -122,10 +122,15 @@
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
     
     NSDictionary* responseHeaders = request.additionalHTTPHeaders;
+    NSString* responseDelegate = [responseHeaders objectForKey: @"delegate"];
     
-     NSLog(@"status code %d", [response statusCode]);
+     NSLog(@"Global Data %d", [response statusCode]);
     
-    if([[responseHeaders objectForKey: @"delegate"] isEqualToString: @"songAddDelegate"]){
+    /*if([responseDelegate isEqualToString: @"participantDelegate"] && participantDelegate != nil){
+        [participantDelegate request:request didLoadResponse:response];
+    }*/
+    
+    if([responseDelegate isEqualToString: @"songAddDelegate"]){
         if(songAddDelegate != nil){
             SongListViewController* songListViewController = (SongListViewController*)songAddDelegate;
             [songListViewController request: request didLoadResponse: response];
@@ -133,14 +138,14 @@
         else NSLog(@"delegate was nil");
     }
     
-    else if([[responseHeaders objectForKey: @"delegate"] isEqualToString: @"playerCreateDelegate"]){
+    else if([responseDelegate isEqualToString: @"playerCreateDelegate"]){
         if(playerCreateDelegate != nil){
             PlayerInfoViewController* playerInfoViewController = (PlayerInfoViewController*)playerCreateDelegate;
             [playerInfoViewController request: request didLoadResponse: response];            
         }
     }
     
-    else if([[responseHeaders objectForKey: @"delegate"] isEqualToString: @"playerMethodsDelegate"]){
+    else if([responseDelegate isEqualToString: @"playerMethodsDelegate"]){
         [[UDJPlayerManager sharedPlayerManager] request:request didLoadResponse:response];
     }
         //  && [[responseHeaders objectForKey: @"requestType"] isEqualToString:@"renewTicket"]

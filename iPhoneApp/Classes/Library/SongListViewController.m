@@ -24,6 +24,10 @@
 #import "LibraryEntryCell.h"
 #import "UDJPlaylist.h"
 
+typedef enum{
+    ExitReasonInactive,
+    ExitReasonKicked
+} ExitReason;
 
 @implementation SongListViewController
 
@@ -281,12 +285,18 @@
 
 #pragma mark - Response handling
 
--(void)resetToPlayerResultView{
+-(void)resetToPlayerResultView:(ExitReason)reason{
     
      [self.navigationController.navigationController popViewControllerAnimated:YES];
     
-    // alert user that player is inactive
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Player Inactive" message: @"The player you are trying to access is now inactive." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    // let user know why they exited the player
+    UIAlertView* alertView;
+    if(reason == ExitReasonInactive){
+        alertView = [[UIAlertView alloc] initWithTitle:@"Player Inactive" message: @"The player you are trying to access is now inactive." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil]; 
+    }
+    else if(reason == ExitReasonKicked){
+        alertView = [[UIAlertView alloc] initWithTitle:@"Kicked" message: @"You have been kicked out of this player." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];  
+    }
     [alertView show];
 }
 
@@ -337,7 +347,7 @@
     if(response.statusCode == 404){
         NSLog(@"missing resource: %@", [headerDict objectForKey: @"X-Udj-Missing-Resource"]);
         if([[headerDict objectForKey: @"X-Udj-Missing-Resource"] isEqualToString:@"player"])
-            [self resetToPlayerResultView];
+            [self resetToPlayerResultView:ExitReasonInactive];
     }
     else if ([request isGET] && [response isOK]) {
         [self handleSearchResults: response];
@@ -350,9 +360,16 @@
         [[UDJPlaylist sharedUDJPlaylist] sendVoteRequest:YES songId: songID];
     }
     
-    // check if our ticket was invalid
-    if(response.statusCode == 401 && [[headerDict objectForKey: @"WWW-Authenticate"] isEqualToString: @"ticket-hash"])
-        [globalData renewTicket];
+    // Check if the ticket expired or if the user was kicked from the player
+    if(response.statusCode == 401 && [[headerDict objectForKey: @"WWW-Authenticate"] isEqualToString: @"ticket-hash"]){
+        NSString* authenticate = [headerDict objectForKey: @"WWW-Authenticate"];
+        if([authenticate isEqualToString: @"ticket-hash"]){
+            [globalData renewTicket];
+        }
+        else if([authenticate isEqualToString: @"kicked"]){
+            [self resetToPlayerResultView: ExitReasonKicked];
+        }
+    }
 }
 
 @end

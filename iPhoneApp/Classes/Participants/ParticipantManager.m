@@ -22,6 +22,7 @@
 #import "UDJPlayerData.h"
 #import "UDJData.h"
 #import "RKRequest+UDJRequest.h"
+#import "RKJSONParserJSONKit.h"
 
 @implementation ParticipantManager
 
@@ -32,6 +33,7 @@
 -(id)init{
     if(self = [super init]){
         self.playerID = [UDJPlayerData sharedPlayerData].currentPlayer.playerID;
+        self.participantArray = [NSMutableArray arrayWithCapacity: 16];
     }
     return self;
 }
@@ -64,8 +66,22 @@
     return cell;
 }
 
-- (void)request:(RKRequest *)request didReceiveResponse:(RKResponse *)response{
+-(void)handleParticipantsResponse:(RKResponse*)response{ 
+    // Parse each user and add them to the list
+    RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
+    NSMutableArray* userArray = [parser objectFromString:[response bodyAsString] error:nil];
+    for(int i=0; i<[userArray count]; i++){
+        NSDictionary* userDict = [userArray objectAtIndex:i];
+        UDJUser* user = [UDJUser userFromDict: userDict];
+        [userArray addObject: user];
+    }
     
+}
+
+- (void)request:(RKRequest *)request didReceiveResponse:(RKResponse *)response{
+    if([request method] == RKRequestMethodGET){
+        [self handleParticipantsResponse: response];
+    }
 }
 
 

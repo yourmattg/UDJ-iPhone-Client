@@ -110,7 +110,6 @@
     RKRequest* request = [RKRequest UDJRequestWithMethod: RKRequestMethodDELETE];
     
     NSString* urlString  = [NSString stringWithFormat: @"%@/players/%@/users/user",[request.URL absoluteString], self.currentPlayer.playerID];
-    NSLog(urlString);
     request.URL = [NSURL URLWithString: urlString];
     request.delegate = playerListDelegate;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++];
