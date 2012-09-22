@@ -425,8 +425,6 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 -(void)sendCurrentSongRequest:(NSString*)libraryID{
     RKClient* client = [RKClient sharedClient];
     
-    NSLog(@"library ID: %@", libraryID);
-    
     NSString* urlString = [client.baseURL absoluteString];
     urlString = [urlString stringByAppendingFormat:@"/players/%@/current_song", self.playerID, nil];
 
@@ -443,9 +441,11 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     request.additionalHTTPHeaders = requestHeaders;
 
     request.params = [NSDictionary dictionaryWithObject: libraryID forKey: @"lib_id"];
+    request.timeoutInterval = 3;
 
     //send request
-    [request send];
+    if(!isInBackground) [request send];
+    else [request sendSynchronously];
 }
 
 -(void)playPlaylistCurrentSong{
@@ -539,6 +539,8 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 
 -(void)queueUpNextSong{
     // find the mediaItem for the top song on the playlist
+    UDJSong* nextSong = [[UDJPlaylist sharedUDJPlaylist] songAtIndex: 0];
+    NSLog(@"Next song: %@", nextSong.title);
     NSString* stringID = [[[UDJPlaylist sharedUDJPlaylist] songAtIndex:0] librarySongId];
     UDJLibraryID mediaItemID = strtoull([stringID UTF8String], NULL, 0);
     MPMediaPropertyPredicate* predicate = [MPMediaPropertyPredicate predicateWithValue: [NSNumber numberWithUnsignedLongLong:mediaItemID]forProperty:MPMediaItemPropertyPersistentID];
