@@ -67,6 +67,8 @@
 -(void)sendVoteRequest:(BOOL)up songId:(NSString*)songId{
     RKClient* client = [RKClient sharedClient];
     
+    NSLog(@"ID: %@", songId);
+    
     //create url [POST] players/player_id/active_playlist/lib_id/upvote
     NSString* urlString = [client.baseURL absoluteString];
     urlString = [urlString stringByAppendingFormat:@"/players/%@/active_playlist/songs/%@/", playerID, songId, nil];

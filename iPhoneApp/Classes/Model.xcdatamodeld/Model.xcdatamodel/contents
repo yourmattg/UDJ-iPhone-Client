@@ -18,8 +18,8 @@
         <attribute name="zipcode" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="UDJStoredData" positionX="160" positionY="192" width="128" height="75"/>
-        <element name="UDJStoredLibraryEntry" positionX="160" positionY="192" width="128" height="75"/>
-        <element name="UDJStoredPlayer" positionX="160" positionY="192" width="128" height="150"/>
+        <element name="UDJStoredData" positionX="115" positionY="186" width="128" height="75"/>
+        <element name="UDJStoredLibraryEntry" positionX="142" positionY="-63" width="128" height="75"/>
+        <element name="UDJStoredPlayer" positionX="-99" positionY="-18" width="128" height="150"/>
     </elements>
 </model>

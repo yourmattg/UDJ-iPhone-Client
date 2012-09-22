@@ -107,6 +107,8 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     NSMutableDictionary* songDict = [NSMutableDictionary dictionaryWithCapacity: 7];
     NSString *title, *artist, *album, *genre;
     NSNumber *track, *duration;
+    
+    NSLog(@"Song ID: %@", [item valueForProperty: MPMediaItemPropertyPersistentID]);
     [songDict setObject: [item valueForProperty: MPMediaItemPropertyPersistentID] forKey:@"id"];
     
     if([item valueForProperty: MPMediaItemPropertyTitle]) title = [item valueForProperty: MPMediaItemPropertyTitle];
@@ -379,8 +381,8 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
         }
         
         // find the mediaItem for the current song
-        NSNumberFormatter* formatter = [[NSNumberFormatter alloc] init];
-        UDJLibraryID mediaItemID = [[formatter numberFromString:[UDJPlaylist sharedUDJPlaylist].currentSong.librarySongId] unsignedLongLongValue];
+        NSString* stringID = [UDJPlaylist sharedUDJPlaylist].currentSong.librarySongId;
+        UDJLibraryID mediaItemID = strtoull([stringID UTF8String], NULL, 0);
         MPMediaPropertyPredicate* predicate = [MPMediaPropertyPredicate predicateWithValue: [NSNumber numberWithUnsignedLongLong:mediaItemID]forProperty:MPMediaItemPropertyPersistentID];
         MPMediaQuery* query = [[MPMediaQuery alloc] initWithFilterPredicates: [NSSet setWithObject: predicate]];
         [self updateCurrentMediaItem: [[query items] objectAtIndex: 0]];
@@ -423,6 +425,8 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 -(void)sendCurrentSongRequest:(NSString*)libraryID{
     RKClient* client = [RKClient sharedClient];
     
+    NSLog(@"library ID: %@", libraryID);
+    
     NSString* urlString = [client.baseURL absoluteString];
     urlString = [urlString stringByAppendingFormat:@"/players/%@/current_song", self.playerID, nil];
 
@@ -446,9 +450,10 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 
 -(void)playPlaylistCurrentSong{
 
+    NSLog(@"Trying to play current song");
     // find the mediaItem for the current song
-    NSNumberFormatter* formatter = [[NSNumberFormatter alloc] init];
-    UDJLibraryID mediaItemID = [[formatter numberFromString:[UDJPlaylist sharedUDJPlaylist].currentSong.librarySongId] unsignedLongLongValue];
+    NSString* stringID = [UDJPlaylist sharedUDJPlaylist].currentSong.librarySongId;
+    UDJLibraryID mediaItemID = strtoull([stringID UTF8String], NULL, 0);
     MPMediaPropertyPredicate* predicate = [MPMediaPropertyPredicate predicateWithValue: [NSNumber numberWithUnsignedLongLong:mediaItemID]forProperty:MPMediaItemPropertyPersistentID];
     MPMediaQuery* query = [[MPMediaQuery alloc] initWithFilterPredicates: [NSSet setWithObject: predicate]];
     [self updateCurrentMediaItem: [[query items] objectAtIndex: 0]];
@@ -475,7 +480,6 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     
     // if there is already a media item playing, resume it
     if(currentMediaItem){
-        NSLog(@"there's a media item already");
         [self setPlayerState:PlayerStatePlaying];
         [audioPlayer play];
         return YES;
@@ -483,8 +487,10 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     
     // if there are songs on the queue but no current song, update the current song to item at the top
     if(![UDJPlaylist sharedUDJPlaylist].currentSong && [[UDJPlaylist sharedUDJPlaylist] count] > 0){
-        [self sendCurrentSongRequest: [UDJPlaylist sharedUDJPlaylist].currentSong.librarySongId]; // update the current song on the server side
+        NSLog(@"trying to change song");
         [UDJPlaylist sharedUDJPlaylist].currentSong = [[UDJPlaylist sharedUDJPlaylist] songAtIndex:0];
+        NSLog(@"changed current song");
+        [self sendCurrentSongRequest: [UDJPlaylist sharedUDJPlaylist].currentSong.librarySongId]; // update the current song on the server side
     }
         
     // if there is now a current song, update the current media item and begin playing
@@ -533,8 +539,8 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 
 -(void)queueUpNextSong{
     // find the mediaItem for the top song on the playlist
-    NSNumberFormatter* formatter = [[NSNumberFormatter alloc] init];
-    UDJLibraryID mediaItemID = [[formatter numberFromString:[UDJPlaylist sharedUDJPlaylist].currentSong.librarySongId] unsignedLongLongValue];
+    NSString* stringID = [[[UDJPlaylist sharedUDJPlaylist] songAtIndex:0] librarySongId];
+    UDJLibraryID mediaItemID = strtoull([stringID UTF8String], NULL, 0);
     MPMediaPropertyPredicate* predicate = [MPMediaPropertyPredicate predicateWithValue: [NSNumber numberWithUnsignedLongLong:mediaItemID]forProperty:MPMediaItemPropertyPersistentID];
     MPMediaQuery* query = [[MPMediaQuery alloc] initWithFilterPredicates: [NSSet setWithObject: predicate]];
     MPMediaItem* nextMediaItem = [[query items] objectAtIndex: 0];
@@ -549,6 +555,8 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
         AVPlayerItem* itemToRemove = [[audioPlayer items] objectAtIndex: 2];
         [audioPlayer removeItem: itemToRemove];
     }
+        
+    [self printItemDurations];
 }
 
 #pragma mark - Preparing for background
