@@ -274,13 +274,16 @@
 
 #pragma mark - Player methods helpers
 
--(BOOL)completedLocationFields{
+-(BOOL)completedRequiredFields{
     BOOL complete = YES;
     for(int i=0; i < [locationFields count]; i++){
         UITextField* textField = [locationFields objectAtIndex: i];
         NSString* textWithoutSpaces = [textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
         if([textWithoutSpaces isEqualToString:@""]) complete = NO;
     }
+    
+    NSString* textWithoutSpaces = [self.playerNameField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if([textWithoutSpaces isEqualToString:@""]) complete = NO;
     
     return complete;
 }
@@ -317,7 +320,7 @@
 
 
 -(IBAction)createButtonClick:(id)sender{
-    if([self completedLocationFields]){
+    if([self completedRequiredFields] && [[playerNameField text] length] > 0){
         [self sendCreatePlayerRequest];
         self.createPlayerButton.hidden = YES;
         
@@ -333,7 +336,7 @@
         [self toggleActivityView: YES];
     }
     else{
-        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Incomplete Location" message:@"You must complete all the address fields." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Missing Info" message:@"You must choose a name for your player and fill out all address fields." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
     }
 }

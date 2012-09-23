@@ -536,7 +536,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 -(BOOL)canQueueNextSong{
     NSNumber* songTime = [currentMediaItem valueForProperty: MPMediaItemPropertyPlaybackDuration];
     NSInteger timeAsInt = [songTime intValue];
-    if([self currentPlaybackTime] > timeAsInt-10) return NO;
+    if([self currentPlaybackTime] > timeAsInt-15) return NO;
     return YES;
 }
 
