@@ -71,7 +71,7 @@
     
     // if this isn't being used as a player, just push the regular views
     if(!isPlayer){
-        self.viewControllers = [NSArray arrayWithObjects:playlistViewController, navigationController, randomViewController, participantsViewController, nil];        
+        self.viewControllers = [NSArray arrayWithObjects:playlistViewController, navigationController, randomViewController, nil];        
     }
     // if this is a player, add the player info view
     else {

@@ -355,7 +355,7 @@
 					<object class="IBUIButton" id="724242275">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 222.5}, {38, 38}}</string>
+						<string key="NSFrame">{{20, 216.5}, {50, 50}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="805324563"/>
@@ -380,7 +380,7 @@
 					<object class="IBUIButton" id="805324563">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{262, 222.5}, {38, 38}}</string>
+						<string key="NSFrame">{{250, 217}, {50, 50}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="365936368"/>
@@ -649,13 +649,13 @@
 							<reference ref="153489208"/>
 							<reference ref="761929813"/>
 							<reference ref="724242275"/>
-							<reference ref="805324563"/>
 							<reference ref="365936368"/>
 							<reference ref="125418469"/>
 							<reference ref="160493006"/>
 							<reference ref="903176478"/>
 							<reference ref="71446770"/>
 							<reference ref="1053023404"/>
+							<reference ref="805324563"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -878,8 +878,8 @@
 			<string key="playerinfobutton.png">{42, 29}</string>
 			<string key="playersbutton.png">{63, 30}</string>
 			<string key="playingbar.png">{320, 30}</string>
-			<string key="playtoggle.png">{38, 38}</string>
-			<string key="skipbutton.png">{38, 38}</string>
+			<string key="playtoggle.png">{50, 50}</string>
+			<string key="skipbutton.png">{50, 50}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1181</string>
 	</data>
