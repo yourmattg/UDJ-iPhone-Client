@@ -94,11 +94,11 @@
 -(IBAction)playToggleClick:(id)sender{
     if([playerManager playerState] == PlayerStatePaused){
         if([playerManager play]){
-            [togglePlayButton setTitle:@"Pause" forState:UIControlStateNormal];
+            [togglePlayButton setImage:[UIImage imageNamed: @"pausetoggle.png"] forState:UIControlStateNormal];
         }
     }
     else{
-        [togglePlayButton setTitle:@"Play" forState:UIControlStateNormal];
+        [togglePlayButton setImage:[UIImage imageNamed: @"playtoggle.png"] forState:UIControlStateNormal];
         [playerManager pause];        
     }
 }

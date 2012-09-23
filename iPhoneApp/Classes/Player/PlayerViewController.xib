@@ -355,7 +355,7 @@
 					<object class="IBUIButton" id="724242275">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 223}, {72, 37}}</string>
+						<string key="NSFrame">{{20, 222.5}, {38, 38}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="805324563"/>
@@ -364,21 +364,23 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">Play</string>
 						<reference key="IBUIHighlightedTitleColor" ref="1010972670"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="372670662"/>
+						<object class="NSCustomResource" key="IBUINormalImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">playtoggle.png</string>
+						</object>
 						<reference key="IBUIFontDescription" ref="724254860"/>
 						<reference key="IBUIFont" ref="602073596"/>
 					</object>
 					<object class="IBUIButton" id="805324563">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{228, 227}, {72, 37}}</string>
+						<string key="NSFrame">{{262, 222.5}, {38, 38}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="365936368"/>
@@ -387,7 +389,6 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
 						<string key="IBUINormalTitle">Skip</string>
 						<reference key="IBUIHighlightedTitleColor" ref="1010972670"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
@@ -395,6 +396,10 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="372670662"/>
+						<object class="NSCustomResource" key="IBUINormalImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">skipbutton.png</string>
+						</object>
 						<reference key="IBUIFontDescription" ref="724254860"/>
 						<reference key="IBUIFont" ref="602073596"/>
 					</object>
@@ -873,6 +878,8 @@
 			<string key="playerinfobutton.png">{42, 29}</string>
 			<string key="playersbutton.png">{63, 30}</string>
 			<string key="playingbar.png">{320, 30}</string>
+			<string key="playtoggle.png">{38, 38}</string>
+			<string key="skipbutton.png">{38, 38}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1181</string>
 	</data>

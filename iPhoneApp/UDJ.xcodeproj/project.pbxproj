@@ -55,6 +55,7 @@
 		A35F57F91572DD04004AA5DB /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A35F57F81572DD04004AA5DB /* arrow.png */; };
 		A3680CAC16067D2700ED0509 /* participanticon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3680CAB16067D2700ED0509 /* participanticon.png */; };
 		A3680CAE160E8B4200ED0509 /* playericon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3680CAD160E8B4200ED0509 /* playericon.png */; };
+		A3680CB0160F967400ED0509 /* skipbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A3680CAF160F967400ED0509 /* skipbutton.png */; };
 		A36CF96215BF87DC0032AF31 /* UDJStoredPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A36CF96115BF87DC0032AF31 /* UDJStoredPlayer.m */; };
 		A3720B3014C74FE800D1E30C /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A3720B2F14C74FE800D1E30C /* LocationManager.m */; };
 		A3720B3214C7513600D1E30C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3720B3114C7513600D1E30C /* CoreLocation.framework */; };
@@ -267,6 +268,7 @@
 		A35F57F81572DD04004AA5DB /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		A3680CAB16067D2700ED0509 /* participanticon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = participanticon.png; sourceTree = "<group>"; };
 		A3680CAD160E8B4200ED0509 /* playericon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playericon.png; sourceTree = "<group>"; };
+		A3680CAF160F967400ED0509 /* skipbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skipbutton.png; sourceTree = "<group>"; };
 		A36CF96015BF87DC0032AF31 /* UDJStoredPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDJStoredPlayer.h; path = Classes/Player/UDJStoredPlayer.h; sourceTree = SOURCE_ROOT; };
 		A36CF96115BF87DC0032AF31 /* UDJStoredPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDJStoredPlayer.m; path = Classes/Player/UDJStoredPlayer.m; sourceTree = SOURCE_ROOT; };
 		A3720B2E14C74FE800D1E30C /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
@@ -569,6 +571,7 @@
 		A3C6A4741565FA1400F1E42E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				A3680CAF160F967400ED0509 /* skipbutton.png */,
 				A3680CAD160E8B4200ED0509 /* playericon.png */,
 				A3680CAB16067D2700ED0509 /* participanticon.png */,
 				A325E0FC15F13D9600D54062 /* donebutton.png */,
@@ -856,6 +859,7 @@
 				A31837451604FB5400D9FC35 /* ParticipantsViewController.xib in Resources */,
 				A3680CAC16067D2700ED0509 /* participanticon.png in Resources */,
 				A3680CAE160E8B4200ED0509 /* playericon.png in Resources */,
+				A3680CB0160F967400ED0509 /* skipbutton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
