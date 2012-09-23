@@ -56,8 +56,6 @@
     self.playerManager.playerID = [UDJPlayerInfoManager sharedPlayerInfoManager].playerID;
     [[UDJPlaylist sharedUDJPlaylist] setPlayerID: playerManager.playerID];
     
-    [[UDJPlaylist sharedUDJPlaylist] sendPlaylistRequest];
-    
     [playerManager changePlayerState: PlayerStatePaused];
     [playerManager updatePlayerMusic];
     
@@ -68,6 +66,11 @@
     AVAudioSession* session = [AVAudioSession sharedInstance];
     [session setCategory:AVAudioSessionCategoryPlayback error:nil];
     [session setActive:YES error:nil];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [[UDJPlaylist sharedUDJPlaylist] sendPlaylistRequest];
 }
 
 #pragma mark - Play and pause

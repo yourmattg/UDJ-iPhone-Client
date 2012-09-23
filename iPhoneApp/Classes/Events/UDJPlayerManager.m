@@ -108,7 +108,6 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     NSString *title, *artist, *album, *genre;
     NSNumber *track, *duration;
     
-    NSLog(@"Song ID: %@", [item valueForProperty: MPMediaItemPropertyPersistentID]);
     [songDict setObject: [item valueForProperty: MPMediaItemPropertyPersistentID] forKey:@"id"];
     
     if([item valueForProperty: MPMediaItemPropertyTitle]) title = [item valueForProperty: MPMediaItemPropertyTitle];
@@ -191,18 +190,20 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
         
         // if this song hasn't been synced, add it to a set of songs to be added
         if(syncStatus == nil || [syncStatus boolValue] == NO){
+            NSLog(@"hasn't been synced yet");
             NSDictionary* songAddDict = [self dictionaryForMediaItem: mediaItem];
             [songAddArray addObject: songAddDict];
             
             // mark the song as synced initially
             [songSyncDictionary setObject: [NSNumber numberWithBool: YES] forKey:number];
-            
-            // if we have 200 songs, send them off to the server
-            if([songAddArray count] == 200 || i == [songArray count]-1){
-                NSLog(@"Sending %d songs to server", [songAddArray count]);
-                [self addSongsToServer: [songAddArray JSONString]];
-                [songAddArray removeAllObjects];
-            }
+        }
+        
+        
+        // if we have 200 songs, send them off to the server
+        if([songAddArray count] == 200 || i == [songArray count]-1){
+            NSLog(@"Sending %d songs to server", [songAddArray count]);
+            [self addSongsToServer: [songAddArray JSONString]];
+            [songAddArray removeAllObjects];
         }
     }
     
@@ -252,8 +253,9 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     request.queue = client.requestQueue;
     request.userData = @"songDelete";
     
-    // add the songs to delete
-    request.params = [NSDictionary dictionaryWithObject:[songs JSONString] forKey: @"to_add"];
+    // add the songs to delete;
+    NSLog(@"Empty Array %@", [[NSArray new] JSONString]);
+    request.params = [NSDictionary dictionaryWithObjectsAndKeys:[songs JSONString], @"to_delete", [[NSArray new] JSONString], @"to_add", nil];
     
     // set up the headers, including which type of request this is
     NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJData sharedUDJData].headers];
@@ -298,6 +300,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     
     // if there were songs to delete, let the server know
     if([deleteItemsArray count] > 0){
+        NSLog(@"About to delete %d songs", [deleteItemsArray count]);
         [self removeSongsFromServer: deleteItemsArray];
         // TODO: move this do didLoadResponse
         /*if([response statusCode] == 200){
@@ -586,6 +589,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response{
     NSString* requestType = [request userData];
     NSLog(@"Player Manager response code: %d, request type %@", [response statusCode], requestType);
+    NSLog([response bodyAsString]);
 }
 
 

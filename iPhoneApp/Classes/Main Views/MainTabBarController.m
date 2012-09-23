@@ -75,11 +75,13 @@
     }
     // if this is a player, add the player info view
     else {
-        self.viewControllers = [NSArray arrayWithObjects:playerViewController, playlistViewController, navigationController, randomViewController, participantsViewController, nil];
+        self.viewControllers = [NSArray arrayWithObjects:playerViewController, playlistViewController, navigationController, randomViewController, nil];
+        // set the player icon
+        UITabBarItem* playerItem = [self.tabBar.items objectAtIndex: 0];
+        [playerItem setImage: [UIImage imageNamed: @"playericon.png"]];
     }
     
     self.tabBar.tintColor = [UIColor colorWithRed:(35.0/255.0) green:(59.0/255.0) blue:(79.0/255.0) alpha:1];
-    
     
     
     // set tab bar images
@@ -93,8 +95,8 @@
     UITabBarItem* randomItem = [self.tabBar.items objectAtIndex: 2 + indexModify];
     [randomItem setImage: [UIImage imageNamed: @"randomicon.png"]];   
     
-    UITabBarItem* participantsItem = [self.tabBar.items objectAtIndex: 3 + indexModify];
-    [participantsItem setImage: [UIImage imageNamed: @"participanticon.png"]];
+    //UITabBarItem* participantsItem = [self.tabBar.items objectAtIndex: 3 + indexModify];
+    //[participantsItem setImage: [UIImage imageNamed: @"participanticon.png"]];
 }
 
 #pragma mark - View lifecycle

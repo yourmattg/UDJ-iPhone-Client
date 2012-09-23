@@ -48,10 +48,6 @@
         eventNameLabel.textColor = [UIColor whiteColor];
         eventNameLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview: eventNameLabel];
-        
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-
     }
     return self;
 }
