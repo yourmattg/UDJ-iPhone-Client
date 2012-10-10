@@ -22,7 +22,7 @@
 #import "UDJPlayerData.h"
 #import "UDJData.h"
 #import "RKRequest+UDJRequest.h"
-#import "RKJSONParserJSONKit.h"
+#import "RestKit/RKJSONParserJSONKit.h"
 
 @implementation ParticipantManager
 

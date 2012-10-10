@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 University of Illinois at Urbana-Champaign. All rights reserved.
 //
 
-#import "RKRequest.h"
+#import "RestKit/RKRequest.h"
 
 @interface RKRequest (UDJRequest)
 

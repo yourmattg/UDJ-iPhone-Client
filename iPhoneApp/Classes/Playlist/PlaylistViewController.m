@@ -540,6 +540,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 - (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response { 
     
     NSLog(@"Playlist: status code %d", [response statusCode]);
+    NSLog([response bodyAsString]);
     
     NSNumber* requestNumber = request.userData;
     NSDictionary* headerDict = [response allHeaderFields];
