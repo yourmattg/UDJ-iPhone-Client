@@ -18,7 +18,7 @@
  */
 
 #import <UIKit/UIKit.h>
-#import <RestKit/RestKit.h>
+#import "RestKit.h"
 #import "UDJData.h"
 #import "UDJStoredData.h"
 #import <QuartzCore/QuartzCore.h>

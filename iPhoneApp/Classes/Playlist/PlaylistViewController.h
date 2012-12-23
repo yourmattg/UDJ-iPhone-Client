@@ -20,7 +20,7 @@
 #import <UIKit/UIKit.h>
 #import "UDJPlayer.h"
 #import "UDJPlaylist.h"
-#import "RestKit/RestKit.h"
+#import "RestKit.h"
 #import "PullRefreshTableViewController.h"
 #import "UDJPlaylistDelegate.h"
 

@@ -18,7 +18,7 @@
  */
 
 #import "RandomViewController.h"
-#import "RestKit/RestKit.h"
+#import "RestKit.h"
 #import "RestKit/RKJSONParserJSONKit.h"
 #import "UDJPlayerData.h"
 #import "LibraryEntryCell.h"

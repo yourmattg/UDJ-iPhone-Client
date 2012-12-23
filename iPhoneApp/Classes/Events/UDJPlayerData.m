@@ -18,7 +18,7 @@
  */
 
 #import "UDJPlayerData.h"
-#import "RestKit/RestKit.h"
+#import "RestKit.h"
 #import "RKRequest+UDJRequest.h"
 
 @implementation UDJPlayerData
