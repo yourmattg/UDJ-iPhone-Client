@@ -18,7 +18,7 @@
  */
 
 #import "UDJSong.h"
-#import "RestKit/RKJSONParserJSONKit.h"
+#import "RKJSONParserJSONKit.h"
 
 // Active Playlist Entry
 @implementation UDJSong

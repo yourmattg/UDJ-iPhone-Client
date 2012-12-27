@@ -18,7 +18,7 @@
  */
 
 #import <UIKit/UIKit.h>
-#import "RestKit.h"
+#import "RestKit/RestKit.h"
 #import "UDJData.h"
 #import "PullRefreshTableViewController.h"
 

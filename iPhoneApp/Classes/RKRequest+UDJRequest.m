@@ -7,7 +7,7 @@
 //
 
 #import "RKRequest+UDJRequest.h"
-#import "RestKit/RKClient.h"
+#import <RestKit/RestKit.h>
 #import "UDJData.h"
 
 @implementation RKRequest (UDJRequest)

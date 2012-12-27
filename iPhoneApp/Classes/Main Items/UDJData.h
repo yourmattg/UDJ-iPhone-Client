@@ -18,7 +18,7 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "RestKit.h"
+#import <RestKit/RestKit.h>
 
 @interface UDJData : NSObject<RKRequestDelegate>{
     NSString* ticket;
