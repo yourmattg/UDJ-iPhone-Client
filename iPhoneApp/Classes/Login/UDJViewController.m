@@ -24,6 +24,7 @@
 #import "UDJAppDelegate.h"
 #import "PlayerListViewController.h"
 #import "RestKit/Restkit.h"
+#import "UDJClient.h"
 
 
 @implementation UDJViewController
@@ -163,36 +164,29 @@
 
 #pragma mark Authenticate methods
 
+-(void)genericErrorMessage{
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"UDJ encountered a networking error. Make sure you have an internet connection or try again later." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alertView show];
+}
+
 // authenticate: sends a POST with the username and password
 - (void) sendAuthRequest:(NSString*)username password:(NSString*)pass{
-    
-    RKClient* client = [RKClient sharedClient];
-    
     // make sure the right api version is being passed in
-    NSDictionary* nameAndPass = [NSDictionary dictionaryWithObjectsAndKeys:username, @"username", pass, @"password", nil]; 
+    NSDictionary* nameAndPass = [NSDictionary dictionaryWithObjectsAndKeys:username, @"username", pass, @"password", nil];
+    NSMutableURLRequest* request = [[UDJClient sharedClient] requestWithMethod:@"POST" path:@"/auth" parameters:nameAndPass];
     
-    // put the API version in the header
     NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"0.5", @"X-Udj-Api-Version", nil];
-
-    // create the URL
-    NSMutableString* urlString = [NSMutableString stringWithString:[client.baseURL absoluteString]];
-    [urlString appendString: @"/auth"];
+    [request setAllHTTPHeaderFields:headers];
     
-    // set up request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
-    request.delegate = self;
-    request.queue = client.requestQueue;
-    request.params = nameAndPass;
-    request.method = RKRequestMethodPOST;
-    request.userData = [NSNumber numberWithInt: globalData.requestCount++]; 
-    request.additionalHTTPHeaders = headers;
-    
-    // remember the request we are waiting on
-    self.currentRequestNumber = request.userData;
+    // TODO: request count?
     
     [self toggleLoginView:YES];
-    [request send];
-    
+
+    [[UDJClient sharedClient] HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation* operation, id responseObject){
+        [self request:request didLoadResponse:operation];
+    }failure:^(AFHTTPRequestOperation* operation, NSError* error){
+        [self genericErrorMessage];
+    }];
 }
 
 // handleAuth: handle authorization response if credentials are valid
