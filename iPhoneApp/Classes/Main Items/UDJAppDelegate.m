@@ -24,9 +24,7 @@
 #import "UDJPlaylist.h"
 #import "UDJSongList.h"
 #import "UDJData.h"
-#import "SHKConfiguration.h"
-#import "UDJConfigurator.h"
-#import "SHKFacebook.h"
+#import "UDJClient.h"
 
 @implementation UDJAppDelegate
 
@@ -110,23 +108,16 @@
     udjData.requestCount = 0;
     
     [UDJPlayerData new]; // eventData singleton
-    //[UDJConnection new]; // UDJConnection singleton
     self.playerManager = [[UDJPlayerManager alloc] init]; // player manager singleton
     
     
-    // initialize udjConnection
+    // initialize  UDClient
     baseUrl = @"https://udjplayer.com:4898/udj/0_6";
-    
-    // initialize RestKit client
-    RKClient* client = [RKClient alloc];
+    UDJClient* client = [UDJClient alloc];
     client = [client initWithBaseURL: [NSURL URLWithString: baseUrl]];
     
     [UDJPlaylist new]; // make UDJPlaylist singleton
     [UDJPlaylist sharedUDJPlaylist].globalData = [UDJData sharedUDJData];
-    
-    // initialize SHK Congfigurator
-    DefaultSHKConfigurator *configurator = [[UDJConfigurator alloc] init];
-    [SHKConfiguration sharedInstanceWithConfigurator:configurator];
     
     //create a UDJViewController (the login screen), and make it the root view
     viewController    = [[UDJViewController alloc] initWithNibName:@"UDJViewController" bundle:[NSBundle mainBundle]];
@@ -189,11 +180,7 @@
 //Facebook
 - (BOOL)handleOpenURL:(NSURL*)url
 {
-    NSString* scheme = [url scheme];
-    NSString* prefix = [NSString stringWithFormat:@"fb%@", SHKCONFIG(facebookAppId)];
-    if ([scheme hasPrefix:prefix])
-        return [SHKFacebook handleOpenURL:url];
-    return YES;
+    
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation 

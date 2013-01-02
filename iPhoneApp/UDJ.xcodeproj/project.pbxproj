@@ -43,6 +43,7 @@
 		A341E23015E2BC9200E92D84 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A341E22F15E2BC9200E92D84 /* CoreMedia.framework */; };
 		A3443FC515C78D73005A6A67 /* UDJStoredLibraryEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A3443FC415C78D73005A6A67 /* UDJStoredLibraryEntry.m */; };
 		A3470D88168BB2E100370597 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF6951497D0A4006ADF19 /* libxml2.dylib */; };
+		A3470D8B168CCFAA00370597 /* UDJClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A3470D8A168CCFA900370597 /* UDJClient.m */; };
 		A34796A514F85AE0001DEE15 /* default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A34796A414F85AE0001DEE15 /* default.jpg */; };
 		A3495614151EF3D800AAEF7E /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = A3495613151EF3D800AAEF7E /* refresh.png */; };
 		A34FA21B15C22D540022EF46 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = A34FA21A15C22D540022EF46 /* plus.png */; };
@@ -201,6 +202,8 @@
 		A341E22F15E2BC9200E92D84 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		A3443FC315C78D73005A6A67 /* UDJStoredLibraryEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDJStoredLibraryEntry.h; path = Classes/Player/UDJStoredLibraryEntry.h; sourceTree = SOURCE_ROOT; };
 		A3443FC415C78D73005A6A67 /* UDJStoredLibraryEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDJStoredLibraryEntry.m; path = Classes/Player/UDJStoredLibraryEntry.m; sourceTree = SOURCE_ROOT; };
+		A3470D89168CCFA900370597 /* UDJClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDJClient.h; path = Network/UDJClient.h; sourceTree = "<group>"; };
+		A3470D8A168CCFA900370597 /* UDJClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDJClient.m; path = Network/UDJClient.m; sourceTree = "<group>"; };
 		A34796A414F85AE0001DEE15 /* default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpg; sourceTree = "<group>"; };
 		A3495613151EF3D800AAEF7E /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		A34FA21A15C22D540022EF46 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
@@ -327,8 +330,7 @@
 				1D3623250D0F684500981E51 /* UDJAppDelegate.m */,
 				A35F57F21572D25D004AA5DB /* PullRefreshTableViewController.h */,
 				A35F57F31572D25D004AA5DB /* PullRefreshTableViewController.m */,
-				A325E10115F165A400D54062 /* RKRequest+UDJRequest.h */,
-				A325E10215F165A400D54062 /* RKRequest+UDJRequest.m */,
+				A3470D8C168CCFB000370597 /* Network */,
 				A396EF1E14B558B300BCEF8F /* Library */,
 				A324ABF714AAB74F00388514 /* Playlist */,
 				A3F58C5514A1519F00756F7D /* Main Items */,
@@ -448,6 +450,17 @@
 				A35EEE1C15E194D7008CB29B /* UDJPlaylistDelegate.h */,
 			);
 			path = Playlist;
+			sourceTree = "<group>";
+		};
+		A3470D8C168CCFB000370597 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				A3470D89168CCFA900370597 /* UDJClient.h */,
+				A3470D8A168CCFA900370597 /* UDJClient.m */,
+				A325E10115F165A400D54062 /* RKRequest+UDJRequest.h */,
+				A325E10215F165A400D54062 /* RKRequest+UDJRequest.m */,
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 		A3536FB414A5219E00B5C95F /* Player List */ = {
@@ -799,6 +812,7 @@
 				A325E10315F165A400D54062 /* RKRequest+UDJRequest.m in Sources */,
 				A31837441604FB5400D9FC35 /* ParticipantsViewController.m in Sources */,
 				A31837481604FBB600D9FC35 /* ParticipantManager.m in Sources */,
+				A3470D8B168CCFAA00370597 /* UDJClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

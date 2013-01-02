@@ -32,7 +32,7 @@
     
     UIViewController* getEventsDelegate; // this will be the EventSearchViewController
     UIViewController* enterEventDelegate; // this will be the EventResultsViewController
-    UIViewController* leaveEventDelegate; // PLaylistViewController
+    UIViewController* leaveEventDelegate; // PlaylistViewController
 }
 
 + (UDJPlayerData*)sharedPlayerData;

@@ -188,6 +188,4 @@ static UDJPlayerData* _sharedEventList = nil;
     return self;
 }
 
-// memory managed
-
 @end

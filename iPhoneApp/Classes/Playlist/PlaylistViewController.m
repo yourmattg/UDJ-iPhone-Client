@@ -26,8 +26,7 @@
 #import "LibraryEntryCell.h"
 #import "PlaylistEntryCell.h"
 #import <QuartzCore/QuartzCore.h>
-#import <RestKit/RKJSONParserJSONKit.h>
-#import "SHK.h"
+#import <RestKit/RestKit.h>
 #import "UDJPlayerManager.h"
 
 @implementation PlaylistViewController

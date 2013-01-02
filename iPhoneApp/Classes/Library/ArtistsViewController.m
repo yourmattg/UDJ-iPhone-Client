@@ -20,7 +20,7 @@
 #import "ArtistsViewController.h"
 #import "UDJPlayerData.h"
 #import "SongListViewController.h"
-#import "RestKit/RKJSONParserJSONKit.h"
+#import "RestKit/RestKit.h"
 #import "UDJPlaylist.h"
 
 typedef enum{

@@ -23,7 +23,7 @@
 #import "KeychainItemWrapper.h"
 #import "UDJAppDelegate.h"
 #import "PlayerListViewController.h"
-#import "RestKit/RKJSONParserJSONKit.h"
+#import "RestKit/Restkit.h"
 
 
 @implementation UDJViewController
@@ -61,12 +61,6 @@
     managedObjectContext = appDelegate.managedObjectContext;
     
     [self checkForUsername];
-    
-    // navigationBar (leave commented out, for testing purposes)
-    /*self.navigationController.navigationBarHidden = NO;
-    [self.navigationController.navigationBar setTintColor: [UIColor colorWithRed:(35.0/255.0) green:(59.0/255.0) blue:(79.0/255.0) alpha:1]];
-    UIBarButtonItem* button = [[UIBarButtonItem alloc] initWithTitle:@"Info" style:UIBarButtonItemStyleBordered target:nil action:nil];
-    self.navigationItem.rightBarButtonItem = button;*/
 }
 
 - (void)didReceiveMemoryWarning {
