@@ -182,11 +182,12 @@
     
     [self toggleLoginView:YES];
 
-    [[UDJClient sharedClient] HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation* operation, id responseObject){
+    AFHTTPRequestOperation* requestOp = [[UDJClient sharedClient] HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation* operation, id responseObject){
         [self request:request didLoadResponse:operation];
     }failure:^(AFHTTPRequestOperation* operation, NSError* error){
         [self genericErrorMessage];
     }];
+    [[UDJClient sharedClient] enqueueHTTPRequestOperation: requestOp];
 }
 
 // handleAuth: handle authorization response if credentials are valid
@@ -264,7 +265,7 @@
 }
 
 // Handle responses from the server
-- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
+- (void)requestOp:(AFHTTPRequestOperation*)operation didLoadResponse:(id)responseObj {
     NSLog(@"status code %d", [response statusCode]);
     
     NSNumber* requestNumber = request.userData;

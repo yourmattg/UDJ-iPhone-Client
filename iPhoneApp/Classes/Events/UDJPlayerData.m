@@ -91,15 +91,18 @@
     RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = playerListDelegate;
     request.method = RKRequestMethodPUT;
-    request.additionalHTTPHeaders = globalData.headers;
+    
+    NSMutableDictionary* headers = globalData.headers;
+    [headers setValue:@"text/json" forKey:@"content-type"];
+    request.additionalHTTPHeaders = headers;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++];
     request.queue = client.requestQueue;
     
     // add the password to the header if neccessary
-    if(password != nil){ 
-        NSMutableDictionary* dictionaryWithPass = [NSMutableDictionary dictionaryWithDictionary: globalData.headers];
-        [dictionaryWithPass setValue:password forKey:@"X-Udj-Player-Password"];
-        request.additionalHTTPHeaders = dictionaryWithPass;
+    if(password != nil){
+        request.HTTPBodyString = [NSString stringWithFormat:@"{password:%@}", password, nil];
+        //NSDictionary* dictionaryWithPass = [NSDictionary dictionaryWithObject:password forKey:@"password"];
+        //request.additionalHTTPHeaders = dictionaryWithPass;
     }
     
     //send request
