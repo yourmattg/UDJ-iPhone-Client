@@ -76,7 +76,6 @@
 		A39AF6901497D079006ADF19 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF68F1497D079006ADF19 /* CoreData.framework */; };
 		A39AF6921497D081006ADF19 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF6911497D081006ADF19 /* MobileCoreServices.framework */; };
 		A39AF6941497D09A006ADF19 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39AF6931497D09A006ADF19 /* SystemConfiguration.framework */; };
-		A3A1EE6C1575E49E0058555A /* UDJConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A1EE6B1575E49E0058555A /* UDJConfigurator.m */; };
 		A3A2B370156DD6C600C4FF90 /* UDJStoredData.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A2B36F156DD6C600C4FF90 /* UDJStoredData.m */; };
 		A3B1ABB8157E759B008498EC /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3B1ABB7157E759B008498EC /* MainWindow.xib */; };
 		A3C22D551566D4D50066B9F8 /* playlisticon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C22D541566D4D50066B9F8 /* playlisticon.png */; };
@@ -104,6 +103,8 @@
 		A3E4D1831574570A0032CF8B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E4D1821574570A0032CF8B /* MessageUI.framework */; };
 		A3E4D185157457260032CF8B /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E4D184157457260032CF8B /* Twitter.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		A3E70CDC159BF7E00037A60B /* blackground.png in Resources */ = {isa = PBXBuildFile; fileRef = A3E70CDB159BF7E00037A60B /* blackground.png */; };
+		A3EEAB72169B742500FE10F4 /* UDJRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EEAB71169B742500FE10F4 /* UDJRequest.m */; };
+		A3EEAB75169B843400FE10F4 /* UDJResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EEAB74169B843400FE10F4 /* UDJResponse.m */; };
 		A3EECC0215994ED30003BEF8 /* PlayerInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EECC0115994ED30003BEF8 /* PlayerInfoViewController.m */; };
 		A3F58D9514C753D300E350F4 /* UDJEventGoer.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F58D9414C753D300E350F4 /* UDJEventGoer.m */; };
 		A3F58D9C14C75FAF00E350F4 /* EventGoerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F58D9B14C75FAF00E350F4 /* EventGoerViewController.xib */; };
@@ -247,9 +248,6 @@
 		A39AF6911497D081006ADF19 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		A39AF6931497D09A006ADF19 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A39AF6951497D0A4006ADF19 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
-		A3A1EE661575DE590058555A /* SHKSharersCustom.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SHKSharersCustom.plist; path = ../SHKSharersCustom.plist; sourceTree = "<group>"; };
-		A3A1EE6A1575E49E0058555A /* UDJConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJConfigurator.h; sourceTree = "<group>"; };
-		A3A1EE6B1575E49E0058555A /* UDJConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJConfigurator.m; sourceTree = "<group>"; };
 		A3A2B36E156DD6C600C4FF90 /* UDJStoredData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDJStoredData.h; path = ../UDJStoredData.h; sourceTree = "<group>"; };
 		A3A2B36F156DD6C600C4FF90 /* UDJStoredData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDJStoredData.m; path = ../UDJStoredData.m; sourceTree = "<group>"; };
 		A3B1ABB7157E759B008498EC /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -284,6 +282,11 @@
 		A3E4D1821574570A0032CF8B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		A3E4D184157457260032CF8B /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		A3E70CDB159BF7E00037A60B /* blackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackground.png; sourceTree = "<group>"; };
+		A3EEAB70169B742500FE10F4 /* UDJRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDJRequest.h; path = Network/UDJRequest.h; sourceTree = "<group>"; };
+		A3EEAB71169B742500FE10F4 /* UDJRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDJRequest.m; path = Network/UDJRequest.m; sourceTree = "<group>"; };
+		A3EEAB73169B843400FE10F4 /* UDJResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDJResponse.h; path = Network/UDJResponse.h; sourceTree = "<group>"; };
+		A3EEAB74169B843400FE10F4 /* UDJResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDJResponse.m; path = Network/UDJResponse.m; sourceTree = "<group>"; };
+		A3EEAB76169B844400FE10F4 /* UDJResponseDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UDJResponseDelegate.h; path = Network/UDJResponseDelegate.h; sourceTree = "<group>"; };
 		A3EECC0015994ED30003BEF8 /* PlayerInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerInfoViewController.h; path = Classes/Player/PlayerInfoViewController.h; sourceTree = SOURCE_ROOT; };
 		A3EECC0115994ED30003BEF8 /* PlayerInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerInfoViewController.m; path = Classes/Player/PlayerInfoViewController.m; sourceTree = SOURCE_ROOT; };
 		A3F58D9314C753D300E350F4 /* UDJEventGoer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJEventGoer.h; sourceTree = "<group>"; };
@@ -325,7 +328,6 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				A30CE2271591649200DA054D /* Connection */,
 				1D3623240D0F684500981E51 /* UDJAppDelegate.h */,
 				1D3623250D0F684500981E51 /* UDJAppDelegate.m */,
 				A35F57F21572D25D004AA5DB /* PullRefreshTableViewController.h */,
@@ -410,16 +412,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A30CE2271591649200DA054D /* Connection */ = {
-			isa = PBXGroup;
-			children = (
-				A3A1EE661575DE590058555A /* SHKSharersCustom.plist */,
-				A3A1EE6A1575E49E0058555A /* UDJConfigurator.h */,
-				A3A1EE6B1575E49E0058555A /* UDJConfigurator.m */,
-			);
-			name = Connection;
-			sourceTree = "<group>";
-		};
 		A318373D1604FAB000D9FC35 /* Participants */ = {
 			isa = PBXGroup;
 			children = (
@@ -457,6 +449,11 @@
 			children = (
 				A3470D89168CCFA900370597 /* UDJClient.h */,
 				A3470D8A168CCFA900370597 /* UDJClient.m */,
+				A3EEAB70169B742500FE10F4 /* UDJRequest.h */,
+				A3EEAB71169B742500FE10F4 /* UDJRequest.m */,
+				A3EEAB73169B843400FE10F4 /* UDJResponse.h */,
+				A3EEAB74169B843400FE10F4 /* UDJResponse.m */,
+				A3EEAB76169B844400FE10F4 /* UDJResponseDelegate.h */,
 				A325E10115F165A400D54062 /* RKRequest+UDJRequest.h */,
 				A325E10215F165A400D54062 /* RKRequest+UDJRequest.m */,
 			);
@@ -802,7 +799,6 @@
 				A3A2B370156DD6C600C4FF90 /* UDJStoredData.m in Sources */,
 				A3F86A6F156F03250036FBCE /* PlayerListViewController.m in Sources */,
 				A35F57F41572D25D004AA5DB /* PullRefreshTableViewController.m in Sources */,
-				A3A1EE6C1575E49E0058555A /* UDJConfigurator.m in Sources */,
 				A3EECC0215994ED30003BEF8 /* PlayerInfoViewController.m in Sources */,
 				A36CF96215BF87DC0032AF31 /* UDJStoredPlayer.m in Sources */,
 				A38DC7C515C4928700BF9A68 /* UDJPlayerManager.m in Sources */,
@@ -813,6 +809,8 @@
 				A31837441604FB5400D9FC35 /* ParticipantsViewController.m in Sources */,
 				A31837481604FBB600D9FC35 /* ParticipantManager.m in Sources */,
 				A3470D8B168CCFAA00370597 /* UDJClient.m in Sources */,
+				A3EEAB72169B742500FE10F4 /* UDJRequest.m in Sources */,
+				A3EEAB75169B843400FE10F4 /* UDJResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -842,6 +840,7 @@
 					"$(SOURCE_ROOT)/../RestKit/Code/**",
 					"$(BUILT_PRODUCTS_DIR)/../../Headers/**",
 					"$(SOURCE_ROOT)/../RestKit/**",
+					"$(SOURCE_ROOT)/JSONKit/**",
 				);
 				INFOPLIST_FILE = "UDJ-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -874,6 +873,7 @@
 					"$(SOURCE_ROOT)/../RestKit/Code/**",
 					"$(BUILT_PRODUCTS_DIR)/../../Headers/**",
 					"$(SOURCE_ROOT)/../RestKit/**",
+					"$(SOURCE_ROOT)/JSONKit/**",
 				);
 				INFOPLIST_FILE = "UDJ-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -926,6 +926,7 @@
 					"$(SOURCE_ROOT)/../RestKit/Code/**",
 					"$(BUILT_PRODUCTS_DIR)/../../Headers/**",
 					"$(SOURCE_ROOT)/../RestKit/**",
+					"$(SOURCE_ROOT)/JSONKit/**",
 				);
 				INFOPLIST_FILE = "UDJ-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
