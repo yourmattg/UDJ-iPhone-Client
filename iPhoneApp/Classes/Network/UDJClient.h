@@ -7,6 +7,9 @@
 //
 
 #import <RestKit/RestKit.h>
+#import "UDJRequestDelegate.h"
+#import "UDJRequest.h"
+#import "UDJResponse.h"
 
 @interface UDJClient : AFHTTPClient
 

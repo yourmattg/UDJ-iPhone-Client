@@ -166,7 +166,7 @@
 // authenticate: sends a POST with the username and password
 - (void) sendAuthRequest:(NSString*)username password:(NSString*)pass{
     
-    RKClient* client = [RKClient sharedClient];
+    UDJClient* client = [UDJClient sharedClient];
     
     // make sure the right api version is being passed in
     NSDictionary* nameAndPass = [NSDictionary dictionaryWithObjectsAndKeys:username, @"username", pass, @"password", nil]; 
@@ -179,11 +179,11 @@
     [urlString appendString: @"/auth"];
     
     // set up request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
+    UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = self;
     request.queue = client.requestQueue;
     request.params = nameAndPass;
-    request.method = RKRequestMethodPOST;
+    request.method = UDJRequestMethodPOST;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++]; 
     request.additionalHTTPHeaders = headers;
     
@@ -196,7 +196,7 @@
 }
 
 // handleAuth: handle authorization response if credentials are valid
-- (void)handleAuth:(RKResponse*)response{
+- (void)handleAuth:(UDJResponse*)response{
     
     // save the username, password, and ticket assign date information to Core Data
     [self saveUsernameAndDate];
@@ -221,7 +221,7 @@
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
--(void)denyAuth:(RKResponse*)response{
+-(void)denyAuth:(UDJResponse*)response{
     // hide the login view
     [self toggleLoginView:NO];
     
@@ -270,7 +270,7 @@
 }
 
 // Handle responses from the server
-- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
+- (void)request:(UDJRequest*)request didLoadResponse:(UDJResponse*)response {
     NSLog(@"status code %d", [response statusCode]);
     
     NSNumber* requestNumber = request.userData;

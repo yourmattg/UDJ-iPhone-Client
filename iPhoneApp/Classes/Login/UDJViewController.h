@@ -23,7 +23,7 @@
 #import "UDJStoredData.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface UDJViewController : UIViewController <RKRequestDelegate, UIAlertViewDelegate> {
+@interface UDJViewController : UIViewController <UDJRequestDelegate, UIAlertViewDelegate> {
 
 	
 	UIButton *loginButton;

@@ -176,17 +176,17 @@ typedef enum{
     
     
     // gets JSON array of artists
-    RKClient* client = [RKClient sharedClient];
+    UDJClient* client = [UDJClient sharedClient];
     
     // create url /players/player_id/available_music/artists
     NSString* urlString = [client.baseURL absoluteString];
     urlString = [urlString stringByAppendingFormat:@"/players/%@/available_music/artists",[UDJPlayerData sharedPlayerData].currentPlayer.playerID,nil];
     
     // create request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
+    UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = self;
     request.queue = client.requestQueue;
-    request.method = RKRequestMethodGET;
+    request.method = UDJRequestMethodGET;
     request.additionalHTTPHeaders = globalData.headers;
     
     // track current request number
@@ -215,7 +215,7 @@ typedef enum{
     [alertView show];
 }
 
--(void)handleArtistResponse:(RKResponse*)response{
+-(void)handleArtistResponse:(UDJResponse*)response{
     
     // clear the current artists array
     [artistsArray removeAllObjects];
@@ -237,7 +237,7 @@ typedef enum{
 }
 
 // Handle responses from the server
-- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response { 
+- (void)request:(UDJRequest*)request didLoadResponse:(UDJResponse*)response { 
     
     //NSNumber* requestNumber = request.userData;
     NSDictionary* headerDict = [response allHeaderFields];

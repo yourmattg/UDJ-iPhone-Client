@@ -21,7 +21,7 @@
 #import "UDJUser.h"
 #import "UDJPlayerData.h"
 #import "UDJData.h"
-#import "RKRequest+UDJRequest.h"
+#import "UDJRequest+UDJRequest.h"
 #import "RestKit/RKJSONParserJSONKit.h"
 
 @implementation ParticipantManager
@@ -39,7 +39,7 @@
 }
 
 -(void)getPlayerParticipants{
-    RKRequest* request = [RKRequest UDJRequestWithMethod: RKRequestMethodGET];
+    UDJRequest* request = [UDJRequest UDJRequestWithMethod: UDJRequestMethodGET];
 
     NSString* urlString = [NSString stringWithFormat: @"%@/players/%@/users", [request.URL absoluteString], self.playerID, nil];
     request.URL = [NSURL URLWithString: urlString];
@@ -66,7 +66,7 @@
     return cell;
 }
 
--(void)handleParticipantsResponse:(RKResponse*)response{ 
+-(void)handleParticipantsResponse:(UDJResponse*)response{ 
     // Parse each user and add them to the list
     RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
     NSMutableArray* userArray = [parser objectFromString:[response bodyAsString] error:nil];
@@ -78,8 +78,8 @@
     
 }
 
-- (void)request:(RKRequest *)request didReceiveResponse:(RKResponse *)response{
-    if([request method] == RKRequestMethodGET){
+- (void)request:(UDJRequest *)request didReceiveResponse:(UDJResponse *)response{
+    if([request method] == UDJRequestMethodGET){
         [self handleParticipantsResponse: response];
     }
 }

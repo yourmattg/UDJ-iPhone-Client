@@ -22,7 +22,7 @@
 #import "UDJData.h"
 #import "PullRefreshTableViewController.h"
 
-@interface RandomViewController : PullRefreshTableViewController <RKRequestDelegate>{
+@interface RandomViewController : PullRefreshTableViewController <UDJRequestDelegate>{
     NSInteger MAX_RESULTS;
 }
 

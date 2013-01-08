@@ -19,8 +19,9 @@
 
 #import <Foundation/Foundation.h>
 #import <RestKit/RestKit.h>
+#import "UDJRequestDelegate.h"
 
-@interface UDJData : NSObject<RKRequestDelegate>{
+@interface UDJData : NSObject<UDJRequestDelegate>{
     NSString* ticket;
     NSString* username;
 }
@@ -41,6 +42,6 @@
 +(UDJData*)sharedUDJData;
 -(BOOL)ticketIsValid;
 -(void)renewTicket;
--(void)handleRenewTicket:(RKResponse*)response;
+-(void)handleRenewTicket:(UDJResponse*)response;
 
 @end

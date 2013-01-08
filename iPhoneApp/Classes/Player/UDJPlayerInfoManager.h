@@ -7,10 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RKRequest+UDJRequest.h"
 #import "UDJData.h"
 
-@interface UDJPlayerInfoManager : NSObject <RKRequestDelegate>
+@interface UDJPlayerInfoManager : NSObject <UDJRequestDelegate>
 
 @property NSString* playerID;
 @property(nonatomic,strong) NSString* playerName;

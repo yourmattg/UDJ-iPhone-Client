@@ -149,7 +149,7 @@ static UDJPlayerInfoManager* _sharedPlayerInfoManager = nil;
 
 // Deletes password on server
 -(void)removePassword{
-    RKRequest* request = [RKRequest UDJRequestWithMethod: RKRequestMethodDELETE];
+    UDJRequest* request = [UDJRequest UDJRequestWithMethod: UDJRequestMethodDELETE];
     request.delegate = self;
     NSString* urlString = [NSString stringWithFormat: @"%@/players/%@/password", [request.URL absoluteString], self.playerID];
     request.URL = [NSURL URLWithString: urlString];
@@ -159,7 +159,7 @@ static UDJPlayerInfoManager* _sharedPlayerInfoManager = nil;
 
 // Changes password on server
 -(void)updatePassword{
-    RKRequest* request = [RKRequest UDJRequestWithMethod: RKRequestMethodPOST];
+    UDJRequest* request = [UDJRequest UDJRequestWithMethod: UDJRequestMethodPOST];
     request.delegate = self;
 
     NSString* urlString = [NSString stringWithFormat: @"%@/players/%@/password", [request.URL absoluteString], self.playerID];
@@ -171,7 +171,7 @@ static UDJPlayerInfoManager* _sharedPlayerInfoManager = nil;
 
 // Changes location on server
 -(void)updateLocation{
-    RKRequest* request = [RKRequest UDJRequestWithMethod: RKRequestMethodPOST];
+    UDJRequest* request = [UDJRequest UDJRequestWithMethod: UDJRequestMethodPOST];
     request.delegate = self;
     // url 0_6/players/player_id/password
     NSString* urlString = [NSString stringWithFormat: @"%@/players/%@/location", [request.URL absoluteString], self.playerID];
@@ -184,7 +184,7 @@ static UDJPlayerInfoManager* _sharedPlayerInfoManager = nil;
 
 #pragma mark - Response handling
 
--(void)request:(RKRequest *)request didLoadResponse:(RKResponse *)response{
+-(void)request:(UDJRequest *)request didLoadResponse:(UDJResponse *)response{
     NSString* requestType = [request userData];
     if([requestType isEqualToString: @"updatePassword"]){
         if([response statusCode] == 400){

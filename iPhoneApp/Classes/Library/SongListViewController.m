@@ -115,16 +115,16 @@ typedef enum{
 }
 
 -(void)sendAddSongRequest:(NSString*)librarySongId playerID:(NSString*)playerID{
-    RKClient* client = [RKClient sharedClient];
+    UDJClient* client = [UDJClient sharedClient];
     
     //create url [PUT] /udj/events/event_id/active_playlist/songs
     NSString* urlString = [NSString stringWithFormat: @"%@/players/%@/active_playlist/songs/%@", [client.baseURL absoluteString], playerID, librarySongId, nil];
 
     // create request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
+    UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = artistViewController;
     request.queue = client.requestQueue;
-    request.method = RKRequestMethodPUT;
+    request.method = UDJRequestMethodPUT;
     request.additionalHTTPHeaders = globalData.headers;
     
     // remember the song we are adding
@@ -215,7 +215,7 @@ typedef enum{
     lastQueryType = UDJQueryTypeArtist;
     lastQuery = artist;
     
-    RKClient* client = [RKClient sharedClient];
+    UDJClient* client = [UDJClient sharedClient];
     
     // create URL
     
@@ -226,10 +226,10 @@ typedef enum{
     NSLog(@"%@",urlString);
     
     // create request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
+    UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = [UDJData sharedUDJData];
     request.queue = client.requestQueue;
-    request.method = RKRequestMethodGET;
+    request.method = UDJRequestMethodGET;
     
     // set up the headers, including which type of request this is
     NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJData sharedUDJData].headers];
@@ -255,7 +255,7 @@ typedef enum{
     lastQueryType = UDJQueryTypeGeneric;
     lastQuery = query;
     
-    RKClient* client = [RKClient sharedClient];
+    UDJClient* client = [UDJClient sharedClient];
     
     // create URL
     
@@ -265,10 +265,10 @@ typedef enum{
     urlString = [urlString stringByAppendingFormat:@"%@%@%@%@%@%d",@"/players/",playerID,@"/available_music?query=",query, @"&max_results=", MAX_RESULTS, nil];
     
     // create request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
+    UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = [UDJData sharedUDJData];
     request.queue = client.requestQueue;
-    request.method = RKRequestMethodGET;
+    request.method = UDJRequestMethodGET;
 
     // set up the headers, including which type of request this is
     NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJData sharedUDJData].headers];
@@ -313,7 +313,7 @@ typedef enum{
     }
 }
 
--(void)handleSearchResults:(RKResponse *)response{
+-(void)handleSearchResults:(UDJResponse *)response{
     UDJSongList* tempList = [UDJSongList new];
     RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
     NSArray* songArray = [parser objectFromString:[response bodyAsString] error:nil];
@@ -334,7 +334,7 @@ typedef enum{
 }
 
 // Handle responses from the server
-- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response { 
+- (void)request:(UDJRequest*)request didLoadResponse:(UDJResponse*)response { 
     
     NSLog(@"status code %d", [response statusCode]);
     

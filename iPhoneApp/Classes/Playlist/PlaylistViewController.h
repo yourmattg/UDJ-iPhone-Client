@@ -29,7 +29,7 @@ typedef enum{
     ExitReasonKicked
 } ExitReason;
 
-@interface PlaylistViewController : PullRefreshTableViewController <UIAlertViewDelegate, RKRequestDelegate, UDJPlaylistDelegate>{
+@interface PlaylistViewController : PullRefreshTableViewController <UIAlertViewDelegate, UDJRequestDelegate, UDJPlaylistDelegate>{
 
     UDJPlaylist *playlist;
     UDJPlayer* currentEvent;

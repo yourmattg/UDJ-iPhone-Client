@@ -342,17 +342,17 @@
 }
 
 -(void)sendCreatePlayerRequest{
-    RKClient* client = [RKClient sharedClient];
+    UDJClient* client = [UDJClient sharedClient];
     
     //create url [POST] {prefix}/udj/users/user_id/players/player_id/name
     NSString* urlString = [client.baseURL absoluteString];
     urlString = [urlString stringByAppendingString:@"/players/player"];
 
     // create request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
+    UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = self.globalData;
     request.queue = client.requestQueue;
-    request.method = RKRequestMethodPUT;
+    request.method = UDJRequestMethodPUT;
     request.HTTPBodyString = [self JSONStringWithPlayerInfo];
     request.userData = [NSString stringWithString: @"createPlayer"];
     
@@ -379,7 +379,7 @@
     [self dismissModalViewControllerAnimated: YES];
 }
 
--(void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
+-(void)request:(UDJRequest*)request didLoadResponse:(UDJResponse*)response {
     NSString* requestType = request.userData;
     //NSDictionary* headerDict = [response allHeaderFields];
     

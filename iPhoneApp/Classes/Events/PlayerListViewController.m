@@ -388,7 +388,7 @@
 }
 
 // handleEventResults: get the list of returned events from either the name or location search
-- (void) handleEventResults:(RKResponse*)response{
+- (void) handleEventResults:(UDJResponse*)response{
     
     // hide the activity indicator
     searchIndicatorView.hidden = YES;
@@ -415,7 +415,7 @@
 }
 
 // Handle responses from the server
-- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
+- (void)request:(UDJRequest*)request didLoadResponse:(UDJResponse*)response {
     NSLog(@"status code %d", [response statusCode]);
     
     NSNumber* requestNumber = request.userData;

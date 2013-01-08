@@ -19,7 +19,7 @@
 
 #import "RandomViewController.h"
 #import "RestKit/RestKit.h"
-#import "RestKit/RKJSONParserJSONKit.h"
+#import "JSONKit.h"
 #import "UDJPlayerData.h"
 #import "LibraryEntryCell.h"
 #import "UDJPlaylist.h"
@@ -106,16 +106,16 @@ typedef enum{
 }
 
 -(void)sendAddSongRequest:(NSString*)librarySongId playerID:(NSString*)playerID{
-    RKClient* client = [RKClient sharedClient];
+    UDJClient* client = [UDJClient sharedClient];
     
     //create url [PUT] /udj/events/event_id/active_playlist/songs
     NSString* urlString = [NSString stringWithFormat: @"%@/players/%@/active_playlist/songs/%@", [client.baseURL absoluteString], playerID, librarySongId, nil];
     
     // create request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
+    UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = self;
     request.queue = client.requestQueue;
-    request.method = RKRequestMethodPUT;
+    request.method = UDJRequestMethodPUT;
     request.additionalHTTPHeaders = globalData.headers;
     
     NSLog(@"URLString: %@", urlString);
@@ -173,17 +173,17 @@ typedef enum{
 
 -(void)sendRandomSongRequest{
     
-    RKClient* client = [RKClient sharedClient];
+    UDJClient* client = [UDJClient sharedClient];
     
     //create url [GET] /udj/events/event_id/available_music/random_songs{?max_randoms=number_desired}
     NSString* urlString = [client.baseURL absoluteString];
     urlString = [urlString stringByAppendingFormat:@"/players/%@/available_music/random_songs?max_randoms=%d", [UDJPlayerData sharedPlayerData].currentPlayer.playerID, MAX_RESULTS, nil];
     
     // create request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
+    UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = self;
     request.queue = client.requestQueue;
-    request.method = RKRequestMethodGET;
+    request.method = UDJRequestMethodGET;
     request.additionalHTTPHeaders = globalData.headers;
     
     //send request
@@ -213,7 +213,7 @@ typedef enum{
     [alertView show];
 }
 
--(void)handleSearchResults:(RKResponse *)response{
+-(void)handleSearchResults:(UDJResponse *)response{
     UDJSongList* tempList = [UDJSongList new];
     RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
     NSArray* songArray = [parser objectFromString:[response bodyAsString] error:nil];
@@ -230,7 +230,7 @@ typedef enum{
 }
 
 // Handle responses from the server
-- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response { 
+- (void)request:(UDJRequest*)request didLoadResponse:(UDJResponse*)response { 
     
     NSLog(@"status code %d", [response statusCode]);
     

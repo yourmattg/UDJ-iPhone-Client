@@ -21,7 +21,7 @@
 #import "RestKit/RestKit.h"
 #import "UDJData.h"
 
-@interface ParticipantManager : NSObject <UITableViewDataSource, RKRequestDelegate>
+@interface ParticipantManager : NSObject <UITableViewDataSource, UDJRequestDelegate>
 
 @property(nonatomic,strong) NSString* playerID;
 @property(nonatomic,strong) UDJData* globalData;

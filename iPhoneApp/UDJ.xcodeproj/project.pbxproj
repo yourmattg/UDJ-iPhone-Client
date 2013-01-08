@@ -31,7 +31,6 @@
 		A325E0FB15F13C1100D54062 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = A325E0FA15F13C1100D54062 /* edit.png */; };
 		A325E0FD15F13D9600D54062 /* donebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A325E0FC15F13D9600D54062 /* donebutton.png */; };
 		A325E10015F1640900D54062 /* UDJPlayerInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A325E0FF15F1640900D54062 /* UDJPlayerInfoManager.m */; };
-		A325E10315F165A400D54062 /* RKRequest+UDJRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A325E10215F165A400D54062 /* RKRequest+UDJRequest.m */; };
 		A3265DB314C6101400FC692B /* PlaylistEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3265DB214C6101400FC692B /* PlaylistEntryCell.m */; };
 		A32BEEA1157163A1005B573B /* nearbybutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A32BEEA0157163A1005B573B /* nearbybutton.png */; };
 		A331096E15DED3B6003D2AD3 /* playerinfobutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A331096D15DED3B6003D2AD3 /* playerinfobutton.png */; };
@@ -187,8 +186,6 @@
 		A325E0FC15F13D9600D54062 /* donebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = donebutton.png; sourceTree = "<group>"; };
 		A325E0FE15F1640900D54062 /* UDJPlayerInfoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDJPlayerInfoManager.h; path = Classes/Player/UDJPlayerInfoManager.h; sourceTree = SOURCE_ROOT; };
 		A325E0FF15F1640900D54062 /* UDJPlayerInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDJPlayerInfoManager.m; path = Classes/Player/UDJPlayerInfoManager.m; sourceTree = SOURCE_ROOT; };
-		A325E10115F165A400D54062 /* RKRequest+UDJRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RKRequest+UDJRequest.h"; path = "Classes/RKRequest+UDJRequest.h"; sourceTree = SOURCE_ROOT; };
-		A325E10215F165A400D54062 /* RKRequest+UDJRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RKRequest+UDJRequest.m"; path = "Classes/RKRequest+UDJRequest.m"; sourceTree = SOURCE_ROOT; };
 		A3265DB114C6101400FC692B /* PlaylistEntryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistEntryCell.h; sourceTree = "<group>"; };
 		A3265DB214C6101400FC692B /* PlaylistEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistEntryCell.m; sourceTree = "<group>"; };
 		A32A384614AE917600D166CF /* UDJ-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "UDJ-Info.plist"; path = "../UDJ-Info.plist"; sourceTree = "<group>"; };
@@ -286,7 +283,7 @@
 		A3EEAB71169B742500FE10F4 /* UDJRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDJRequest.m; path = Network/UDJRequest.m; sourceTree = "<group>"; };
 		A3EEAB73169B843400FE10F4 /* UDJResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDJResponse.h; path = Network/UDJResponse.h; sourceTree = "<group>"; };
 		A3EEAB74169B843400FE10F4 /* UDJResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDJResponse.m; path = Network/UDJResponse.m; sourceTree = "<group>"; };
-		A3EEAB76169B844400FE10F4 /* UDJResponseDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UDJResponseDelegate.h; path = Network/UDJResponseDelegate.h; sourceTree = "<group>"; };
+		A3EEAB76169B844400FE10F4 /* UDJRequestDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UDJRequestDelegate.h; path = Network/UDJRequestDelegate.h; sourceTree = "<group>"; };
 		A3EECC0015994ED30003BEF8 /* PlayerInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerInfoViewController.h; path = Classes/Player/PlayerInfoViewController.h; sourceTree = SOURCE_ROOT; };
 		A3EECC0115994ED30003BEF8 /* PlayerInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerInfoViewController.m; path = Classes/Player/PlayerInfoViewController.m; sourceTree = SOURCE_ROOT; };
 		A3F58D9314C753D300E350F4 /* UDJEventGoer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJEventGoer.h; sourceTree = "<group>"; };
@@ -453,9 +450,7 @@
 				A3EEAB71169B742500FE10F4 /* UDJRequest.m */,
 				A3EEAB73169B843400FE10F4 /* UDJResponse.h */,
 				A3EEAB74169B843400FE10F4 /* UDJResponse.m */,
-				A3EEAB76169B844400FE10F4 /* UDJResponseDelegate.h */,
-				A325E10115F165A400D54062 /* RKRequest+UDJRequest.h */,
-				A325E10215F165A400D54062 /* RKRequest+UDJRequest.m */,
+				A3EEAB76169B844400FE10F4 /* UDJRequestDelegate.h */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -805,7 +800,6 @@
 				A3443FC515C78D73005A6A67 /* UDJStoredLibraryEntry.m in Sources */,
 				A3E3D7CE15DDDAA000EBF087 /* PlayerViewController.m in Sources */,
 				A325E10015F1640900D54062 /* UDJPlayerInfoManager.m in Sources */,
-				A325E10315F165A400D54062 /* RKRequest+UDJRequest.m in Sources */,
 				A31837441604FB5400D9FC35 /* ParticipantsViewController.m in Sources */,
 				A31837481604FBB600D9FC35 /* ParticipantManager.m in Sources */,
 				A3470D8B168CCFAA00370597 /* UDJClient.m in Sources */,

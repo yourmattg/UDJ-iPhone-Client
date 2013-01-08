@@ -536,7 +536,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 
 
 // Handle responses from the server
-- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response { 
+- (void)request:(UDJRequest*)request didLoadResponse:(UDJResponse*)response { 
     
     NSLog(@"Playlist: status code %d", [response statusCode]);
     NSLog([response bodyAsString]);

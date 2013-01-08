@@ -28,7 +28,7 @@ enum SearchType {
     SearchTypeNearby = 2
 };
 
-@interface PlayerListViewController : UIViewController <UIAlertViewDelegate, RKRequestDelegate>
+@interface PlayerListViewController : UIViewController <UIAlertViewDelegate, UDJRequestDelegate>
 
 
 @property enum SearchType lastSearchType;

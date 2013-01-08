@@ -19,7 +19,7 @@
 
 #import "UDJPlaylist.h"
 #import "UDJSong.h"
-#import "RestKit/RKJSONParserJSONKit.h"
+#import "JSONKit.h"
 #import "UDJPlayerManager.h"
 #import "PlaylistViewController.h"
 
@@ -36,28 +36,28 @@
 // sendPlaylistRequest: requests playlist from server, seperate from handling because
 // we want client to be able to do other things while we wait for it to refresh
 - (void)sendPlaylistRequest{
-    RKClient* client = [RKClient sharedClient];
+    UDJClient* client = [UDJClient sharedClient];
     
     //create url [GET] {prefix}/events/event_id/active_playlist
     NSString* urlString = [client.baseURL absoluteString];
     urlString = [urlString stringByAppendingFormat:@"/players/%@/active_playlist", playerID, nil];
 
     // create request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
+    UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = self;
     request.queue = client.requestQueue;
-    request.method = RKRequestMethodGET;
+    request.method = UDJRequestMethodGET;
     request.additionalHTTPHeaders = globalData.headers;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++];
     
-    request.backgroundPolicy = RKRequestBackgroundPolicyContinue;
+    request.backgroundPolicy = UDJRequestBackgroundPolicyContinue;
     
     // foreground mode
     if(![[UDJPlayerManager sharedPlayerManager] isInBackground]) [request send];
     
     // background mode
     else{
-        RKResponse* response = [request sendSynchronously];
+        UDJResponse* response = [request sendSynchronously];
         //NSLog(@"got playlist response while in background");
         [self request:request didLoadResponse:response];        
     }
@@ -65,7 +65,7 @@
 
 
 -(void)sendVoteRequest:(BOOL)up songId:(NSString*)songId{
-    RKClient* client = [RKClient sharedClient];
+    UDJClient* client = [UDJClient sharedClient];
     
     NSLog(@"ID: %@", songId);
     
@@ -78,10 +78,10 @@
     NSLog(urlString);
     
     // create request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
+    UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = self.delegate;
     request.queue = client.requestQueue;
-    request.method = RKRequestMethodPUT;
+    request.method = UDJRequestMethodPUT;
     request.additionalHTTPHeaders = globalData.headers;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++];
     
@@ -113,7 +113,7 @@
 
 // handlePlaylistResponse: this is done asynchronously from the send method so the client can do other things meanwhile
 // NOTE: this calls [playlistView refreshTableList] for you!
-- (void)handlePlaylistResponse:(RKResponse*)response{
+- (void)handlePlaylistResponse:(UDJResponse*)response{
     
     NSMutableArray* tempList = [NSMutableArray new];
     
@@ -138,7 +138,7 @@
     [playlistDelegate playlistDidUpdate: responseDict];
 }
 
--(void)request:(RKRequest *)request didLoadResponse:(RKResponse *)response{
+-(void)request:(UDJRequest *)request didLoadResponse:(UDJResponse *)response{
     //NSLog(@"Response Code: %d", [response statusCode]);
     if ([request isGET]) {
         [self handlePlaylistResponse:response];        

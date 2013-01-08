@@ -28,7 +28,7 @@ enum VoteStatus {
     VoteStatusUp = 2
 };
 
-@interface UDJPlaylist : NSObject<RKRequestDelegate>{
+@interface UDJPlaylist : NSObject<UDJRequestDelegate>{
     
     NSMutableArray* playlist;
     UDJSong* currentSong;
@@ -50,7 +50,7 @@ enum VoteStatus {
 @property(nonatomic,strong) NSMutableArray* playlist;
 @property(nonatomic,strong) NSString* playerID;
 @property(nonatomic,strong) UDJSong* currentSong;
-@property(nonatomic, strong) id<RKRequestDelegate> delegate;
+@property(nonatomic, strong) id<UDJRequestDelegate> delegate;
 @property(nonatomic,strong) UDJData* globalData;
 
 @property(nonatomic,weak) id<UDJPlaylistDelegate> playlistDelegate;

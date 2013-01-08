@@ -12,7 +12,7 @@
 #import "UDJPlayerManager.h"
 #import "UDJPlayerInfoManager.h"
 
-@interface PlayerInfoViewController : UIViewController <UITextFieldDelegate, RKRequestDelegate, UIPickerViewDataSource>
+@interface PlayerInfoViewController : UIViewController <UITextFieldDelegate, UDJRequestDelegate, UIPickerViewDataSource>
 
 @property(nonatomic,strong) IBOutlet UIScrollView* mainScrollView;
 
@@ -54,6 +54,6 @@
 
 @property(nonatomic,weak) UIViewController* parentViewController;
 
--(void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response;
+-(void)request:(UDJRequest*)request didLoadResponse:(UDJResponse*)response;
 
 @end

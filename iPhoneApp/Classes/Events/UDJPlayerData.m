@@ -19,7 +19,8 @@
 
 #import "UDJPlayerData.h"
 #import <RestKit/RestKit.h>
-#import "RKRequest+UDJRequest.h"
+
+#import "UDJClient.h"
 
 @implementation UDJPlayerData
 
@@ -27,7 +28,7 @@
 
 // getNearbyEvents: has the UDJConnection send a event search request
 - (void) getNearbyPlayers{
-    RKClient* client = [RKClient sharedClient];
+    UDJClient* client = [UDJClient sharedClient];
     
     // use location manager to get long/latitude
     float latitude = [locationManager getLatitude];
@@ -39,9 +40,9 @@
     NSURL* url = [NSURL URLWithString:urlString];
     
     // create GET request
-    RKRequest* request = [[RKRequest alloc] initWithURL:url];
+    UDJRequest* request = [[UDJRequest alloc] initWithURL:url];
     request.delegate = playerListDelegate;
-    request.method = RKRequestMethodGET;
+    request.method = UDJRequestMethodGET;
     request.additionalHTTPHeaders = globalData.headers;    
     
     request.userData = [NSNumber numberWithInt: globalData.requestCount++]; 
@@ -54,7 +55,7 @@
 
 // getEventsByName
 - (void)getPlayersByName:(NSString *)name{
-    RKClient* client = [RKClient sharedClient];
+    UDJClient* client = [UDJClient sharedClient];
     
     name = [name stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     
@@ -65,9 +66,9 @@
     NSURL* url = [NSURL URLWithString:urlString];
     
     //create GET request with correct parameters and headers
-    RKRequest* request = [[RKRequest alloc] initWithURL:url];
+    UDJRequest* request = [[UDJRequest alloc] initWithURL:url];
     request.delegate = playerListDelegate;
-    request.method = RKRequestMethodGET;
+    request.method = UDJRequestMethodGET;
     request.additionalHTTPHeaders = globalData.headers;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++]; 
     request.queue = client.requestQueue;
@@ -79,7 +80,7 @@
 // joinPlayer: attempts to log in user to party, returns status code of response
 - (void)joinPlayer:(NSString*)password{
 
-    RKClient* client = [RKClient sharedClient];
+    UDJClient* client = [UDJClient sharedClient];
     
     //create url
     NSString* urlString = [client.baseURL absoluteString];
@@ -88,9 +89,9 @@
     urlString = [urlString stringByAppendingString:@"/users/user"];
     
     //set up request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
+    UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = playerListDelegate;
-    request.method = RKRequestMethodPUT;
+    request.method = UDJRequestMethodPUT;
     request.additionalHTTPHeaders = globalData.headers;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++];
     request.queue = client.requestQueue;
@@ -107,7 +108,7 @@
 }
 
 -(void)leavePlayer{
-    RKRequest* request = [RKRequest UDJRequestWithMethod: RKRequestMethodDELETE];
+    UDJRequest* request = [UDJRequest UDJRequestWithMethod: UDJRequestMethodDELETE];
     
     NSString* urlString  = [NSString stringWithFormat: @"%@/players/%@/users/user",[request.URL absoluteString], self.currentPlayer.playerID];
     request.URL = [NSURL URLWithString: urlString];
@@ -118,16 +119,16 @@
 }
 
 -(void)setState:(NSString*)state{
-    RKClient* client = [RKClient sharedClient];
+    UDJClient* client = [UDJClient sharedClient];
     //create url [POST] /udj/users/user_id/players/player_id/state
     NSString* urlString = [client.baseURL absoluteString];
     urlString = [urlString stringByAppendingFormat: @"/players/%@/state", currentPlayer.playerID, nil];
     
     //set up request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
+    UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     NSDictionary* stateParam = [NSDictionary dictionaryWithObjectsAndKeys: state, @"state", nil]; 
     request.params = stateParam;
-    request.method = RKRequestMethodPOST;
+    request.method = UDJRequestMethodPOST;
     request.additionalHTTPHeaders = globalData.headers;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++];
     request.queue = client.requestQueue;
@@ -138,16 +139,16 @@
 
 //[POST] /udj/users/user_id/players/player_id/volume
 -(void)setVolume:(NSInteger)volume{
-    RKClient* client = [RKClient sharedClient];
+    UDJClient* client = [UDJClient sharedClient];
     //create url [POST] /udj/users/user_id/players/player_id/state
     NSString* urlString = [client.baseURL absoluteString];
     urlString = [urlString stringByAppendingFormat: @"/players/%@/volume", currentPlayer.playerID, nil];
     
     //set up request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
+    UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     NSDictionary* volumeParam = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt: volume], @"volume", nil]; 
     request.params = volumeParam;
-    request.method = RKRequestMethodPOST;
+    request.method = UDJRequestMethodPOST;
     request.additionalHTTPHeaders = globalData.headers;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++];
     request.queue = client.requestQueue;

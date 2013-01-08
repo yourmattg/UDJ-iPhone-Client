@@ -20,7 +20,7 @@
 #import "UDJData.h"
 #import "UDJStoredData.h"
 #import "UDJAppDelegate.h"
-#import "RestKit/RKJSONParserJSONKit.h"
+#import "JSONKit.h"
 #import "SongListViewController.h"
 #import "PlayerInfoViewController.h"
 #import "UDJPlayerManager.h"
@@ -76,7 +76,7 @@
     
     if(self.username == nil) return;
     
-    RKClient* client = [RKClient sharedClient];
+    UDJClient* client = [UDJClient sharedClient];
     
     // make sure the right api version is being passed in
     NSDictionary* nameAndPass = [NSDictionary dictionaryWithObjectsAndKeys:username, @"username", password, @"password", nil]; 
@@ -89,17 +89,17 @@
     [urlString appendString: @"/auth"];
     
     // set up request
-    RKRequest* request = [RKRequest requestWithURL:[NSURL URLWithString:urlString]];
+    UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = self;
     request.queue = client.requestQueue;
     request.params = nameAndPass;
-    request.method = RKRequestMethodPOST;
+    request.method = UDJRequestMethodPOST;
     request.additionalHTTPHeaders = apiHeader;
 
     [request send];    
 }
 
--(void)handleRenewTicket:(RKResponse*)response{
+-(void)handleRenewTicket:(UDJResponse*)response{
     if([response isOK]){
         // only handle if we are waiting for an auth response
         RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
@@ -119,7 +119,7 @@
 
 
 // Handle responses from the server
-- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response {
+- (void)request:(UDJRequest*)request didLoadResponse:(UDJResponse*)response {
     
     NSDictionary* responseHeaders = request.additionalHTTPHeaders;
     NSString* responseDelegate = [responseHeaders objectForKey: @"delegate"];
