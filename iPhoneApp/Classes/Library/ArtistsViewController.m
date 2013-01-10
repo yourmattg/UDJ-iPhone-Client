@@ -20,8 +20,9 @@
 #import "ArtistsViewController.h"
 #import "UDJPlayerData.h"
 #import "SongListViewController.h"
-#import "RestKit/RestKit.h"
+#import "UDJClient.h"
 #import "UDJPlaylist.h"
+#import "JSONKit.h"
 
 typedef enum{
     ExitReasonInactive,
@@ -220,8 +221,7 @@ typedef enum{
     [artistsArray removeAllObjects];
     
     // create a JSON parser and parse the artist names
-    RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
-    NSArray* responseArray = [parser objectFromString:[response bodyAsString] error:nil];
+    NSArray* responseArray = [[response bodyAsString] objectFromJSONString];
     for(int i=0; i<[responseArray count]; i++)
         [artistsArray addObject: [responseArray objectAtIndex: i]];
     

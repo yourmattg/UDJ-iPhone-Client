@@ -11,6 +11,7 @@
 #import "UDJAppDelegate.h"
 #import "UDJPlayer.h"
 #import "UDJPlayerData.h"
+#import "UDJClient.h"
 
 @implementation UDJPlayerInfoManager
 
@@ -39,7 +40,7 @@ static UDJPlayerInfoManager* _sharedPlayerInfoManager = nil;
 
 +(id)alloc{
     @synchronized([UDJPlayerInfoManager class]){
-        NSAssert(_sharedPlayerManager == nil, @"Attempted to allocate a second instance of a singleton.");
+        NSAssert(_sharedPlayerInfoManager == nil, @"Attempted to allocate a second instance of a singleton.");
         _sharedPlayerInfoManager = [super alloc];
         return _sharedPlayerInfoManager;
     }
@@ -149,7 +150,7 @@ static UDJPlayerInfoManager* _sharedPlayerInfoManager = nil;
 
 // Deletes password on server
 -(void)removePassword{
-    UDJRequest* request = [UDJRequest UDJRequestWithMethod: UDJRequestMethodDELETE];
+    UDJRequest* request = [UDJRequest requestWithMethod: UDJRequestMethodDELETE];
     request.delegate = self;
     NSString* urlString = [NSString stringWithFormat: @"%@/players/%@/password", [request.URL absoluteString], self.playerID];
     request.URL = [NSURL URLWithString: urlString];
@@ -159,7 +160,7 @@ static UDJPlayerInfoManager* _sharedPlayerInfoManager = nil;
 
 // Changes password on server
 -(void)updatePassword{
-    UDJRequest* request = [UDJRequest UDJRequestWithMethod: UDJRequestMethodPOST];
+    UDJRequest* request = [UDJRequest requestWithMethod: UDJRequestMethodPOST];
     request.delegate = self;
 
     NSString* urlString = [NSString stringWithFormat: @"%@/players/%@/password", [request.URL absoluteString], self.playerID];
@@ -171,7 +172,7 @@ static UDJPlayerInfoManager* _sharedPlayerInfoManager = nil;
 
 // Changes location on server
 -(void)updateLocation{
-    UDJRequest* request = [UDJRequest UDJRequestWithMethod: UDJRequestMethodPOST];
+    UDJRequest* request = [UDJRequest requestWithMethod: UDJRequestMethodPOST];
     request.delegate = self;
     // url 0_6/players/player_id/password
     NSString* urlString = [NSString stringWithFormat: @"%@/players/%@/location", [request.URL absoluteString], self.playerID];

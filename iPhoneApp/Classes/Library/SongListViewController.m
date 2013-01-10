@@ -265,7 +265,6 @@ typedef enum{
     // create request
     UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = [UDJData sharedUDJData];
-    request.queue = client.requestQueue;
     request.method = UDJRequestMethodGET;
 
     // set up the headers, including which type of request this is

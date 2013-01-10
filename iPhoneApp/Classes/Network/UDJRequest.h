@@ -33,6 +33,8 @@ typedef enum UDJRequestBackgroundPolicy{
 @property(nonatomic,strong) id userData;
 @property UDJRequestBackgroundPolicy backgroundPolicy;
 @property(nonatomic,strong) NSData* HTTPBody;
+@property(nonatomic,strong) NSString* HTTPBodyString;
+@property NSInteger timeoutInterval;
 
 +(UDJRequest*)requestWithMethod:(UDJRequestMethod)method;
 +(UDJRequest*)requestWithURL:(NSURL*)url;

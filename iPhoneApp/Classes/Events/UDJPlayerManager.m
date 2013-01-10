@@ -250,7 +250,6 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = self.globalData;
     request.method = UDJRequestMethodPOST;
-    request.queue = client.requestQueue;
     request.userData = @"songDelete";
     
     // add the songs to delete;
@@ -327,9 +326,8 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     // create request
     UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = self.globalData;
-    request.queue = client.requestQueue;
     request.method = UDJRequestMethodPOST;
-    request.userData = [NSString stringWithString: @"changeState"];
+    request.userData = @"changeState";
     
     // set up the headers, including which type of request this is
     NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: globalData.headers];
@@ -434,9 +432,8 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     // create request
     UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = self.globalData;
-    request.queue = client.requestQueue;
     request.method = UDJRequestMethodPOST;
-    request.userData = [NSString stringWithString: @"changeCurrentSong"];
+    request.userData = @"changeCurrentSong";
 
     // set up the headers, including which type of request this is
     NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: globalData.headers];

@@ -39,7 +39,7 @@
 }
 
 -(void)getPlayerParticipants{
-    UDJRequest* request = [UDJRequest UDJRequestWithMethod: UDJRequestMethodGET];
+    UDJRequest* request = [UDJRequest requestWithMethod: UDJRequestMethodGET];
 
     NSString* urlString = [NSString stringWithFormat: @"%@/players/%@/users", [request.URL absoluteString], self.playerID, nil];
     request.URL = [NSURL URLWithString: urlString];
@@ -68,8 +68,7 @@
 
 -(void)handleParticipantsResponse:(UDJResponse*)response{ 
     // Parse each user and add them to the list
-    RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
-    NSMutableArray* userArray = [parser objectFromString:[response bodyAsString] error:nil];
+    NSMutableArray* userArray = [[response bodyAsString] objectFromJSONString];
     for(int i=0; i<[userArray count]; i++){
         NSDictionary* userDict = [userArray objectAtIndex:i];
         UDJUser* user = [UDJUser userFromDict: userDict];
@@ -78,7 +77,7 @@
     
 }
 
-- (void)request:(UDJRequest *)request didReceiveResponse:(UDJResponse *)response{
+- (void)request:(UDJRequest *)request didLoadResponse:(UDJResponse *)response{
     if([request method] == UDJRequestMethodGET){
         [self handleParticipantsResponse: response];
     }

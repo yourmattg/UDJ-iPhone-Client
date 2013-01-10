@@ -11,6 +11,7 @@
 @implementation UDJRequest
 
 @synthesize userData;
+@synthesize additionalHTTPHeaders;
 
 /*
  

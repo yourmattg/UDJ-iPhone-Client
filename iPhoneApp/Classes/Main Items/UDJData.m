@@ -24,6 +24,7 @@
 #import "SongListViewController.h"
 #import "PlayerInfoViewController.h"
 #import "UDJPlayerManager.h"
+#import "UDJClient.h"
 
 @implementation UDJData
 
@@ -91,7 +92,6 @@
     // set up request
     UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = self;
-    request.queue = client.requestQueue;
     request.params = nameAndPass;
     request.method = UDJRequestMethodPOST;
     request.additionalHTTPHeaders = apiHeader;
@@ -102,8 +102,7 @@
 -(void)handleRenewTicket:(UDJResponse*)response{
     if([response isOK]){
         // only handle if we are waiting for an auth response
-        RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
-        NSDictionary* responseDict = [parser objectFromString:[response bodyAsString] error:nil];
+        NSDictionary* responseDict = [[response bodyAsString] objectFromJSONString];
         ticket=[responseDict valueForKey:@"ticket_hash"];
         userID=[responseDict valueForKey:@"user_id"];
         

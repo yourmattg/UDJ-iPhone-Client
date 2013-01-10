@@ -25,6 +25,7 @@
 #import "QuartzCore/QuartzCore.h"
 #import "PlayerInfoViewController.h"
 #import "UDJPlayerManager.h"
+#import "UDJClient.h"
 
 @interface PlayerListViewController ()
 
@@ -395,8 +396,7 @@
     
     // Parse the response into an array of UDJEvents
     NSMutableArray* cList = [NSMutableArray new];
-    RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
-    NSArray* eventArray = [parser objectFromString:[response bodyAsString] error:nil];
+    NSArray* eventArray = [[response bodyAsString] objectFromJSONString];
     for(int i=0; i<[eventArray count]; i++){
         NSDictionary* eventDict = [eventArray objectAtIndex:i];
         UDJPlayer* event = [UDJPlayer playerFromDictionary:eventDict];
