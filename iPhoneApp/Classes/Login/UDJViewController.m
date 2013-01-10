@@ -23,7 +23,7 @@
 #import "KeychainItemWrapper.h"
 #import "UDJAppDelegate.h"
 #import "PlayerListViewController.h"
-#import "RestKit/Restkit.h"
+#import "JSONKit.h"
 
 
 @implementation UDJViewController
@@ -181,7 +181,6 @@
     // set up request
     UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = self;
-    request.queue = client.requestQueue;
     request.params = nameAndPass;
     request.method = UDJRequestMethodPOST;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++]; 
@@ -208,8 +207,7 @@
     globalData.password = passwordField.text;
     
     // only handle if we are waiting for an auth response
-    RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
-    NSDictionary* responseDict = [parser objectFromString:[response bodyAsString] error:nil];
+    NSDictionary* responseDict = [[response bodyAsString] objectFromJSONString];
     globalData.ticket=[responseDict valueForKey:@"ticket_hash"];
     globalData.userID=[[responseDict valueForKey:@"user_id"] stringValue];
         

@@ -23,6 +23,7 @@
 #import "RestKit/RestKit.h"
 #import "PullRefreshTableViewController.h"
 #import "UDJPlaylistDelegate.h"
+#import "UDJClient.h"
 
 typedef enum{
     ExitReasonInactive,
@@ -81,5 +82,6 @@ typedef enum{
 @property BOOL playing;
 
 -(void)resetToPlayerResultView:(ExitReason)reason;
+-(void)request:(UDJRequest *)request didLoadResponse:(UDJResponse *)response;
 
 @end

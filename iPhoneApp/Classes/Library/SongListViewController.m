@@ -18,11 +18,11 @@
  */
 
 #import "SongListViewController.h"
-#import "RestKit/RestKit.h"
-#import "RestKit/RKJSONParserJSONKit.h"
+#import "JSONKit.h"
 #import "UDJPlayerData.h"
 #import "LibraryEntryCell.h"
 #import "UDJPlaylist.h"
+#import "UDJClient.h"
 
 typedef enum{
     ExitReasonInactive,
@@ -123,7 +123,6 @@ typedef enum{
     // create request
     UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = artistViewController;
-    request.queue = client.requestQueue;
     request.method = UDJRequestMethodPUT;
     request.additionalHTTPHeaders = globalData.headers;
     
@@ -228,7 +227,6 @@ typedef enum{
     // create request
     UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = [UDJData sharedUDJData];
-    request.queue = client.requestQueue;
     request.method = UDJRequestMethodGET;
     
     // set up the headers, including which type of request this is
@@ -315,8 +313,7 @@ typedef enum{
 
 -(void)handleSearchResults:(UDJResponse *)response{
     UDJSongList* tempList = [UDJSongList new];
-    RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
-    NSArray* songArray = [parser objectFromString:[response bodyAsString] error:nil];
+    NSArray* songArray = [[response bodyAsString] objectFromJSONString];
     for(int i=0; i<[songArray count]; i++){
         NSDictionary* songDict = [songArray objectAtIndex:i];
         UDJSong* song = [UDJSong songFromDictionary:songDict isLibraryEntry:YES];

@@ -10,4 +10,10 @@
 
 @interface UDJResponse : NSObject
 
+@property(nonatomic,strong) NSDictionary* allHeaderFields;
+@property NSInteger statusCode;
+@property(nonatomic,strong) NSString* bodyAsString;
+
+-(BOOL)isOK;
+
 @end

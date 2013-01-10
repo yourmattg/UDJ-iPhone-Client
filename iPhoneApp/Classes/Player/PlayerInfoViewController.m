@@ -14,6 +14,7 @@
 #import "UDJStoredLibraryEntry.h"
 #import "PlayerListViewController.h"
 #import <objc/runtime.h>
+#import "UDJClient.h"
 
 @interface PlayerInfoViewController ()
 
@@ -351,7 +352,6 @@
     // create request
     UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = self.globalData;
-    request.queue = client.requestQueue;
     request.method = UDJRequestMethodPUT;
     request.HTTPBodyString = [self JSONStringWithPlayerInfo];
     request.userData = [NSString stringWithString: @"createPlayer"];

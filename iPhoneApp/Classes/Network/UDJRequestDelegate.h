@@ -7,13 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "UDJRequest.h"
 #import "UDJResponse.h"
+
+@class UDJRequest;
 
 @protocol UDJRequestDelegate <NSObject>
 
 @required
 
--(void)request:(UDJRequest*) didLoadResponse:(UDJResponse*)response;
+-(void)request:(UDJRequest*)request didLoadResponse:(UDJResponse*)response;
 
 @end

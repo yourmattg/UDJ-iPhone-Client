@@ -22,6 +22,7 @@
 #import "JSONKit.h"
 #import "UDJPlayerManager.h"
 #import "PlaylistViewController.h"
+#import "UDJClient.h"
 
 @implementation UDJPlaylist
 
@@ -45,7 +46,6 @@
     // create request
     UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = self;
-    request.queue = client.requestQueue;
     request.method = UDJRequestMethodGET;
     request.additionalHTTPHeaders = globalData.headers;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++];
@@ -80,7 +80,6 @@
     // create request
     UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = self.delegate;
-    request.queue = client.requestQueue;
     request.method = UDJRequestMethodPUT;
     request.additionalHTTPHeaders = globalData.headers;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++];
@@ -117,9 +116,8 @@
     
     NSMutableArray* tempList = [NSMutableArray new];
     
-    RKJSONParserJSONKit* parser = [RKJSONParserJSONKit new];
     // response dict: holds current song and array of songs
-    NSDictionary* responseDict = [parser objectFromString:[response bodyAsString] error:nil];
+    NSDictionary* responseDict = [[response bodyAsString] objectFromJSONString];
     UDJSong* newCurrentSong = [UDJSong songFromDictionary:[responseDict objectForKey:@"current_song"] isLibraryEntry:NO];
     
     // the array holding the songs on the playlist
@@ -138,7 +136,7 @@
     [playlistDelegate playlistDidUpdate: responseDict];
 }
 
--(void)request:(UDJRequest *)request didLoadResponse:(UDJResponse *)response{
+-(void)request:(UDJRequest*)request didLoadResponse:(UDJResponse*)response{
     //NSLog(@"Response Code: %d", [response statusCode]);
     if ([request isGET]) {
         [self handlePlaylistResponse:response];        

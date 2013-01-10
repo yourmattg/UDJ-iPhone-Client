@@ -16,9 +16,33 @@ typedef enum UDJRequestMethod{
     UDJRequestMethodDELETE
 }UDJRequestMethod;
 
+typedef enum UDJRequestBackgroundPolicy{
+    UDJRequestBackgroundPolicyCancel,
+    UDJRequestBackgroundPolicyContinue
+}UDJRequestBackgroundPolicy;
+
+
+
 @interface UDJRequest : NSObject
 
 @property(nonatomic,strong) id<UDJRequestDelegate> delegate;
+@property(nonatomic,strong) NSDictionary* additionalHTTPHeaders;
+@property(nonatomic,strong) NSDictionary* params;
 @property UDJRequestMethod method;
+@property(nonatomic,strong) NSURL* URL;
+@property(nonatomic,strong) id userData;
+@property UDJRequestBackgroundPolicy backgroundPolicy;
+@property(nonatomic,strong) NSData* HTTPBody;
+
++(UDJRequest*)requestWithMethod:(UDJRequestMethod)method;
++(UDJRequest*)requestWithURL:(NSURL*)url;
+-(id)initWithURL:(NSURL*)url;
+-(void)send;
+-(UDJResponse*)sendSynchronously;
+
+-(BOOL)isGET;
+-(BOOL)isPUT;
+-(BOOL)isPOST;
+-(BOOL)isDELETE;
 
 @end

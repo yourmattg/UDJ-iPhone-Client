@@ -10,6 +10,8 @@
 
 @implementation UDJRequest
 
+@synthesize userData;
+
 /*
  
  UDJClient* client = [UDJClient sharedClient];

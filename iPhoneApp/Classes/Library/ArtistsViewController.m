@@ -185,7 +185,6 @@ typedef enum{
     // create request
     UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = self;
-    request.queue = client.requestQueue;
     request.method = UDJRequestMethodGET;
     request.additionalHTTPHeaders = globalData.headers;
     

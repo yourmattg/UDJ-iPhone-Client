@@ -28,6 +28,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import <RestKit/RestKit.h>
 #import "UDJPlayerManager.h"
+#import "UDJClient.h"
 
 @implementation PlaylistViewController
 
@@ -184,31 +185,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
     else [self vote:NO];
 }
 
-
-
-#pragma mark - Sharing
-
--(void)share{
-    
-    // Create the item to share (in this example, a url)
-    SHKItem *item = [SHKItem text: [NSString stringWithFormat: @"We're listening to %@ by %@, at %@", selectedSong.title, selectedSong.artist, currentEvent.name, nil]];
-    
-    // Get the ShareKit action sheet
-    SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem: item];
-    
-    // ShareKit detects top view controller (the one intended to present ShareKit UI) automatically,
-    // but sometimes it may not find one. To be safe, set it explicitly
-    [SHK setRootViewController:self];
-    
-    // Display the action sheet
-    [actionSheet showFromTabBar: self.tabBarController.tabBar];
-     
-}
-
--(void)showSongOptions{
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle: selectedSong.title message: [NSString stringWithFormat: @"%@\n%@", selectedSong.artist, selectedSong.album, nil] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Song Details", @"Share", nil];
-    [alertView show];
-}
 
 
 #pragma mark - View lifecycle
@@ -434,12 +410,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
         else self.selectedSong = [playlist songAtIndex: rowNumber - 1];
     }
     else self.selectedSong = [playlist songAtIndex: rowNumber];
-    
-    // if this was a double click, show song options
-    
-    if(selectedSong == previouslySelectedSong) {
-        [self share];
-    }
 }
 
 

@@ -17,6 +17,7 @@
 #import "PlayerViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import <CoreMedia/CMTime.h>
+#import "UDJClient.h"
 
 typedef unsigned long long UDJLibraryID;
 
@@ -225,7 +226,6 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = self.globalData;
     request.method = UDJRequestMethodPUT;
-    request.queue = client.requestQueue;
     request.userData = @"songSetAdd";
     
     // set up the headers, including which type of request this is

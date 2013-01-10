@@ -18,7 +18,7 @@
  */
 
 #import "PlayerListViewController.h"
-#import "RestKit/RestKit.h"
+#import "JSONKit.h"
 #import "PlayerCell.h"
 #import "MainTabBarController.h"
 #import "PlayerInfoViewController.h"

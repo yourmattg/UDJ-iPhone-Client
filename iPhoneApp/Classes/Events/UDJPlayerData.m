@@ -46,7 +46,6 @@
     request.additionalHTTPHeaders = globalData.headers;    
     
     request.userData = [NSNumber numberWithInt: globalData.requestCount++]; 
-    request.queue = client.requestQueue;
     
     // send request 
     [request send];
@@ -70,8 +69,7 @@
     request.delegate = playerListDelegate;
     request.method = UDJRequestMethodGET;
     request.additionalHTTPHeaders = globalData.headers;
-    request.userData = [NSNumber numberWithInt: globalData.requestCount++]; 
-    request.queue = client.requestQueue;
+    request.userData = [NSNumber numberWithInt: globalData.requestCount++];
     
     // send request and handle response
     [request send];
@@ -94,7 +92,6 @@
     request.method = UDJRequestMethodPUT;
     request.additionalHTTPHeaders = globalData.headers;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++];
-    request.queue = client.requestQueue;
     
     // add the password to the header if neccessary
     if(password != nil){ 
@@ -108,7 +105,7 @@
 }
 
 -(void)leavePlayer{
-    UDJRequest* request = [UDJRequest UDJRequestWithMethod: UDJRequestMethodDELETE];
+    UDJRequest* request = [UDJRequest requestWithMethod: UDJRequestMethodDELETE];
     
     NSString* urlString  = [NSString stringWithFormat: @"%@/players/%@/users/user",[request.URL absoluteString], self.currentPlayer.playerID];
     request.URL = [NSURL URLWithString: urlString];
@@ -131,7 +128,6 @@
     request.method = UDJRequestMethodPOST;
     request.additionalHTTPHeaders = globalData.headers;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++];
-    request.queue = client.requestQueue;
     
     //send request, handle results
     [request send];    
@@ -151,7 +147,6 @@
     request.method = UDJRequestMethodPOST;
     request.additionalHTTPHeaders = globalData.headers;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++];
-    request.queue = client.requestQueue;
     
     //send request, handle results
     [request send];    
