@@ -18,7 +18,6 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <RestKit/RestKit.h>
 #import "UDJRequestDelegate.h"
 
 @interface UDJData : NSObject<UDJRequestDelegate>{

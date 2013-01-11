@@ -26,7 +26,6 @@
 #import "LibraryEntryCell.h"
 #import "PlaylistEntryCell.h"
 #import <QuartzCore/QuartzCore.h>
-#import <RestKit/RestKit.h>
 #import "UDJPlayerManager.h"
 #import "UDJClient.h"
 

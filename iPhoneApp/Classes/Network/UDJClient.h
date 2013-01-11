@@ -6,12 +6,14 @@
 //
 //
 
-#import <RestKit/RestKit.h>
 #import "UDJRequestDelegate.h"
 #import "UDJRequest.h"
 #import "UDJResponse.h"
+#import "AFHTTPClient.h"
 
 @interface UDJClient : AFHTTPClient
+
+@property(nonatomic,strong) NSURL* baseURL;
 
 +(UDJClient*)sharedClient;
 

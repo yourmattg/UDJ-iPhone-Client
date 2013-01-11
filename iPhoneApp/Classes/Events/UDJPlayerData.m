@@ -18,7 +18,6 @@
  */
 
 #import "UDJPlayerData.h"
-#import <RestKit/RestKit.h>
 
 #import "UDJClient.h"
 

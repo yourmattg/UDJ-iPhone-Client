@@ -18,7 +18,6 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "RestKit/RestKit.h"
 #import "UDJData.h"
 
 @interface ParticipantManager : NSObject <UITableViewDataSource, UDJRequestDelegate>
