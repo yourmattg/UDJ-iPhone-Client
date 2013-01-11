@@ -14,6 +14,7 @@
 @interface UDJClient : AFHTTPClient
 
 @property(nonatomic,strong) NSURL* baseURL;
+@property(nonatomic,strong) NSMutableDictionary* requestKeeper;
 
 +(UDJClient*)sharedClient;
 

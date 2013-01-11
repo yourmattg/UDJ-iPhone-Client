@@ -45,17 +45,56 @@
     return self;
 }
 
+#pragma mark - Sending helpers
+
+-(NSString*)methodString{
+    if([self method] == UDJRequestMethodGET){
+        return @"GET";
+    }
+    else if([self method] == UDJRequestMethodPUT){
+        return @"PUT";
+    }
+    else if([self method] == UDJRequestMethodPOST){
+        return @"POST";
+    }
+    else if([self method] == UDJRequestMethodDELETE){
+        return @"DELETE";
+    }
+}
+
 #pragma mark - Sending
 
 -(void)send{
     UDJClient* client = [UDJClient sharedClient];
     
-    NSURLRequest* request = [NSURLRequest requestWithURL: self.URL];
+    // Convert UDJRequest to NSURLRequest
+    NSMutableURLRequest* request = [client requestWithMethod:[self methodString] path:[[self URL] absoluteString] parameters: [self params]];
+    [request setAllHTTPHeaderFields: [self additionalHTTPHeaders]];
+    [request setTimeoutInterval: [self timeoutInterval]];
     
+    // Create request operation and specify callbacks
+    AFHTTPRequestOperation* operation = [client HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation* operation, id responseObj){
+        [self success];
+    } failure:^(AFHTTPRequestOperation* operation, NSError* error){
+        [self failure];
+    }];
+    
+    [client enqueueHTTPRequestOperation:operation];
 }
 
 -(UDJResponse*)sendSynchronously{
     
 }
+
+#pragma mark - Response callback
+
+-(void)success{
+    NSLog(@"Request success");
+}
+
+-(void)failure{
+    NSLog(@"Request fail");
+}
+
 
 @end
