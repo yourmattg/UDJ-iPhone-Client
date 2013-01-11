@@ -116,7 +116,6 @@
     UDJClient* client = [UDJClient alloc];
     client = [client initWithBaseURL: [NSURL URLWithString: baseUrl]];
     
-    [UDJPlaylist new]; // make UDJPlaylist singleton
     [UDJPlaylist sharedUDJPlaylist].globalData = [UDJData sharedUDJData];
     
     //create a UDJViewController (the login screen), and make it the root view

@@ -60,11 +60,14 @@
     else if([self method] == UDJRequestMethodDELETE){
         return @"DELETE";
     }
+    
+    return @"";
 }
 
 #pragma mark - Sending
 
 -(void)send{
+    NSLog(@"about to send");
     UDJClient* client = [UDJClient sharedClient];
     
     // Convert UDJRequest to NSURLRequest
@@ -83,7 +86,7 @@
 }
 
 -(UDJResponse*)sendSynchronously{
-    
+    return nil;
 }
 
 #pragma mark - Response callback
