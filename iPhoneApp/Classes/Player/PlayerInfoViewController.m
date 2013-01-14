@@ -354,7 +354,7 @@
     request.delegate = self.globalData;
     request.method = UDJRequestMethodPUT;
     request.HTTPBodyString = [self JSONStringWithPlayerInfo];
-    request.userData = [NSString stringWithString: @"createPlayer"];
+    request.userData = @"createPlayer";
     
     // set up the headers, including which type of request this is
     NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJData sharedUDJData].headers];

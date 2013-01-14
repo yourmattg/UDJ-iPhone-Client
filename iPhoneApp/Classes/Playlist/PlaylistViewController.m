@@ -401,7 +401,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 {
     NSInteger rowNumber = indexPath.row;
     
-    UDJSong* previouslySelectedSong = self.selectedSong;
+    //UDJSong* previouslySelectedSong = self.selectedSong;
     
     // correctly set the selected song
     if([playlist songPlaying] != nil){
@@ -508,7 +508,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 - (void)request:(UDJRequest*)request didLoadResponse:(UDJResponse*)response { 
     
     NSLog(@"Playlist: status code %d", [response statusCode]);
-    NSLog([response bodyAsString]);
+    NSLog(@"%@",[response bodyAsString]);
     
     NSNumber* requestNumber = request.userData;
     NSDictionary* headerDict = [response allHeaderFields];
