@@ -387,7 +387,7 @@
         if([response statusCode] == 201){
             // Save player ID
             NSDictionary* responseDict = [response.bodyAsString objectFromJSONString];
-            NSString* recievedID = [[responseDict objectForKey: @"player_id"] stringValue];
+            NSString* recievedID = [responseDict objectForKey: @"player_id"];
             self.playerID = recievedID;
             
             [self additionalPlayerSetup];            

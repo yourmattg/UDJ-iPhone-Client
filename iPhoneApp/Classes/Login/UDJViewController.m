@@ -209,7 +209,7 @@
     // only handle if we are waiting for an auth response
     NSDictionary* responseDict = [[response bodyAsString] objectFromJSONString];
     globalData.ticket=[responseDict valueForKey:@"ticket_hash"];
-    globalData.userID=[[responseDict valueForKey:@"user_id"] stringValue];
+    globalData.userID=[responseDict valueForKey:@"user_id"];
         
     //TODO: may need to change userID to [userID intValue]
     globalData.headers = [NSDictionary dictionaryWithObjectsAndKeys:globalData.ticket, @"X-Udj-Ticket-Hash", nil];
