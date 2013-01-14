@@ -86,7 +86,7 @@
     NSDictionary* apiHeader = [NSDictionary dictionaryWithObjectsAndKeys:@"0.5", @"X-Udj-Api-Version", @"renewTicket", @"requestType", nil];
     
     // create the URL
-    NSMutableString* urlString = [NSMutableString stringWithString: [client.baseURL absoluteString]];
+    NSMutableString* urlString = [NSMutableString stringWithString: client.baseURLString];
     [urlString appendString: @"/auth"];
     
     // set up request

@@ -175,7 +175,7 @@
     NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"0.5", @"X-Udj-Api-Version", nil];
 
     // create the URL
-    NSMutableString* urlString = [NSMutableString stringWithString:[client.baseURL absoluteString]];
+    NSMutableString* urlString = [NSMutableString stringWithString:client.baseURLString];
     [urlString appendString: @"/auth"];
     
     // set up request

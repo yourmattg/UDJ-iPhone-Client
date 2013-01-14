@@ -346,7 +346,7 @@
     UDJClient* client = [UDJClient sharedClient];
     
     //create url [POST] {prefix}/udj/users/user_id/players/player_id/name
-    NSString* urlString = [client.baseURL absoluteString];
+    NSString* urlString = client.baseURLString;
     urlString = [urlString stringByAppendingString:@"/players/player"];
 
     // create request

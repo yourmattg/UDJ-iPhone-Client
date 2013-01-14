@@ -180,7 +180,7 @@ typedef enum{
     UDJClient* client = [UDJClient sharedClient];
     
     // create url /players/player_id/available_music/artists
-    NSString* urlString = [client.baseURL absoluteString];
+    NSString* urlString = client.baseURLString;
     urlString = [urlString stringByAppendingFormat:@"/players/%@/available_music/artists",[UDJPlayerData sharedPlayerData].currentPlayer.playerID,nil];
     
     // create request

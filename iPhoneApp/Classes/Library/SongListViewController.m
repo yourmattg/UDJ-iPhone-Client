@@ -118,7 +118,7 @@ typedef enum{
     UDJClient* client = [UDJClient sharedClient];
     
     //create url [PUT] /udj/events/event_id/active_playlist/songs
-    NSString* urlString = [NSString stringWithFormat: @"%@/players/%@/active_playlist/songs/%@", [client.baseURL absoluteString], playerID, librarySongId, nil];
+    NSString* urlString = [NSString stringWithFormat: @"%@/players/%@/active_playlist/songs/%@", client.baseURLString, playerID, librarySongId, nil];
 
     // create request
     UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
@@ -218,7 +218,7 @@ typedef enum{
     
     // create URL
     
-    NSString* urlString = [client.baseURL absoluteString];
+    NSString* urlString = client.baseURLString;
     artist = [artist stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     NSString* playerID = [UDJPlayerData sharedPlayerData].currentPlayer.playerID;
     urlString = [urlString stringByAppendingFormat:@"/players/%@/available_music/artists/%@", playerID, artist, nil];
@@ -257,7 +257,7 @@ typedef enum{
     
     // create URL
     
-    NSString* urlString = [client.baseURL absoluteString];
+    NSString* urlString = client.baseURLString;
     query = [query stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     NSString* playerID = [UDJPlayerData sharedPlayerData].currentPlayer.playerID;
     urlString = [urlString stringByAppendingFormat:@"%@%@%@%@%@%d",@"/players/",playerID,@"/available_music?query=",query, @"&max_results=", MAX_RESULTS, nil];

@@ -18,7 +18,7 @@
     if(self = [super init]){
         self.statusCode = response.statusCode;
         self.bodyAsString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(self.bodyAsString);
+        self.allHeaderFields = response.allHeaderFields;
     }
     return self;
 }

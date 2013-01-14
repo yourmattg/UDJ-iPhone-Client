@@ -41,7 +41,7 @@
 -(void)getPlayerParticipants{
     UDJRequest* request = [UDJRequest requestWithMethod: UDJRequestMethodGET];
 
-    NSString* urlString = [NSString stringWithFormat: @"%@/players/%@/users", [request.URL absoluteString], self.playerID, nil];
+    NSString* urlString = [NSString stringWithFormat: @"%@/players/%@/users", [UDJClient sharedClient].baseURLString, self.playerID, nil];
     request.URL = [NSURL URLWithString: urlString];
     request.delegate = globalData;
     

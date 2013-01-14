@@ -18,8 +18,8 @@
  */
 
 #import "UDJPlayerData.h"
-
 #import "UDJClient.h"
+#import "JSONKit.h"
 
 @implementation UDJPlayerData
 
@@ -34,7 +34,8 @@
     float longitude = [locationManager getLongitude];
     
     // create URL
-    NSString* urlString = [client.baseURL absoluteString];
+    NSString* urlString = client.baseURLString;
+
     urlString = [urlString stringByAppendingFormat:@"%@%f%@%f", @"/players/", latitude, @"/", longitude];
     NSURL* url = [NSURL URLWithString:urlString];
     
@@ -58,7 +59,7 @@
     name = [name stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     
     // create the URL
-    NSString* urlString = [client.baseURL absoluteString];
+    NSString* urlString = client.baseURLString;
     urlString = [urlString stringByAppendingString:@"/players?name="];
     urlString = [urlString stringByAppendingString:name];
     NSURL* url = [NSURL URLWithString:urlString];
@@ -80,7 +81,7 @@
     UDJClient* client = [UDJClient sharedClient];
     
     //create url
-    NSString* urlString = [client.baseURL absoluteString];
+    NSString* urlString = client.baseURLString;
     urlString = [urlString stringByAppendingString:@"/players/"];
     urlString = [urlString stringByAppendingFormat:@"%@", self.currentPlayer.playerID];
     urlString = [urlString stringByAppendingString:@"/users/user"];
@@ -94,9 +95,13 @@
     
     // add the password to the header if neccessary
     if(password != nil){ 
-        NSMutableDictionary* dictionaryWithPass = [NSMutableDictionary dictionaryWithDictionary: globalData.headers];
-        [dictionaryWithPass setValue:password forKey:@"X-Udj-Player-Password"];
-        request.additionalHTTPHeaders = dictionaryWithPass;
+        NSDictionary* bodyDict = [NSDictionary dictionaryWithObject:password forKey:@"password"];
+        request.HTTPBodyString = [bodyDict JSONString];
+        
+        //set content-type header to text/json
+        NSMutableDictionary* headerDict = [NSMutableDictionary dictionaryWithDictionary: request.additionalHTTPHeaders];
+        [headerDict setObject:@"text/json" forKey:@"content-type"];
+        request.additionalHTTPHeaders = headerDict;
     }
     
     //send request
@@ -106,18 +111,18 @@
 -(void)leavePlayer{
     UDJRequest* request = [UDJRequest requestWithMethod: UDJRequestMethodDELETE];
     
-    NSString* urlString  = [NSString stringWithFormat: @"%@/players/%@/users/user",[request.URL absoluteString], self.currentPlayer.playerID];
+    NSString* urlString  = [NSString stringWithFormat: @"%@/players/%@/users/user", [UDJClient sharedClient].baseURLString, self.currentPlayer.playerID];
     request.URL = [NSURL URLWithString: urlString];
     request.delegate = playerListDelegate;
+    request.additionalHTTPHeaders = [UDJData sharedUDJData].headers;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++];
-    
     [request send];
 }
 
 -(void)setState:(NSString*)state{
     UDJClient* client = [UDJClient sharedClient];
     //create url [POST] /udj/users/user_id/players/player_id/state
-    NSString* urlString = [client.baseURL absoluteString];
+    NSString* urlString = client.baseURLString;
     urlString = [urlString stringByAppendingFormat: @"/players/%@/state", currentPlayer.playerID, nil];
     
     //set up request
@@ -136,7 +141,7 @@
 -(void)setVolume:(NSInteger)volume{
     UDJClient* client = [UDJClient sharedClient];
     //create url [POST] /udj/users/user_id/players/player_id/state
-    NSString* urlString = [client.baseURL absoluteString];
+    NSString* urlString = client.baseURLString;
     urlString = [urlString stringByAppendingFormat: @"/players/%@/volume", currentPlayer.playerID, nil];
     
     //set up request

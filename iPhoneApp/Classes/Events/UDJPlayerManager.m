@@ -219,7 +219,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     UDJClient* client = [UDJClient sharedClient];
     
     //create url users/user_id/players/player_id/library/songs
-    NSString* urlString = [client.baseURL absoluteString];
+    NSString* urlString = client.baseURLString;
     urlString = [urlString stringByAppendingFormat: @"/players/%@/library/songs", self.playerID, nil];
     
     //set up request
@@ -243,7 +243,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 -(void)removeSongsFromServer:(NSArray*)songs{
     UDJClient* client = [UDJClient sharedClient];
     
-    NSString* urlString = [client.baseURL absoluteString];
+    NSString* urlString = client.baseURLString;
     urlString = [urlString stringByAppendingFormat: @"/players/%@/library", self.playerID, nil];
     
     //set up request
@@ -320,7 +320,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 -(void)sendPlayerStateRequest:(PlayerState)newState{
     UDJClient* client = [UDJClient sharedClient];
     
-    NSString* urlString = [client.baseURL absoluteString];
+    NSString* urlString = client.baseURLString;
     urlString = [urlString stringByAppendingFormat:@"/players/%@/state", self.playerID, nil];
     
     // create request
@@ -426,7 +426,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 -(void)sendCurrentSongRequest:(NSString*)libraryID{
     UDJClient* client = [UDJClient sharedClient];
     
-    NSString* urlString = [client.baseURL absoluteString];
+    NSString* urlString = client.baseURLString;
     urlString = [urlString stringByAppendingFormat:@"/players/%@/current_song", self.playerID, nil];
 
     // create request

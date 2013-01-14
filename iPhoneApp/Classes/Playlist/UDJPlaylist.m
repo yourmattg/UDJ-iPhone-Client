@@ -40,7 +40,7 @@
     UDJClient* client = [UDJClient sharedClient];
     
     //create url [GET] {prefix}/events/event_id/active_playlist
-    NSString* urlString = [client.baseURL absoluteString];
+    NSString* urlString = client.baseURLString;
     urlString = [urlString stringByAppendingFormat:@"/players/%@/active_playlist", playerID, nil];
 
     // create request
@@ -70,7 +70,7 @@
     NSLog(@"ID: %@", songId);
     
     //create url [POST] players/player_id/active_playlist/lib_id/upvote
-    NSString* urlString = [client.baseURL absoluteString];
+    NSString* urlString = client.baseURLString;
     urlString = [urlString stringByAppendingFormat:@"/players/%@/active_playlist/songs/%@/", playerID, songId, nil];
     if(up) urlString = [urlString stringByAppendingString:@"upvote"];
     else urlString = [urlString stringByAppendingString:@"downvote"];

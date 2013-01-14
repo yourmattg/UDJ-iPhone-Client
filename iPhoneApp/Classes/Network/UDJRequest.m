@@ -8,6 +8,7 @@
 
 #import "UDJRequest.h"
 #import "UDJClient.h"
+#import "UDJData.h"
 #import "AFHTTPRequestOperation.h"
 
 
@@ -47,6 +48,13 @@
     return self;
 }
 
+-(id)init{
+    if(self = [super init]){
+        self.additionalHTTPHeaders = [UDJData sharedUDJData].headers;
+    }
+    return self;
+}
+
 #pragma mark - Sending helpers
 
 -(NSString*)methodString{
@@ -69,19 +77,22 @@
 #pragma mark - Sending
 
 -(void)send{
-    NSLog(@"about to send");
     UDJClient* client = [UDJClient sharedClient];
     
     // Convert UDJRequest to NSURLRequest
     NSMutableURLRequest* request = [client requestWithMethod:[self methodString] path:[[self URL] absoluteString] parameters: [self params]];
     [request setAllHTTPHeaderFields: [self additionalHTTPHeaders]];
+    if(self.HTTPBodyString){
+        [request setHTTPBody: [self.HTTPBodyString dataUsingEncoding:NSUTF8StringEncoding]];
+    }
     [request setTimeoutInterval: [self timeoutInterval]];
     
     // Create request operation and specify callbacks
     AFHTTPRequestOperation* operation = [client HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation* op, id responseObj){
         [self success:op.response responseObj:responseObj];
     } failure:^(AFHTTPRequestOperation* op, NSError* error){
-        [self failure];
+        NSLog(@"%@",[error localizedDescription]);;
+        [self failure:op.response];
     }];
     
     [client enqueueHTTPRequestOperation:operation];
@@ -94,15 +105,13 @@
 #pragma mark - Response callback
 
 -(void)success:(NSHTTPURLResponse*)response responseObj:(NSData*)responseObj{
-    NSLog(@"Request success");
-    
     UDJResponse* udjResponse = [[UDJResponse alloc] initWithNSHTTPURLResponse:response andData:responseObj];
     [self.delegate request:self didLoadResponse:udjResponse];
 }
 
--(void)failure{
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"General network error." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alertView show];
+-(void)failure:(NSHTTPURLResponse*)response{
+    UDJResponse* udjResponse = [[UDJResponse alloc] initWithNSHTTPURLResponse:response andData:[@"" dataUsingEncoding:NSUTF8StringEncoding]];
+    [self.delegate request:self didLoadResponse:udjResponse];
 }
 
 

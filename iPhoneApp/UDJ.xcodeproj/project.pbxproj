@@ -282,7 +282,7 @@
 		A3F58D9B14C75FAF00E350F4 /* EventGoerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventGoerViewController.xib; sourceTree = "<group>"; };
 		A3F86A6C156F03250036FBCE /* PlayerListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerListViewController.h; sourceTree = "<group>"; };
 		A3F86A6D156F03250036FBCE /* PlayerListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerListViewController.m; sourceTree = "<group>"; };
-		A3F86A6E156F03250036FBCE /* PlayerListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlayerListViewController.xib; path = ../Classes/Events/PlayerListViewController.xib; sourceTree = "<group>"; };
+		A3F86A6E156F03250036FBCE /* PlayerListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerListViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -447,6 +447,7 @@
 				A374BE0014A2EF36001A0DE0 /* UDJPlayerData.m */,
 				A3F86A6C156F03250036FBCE /* PlayerListViewController.h */,
 				A3F86A6D156F03250036FBCE /* PlayerListViewController.m */,
+				A3F86A6E156F03250036FBCE /* PlayerListViewController.xib */,
 			);
 			name = "Player List";
 			path = Events;
@@ -574,7 +575,6 @@
 			isa = PBXGroup;
 			children = (
 				A3B1ABB7157E759B008498EC /* MainWindow.xib */,
-				A3F86A6E156F03250036FBCE /* PlayerListViewController.xib */,
 				A3C7A441156714F20085150A /* SongListViewController.xib */,
 				A37BBF3E15670A1500251CC8 /* ArtistsViewController.xib */,
 				A3C6A4711565F9FA00F1E42E /* RandomViewController.xib */,

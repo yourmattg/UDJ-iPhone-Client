@@ -109,7 +109,7 @@ typedef enum{
     UDJClient* client = [UDJClient sharedClient];
     
     //create url [PUT] /udj/events/event_id/active_playlist/songs
-    NSString* urlString = [NSString stringWithFormat: @"%@/players/%@/active_playlist/songs/%@", [client.baseURL absoluteString], playerID, librarySongId, nil];
+    NSString* urlString = [NSString stringWithFormat: @"%@/players/%@/active_playlist/songs/%@", client.baseURLString, playerID, librarySongId, nil];
     
     // create request
     UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
@@ -118,7 +118,7 @@ typedef enum{
     request.additionalHTTPHeaders = globalData.headers;
     
     NSLog(@"URLString: %@", urlString);
-    NSLog(@"sent URL: %@", [request.URL absoluteString]);
+    NSLog(@"sent URL: %@", [UDJClient sharedClient].baseURLString);
     // remember song number
     request.userData = librarySongId;
     
@@ -175,7 +175,7 @@ typedef enum{
     UDJClient* client = [UDJClient sharedClient];
     
     //create url [GET] /udj/events/event_id/available_music/random_songs{?max_randoms=number_desired}
-    NSString* urlString = [client.baseURL absoluteString];
+    NSString* urlString = client.baseURLString;
     urlString = [urlString stringByAppendingFormat:@"/players/%@/available_music/random_songs?max_randoms=%d", [UDJPlayerData sharedPlayerData].currentPlayer.playerID, MAX_RESULTS, nil];
     
     // create request
