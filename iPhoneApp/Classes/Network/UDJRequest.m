@@ -8,6 +8,8 @@
 
 #import "UDJRequest.h"
 #import "UDJClient.h"
+#import "AFHTTPRequestOperation.h"
+
 
 @implementation UDJRequest
 
@@ -76,9 +78,9 @@
     [request setTimeoutInterval: [self timeoutInterval]];
     
     // Create request operation and specify callbacks
-    AFHTTPRequestOperation* operation = [client HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation* operation, id responseObj){
-        [self success];
-    } failure:^(AFHTTPRequestOperation* operation, NSError* error){
+    AFHTTPRequestOperation* operation = [client HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation* op, id responseObj){
+        [self success:op.response];
+    } failure:^(AFHTTPRequestOperation* op, NSError* error){
         [self failure];
     }];
     
@@ -91,12 +93,34 @@
 
 #pragma mark - Response callback
 
--(void)success{
+-(void)success:(NSHTTPURLResponse*)response{
     NSLog(@"Request success");
+    
+    UDJResponse* udjResponse = [[UDJResponse alloc] init];
+    [self.delegate request:self didLoadResponse:udjResponse];
 }
 
 -(void)failure{
     NSLog(@"Request fail");
+}
+
+
+#pragma mark - Checking request method
+
+-(BOOL)isGET{
+    return self.method == UDJRequestMethodGET;
+}
+
+-(BOOL)isPUT{
+    return self.method == UDJRequestMethodPUT;
+}
+
+-(BOOL)isPOST{
+    return self.method == UDJRequestMethodPOST;
+}
+
+-(BOOL)isDELETE{
+    return self.method == UDJRequestMethodDELETE;
 }
 
 
