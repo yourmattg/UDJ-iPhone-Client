@@ -10,4 +10,17 @@
 
 @implementation UDJResponse
 
+-(BOOL)isOK{
+    return self.statusCode == 200;
+}
+
+-(id)initWithNSHTTPURLResponse:(NSHTTPURLResponse*)response andData:(NSData*)data{
+    if(self = [super init]){
+        self.statusCode = response.statusCode;
+        self.bodyAsString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(self.bodyAsString);
+    }
+    return self;
+}
+
 @end

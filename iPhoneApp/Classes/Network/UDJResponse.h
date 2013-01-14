@@ -14,6 +14,7 @@
 @property NSInteger statusCode;
 @property(nonatomic,strong) NSString* bodyAsString;
 
+-(id)initWithNSHTTPURLResponse:(NSHTTPURLResponse*)response andData:(NSData*)data;
 -(BOOL)isOK;
 
 @end

@@ -79,7 +79,7 @@
     
     // Create request operation and specify callbacks
     AFHTTPRequestOperation* operation = [client HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation* op, id responseObj){
-        [self success:op.response];
+        [self success:op.response responseObj:responseObj];
     } failure:^(AFHTTPRequestOperation* op, NSError* error){
         [self failure];
     }];
@@ -93,15 +93,16 @@
 
 #pragma mark - Response callback
 
--(void)success:(NSHTTPURLResponse*)response{
+-(void)success:(NSHTTPURLResponse*)response responseObj:(NSData*)responseObj{
     NSLog(@"Request success");
     
-    UDJResponse* udjResponse = [[UDJResponse alloc] init];
+    UDJResponse* udjResponse = [[UDJResponse alloc] initWithNSHTTPURLResponse:response andData:responseObj];
     [self.delegate request:self didLoadResponse:udjResponse];
 }
 
 -(void)failure{
-    NSLog(@"Request fail");
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"General network error." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alertView show];
 }
 
 

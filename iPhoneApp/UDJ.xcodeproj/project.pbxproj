@@ -55,6 +55,7 @@
 		A35F57F41572D25D004AA5DB /* PullRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A35F57F31572D25D004AA5DB /* PullRefreshTableViewController.m */; };
 		A35F57F61572D477004AA5DB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35F57F51572D477004AA5DB /* QuartzCore.framework */; };
 		A35F57F91572DD04004AA5DB /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A35F57F81572DD04004AA5DB /* arrow.png */; };
+		A36170A916A395000032505C /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A36170A816A395000032505C /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A3680CAC16067D2700ED0509 /* participanticon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3680CAB16067D2700ED0509 /* participanticon.png */; };
 		A3680CAE160E8B4200ED0509 /* playericon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3680CAD160E8B4200ED0509 /* playericon.png */; };
 		A3680CB0160F967400ED0509 /* skipbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A3680CAF160F967400ED0509 /* skipbutton.png */; };
@@ -188,6 +189,7 @@
 		A35F57F31572D25D004AA5DB /* PullRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullRefreshTableViewController.m; sourceTree = "<group>"; };
 		A35F57F51572D477004AA5DB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A35F57F81572DD04004AA5DB /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		A36170A816A395000032505C /* JSONKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = JSONKit/JSONKit.m; sourceTree = "<group>"; };
 		A3680CAB16067D2700ED0509 /* participanticon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = participanticon.png; sourceTree = "<group>"; };
 		A3680CAD160E8B4200ED0509 /* playericon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playericon.png; sourceTree = "<group>"; };
 		A3680CAF160F967400ED0509 /* skipbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skipbutton.png; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				A36170A816A395000032505C /* JSONKit.m */,
 				A30C4BDF1687BD26004D22DA /* Default-568h@2x.png */,
 				A341E22F15E2BC9200E92D84 /* CoreMedia.framework */,
 				A341E22D15E2B45300E92D84 /* AVFoundation.framework */,
@@ -736,6 +739,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A36170A916A395000032505C /* JSONKit.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* UDJAppDelegate.m in Sources */,
 				28D7ACF80DDB3853001CB0EB /* UDJViewController.m in Sources */,
