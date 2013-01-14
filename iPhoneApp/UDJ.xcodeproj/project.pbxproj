@@ -159,7 +159,7 @@
 		A325E0FF15F1640900D54062 /* UDJPlayerInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDJPlayerInfoManager.m; path = Classes/Player/UDJPlayerInfoManager.m; sourceTree = SOURCE_ROOT; };
 		A3265DB114C6101400FC692B /* PlaylistEntryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistEntryCell.h; sourceTree = "<group>"; };
 		A3265DB214C6101400FC692B /* PlaylistEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistEntryCell.m; sourceTree = "<group>"; };
-		A32A384614AE917600D166CF /* UDJ-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "UDJ-Info.plist"; path = "../UDJ-Info.plist"; sourceTree = "<group>"; };
+		A32A384614AE917600D166CF /* UDJ-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "UDJ-Info.plist"; sourceTree = "<group>"; };
 		A32BEEA0157163A1005B573B /* nearbybutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nearbybutton.png; sourceTree = "<group>"; };
 		A331096D15DED3B6003D2AD3 /* playerinfobutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playerinfobutton.png; sourceTree = "<group>"; };
 		A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewPlaylistViewController.xib; path = Resources/NewPlaylistViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -345,6 +345,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				A32A384614AE917600D166CF /* UDJ-Info.plist */,
 				A36170A816A395000032505C /* JSONKit.m */,
 				A30C4BDF1687BD26004D22DA /* Default-568h@2x.png */,
 				A341E22F15E2BC9200E92D84 /* CoreMedia.framework */,
@@ -374,7 +375,6 @@
 			children = (
 				A3C6A4751565FA2400F1E42E /* xib files */,
 				A3C6A4741565FA1400F1E42E /* images */,
-				A32A384614AE917600D166CF /* UDJ-Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";

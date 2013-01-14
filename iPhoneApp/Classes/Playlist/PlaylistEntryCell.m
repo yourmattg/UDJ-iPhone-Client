@@ -64,7 +64,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        //self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         
         songLabel = [[UILabel alloc] init];
         songLabel.textAlignment = UITextAlignmentLeft;
