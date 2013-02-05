@@ -585,7 +585,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 
 - (void)request:(UDJRequest*)request didLoadResponse:(UDJResponse*)response{
     NSString* requestType = [request userData];
-    NSLog(@"Player Manager response code: %d, request type %@", [response statusCode], requestType);
+    NSLog(@"Player Manager response code: %d, request type %@, URL %@", [response statusCode], requestType, [request.URL absoluteString]);
     NSLog(@"%@",[response bodyAsString]);
 }
 
