@@ -191,7 +191,6 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
         
         // if this song hasn't been synced, add it to a set of songs to be added
         if(syncStatus == nil || [syncStatus boolValue] == NO){
-            NSLog(@"hasn't been synced yet");
             NSDictionary* songAddDict = [self dictionaryForMediaItem: mediaItem];
             [songAddArray addObject: songAddDict];
             
@@ -235,8 +234,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     request.additionalHTTPHeaders = requestHeaders;
     
     // set body to the JSON song array
-    [request setHTTPBody: [songCollectionString dataUsingEncoding: NSUTF8StringEncoding]];
-    NSLog(@"addSong body: %@", request.HTTPBodyString);
+    [request setHTTPBodyString:songCollectionString];
     
     [request send];
 }
