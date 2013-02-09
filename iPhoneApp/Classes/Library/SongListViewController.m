@@ -222,7 +222,6 @@ typedef enum{
     artist = [artist stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     NSString* playerID = [UDJPlayerData sharedPlayerData].currentPlayer.playerID;
     urlString = [urlString stringByAppendingFormat:@"/players/%@/available_music/artists/%@", playerID, artist, nil];
-    NSLog(@"%@",urlString);
     
     // create request
     UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];

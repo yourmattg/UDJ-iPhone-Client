@@ -236,7 +236,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     
     // set body to the JSON song array
     [request setHTTPBody: [songCollectionString dataUsingEncoding: NSUTF8StringEncoding]];
-    NSLog(@"%@", request.HTTPBodyString);
+    NSLog(@"addSong body: %@", request.HTTPBodyString);
     
     [request send];
 }
