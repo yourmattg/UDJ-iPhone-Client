@@ -201,7 +201,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
         
         
         // if we have 200 songs, send them off to the server
-        if([songAddArray count] == 200 || i == [songArray count]-1){
+        if([songAddArray count] == 200 || (i == [songArray count]-1 && [songAddArray count] > 0)){
             NSLog(@"Sending %d songs to server", [songAddArray count]);
             [self addSongsToServer: [songAddArray JSONString]];
             [songAddArray removeAllObjects];
@@ -236,6 +236,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     
     // set body to the JSON song array
     [request setHTTPBody: [songCollectionString dataUsingEncoding: NSUTF8StringEncoding]];
+    NSLog(@"%@", request.HTTPBodyString);
     
     [request send];
 }

@@ -55,8 +55,6 @@
         float secondsSince = [currentDate timeIntervalSinceDate: lastDate];
         float hoursSince = secondsSince/60/60;
         
-        NSLog(@"%f hours since last ticket", hoursSince);
-        
         // if it has been more than 20 hours, we'll renew the ticket to be safe
         if(hoursSince >= 20){
             return NO;
