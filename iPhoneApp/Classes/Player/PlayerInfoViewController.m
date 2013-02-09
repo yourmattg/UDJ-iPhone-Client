@@ -57,6 +57,7 @@
         UITextField* textField= [textFieldArray objectAtIndex: i];
         textField.delegate = self;
         textField.tag = i;
+        textField.spellCheckingType = UITextSpellCheckingTypeNo;
     }
 }
 
