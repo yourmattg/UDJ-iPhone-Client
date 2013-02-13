@@ -539,25 +539,27 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
 -(void)queueUpNextSong{
     // find the mediaItem for the top song on the playlist
     UDJSong* nextSong = [[UDJPlaylist sharedUDJPlaylist] songAtIndex: 0];
-    NSLog(@"Next song: %@", nextSong.title);
-    NSString* stringID = [[[UDJPlaylist sharedUDJPlaylist] songAtIndex:0] librarySongId];
-    UDJLibraryID mediaItemID = strtoull([stringID UTF8String], NULL, 0);
-    MPMediaPropertyPredicate* predicate = [MPMediaPropertyPredicate predicateWithValue: [NSNumber numberWithUnsignedLongLong:mediaItemID]forProperty:MPMediaItemPropertyPersistentID];
-    MPMediaQuery* query = [[MPMediaQuery alloc] initWithFilterPredicates: [NSSet setWithObject: predicate]];
-    MPMediaItem* nextMediaItem = [[query items] objectAtIndex: 0];
-    
-    // add next item to queue, just after the item playing
-    NSURL* url = [nextMediaItem valueForProperty: MPMediaItemPropertyAssetURL];
-    AVPlayerItem* nextItem = [[AVPlayerItem alloc] initWithURL:url];
-    [audioPlayer insertItem:nextItem afterItem: [[audioPlayer items] objectAtIndex:0]];
-    
-    // remove last item
-    if([[audioPlayer items] count] > 2){
-        AVPlayerItem* itemToRemove = [[audioPlayer items] objectAtIndex: 2];
-        [audioPlayer removeItem: itemToRemove];
-    }
+    if (nextSong) {
+        NSLog(@"Next song: %@", nextSong.title);
+        NSString* stringID = [[[UDJPlaylist sharedUDJPlaylist] songAtIndex:0] librarySongId];
+        UDJLibraryID mediaItemID = strtoull([stringID UTF8String], NULL, 0);
+        MPMediaPropertyPredicate* predicate = [MPMediaPropertyPredicate predicateWithValue: [NSNumber numberWithUnsignedLongLong:mediaItemID]forProperty:MPMediaItemPropertyPersistentID];
+        MPMediaQuery* query = [[MPMediaQuery alloc] initWithFilterPredicates: [NSSet setWithObject: predicate]];
+        MPMediaItem* nextMediaItem = [[query items] objectAtIndex: 0];
         
-    [self printItemDurations];
+        // add next item to queue, just after the item playing
+        NSURL* url = [nextMediaItem valueForProperty: MPMediaItemPropertyAssetURL];
+        AVPlayerItem* nextItem = [[AVPlayerItem alloc] initWithURL:url];
+        [audioPlayer insertItem:nextItem afterItem: [[audioPlayer items] objectAtIndex:0]];
+        
+        // remove last item
+        if([[audioPlayer items] count] > 2){
+            AVPlayerItem* itemToRemove = [[audioPlayer items] objectAtIndex: 2];
+            [audioPlayer removeItem: itemToRemove];
+        }
+        
+        [self printItemDurations];
+    }
 }
 
 #pragma mark - Preparing for background

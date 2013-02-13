@@ -15,7 +15,6 @@
 
 @property(nonatomic,strong) NSURL* baseURL;
 @property(nonatomic,strong) NSString* baseURLString;
-@property(nonatomic,strong) NSMutableDictionary* requestKeeper;
 
 +(UDJClient*)sharedClient;
 

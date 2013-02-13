@@ -130,14 +130,14 @@
     
     [self setPlaylist: tempList];
     [self setCurrentSong: newCurrentSong];
-    //NSLog(@"updated playlist. current song = %@, playlist count = %d", newCurrentSong.title, [self count]);
+    NSLog(@"updated playlist. current song = %@, playlist count = %d", newCurrentSong.title, [self count]);
     
     // send message to delegate (Playlist view controller)
     [playlistDelegate playlistDidUpdate: responseDict];
 }
 
 -(void)request:(UDJRequest*)request didLoadResponse:(UDJResponse*)response{
-    //NSLog(@"Response Code: %d", [response statusCode]);
+    NSLog(@"Playlist response code: %d, request url %@", [response statusCode], [request.URL absoluteString]);
     if ([request isGET]) {
         [self handlePlaylistResponse:response];        
     }
