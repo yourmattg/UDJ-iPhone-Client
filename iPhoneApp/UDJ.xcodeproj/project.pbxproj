@@ -48,6 +48,7 @@
 		A34FA21B15C22D540022EF46 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = A34FA21A15C22D540022EF46 /* plus.png */; };
 		A34FA21E15C22E120022EF46 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A34FA21C15C22E120022EF46 /* Default.png */; };
 		A34FA21F15C22E120022EF46 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A34FA21D15C22E120022EF46 /* Default@2x.png */; };
+		A35259A516CB2E78006C44FD /* UDJViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A35259A416CB2E78006C44FD /* UDJViewController.xib */; };
 		A3536FB314A5218F00B5C95F /* UDJPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A3536FB214A5218F00B5C95F /* UDJPlayer.m */; };
 		A35D3DF114F985460007B374 /* votedown.png in Resources */ = {isa = PBXBuildFile; fileRef = A35D3DEF14F985460007B374 /* votedown.png */; };
 		A35D3DF214F985460007B374 /* voteup.png in Resources */ = {isa = PBXBuildFile; fileRef = A35D3DF014F985460007B374 /* voteup.png */; };
@@ -128,7 +129,7 @@
 		1D6058910D05DD3D006BFB54 /* UDJ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UDJ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		2899E5210DE3E06400AC0155 /* UDJViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UDJViewController.xib; sourceTree = "<group>"; };
+		2899E5210DE3E06400AC0155 /* UDJViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = UDJViewController.xib; path = ../../Resources/UDJViewController.xib; sourceTree = "<group>"; };
 		28D7ACF60DDB3853001CB0EB /* UDJViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJViewController.h; sourceTree = "<group>"; };
 		28D7ACF70DDB3853001CB0EB /* UDJViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -178,6 +179,7 @@
 		A34FA21A15C22D540022EF46 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 		A34FA21C15C22E120022EF46 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		A34FA21D15C22E120022EF46 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		A35259A416CB2E78006C44FD /* UDJViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UDJViewController.xib; sourceTree = "<group>"; };
 		A3536FB114A5218F00B5C95F /* UDJPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJPlayer.h; sourceTree = "<group>"; };
 		A3536FB214A5218F00B5C95F /* UDJPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJPlayer.m; sourceTree = "<group>"; };
 		A35D3DEF14F985460007B374 /* votedown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = votedown.png; sourceTree = "<group>"; };
@@ -458,6 +460,8 @@
 			children = (
 				28D7ACF60DDB3853001CB0EB /* UDJViewController.h */,
 				28D7ACF70DDB3853001CB0EB /* UDJViewController.m */,
+				A35259A416CB2E78006C44FD /* UDJViewController.xib */,
+				2899E5210DE3E06400AC0155 /* UDJViewController.xib */,
 				A3CFBEEE15688811002B7658 /* KeychainItemWrapper.h */,
 				A3CFBEEF15688811002B7658 /* KeychainItemWrapper.m */,
 				A3A2B36E156DD6C600C4FF90 /* UDJStoredData.h */,
@@ -579,7 +583,6 @@
 				A37BBF3E15670A1500251CC8 /* ArtistsViewController.xib */,
 				A3C6A4711565F9FA00F1E42E /* RandomViewController.xib */,
 				A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */,
-				2899E5210DE3E06400AC0155 /* UDJViewController.xib */,
 				A3F58D9B14C75FAF00E350F4 /* EventGoerViewController.xib */,
 				A3028B851564A2AE00EF6EE8 /* MainTabBarController.xib */,
 			);
@@ -729,6 +732,7 @@
 				A3680CAE160E8B4200ED0509 /* playericon.png in Resources */,
 				A3680CB0160F967400ED0509 /* skipbutton.png in Resources */,
 				A30C4BE01687BD26004D22DA /* Default-568h@2x.png in Resources */,
+				A35259A516CB2E78006C44FD /* UDJViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

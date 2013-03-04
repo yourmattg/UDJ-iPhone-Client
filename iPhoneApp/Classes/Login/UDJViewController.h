@@ -25,9 +25,9 @@
 @interface UDJViewController : UIViewController <UDJRequestDelegate, UIAlertViewDelegate> {
 
 	
-	UIButton *loginButton;
-	UITextField *usernameField;
-	UITextField *passwordField;
+    UIButton *loginButton;
+    UITextField *usernameField;
+    UITextField *passwordField;
     UIButton* registerButton;
     
     NSNumber* currentRequestNumber;
@@ -39,10 +39,10 @@
     UIButton* cancelButton;
 }
 
-@property (strong,nonatomic) IBOutlet UIButton *loginButton;
-@property (strong,nonatomic) IBOutlet UITextField *usernameField;
-@property (strong,nonatomic) IBOutlet UITextField *passwordField;
-@property (strong,nonatomic) IBOutlet UIButton *registerButton;
+@property(strong,nonatomic) IBOutlet UIButton *loginButton;
+@property(strong,nonatomic) IBOutlet UITextField *usernameField;
+@property(strong,nonatomic) IBOutlet UITextField *passwordField;
+@property(strong,nonatomic) IBOutlet UIButton *registerButton;
 @property(nonatomic,strong) NSNumber* currentRequestNumber;
 @property(nonatomic,strong) UDJData* globalData;
 
