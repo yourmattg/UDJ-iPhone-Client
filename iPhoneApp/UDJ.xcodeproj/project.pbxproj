@@ -204,7 +204,7 @@
 		A37BBF3A1567085000251CC8 /* playersbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playersbutton.png; sourceTree = "<group>"; };
 		A37BBF3C15670A1500251CC8 /* ArtistsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtistsViewController.h; sourceTree = "<group>"; };
 		A37BBF3D15670A1500251CC8 /* ArtistsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtistsViewController.m; sourceTree = "<group>"; };
-		A37BBF3E15670A1500251CC8 /* ArtistsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ArtistsViewController.xib; path = ../Classes/Library/ArtistsViewController.xib; sourceTree = "<group>"; };
+		A37BBF3E15670A1500251CC8 /* ArtistsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArtistsViewController.xib; sourceTree = "<group>"; };
 		A38B629F14C736C70088640D /* udjlauncher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = udjlauncher.png; sourceTree = "<group>"; };
 		A38DC7C315C4928700BF9A68 /* UDJPlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJPlayerManager.h; sourceTree = "<group>"; };
 		A38DC7C415C4928700BF9A68 /* UDJPlayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJPlayerManager.m; sourceTree = "<group>"; };
@@ -248,7 +248,7 @@
 		A3C6A4691565E6FF00F1E42E /* darknavbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = darknavbar.png; sourceTree = "<group>"; };
 		A3C6A46F1565F9FA00F1E42E /* RandomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomViewController.h; sourceTree = "<group>"; };
 		A3C6A4701565F9FA00F1E42E /* RandomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RandomViewController.m; sourceTree = "<group>"; };
-		A3C6A4711565F9FA00F1E42E /* RandomViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RandomViewController.xib; path = ../Classes/Library/RandomViewController.xib; sourceTree = "<group>"; };
+		A3C6A4711565F9FA00F1E42E /* RandomViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RandomViewController.xib; sourceTree = "<group>"; };
 		A3C6A47B1566017A00F1E42E /* artists.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = artists.png; sourceTree = "<group>"; };
 		A3C7A43F156714F20085150A /* SongListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongListViewController.h; sourceTree = "<group>"; };
 		A3C7A440156714F20085150A /* SongListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongListViewController.m; sourceTree = "<group>"; };
@@ -408,6 +408,7 @@
 			children = (
 				A33C4611148F0707009C1BC6 /* PlaylistViewController.h */,
 				A33C4612148F0707009C1BC6 /* PlaylistViewController.m */,
+				A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */,
 				A3265DB114C6101400FC692B /* PlaylistEntryCell.h */,
 				A3265DB214C6101400FC692B /* PlaylistEntryCell.m */,
 				A324AC0314AABB8900388514 /* UDJPlaylist.h */,
@@ -490,10 +491,12 @@
 			children = (
 				A37BBF3C15670A1500251CC8 /* ArtistsViewController.h */,
 				A37BBF3D15670A1500251CC8 /* ArtistsViewController.m */,
+				A37BBF3E15670A1500251CC8 /* ArtistsViewController.xib */,
 				A3C7A43F156714F20085150A /* SongListViewController.h */,
 				A3C7A440156714F20085150A /* SongListViewController.m */,
 				A3C6A46F1565F9FA00F1E42E /* RandomViewController.h */,
 				A3C6A4701565F9FA00F1E42E /* RandomViewController.m */,
+				A3C6A4711565F9FA00F1E42E /* RandomViewController.xib */,
 				A3CF872D14B8F8F000A9F829 /* UDJSongList.h */,
 				A3CF872E14B8F8F000A9F829 /* UDJSongList.m */,
 				A39A0C8914C4ADDF008A6D54 /* LibraryEntryCell.h */,
@@ -577,9 +580,6 @@
 			children = (
 				A3B1ABB7157E759B008498EC /* MainWindow.xib */,
 				A3C7A441156714F20085150A /* SongListViewController.xib */,
-				A37BBF3E15670A1500251CC8 /* ArtistsViewController.xib */,
-				A3C6A4711565F9FA00F1E42E /* RandomViewController.xib */,
-				A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */,
 				A3F58D9B14C75FAF00E350F4 /* EventGoerViewController.xib */,
 				A3028B851564A2AE00EF6EE8 /* MainTabBarController.xib */,
 			);

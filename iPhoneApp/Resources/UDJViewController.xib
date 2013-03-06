@@ -54,7 +54,7 @@
 								<string key="NSFrameSize">{320, 460}</string>
 								<reference key="NSSuperview" ref="774585933"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="788281810"/>
+								<reference key="NSNextKeyView" ref="372534521"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MCAwIDAAA</bytes>
@@ -73,7 +73,7 @@
 								<string key="NSFrameSize">{320, 480}</string>
 								<reference key="NSSuperview" ref="774585933"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="180412049"/>
+								<reference key="NSNextKeyView" ref="788281810"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<int key="IBUIContentMode">6</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -381,7 +381,7 @@
 						<string key="NSFrameSize">{320, 460}</string>
 						<reference key="NSSuperview" ref="726255338"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="372534521"/>
+						<reference key="NSNextKeyView" ref="180412049"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC43NQA</bytes>
