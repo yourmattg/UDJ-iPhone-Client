@@ -52,15 +52,7 @@
     
     request.backgroundPolicy = UDJRequestBackgroundPolicyContinue;
     
-    // foreground mode
-    if(![[UDJPlayerManager sharedPlayerManager] isInBackground]) [request send];
-    
-    // background mode
-    else{
-        UDJResponse* response = [request sendSynchronously];
-        //NSLog(@"got playlist response while in background");
-        [self request:request didLoadResponse:response];        
-    }
+    [request send];
 }
 
 

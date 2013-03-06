@@ -92,11 +92,18 @@
     AFHTTPRequestOperation* operation = [client HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation* op, id responseObj){
         [self success:op.response responseObj:responseObj];
     } failure:^(AFHTTPRequestOperation* op, NSError* error){
-        NSLog(@"%@",[error localizedDescription]);;
+        NSLog(@"Error: %@",[error localizedDescription]);;
         [self failure:op.response];
     }];
     
+    if(self.backgroundPolicy == UDJRequestBackgroundPolicyContinue){
+        NSLog(@"background request");
+        [operation setShouldExecuteAsBackgroundTaskWithExpirationHandler:^(void){
+            NSLog(@"expired");
+        }];
+    }
     
+    NSLog(@"about to send request");
     [client enqueueHTTPRequestOperation:operation];
 }
 
@@ -108,6 +115,7 @@
 
 -(void)success:(NSHTTPURLResponse*)response responseObj:(NSData*)responseObj{
     UDJResponse* udjResponse = [[UDJResponse alloc] initWithNSHTTPURLResponse:response andData:responseObj];
+    NSLog(@"Success: %d status code", [udjResponse statusCode]);
     [self.delegate request:self didLoadResponse:udjResponse];
 }
 

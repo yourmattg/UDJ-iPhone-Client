@@ -48,7 +48,6 @@
 		A34FA21B15C22D540022EF46 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = A34FA21A15C22D540022EF46 /* plus.png */; };
 		A34FA21E15C22E120022EF46 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A34FA21C15C22E120022EF46 /* Default.png */; };
 		A34FA21F15C22E120022EF46 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A34FA21D15C22E120022EF46 /* Default@2x.png */; };
-		A35259A516CB2E78006C44FD /* UDJViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A35259A416CB2E78006C44FD /* UDJViewController.xib */; };
 		A3536FB314A5218F00B5C95F /* UDJPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A3536FB214A5218F00B5C95F /* UDJPlayer.m */; };
 		A35D3DF114F985460007B374 /* votedown.png in Resources */ = {isa = PBXBuildFile; fileRef = A35D3DEF14F985460007B374 /* votedown.png */; };
 		A35D3DF214F985460007B374 /* voteup.png in Resources */ = {isa = PBXBuildFile; fileRef = A35D3DF014F985460007B374 /* voteup.png */; };
@@ -179,7 +178,6 @@
 		A34FA21A15C22D540022EF46 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 		A34FA21C15C22E120022EF46 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		A34FA21D15C22E120022EF46 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		A35259A416CB2E78006C44FD /* UDJViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UDJViewController.xib; sourceTree = "<group>"; };
 		A3536FB114A5218F00B5C95F /* UDJPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJPlayer.h; sourceTree = "<group>"; };
 		A3536FB214A5218F00B5C95F /* UDJPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJPlayer.m; sourceTree = "<group>"; };
 		A35D3DEF14F985460007B374 /* votedown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = votedown.png; sourceTree = "<group>"; };
@@ -460,7 +458,6 @@
 			children = (
 				28D7ACF60DDB3853001CB0EB /* UDJViewController.h */,
 				28D7ACF70DDB3853001CB0EB /* UDJViewController.m */,
-				A35259A416CB2E78006C44FD /* UDJViewController.xib */,
 				2899E5210DE3E06400AC0155 /* UDJViewController.xib */,
 				A3CFBEEE15688811002B7658 /* KeychainItemWrapper.h */,
 				A3CFBEEF15688811002B7658 /* KeychainItemWrapper.m */,
@@ -732,7 +729,6 @@
 				A3680CAE160E8B4200ED0509 /* playericon.png in Resources */,
 				A3680CB0160F967400ED0509 /* skipbutton.png in Resources */,
 				A30C4BE01687BD26004D22DA /* Default-568h@2x.png in Resources */,
-				A35259A516CB2E78006C44FD /* UDJViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -800,6 +796,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -824,6 +821,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = UDJ;
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
