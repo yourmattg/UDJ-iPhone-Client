@@ -188,6 +188,10 @@ static PlaylistViewController* _sharedPlaylistViewController;
 
 #pragma mark - View lifecycle
 
+-(void)initNavBar{
+    [self.tabBarController.navigationItem setTitle:[currentEvent name]];
+}
+
 - (void)viewDidLoad {
 
     [super viewDidLoad];
@@ -198,7 +202,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     // set event, event label text
     self.currentEvent = [UDJPlayerData sharedPlayerData].currentPlayer;
-	self.eventNameLabel.text = currentEvent.name;
+    self.eventNameLabel.text = currentEvent.name;
     
     // set delegate
     [UDJPlayerData sharedPlayerData].leaveEventDelegate = self;
@@ -215,9 +219,10 @@ static PlaylistViewController* _sharedPlaylistViewController;
     [playerNameLabel setText: currentEvent.name];
     self.leaveButton.hidden = [UDJPlayerManager sharedPlayerManager].isInPlayerMode;
     
+    [self initNavBar];
+    
     self.hostControlView.hidden = YES;
     [self checkIfHost];
-    
     
 }
 

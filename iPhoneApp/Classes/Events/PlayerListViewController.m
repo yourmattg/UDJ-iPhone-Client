@@ -115,6 +115,7 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.navigationController setToolbarHidden: YES animated:YES];
+    [self.navigationItem setTitle:@"Players"];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -136,7 +137,6 @@
     
     self.navigationController.navigationBarHidden = NO;
     [self.navigationController.navigationBar setTintColor: blueTintColor];
-    
     
     // set up search bar
     self.playerSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 240, 44)];
@@ -220,6 +220,7 @@
     [rightButton setAction:@selector(nearbyButtonClick:)];
 }
 
+// Hides the keyboard and brings back the Nearby button
 -(IBAction)cancelSearchButtonClick:(id)sender{
     UIBarButtonItem* rightBarButton = [self.navigationItem rightBarButtonItem];
     [rightBarButton setTitle:@"Nearby"];
