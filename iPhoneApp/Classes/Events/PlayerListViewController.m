@@ -90,7 +90,6 @@
     self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
     
     // initialize search bar
-    playerSearchBar.autocorrectionType = UITextAutocorrectionTypeNo;
          
     self.navigationController.toolbar.tintColor = [UIColor colorWithRed:(35.0/255.0) green:(59.0/255.0) blue:(79.0/255.0) alpha:1];
     self.navigationController.toolbarHidden = NO;
@@ -133,7 +132,26 @@
 }
 
 -(void)initNavBar{
-    self.navigationController.navigationBarHidden = YES;
+    UIColor* blueTintColor = [UIColor colorWithRed:(35.0/255.0) green:(59.0/255.0) blue:(79.0/255.0) alpha:1];
+    
+    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController.navigationBar setTintColor: blueTintColor];
+    
+    
+    // set up search bar
+    self.playerSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 240, 44)];
+    [playerSearchBar setPlaceholder:@"Search for players"];
+    [playerSearchBar setTintColor: blueTintColor];
+    [playerSearchBar setAutocorrectionType: UITextAutocorrectionTypeNo];
+    [playerSearchBar setDelegate:self];
+    
+    // put search bar on left side
+    UIBarButtonItem* searchBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView: playerSearchBar];
+    [self.navigationItem setLeftBarButtonItem:searchBarButtonItem];
+    
+    // set up buttons
+    UIBarButtonItem* nearbyButton = [[UIBarButtonItem alloc] initWithTitle:@"Nearby" style:UIBarButtonItemStyleBordered target:self action:@selector(nearbyButtonClick:)];
+    [self.navigationItem setRightBarButtonItem:nearbyButton];
 }
 
 
@@ -171,20 +189,15 @@
     [self toggleJoiningView:NO];
 }
 
--(IBAction)findNearbyButtonClick:(id)sender{
+-(IBAction)nearbyButtonClick:(id)sender{
     [playerSearchBar resignFirstResponder];
     [self findNearbyPlayers];
 }
 
 -(void)searchBarTextDidBeginEditing:(UISearchBar*)theSearchBar{
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        cancelSearchButton.alpha = 1;
-        cancelSearchButton.frame = CGRectMake(250, 8, 60, 29);
-        findNearbyButton.alpha = 0;
-        findNearbyButton.frame = CGRectMake(249, -18, 61, 29);
-    }];
-    
+    UIBarButtonItem* rightButton = [self.navigationItem rightBarButtonItem];
+    [rightButton setTitle:@"Cancel"];
+    [rightButton setAction:@selector(cancelSearchButtonClick:)];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)theSearchBar{
@@ -198,24 +211,19 @@
         [invalidSearchParam show];
     }
     
-    else if(![searchParam isEqualToString:@""]) [self findPlayersByName: searchParam];
+    else if(![searchParam isEqualToString:@""]){
+        [self findPlayersByName: searchParam];
+    }
     
-    [UIView animateWithDuration:0.5 animations:^{
-        cancelSearchButton.alpha = 0;
-        cancelSearchButton.frame = CGRectMake(250, -18, 60, 29);
-        findNearbyButton.alpha = 1;
-        findNearbyButton.frame = CGRectMake(249, 8, 61, 29);
-    }];
-    
+    UIBarButtonItem* rightButton = [self.navigationItem rightBarButtonItem];
+    [rightButton setTitle:@"Nearby"];
+    [rightButton setAction:@selector(nearbyButtonClick:)];
 }
 
 -(IBAction)cancelSearchButtonClick:(id)sender{
-    [UIView animateWithDuration:0.5 animations:^{
-        cancelSearchButton.alpha = 0;
-        cancelSearchButton.frame = CGRectMake(250, -18, 60, 29);
-        findNearbyButton.alpha = 1;
-        findNearbyButton.frame = CGRectMake(249, 8, 61, 29);
-    }];
+    UIBarButtonItem* rightBarButton = [self.navigationItem rightBarButtonItem];
+    [rightBarButton setTitle:@"Nearby"];
+    [rightBarButton setAction:@selector(nearbyButtonClick:)];
     [playerSearchBar resignFirstResponder];
 }
 
@@ -303,7 +311,6 @@
         self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
         [playerData joinPlayer:nil];
     }
-    
 }
 
 
