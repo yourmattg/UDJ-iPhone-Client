@@ -103,7 +103,6 @@
         }];
     }
     
-    NSLog(@"about to send request");
     [client enqueueHTTPRequestOperation:operation];
 }
 

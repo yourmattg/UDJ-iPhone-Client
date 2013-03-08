@@ -252,7 +252,7 @@
 		A3C6A47B1566017A00F1E42E /* artists.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = artists.png; sourceTree = "<group>"; };
 		A3C7A43F156714F20085150A /* SongListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongListViewController.h; sourceTree = "<group>"; };
 		A3C7A440156714F20085150A /* SongListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongListViewController.m; sourceTree = "<group>"; };
-		A3C7A441156714F20085150A /* SongListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SongListViewController.xib; path = ../Classes/Library/SongListViewController.xib; sourceTree = "<group>"; };
+		A3C7A441156714F20085150A /* SongListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SongListViewController.xib; sourceTree = "<group>"; };
 		A3CF872D14B8F8F000A9F829 /* UDJSongList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJSongList.h; sourceTree = "<group>"; };
 		A3CF872E14B8F8F000A9F829 /* UDJSongList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJSongList.m; sourceTree = "<group>"; };
 		A3CFBEE815685DA5002B7658 /* playtoggle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playtoggle.png; sourceTree = "<group>"; };
@@ -494,6 +494,7 @@
 				A37BBF3E15670A1500251CC8 /* ArtistsViewController.xib */,
 				A3C7A43F156714F20085150A /* SongListViewController.h */,
 				A3C7A440156714F20085150A /* SongListViewController.m */,
+				A3C7A441156714F20085150A /* SongListViewController.xib */,
 				A3C6A46F1565F9FA00F1E42E /* RandomViewController.h */,
 				A3C6A4701565F9FA00F1E42E /* RandomViewController.m */,
 				A3C6A4711565F9FA00F1E42E /* RandomViewController.xib */,
@@ -579,7 +580,6 @@
 			isa = PBXGroup;
 			children = (
 				A3B1ABB7157E759B008498EC /* MainWindow.xib */,
-				A3C7A441156714F20085150A /* SongListViewController.xib */,
 				A3F58D9B14C75FAF00E350F4 /* EventGoerViewController.xib */,
 				A3028B851564A2AE00EF6EE8 /* MainTabBarController.xib */,
 			);

@@ -101,6 +101,8 @@
     
     self.shouldShowMyPlayer = NO;
     
+    [self initNavBar];
+    
     [self findNearbyPlayers];
 }
 
@@ -128,6 +130,10 @@
         [tabBarController initForPlayerMode: YES];
         [self.navigationController pushViewController: tabBarController animated:YES];          
     }
+}
+
+-(void)initNavBar{
+    self.navigationController.navigationBarHidden = YES;
 }
 
 
