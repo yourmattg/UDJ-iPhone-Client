@@ -107,6 +107,7 @@ typedef enum{
     [searchBar setDelegate:self];
     UIBarButtonItem* searchBarItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
     [self.tabBarController.navigationItem setLeftBarButtonItem: searchBarItem];
+    [searchBar sizeToFit];
 }
 
 
@@ -123,24 +124,21 @@ typedef enum{
         cancelSearchButton.frame = CGRectMake(320, 8, 60, 29); // x usually is 250
         searchBar.frame = CGRectMake(0, 0, 320, 44);
     }];
-    
-    searchBar.showsScopeBar = NO;  
+     
     [searchBar sizeToFit];    
     [searchBar setShowsCancelButton:NO animated:YES]; 
     [searchBar resignFirstResponder];
 }
 
-- (void)searchBarCancelButtonClicked:(UISearchBar *)theSearchBar{
-    searchBar.showsScopeBar = NO;  
+- (void)searchBarCancelButtonClicked:(UISearchBar *)theSearchBar{  
     [searchBar sizeToFit];    
     [searchBar setShowsCancelButton:NO animated:YES];    
     [searchBar resignFirstResponder];
 }
 
 -(void)searchBarTextDidBeginEditing:(UISearchBar*)theSearchBar{
-    searchBar.showsScopeBar = YES;  
-    [searchBar sizeToFit];    
-    [searchBar setShowsCancelButton:YES animated:YES]; 
+    [searchBar sizeToFit];
+    [searchBar setShowsCancelButton:YES animated:YES];
 }
 
 
