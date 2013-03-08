@@ -68,6 +68,8 @@ typedef enum{
     [self sendArtistsRequest];
     
     searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+    
+    [self initNavBar];
 }
 
 - (void)viewDidUnload
@@ -82,9 +84,14 @@ typedef enum{
     [self.tableView reloadData];
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
+}
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self initNavBar];
+    [self showNavBar];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -95,19 +102,29 @@ typedef enum{
 
 #pragma mark - Navigation bar setup
 
+-(void)showNavBar{
+    NSLog(@"showing artists nav bar");
+    // hide tab bar nav controller, set up our own nav bar
+    [self.tabBarController.navigationController setNavigationBarHidden:YES];
+    [self.navigationController setNavigationBarHidden:NO];
+}
+
 -(void)initNavBar{
+    NSLog(@"init artists nav bar");
     UIColor* blueTintColor = [UIColor colorWithRed:(35.0/255.0) green:(59.0/255.0) blue:(79.0/255.0) alpha:1];
     
-    [self.tabBarController.navigationItem setTitle:@""];
+    [self.navigationItem setTitle:@""];
+    [self.navigationController.navigationBar setTintColor:blueTintColor];
     
+    /*
     // set up search bar
     searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
     [searchBar setTintColor:blueTintColor];
     [searchBar setPlaceholder:@"Search for songs"];
     [searchBar setDelegate:self];
     UIBarButtonItem* searchBarItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
-    [self.tabBarController.navigationItem setLeftBarButtonItem: searchBarItem];
-    [searchBar sizeToFit];
+    [self.navigationItem setLeftBarButtonItem: searchBarItem];
+    [searchBar sizeToFit];*/
 }
 
 
@@ -179,7 +196,7 @@ typedef enum{
     songListViewController.artistViewController = self;
     [songListViewController getSongsByArtist: artistName];
     
-    
+    [self.navigationItem setTitle:@"Artists"];
 }
 
 

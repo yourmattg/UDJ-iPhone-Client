@@ -81,6 +81,11 @@ typedef enum{
     [UDJData sharedUDJData].songAddDelegate = nil;
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear: animated];
+    [self initNavBar];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
@@ -167,6 +172,12 @@ typedef enum{
     return cell;
 }
 
+#pragma mark - Navigation bar setup
+
+-(void)initNavBar{
+    [self.navigationController setNavigationBarHidden:NO];
+    
+}
 
 #pragma mark - UI, SearchBar Events
 

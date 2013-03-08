@@ -191,7 +191,13 @@ static PlaylistViewController* _sharedPlaylistViewController;
 
 #pragma mark - View lifecycle
 
+-(void)showNavBar{
+    NSLog(@"showing playlist nav bar");
+    [self.tabBarController.navigationController setNavigationBarHidden:NO];
+}
+
 -(void)initNavBar{
+    NSLog(@"init playlist nav bar");
     [self.tabBarController.navigationItem setTitle:[currentEvent name]];
     
     // override  back button
@@ -231,6 +237,8 @@ static PlaylistViewController* _sharedPlaylistViewController;
     
     self.hostControlView.hidden = YES;
     
+    [self initNavBar];
+    
 }
 
 
@@ -249,7 +257,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self initNavBar];
+    [self showNavBar];
     [self sendRefreshRequest];
 }
 
