@@ -31,9 +31,10 @@
     [super layoutSubviews];
     CGRect contentRect = self.contentView.bounds;
     CGFloat boundsX = contentRect.origin.x;
+    CGFloat boundsY = contentRect.origin.y;
     CGRect frame;
     
-    frame = CGRectMake(boundsX+15, -3, 250, self.frame.size.height);
+    frame = CGRectMake(boundsX+15, boundsY, 250, containerView.frame.size.height);
     eventNameLabel.frame = frame;
     
     
@@ -55,6 +56,12 @@
         [containerView.layer setBorderColor: [borderColor CGColor]];
         [containerView.layer setBorderWidth: 1];
         [self.contentView addSubview:containerView];
+        
+        // add shadow
+        [containerView.layer setShadowColor: [[UIColor blackColor] CGColor]];
+        [containerView.layer setShadowOffset: CGSizeMake(0, 5)];
+        [containerView.layer setShadowOpacity:0.8];
+        [containerView.layer setShadowRadius:5];
         
         eventNameLabel = [[UILabel alloc] init];
         eventNameLabel.font = [UIFont fontWithName:@"Helvetica" size:22];
