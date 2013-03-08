@@ -197,6 +197,9 @@ static PlaylistViewController* _sharedPlaylistViewController;
     // override  back button
     UIBarButtonItem* playersButton = [[UIBarButtonItem alloc] initWithTitle:@"Players" style:UIBarButtonItemStyleBordered target:self action:@selector(backButtonClick:)];
     [self.tabBarController.navigationItem setLeftBarButtonItem:playersButton];
+    
+    // Add control button if we're the host
+    [self checkIfHost];
 }
 
 - (void)viewDidLoad {
@@ -226,10 +229,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     [playerNameLabel setText: currentEvent.name];
     self.leaveButton.hidden = [UDJPlayerManager sharedPlayerManager].isInPlayerMode;
     
-    [self initNavBar];
-    
     self.hostControlView.hidden = YES;
-    [self checkIfHost];
     
 }
 
@@ -249,6 +249,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [self initNavBar];
     [self sendRefreshRequest];
 }
 

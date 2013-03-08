@@ -82,10 +82,31 @@ typedef enum{
     [self.tableView reloadData];
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self initNavBar];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - Navigation bar setup
+
+-(void)initNavBar{
+    UIColor* blueTintColor = [UIColor colorWithRed:(35.0/255.0) green:(59.0/255.0) blue:(79.0/255.0) alpha:1];
+    
+    [self.tabBarController.navigationItem setTitle:@""];
+    
+    // set up search bar
+    searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+    [searchBar setTintColor:blueTintColor];
+    [searchBar setPlaceholder:@"Search for songs"];
+    [searchBar setDelegate:self];
+    UIBarButtonItem* searchBarItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
+    [self.tabBarController.navigationItem setLeftBarButtonItem: searchBarItem];
 }
 
 

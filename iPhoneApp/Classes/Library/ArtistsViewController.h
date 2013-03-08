@@ -21,7 +21,7 @@
 #import "UDJData.h"
 #import "PullRefreshTableViewController.h"
 
-@interface ArtistsViewController : PullRefreshTableViewController <UDJRequestDelegate>
+@interface ArtistsViewController : PullRefreshTableViewController <UDJRequestDelegate,UISearchBarDelegate>
 
 @property(nonatomic,strong) IBOutlet UISearchBar* searchBar;
 @property(nonatomic,strong) NSMutableArray* artistsArray;
