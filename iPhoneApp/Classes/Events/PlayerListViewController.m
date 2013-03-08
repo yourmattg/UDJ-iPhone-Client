@@ -110,6 +110,7 @@
     [self toggleJoiningView: NO];
     [super viewWillAppear:animated];
     [self.navigationController setToolbarHidden: NO animated:YES];
+    [self.navigationItem setTitle:@""];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{

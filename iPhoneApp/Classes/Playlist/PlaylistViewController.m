@@ -17,6 +17,9 @@
  * along with UDJ.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#define CTRLVIEW_HIDDEN_Y           -55
+#define CTRLVIEW_SHOWING_Y          0
+
 #import "PlaylistViewController.h"
 #import "UDJPlayerData.h"
 #import "UDJPlayer.h"
@@ -190,6 +193,10 @@ static PlaylistViewController* _sharedPlaylistViewController;
 
 -(void)initNavBar{
     [self.tabBarController.navigationItem setTitle:[currentEvent name]];
+    
+    // override  back button
+    UIBarButtonItem* playersButton = [[UIBarButtonItem alloc] initWithTitle:@"Players" style:UIBarButtonItemStyleBordered target:self action:@selector(backButtonClick:)];
+    [self.tabBarController.navigationItem setLeftBarButtonItem:playersButton];
 }
 
 - (void)viewDidLoad {
@@ -245,8 +252,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     [self sendRefreshRequest];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
 }
 
@@ -421,16 +427,16 @@ static PlaylistViewController* _sharedPlaylistViewController;
 
 -(IBAction)controlsButtonClick:(id)sender{
     // animate to hide/show view
-    if(hostControlView.frame.origin.y == -5){
+    if(hostControlView.frame.origin.y == CTRLVIEW_HIDDEN_Y){
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:.3];
-        hostControlView.frame =  CGRectMake(0, 44, 320, 50);
+        hostControlView.frame =  CGRectMake(0, CTRLVIEW_SHOWING_Y, 320, 50);
         [UIView commitAnimations];        
     }
-    else if(hostControlView.frame.origin.y == 44){
+    else if(hostControlView.frame.origin.y == CTRLVIEW_SHOWING_Y){
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:.3];
-        hostControlView.frame =  CGRectMake(0, -5, 320, 50);
+        hostControlView.frame =  CGRectMake(0, CTRLVIEW_HIDDEN_Y, 320, 50);
         [UIView commitAnimations];        
     }
 }
@@ -455,11 +461,10 @@ static PlaylistViewController* _sharedPlaylistViewController;
 
 -(void)checkIfHost{
     if([globalData.userID isEqualToString: currentEvent.owner.userID]){
-        // remove after debugging
-        controlButton.hidden = NO;
+        UIBarButtonItem* controlsButton = [[UIBarButtonItem alloc] initWithTitle:@"Controls" style:UIBarButtonItemStyleBordered target:self action:@selector(controlsButtonClick:)];
+        [self.tabBarController.navigationItem setRightBarButtonItem:controlsButton];
         hostControlView.hidden = NO;
-        hostControlView.frame =  CGRectMake(0, -5, 320, 50);
-        
+        hostControlView.frame =  CGRectMake(0, CTRLVIEW_HIDDEN_Y, 320, 50);
     }
 }
 
