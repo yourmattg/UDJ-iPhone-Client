@@ -17,12 +17,15 @@
  * along with UDJ.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#define PCELL_PADDING     5
+
 #import "PlayerCell.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation PlayerCell
 
 @synthesize cellImageView, eventNameLabel;
+@synthesize containerView;
 
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -30,7 +33,7 @@
     CGFloat boundsX = contentRect.origin.x;
     CGRect frame;
     
-    frame = CGRectMake(boundsX+15, 3, 250, 42);
+    frame = CGRectMake(boundsX+15, -3, 250, self.frame.size.height);
     eventNameLabel.frame = frame;
     
     
@@ -41,7 +44,17 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
+        UIColor* containerColor = [UIColor colorWithRed:72.0/255.0 green:147.0/255.0 blue:203.0/255.0 alpha:0.85];
+        UIColor* borderColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.9];
+        
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        containerView = [[UIView alloc] initWithFrame:CGRectMake(PCELL_PADDING, 0, 320-2*PCELL_PADDING, self.frame.size.height)];
+        [containerView setBackgroundColor: containerColor];
+        [containerView.layer setCornerRadius: 5];
+        [containerView.layer setBorderColor: [borderColor CGColor]];
+        [containerView.layer setBorderWidth: 1];
+        [self.contentView addSubview:containerView];
         
         eventNameLabel = [[UILabel alloc] init];
         eventNameLabel.font = [UIFont fontWithName:@"Helvetica" size:22];
@@ -55,8 +68,15 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
+    if(selected){
+        UIColor* containerColor = [UIColor colorWithRed:0.0/255.0 green:73.0/255.0 blue:128.0/255.0 alpha:0.85];
+        [containerView setBackgroundColor:containerColor];
+    }
+    else{
+        UIColor* containerColor = [UIColor colorWithRed:72.0/255.0 green:147.0/255.0 blue:203.0/255.0 alpha:0.85];
+        [containerView setBackgroundColor:containerColor];
+    }
     
-    // Configure the view for the selected state
 }
 
 @end
