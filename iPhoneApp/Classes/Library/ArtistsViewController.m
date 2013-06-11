@@ -81,6 +81,7 @@ typedef enum{
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.navigationItem setTitle:@""];
     [self.tableView reloadData];
 }
 
@@ -116,7 +117,7 @@ typedef enum{
     [self.navigationItem setTitle:@""];
     [self.navigationController.navigationBar setTintColor:blueTintColor];
     
-    /*
+    
     // set up search bar
     searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
     [searchBar setTintColor:blueTintColor];
@@ -124,7 +125,7 @@ typedef enum{
     [searchBar setDelegate:self];
     UIBarButtonItem* searchBarItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
     [self.navigationItem setLeftBarButtonItem: searchBarItem];
-    [searchBar sizeToFit];*/
+    [searchBar sizeToFit];
 }
 
 

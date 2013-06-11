@@ -90,7 +90,6 @@
     self.currentRequestNumber = [NSNumber numberWithInt: globalData.requestCount];
     
     // initialize search bar
-         
     self.navigationController.toolbar.tintColor = [UIColor colorWithRed:(35.0/255.0) green:(59.0/255.0) blue:(79.0/255.0) alpha:1];
     self.navigationController.toolbarHidden = NO;
     

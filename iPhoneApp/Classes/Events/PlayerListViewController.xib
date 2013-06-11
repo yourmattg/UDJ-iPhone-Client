@@ -77,6 +77,7 @@
 						<string key="NSFrame">{{0, 27}, {320, 389}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MSAwAA</bytes>
@@ -173,6 +174,7 @@
 										<string key="NSFrame">{{49, 169}, {88, 37}}</string>
 										<reference key="NSSuperview" ref="291440394"/>
 										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView" ref="188106305"/>
 										<string key="NSReuseIdentifierKey">_NS:225</string>
 										<bool key="IBUIOpaque">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -266,7 +268,7 @@
 				<string key="NSFrame">{{0, 64}, {320, 416}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="188106305"/>
+				<reference key="NSNextKeyView" ref="903847881"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
@@ -492,25 +494,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">PlayerListViewController</string>
 					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="cancelButtonClick:">id</string>
-						<string key="cancelSearchButtonClick:">id</string>
-						<string key="nearbyButtonClick:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="cancelButtonClick:">
-							<string key="name">cancelButtonClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="cancelSearchButtonClick:">
-							<string key="name">cancelSearchButtonClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="nearbyButtonClick:">
-							<string key="name">nearbyButtonClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="cancelSearchButton">UIButton</string>
 						<string key="findNearbyButton">UIButton</string>

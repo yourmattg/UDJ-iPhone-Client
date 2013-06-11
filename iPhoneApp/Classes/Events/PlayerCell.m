@@ -17,7 +17,8 @@
  * along with UDJ.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#define PCELL_PADDING     5
+#define PCELL_HORIZONTAL_PADDING        5
+#define PCELL_VERTICAL_PADDING          2
 
 #import "PlayerCell.h"
 #import <QuartzCore/QuartzCore.h>
@@ -34,7 +35,7 @@
     CGFloat boundsY = contentRect.origin.y;
     CGRect frame;
     
-    frame = CGRectMake(boundsX+15, boundsY, 250, containerView.frame.size.height);
+    frame = CGRectMake(boundsX+15, boundsY+PCELL_VERTICAL_PADDING, 250, containerView.frame.size.height);
     eventNameLabel.frame = frame;
     
     
@@ -50,7 +51,7 @@
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        containerView = [[UIView alloc] initWithFrame:CGRectMake(PCELL_PADDING, 0, 320-2*PCELL_PADDING, self.frame.size.height)];
+        containerView = [[UIView alloc] initWithFrame:CGRectMake(PCELL_HORIZONTAL_PADDING, PCELL_VERTICAL_PADDING, 320-2*PCELL_HORIZONTAL_PADDING, self.frame.size.height-2*PCELL_VERTICAL_PADDING)];
         [containerView setBackgroundColor: containerColor];
         [containerView.layer setCornerRadius: 5];
         [containerView.layer setBorderColor: [borderColor CGColor]];
