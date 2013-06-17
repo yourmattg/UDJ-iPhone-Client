@@ -81,9 +81,13 @@ typedef enum{
     [UDJData sharedUDJData].songAddDelegate = nil;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tabBarController.navigationController setNavigationBarHidden:YES];
+}
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear: animated];
-    [self initNavBar];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -170,13 +174,6 @@ typedef enum{
     [cell.addButton addTarget:self action:@selector(addButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     return cell;
-}
-
-#pragma mark - Navigation bar setup
-
--(void)initNavBar{
-    [self.navigationController setNavigationBarHidden:NO];
-    
 }
 
 #pragma mark - UI, SearchBar Events

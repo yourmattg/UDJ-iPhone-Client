@@ -191,11 +191,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
 
 #pragma mark - View lifecycle
 
--(void)showNavBar{
-    NSLog(@"showing playlist nav bar");
-    [self.tabBarController.navigationController setNavigationBarHidden:NO];
-}
-
 -(void)initNavBar{
     [self.tabBarController.navigationItem setTitle:[currentEvent name]];
     
@@ -252,12 +247,12 @@ static PlaylistViewController* _sharedPlaylistViewController;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.tabBarController.navigationController setNavigationBarHidden:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self showNavBar];
     [self sendRefreshRequest];
 }
 

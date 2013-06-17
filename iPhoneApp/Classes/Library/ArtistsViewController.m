@@ -81,18 +81,17 @@ typedef enum{
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self showNavBar];
     [self.navigationItem setTitle:@""];
     [self.tableView reloadData];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self showNavBar];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -191,6 +190,7 @@ typedef enum{
     songListViewController.artistViewController = self;
     [songListViewController getSongsByArtist: artistName];
     
+    NSLog(@"setting title to artsits");
     [self.navigationItem setTitle:@"Artists"];
 }
 
