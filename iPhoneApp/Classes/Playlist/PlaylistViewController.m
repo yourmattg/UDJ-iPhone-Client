@@ -197,7 +197,6 @@ static PlaylistViewController* _sharedPlaylistViewController;
 }
 
 -(void)initNavBar{
-    NSLog(@"init playlist nav bar");
     [self.tabBarController.navigationItem setTitle:[currentEvent name]];
     
     // override  back button
@@ -238,6 +237,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
     self.hostControlView.hidden = YES;
     
     [self initNavBar];
+    
     
 }
 

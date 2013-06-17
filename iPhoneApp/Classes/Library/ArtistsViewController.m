@@ -31,7 +31,7 @@ typedef enum{
 
 @implementation ArtistsViewController
 
-@synthesize searchBar, cancelSearchButton, artistsArray, globalData;
+@synthesize searchBar, artistsArray, globalData;
 @synthesize statusLabel, searchIndicatorView, currentRequestNumber;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -136,12 +136,6 @@ typedef enum{
     SongListViewController* songListViewController = [[SongListViewController alloc] initWithNibName:@"SongListViewController" bundle:[NSBundle mainBundle]];
     [self.navigationController pushViewController: songListViewController animated:YES];
     [songListViewController getSongsByQuery: theSearchBar.text];
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        cancelSearchButton.alpha = 0;
-        cancelSearchButton.frame = CGRectMake(320, 8, 60, 29); // x usually is 250
-        searchBar.frame = CGRectMake(0, 0, 320, 44);
-    }];
      
     [searchBar sizeToFit];    
     [searchBar setShowsCancelButton:NO animated:YES]; 
