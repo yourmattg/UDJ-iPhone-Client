@@ -54,6 +54,11 @@ typedef enum{
 
 #pragma mark - View lifecycle
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tabBarController.navigationController setNavigationBarHidden:NO];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

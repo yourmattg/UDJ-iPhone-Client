@@ -103,14 +103,12 @@ typedef enum{
 #pragma mark - Navigation bar setup
 
 -(void)showNavBar{
-    NSLog(@"showing artists nav bar");
     // hide tab bar nav controller, set up our own nav bar
     [self.tabBarController.navigationController setNavigationBarHidden:YES];
     [self.navigationController setNavigationBarHidden:NO];
 }
 
 -(void)initNavBar{
-    NSLog(@"init artists nav bar");
     UIColor* blueTintColor = [UIColor colorWithRed:(35.0/255.0) green:(59.0/255.0) blue:(79.0/255.0) alpha:1];
     
     [self.navigationItem setTitle:@""];
@@ -184,6 +182,8 @@ typedef enum{
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString* artistName = [artistsArray objectAtIndex: indexPath.row];
     
+    [self.navigationItem setTitle:@"Artists"];
+    
     // transition to SongListViewController
     SongListViewController* songListViewController = [[SongListViewController alloc] initWithNibName:@"SongListViewController" bundle:[NSBundle mainBundle]];
     [self.navigationController pushViewController:songListViewController animated:YES];
@@ -191,7 +191,6 @@ typedef enum{
     [songListViewController getSongsByArtist: artistName];
     
     NSLog(@"setting title to artsits");
-    [self.navigationItem setTitle:@"Artists"];
 }
 
 
