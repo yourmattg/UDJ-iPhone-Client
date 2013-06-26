@@ -70,6 +70,8 @@
 		A38B62A014C736C70088640D /* udjlauncher.png in Resources */ = {isa = PBXBuildFile; fileRef = A38B629F14C736C70088640D /* udjlauncher.png */; };
 		A38DC7C515C4928700BF9A68 /* UDJPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A38DC7C415C4928700BF9A68 /* UDJPlayerManager.m */; };
 		A38DC7C715C496CF00BF9A68 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A38DC7C615C496CF00BF9A68 /* MediaPlayer.framework */; };
+		A3907C61177A7BF6000B1A48 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3907C5F177A7BF6000B1A48 /* RegisterViewController.m */; };
+		A3907C62177A7BF6000B1A48 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3907C60177A7BF6000B1A48 /* RegisterViewController.xib */; };
 		A3977E8A169F908E0095056E /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A3977E78169F908E0095056E /* AFHTTPClient.m */; };
 		A3977E8B169F908E0095056E /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A3977E7A169F908E0095056E /* AFHTTPRequestOperation.m */; };
 		A3977E8C169F908E0095056E /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A3977E7C169F908E0095056E /* AFImageRequestOperation.m */; };
@@ -209,6 +211,9 @@
 		A38DC7C315C4928700BF9A68 /* UDJPlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJPlayerManager.h; sourceTree = "<group>"; };
 		A38DC7C415C4928700BF9A68 /* UDJPlayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJPlayerManager.m; sourceTree = "<group>"; };
 		A38DC7C615C496CF00BF9A68 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		A3907C5E177A7BF6000B1A48 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		A3907C5F177A7BF6000B1A48 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		A3907C60177A7BF6000B1A48 /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
 		A3977E77169F908E0095056E /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		A3977E78169F908E0095056E /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		A3977E79169F908E0095056E /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -460,6 +465,9 @@
 				28D7ACF60DDB3853001CB0EB /* UDJViewController.h */,
 				28D7ACF70DDB3853001CB0EB /* UDJViewController.m */,
 				2899E5210DE3E06400AC0155 /* UDJViewController.xib */,
+				A3907C5E177A7BF6000B1A48 /* RegisterViewController.h */,
+				A3907C5F177A7BF6000B1A48 /* RegisterViewController.m */,
+				A3907C60177A7BF6000B1A48 /* RegisterViewController.xib */,
 				A3CFBEEE15688811002B7658 /* KeychainItemWrapper.h */,
 				A3CFBEEF15688811002B7658 /* KeychainItemWrapper.m */,
 				A3A2B36E156DD6C600C4FF90 /* UDJStoredData.h */,
@@ -729,6 +737,7 @@
 				A3680CAE160E8B4200ED0509 /* playericon.png in Resources */,
 				A3680CB0160F967400ED0509 /* skipbutton.png in Resources */,
 				A30C4BE01687BD26004D22DA /* Default-568h@2x.png in Resources */,
+				A3907C62177A7BF6000B1A48 /* RegisterViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -785,6 +794,7 @@
 				A3977E90169F908E0095056E /* AFURLConnectionOperation.m in Sources */,
 				A3977E91169F908E0095056E /* AFXMLRequestOperation.m in Sources */,
 				A3977E92169F908E0095056E /* UIImageView+AFNetworking.m in Sources */,
+				A3907C61177A7BF6000B1A48 /* RegisterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -158,7 +158,7 @@
 static UDJUserData* _sharedUDJData = nil;
 
 +(UDJUserData*)sharedUDJData{
-	@synchronized([UDJData class]){
+	@synchronized([UDJUserData class]){
 		if (!_sharedUDJData){
 			_sharedUDJData = [[self alloc] init]; 
     
@@ -169,7 +169,7 @@ static UDJUserData* _sharedUDJData = nil;
 }
 
 +(id)alloc{
-	@synchronized([UDJData class]){
+	@synchronized([UDJUserData class]){
 		NSAssert(_sharedUDJData == nil, @"Attempted to allocate a second instance of a singleton.");
 		_sharedUDJData = [super alloc];
 		return _sharedUDJData;

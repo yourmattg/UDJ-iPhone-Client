@@ -178,6 +178,8 @@
     NSMutableString* urlString = [NSMutableString stringWithString:client.baseURLString];
     [urlString appendString: @"/auth"];
     
+    NSLog(urlString);
+    
     // set up request
     UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = self;
