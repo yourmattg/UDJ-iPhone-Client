@@ -20,7 +20,7 @@
 #import <UIKit/UIKit.h>
 #import "UDJSong.h"
 #import "UDJSongList.h"
-#import "UDJData.h"
+#import "UDJUserData.h"
 
 enum UDJQueryType {
     UDJQueryTypeArtist,
@@ -37,7 +37,7 @@ enum UDJQueryType {
 @property(nonatomic,strong) IBOutlet UIActivityIndicatorView* searchIndicatorView;
 @property(nonatomic,strong) IBOutlet UITableView* songTableView;
 
-@property(nonatomic,strong) UDJData* globalData;
+@property(nonatomic,strong) UDJUserData* globalData;
 @property(nonatomic,strong) NSNumber* currentRequestNumber;
 
 @property(nonatomic,strong) UDJSongList* resultList;

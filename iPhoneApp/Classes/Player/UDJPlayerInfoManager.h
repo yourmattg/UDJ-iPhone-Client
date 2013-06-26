@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "UDJData.h"
+#import "UDJUserData.h"
 
 @interface UDJPlayerInfoManager : NSObject <UDJRequestDelegate>
 
@@ -20,7 +20,7 @@
 @property(nonatomic,strong) NSString* zipCode;
 
 @property(nonatomic,strong) NSManagedObjectContext* managedObjectContext;
-@property(nonatomic,strong) UDJData* globalData;
+@property(nonatomic,strong) UDJUserData* globalData;
 
 +(UDJPlayerInfoManager*)sharedPlayerInfoManager;
 -(void)updateCurrentPlayer;

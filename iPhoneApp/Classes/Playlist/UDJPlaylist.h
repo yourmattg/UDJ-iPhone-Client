@@ -19,7 +19,7 @@
 
 #import <Foundation/Foundation.h>
 #import "UDJSong.h"
-#import "UDJData.h"
+#import "UDJUserData.h"
 #import "UDJPlaylistDelegate.h"
 
 enum VoteStatus {
@@ -36,7 +36,7 @@ enum VoteStatus {
     NSMutableDictionary* voteRecordKeeper;
     
     
-    UDJData* globalData;
+    UDJUserData* globalData;
 }
 
 + (UDJPlaylist*)sharedUDJPlaylist;
@@ -51,7 +51,7 @@ enum VoteStatus {
 @property(nonatomic,strong) NSString* playerID;
 @property(nonatomic,strong) UDJSong* currentSong;
 @property(nonatomic, strong) id<UDJRequestDelegate> delegate;
-@property(nonatomic,strong) UDJData* globalData;
+@property(nonatomic,strong) UDJUserData* globalData;
 
 @property(nonatomic,weak) id<UDJPlaylistDelegate> playlistDelegate;
 

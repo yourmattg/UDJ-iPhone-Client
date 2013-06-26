@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UDJData.h"
+#import "UDJUserData.h"
 #import "UDJPlayerManager.h"
 
 @interface PlayerViewController : UIViewController <UIAlertViewDelegate>
@@ -30,7 +30,7 @@
 @property(nonatomic,strong) IBOutlet UISlider* volumeSlider;
 
 @property(nonatomic,strong) UDJPlayerManager* playerManager;
-@property(nonatomic,strong) UDJData* globalData;
+@property(nonatomic,strong) UDJUserData* globalData;
 @property(nonatomic,strong) NSManagedObjectContext *managedObjectContext;
 @property NSInteger playerID;
 

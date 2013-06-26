@@ -114,7 +114,7 @@
     NSString* urlString  = [NSString stringWithFormat: @"%@/players/%@/users/user", [UDJClient sharedClient].baseURLString, self.currentPlayer.playerID];
     request.URL = [NSURL URLWithString: urlString];
     request.delegate = playerListDelegate;
-    request.additionalHTTPHeaders = [UDJData sharedUDJData].headers;
+    request.additionalHTTPHeaders = [UDJUserData sharedUDJData].headers;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++];
     [request send];
 }
@@ -183,7 +183,7 @@ static UDJPlayerData* _sharedEventList = nil;
     self = [super init];
     
     locationManager = [[LocationManager alloc] init];
-    globalData = [UDJData sharedUDJData];
+    globalData = [UDJUserData sharedUDJData];
     
     return self;
 }

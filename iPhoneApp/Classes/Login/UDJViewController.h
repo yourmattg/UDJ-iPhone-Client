@@ -18,7 +18,7 @@
  */
 
 #import <UIKit/UIKit.h>
-#import "UDJData.h"
+#import "UDJUserData.h"
 #import "UDJStoredData.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -32,7 +32,7 @@
     
     NSNumber* currentRequestNumber;
     
-    UDJData* globalData;
+    UDJUserData* globalData;
     
     UIView* loginBackgroundView;
     UIView* loginView;
@@ -44,7 +44,7 @@
 @property(strong,nonatomic) IBOutlet UITextField *passwordField;
 @property(strong,nonatomic) IBOutlet UIButton *registerButton;
 @property(nonatomic,strong) NSNumber* currentRequestNumber;
-@property(nonatomic,strong) UDJData* globalData;
+@property(nonatomic,strong) UDJUserData* globalData;
 
 @property(nonatomic,strong) IBOutlet UIView* loginView;
 @property(nonatomic,strong) IBOutlet UIView* loginBackgroundView;

@@ -77,7 +77,7 @@
     
     self.tableList = [[NSMutableArray alloc] init];
     
-    self.globalData = [UDJData sharedUDJData];
+    self.globalData = [UDJUserData sharedUDJData];
     
     // initialize login view
     joiningView.layer.cornerRadius = 8;

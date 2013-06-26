@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <MediaPlayer/MediaPlayer.h>
-#import "UDJData.h"
+#import "UDJUserData.h"
 #import <AVFoundation/AVFoundation.h>
 #import "UDJPlaylist.h"
 
@@ -28,7 +28,7 @@ typedef enum {
 
 @property(nonatomic,strong) NSManagedObjectContext* managedObjectContext;
 @property(nonatomic,strong) NSMutableDictionary* songSyncDictionary;
-@property(nonatomic,strong) UDJData* globalData;
+@property(nonatomic,strong) UDJUserData* globalData;
 
 @property(nonatomic,strong) AVQueuePlayer* audioPlayer;
 @property(nonatomic,strong) MPMediaItem* currentMediaItem;

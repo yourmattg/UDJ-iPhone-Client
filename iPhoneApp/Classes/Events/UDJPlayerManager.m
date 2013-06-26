@@ -62,7 +62,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
         UDJAppDelegate* appDelegate = (UDJAppDelegate*)[[UIApplication sharedApplication] delegate];
         managedObjectContext = appDelegate.managedObjectContext;
         
-        self.globalData = [UDJData sharedUDJData];
+        self.globalData = [UDJUserData sharedUDJData];
 
         self.audioPlayer = [[AVQueuePlayer alloc] init];
         [audioPlayer setActionAtItemEnd: AVPlayerActionAtItemEndAdvance];
@@ -228,7 +228,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     request.userData = @"songSetAdd";
     
     // set up the headers, including which type of request this is
-    NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJData sharedUDJData].headers];
+    NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJUserData sharedUDJData].headers];
     [requestHeaders setValue:@"playerMethodsDelegate" forKey:@"delegate"];
     [requestHeaders setValue:@"text/json" forKey:@"content-type"];
     request.additionalHTTPHeaders = requestHeaders;
@@ -256,7 +256,7 @@ static UDJPlayerManager* _sharedPlayerManager = nil;
     request.params = [NSDictionary dictionaryWithObjectsAndKeys:[songs JSONString], @"to_delete", [[NSArray new] JSONString], @"to_add", nil];
     
     // set up the headers, including which type of request this is
-    NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJData sharedUDJData].headers];
+    NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJUserData sharedUDJData].headers];
     [requestHeaders setValue:@"playerMethodsDelegate" forKey:@"delegate"];
     [requestHeaders setValue:@"text/json" forKey:@"content-type"];
     request.additionalHTTPHeaders = requestHeaders;

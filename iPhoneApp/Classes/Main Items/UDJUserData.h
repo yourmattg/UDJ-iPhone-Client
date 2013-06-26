@@ -20,7 +20,7 @@
 #import <Foundation/Foundation.h>
 #import "UDJRequestDelegate.h"
 
-@interface UDJData : NSObject<UDJRequestDelegate>{
+@interface UDJUserData : NSObject<UDJRequestDelegate>{
     NSString* ticket;
     NSString* username;
 }
@@ -30,6 +30,8 @@
 @property(nonatomic,strong) NSMutableDictionary* headers;
 @property(nonatomic,strong) NSString* userID;
 @property(nonatomic,strong) NSString* username;
+@property(nonatomic,strong) NSString* firstName;
+@property(nonatomic,strong) NSString* lastName;
 @property(nonatomic,strong) NSString* password;
 @property BOOL loggedIn;
 
@@ -38,7 +40,7 @@
 @property(nonatomic,unsafe_unretained) UIViewController* songAddDelegate;
 @property(nonatomic,unsafe_unretained) UIViewController* playerCreateDelegate;
 
-+(UDJData*)sharedUDJData;
++(UDJUserData*)sharedUDJData;
 -(BOOL)ticketIsValid;
 -(void)renewTicket;
 -(void)handleRenewTicket:(UDJResponse*)response;

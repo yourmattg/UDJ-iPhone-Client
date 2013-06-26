@@ -20,7 +20,7 @@
 #import "ParticipantManager.h"
 #import "UDJUser.h"
 #import "UDJPlayerData.h"
-#import "UDJData.h"
+#import "UDJUserData.h"
 #import "UDJClient.h"
 #import "JSONKit.h"
 

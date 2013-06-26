@@ -8,7 +8,7 @@
 
 #import "UDJRequest.h"
 #import "UDJClient.h"
-#import "UDJData.h"
+#import "UDJUserData.h"
 #import "AFHTTPRequestOperation.h"
 
 
@@ -50,7 +50,7 @@
 
 -(id)init{
     if(self = [super init]){
-        self.additionalHTTPHeaders = [UDJData sharedUDJData].headers;
+        self.additionalHTTPHeaders = [UDJUserData sharedUDJData].headers;
     }
     return self;
 }

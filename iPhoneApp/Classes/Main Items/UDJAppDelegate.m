@@ -23,7 +23,7 @@
 #import "UDJPlayerData.h"
 #import "UDJPlaylist.h"
 #import "UDJSongList.h"
-#import "UDJData.h"
+#import "UDJUserData.h"
 #import "UDJClient.h"
 
 @implementation UDJAppDelegate
@@ -104,7 +104,7 @@
     // Override point for customization after application launch.
     
     //init UDJData
-    UDJData* udjData = [[UDJData alloc] init];
+    UDJUserData* udjData = [[UDJUserData alloc] init];
     udjData.requestCount = 0;
     
     [UDJPlayerData new]; // eventData singleton
@@ -112,13 +112,12 @@
     
     
     // initialize  UDClient
-    baseUrl = @"https://udjplayer.com:4898/udj/0_6";
+    baseUrl = @"https://udjplayer.com:4898/udj/0_7";
     UDJClient* client = [UDJClient alloc];
     client = [client initWithBaseURL: [NSURL URLWithString: baseUrl]];
-    client.baseURLString = @"https://udjplayer.com:4898/udj/0_6";;
-    NSLog(@"Base Url: %@", client.baseURL.absoluteString);
+    client.baseURLString = @"https://udjplayer.com:4898/udj/0_7";;
     
-    [UDJPlaylist sharedUDJPlaylist].globalData = [UDJData sharedUDJData];
+    [UDJPlaylist sharedUDJPlaylist].globalData = [UDJUserData sharedUDJData];
     
     //create a UDJViewController (the login screen), and make it the root view
     viewController    = [[UDJViewController alloc] initWithNibName:@"UDJViewController" bundle:[NSBundle mainBundle]];
@@ -166,9 +165,9 @@
      */
     
     // TODO: check if our ticket is still valid
-    if([UDJData sharedUDJData].username != nil && ![[UDJData sharedUDJData] ticketIsValid]){
+    if([UDJUserData sharedUDJData].username != nil && ![[UDJUserData sharedUDJData] ticketIsValid]){
         NSLog(@"Renewing the ticket");
-        [[UDJData sharedUDJData] renewTicket];
+        [[UDJUserData sharedUDJData] renewTicket];
     }
 }
 

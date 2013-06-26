@@ -17,7 +17,7 @@
  * along with UDJ.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "UDJData.h"
+#import "UDJUserData.h"
 #import "UDJStoredData.h"
 #import "UDJAppDelegate.h"
 #import "JSONKit.h"
@@ -26,10 +26,12 @@
 #import "UDJPlayerManager.h"
 #import "UDJClient.h"
 
-@implementation UDJData
+@implementation UDJUserData
 
 @synthesize requestCount, ticket, headers, userID, username, password, loggedIn, managedObjectContext;
 @synthesize songAddDelegate, playerCreateDelegate;
+@synthesize firstName;
+@synthesize lastName;
 
 
 #pragma mark - Ticket validation
@@ -153,9 +155,9 @@
 
 
 #pragma mark Singleton methods
-static UDJData* _sharedUDJData = nil;
+static UDJUserData* _sharedUDJData = nil;
 
-+(UDJData*)sharedUDJData{
++(UDJUserData*)sharedUDJData{
 	@synchronized([UDJData class]){
 		if (!_sharedUDJData){
 			_sharedUDJData = [[self alloc] init]; 

@@ -20,7 +20,7 @@
 #import <Foundation/Foundation.h>
 #import "LocationManager.h"
 #import "UDJPlayer.h"
-#import "UDJData.h"
+#import "UDJUserData.h"
 
 @interface UDJPlayerData : NSObject{
     
@@ -28,7 +28,7 @@
     NSString* lastSearchParam; // the last string we tried searching
     UDJPlayer* currentPlayer; // the event id the client is logged in/trying to connect to
     
-    UDJData* globalData;
+    UDJUserData* globalData;
     
     UIViewController* getEventsDelegate; // this will be the EventSearchViewController
     UIViewController* enterEventDelegate; // this will be the EventResultsViewController
@@ -47,7 +47,7 @@
 @property(nonatomic,strong) NSString* lastSearchParam;
 @property(nonatomic,strong) UDJPlayer* currentPlayer;
 @property(nonatomic,strong) LocationManager* locationManager;
-@property(nonatomic,strong) UDJData* globalData;
+@property(nonatomic,strong) UDJUserData* globalData;
 @property(nonatomic,strong) id<UDJRequestDelegate> playerListDelegate;
 @property(nonatomic,strong) UIViewController* leaveEventDelegate;
 

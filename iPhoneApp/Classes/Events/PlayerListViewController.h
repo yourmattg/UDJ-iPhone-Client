@@ -18,7 +18,7 @@
  */
 
 #import <UIKit/UIKit.h>
-#import "UDJData.h"
+#import "UDJUserData.h"
 #import "UDJPlayerData.h"
 #import "PullRefreshTableViewController.h"
 
@@ -40,7 +40,7 @@ enum SearchType {
 @property(nonatomic,strong) IBOutlet UITableView* tableView;
 @property(nonatomic,strong) IBOutlet UILabel* statusLabel;
 
-@property(nonatomic,strong) UDJData* globalData;
+@property(nonatomic,strong) UDJUserData* globalData;
 @property(nonatomic,strong) NSNumber* currentRequestNumber;
 
 @property(nonatomic,strong) IBOutlet UISearchBar* playerSearchBar;

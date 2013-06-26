@@ -59,13 +59,13 @@ typedef enum{
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    globalData = [UDJData sharedUDJData];
+    globalData = [UDJUserData sharedUDJData];
     MAX_RESULTS = 100;
     
     searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
     
     // tell UDJData that this is the songAddDelegate
-    [UDJData sharedUDJData].songAddDelegate = self;
+    [UDJUserData sharedUDJData].songAddDelegate = self;
 }
 
 - (void)viewDidUnload
@@ -78,7 +78,7 @@ typedef enum{
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear: animated];
-    [UDJData sharedUDJData].songAddDelegate = nil;
+    [UDJUserData sharedUDJData].songAddDelegate = nil;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -233,17 +233,17 @@ typedef enum{
     
     // create request
     UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
-    request.delegate = [UDJData sharedUDJData];
+    request.delegate = [UDJUserData sharedUDJData];
     request.method = UDJRequestMethodGET;
     
     // set up the headers, including which type of request this is
-    NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJData sharedUDJData].headers];
+    NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJUserData sharedUDJData].headers];
     [requestHeaders setValue:@"songAddDelegate" forKey:@"delegate"];
     request.additionalHTTPHeaders = requestHeaders;
     
     // track current request number
-    currentRequestNumber = [NSNumber numberWithInt: [UDJData sharedUDJData].requestCount];
-    request.userData = [NSNumber numberWithInt: [UDJData sharedUDJData].requestCount++];
+    currentRequestNumber = [NSNumber numberWithInt: [UDJUserData sharedUDJData].requestCount];
+    request.userData = [NSNumber numberWithInt: [UDJUserData sharedUDJData].requestCount++];
     
     //send request
     [request send]; 
@@ -271,17 +271,17 @@ typedef enum{
     
     // create request
     UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
-    request.delegate = [UDJData sharedUDJData];
+    request.delegate = [UDJUserData sharedUDJData];
     request.method = UDJRequestMethodGET;
 
     // set up the headers, including which type of request this is
-    NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJData sharedUDJData].headers];
+    NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJUserData sharedUDJData].headers];
     [requestHeaders setValue:@"songAddDelegate" forKey:@"delegate"];
     request.additionalHTTPHeaders = requestHeaders;
     
     // track current request number
-    currentRequestNumber = [NSNumber numberWithInt: [UDJData sharedUDJData].requestCount];
-    request.userData = [NSNumber numberWithInt: [UDJData sharedUDJData].requestCount++];
+    currentRequestNumber = [NSNumber numberWithInt: [UDJUserData sharedUDJData].requestCount];
+    request.userData = [NSNumber numberWithInt: [UDJUserData sharedUDJData].requestCount++];
     
     //send request
     [request send]; 

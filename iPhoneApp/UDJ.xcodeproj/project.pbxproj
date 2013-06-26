@@ -51,7 +51,7 @@
 		A3536FB314A5218F00B5C95F /* UDJPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A3536FB214A5218F00B5C95F /* UDJPlayer.m */; };
 		A35D3DF114F985460007B374 /* votedown.png in Resources */ = {isa = PBXBuildFile; fileRef = A35D3DEF14F985460007B374 /* votedown.png */; };
 		A35D3DF214F985460007B374 /* voteup.png in Resources */ = {isa = PBXBuildFile; fileRef = A35D3DF014F985460007B374 /* voteup.png */; };
-		A35E3E9A1516680100A2882D /* UDJData.m in Sources */ = {isa = PBXBuildFile; fileRef = A35E3E991516680100A2882D /* UDJData.m */; };
+		A35E3E9A1516680100A2882D /* UDJUserData.m in Sources */ = {isa = PBXBuildFile; fileRef = A35E3E991516680100A2882D /* UDJUserData.m */; };
 		A35F57F41572D25D004AA5DB /* PullRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A35F57F31572D25D004AA5DB /* PullRefreshTableViewController.m */; };
 		A35F57F61572D477004AA5DB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35F57F51572D477004AA5DB /* QuartzCore.framework */; };
 		A35F57F91572DD04004AA5DB /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A35F57F81572DD04004AA5DB /* arrow.png */; };
@@ -182,8 +182,8 @@
 		A3536FB214A5218F00B5C95F /* UDJPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJPlayer.m; sourceTree = "<group>"; };
 		A35D3DEF14F985460007B374 /* votedown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = votedown.png; sourceTree = "<group>"; };
 		A35D3DF014F985460007B374 /* voteup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voteup.png; sourceTree = "<group>"; };
-		A35E3E981516680100A2882D /* UDJData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJData.h; sourceTree = "<group>"; };
-		A35E3E991516680100A2882D /* UDJData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJData.m; sourceTree = "<group>"; };
+		A35E3E981516680100A2882D /* UDJUserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDJUserData.h; sourceTree = "<group>"; };
+		A35E3E991516680100A2882D /* UDJUserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDJUserData.m; sourceTree = "<group>"; };
 		A35EEE1C15E194D7008CB29B /* UDJPlaylistDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UDJPlaylistDelegate.h; sourceTree = "<group>"; };
 		A35F57F21572D25D004AA5DB /* PullRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullRefreshTableViewController.h; sourceTree = "<group>"; };
 		A35F57F31572D25D004AA5DB /* PullRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullRefreshTableViewController.m; sourceTree = "<group>"; };
@@ -622,8 +622,8 @@
 			children = (
 				A3720B2E14C74FE800D1E30C /* LocationManager.h */,
 				A3720B2F14C74FE800D1E30C /* LocationManager.m */,
-				A35E3E981516680100A2882D /* UDJData.h */,
-				A35E3E991516680100A2882D /* UDJData.m */,
+				A35E3E981516680100A2882D /* UDJUserData.h */,
+				A35E3E991516680100A2882D /* UDJUserData.m */,
 			);
 			path = "Main Items";
 			sourceTree = "<group>";
@@ -753,7 +753,7 @@
 				A3265DB314C6101400FC692B /* PlaylistEntryCell.m in Sources */,
 				A3720B3014C74FE800D1E30C /* LocationManager.m in Sources */,
 				A3F58D9514C753D300E350F4 /* UDJEventGoer.m in Sources */,
-				A35E3E9A1516680100A2882D /* UDJData.m in Sources */,
+				A35E3E9A1516680100A2882D /* UDJUserData.m in Sources */,
 				A3C608FA151E3593004AB623 /* PlayerCell.m in Sources */,
 				A31AA6AB1561CE3B0032FEAB /* UDJUser.m in Sources */,
 				A3028B861564A2AE00EF6EE8 /* MainTabBarController.m in Sources */,

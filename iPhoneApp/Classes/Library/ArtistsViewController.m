@@ -59,7 +59,7 @@ typedef enum{
     // Do any additional setup after loading the view from its nib.
     
     // get global data
-    globalData = [UDJData sharedUDJData];
+    globalData = [UDJUserData sharedUDJData];
     
     // intialize artists array
     artistsArray = [[NSMutableArray alloc] initWithCapacity:50];
@@ -220,7 +220,7 @@ typedef enum{
     request.additionalHTTPHeaders = globalData.headers;
     
     // track current request number
-    currentRequestNumber = [NSNumber numberWithInt: [UDJData sharedUDJData].requestCount];
+    currentRequestNumber = [NSNumber numberWithInt: [UDJUserData sharedUDJData].requestCount];
     request.userData = [NSNumber numberWithInt: globalData.requestCount++];
     
     //send request

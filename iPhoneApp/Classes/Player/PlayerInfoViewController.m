@@ -190,7 +190,7 @@
     
     [self initTextFields];
     
-    self.globalData = [UDJData sharedUDJData];
+    self.globalData = [UDJUserData sharedUDJData];
     self.globalData.playerCreateDelegate = self;
     self.playerManager = [UDJPlayerManager sharedPlayerManager];
     self.playerInfoManager = [UDJPlayerInfoManager sharedPlayerInfoManager];
@@ -358,7 +358,7 @@
     request.userData = @"createPlayer";
     
     // set up the headers, including which type of request this is
-    NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJData sharedUDJData].headers];
+    NSMutableDictionary* requestHeaders = [NSMutableDictionary dictionaryWithDictionary: [UDJUserData sharedUDJData].headers];
     [requestHeaders setValue:@"playerCreateDelegate" forKey:@"delegate"];
     [requestHeaders setValue:@"text/json" forKey:@"content-type"];
     request.additionalHTTPHeaders = requestHeaders;

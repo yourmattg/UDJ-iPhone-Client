@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UDJData.h"
+#import "UDJUserData.h"
 #import "UDJPlayerManager.h"
 #import "UDJPlayerInfoManager.h"
 
@@ -46,7 +46,7 @@
 
 @property(nonatomic,strong) UDJPlayerInfoManager* playerInfoManager;
 @property(nonatomic,strong) UDJPlayerManager* playerManager;
-@property(nonatomic,strong) UDJData* globalData;
+@property(nonatomic,strong) UDJUserData* globalData;
 @property(nonatomic,strong) NSManagedObjectContext *managedObjectContext;
 @property(nonatomic,strong) NSString* playerID;
 @property(nonatomic,strong) NSMutableDictionary* songSyncDictionary;

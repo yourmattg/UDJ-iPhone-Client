@@ -206,7 +206,7 @@ static PlaylistViewController* _sharedPlaylistViewController;
 
     [super viewDidLoad];
     
-    self.globalData = [UDJData sharedUDJData];
+    self.globalData = [UDJUserData sharedUDJData];
     
     _sharedPlaylistViewController = self;
     

@@ -18,12 +18,12 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "UDJData.h"
+#import "UDJUserData.h"
 
 @interface ParticipantManager : NSObject <UITableViewDataSource, UDJRequestDelegate>
 
 @property(nonatomic,strong) NSString* playerID;
-@property(nonatomic,strong) UDJData* globalData;
+@property(nonatomic,strong) UDJUserData* globalData;
 @property(nonatomic,strong) NSMutableArray* participantArray;
 
 -(void)getPlayerParticipants;

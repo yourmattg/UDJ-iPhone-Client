@@ -64,7 +64,7 @@ typedef enum{
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    globalData = [UDJData sharedUDJData];
+    globalData = [UDJUserData sharedUDJData];
     MAX_RESULTS = 50;
     
     [self sendRandomSongRequest];

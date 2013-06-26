@@ -18,14 +18,14 @@
  */
 
 #import <UIKit/UIKit.h>
-#import "UDJData.h"
+#import "UDJUserData.h"
 #import "PullRefreshTableViewController.h"
 
 @interface ArtistsViewController : PullRefreshTableViewController <UDJRequestDelegate,UISearchBarDelegate>
 
 @property(nonatomic,strong) IBOutlet UISearchBar* searchBar;
 @property(nonatomic,strong) NSMutableArray* artistsArray;
-@property(nonatomic,strong) IBOutlet UDJData* globalData;
+@property(nonatomic,strong) IBOutlet UDJUserData* globalData;
 
 @property(nonatomic,strong) IBOutlet UILabel* statusLabel;
 @property(nonatomic,strong) IBOutlet UIActivityIndicatorView* searchIndicatorView;

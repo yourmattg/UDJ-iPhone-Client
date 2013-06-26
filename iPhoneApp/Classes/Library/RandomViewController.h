@@ -19,7 +19,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UDJSongList.h"
-#import "UDJData.h"
+#import "UDJUserData.h"
 #import "PullRefreshTableViewController.h"
 
 @interface RandomViewController : PullRefreshTableViewController <UDJRequestDelegate>{
@@ -28,7 +28,7 @@
 
 @property(nonatomic,strong) UDJSongList* resultList;
 
-@property(nonatomic,strong) UDJData* globalData;
+@property(nonatomic,strong) UDJUserData* globalData;
 @property(nonatomic,strong) NSNumber* currentRequestNumber;
 
 @property(nonatomic,strong) IBOutlet UIView* addNotificationView;

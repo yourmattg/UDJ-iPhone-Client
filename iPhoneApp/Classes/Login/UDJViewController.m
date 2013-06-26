@@ -19,7 +19,7 @@
 
 #import "UDJViewController.h"
 #import "PlaylistViewController.h"
-#import "UDJData.h"
+#import "UDJUserData.h"
 #import "KeychainItemWrapper.h"
 #import "UDJAppDelegate.h"
 #import "PlayerListViewController.h"
@@ -43,7 +43,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	[self.navigationController setNavigationBarHidden:YES];
-    globalData = [UDJData sharedUDJData];
+    globalData = [UDJUserData sharedUDJData];
     
     // initialize login view
     loginBackgroundView.hidden = YES;
@@ -172,7 +172,7 @@
     NSDictionary* nameAndPass = [NSDictionary dictionaryWithObjectsAndKeys:username, @"username", pass, @"password", nil]; 
     
     // put the API version in the header
-    NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"0.5", @"X-Udj-Api-Version", nil];
+    NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"0.7", @"X-Udj-Api-Version", nil];
 
     // create the URL
     NSMutableString* urlString = [NSMutableString stringWithString:client.baseURLString];

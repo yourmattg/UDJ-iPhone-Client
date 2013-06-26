@@ -38,7 +38,7 @@ typedef enum{
     UILabel* currentSongArtistLabel;
     UILabel* statusLabel;
     UDJSong* selectedSong;
-    UDJData* globalData;
+    UDJUserData* globalData;
     
     UIView* leavingBackgroundView;
     UIView* leavingView;
@@ -59,7 +59,7 @@ typedef enum{
 @property (nonatomic, strong) IBOutlet UILabel* currentSongArtistLabel;
 @property(nonatomic,strong) IBOutlet UILabel* statusLabel;
 @property(nonatomic,strong) NSNumber* currentRequestNumber;
-@property(nonatomic,strong) UDJData* globalData;
+@property(nonatomic,strong) UDJUserData* globalData;
 
 @property(nonatomic,strong) IBOutlet UIButton* leaveButton;
 @property(nonatomic,strong) IBOutlet UIButton* libraryButton;
