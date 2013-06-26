@@ -72,6 +72,7 @@
 		A38DC7C715C496CF00BF9A68 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A38DC7C615C496CF00BF9A68 /* MediaPlayer.framework */; };
 		A3907C61177A7BF6000B1A48 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3907C5F177A7BF6000B1A48 /* RegisterViewController.m */; };
 		A3907C62177A7BF6000B1A48 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3907C60177A7BF6000B1A48 /* RegisterViewController.xib */; };
+		A3907C64177A8172000B1A48 /* white_back_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A3907C63177A8172000B1A48 /* white_back_arrow.png */; };
 		A3977E8A169F908E0095056E /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A3977E78169F908E0095056E /* AFHTTPClient.m */; };
 		A3977E8B169F908E0095056E /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A3977E7A169F908E0095056E /* AFHTTPRequestOperation.m */; };
 		A3977E8C169F908E0095056E /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A3977E7C169F908E0095056E /* AFImageRequestOperation.m */; };
@@ -214,6 +215,7 @@
 		A3907C5E177A7BF6000B1A48 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		A3907C5F177A7BF6000B1A48 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		A3907C60177A7BF6000B1A48 /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
+		A3907C63177A8172000B1A48 /* white_back_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white_back_arrow.png; sourceTree = "<group>"; };
 		A3977E77169F908E0095056E /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		A3977E78169F908E0095056E /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		A3977E79169F908E0095056E /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -544,6 +546,7 @@
 		A3C6A4741565FA1400F1E42E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				A3907C63177A8172000B1A48 /* white_back_arrow.png */,
 				A3680CAF160F967400ED0509 /* skipbutton.png */,
 				A3680CAD160E8B4200ED0509 /* playericon.png */,
 				A3680CAB16067D2700ED0509 /* participanticon.png */,
@@ -738,6 +741,7 @@
 				A3680CB0160F967400ED0509 /* skipbutton.png in Resources */,
 				A30C4BE01687BD26004D22DA /* Default-568h@2x.png in Resources */,
 				A3907C62177A7BF6000B1A48 /* RegisterViewController.xib in Resources */,
+				A3907C64177A8172000B1A48 /* white_back_arrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

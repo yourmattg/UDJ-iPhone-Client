@@ -24,6 +24,7 @@
 #import "UDJAppDelegate.h"
 #import "PlayerListViewController.h"
 #import "JSONKit.h"
+#import "RegisterViewController.h"
 
 
 @implementation UDJViewController
@@ -258,7 +259,9 @@
 
 // Send user to the register page
 -(IBAction)registerButtonClick:(id)sender{
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.udjplayer.com/registration/register/"]];
+    //[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.udjplayer.com/registration/register/"]];
+    RegisterViewController* registerViewController = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:[NSBundle mainBundle]];
+    [self.navigationController pushViewController:registerViewController animated:YES];
 }
 
 // Hide the keyboard when user hits return
