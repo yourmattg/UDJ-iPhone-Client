@@ -171,7 +171,7 @@
     NSString* jsonString = [nameAndPass JSONString];
     
     // put the API version in the header
-    NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"0.7", @"X-Udj-Api-Version", nil];
+    NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"0.7", @"X-Udj-Api-Version", @"text/json", @"content-type", nil];
 
     // create the URL
     NSMutableString* urlString = [NSMutableString stringWithString:client.baseURLString];
