@@ -94,7 +94,6 @@
 }
 
 -(void)saveUsernameAndDate{
-    
     UDJStoredData* storedData;
     NSError* error;
     
@@ -140,7 +139,6 @@
 }
 
 -(void)checkForUsername{
-    
     UDJStoredData* storedData;
     NSError* error;
     
@@ -166,11 +164,11 @@
 
 // authenticate: sends a POST with the username and password
 - (void) sendAuthRequest:(NSString*)username password:(NSString*)pass{
-    
     UDJClient* client = [UDJClient sharedClient];
     
     // make sure the right api version is being passed in
-    NSDictionary* nameAndPass = [NSDictionary dictionaryWithObjectsAndKeys:username, @"username", pass, @"password", nil]; 
+    NSDictionary* nameAndPass = [NSDictionary dictionaryWithObjectsAndKeys:username, @"username", pass, @"password", nil];
+    NSString* jsonString = [nameAndPass JSONString];
     
     // put the API version in the header
     NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"0.7", @"X-Udj-Api-Version", nil];
@@ -179,12 +177,10 @@
     NSMutableString* urlString = [NSMutableString stringWithString:client.baseURLString];
     [urlString appendString: @"/auth"];
     
-    NSLog(urlString);
-    
     // set up request
     UDJRequest* request = [UDJRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.delegate = self;
-    request.params = nameAndPass;
+    request.HTTPBodyString = jsonString;
     request.method = UDJRequestMethodPOST;
     request.userData = [NSNumber numberWithInt: globalData.requestCount++]; 
     request.additionalHTTPHeaders = headers;
@@ -232,10 +228,14 @@
         [authNotification show];        
     }
     
-    if([response statusCode] == 501){
+    else if([response statusCode] == 501){
         //let user know they have to update
         UIAlertView* authNotification = [[UIAlertView alloc] initWithTitle:@"Needs Update" message:@"Your UDJ client is outdated. Please download the latest version." delegate: self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Update", nil];
         [authNotification show];        
+    }
+    else{
+        UIAlertView* authNotification = [[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Something went wrong on our end. Please try again later." delegate: self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [authNotification show];
     }
 }
 

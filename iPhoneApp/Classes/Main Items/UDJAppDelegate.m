@@ -112,10 +112,10 @@
     
     
     // initialize  UDClient
-    baseUrl = @"https://udjplayer.com:4898/udj/0_6";
+    baseUrl = @"https://udjplayer.com:4898/udj/0_7";
     UDJClient* client = [UDJClient alloc];
     client = [client initWithBaseURL: [NSURL URLWithString: baseUrl]];
-    client.baseURLString = @"https://udjplayer.com:4898/udj/0_6";;
+    client.baseURLString = @"https://udjplayer.com:4898/udj/0_7";;
     
     [UDJPlaylist sharedUDJPlaylist].globalData = [UDJUserData sharedUDJData];
     
