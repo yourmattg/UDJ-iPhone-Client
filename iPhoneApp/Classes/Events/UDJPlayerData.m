@@ -35,15 +35,24 @@
     
     // create URL
     NSString* urlString = client.baseURLString;
-
-    urlString = [urlString stringByAppendingFormat:@"%@%f%@%f", @"/players/", latitude, @"/", longitude];
+    urlString = [urlString stringByAppendingString:@"/players"];
     NSURL* url = [NSURL URLWithString:urlString];
+    
+    // create location dictionary
+    NSDictionary* locationDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  [NSNumber numberWithFloat:latitude], @"latitude",
+                                  [NSNumber numberWithFloat:longitude], @"longitude", nil];
     
     // create GET request
     UDJRequest* request = [[UDJRequest alloc] initWithURL:url];
     request.delegate = playerListDelegate;
+    request.HTTPBodyString = [locationDict JSONString];
+    NSLog([url absoluteString]);
+    NSLog(@"BODY: %@", request.HTTPBodyString);
     request.method = UDJRequestMethodGET;
-    request.additionalHTTPHeaders = globalData.headers;    
+    NSMutableDictionary* dictWithContentType = [NSMutableDictionary dictionaryWithDictionary:globalData.headers];
+    [dictWithContentType setObject:@"text/json" forKey:@"content-type"];
+    request.additionalHTTPHeaders = dictWithContentType;
     
     request.userData = [NSNumber numberWithInt: globalData.requestCount++]; 
     
@@ -63,6 +72,7 @@
     urlString = [urlString stringByAppendingString:@"/players?name="];
     urlString = [urlString stringByAppendingString:name];
     NSURL* url = [NSURL URLWithString:urlString];
+    NSLog(@"URL: %@", [url absoluteString]);
     
     //create GET request with correct parameters and headers
     UDJRequest* request = [[UDJRequest alloc] initWithURL:url];

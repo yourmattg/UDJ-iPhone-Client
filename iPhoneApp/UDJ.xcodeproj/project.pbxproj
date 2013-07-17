@@ -16,7 +16,6 @@
 		28D7ACF80DDB3853001CB0EB /* UDJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* UDJViewController.m */; };
 		A3028B861564A2AE00EF6EE8 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3028B841564A2AE00EF6EE8 /* MainTabBarController.m */; };
 		A3028B871564A2AE00EF6EE8 /* MainTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3028B851564A2AE00EF6EE8 /* MainTabBarController.xib */; };
-		A302C4121593F52A008B3793 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = A302C4111593F52A008B3793 /* cancel.png */; };
 		A30C4BE01687BD26004D22DA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A30C4BDF1687BD26004D22DA /* Default-568h@2x.png */; };
 		A30CE22C1591695800DA054D /* backg.png in Resources */ = {isa = PBXBuildFile; fileRef = A30CE22B1591695800DA054D /* backg.png */; };
 		A30CE22E15916C0500DA054D /* underline.png in Resources */ = {isa = PBXBuildFile; fileRef = A30CE22D15916C0500DA054D /* underline.png */; };
@@ -37,7 +36,6 @@
 		A3360BCF14F5E14F00541726 /* NewPlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3360BCE14F5E14F00541726 /* NewPlaylistViewController.xib */; };
 		A33C4614148F0707009C1BC6 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A33C4612148F0707009C1BC6 /* PlaylistViewController.m */; };
 		A33EE1E115684B7D00D49B85 /* playing.png in Resources */ = {isa = PBXBuildFile; fileRef = A33EE1E015684B7D00D49B85 /* playing.png */; };
-		A341B92914F86C61001892C5 /* addbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A341B92814F86C61001892C5 /* addbutton.png */; };
 		A341E22E15E2B45300E92D84 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A341E22D15E2B45300E92D84 /* AVFoundation.framework */; };
 		A341E23015E2BC9200E92D84 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A341E22F15E2BC9200E92D84 /* CoreMedia.framework */; };
 		A3443FC515C78D73005A6A67 /* UDJStoredLibraryEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A3443FC415C78D73005A6A67 /* UDJStoredLibraryEntry.m */; };
@@ -60,6 +58,7 @@
 		A3680CAE160E8B4200ED0509 /* playericon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3680CAD160E8B4200ED0509 /* playericon.png */; };
 		A3680CB0160F967400ED0509 /* skipbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A3680CAF160F967400ED0509 /* skipbutton.png */; };
 		A36CF96215BF87DC0032AF31 /* UDJStoredPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A36CF96115BF87DC0032AF31 /* UDJStoredPlayer.m */; };
+		A36F915917962CC70036B6C0 /* addbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A36F915817962CC70036B6C0 /* addbutton.png */; };
 		A3720B3014C74FE800D1E30C /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A3720B2F14C74FE800D1E30C /* LocationManager.m */; };
 		A3720B3214C7513600D1E30C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3720B3114C7513600D1E30C /* CoreLocation.framework */; };
 		A3720B3414C7514400D1E30C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3720B3314C7514400D1E30C /* CoreFoundation.framework */; };
@@ -98,7 +97,6 @@
 		A3C6A46A1565E6FF00F1E42E /* darknavbar.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C6A4691565E6FF00F1E42E /* darknavbar.png */; };
 		A3C6A4721565F9FA00F1E42E /* RandomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C6A4701565F9FA00F1E42E /* RandomViewController.m */; };
 		A3C6A4731565F9FA00F1E42E /* RandomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3C6A4711565F9FA00F1E42E /* RandomViewController.xib */; };
-		A3C6A47C1566017A00F1E42E /* artists.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C6A47B1566017A00F1E42E /* artists.png */; };
 		A3C7A442156714F20085150A /* SongListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C7A440156714F20085150A /* SongListViewController.m */; };
 		A3C7A443156714F20085150A /* SongListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3C7A441156714F20085150A /* SongListViewController.xib */; };
 		A3CF872F14B8F8F000A9F829 /* UDJSongList.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CF872E14B8F8F000A9F829 /* UDJSongList.m */; };
@@ -107,7 +105,6 @@
 		A3CFBEED1568730A002B7658 /* pausetoggle.png in Resources */ = {isa = PBXBuildFile; fileRef = A3CFBEEC1568730A002B7658 /* pausetoggle.png */; };
 		A3CFBEF015688811002B7658 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CFBEEF15688811002B7658 /* KeychainItemWrapper.m */; };
 		A3CFBEF3156888E8002B7658 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3CFBEF1156888E8002B7658 /* Model.xcdatamodeld */; };
-		A3CFEEDC15DFE8EB00962465 /* closebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A3CFEEDB15DFE8EB00962465 /* closebutton.png */; };
 		A3D61A3215882EA300ACE780 /* PlayerInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3D61A3115882EA300ACE780 /* PlayerInfoViewController.xib */; };
 		A3DDD0A71533EFEF00DB5E1F /* smalldownarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A3DDD0A61533EFEF00DB5E1F /* smalldownarrow.png */; };
 		A3E3D7CE15DDDAA000EBF087 /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E3D7CC15DDDAA000EBF087 /* PlayerViewController.m */; };
@@ -139,7 +136,6 @@
 		A3028B831564A2AE00EF6EE8 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
 		A3028B841564A2AE00EF6EE8 /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 		A3028B851564A2AE00EF6EE8 /* MainTabBarController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainTabBarController.xib; path = "../Classes/Main Views/MainTabBarController.xib"; sourceTree = "<group>"; };
-		A302C4111593F52A008B3793 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
 		A30C4BDF1687BD26004D22DA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		A30CE22B1591695800DA054D /* backg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backg.png; sourceTree = "<group>"; };
 		A30CE22D15916C0500DA054D /* underline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = underline.png; sourceTree = "<group>"; };
@@ -169,7 +165,6 @@
 		A33C4611148F0707009C1BC6 /* PlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistViewController.h; sourceTree = "<group>"; };
 		A33C4612148F0707009C1BC6 /* PlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistViewController.m; sourceTree = "<group>"; };
 		A33EE1E015684B7D00D49B85 /* playing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playing.png; sourceTree = "<group>"; };
-		A341B92814F86C61001892C5 /* addbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addbutton.png; sourceTree = "<group>"; };
 		A341E22D15E2B45300E92D84 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		A341E22F15E2BC9200E92D84 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		A3443FC315C78D73005A6A67 /* UDJStoredLibraryEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDJStoredLibraryEntry.h; path = Classes/Player/UDJStoredLibraryEntry.h; sourceTree = SOURCE_ROOT; };
@@ -198,6 +193,7 @@
 		A3680CAF160F967400ED0509 /* skipbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skipbutton.png; sourceTree = "<group>"; };
 		A36CF96015BF87DC0032AF31 /* UDJStoredPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDJStoredPlayer.h; path = Classes/Player/UDJStoredPlayer.h; sourceTree = SOURCE_ROOT; };
 		A36CF96115BF87DC0032AF31 /* UDJStoredPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDJStoredPlayer.m; path = Classes/Player/UDJStoredPlayer.m; sourceTree = SOURCE_ROOT; };
+		A36F915817962CC70036B6C0 /* addbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addbutton.png; sourceTree = "<group>"; };
 		A3720B2E14C74FE800D1E30C /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		A3720B2F14C74FE800D1E30C /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		A3720B3114C7513600D1E30C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -256,7 +252,6 @@
 		A3C6A46F1565F9FA00F1E42E /* RandomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomViewController.h; sourceTree = "<group>"; };
 		A3C6A4701565F9FA00F1E42E /* RandomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RandomViewController.m; sourceTree = "<group>"; };
 		A3C6A4711565F9FA00F1E42E /* RandomViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RandomViewController.xib; sourceTree = "<group>"; };
-		A3C6A47B1566017A00F1E42E /* artists.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = artists.png; sourceTree = "<group>"; };
 		A3C7A43F156714F20085150A /* SongListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongListViewController.h; sourceTree = "<group>"; };
 		A3C7A440156714F20085150A /* SongListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongListViewController.m; sourceTree = "<group>"; };
 		A3C7A441156714F20085150A /* SongListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SongListViewController.xib; sourceTree = "<group>"; };
@@ -268,7 +263,6 @@
 		A3CFBEEE15688811002B7658 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		A3CFBEEF15688811002B7658 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		A3CFBEF2156888E8002B7658 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		A3CFEEDB15DFE8EB00962465 /* closebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closebutton.png; sourceTree = "<group>"; };
 		A3D61A3115882EA300ACE780 /* PlayerInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlayerInfoViewController.xib; path = ../../Resources/PlayerInfoViewController.xib; sourceTree = "<group>"; };
 		A3DDD0A61533EFEF00DB5E1F /* smalldownarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smalldownarrow.png; sourceTree = "<group>"; };
 		A3E3D7CB15DDDAA000EBF087 /* PlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerViewController.h; path = Classes/Player/PlayerViewController.h; sourceTree = SOURCE_ROOT; };
@@ -546,20 +540,19 @@
 		A3C6A4741565FA1400F1E42E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				A36F915817962CC70036B6C0 /* addbutton.png */,
 				A3907C63177A8172000B1A48 /* white_back_arrow.png */,
 				A3680CAF160F967400ED0509 /* skipbutton.png */,
 				A3680CAD160E8B4200ED0509 /* playericon.png */,
 				A3680CAB16067D2700ED0509 /* participanticon.png */,
 				A325E0FC15F13D9600D54062 /* donebutton.png */,
 				A325E0FA15F13C1100D54062 /* edit.png */,
-				A3CFEEDB15DFE8EB00962465 /* closebutton.png */,
 				A331096D15DED3B6003D2AD3 /* playerinfobutton.png */,
 				A34FA21C15C22E120022EF46 /* Default.png */,
 				A34FA21D15C22E120022EF46 /* Default@2x.png */,
 				A34FA21A15C22D540022EF46 /* plus.png */,
 				A3E70CDB159BF7E00037A60B /* blackground.png */,
 				A30CE22D15916C0500DA054D /* underline.png */,
-				A302C4111593F52A008B3793 /* cancel.png */,
 				A30CE22B1591695800DA054D /* backg.png */,
 				A35F57F81572DD04004AA5DB /* arrow.png */,
 				A32BEEA0157163A1005B573B /* nearbybutton.png */,
@@ -572,7 +565,6 @@
 				A3C22D581566D8510066B9F8 /* randomicon.png */,
 				A3C22D561566D62E0066B9F8 /* libraryicon.png */,
 				A3C22D541566D4D50066B9F8 /* playlisticon.png */,
-				A3C6A47B1566017A00F1E42E /* artists.png */,
 				A3C6A4691565E6FF00F1E42E /* darknavbar.png */,
 				A31A9B6215608C0B005268C0 /* separator.png */,
 				A3DDD0A61533EFEF00DB5E1F /* smalldownarrow.png */,
@@ -580,7 +572,6 @@
 				A3495613151EF3D800AAEF7E /* refresh.png */,
 				A35D3DEF14F985460007B374 /* votedown.png */,
 				A35D3DF014F985460007B374 /* voteup.png */,
-				A341B92814F86C61001892C5 /* addbutton.png */,
 				A34796A414F85AE0001DEE15 /* default.jpg */,
 				A38B629F14C736C70088640D /* udjlauncher.png */,
 			);
@@ -696,7 +687,6 @@
 				A3F58D9C14C75FAF00E350F4 /* EventGoerViewController.xib in Resources */,
 				A3360BCF14F5E14F00541726 /* NewPlaylistViewController.xib in Resources */,
 				A34796A514F85AE0001DEE15 /* default.jpg in Resources */,
-				A341B92914F86C61001892C5 /* addbutton.png in Resources */,
 				A35D3DF114F985460007B374 /* votedown.png in Resources */,
 				A35D3DF214F985460007B374 /* voteup.png in Resources */,
 				A3495614151EF3D800AAEF7E /* refresh.png in Resources */,
@@ -706,7 +696,6 @@
 				A3028B871564A2AE00EF6EE8 /* MainTabBarController.xib in Resources */,
 				A3C6A46A1565E6FF00F1E42E /* darknavbar.png in Resources */,
 				A3C6A4731565F9FA00F1E42E /* RandomViewController.xib in Resources */,
-				A3C6A47C1566017A00F1E42E /* artists.png in Resources */,
 				A3C22D551566D4D50066B9F8 /* playlisticon.png in Resources */,
 				A3C22D571566D62E0066B9F8 /* libraryicon.png in Resources */,
 				A3C22D591566D8510066B9F8 /* randomicon.png in Resources */,
@@ -725,14 +714,12 @@
 				A3D61A3215882EA300ACE780 /* PlayerInfoViewController.xib in Resources */,
 				A30CE22C1591695800DA054D /* backg.png in Resources */,
 				A30CE22E15916C0500DA054D /* underline.png in Resources */,
-				A302C4121593F52A008B3793 /* cancel.png in Resources */,
 				A3E70CDC159BF7E00037A60B /* blackground.png in Resources */,
 				A34FA21B15C22D540022EF46 /* plus.png in Resources */,
 				A34FA21E15C22E120022EF46 /* Default.png in Resources */,
 				A34FA21F15C22E120022EF46 /* Default@2x.png in Resources */,
 				A3E3D7CF15DDDAA000EBF087 /* PlayerViewController.xib in Resources */,
 				A331096E15DED3B6003D2AD3 /* playerinfobutton.png in Resources */,
-				A3CFEEDC15DFE8EB00962465 /* closebutton.png in Resources */,
 				A325E0FB15F13C1100D54062 /* edit.png in Resources */,
 				A325E0FD15F13D9600D54062 /* donebutton.png in Resources */,
 				A31837451604FB5400D9FC35 /* ParticipantsViewController.xib in Resources */,
@@ -742,6 +729,7 @@
 				A30C4BE01687BD26004D22DA /* Default-568h@2x.png in Resources */,
 				A3907C62177A7BF6000B1A48 /* RegisterViewController.xib in Resources */,
 				A3907C64177A8172000B1A48 /* white_back_arrow.png in Resources */,
+				A36F915917962CC70036B6C0 /* addbutton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
